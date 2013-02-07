@@ -8,7 +8,7 @@ namespace Molajo\Filters;
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   MIT
  */
-include '../../../' . 'index.php';
+include '../../../' . 'Index.php';
 
 use Molajo\Filters\Adapter as filterAdapter;
 $read = BASE_FOLDER . '/Tests/Data/test1.txt';
