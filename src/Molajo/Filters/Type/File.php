@@ -61,7 +61,7 @@ class File implements Filtersinterface
     /**
      * Filters input data
      *
-     * @param   string  $field_value Value of input field
+     * @param   string  $value Value of input field
      * @param   string  $type        Datatype of input field
      * @param   int     $null        0 or 1 - is null allowed
      * @param   string  $default     Default value, optional
@@ -69,11 +69,11 @@ class File implements Filtersinterface
      * @return  string
      * @since   1.0
      */
-    public function filterInput($field_value, $type = 'int', $null = 1, $default = null)
+    public function filterInput($value, $type = 'int', $null = 1, $default = null)
     {
         $regex = array('#(\.){2,}#', '#[^A-Za-z0-9\.\_\- ]#', '#^\.#');
 
-        return preg_replace($regex, '', $field_value);
+        return preg_replace($regex, '', $value);
     }
 
     /**

@@ -61,7 +61,7 @@ class Date implements Filtersinterface
     /**
      * Filters Date data
      *
-     * @param   string  $field_value Value of input field
+     * @param   string  $value Value of input field
      * @param   string  $type        Datatype of input field
      * @param   int     $null        0 or 1 - is null allowed
      * @param   string  $default     Default value, optional
@@ -69,24 +69,24 @@ class Date implements Filtersinterface
      * @return  string
      * @since   1.0
      */
-    public function filterInput($field_value, $type = 'int', $null = 1, $default = null)
+    public function filterInput($value, $type = 'int', $null = 1, $default = null)
     {
         if ($default == null) {
-        } elseif ($field_value == null
-            || $field_value == ''
-            || $field_value == 0
+        } elseif ($value == null
+            || $value == ''
+            || $value == 0
         ) {
-            $field_value = $default;
+            $value = $default;
         }
 
-        if ($field_value == null
-            || $field_value == '0000-00-00 00:00:00'
+        if ($value == null
+            || $value == '0000-00-00 00:00:00'
         ) {
 
         } else {
-            $dd   = substr($field_value, 8, 2);
-            $mm   = substr($field_value, 5, 2);
-            $ccyy = substr($field_value, 0, 4);
+            $dd   = substr($value, 8, 2);
+            $mm   = substr($value, 5, 2);
+            $ccyy = substr($value, 0, 4);
 
             if (checkdate((int)$mm, (int)$dd, (int)$ccyy)) {
             } else {
@@ -94,20 +94,20 @@ class Date implements Filtersinterface
             }
             $test = $ccyy . '-' . $mm . '-' . $dd;
 
-            if ($test == substr($field_value, 0, 10)) {
-                return $field_value;
+            if ($test == substr($value, 0, 10)) {
+                return $value;
             } else {
                 throw new \Exception('FILTER_INVALID_VALUE');
             }
         }
 
-        if ($field_value == null
+        if ($value == null
             && $null == 0
         ) {
             throw new \Exception('FILTER_VALUE_REQUIRED');
         }
 
-        return $field_value;
+        return $value;
     }
 
     /**

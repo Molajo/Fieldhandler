@@ -23,7 +23,7 @@ interface FiltersInterface
     /**
      * Filters input data
      *
-     * @param   string  $field_value Value of input field
+     * @param   string  $value Value of input field
      * @param   string  $type        Datatype of input field
      * @param   int     $null        0 or 1 - is null allowed
      * @param   string  $default     Default value, optional
@@ -32,7 +32,7 @@ interface FiltersInterface
      * @since   1.0
      */
     public function filterInput(
-        $field_value    ,
+        $value    ,
         $type           = 'int',
         $null           = 1,
         $default        = null

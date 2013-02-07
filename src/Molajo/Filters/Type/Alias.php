@@ -61,7 +61,7 @@ class Alias implements Filtersinterface
     /**
      * Filters input data
      *
-     * @param   string  $field_value Value of input field
+     * @param   string  $value Value of input field
      * @param   string  $type        Datatype of input field
      * @param   int     $null        0 or 1 - is null allowed
      * @param   string  $default     Default value, optional
@@ -69,38 +69,38 @@ class Alias implements Filtersinterface
      * @return  string
      * @since   1.0
      */
-    public function filterInput($field_value, $type = 'int', $null = 1, $default = null)
+    public function filterInput($value, $type = 'int', $null = 1, $default = null)
     {
         if ($default == null) {
         } else {
-            $field_value = $default;
+            $value = $default;
         }
 
-        if ($field_value == null) {
-            $field_value = $default;
+        if ($value == null) {
+            $value = $default;
         }
 
-        if ($field_value == null) {
+        if ($value == null) {
         } else {
-            $test = filter_var($field_value, FILTER_SANITIZE_URL);
+            $test = filter_var($value, FILTER_SANITIZE_URL);
 
             /** Replace dashes with spaces */
-            $field_value = str_replace('-', ' ', strtolower(trim($field_value)));
+            $value = str_replace('-', ' ', strtolower(trim($value)));
 
             /** Removes double spaces, ensures only alphanumeric characters */
-            $field_value = preg_replace('/(\s|[^A-Za-z0-9\-])+/', '-', $field_value);
+            $value = preg_replace('/(\s|[^A-Za-z0-9\-])+/', '-', $value);
 
             /** Trim dashes at beginning and end */
-            $field_value = trim($field_value, '-');
+            $value = trim($value, '-');
         }
 
-        if ($field_value == null
+        if ($value == null
             && $null == 0
         ) {
             throw new \Exception('FILTER_VALUE_REQUIRED');
         }
 
-        return $field_value;
+        return $value;
     }
 
     /**

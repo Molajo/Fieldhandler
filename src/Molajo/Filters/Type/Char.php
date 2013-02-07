@@ -61,7 +61,7 @@ class Char implements Filtersinterface
     /**
      * Filters input data
      *
-     * @param   string  $field_value Value of input field
+     * @param   string  $value Value of input field
      * @param   string  $type        Datatype of input field
      * @param   int     $null        0 or 1 - is null allowed
      * @param   string  $default     Default value, optional
@@ -69,32 +69,32 @@ class Char implements Filtersinterface
      * @return  string
      * @since   1.0
      */
-    public function filterInput($field_value, $type = 'int', $null = 1, $default = null)
+    public function filterInput($value, $type = 'int', $null = 1, $default = null)
     {
         if ($default == null) {
         } else {
-            if ($field_value == null) {
-                $field_value = $default;
+            if ($value == null) {
+                $value = $default;
             }
         }
 
-        if ($field_value == null) {
+        if ($value == null) {
         } else {
-            $test = filter_var($field_value, FILTER_SANITIZE_STRING);
-            if ($test == $field_value) {
+            $test = filter_var($value, FILTER_SANITIZE_STRING);
+            if ($test == $value) {
                 return $test;
             } else {
                 throw new \Exception('FILTER_INVALID_VALUE');
             }
         }
 
-        if ($field_value == null
+        if ($value == null
             && $null == 0
         ) {
             throw new \Exception('FILTER_VALUE_REQUIRED');
         }
 
-        return trim($field_value);
+        return trim($value);
     }
 
     /**

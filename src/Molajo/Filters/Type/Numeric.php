@@ -61,7 +61,7 @@ class Numeric implements Filtersinterface
     /**
      * Filters input data
      *
-     * @param   string  $field_value Value of input field
+     * @param   string  $value Value of input field
      * @param   string  $type        Datatype of input field
      * @param   int     $null        0 or 1 - is null allowed
      * @param   string  $default     Default value, optional
@@ -69,20 +69,20 @@ class Numeric implements Filtersinterface
      * @return  string
      * @since   1.0
      */
-    public function filterInput($field_value, $type = 'int', $null = 1, $default = null)
+    public function filterInput($value, $type = 'int', $null = 1, $default = null)
     {
         if ($default == null) {
-        } elseif ($field_value == null) {
-            $field_value = $default;
+        } elseif ($value == null) {
+            $value = $default;
         }
 
-        if ($field_value == null) {
+        if ($value == null) {
         } else {
             switch ($type) {
 
                 case 'boolean':
                     $test = filter_var(
-                        $field_value,
+                        $value,
                         FILTER_SANITIZE_NUMBER_INT
                     );
                     if ($test == 1) {
@@ -93,7 +93,7 @@ class Numeric implements Filtersinterface
 
                 case 'float':
                     $test = filter_var(
-                        $field_value,
+                        $value,
                         FILTER_SANITIZE_NUMBER_FLOAT,
                         FILTER_FLAG_ALLOW_FRACTION
                     );
@@ -101,26 +101,26 @@ class Numeric implements Filtersinterface
 
                 default:
                     $test = filter_var(
-                        $field_value,
+                        $value,
                         FILTER_SANITIZE_NUMBER_INT
                     );
                     break;
 
             }
-            if ($test == $field_value) {
+            if ($test == $value) {
                 return $test;
             } else {
                 throw new \Exception('FILTER_INVALID_VALUE');
             }
         }
 
-        if ($field_value == null
+        if ($value == null
             && $null == 0
         ) {
             throw new \Exception('FILTER_VALUE_REQUIRED');
         }
 
-        return $field_value;
+        return $value;
     }
 
     /**
