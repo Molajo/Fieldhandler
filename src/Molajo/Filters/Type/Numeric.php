@@ -14,8 +14,8 @@ use Exception;
 use RuntimeException;
 
 use Molajo\Filters\Adapter as filterAdapter;
-use Molajo\Filters\Adapter\FiltersInterface;
-use Molajo\Filters\Exception\FiltersException;
+use Molajo\Filters\Adapter\FilterInterface;
+use Molajo\Filters\Exception\FilterException;
 
 /**
  * Numeric Filters
@@ -31,7 +31,7 @@ class Numeric implements Filtersinterface
      * Class constructor
      *
      * @since   1.0
-     * @throws  FiltersException
+     * @throws  FilterException
      */
     public function __construct()
     {
@@ -54,7 +54,7 @@ class Numeric implements Filtersinterface
             }
         }
 
-        throw new FiltersException
+        throw new FilterException
         ('Numeric Filter Adapter Constructor Method can only be accessed by the Filter Adapter.');
     }
 

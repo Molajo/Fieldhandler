@@ -11,8 +11,7 @@ namespace Molajo\Filters;
 include '../../../' . 'Index.php';
 
 use Molajo\Filters\Adapter as filterAdapter;
-$read = BASE_FOLDER . '/Tests/Data/test1.txt';
-$adapter = new filterAdapter('Read', $read);
 
-echo '<pre>';
-echo var_dump($adapter->fs);
+$adapter = new filterAdapter();
+$value = $adapter->filterInput('int', 5, $null = 1, $default = 0);
+echo $value;

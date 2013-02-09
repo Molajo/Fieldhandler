@@ -1,6 +1,6 @@
 <?php
 /**
- *Char Filters
+ *Float Filters
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -18,14 +18,14 @@ use Molajo\Filters\Adapter\FilterInterface;
 use Molajo\Filters\Exception\FilterException;
 
 /**
- * Char Filters
+ * Float Filters
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   MIT
  * @since     1.0
  */
-class Char implements Filtersinterface
+class Float implements Filtersinterface
 {
     /**
      * Class constructor
@@ -49,13 +49,13 @@ class Char implements Filtersinterface
         if (isset($trace[1])) {
             if ($trace[1]['class'] == 'Molajo\\Filters\\Adapter') {
 
-                $this->filesystem_type = 'Char';
+                $this->Floatsystem_type = 'Float';
                 return $this;
             }
         }
 
         throw new FilterException
-        ('Char Filter Adapter Constructor Method can only be accessed by the Filter Adapter.');
+        ('Float Filter Adapter Constructor Method can only be accessed by the Filter Adapter.');
     }
 
     /**
@@ -69,23 +69,20 @@ class Char implements Filtersinterface
      * @return  string
      * @since   1.0
      */
-    public function filterInput($value, $type = 'int', $null = 1, $default = null)
+    public function filterInput($value, $type = 'Float', $null = 1, $default = null)
     {
         if ($default == null) {
         } else {
-            if ($value == null) {
-                $value = $default;
-            }
+            $value = $default;
+        }
+
+        if ($value == null) {
+            $value = $default;
         }
 
         if ($value == null) {
         } else {
-            $test = filter_var($value, FILTER_SANITIZE_STRING);
-            if ($test == $value) {
-                return $test;
-            } else {
-                throw new \Exception('FILTER_INVALID_VALUE');
-            }
+            $test = filter_var($value, FILTER_VALIDATE_FLOAT);
         }
 
         if ($value == null
@@ -94,7 +91,7 @@ class Char implements Filtersinterface
             throw new \Exception('FILTER_VALUE_REQUIRED');
         }
 
-        return trim($value);
+        return $value;
     }
 
     /**
@@ -102,11 +99,11 @@ class Char implements Filtersinterface
      *
      * @param   string  $value  Value of input field
      *
-     * @return  string
+     * @return  void
      * @since   1.0
      */
     public function escapeOutput($value)
     {
-        return htmlentities($value, ENT_QUOTES, 'UTF-8');
+        return filter_var($value, FILTER_VALIDATE_FLOAT);
     }
 }

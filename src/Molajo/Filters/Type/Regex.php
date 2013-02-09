@@ -1,6 +1,6 @@
 <?php
 /**
- *Char Filters
+ *Regexp Filters
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -18,14 +18,14 @@ use Molajo\Filters\Adapter\FilterInterface;
 use Molajo\Filters\Exception\FilterException;
 
 /**
- * Char Filters
+ * Regexp Filters
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   MIT
  * @since     1.0
  */
-class Char implements Filtersinterface
+class Regexp implements Filtersinterface
 {
     /**
      * Class constructor
@@ -49,19 +49,19 @@ class Char implements Filtersinterface
         if (isset($trace[1])) {
             if ($trace[1]['class'] == 'Molajo\\Filters\\Adapter') {
 
-                $this->filesystem_type = 'Char';
+                $this->filesystem_type = 'Regexp';
                 return $this;
             }
         }
 
         throw new FilterException
-        ('Char Filter Adapter Constructor Method can only be accessed by the Filter Adapter.');
+        ('Regexp Filter Adapter Constructor Method can only be accessed by the Filter Adapter.');
     }
 
     /**
      * Filters input data
      *
-     * @param   string  $value Value of input field
+     * @param   string  $value       Value of input field
      * @param   string  $type        Datatype of input field
      * @param   int     $null        0 or 1 - is null allowed
      * @param   string  $default     Default value, optional
@@ -73,15 +73,15 @@ class Char implements Filtersinterface
     {
         if ($default == null) {
         } else {
-            if ($value == null) {
-                $value = $default;
-            }
+            $value = $default;
         }
 
         if ($value == null) {
         } else {
-            $test = filter_var($value, FILTER_SANITIZE_STRING);
-            if ($test == $value) {
+
+            $test = filter_var($value, FILTER_SANITIZE_REGEXP);
+
+            if (filter_var($test, FILTER_VALIDATE_REGEXP)) {
                 return $test;
             } else {
                 throw new \Exception('FILTER_INVALID_VALUE');
@@ -94,19 +94,19 @@ class Char implements Filtersinterface
             throw new \Exception('FILTER_VALUE_REQUIRED');
         }
 
-        return trim($value);
+        return $value;
     }
 
     /**
      * Escapes output
      *
-     * @param   string  $value  Value of input field
+     * @param   string  $value       Value of input field
      *
-     * @return  string
+     * @return  void
      * @since   1.0
      */
     public function escapeOutput($value)
     {
-        return htmlentities($value, ENT_QUOTES, 'UTF-8');
+        return filter_var($value, FILTER_SANITIZE_REGEXP);
     }
 }

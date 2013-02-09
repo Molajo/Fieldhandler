@@ -3,7 +3,7 @@ namespace Tests\Integration;
 
 use Exception;
 use Molajo\Filters\Exception\NotFoundException;
-use Molajo\Filters\Exception\FiltersException;
+use Molajo\Filters\Exception\FilterException;
 
 use Molajo\Filters\Adapter as filterAdapter;
 

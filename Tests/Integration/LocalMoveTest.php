@@ -119,7 +119,7 @@ class LocalMoveTest extends Data
 
     /**
      * @covers Molajo\Filters\Type\Local::copyOrMove
-     * @expectedException Molajo\Filters\Exception\FiltersException
+     * @expectedException Molajo\Filters\Exception\FilterException
      */
     public function testNotAFile()
     {

@@ -3,7 +3,7 @@ namespace Tests\Integration;
 
 use Exception;
 use Molajo\Filters\Exception\NotFoundException;
-use Molajo\Filters\Exception\FiltersException;
+use Molajo\Filters\Exception\FilterException;
 
 use Molajo\Filters\Adapter as filterAdapter;
 
@@ -84,7 +84,7 @@ class LocalWriteTest extends Data
 
     /**
      * @covers Molajo\Filters\Type\Local::write
-     * @expectedException Molajo\Filters\Exception\FiltersException
+     * @expectedException Molajo\Filters\Exception\FilterException
      */
     public function testUnsuccessfulRewrite()
     {

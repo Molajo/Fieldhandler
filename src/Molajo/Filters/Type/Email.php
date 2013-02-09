@@ -14,8 +14,8 @@ use Exception;
 use RuntimeException;
 
 use Molajo\Filters\Adapter as filterAdapter;
-use Molajo\Filters\Adapter\FiltersInterface;
-use Molajo\Filters\Exception\FiltersException;
+use Molajo\Filters\Adapter\FilterInterface;
+use Molajo\Filters\Exception\FilterException;
 
 /**
  * Email Filters
@@ -31,7 +31,7 @@ class Email implements Filtersinterface
      * Class constructor
      *
      * @since   1.0
-     * @throws  FiltersException
+     * @throws  FilterException
      */
     public function __construct()
     {
@@ -54,7 +54,7 @@ class Email implements Filtersinterface
             }
         }
 
-        throw new FiltersException
+        throw new FilterException
         ('Email Filter Adapter Constructor Method can only be accessed by the Filter Adapter.');
     }
 
@@ -78,7 +78,9 @@ class Email implements Filtersinterface
 
         if ($value == null) {
         } else {
+
             $test = filter_var($value, FILTER_SANITIZE_EMAIL);
+
             if (filter_var($test, FILTER_VALIDATE_EMAIL)) {
                 return $test;
             } else {

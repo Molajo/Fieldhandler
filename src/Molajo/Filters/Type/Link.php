@@ -1,6 +1,6 @@
 <?php
 /**
- *Char Filters
+ * Local Adapter for Filters
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -18,14 +18,14 @@ use Molajo\Filters\Adapter\FilterInterface;
 use Molajo\Filters\Exception\FilterException;
 
 /**
- * Char Filters
+ * Link Filters
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   MIT
  * @since     1.0
  */
-class Char implements Filtersinterface
+class Link implements Filtersinterface
 {
     /**
      * Class constructor
@@ -49,13 +49,13 @@ class Char implements Filtersinterface
         if (isset($trace[1])) {
             if ($trace[1]['class'] == 'Molajo\\Filters\\Adapter') {
 
-                $this->filesystem_type = 'Char';
+                $this->filesystem_type = 'Link';
                 return $this;
             }
         }
 
         throw new FilterException
-        ('Char Filter Adapter Constructor Method can only be accessed by the Filter Adapter.');
+        ('Link Filter Adapter Constructor Method can only be accessed by the Filter Adapter.');
     }
 
     /**
@@ -72,15 +72,41 @@ class Char implements Filtersinterface
     public function filterInput($value, $type = 'int', $null = 1, $default = null)
     {
         if ($default == null) {
-        } else {
-            if ($value == null) {
-                $value = $default;
-            }
+        } elseif ($value == null) {
+            $value = $default;
         }
 
         if ($value == null) {
         } else {
-            $test = filter_var($value, FILTER_SANITIZE_STRING);
+            switch ($type) {
+
+                case 'boolean':
+                    $test = filter_var(
+                        $value,
+                        FILTER_SANITIZE_NUMBER_INT
+                    );
+                    if ($test == 1) {
+                    } else {
+                        $test = 0;
+                    }
+                    break;
+
+                case 'float':
+                    $test = filter_var(
+                        $value,
+                        FILTER_SANITIZE_NUMBER_FLOAT,
+                        FILTER_FLAG_ALLOW_FRACTION
+                    );
+                    break;
+
+                default:
+                    $test = filter_var(
+                        $value,
+                        FILTER_SANITIZE_NUMBER_INT
+                    );
+                    break;
+
+            }
             if ($test == $value) {
                 return $test;
             } else {
@@ -94,7 +120,7 @@ class Char implements Filtersinterface
             throw new \Exception('FILTER_VALUE_REQUIRED');
         }
 
-        return trim($value);
+        return $value;
     }
 
     /**
@@ -107,6 +133,6 @@ class Char implements Filtersinterface
      */
     public function escapeOutput($value)
     {
-        return htmlentities($value, ENT_QUOTES, 'UTF-8');
+        return urlencode($value);
     }
 }

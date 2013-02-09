@@ -1,6 +1,6 @@
 <?php
 /**
- * Request for Filters Services Class
+ * Filter Adapter
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -10,125 +10,85 @@ namespace Molajo\Filters;
 
 defined('MOLAJO') or die;
 
-use Molajo\Filters\Adapter\FiltersInterface;
-use Molajo\Filters\Exception\FiltersException;
+use Molajo\Filters\Adapter\FilterInterface;
+use Molajo\Filters\Exception\FilterException;
 
 /**
- * Request for Filters Services Class
+ * Filter Adapter
  *
  * @package   Molajo
  * @license   MIT
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @since     1.0
  */
-Class Adapter implements FiltersInterface
+Class Adapter
 {
     /**
-     * Filters Type
+     * Validate Input
      *
-     * @var     string
+     * @param   string   $filter_type
+     * @param   mixed    $value
+     * @param   int      $null
+     * @param   null     $default
+     *
+     * @return  mixed
      * @since   1.0
      */
-    public $fs;
-
-    /**
-     * Construct
-     *
-     * @param   string  $action
-     * @param   string  $path
-     * @param   string  $filesystem_type
-     * @param   array   $options
-     *
-     * @since   1.0
-     * @throws  FiltersException
-     */
-    public function __construct($action = '', $path = '', $filesystem_type = 'Local', $options = array())
+    public function validateInput($value, $filter_type, $null = 1, $default = null)
     {
-        $options = $this->getTimeZone($options);
-
-        if ($filesystem_type == '') {
-            $filesystem_type = 'Local';
-        }
-        $this->getFiltersType($filesystem_type);
-
-        $this->connect($options);
-
-        if ($path == '') {
-            throw new FiltersException
-            ('Filters Path is required, but was not provided.');
-        }
-        $this->setPath($path);
-
-        $this->getMetadata();
-
-        $this->doAction($action);
-
-        $this->close();
-
-        return $this->filter;
+        return $this->getFiltersType($filter_type)->validateInput($value, $filter_type, $null, $default);
     }
 
     /**
-     * Get the Filters Type (ex., Local, Ftp, Virtual, etc.)
+     * Filter Input
      *
-     * @param   string  $filesystem_type
+     * @param   string   $filter_type
+     * @param   mixed    $value
+     * @param   int      $null
+     * @param   null     $default
      *
-     * @return  void
-     * @since   1.0
-     * @throws  FiltersException
-     */
-    protected function getFiltersType($filesystem_type)
-    {
-        $class = 'Molajo\\Filters\\Type\\' . $filesystem_type;
-
-        if (class_exists($class)) {
-        } else {
-            throw new FiltersException
-            ('Filters Type Class ' . $class . ' does not exist.');
-        }
-
-        $this->filter = new $class($filesystem_type);
-
-        return;
-    }
-
-    /**
-     * Validates the input data
-     *
-     * @return  void
+     * @return  mixed
      * @since   1.0
      */
-    public function validateData()
+    public function filterInput($value, $filter_type, $null = 1, $default = null)
     {
-        $this->filter->validateData();
-
-        return;
-    }
-
-    /**
-     * Filters input data
-     *
-     * @return  void
-     * @since   1.0
-     */
-    public function filterInput()
-    {
-        $this->filter->filterInput();
-
-        return;
+        return $this->getFiltersType($filter_type)->filterInput($value, $filter_type, $null, $default);
     }
 
     /**
      * Escapes output
      *
-     * @return  void
+     * @param   string   $filter_type
+     * @param   mixed    $value
+     *
+     * @return  mixed
      * @since   1.0
      */
-    public function escapeOutput()
+    public function escapeOutput($filter_type, $value)
     {
-        $this->filter->escapeOutput();
+        return $this->getFiltersType($filter_type)->escapeOutput($value);
+    }
 
-        return;
+    /**
+     * Get the Filters Type (ex., Local, Ftp, Virtual, etc.)
+     *
+     * @param   string  $filter_type
+     *
+     * @return  object
+     * @since   1.0
+     * @throws  FilterException
+     */
+    protected function getFiltersType($filter_type)
+    {
+        $class = 'Molajo\\Filters\\Type\\' . $filter_type;
+
+        if (class_exists($class)) {
+        } else {
+            throw new FilterException
+            ('Filter Type Class ' . $class . ' does not exist.');
+        }
+
+        return new $class($filter_type);
     }
 
     /**

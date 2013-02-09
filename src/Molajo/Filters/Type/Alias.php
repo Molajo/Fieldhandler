@@ -14,8 +14,8 @@ use Exception;
 use RuntimeException;
 
 use Molajo\Filters\Adapter as filterAdapter;
-use Molajo\Filters\Adapter\FiltersInterface;
-use Molajo\Filters\Exception\FiltersException;
+use Molajo\Filters\Adapter\FilterInterface;
+use Molajo\Filters\Exception\FilterException;
 
 /**
  * Alias Filters
@@ -31,7 +31,7 @@ class Alias implements Filtersinterface
      * Class constructor
      *
      * @since   1.0
-     * @throws  FiltersException
+     * @throws  FilterException
      */
     public function __construct()
     {
@@ -54,7 +54,7 @@ class Alias implements Filtersinterface
             }
         }
 
-        throw new FiltersException
+        throw new FilterException
         ('Alias Filter Adapter Constructor Method can only be accessed by the Filter Adapter.');
     }
 
