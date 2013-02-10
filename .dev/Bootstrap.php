@@ -22,7 +22,7 @@ define('BASE_FOLDER', $base);
 $classMap = array(
     'Molajo\\Filters\\Adapter'                                 => BASE_FOLDER . '/Adapter.php',
     'Molajo\\Filters\\Adapter\\FiltersActionsInterface'     => BASE_FOLDER . '/Adapter/FiltersActionsInterface.php',
-    'Molajo\\Filters\\Adapter\\FiltersInterface'            => BASE_FOLDER . '/Adapter/FiltersInterface.php',
+    'Molajo\\Filters\\Adapter\\FilterInterface'            => BASE_FOLDER . '/Adapter/FilterInterface.php',
     'Molajo\\Filters\\Adapter\\Fileupload'                     => BASE_FOLDER . '/Adapter/Fileupload.php',
     'Molajo\\Filters\\Adapter\\MetadataInterface'              => BASE_FOLDER . '/Adapter/MetadataInterface.php',
     'Molajo\\Filters\\Adapter\\SystemInterface'                => BASE_FOLDER . '/Adapter/SystemInterface.php',

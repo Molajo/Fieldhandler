@@ -25,7 +25,7 @@ use Molajo\Filters\Exception\FilterException;
  * @license   MIT
  * @since     1.0
  */
-class Html implements Filtersinterface
+class Html implements FilterInterface
 {
     /**
      * Class constructor

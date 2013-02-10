@@ -25,7 +25,7 @@ use Molajo\Filters\Exception\FilterException;
  * @license   MIT
  * @since     1.0
  */
-class Regexp implements Filtersinterface
+class Regexp implements FilterInterface
 {
     /**
      * Class constructor

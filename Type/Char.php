@@ -25,7 +25,7 @@ use Molajo\Filters\Exception\FilterException;
  * @license   MIT
  * @since     1.0
  */
-class Char implements Filtersinterface
+class Char implements FilterInterface
 {
     /**
      * Class constructor
