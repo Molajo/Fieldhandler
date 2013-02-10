@@ -1,26 +1,37 @@
 {
-    "name":"Molajo/Filters",
-    "description":"Common handling of file and directory requests for adapter filesystems",
+    "name":"molajo/filters",
+    "type":"molajo-bundle",
+    "description":"Molajo Filters: Does stuff",
     "keywords":["Filters", "Adapters", "Interface", "PSR-0"],
-    "homepage":"http://github.com/AmyStephen/Filters",
-    "type":"library",
+    "homepage":"http://github.com/Molajo/Filters",
     "license":"MIT",
     "authors":[
         {
             "name":"Amy Stephen",
             "email":"AmyStephen@gmail.com",
-            "homepage":"http://Twitter.com/AmyStephen"
+            "homepage":"http://AmyStephen.github.com"
+        },
+        {
+            "name": "Other Contributors",
+            "homepage": "http://github.com/Molajo/Filters/contributors"
         }
     ],
     "require":{
         "php":">=5.3.3"
     },
-    "require-dev": {
-        "phpunit/phpunit": "3.7.*@stable"
+
+    "support":{
+        "email":"hello@molajo.org",
+        "irc":"irc://irc.freenode.org/molajo"
     },
-    "autoload":{
-        "psr-0":{
-            "Molajo/Filters":"Src/"
+    "target-dir": "Molajo/Filters",
+    "autoload": {
+        "psr-0": {"Molajo\\Filters": "./"}
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.0-dev"
         }
     }
 }

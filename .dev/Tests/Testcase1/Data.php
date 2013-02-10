@@ -1,5 +1,5 @@
 <?php
-namespace Tests\Integration;
+namespace Testcase1;
 
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -11,14 +11,14 @@ use PHPUnit_Framework_TestCase;
 class Data extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var Type of Filters (ex. Local, Ftp, Stream)
+     * @var Type of Filters (ex. Testcase1, Ftp, Stream)
      */
     protected $filesystem_type;
 
     /**
      * @var Filters Adapter
      */
-    protected $filterAdapter;
+    protected $fsAdapter;
 
     /**
      * @var Action (ex. Read, List, Write, Copy, Delete, Set, etc.)
@@ -51,19 +51,19 @@ class Data extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         /** Remove Existing */
-        $this->path = BASE_FOLDER . '/Tests/Data';
+        $this->path = BASE_FOLDER . '/.dev/Tests/Data';
         if (file_exists($this->path)) {
             $this->delete($this->path);
         }
 
-        $from   = BASE_FOLDER . '/Tests/Hold';
-        $to     = BASE_FOLDER . '/Tests';
+        $from   = BASE_FOLDER . '/.dev/Tests/Hold';
+        $to     = BASE_FOLDER . '/.dev/Tests';
         $folder = 'Data';
 
         $this->copyOrMove($from, $to, $folder);
 
         /** initialise call */
-        $this->filesystem_type = 'Local';
+        $this->filesystem_type = 'Testcase1';
         $this->action  = 'Delete';
 
         $this->options = array(
@@ -79,7 +79,7 @@ class Data extends PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        $this->path = BASE_FOLDER . '/Tests/Data';
+        $this->path = BASE_FOLDER . '/.dev/Tests/Data';
         $this->delete($this->path);
     }
 
