@@ -4,7 +4,7 @@
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   MIT
+ * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  */
 namespace Molajo\Filters\Adapter;
 
@@ -14,7 +14,7 @@ defined('MOLAJO') or die;
  * Interface for Filters Adapter
  *
  * @package   Molajo
- * @license   MIT
+ * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @since     1.0
  */
@@ -23,37 +23,24 @@ interface FilterInterface
     /**
      * Validate Input
      *
-     * @param   string   $filter_type
-     * @param   mixed    $value
-     * @param   int      $null
-     * @param   null     $default
-     *
      * @return  mixed
      * @since   1.0
      */
-    public function validateInput($filter_type, $value, $null = 1, $default = null);
+    public function validate();
 
     /**
      * Filter Input
      *
-     * @param   string   $filter_type
-     * @param   mixed    $value
-     * @param   int      $null
-     * @param   null     $default
-     *
      * @return  mixed
      * @since   1.0
      */
-    public function filterInput($filter_type, $value, $null = 1, $default = null);
+    public function filter();
 
     /**
      * Escape output
      *
-     * @param   string  $filter_type
-     * @param   mixed   $value
-     *
-     * @return  void
+     * @return  mixed
      * @since   1.0
      */
-    public function escapeOutput($filter_type, $value);
+    public function escape();
 }

@@ -4,16 +4,12 @@
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   MIT
+ * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  */
 namespace Molajo\Filters\Type;
 
 defined('MOLAJO') or die;
 
-use Exception;
-use RuntimeException;
-
-use Molajo\Filters\Adapter as filterAdapter;
 use Molajo\Filters\Adapter\FilterInterface;
 use Molajo\Filters\Exception\FilterException;
 
@@ -22,68 +18,74 @@ use Molajo\Filters\Exception\FilterException;
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   MIT
+ * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Linktext implements FilterInterface
+class Linktext extends AbstractFilter
 {
     /**
-     * Class constructor
+     * Validate Input
      *
-     * @since   1.0
-     * @throws  FilterException
-     */
-    public function __construct()
-    {
-        /** minimize memory http://php.net/manual/en/function.debug-backtrace.php */
-        if (phpversion() < 50306) {
-            $trace = debug_backtrace(1); // does not return objects
-        }
-        if (phpversion() > 50305) {
-            $trace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT | DEBUG_BACKTRACE_IGNORE_ARGS);
-        }
-        if (phpversion() > 50399) {
-            $trace = debug_backtrace(1, 1); // limit objects and arguments retrieved
-        }
-
-        if (isset($trace[1])) {
-            if ($trace[1]['class'] == 'Molajo\\Filters\\Adapter') {
-
-                $this->filesystem_type = 'Linktext';
-                return $this;
-            }
-        }
-
-        throw new FilterException
-        ('Linktext Filter Adapter Constructor Method can only be accessed by the Filter Adapter.');
-    }
-
-    /**
-     * Filters input data
+     * @param   mixed    $this->getValue()
+     * @param   bool     $this->getRequired()
+     * @param   null     $this->getDefault()
+     * @param   null     $this->getMin()
+     * @param   null     $this->getMax()
+     * @param   array    $this->getValues()
+     * @param   array    $this->options
      *
-     * @param   string  $value Value of input field
-     * @param   string  $type        Datatype of input field
-     * @param   int     $null        0 or 1 - is null allowed
-     * @param   string  $default     Default value, optional
-     *
-     * @return  string
+     * @return  mixed
      * @since   1.0
      */
-    public function filterInput($value, $type = 'int', $null = 1, $default = null)
-    {
+    public function validate(
+        $this->getValue(),
+        $this->getRequired() = true,
+        $this->getDefault() = null,
+        $this->getMin() = null,
+        $this->getMax() = null,
+        $this->getValues() = array(),
+        $this->options = array()
+    ) {
 
     }
 
     /**
-     * Escapes output
+     * Filter Input
      *
-     * @param   string  $value  Value of input field
+     * @param   mixed    $this->getValue()
+     * @param   bool     $this->getRequired()
+     * @param   null     $this->getDefault()
+     * @param   null     $this->getMin()
+     * @param   null     $this->getMax()
+     * @param   array    $this->getValues()
+     * @param   array    $this->options
      *
-     * @return  string
+     * @return  mixed
      * @since   1.0
      */
-    public function escapeOutput($value)
+    public function filter(
+        $this->getValue(),
+        $this->getRequired() = true,
+        $this->getDefault() = null,
+        $this->getMin() = null,
+        $this->getMax() = null,
+        $this->getValues() = array(),
+        $this->options = array()
+    ) {
+        $test = filter_var($this->getValue(), FILTER_SANITIZE_ENCODED);
+    }
+
+    /**
+     * Escapes and formats output
+     *
+     * @param   mixed    $this->getValue()
+     *
+     * @return  mixed
+     * @since   1.0
+     */
+    public function escape($this->getValue(), $this->options = array())
     {
-        return urlencode($value);
+        return urlencode($this->getValue());
     }
 }
+

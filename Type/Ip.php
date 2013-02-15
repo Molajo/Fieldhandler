@@ -4,17 +4,12 @@
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   MIT
+ * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  */
 namespace Molajo\Filters\Type;
 
 defined('MOLAJO') or die;
 
-use Exception;
-use RuntimeException;
-
-use Molajo\Filters\Adapter as filterAdapter;
-use Molajo\Filters\Adapter\FilterInterface;
 use Molajo\Filters\Exception\FilterException;
 
 /**
@@ -22,89 +17,111 @@ use Molajo\Filters\Exception\FilterException;
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   MIT
+ * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Ip implements FilterInterface
+class Ip extends AbstractFilter
 {
     /**
-     * Class constructor
+     * Validate Input
      *
+     * @param   mixed    $this->getValue()
+     * @param   bool     $this->getRequired()
+     * @param   null     $this->getDefault()
+     * @param   null     $this->getMin()
+     * @param   null     $this->getMax()
+     * @param   array    $this->getValues()
+     * @param   array    $this->options
+     *
+     * @return  mixed
      * @since   1.0
-     * @throws  FilterException
      */
-    public function __construct()
-    {
-        /** minimize memory http://php.net/manual/en/function.debug-backtrace.php */
-        if (phpversion() < 50306) {
-            $trace = debug_backtrace(1); // does not return objects
-        }
-        if (phpversion() > 50305) {
-            $trace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT | DEBUG_BACKTRACE_IGNORE_ARGS);
-        }
-        if (phpversion() > 50399) {
-            $trace = debug_backtrace(1, 1); // limit objects and arguments retrieved
-        }
-
-        if (isset($trace[1])) {
-            if ($trace[1]['class'] == 'Molajo\\Filters\\Adapter') {
-
-                $this->filesystem_type = 'Int';
-                return $this;
+    public function validate(
+        $this->getValue(),
+        $this->getRequired() = true,
+        $this->getDefault() = null,
+        $this->getMin() = null,
+        $this->getMax() = null,
+        $this->getValues() = array(),
+        $this->options = array()
+    ) {
+            $flags = 0;
+            if ($this->options['ipv4']) {
+                $flags |= FILTER_FLAG_IPV4;
             }
-        }
+            if ($this->options['ipv6']) {
+                $flags |= FILTER_FLAG_IPV6;
+            }
+            if (!$this->options['private']) {
+                $flags |= FILTER_FLAG_NO_PRIV_RANGE;
+            }
+            if (!$this->options['reserved']) {
+                $flags |= FILTER_FLAG_NO_RES_RANGE;
+            }
 
-        throw new FilterException
-            ('Int Filter Adapter Constructor Method can only be accessed by the Filter Adapter.');
+            return filter_var($var, FILTER_VALIDATE_IP, $flags);
     }
 
     /**
-     * Filters input data
+     * Filter Input
      *
-     * @param   string  $value       Value of input field
-     * @param   string  $type        Datatype of input field
-     * @param   int     $null        0 or 1 - is null allowed
-     * @param   string  $default     Default value, optional
+     * @param   mixed    $this->getValue()
+     * @param   bool     $this->getRequired()
+     * @param   null     $this->getDefault()
+     * @param   null     $this->getMin()
+     * @param   null     $this->getMax()
+     * @param   array    $this->getValues()
+     * @param   array    $this->options
      *
-     * @return  string
+     * @return  mixed
      * @since   1.0
      */
-    public function filterInput($value, $type = 'Ip', $null = 1, $default = null)
-    {
-        if ($default == null) {
-        } elseif ($value == null) {
-            $value = $default;
+    public function filter(
+        $this->getValue(),
+        $this->getRequired() = true,
+        $this->getDefault() = null,
+        $this->getMin() = null,
+        $this->getMax() = null,
+        $this->getValues() = array(),
+        $this->options = array()
+    ) {
+        if ($this->getDefault() == null) {
+        } elseif ($this->getValue() === null) {
+            $this->getValue() = $this->getDefault();
         }
 
-        if ($value == null) {
+        if ($this->getValue() === null) {
         } else {
-            $value = filter_var($value, FILTER_SANITIZE_IP);
-            $test = filter_var($value, FILTER_VALIDATE_IP);
+            $this->getValue() = filter_var($this->getValue(), FILTER_SANITIZE_IP);
+
+            $test = filter_var($this->getValue(), FILTER_VALIDATE_IP);
         }
 
-        if ($test == $value) {
+        if ($test == $this->getValue()) {
         } else {
-            throw new \Exception('FILTER_INVALID_VALUE');
+            throw new FilterException('FILTER_INVALID_VALUE');
         }
 
 
-        if ($value == null
-            && $null == 0
+        if ($this->getValue() === null
+            && $this->getRequired() == 0
         ) {
-            throw new \Exception('FILTER_VALUE_REQUIRED');
+            throw new FilterException(__CLASS__ . ' ' . FILTER_VALUE_REQUIRED);
         }
 
-        return $value;
+        return $this->getValue();
     }
 
     /**
-     * Escapes output
+     * Escapes and formats output
      *
-     * @return  int
+     * @param   mixed    $this->getValue()
+     *
+     * @return  mixed
      * @since   1.0
      */
-    public function escapeOutput($value)
+    public function escape($this->getValue(), $this->options = array())
     {
-        return filter_var($value, FILTER_SANITIZE_NUMBER_INT);
+        return filter_var($this->getValue(), FILTER_SANITIZE_IP);
     }
 }

@@ -4,7 +4,7 @@
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   MIT
+ * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  */
 namespace Molajo\Filters\Type;
 
@@ -13,7 +13,7 @@ defined('MOLAJO') or die;
 use Exception;
 use RuntimeException;
 
-use Molajo\Filters\Adapter as filterAdapter;
+
 use Molajo\Filters\Adapter\FilterInterface;
 use Molajo\Filters\Exception\FilterException;
 
@@ -22,85 +22,99 @@ use Molajo\Filters\Exception\FilterException;
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   MIT
+ * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Html implements FilterInterface
+class Html extends AbstractFilter
 {
     /**
-     * Class constructor
+     * Validate Input
      *
+     * @param   mixed    $this->getValue()
+     * @param   bool     $this->getRequired()
+     * @param   null     $this->getDefault()
+     * @param   null     $this->getMin()
+     * @param   null     $this->getMax()
+     * @param   array    $this->getValues()
+     * @param   array    $this->options
+     *
+     * @return  mixed
      * @since   1.0
-     * @throws  FilterException
      */
-    public function __construct()
-    {
-        /** minimize memory http://php.net/manual/en/function.debug-backtrace.php */
-        if (phpversion() < 50306) {
-            $trace = debug_backtrace(1); // does not return objects
-        }
-        if (phpversion() > 50305) {
-            $trace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT | DEBUG_BACKTRACE_IGNORE_ARGS);
-        }
-        if (phpversion() > 50399) {
-            $trace = debug_backtrace(1, 1); // limit objects and arguments retrieved
-        }
+    public function validate(
+        $this->getValue(),
+        $this->getRequired() = true,
+        $this->getDefault() = null,
+        $this->getMin() = null,
+        $this->getMax() = null,
+        $this->getValues() = array(),
+        $this->options = array()
+    ) {
 
-        if (isset($trace[1])) {
-            if ($trace[1]['class'] == 'Molajo\\Filters\\Adapter') {
-
-                $this->filesystem_type = 'Html';
-                return $this;
-            }
-        }
-
-        throw new FilterException
-        ('Html Filter Adapter Constructor Method can only be accessed by the Filter Adapter.');
     }
 
     /**
-     * Filters input data
+     * Filter Input
      *
-     * @param   string  $value Value of input field
-     * @param   string  $type        Datatype of input field
-     * @param   int     $null        0 or 1 - is null allowed
-     * @param   string  $default     Default value, optional
+     * @param   mixed    $this->getValue()
+     * @param   bool     $this->getRequired()
+     * @param   null     $this->getDefault()
+     * @param   null     $this->getMin()
+     * @param   null     $this->getMax()
+     * @param   array    $this->getValues()
+     * @param   array    $this->options
      *
-     * @return  string
+     * @return  mixed
      * @since   1.0
      */
-    public function filterInput($value, $type = 'int', $null = 1, $default = null)
-    {
-        //@todo get html filters back on
-        return true;
-
-        if ($default == null) {
-        } elseif ($value == null) {
-            $value = $default;
+    public function filter(
+        $this->getValue(),
+        $this->getRequired() = true,
+        $this->getDefault() = null,
+        $this->getMin() = null,
+        $this->getMax() = null,
+        $this->getValues() = array(),
+        $this->options = array()
+    ) {
+        if ($this->getDefault() == null) {
+        } elseif ($this->getValue() === null) {
+            $this->getValue() = $this->getDefault();
         }
 
-        if ($value == null) {
+        if ($this->getValue() === null) {
         } else {
-            $value = $this->purifier->purify($value);
+            $this->getValue() = filter_var($this->getValue(), FILTER_UNSAFE_RAW);
         }
 
-        if ($value == null
-            && $null == 0
+        if ($this->getValue() === null
+            && $this->getRequired() == 0
         ) {
-            throw new \Exception('FILTER_VALUE_REQUIRED');
+            throw new FilterException(__CLASS__ . ' ' . FILTER_VALUE_REQUIRED);
         }
 
-        return $value;
+        return $this->getValue();
     }
 
     /**
-     * Escapes output
+     * Escapes and formats output
      *
-     * @return  void
+     * @param   mixed    $this->getValue()
+     *
+     * @return  mixed
      * @since   1.0
      */
-    public function escapeOutput()
+    public function escape($this->getValue(), $this->options = array())
     {
-
+        //striptags
+        //nl2br
+        //upper
+        //lower
+        //reverse
+        //length
+        //raw
+        //trim
+        // htmlspecialchars($var, ENT_QUOTES, 'UTF-8')
+        return filter_var($this->getValue(), FILTER_UNSAFE_RAW);
     }
 }
+

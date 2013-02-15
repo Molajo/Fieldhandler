@@ -1,78 +1,105 @@
 <?php
 /**
- *Boolean Filters
+ * Boolean Filters
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   MIT
+ * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  */
 namespace Molajo\Filters\Type;
 
 defined('MOLAJO') or die;
-
-use Exception;
-use RuntimeException;
-
-use Molajo\Filters\Adapter as filterAdapter;
-use Molajo\Filters\Adapter\FilterInterface;
-use Molajo\Filters\Exception\FilterException;
 
 /**
  * Boolean Filters
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   MIT
+ * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Boolean implements FilterInterface
+class Boolean extends AbstractFilter
 {
     /**
-     * Filters input data
+     * Constructor
      *
-     * @param   string  $value
-     * @param   string  $type
-     * @param   boolean $null
-     * @param   string  $default
+     * @param   string   $method (validate, filter, escape)
+     * @param   string   $filter_type
      *
-     * @return  string
+     * @param   mixed    $value
+     * @param   null     $default
+     * @param   bool     $required
+     * @param   null     $min
+     * @param   null     $max
+     * @param   array    $values
+     * @param   string   $regex
+     * @param   object   $callback
+     * @param   array    $options
+     *
+     * @return  mixed
      * @since   1.0
      */
-    public function filterInput($value, $type = 'boolean', $null = 1, $default = null)
-    {
-        if ($default == null) {
-        } else {
-            $value = $default;
-        }
-
-        if ($value == null) {
-            $value = $default;
-        }
-
-        if ($value == null) {
-        } else {
-            $test = filter_var($value, FILTER_VALIDATE_BOOLEAN);
-        }
-
-        if ($value == null
-            && $null == 0
-        ) {
-            throw new \Exception('FILTER_VALUE_REQUIRED');
-        }
-
-        return $value;
+    public function __construct(
+        $method,
+        $filter_type,
+        $value,
+        $default = null,
+        $required = true,
+        $min = null,
+        $max = null,
+        $values = array(),
+        $regex = null,
+        $callback = null,
+        $options = array()
+    ) {
+        return parent::__contruct();
     }
 
     /**
-     * Escapes output
+     * Validate Input
      *
-     * @param   string  $value  Value of input field
-     *
-     * @return  void
+     * @return  mixed
      * @since   1.0
      */
-    public function escapeOutput($value)
+    public function validate()
     {
-        return filter_var($value, FILTER_VALIDATE_BOOLEAN);
+        return parent::validate();
+    }
+
+    /**
+     * Filter Input
+     *
+     * @return  mixed
+     * @since   1.0
+     */
+    public function filter()
+    {
+        parent::filter();
+
+        if ($this->getValue() === null) {
+        } else {
+            $test = filter_var($this->getValue(), FILTER_VALIDATE_BOOLEAN);
+        }
+
+        if ($this->getValue() === null
+            && $this->getRequired() == 0
+        ) {
+            throw new FilterException(__CLASS__ . ' ' . FILTER_VALUE_REQUIRED);
+        }
+
+        return $this->getValue();
+    }
+
+    /**
+     * Escapes and formats output
+     *
+     * @return  mixed
+     * @since   1.0
+     */
+    public function escape()
+    {
+        parent::escape();
+
+        return filter_var($this->getValue(), FILTER_VALIDATE_BOOLEAN);
     }
 }

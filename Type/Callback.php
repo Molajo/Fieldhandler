@@ -1,6 +1,6 @@
 <?php
 /**
- *Email Filters
+ *Callback Filters
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -10,22 +10,15 @@ namespace Molajo\Filters\Type;
 
 defined('MOLAJO') or die;
 
-use Exception;
-use RuntimeException;
-
-
-use Molajo\Filters\Adapter\FilterInterface;
-use Molajo\Filters\Exception\FilterException;
-
 /**
- * Email Filters
+ * Callback Filters
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Email extends AbstractFilter
+class Callback extends AbstractFilter
 {
     /**
      * Validate Input
@@ -51,6 +44,19 @@ class Email extends AbstractFilter
         $this->options = array()
     ) {
 
+        if (isset($this->options['callback'])) {
+            $this->getCallback() = $this->options['callback'];
+        } else {
+            throw new FilterException('Filters Validate: '
+            . 'Callback Object must be instantiated and injected into the $this->options associative array');
+        }
+
+        try {
+            return $this->getCallback()->validate($this->getValue(), $this->getRequired(), $this->getDefault(), $this->getMin(), $this->getMax(), $this->getValues(), $this->options);
+        }
+        catch (Exception $e) {
+            throw new FilterException('Filters Validate: Callback Exception Caught: ' . $e->message);
+        }
     }
 
     /**
@@ -76,30 +82,19 @@ class Email extends AbstractFilter
         $this->getValues() = array(),
         $this->options = array()
     ) {
-        if ($this->getDefault() == null) {
+        if (isset($this->options['callback'])) {
+            $this->getCallback() = $this->options['callback'];
         } else {
-            $this->getValue() = $this->getDefault();
+            throw new FilterException('Filters Filter method: '
+            . ' Callback Object must be instantiated and injected into the $this->options associative array');
         }
 
-        if ($this->getValue() === null) {
-        } else {
-
-            $test = filter_var($this->getValue(), FILTER_SANITIZE_EMAIL);
-
-            if (filter_var($test, FILTER_VALIDATE_EMAIL)) {
-                return $test;
-            } else {
-                throw new FilterException('FILTER_INVALID_VALUE');
-            }
+        try {
+            return $this->getCallback()->filter($this->getValue(), $this->getRequired(), $this->getDefault(), $this->getMin(), $this->getMax(), $this->getValues(), $this->options);
         }
-
-        if ($this->getValue() === null
-            && $this->getRequired() == 0
-        ) {
-            throw new FilterException(__CLASS__ . ' ' . FILTER_VALUE_REQUIRED);
+        catch (Exception $e) {
+            throw new FilterException('Filters Filter: Callback Exception Caught: ' . $e->message);
         }
-
-        return $this->getValue();
     }
 
     /**
@@ -112,7 +107,18 @@ class Email extends AbstractFilter
      */
     public function escape($this->getValue(), $this->options = array())
     {
-        return filter_var($this->getValue(), FILTER_SANITIZE_EMAIL);
+        if (isset($this->options['callback'])) {
+            $this->getCallback() = $this->options['callback'];
+        } else {
+            throw new FilterException('Filters Escape: '
+               . ' Callback Object must be instantiated and injected into the $this->options associative array');
+        }
+
+        try {
+            return $this->getCallback()->validate($this->getValue());
+        }
+        catch (Exception $e) {
+            throw new FilterException('Filters Validate: Callback Exception Caught: ' . $e->message);
+        }
     }
 }
-

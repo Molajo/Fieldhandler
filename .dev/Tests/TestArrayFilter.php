@@ -19,7 +19,7 @@ class Testcase1Test extends Data
 
         /** initialise call */
         $this->filesystem_type = 'Testcase1';
-        $this->action  = 'Copy';
+        $this->action          = 'Copy';
 
         return;
     }

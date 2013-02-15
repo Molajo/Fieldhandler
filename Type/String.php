@@ -1,6 +1,6 @@
 <?php
 /**
- *Email Filters
+ * String Filters
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -10,22 +10,18 @@ namespace Molajo\Filters\Type;
 
 defined('MOLAJO') or die;
 
-use Exception;
-use RuntimeException;
-
-
 use Molajo\Filters\Adapter\FilterInterface;
 use Molajo\Filters\Exception\FilterException;
 
 /**
- * Email Filters
+ * String Filters
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Email extends AbstractFilter
+class String extends AbstractFilter
 {
     /**
      * Validate Input
@@ -78,15 +74,15 @@ class Email extends AbstractFilter
     ) {
         if ($this->getDefault() == null) {
         } else {
-            $this->getValue() = $this->getDefault();
+            if ($this->getValue() === null) {
+                $this->getValue() = $this->getDefault();
+            }
         }
 
         if ($this->getValue() === null) {
         } else {
-
-            $test = filter_var($this->getValue(), FILTER_SANITIZE_EMAIL);
-
-            if (filter_var($test, FILTER_VALIDATE_EMAIL)) {
+            $test = filter_var($this->getValue(), FILTER_SANITIZE_STRING);
+            if ($test == $this->getValue()) {
                 return $test;
             } else {
                 throw new FilterException('FILTER_INVALID_VALUE');
@@ -99,7 +95,7 @@ class Email extends AbstractFilter
             throw new FilterException(__CLASS__ . ' ' . FILTER_VALUE_REQUIRED);
         }
 
-        return $this->getValue();
+        return trim($this->getValue());
     }
 
     /**
@@ -112,7 +108,6 @@ class Email extends AbstractFilter
      */
     public function escape($this->getValue(), $this->options = array())
     {
-        return filter_var($this->getValue(), FILTER_SANITIZE_EMAIL);
+        return htmlentities($this->getValue(), ENT_QUOTES, 'UTF-8');
     }
 }
-

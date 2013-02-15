@@ -1,116 +1,150 @@
 <?php
 /**
- *Alias Filters
+ * Alias Filters
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   MIT
+ * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  */
 namespace Molajo\Filters\Type;
 
 defined('MOLAJO') or die;
-
-use Exception;
-use RuntimeException;
-
-use Molajo\Filters\Adapter as filterAdapter;
-use Molajo\Filters\Adapter\FilterInterface;
-use Molajo\Filters\Exception\FilterException;
 
 /**
  * Alias Filters
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   MIT
+ * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Alias implements FilterInterface
+class Alias extends AbstractFilter
 {
     /**
-     * Class constructor
+     * Constructor
      *
+     * @param   string   $method (validate, filter, escape)
+     * @param   string   $filter_type
+     *
+     * @param   mixed    $this->getValue()
+     * @param   null     $this->getDefault()
+     * @param   bool     $this->getRequired()
+     * @param   null     $this->getMin()
+     * @param   null     $this->getMax()
+     * @param   array    $this->getValues()
+     * @param   string   $this->getRegex()
+     * @param   object   $this->getCallback()
+     * @param   array    $this->options
+     *
+     * @return  mixed
      * @since   1.0
-     * @throws  FilterException
      */
-    public function __construct()
-    {
-        /** minimize memory http://php.net/manual/en/function.debug-backtrace.php */
-        if (phpversion() < 50306) {
-            $trace = debug_backtrace(1); // does not return objects
+    public function __construct(
+        $method,
+        $filter_type,
+        $this->getValue(),
+        $this->getDefault() = null,
+        $this->getRequired() = true,
+        $this->getMin() = null,
+        $this->getMax() = null,
+        $this->getValues() = array(),
+        $this->getRegex() = null,
+        $this->getCallback() = null,
+        $this->options = array()
+    ) {
+        if (defined('FILTER_VALUE_REQUIRED')) {
+        } else {
+            $this->defines();
         }
-        if (phpversion() > 50305) {
-            $trace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT | DEBUG_BACKTRACE_IGNORE_ARGS);
-        }
-        if (phpversion() > 50399) {
-            $trace = debug_backtrace(1, 1); // limit objects and arguments retrieved
-        }
-
-        if (isset($trace[1])) {
-            if ($trace[1]['class'] == 'Molajo\\Filters\\Adapter') {
-
-                $this->Aliassystem_type = 'Alias';
-                return $this;
-            }
-        }
-
-        throw new FilterException
-        ('Alias Filter Adapter Constructor Method can only be accessed by the Filter Adapter.');
     }
 
     /**
-     * Filters input data
+     * Validate Input
      *
-     * @param   string  $value Value of input field
-     * @param   string  $type        Datatype of input field
-     * @param   int     $null        0 or 1 - is null allowed
-     * @param   string  $default     Default value, optional
-     *
-     * @return  string
+     * @return  mixed
      * @since   1.0
      */
-    public function filterInput($value, $type = 'int', $null = 1, $default = null)
+    public function validate()
     {
-        if ($default == null) {
-        } else {
-            $value = $default;
+        $test = $this->createAlias();
+
+        if ($test == $this->getValue()) {
+            return $this->getValue();
         }
 
-        if ($value == null) {
-            $value = $default;
+        throw new FilterException(__CLASS__ . ' ' . FILTER_VALUE_INVALID);
+    }
+
+
+    /**
+     * Filter Input
+     *
+     * @return  mixed
+     * @since   1.0
+     */
+    public function filter()
+    {
+        if ($this->getDefault() == null) {
+        } else {
+            $this->getValue() = $this->getDefault();
         }
 
-        if ($value == null) {
+        if ($this->getValue() === null) {
+            $this->getValue() = $this->efault;
+        }
+
+        $this->getValue() = $this->createAlias($this->getValue());
+
+        if ($this->getValue() === null
+            && $this->getRequired() == 0
+        ) {
+            throw new FilterException(__CLASS__ . ' ' . FILTER_VALUE_REQUIRED);
+        }
+
+        return $this->getValue();
+    }
+
+    /**
+     * Create Alias from Text Value
+     *
+     * @param $this->getValue()
+     *
+     * @return mixed
+     * @since  1.0
+     */
+    public function createAlias($this->getValue())
+    {
+        if ($this->getValue() === null) {
         } else {
-            $test = filter_var($value, FILTER_SANITIZE_URL);
+            $test = filter_var($this->getValue(), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
             /** Replace dashes with spaces */
-            $value = str_replace('-', ' ', strtolower(trim($value)));
+            $this->getValue() = str_replace('-', ' ', strtolower(trim($this->getValue())));
 
             /** Removes double spaces, ensures only alphanumeric characters */
-            $value = preg_replace('/(\s|[^A-Za-z0-9\-])+/', '-', $value);
+            $this->getValue() = preg_replace('/(\s|[^A-Za-z0-9\-])+/', '-', $this->getValue());
 
             /** Trim dashes at beginning and end */
-            $value = trim($value, '-');
+            $this->getValue() = trim($this->getValue(), '-');
+
+            /** Replace spaces with underscores */
+            $this->getValue() = str_replace(' ', '_', strtolower(trim($this->getValue())));
         }
 
-        if ($value == null
-            && $null == 0
-        ) {
-            throw new \Exception('FILTER_VALUE_REQUIRED');
-        }
-
-        return $value;
+        return $this->getValue();
     }
 
     /**
-     * Escapes output
+     * Escapes and formats output
      *
-     * @return  void
+     * @param   mixed    $this->getValue()
+     * @param   array    $this->options
+     *
+     * @return  mixed
      * @since   1.0
      */
-    public function escapeOutput()
+    public function escape($this->getValue(), $this->options = array())
     {
-
+        return $this->createAlias($this->getValue());
     }
 }

@@ -4,73 +4,114 @@
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   MIT
+ * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  */
 namespace Molajo\Filters;
 
 defined('MOLAJO') or die;
 
-use Molajo\Filters\Adapter\FilterInterface;
+use Exception;
 use Molajo\Filters\Exception\FilterException;
 
 /**
  * Filter Adapter
  *
  * @package   Molajo
- * @license   MIT
  * @copyright 2013 Amy Stephen. All rights reserved.
- * @since     1.0
+ * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  */
 Class Adapter
 {
     /**
-     * Validate Input
+     * Filter Type
      *
+     * @var    string
+     * @since  1.0
+     */
+    protected $filter_type;
+
+    /**
+     * Filter Type Object
+     *
+     * @var    object   FilterInterface
+     * @since  1.0
+     */
+    protected $ft;
+
+    /**
+     * Method (validate, filter, escape)
+     *
+     * @var    string
+     * @since  1.0
+     */
+    protected $method;
+
+    /**
+     * Constructor
+     *
+     * @param   string   $method (validate, filter, escape)
      * @param   string   $filter_type
+     *
      * @param   mixed    $value
-     * @param   int      $null
      * @param   null     $default
+     * @param   bool     $required
+     * @param   null     $min
+     * @param   null     $max
+     * @param   array    $values
+     * @param   string   $regex
+     * @param   object   $callback
+     * @param   array    $options
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0          Molajo/Filters/Adapter(Validate, 'Int', 888, 777, false, null, null);
      */
-    public function validateInput($value, $filter_type, $null = 1, $default = null)
-    {
-        return $this->getFiltersType($filter_type)->validateInput($value, $filter_type, $null, $default);
+    public function __construct(
+        $method,
+        $filter_type,
+
+        $value,
+        $default = null,
+        $required = true,
+        $min = null,
+        $max = null,
+        $values = array(),
+        $regex = null,
+        $callback = null,
+        $options = array()
+    ) {
+        if (defined('FILTER_VALUE_REQUIRED')) {
+        } else {
+            $this->defines();
+        }
+
+        $class = $this->getType($filter_type);
+
+        try {
+
+            $this->ft = new $class ($method,
+                $filter_type,
+                $value,
+                $default,
+                $required,
+                $min,
+                $max,
+                $values,
+                $regex,
+                $callback,
+                $options);
+
+        } catch (Exception $e) {
+
+            throw new FilterException
+            ('Filters: Could not instantiate Filter Type: ' . $filter_type
+                . ' Class: ' . $class);
+        }
+
+        return $this->ft->$method();
     }
 
     /**
-     * Filter Input
-     *
-     * @param   string   $filter_type
-     * @param   mixed    $value
-     * @param   int      $null
-     * @param   null     $default
-     *
-     * @return  mixed
-     * @since   1.0
-     */
-    public function filterInput($value, $filter_type, $null = 1, $default = null)
-    {
-        return $this->getFiltersType($filter_type)->filterInput($value, $filter_type, $null, $default);
-    }
-
-    /**
-     * Escapes output
-     *
-     * @param   string   $filter_type
-     * @param   mixed    $value
-     *
-     * @return  mixed
-     * @since   1.0
-     */
-    public function escapeOutput($filter_type, $value)
-    {
-        return $this->getFiltersType($filter_type)->escapeOutput($value);
-    }
-
-    /**
-     * Get the Filters Type (ex., Local, Ftp, Virtual, etc.)
+     * Instantiates Filter Class
      *
      * @param   string  $filter_type
      *
@@ -78,7 +119,7 @@ Class Adapter
      * @since   1.0
      * @throws  FilterException
      */
-    protected function getFiltersType($filter_type)
+    protected function getType($filter_type)
     {
         $class = 'Molajo\\Filters\\Type\\' . $filter_type;
 
@@ -88,43 +129,28 @@ Class Adapter
             ('Filter Type Class ' . $class . ' does not exist.');
         }
 
-        return new $class($filter_type);
+        return $class;
     }
 
     /**
-     * Get timezone
+     * Define Contacts
      *
-     * @param   array  $options
-     *
-     * @return  array
+     * @return  object
      * @since   1.0
+     * @throws  FilterException
      */
-    protected function getTimeZone($options)
+    protected function defines()
     {
-        $timezone = '';
-
-        if (is_array($options)) {
+        if (defined('FILTER_VALUE_REQUIRED')) {
         } else {
-            $options = array();
+            define('FILTER_VALUE_REQUIRED', ' Value required.');
         }
 
-        if (isset($options['timezone'])) {
-            $timezone = $options['timezone'];
+        if (defined('FILTER_INVALID_VALUE')) {
+        } else {
+            define('FILTER_INVALID_VALUE', ' Invalid value.');
         }
 
-        if ($timezone === '') {
-            if (ini_get('date.timezone')) {
-                $timezone = ini_get('date.timezone');
-            }
-        }
-
-        if ($timezone === '') {
-            $timezone = 'UTC';
-        }
-
-        ini_set('date.timezone', $timezone);
-        $options['timezone'] = $timezone;
-
-        return $options;
+        return;
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- *Email Filters
+ * Values Filters
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -10,22 +10,18 @@ namespace Molajo\Filters\Type;
 
 defined('MOLAJO') or die;
 
-use Exception;
-use RuntimeException;
-
-
 use Molajo\Filters\Adapter\FilterInterface;
 use Molajo\Filters\Exception\FilterException;
 
 /**
- * Email Filters
+ * Values Filters
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Email extends AbstractFilter
+class Valuesfilter extends AbstractFilter
 {
     /**
      * Validate Input
@@ -50,7 +46,21 @@ class Email extends AbstractFilter
         $this->getValues() = array(),
         $this->options = array()
     ) {
+        if (is_array($this->getValues()) && count($this->getValues()) > 0) {
+        } else {
+            throw new FilterException(__CLASS__ . ' Value: ' . $this->getValue() . ' No set of validation values provided.');
+        }
 
+        if ($this->getDefault() == null) {
+        } else {
+            $this->getValue() = $this->getDefault();
+        }
+
+        if (in_array($this->getValue(), $this->getValues())) {
+            return $this->getValue();
+        }
+
+        throw new FilterException(__CLASS__ . ' Value: ' . $this->getValue() . ' Not one of valid values.');
     }
 
     /**
@@ -82,21 +92,23 @@ class Email extends AbstractFilter
         }
 
         if ($this->getValue() === null) {
-        } else {
-
-            $test = filter_var($this->getValue(), FILTER_SANITIZE_EMAIL);
-
-            if (filter_var($test, FILTER_VALIDATE_EMAIL)) {
-                return $test;
-            } else {
-                throw new FilterException('FILTER_INVALID_VALUE');
-            }
+            $this->getValue() = $this->getDefault();
         }
 
         if ($this->getValue() === null
             && $this->getRequired() == 0
         ) {
             throw new FilterException(__CLASS__ . ' ' . FILTER_VALUE_REQUIRED);
+        }
+
+        if ($this->getValue() === null) {
+            $this->getValue() = array();
+        } else {
+            if (is_array($this->getValue())) {
+
+            } else {
+                throw new FilterException(__CLASS__ . ' ' . FILTER_INVALID_VALUE);
+            }
         }
 
         return $this->getValue();
@@ -112,7 +124,12 @@ class Email extends AbstractFilter
      */
     public function escape($this->getValue(), $this->options = array())
     {
-        return filter_var($this->getValue(), FILTER_SANITIZE_EMAIL);
+        // create list
+        // value(s) selected
+        if (is_array($this->getValue())) {
+            return $this->getValue();
+        }
+
+        return array();
     }
 }
-

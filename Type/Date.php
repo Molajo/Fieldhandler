@@ -1,123 +1,125 @@
 <?php
 /**
- *Date Filters
+ * Date Filters
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   MIT
+ * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  */
 namespace Molajo\Filters\Type;
 
 defined('MOLAJO') or die;
-
-use Exception;
-use RuntimeException;
-
-use Molajo\Filters\Adapter as filterAdapter;
-use Molajo\Filters\Adapter\FilterInterface;
-use Molajo\Filters\Exception\FilterException;
 
 /**
  * Date Filters
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   MIT
+ * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Date implements FilterInterface
+class Date extends AbstractFilter
 {
     /**
-     * Class constructor
+     * Validate Input
      *
+     * @param   mixed    $this->getValue()
+     * @param   bool     $this->getRequired()
+     * @param   null     $this->getDefault()
+     * @param   null     $this->getMin()
+     * @param   null     $this->getMax()
+     * @param   array    $this->getValues()
+     * @param   array    $this->options
+     *
+     * @return  mixed
      * @since   1.0
-     * @throws  FilterException
      */
-    public function __construct()
-    {
-        /** minimize memory http://php.net/manual/en/function.debug-backtrace.php */
-        if (phpversion() < 50306) {
-            $trace = debug_backtrace(1); // does not return objects
-        }
-        if (phpversion() > 50305) {
-            $trace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT | DEBUG_BACKTRACE_IGNORE_ARGS);
-        }
-        if (phpversion() > 50399) {
-            $trace = debug_backtrace(1, 1); // limit objects and arguments retrieved
-        }
+    public function validate(
+        $this->getValue(),
+        $this->getRequired() = true,
+        $this->getDefault() = null,
+        $this->getMin() = null,
+        $this->getMax() = null,
+        $this->getValues() = array(),
+        $this->options = array()
+    ) {
 
-        if (isset($trace[1])) {
-            if ($trace[1]['class'] == 'Molajo\\Filters\\Adapter') {
-
-                $this->filesystem_type = 'Date';
-                return $this;
-            }
-        }
-
-        throw new FilterException
-        ('Date Filter Adapter Constructor Method can only be accessed by the Filter Adapter.');
     }
 
     /**
-     * Filters Date data
+     * Filter Input
      *
-     * @param   string  $value Value of input field
-     * @param   string  $type        Datatype of input field
-     * @param   int     $null        0 or 1 - is null allowed
-     * @param   string  $default     Default value, optional
+     * @param   mixed    $this->getValue()
+     * @param   bool     $this->getRequired()
+     * @param   null     $this->getDefault()
+     * @param   null     $this->getMin()
+     * @param   null     $this->getMax()
+     * @param   array    $this->getValues()
+     * @param   array    $this->options
      *
-     * @return  string
+     * @return  mixed
      * @since   1.0
      */
-    public function filterInput($value, $type = 'int', $null = 1, $default = null)
-    {
-        if ($default == null) {
-        } elseif ($value == null
-            || $value == ''
-            || $value == 0
+    public function filter(
+        $this->getValue(),
+        $this->getRequired() = true,
+        $this->getDefault() = null,
+        $this->getMin() = null,
+        $this->getMax() = null,
+        $this->getValues() = array(),
+        $this->options = array()
+    ) {
+        if ($this->getDefault() == null) {
+        } elseif ($this->getValue() === null
+            || $this->getValue() == ''
+            || $this->getValue() == 0
         ) {
-            $value = $default;
+            $this->getValue() = $this->getDefault();
         }
 
-        if ($value == null
-            || $value == '0000-00-00 00:00:00'
+        if ($this->getValue() === null
+            || $this->getValue() == '0000-00-00 00:00:00'
         ) {
 
         } else {
-            $dd   = substr($value, 8, 2);
-            $mm   = substr($value, 5, 2);
-            $ccyy = substr($value, 0, 4);
+            $dd   = substr($this->getValue(), 8, 2);
+            $mm   = substr($this->getValue(), 5, 2);
+            $ccyy = substr($this->getValue(), 0, 4);
 
             if (checkdate((int)$mm, (int)$dd, (int)$ccyy)) {
             } else {
-                throw new \Exception('FILTER_INVALID_VALUE');
+                throw new FilterException('FILTER_INVALID_VALUE');
             }
             $test = $ccyy . '-' . $mm . '-' . $dd;
 
-            if ($test == substr($value, 0, 10)) {
-                return $value;
+            if ($test == substr($this->getValue(), 0, 10)) {
+                return $this->getValue();
             } else {
-                throw new \Exception('FILTER_INVALID_VALUE');
+                throw new FilterException('FILTER_INVALID_VALUE');
             }
         }
 
-        if ($value == null
-            && $null == 0
+        if ($this->getValue() === null
+            && $this->getRequired() == 0
         ) {
-            throw new \Exception('FILTER_VALUE_REQUIRED');
+            throw new FilterException(__CLASS__ . ' ' . FILTER_VALUE_REQUIRED);
         }
 
-        return $value;
+        return $this->getValue();
     }
 
     /**
-     * Escapes output
+     * Escapes and formats output
      *
-     * @return  void
+     * @param   mixed  $this->getValue()
+     *
+     * @return  mixed
      * @since   1.0
      */
-    public function escapeOutput()
+    public function escape($this->getValue(), $this->options = array())
     {
+        //timezone
 
+        return htmlentities($this->getValue(), ENT_QUOTES, 'UTF-8');
     }
 }

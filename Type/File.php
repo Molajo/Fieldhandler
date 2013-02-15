@@ -4,16 +4,13 @@
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   MIT
+ * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  */
 namespace Molajo\Filters\Type;
 
 defined('MOLAJO') or die;
 
 use Exception;
-use RuntimeException;
-
-use Molajo\Filters\Adapter as filterAdapter;
 use Molajo\Filters\Adapter\FilterInterface;
 use Molajo\Filters\Exception\FilterException;
 
@@ -22,68 +19,76 @@ use Molajo\Filters\Exception\FilterException;
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   MIT
+ * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class File implements FilterInterface
+class File extends AbstractFilter
 {
     /**
-     * Class constructor
+     * Validate Input
      *
+     * @param   mixed    $this->getValue()
+     * @param   bool     $this->getRequired()
+     * @param   null     $this->getDefault()
+     * @param   null     $this->getMin()
+     * @param   null     $this->getMax()
+     * @param   array    $this->getValues()
+     * @param   array    $this->options
+     *
+     * @return  mixed
      * @since   1.0
-     * @throws  FilterException
      */
-    public function __construct()
-    {
-        /** minimize memory http://php.net/manual/en/function.debug-backtrace.php */
-        if (phpversion() < 50306) {
-            $trace = debug_backtrace(1); // does not return objects
-        }
-        if (phpversion() > 50305) {
-            $trace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT | DEBUG_BACKTRACE_IGNORE_ARGS);
-        }
-        if (phpversion() > 50399) {
-            $trace = debug_backtrace(1, 1); // limit objects and arguments retrieved
-        }
+    public function validate(
+        $this->getValue(),
+        $this->getRequired() = true,
+        $this->getDefault() = null,
+        $this->getMin() = null,
+        $this->getMax() = null,
+        $this->getValues() = array(),
+        $this->options = array()
+    ) {
 
-        if (isset($trace[1])) {
-            if ($trace[1]['class'] == 'Molajo\\Filters\\Adapter') {
-
-                $this->filesystem_type = 'File';
-                return $this;
-            }
-        }
-
-        throw new FilterException
-        ('File Filter Adapter Constructor Method can only be accessed by the Filter Adapter.');
     }
 
     /**
-     * Filters input data
+     * Filter Input
      *
-     * @param   string  $value Value of input field
-     * @param   string  $type        Datatype of input field
-     * @param   int     $null        0 or 1 - is null allowed
-     * @param   string  $default     Default value, optional
+     * @param   mixed    $this->getValue()
+     * @param   bool     $this->getRequired()
+     * @param   null     $this->getDefault()
+     * @param   null     $this->getMin()
+     * @param   null     $this->getMax()
+     * @param   array    $this->getValues()
+     * @param   array    $this->options
      *
-     * @return  string
+     * @return  mixed
      * @since   1.0
      */
-    public function filterInput($value, $type = 'int', $null = 1, $default = null)
-    {
-        $regex = array('#(\.){2,}#', '#[^A-Za-z0-9\.\_\- ]#', '#^\.#');
+    public function filter(
+        $this->getValue(),
+        $this->getRequired() = true,
+        $this->getDefault() = null,
+        $this->getMin() = null,
+        $this->getMax() = null,
+        $this->getValues() = array(),
+        $this->options = array()
+    ) {
+        $this->getRegex() = array('#(\.){2,}#', '#[^A-Za-z0-9\.\_\- ]#', '#^\.#');
 
-        return preg_replace($regex, '', $value);
+        return preg_replace($this->getRegex(), '', $this->getValue());
     }
 
     /**
-     * Escapes output
+     * Escapes and formats output
      *
-     * @return  void
+     * @param   mixed    $this->getValue()
+     *
+     * @return  mixed
      * @since   1.0
      */
-    public function escapeOutput()
+    public function escape($this->getValue(), $this->options = array())
     {
-
+        return htmlentities($this->getValue(), ENT_QUOTES, 'UTF-8');
     }
 }
+

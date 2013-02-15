@@ -1,6 +1,6 @@
 <?php
 /**
- *Email Filters
+ *Alpha Filters
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -10,22 +10,18 @@ namespace Molajo\Filters\Type;
 
 defined('MOLAJO') or die;
 
-use Exception;
-use RuntimeException;
-
-
 use Molajo\Filters\Adapter\FilterInterface;
 use Molajo\Filters\Exception\FilterException;
 
 /**
- * Email Filters
+ * Alpha Filters
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Email extends AbstractFilter
+class Alpha extends AbstractFilter
 {
     /**
      * Validate Input
@@ -82,15 +78,12 @@ class Email extends AbstractFilter
         }
 
         if ($this->getValue() === null) {
+            $this->getValue() = $this->getDefault();
+        }
+
+        if ($this->getValue() === null) {
         } else {
-
-            $test = filter_var($this->getValue(), FILTER_SANITIZE_EMAIL);
-
-            if (filter_var($test, FILTER_VALIDATE_EMAIL)) {
-                return $test;
-            } else {
-                throw new FilterException('FILTER_INVALID_VALUE');
-            }
+            $test = filter_var($this->getValue(), FILTER_VALIDATE_BOOLEAN);
         }
 
         if ($this->getValue() === null
@@ -112,7 +105,6 @@ class Email extends AbstractFilter
      */
     public function escape($this->getValue(), $this->options = array())
     {
-        return filter_var($this->getValue(), FILTER_SANITIZE_EMAIL);
+        return filter_var($this->getValue(), FILTER_VALIDATE_BOOLEAN);
     }
 }
-

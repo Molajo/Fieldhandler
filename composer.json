@@ -12,8 +12,8 @@
             "homepage":"http://AmyStephen.github.com"
         },
         {
-            "name": "Other Contributors",
-            "homepage": "http://github.com/Molajo/Filters/contributors"
+            "name":"Other Contributors",
+            "homepage":"http://github.com/Molajo/Filters/contributors"
         }
     ],
     "require":{
@@ -24,14 +24,16 @@
         "email":"hello@molajo.org",
         "irc":"irc://irc.freenode.org/molajo"
     },
-    "target-dir": "Molajo/Filters",
-    "autoload": {
-        "psr-0": {"Molajo\\Filters": "./"}
+    "target-dir":"Molajo/Filters",
+    "autoload":{
+        "psr-0":{
+            "Molajo\\Filters":"./"
+        }
     },
-    "minimum-stability": "dev",
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.1.0-dev"
+    "minimum-stability":"dev",
+    "extra":{
+        "branch-alias":{
+            "dev-master":"0.1.0-dev"
         }
     }
 }
