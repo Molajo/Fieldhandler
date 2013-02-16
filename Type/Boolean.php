@@ -1,6 +1,6 @@
 <?php
 /**
- * Alpha Filter
+ * Boolean Filter
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -11,7 +11,7 @@ namespace Molajo\Filters\Type;
 defined('MOLAJO') or die;
 
 /**
- * Alpha Filter
+ * Boolean Filter
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -23,17 +23,10 @@ class Boolean extends AbstractFilter
     /**
      * Constructor
      *
-     * @param   string   $method (validate, filter, escape)
-     * @param   string   $filter_type
-     *
-     * @param   mixed    $value
-     * @param   null     $default
-     * @param   bool     $required
-     * @param   null     $min
-     * @param   null     $max
-     * @param   array    $values
-     * @param   string   $regex
-     * @param   object   $callback
+     * @param   string   $method
+     * @param   string   $field_name
+     * @param   mixed    $field_value
+     * @param   array    $filter_type_chain
      * @param   array    $options
      *
      * @return  mixed
@@ -41,18 +34,12 @@ class Boolean extends AbstractFilter
      */
     public function __construct(
         $method,
-        $filter_type,
-        $value,
-        $default = null,
-        $required = true,
-        $min = null,
-        $max = null,
-        $values = array(),
-        $regex = null,
-        $callback = null,
+        $field_name,
+        $field_value,
+        $filter_type_chain,
         $options = array()
     ) {
-        return parent::__construct();
+        return parent::__construct($method, $field_name, $field_value, $filter_type_chain, $options);
     }
 
     /**
@@ -65,10 +52,10 @@ class Boolean extends AbstractFilter
     {
         parent::validate();
 
-        if ($this->getValue() === null) {
+        if ($this->getFieldValue() === null) {
         } else {
 
-            $test = filter_var($this->getValue(), FILTER_VALIDATE_BOOLEAN);
+            $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_BOOLEAN);
 
             if ($test == true) {
             } else {
@@ -77,7 +64,7 @@ class Boolean extends AbstractFilter
             }
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**
@@ -90,18 +77,18 @@ class Boolean extends AbstractFilter
     {
         parent::filter();
 
-        if ($this->getValue() === null) {
+        if ($this->getFieldValue() === null) {
         } else {
 
-            $test = filter_var($this->getValue(), FILTER_VALIDATE_BOOLEAN);
+            $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_BOOLEAN);
 
             if ($test == true) {
             } else {
-                $this->setValue(false);
+                $this->setFieldValue(false);
             }
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**
@@ -114,13 +101,13 @@ class Boolean extends AbstractFilter
     {
         parent::escape();
 
-        $test = filter_var($this->getValue(), FILTER_VALIDATE_BOOLEAN);
+        $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_BOOLEAN);
 
         if ($test == true) {
         } else {
-            $this->setValue(false);
+            $this->setFieldValue(false);
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 }

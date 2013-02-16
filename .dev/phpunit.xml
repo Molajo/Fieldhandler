@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="Bootstrap.php" colors="true">
     <testsuites>
-        <testsuite name="Testcase1">
-            <directory>./Tests/Testcase1/</directory>
+        <testsuite name="Classes">
+            <directory>./Tests/Classes/</directory>
         </testsuite>
     </testsuites>
     <filter>

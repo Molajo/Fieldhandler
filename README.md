@@ -33,12 +33,12 @@ There are three methods for each filter:
 The **escape** method only has the **value** parameter.
 
 The **validate** and **filter** methods each have the following parameters:
-1. **$value** contains the data value to be verified or filtered;
+1. **$field_value** contains the data value to be verified or filtered;
 2. **$required** true or false value indicating if a value is required or if null is allowed;
 3. **$default** if a null value is found, default value to use;
 4. **$min** if needed, the minimum value allowed, if not needed, pass in a null value;
 5. **$max** if needed, the maximum value allowed, if not needed, pass in a null value;
-6. **$values** if needed, an array of valid values;
+6. **$field_values** if needed, an array of valid values;
 7. **$callback** Associative array of named pair values for custom filters.
 7. **$options** Associative array of named pair values for custom filters.
 
@@ -48,39 +48,39 @@ Validate and Filter have the same set of parameters:
 
 ```php
     $result = new Molajo/Filters/Adapter($filter)
-        ->($value, $required, $default, $max, $max, $values, $options);
+        ->($field_value, $required, $default, $max, $max, $field_values, $options);
 ```
 #### Parameters ####
 
-- **$value** valid values: Read, List, Write, Delete, Rename, Copy, Move, GetRelativePath, Chmod, Touch, Metadata;
+- **$field_value** valid values: Read, List, Write, Delete, Rename, Copy, Move, GetRelativePath, Chmod, Touch, Metadata;
 - **$required** contains an absolute path from the filesystem root to be used to fulfill the action requested;
 - **$default** Identifier for the file system. Examples include Local (default), Ftp, Virtual, Dropbox, etc.;
 - **$min** Associative array of named pair values needed for the specific Action (examples below);
 - **$max** Associative array of named pair values needed for the specific Action (examples below);
-- **$values** Associative array of named pair values needed for the specific Action (examples below);
+- **$field_values** Associative array of named pair values needed for the specific Action (examples below);
 - **$options** Associative array of named pair values needed for the specific Action (examples below).
 
-     * @param   mixed    $value
+     * @param   mixed    $field_value
      * @param   bool     $required
      * @param   null     $default
      * @param   null     $min
      * @param   null     $max
-     * @param   array    $values
+     * @param   array    $field_values
      * @param   array    $options
 
-$value,
+$field_value,
         $required = true,
         $default = null,
         $min = null,
         $max = null,
-        $values = array(),
+        $field_values = array(),
         $options
-- **$value** valid values: Read, List, Write, Delete, Rename, Copy, Move, GetRelativePath, Chmod, Touch, Metadata;
+- **$field_value** valid values: Read, List, Write, Delete, Rename, Copy, Move, GetRelativePath, Chmod, Touch, Metadata;
 - **$required** contains an absolute path from the filesystem root to be used to fulfill the action requested;
 - **$default** Identifier for the file system. Examples include Local (default), Ftp, Virtual, Dropbox, etc.;
 - **$min** Associative array of named pair values needed for the specific Action (examples below);
 - **$max** Associative array of named pair values needed for the specific Action (examples below);
-- **$values** Associative array of named pair values needed for the specific Action (examples below);
+- **$field_values** Associative array of named pair values needed for the specific Action (examples below);
 - **$options** Associative array of named pair values needed for the specific Action (examples below).
 
 #### Results ####

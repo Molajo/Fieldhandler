@@ -26,12 +26,12 @@ class Float extends AbstractFilter
      * @param   string   $method (validate, filter, escape)
      * @param   string   $filter_type
      *
-     * @param   mixed    $value
+     * @param   mixed    $field_value
      * @param   null     $default
      * @param   bool     $required
      * @param   null     $min
      * @param   null     $max
-     * @param   array    $values
+     * @param   array    $field_values
      * @param   string   $regex
      * @param   object   $callback
      * @param   array    $options
@@ -42,12 +42,12 @@ class Float extends AbstractFilter
     public function __construct(
         $method,
         $filter_type,
-        $value,
+        $field_value,
         $default = null,
         $required = true,
         $min = null,
         $max = null,
-        $values = array(),
+        $field_values = array(),
         $regex = null,
         $callback = null,
         $options = array()
@@ -65,10 +65,10 @@ class Float extends AbstractFilter
     {
         parent::validate();
 
-        if ($this->getValue() === null) {
+        if ($this->getFieldValue() === null) {
         } else {
 
-            $test = filter_var($this->getValue(), FILTER_VALIDATE_FLOAT, $this->setFlags());
+            $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_FLOAT, $this->setFlags());
 
             if ($test == true) {
             } else {
@@ -77,7 +77,7 @@ class Float extends AbstractFilter
             }
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**
@@ -90,18 +90,18 @@ class Float extends AbstractFilter
     {
         parent::filter();
 
-        if ($this->getValue() === null) {
+        if ($this->getFieldValue() === null) {
         } else {
 
-            $test = filter_var($this->getValue(), FILTER_VALIDATE_FLOAT, $this->setFlags());
+            $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_FLOAT, $this->setFlags());
 
             if ($test == true) {
             } else {
-                $this->setValue(filter_var($this->getValue(), FILTER_SANITIZE_NUMBER_INT));
+                $this->setFieldValue(filter_var($this->getFieldValue(), FILTER_SANITIZE_NUMBER_INT));
             }
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**
@@ -114,14 +114,14 @@ class Float extends AbstractFilter
     {
         parent::escape();
 
-        $test = filter_var($this->getValue(), FILTER_VALIDATE_FLOAT, $this->setFlags());
+        $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_FLOAT, $this->setFlags());
 
         if ($test == true) {
         } else {
-            $this->setValue(filter_var($this->getValue(), FILTER_SANITIZE_NUMBER_INT));
+            $this->setFieldValue(filter_var($this->getFieldValue(), FILTER_SANITIZE_NUMBER_INT));
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**

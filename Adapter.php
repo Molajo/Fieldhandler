@@ -23,90 +23,178 @@ use Molajo\Filters\Exception\FilterException;
 Class Adapter
 {
     /**
-     * Filter Type
+     * Method (validate, filter, or escape)
      *
      * @var    string
      * @since  1.0
      */
-    protected $filter_type;
+    public $method;
 
     /**
-     * Filter Type Object
-     *
-     * @var    object   FilterInterface
-     * @since  1.0
-     */
-    protected $ft;
-
-    /**
-     * Method (validate, filter, escape)
+     * Name of Field
      *
      * @var    string
      * @since  1.0
      */
-    protected $method;
+    public $field_name;
+
+    /**
+     * Field Value
+     *
+     * @var    string
+     * @since  1.0
+     */
+    public $field_value;
+
+    /**
+     * Array of requested filters
+     *
+     * @var    array
+     * @since  1.0
+     */
+    public $filter_types;
+
+    /**
+     * Array of values needed for filters
+     *
+     * @var    array
+     * @since  1.0
+     */
+    public $options;
 
     /**
      * Constructor
      *
-     * @param   string   $method (validate, filter, escape)
-     * @param   string   $filter_type
-     *
-     * @param   mixed    $value
-     * @param   null     $default
-     * @param   bool     $required
-     * @param   null     $min
-     * @param   null     $max
-     * @param   array    $values
-     * @param   string   $regex
-     * @param   object   $callback
+     * @param   string   $method
+     * @param   string   $field_name
+     * @param   mixed    $field_value
+     * @param   array    $filter_type_chain
      * @param   array    $options
      *
      * @return  mixed
-     * @since   1.0          Molajo/Filters/Adapter(Validate, 'Int', 888, 777, false, null, null);
+     * @since   1.0
      */
     public function __construct(
         $method,
-        $filter_type,
-        $value,
-        $default = null,
-        $required = true,
-        $min = null,
-        $max = null,
-        $values = array(),
-        $regex = null,
-        $callback = null,
+        $field_name,
+        $field_value,
+        $filter_type_chain,
         $options = array()
     ) {
-        if (defined('FILTER_VALUE_REQUIRED')) {
+
+        $this->initialise();
+
+        $this->editRequest($method, $field_name, $field_value, $filter_type_chain, $options);
+
+        $this->processRequest();
+
+        return $this;
+    }
+
+    /**
+     * Edit Request
+     *
+     * @param   string   $method
+     * @param   string   $field_name
+     * @param   mixed    $field_value
+     * @param   string   $filter_type_chain
+     * @param   array    $options
+     *
+     * @return  mixed
+     * @since   1.0
+     * @throws  FilterException
+     */
+    protected function editRequest(
+        $method,
+        $field_name,
+        $field_value,
+        $filter_type_chain,
+        $options = array()
+    ) {
+
+        $method = strtolower($method);
+        if (in_array($method, array('validate', 'filter', 'escape'))) {
+            $this->method = $method;
         } else {
-            $this->defines();
-        }
-
-        $class = $this->getType($filter_type);
-
-        try {
-
-            $this->ft = new $class ($method,
-                $filter_type,
-                $value,
-                $default,
-                $required,
-                $min,
-                $max,
-                $values,
-                $regex,
-                $callback,
-                $options);
-
-        } catch (Exception $e) {
-
             throw new FilterException
-            ('Filters: Could not instantiate Filter Type: ' . $filter_type
-                . ' Class: ' . $class);
+            ('Filters: Must provide the name of the requested method.');
         }
 
-        return $this->ft->$method();
+        if ($field_name == '' || $field_name === null) {
+            throw new FilterException
+            ('Filters: Must provide the field name.');
+        } else {
+            $this->field_name = $field_name;
+        }
+
+        $this->field_value = $field_value;
+
+        $filter_types = explode(',', $filter_type_chain);
+
+        if (is_array($filter_types) && count($filter_types) > 0) {
+            $this->filter_types = $filter_types;
+        } else {
+            throw new FilterException
+            ('Filters: Must request at least one filter type');
+        }
+
+        if (is_array($filter_types) && count($filter_types) > 0) {
+            $this->options = $options;
+        } else {
+            $this->options = array();
+        }
+
+        return;
+    }
+
+    /**
+     * Process Request
+     *
+     * @return  void
+     * @since   1.0
+     * @throws  FilterException
+     */
+    protected function processRequest()
+    {
+        foreach ($this->filter_types as $filter_type) {
+
+            $filter_type = ucfirst(strtolower($filter_type));
+
+            $class = $this->getType($filter_type);
+
+            try {
+
+                $ft = new $class (
+                    $filter_type,
+                    $this->method,
+                    $this->field_name,
+                    $this->field_value,
+                    $this->options
+                );
+
+            } catch (Exception $e) {
+
+                throw new FilterException
+                ('Filters: Could not instantiate Filter Type: ' . $filter_type
+                    . ' Class: ' . $class);
+            }
+
+            try {
+
+                $method            = $this->method;
+
+                $this->field_value = $ft->$method();
+
+            } catch (Exception $e) {
+
+                throw new FilterException
+                ('Filters: Could not call Filter Type: ' . $filter_type
+                    . ' Class: ' . $class
+                    . ' for Method: ' . $this->method);
+            }
+        }
+
+        return;
     }
 
     /**
@@ -132,14 +220,17 @@ Class Adapter
     }
 
     /**
-     * Define Contacts
+     * initialise
      *
-     * @return  object
+     * @return  void
      * @since   1.0
-     * @throws  FilterException
      */
-    protected function defines()
+    protected function initialise()
     {
+        if (defined('FILTER_VALUE_REQUIRED')) {
+            return;
+        }
+
         if (defined('FILTER_VALUE_REQUIRED')) {
         } else {
             define('FILTER_VALUE_REQUIRED', ' Value required.');

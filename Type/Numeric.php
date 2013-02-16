@@ -26,12 +26,12 @@ class Numeric extends AbstractFilter
      * @param   string   $method (validate, filter, escape)
      * @param   string   $filter_type
      *
-     * @param   mixed    $value
+     * @param   mixed    $field_value
      * @param   null     $default
      * @param   bool     $required
      * @param   null     $min
      * @param   null     $max
-     * @param   array    $values
+     * @param   array    $field_values
      * @param   string   $regex
      * @param   object   $callback
      * @param   array    $options
@@ -42,12 +42,12 @@ class Numeric extends AbstractFilter
     public function __construct(
         $method,
         $filter_type,
-        $value,
+        $field_value,
         $default = null,
         $required = true,
         $min = null,
         $max = null,
-        $values = array(),
+        $field_values = array(),
         $regex = null,
         $callback = null,
         $options = array()
@@ -65,10 +65,10 @@ class Numeric extends AbstractFilter
     {
         parent::validate();
 
-        if ($this->getValue() === null) {
+        if ($this->getFieldValue() === null) {
         } else {
 
-            $test = is_numeric($this->getValue());
+            $test = is_numeric($this->getFieldValue());
             if ($test == 1) {
             } else {
                 throw new FilterException
@@ -76,7 +76,7 @@ class Numeric extends AbstractFilter
             }
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**
@@ -89,18 +89,18 @@ class Numeric extends AbstractFilter
     {
         parent::filter();
 
-        if ($this->getValue() === null) {
+        if ($this->getFieldValue() === null) {
         } else {
 
-            $test = is_numeric($this->getValue());
+            $test = is_numeric($this->getFieldValue());
 
             if ($test == 1) {
             } else {
-                $this->setValue(0);
+                $this->setFieldValue(0);
             }
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**
@@ -113,13 +113,13 @@ class Numeric extends AbstractFilter
     {
         parent::escape();
 
-        $test = is_numeric($this->getValue());
+        $test = is_numeric($this->getFieldValue());
 
         if ($test == 1) {
         } else {
-            $this->setValue(0);
+            $this->setFieldValue(0);
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 }

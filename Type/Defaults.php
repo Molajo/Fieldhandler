@@ -1,6 +1,6 @@
 <?php
 /**
- * Alphanumeric Filter
+ * Defaults Filter
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -11,14 +11,14 @@ namespace Molajo\Filters\Type;
 defined('MOLAJO') or die;
 
 /**
- * Alphanumeric Filter
+ * Defaults Filter
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Alphanumeric extends AbstractFilter
+class Defaults extends AbstractFilter
 {
     /**
      * Constructor
@@ -52,16 +52,7 @@ class Alphanumeric extends AbstractFilter
     {
         parent::validate();
 
-        if ($this->getFieldValue() === null) {
-        } else {
-
-            $test = ctype_alnum($this->getFieldValue());
-            if ($test == 1) {
-            } else {
-                throw new FilterException
-                ('Validate Alphanumeric: ' . FILTER_INVALID_VALUE);
-            }
-        }
+        $this->setDefault();
 
         return $this->getFieldValue();
     }
@@ -76,16 +67,7 @@ class Alphanumeric extends AbstractFilter
     {
         parent::filter();
 
-        if ($this->getFieldValue() === null) {
-        } else {
-
-            $test = ctype_alnum($this->getFieldValue());
-
-            if ($test == 1) {
-            } else {
-                $this->setFieldValue($this->filterByCharacter('ctype_alnum', $this->getFieldValue()));
-            }
-        }
+        $this->setDefault();
 
         return $this->getFieldValue();
     }
@@ -100,8 +82,34 @@ class Alphanumeric extends AbstractFilter
     {
         parent::escape();
 
-        $this->setFieldValue($this->filterByCharacter('ctype_alnum', $this->getFieldValue()));
+        $this->setDefault();
 
         return $this->getFieldValue();
+    }
+
+    /**
+     * If needed, apply default to Field
+     *
+     * @return  mixed
+     * @since   1.0
+     */
+    public function setDefault()
+    {
+        if ($this->getFieldValue() === null) {
+
+            $default = null;
+
+            if (isset($this->options['default'])) {
+                $default = $this->options['default'];
+            }
+
+            if ($default === null) {
+
+            } else {
+                $this->setFieldValue($default);
+            }
+        }
+
+        return;
     }
 }

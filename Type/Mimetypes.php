@@ -26,12 +26,12 @@ class Mimetypes extends AbstractFilter
      * @param   string   $method (validate, filter, escape)
      * @param   string   $filter_type
      *
-     * @param   mixed    $value
+     * @param   mixed    $field_value
      * @param   null     $default
      * @param   bool     $required
      * @param   null     $min
      * @param   null     $max
-     * @param   array    $values
+     * @param   array    $field_values
      * @param   string   $regex
      * @param   object   $callback
      * @param   array    $options
@@ -42,12 +42,12 @@ class Mimetypes extends AbstractFilter
     public function __construct(
         $method,
         $filter_type,
-        $value,
+        $field_value,
         $default = null,
         $required = true,
         $min = null,
         $max = null,
-        $values = array(),
+        $field_values = array(),
         $regex = null,
         $callback = null,
         $options = array()
@@ -65,10 +65,10 @@ class Mimetypes extends AbstractFilter
     {
         parent::validate();
 
-        if ($this->getValue() === null) {
+        if ($this->getFieldValue() === null) {
         } else {
 
-            $test = in_array($this->getValue(), $this->getMimetypes());
+            $test = in_array($this->getFieldValue(), $this->getMimetypes());
 
             if ($test == 1) {
             } else {
@@ -77,7 +77,7 @@ class Mimetypes extends AbstractFilter
             }
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**
@@ -90,18 +90,18 @@ class Mimetypes extends AbstractFilter
     {
         parent::filter();
 
-        if ($this->getValue() === null) {
+        if ($this->getFieldValue() === null) {
         } else {
 
-            $test = in_array($this->getValue(), $this->getMimetypes());
+            $test = in_array($this->getFieldValue(), $this->getMimetypes());
 
             if ($test == 1) {
             } else {
-                $this->setValue(false);
+                $this->setFieldValue(false);
             }
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**
@@ -114,18 +114,18 @@ class Mimetypes extends AbstractFilter
     {
         parent::escape();
 
-        if ($this->getValue() === null) {
+        if ($this->getFieldValue() === null) {
         } else {
 
-            $test = in_array($this->getValue(), $this->getMimetypes());
+            $test = in_array($this->getFieldValue(), $this->getMimetypes());
 
             if ($test == 1) {
             } else {
-                $this->setValue(false);
+                $this->setFieldValue(false);
             }
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**
@@ -136,12 +136,12 @@ class Mimetypes extends AbstractFilter
      */
     public function getMimetypes()
     {
-        $values = array();
+        $field_values = array();
 
         if (isset($this->options['array_valid_mimetypes'])) {
-            $values = $this->options['array_valid_mimetypes'];
+            $field_values = $this->options['array_valid_mimetypes'];
         }
 
-        return $values;
+        return $field_values;
     }
 }

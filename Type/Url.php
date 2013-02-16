@@ -26,12 +26,12 @@ class Url extends AbstractFilter
      * @param   string   $method (validate, filter, escape)
      * @param   string   $filter_type
      *
-     * @param   mixed    $value
+     * @param   mixed    $field_value
      * @param   null     $default
      * @param   bool     $required
      * @param   null     $min
      * @param   null     $max
-     * @param   array    $values
+     * @param   array    $field_values
      * @param   string   $regex
      * @param   object   $callback
      * @param   array    $options
@@ -42,12 +42,12 @@ class Url extends AbstractFilter
     public function __construct(
         $method,
         $filter_type,
-        $value,
+        $field_value,
         $default = null,
         $required = true,
         $min = null,
         $max = null,
-        $values = array(),
+        $field_values = array(),
         $regex = null,
         $callback = null,
         $options = array()
@@ -65,14 +65,14 @@ class Url extends AbstractFilter
     {
         parent::validate();
 
-        if ($this->getValue() === null) {
+        if ($this->getFieldValue() === null) {
         } else {
 
             $url = str_replace(
                 array('ftp://', 'ftps://', 'http://', 'https://'),
                 ''
                 ,
-                strtolower($this->getValue())
+                strtolower($this->getFieldValue())
             );
 
             $test = filter_var($url, FILTER_VALIDATE_URL, $this->setFlags());
@@ -84,7 +84,7 @@ class Url extends AbstractFilter
             }
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**
@@ -97,25 +97,25 @@ class Url extends AbstractFilter
     {
         parent::filter();
 
-        if ($this->getValue() === null) {
+        if ($this->getFieldValue() === null) {
         } else {
 
             $url = str_replace(
                 array('ftp://', 'ftps://', 'http://', 'https://'),
                 ''
                 ,
-                strtolower($this->getValue())
+                strtolower($this->getFieldValue())
             );
 
             $test = filter_var($url, FILTER_SANITIZE_URL, $this->setFlags());
 
             if ($test == true) {
             } else {
-                $this->setValue(filter_var($url, FILTER_SANITIZE_URL));
+                $this->setFieldValue(filter_var($url, FILTER_SANITIZE_URL));
             }
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**
@@ -132,17 +132,17 @@ class Url extends AbstractFilter
             array('ftp://', 'ftps://', 'http://', 'https://'),
             ''
             ,
-            strtolower($this->getValue())
+            strtolower($this->getFieldValue())
         );
 
         $test = filter_var($url, FILTER_SANITIZE_URL, $this->setFlags());
 
         if ($test == true) {
         } else {
-            $this->setValue(filter_var($url, FILTER_SANITIZE_URL));
+            $this->setFieldValue(filter_var($url, FILTER_SANITIZE_URL));
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**

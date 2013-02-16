@@ -26,12 +26,12 @@ class Values extends AbstractFilter
      * @param   string   $method (validate, filter, escape)
      * @param   string   $filter_type
      *
-     * @param   mixed    $value
+     * @param   mixed    $field_value
      * @param   null     $default
      * @param   bool     $required
      * @param   null     $min
      * @param   null     $max
-     * @param   array    $values
+     * @param   array    $field_values
      * @param   string   $regex
      * @param   object   $callback
      * @param   array    $options
@@ -42,12 +42,12 @@ class Values extends AbstractFilter
     public function __construct(
         $method,
         $filter_type,
-        $value,
+        $field_value,
         $default = null,
         $required = true,
         $min = null,
         $max = null,
-        $values = array(),
+        $field_values = array(),
         $regex = null,
         $callback = null,
         $options = array()
@@ -65,10 +65,10 @@ class Values extends AbstractFilter
     {
         parent::validate();
 
-        if ($this->getValue() === null) {
+        if ($this->getFieldValue() === null) {
         } else {
 
-            $test = in_array($this->getValue(), $this->getValues());
+            $test = in_array($this->getFieldValue(), $this->getFieldValues());
 
             if ($test == 1) {
             } else {
@@ -77,7 +77,7 @@ class Values extends AbstractFilter
             }
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**
@@ -90,18 +90,18 @@ class Values extends AbstractFilter
     {
         parent::filter();
 
-        if ($this->getValue() === null) {
+        if ($this->getFieldValue() === null) {
         } else {
 
-            $test = in_array($this->getValue(), $this->getValues());
+            $test = in_array($this->getFieldValue(), $this->getFieldValues());
 
             if ($test == 1) {
             } else {
-                $this->setValue(false);
+                $this->setFieldValue(false);
             }
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**
@@ -114,18 +114,18 @@ class Values extends AbstractFilter
     {
         parent::escape();
 
-        if ($this->getValue() === null) {
+        if ($this->getFieldValue() === null) {
         } else {
 
-            $test = in_array($this->getValue(), $this->getValues());
+            $test = in_array($this->getFieldValue(), $this->getFieldValues());
 
             if ($test == 1) {
             } else {
-                $this->setValue(false);
+                $this->setFieldValue(false);
             }
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**
@@ -134,14 +134,14 @@ class Values extends AbstractFilter
      * @return  mixed
      * @since   1.0
      */
-    public function getValues()
+    public function getFieldValues()
     {
-        $values = array();
+        $field_values = array();
 
         if (isset($this->options['array_valid_values'])) {
-            $values = $this->options['array_valid_values'];
+            $field_values = $this->options['array_valid_values'];
         }
 
-        return $values;
+        return $field_values;
     }
 }

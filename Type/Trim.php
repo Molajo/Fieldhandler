@@ -26,12 +26,12 @@ class Trim extends AbstractFilter
      * @param   string   $method (validate, filter, escape)
      * @param   string   $filter_type
      *
-     * @param   mixed    $value
+     * @param   mixed    $field_value
      * @param   null     $default
      * @param   bool     $required
      * @param   null     $min
      * @param   null     $max
-     * @param   array    $values
+     * @param   array    $field_values
      * @param   string   $regex
      * @param   object   $callback
      * @param   array    $options
@@ -42,12 +42,12 @@ class Trim extends AbstractFilter
     public function __construct(
         $method,
         $filter_type,
-        $value,
+        $field_value,
         $default = null,
         $required = true,
         $min = null,
         $max = null,
-        $values = array(),
+        $field_values = array(),
         $regex = null,
         $callback = null,
         $options = array()
@@ -65,10 +65,10 @@ class Trim extends AbstractFilter
     {
         parent::validate();
 
-        if ($this->getValue() === null) {
+        if ($this->getFieldValue() === null) {
         } else {
 
-            $test = trim($this->getValue());
+            $test = trim($this->getFieldValue());
             if ($test == 1) {
             } else {
                 throw new FilterException
@@ -76,7 +76,7 @@ class Trim extends AbstractFilter
             }
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**
@@ -89,17 +89,17 @@ class Trim extends AbstractFilter
     {
         parent::filter();
 
-        if ($this->getValue() === null) {
+        if ($this->getFieldValue() === null) {
         } else {
 
-            $test = trim($this->getValue());
-            if ($test == $this->getValue()) {
+            $test = trim($this->getFieldValue());
+            if ($test == $this->getFieldValue()) {
             } else {
-                $this->setValue($test);
+                $this->setFieldValue($test);
             }
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**
@@ -110,16 +110,16 @@ class Trim extends AbstractFilter
      */
     public function escape()
     {
-        if ($this->getValue() === null) {
+        if ($this->getFieldValue() === null) {
         } else {
 
-            $test = trim($this->getValue());
-            if ($test == $this->getValue()) {
+            $test = trim($this->getFieldValue());
+            if ($test == $this->getFieldValue()) {
             } else {
-                $this->setValue($test);
+                $this->setFieldValue($test);
             }
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 }

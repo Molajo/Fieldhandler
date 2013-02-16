@@ -10,7 +10,6 @@ namespace Molajo\Filters\Type;
 
 defined('MOLAJO') or die;
 
-use Exception;
 use Molajo\Filters\Exception\FilterException;
 use Molajo\Filters\Adapter\FilterInterface;
 
@@ -22,8 +21,16 @@ use Molajo\Filters\Adapter\FilterInterface;
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-abstract class AbstractFilter implements FilterInterface
+class AbstractFilter implements FilterInterface
 {
+    /**
+     * Filter Type
+     *
+     * @var    mixed
+     * @since  1.0
+     */
+    protected $filter_type;
+
     /**
      * Method (validate, filter, escape)
      *
@@ -33,14 +40,12 @@ abstract class AbstractFilter implements FilterInterface
     protected $method;
 
     /**
-     * Filter Type
+     * Field Name
      *
-     * @var    mixed
+     * @var    string
      * @since  1.0
      */
-    protected $filter_type;
-
-    /** Data Values */
+    protected $field_name;
 
     /**
      * Data Value
@@ -48,10 +53,10 @@ abstract class AbstractFilter implements FilterInterface
      * @var    mixed
      * @since  1.0
      */
-    protected $value;
+    protected $field_value;
 
     /**
-     * Options for custom filters
+     * Options
      *
      * @var    array
      * @since  1.0
@@ -69,20 +74,30 @@ abstract class AbstractFilter implements FilterInterface
     /**
      * Constructor
      *
-     * @param   string   $method (validate, filter, escape)
      * @param   string   $filter_type
-     * @param   mixed    $value
+     * @param   string   $method
+     * @param   string   $field_name
+     * @param   mixed    $field_value
      * @param   array    $options
      *
      * @return  mixed
      * @since   1.0
      */
     public function __construct(
+        $filter_type,
         $method,
-        $filter_list,
-        $value,
-        $options = array()
+        $field_name,
+        $field_value,
+        $options
     ) {
+        $this->setFilterType($filter_type);
+        $this->setMethod($method);
+        $this->setFieldName($field_name);
+        $this->setFieldValue($field_value);
+        $this->setOptions($options);
+
+        $this->getUserTimeZone();
+
         return $this;
     }
 
@@ -94,7 +109,7 @@ abstract class AbstractFilter implements FilterInterface
      */
     public function validate()
     {
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**
@@ -105,7 +120,7 @@ abstract class AbstractFilter implements FilterInterface
      */
     public function filter()
     {
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**
@@ -116,7 +131,138 @@ abstract class AbstractFilter implements FilterInterface
      */
     public function escape()
     {
-        return $this->getValue();
+        return $this->getFieldValue();
+    }
+
+    /**
+     * Set the Method
+     *
+     * @param   string  $method
+     *
+     * @return  string
+     * @since   1.0
+     */
+    protected function setMethod($method)
+    {
+        $method = strtolower($method);
+
+        if ($method == 'validate'
+            || $method == 'filter'
+            || $method == 'escape'
+        ) {
+
+        } else {
+            throw new FilterException
+            ('');
+        }
+
+        $this->method = $method;
+
+        return;
+    }
+
+    /**
+     * Get the Path
+     *
+     * @return  string
+     * @since   1.0
+     */
+    protected function getMethod()
+    {
+        return $this->method;
+    }
+
+    /**
+     * Set the Filter Type
+     *
+     * @param   string  $method
+     *
+     * @return  string
+     * @since   1.0
+     */
+    protected function setFilterType($filter_type)
+    {
+        $this->filter_type = $filter_type;
+
+        return;
+    }
+
+    /**
+     * Get the Filter Type
+     *
+     * @return  string
+     * @since   1.0
+     */
+    protected function getFilterType()
+    {
+        return $this->filter_type;
+    }
+
+    /**
+     * Set the Field Name
+     *
+     * @param   string  $field_name
+     *
+     * @return  void
+     * @since   1.0
+     */
+    protected function setFieldName($field_name)
+    {
+        $this->field_name = $field_name;
+
+        return;
+    }
+
+    /**
+     * Set the Value
+     *
+     * @param   string  $field_value
+     *
+     * @return  void
+     * @since   1.0
+     */
+    public function setFieldValue($field_value)
+    {
+        $this->field_value = $field_value;
+
+        return;
+    }
+
+    /**
+     * Get Value
+     *
+     * @return  mixed
+     * @since   1.0
+     */
+    public function getFieldValue()
+    {
+        return $this->field_value;
+    }
+
+    /**
+     * Set Options
+     *
+     * @param   string  $options
+     *
+     * @return  void
+     * @since   1.0
+     */
+    public function setOptions($options)
+    {
+        $this->options = $options;
+
+        return;
+    }
+
+    /**
+     * Get Options
+     *
+     * @return  array
+     * @since   1.0
+     */
+    public function getOptions()
+    {
+        return $this->options;
     }
 
     /**
@@ -151,174 +297,9 @@ abstract class AbstractFilter implements FilterInterface
         ini_set('date.timezone', $timezone);
         $this->options['timezone'] = $timezone;
 
-        $this->timezone = $timezone;
+        $this->setTimezone($timezone);
 
         return;
-    }
-
-    /**
-     * Named Pair Check
-     *
-     * @return  void
-     * @since   1.0
-     */
-    public function checkNamedPairs()
-    {
-        if (isset($this->options['name_pair_array'])
-            && isset($this->options['name_pair_key'])
-        ) {
-        } else {
-            return;
-        }
-
-        if ($this->options['name_pair_array'][$this->options['name_pair_key']] == $this->getValue()) {
-            return;
-        }
-
-        throw new FilterException
-        ('');
-    }
-
-    /**
-     * Getters and Setters
-     *
-     * Set the Method
-     *
-     * @param   string  $method
-     *
-     * @return  string
-     * @since   1.0
-     */
-    protected function setMethod($method)
-    {
-        if ($method == 'validate'
-            || $method == 'filter'
-            || $method == 'escape'
-        ) {
-        } else {
-            throw new FilterException
-            ('');
-        }
-
-        $this->method = $method;
-
-        return;
-    }
-
-    /**
-     * Get the Path
-     *
-     * @return  string
-     * @since   1.0
-     */
-    protected function getMethod()
-    {
-        return $this->method();
-    }
-
-    /**
-     * Set the Filter Type
-     *
-     * @param   string  $method
-     *
-     * @return  string
-     * @since   1.0
-     */
-    protected function setFilterType($filter_type)
-    {
-        $this->filter_type = $filter_type;
-
-        return;
-    }
-
-    /**
-     * Get the Filter Type
-     *
-     * @return  string
-     * @since   1.0
-     */
-    protected function getFilterType()
-    {
-        return $this->filter_type;
-    }
-
-
-    /**
-     * Set the Value
-     *
-     * @param   string  $value
-     *
-     * @return  void
-     * @since   1.0
-     */
-    protected function setValue($value)
-    {
-        $this->value = $value;
-
-        return;
-    }
-
-    /**
-     * Get Value
-     *
-     * @return  mixed
-     * @since   1.0
-     */
-    protected function getValue()
-    {
-        return $this->value;
-    }
-
-    /**
-     * Set the Values array
-     *
-     * @param   string  $values
-     *
-     * @return  void
-     * @since   1.0
-     */
-    protected function setValues($values = array())
-    {
-        $this->values = $values;
-
-        return;
-    }
-
-    /**
-     * Get the Values array
-     *
-     * @return  array
-     * @since   1.0
-     */
-    protected function getValues()
-    {
-        return $this->values;
-    }
-
-    /**
-     * Set Options
-     *
-     * @param   string  $options
-     *
-     * @return  void
-     * @since   1.0
-     */
-    protected function setOptions($options)
-    {
-        $this->options = $options;
-
-        return;
-    }
-
-    /**
-     * Get Options
-     *
-     * @return  array
-     * @since   1.0
-     */
-    protected function getOptions()
-    {
-        return $this->options;
     }
 
     /**
@@ -355,7 +336,7 @@ abstract class AbstractFilter implements FilterInterface
      * @return  string
      * @since   1.0
      */
-    protected function filterByCharacter($filter, $test)
+    public function filterByCharacter($filter, $test)
     {
         $filtered = '';
 

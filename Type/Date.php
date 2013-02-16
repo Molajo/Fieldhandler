@@ -23,17 +23,10 @@ class Date extends AbstractFilter
     /**
      * Constructor
      *
-     * @param   string   $method (validate, filter, escape)
-     * @param   string   $filter_type
-     *
-     * @param   mixed    $value
-     * @param   null     $default
-     * @param   bool     $required
-     * @param   null     $min
-     * @param   null     $max
-     * @param   array    $values
-     * @param   string   $regex
-     * @param   object   $callback
+     * @param   string   $method
+     * @param   string   $field_name
+     * @param   mixed    $field_value
+     * @param   array    $filter_type_chain
      * @param   array    $options
      *
      * @return  mixed
@@ -41,18 +34,12 @@ class Date extends AbstractFilter
      */
     public function __construct(
         $method,
-        $filter_type,
-        $value,
-        $default = null,
-        $required = true,
-        $min = null,
-        $max = null,
-        $values = array(),
-        $regex = null,
-        $callback = null,
+        $field_name,
+        $field_value,
+        $filter_type_chain,
         $options = array()
     ) {
-        return parent::__construct();
+        return parent::__construct($method, $field_name, $field_value, $filter_type_chain, $options);
     }
 
     /**
@@ -65,10 +52,10 @@ class Date extends AbstractFilter
     {
         parent::validate();
 
-        if ($this->getValue() === null) {
+        if ($this->getFieldValue() === null) {
         } else {
 
-            $test = strtotime($this->getValue());
+            $test = strtotime($this->getFieldValue());
 
             if ($test == false) {
             } else {
@@ -77,7 +64,7 @@ class Date extends AbstractFilter
             }
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**
@@ -90,7 +77,7 @@ class Date extends AbstractFilter
     {
         parent::filter();
 
-        $test = strtotime($this->getValue());
+        $test = strtotime($this->getFieldValue());
 
         if ($test == false) {
         } else {
@@ -98,7 +85,7 @@ class Date extends AbstractFilter
             ('Validate Date: ' . FILTER_INVALID_VALUE);
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**
@@ -111,8 +98,8 @@ class Date extends AbstractFilter
     {
         parent::escape();
 
-        $this->setValue($this->filterByCharacter('ctype_digit', $this->getValue()));
+        $this->setFieldValue($this->filterByCharacter('ctype_digit', $this->getFieldValue()));
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 }

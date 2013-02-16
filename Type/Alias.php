@@ -23,17 +23,10 @@ class Alias extends AbstractFilter
     /**
      * Constructor
      *
-     * @param   string   $method (validate, filter, escape)
-     * @param   string   $filter_type
-     *
-     * @param   mixed    $value
-     * @param   null     $default
-     * @param   bool     $required
-     * @param   null     $min
-     * @param   null     $max
-     * @param   array    $values
-     * @param   string   $regex
-     * @param   object   $callback
+     * @param   string   $method
+     * @param   string   $field_name
+     * @param   mixed    $field_value
+     * @param   array    $filter_type_chain
      * @param   array    $options
      *
      * @return  mixed
@@ -41,18 +34,12 @@ class Alias extends AbstractFilter
      */
     public function __construct(
         $method,
-        $filter_type,
-        $value,
-        $default = null,
-        $required = true,
-        $min = null,
-        $max = null,
-        $values = array(),
-        $regex = null,
-        $callback = null,
+        $field_name,
+        $field_value,
+        $filter_type_chain,
         $options = array()
     ) {
-        return parent::__construct();
+        return parent::__construct($method, $field_name, $field_value, $filter_type_chain, $options);
     }
 
     /**
@@ -65,17 +52,17 @@ class Alias extends AbstractFilter
     {
         parent::validate();
 
-        if ($this->getValue() === null) {
+        if ($this->getFieldValue() === null) {
         } else {
             $test = $this->createAlias();
-            if ($test == $this->getValue()) {
+            if ($test == $this->getFieldValue()) {
             } else {
                 throw new FilterException
                 ('Validate Alias: ' . FILTER_INVALID_VALUE);
             }
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**
@@ -88,12 +75,12 @@ class Alias extends AbstractFilter
     {
         parent::filter();
 
-        if ($this->getValue() === null) {
+        if ($this->getFieldValue() === null) {
         } else {
-            $this->setValue($this->createAlias());
+            $this->setFieldValue($this->createAlias());
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**
@@ -117,10 +104,10 @@ class Alias extends AbstractFilter
      */
     public function createAlias()
     {
-        if ($this->getValue() === null) {
+        if ($this->getFieldValue() === null) {
         } else {
 
-            $alias = filter_var($this->getValue(), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $alias = filter_var($this->getFieldValue(), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
             /** Replace dashes with spaces */
             $alias = str_replace('-', ' ', strtolower(trim($alias)));
@@ -134,9 +121,9 @@ class Alias extends AbstractFilter
             /** Replace spaces with underscores */
             $alias = str_replace(' ', '_', strtolower(trim($alias)));
 
-            $this->setValue($alias);
+            $this->setFieldValue($alias);
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 }

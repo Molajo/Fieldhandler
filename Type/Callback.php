@@ -23,17 +23,10 @@ class Callbacks extends AbstractFilter
     /**
      * Constructor
      *
-     * @param   string   $method (validate, filter, escape)
-     * @param   string   $filter_type
-     *
-     * @param   mixed    $value
-     * @param   null     $default
-     * @param   bool     $required
-     * @param   null     $min
-     * @param   null     $max
-     * @param   array    $values
-     * @param   string   $regex
-     * @param   object   $callback
+     * @param   string   $method
+     * @param   string   $field_name
+     * @param   mixed    $field_value
+     * @param   array    $filter_type_chain
      * @param   array    $options
      *
      * @return  mixed
@@ -41,18 +34,12 @@ class Callbacks extends AbstractFilter
      */
     public function __construct(
         $method,
-        $filter_type,
-        $value,
-        $default = null,
-        $required = true,
-        $min = null,
-        $max = null,
-        $values = array(),
-        $regex = null,
-        $callback = null,
+        $field_name,
+        $field_value,
+        $filter_type_chain,
         $options = array()
     ) {
-        return parent::__construct();
+        return parent::__construct($method, $field_name, $field_value, $filter_type_chain, $options);
     }
 
     /**
@@ -65,13 +52,13 @@ class Callbacks extends AbstractFilter
     {
         parent::validate();
 
-        if ($this->getValue() === null) {
+        if ($this->getFieldValue() === null) {
 
         } else {
 
-            $test = filter_var($this->getValue(), FILTER_CALLBACK, $this->setCallback());
+            $test = filter_var($this->getFieldValue(), FILTER_CALLBACK, $this->setCallback());
 
-            if ($test == $this->getValue()) {
+            if ($test == $this->getFieldValue()) {
             } else {
 
                 throw new FilterException
@@ -79,7 +66,7 @@ class Callbacks extends AbstractFilter
             }
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**
@@ -92,19 +79,19 @@ class Callbacks extends AbstractFilter
     {
         parent::filter();
 
-        if ($this->getValue() === null) {
+        if ($this->getFieldValue() === null) {
 
         } else {
 
-            $test = filter_var($this->getValue(), FILTER_CALLBACK, $this->setCallback());
+            $test = filter_var($this->getFieldValue(), FILTER_CALLBACK, $this->setCallback());
 
-            if ($test == $this->getValue()) {
+            if ($test == $this->getFieldValue()) {
             } else {
-                $this->setValue(filter_var($this->getValue(), FILTER_CALLBACK, $this->setCallback()));
+                $this->setFieldValue(filter_var($this->getFieldValue(), FILTER_CALLBACK, $this->setCallback()));
             }
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**
@@ -117,15 +104,15 @@ class Callbacks extends AbstractFilter
     {
         parent::escape();
 
-        $test = filter_var($this->getValue(), FILTER_CALLBACK, $this->setCallback());
+        $test = filter_var($this->getFieldValue(), FILTER_CALLBACK, $this->setCallback());
 
-        if ($test == $this->getValue()) {
+        if ($test == $this->getFieldValue()) {
 
         } else {
-            $this->setValue(filter_var($this->getValue(), FILTER_CALLBACK, $this->setCallback()));
+            $this->setFieldValue(filter_var($this->getFieldValue(), FILTER_CALLBACK, $this->setCallback()));
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**

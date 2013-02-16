@@ -2,10 +2,10 @@
 /**
 $test = 'ctype_alpha';
 
-$getValue = 'dDg123@gmail.com';
+$getFieldValue = 'dDg123@gmail.com';
 
 $filtered = '';
-$filter = $getValue;
+$filter = $getFieldValue;
 if (strlen($filter) > 0) {
 for ($i = 0; $i < strlen($filter); $i++) {
 if ($test(substr($filter, $i, 1)) == 1) {
@@ -17,7 +17,7 @@ echo $filtered;
 
 echo '<br />';
 
-if ($test($getValue)) {
+if ($test($getFieldValue)) {
 echo 'true';
 } else {
 echo 'false';

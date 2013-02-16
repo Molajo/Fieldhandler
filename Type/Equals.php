@@ -26,12 +26,12 @@ class Equals extends AbstractFilter
      * @param   string   $method (validate, filter, escape)
      * @param   string   $filter_type
      *
-     * @param   mixed    $value
+     * @param   mixed    $field_value
      * @param   null     $default
      * @param   bool     $required
      * @param   null     $min
      * @param   null     $max
-     * @param   array    $values
+     * @param   array    $field_values
      * @param   string   $regex
      * @param   object   $callback
      * @param   array    $options
@@ -42,12 +42,12 @@ class Equals extends AbstractFilter
     public function __construct(
         $method,
         $filter_type,
-        $value,
+        $field_value,
         $default = null,
         $required = true,
         $min = null,
         $max = null,
-        $values = array(),
+        $field_values = array(),
         $regex = null,
         $callback = null,
         $options = array()
@@ -65,17 +65,17 @@ class Equals extends AbstractFilter
     {
         parent::validate();
 
-        if ($this->getValue() === null) {
+        if ($this->getFieldValue() === null) {
         } else {
 
-            if ($this->getValue() == $this->getEquals()) {
+            if ($this->getFieldValue() == $this->getEquals()) {
             } else {
                 throw new FilterException
                 ('Validate Equals: ' . FILTER_INVALID_VALUE);
             }
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**
@@ -88,16 +88,16 @@ class Equals extends AbstractFilter
     {
         parent::filter();
 
-        if ($this->getValue() === null) {
+        if ($this->getFieldValue() === null) {
         } else {
 
-            if ($this->getValue() == $this->getEquals()) {
+            if ($this->getFieldValue() == $this->getEquals()) {
             } else {
-                $this->setValue($this->getEquals());
+                $this->setFieldValue($this->getEquals());
             }
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**
@@ -110,16 +110,16 @@ class Equals extends AbstractFilter
     {
         parent::escape();
 
-        if ($this->getValue() === null) {
+        if ($this->getFieldValue() === null) {
         } else {
 
-            if ($this->getValue() == $this->getEquals()) {
+            if ($this->getFieldValue() == $this->getEquals()) {
             } else {
-                $this->setValue($this->getEquals());
+                $this->setFieldValue($this->getEquals());
             }
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**
@@ -130,12 +130,12 @@ class Equals extends AbstractFilter
      */
     public function getEquals()
     {
-        $value = '';
+        $field_value = '';
 
         if (isset($this->options['equals'])) {
-            $value = $this->options['equals'];
+            $field_value = $this->options['equals'];
         }
 
-        return $value;
+        return $field_value;
     }
 }

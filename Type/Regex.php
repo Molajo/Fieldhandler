@@ -26,12 +26,12 @@ class Regex extends AbstractFilter
      * @param   string   $method (validate, filter, escape)
      * @param   string   $filter_type
      *
-     * @param   mixed    $value
+     * @param   mixed    $field_value
      * @param   null     $default
      * @param   bool     $required
      * @param   null     $min
      * @param   null     $max
-     * @param   array    $values
+     * @param   array    $field_values
      * @param   string   $regex
      * @param   object   $callback
      * @param   array    $options
@@ -42,12 +42,12 @@ class Regex extends AbstractFilter
     public function __construct(
         $method,
         $filter_type,
-        $value,
+        $field_value,
         $default = null,
         $required = true,
         $min = null,
         $max = null,
-        $values = array(),
+        $field_values = array(),
         $regex = null,
         $callback = null,
         $options = array()
@@ -65,19 +65,19 @@ class Regex extends AbstractFilter
     {
         parent::validate();
 
-        if ($this->getValue() === null) {
+        if ($this->getFieldValue() === null) {
         } else {
 
-            $test = preg_match($this->getRegex(), $this->getValue());
+            $test = preg_match($this->getRegex(), $this->getFieldValue());
 
-            if ($test == $this->getValue()) {
+            if ($test == $this->getFieldValue()) {
             } else {
                 throw new FilterException
                 ('Validate Regex: ' . FILTER_INVALID_VALUE);
             }
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**
@@ -90,18 +90,18 @@ class Regex extends AbstractFilter
     {
         parent::filter();
 
-        if ($this->getValue() === null) {
+        if ($this->getFieldValue() === null) {
         } else {
 
-            $test = preg_match($this->getRegex(), $this->getValue());
+            $test = preg_match($this->getRegex(), $this->getFieldValue());
 
-            if ($test == $this->getValue()) {
+            if ($test == $this->getFieldValue()) {
             } else {
-                $this->setValue($test);
+                $this->setFieldValue($test);
             }
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**
@@ -114,18 +114,18 @@ class Regex extends AbstractFilter
     {
         parent::escape();
 
-        if ($this->getValue() === null) {
+        if ($this->getFieldValue() === null) {
         } else {
 
-            $test = preg_match($this->getRegex(), $this->getValue());
+            $test = preg_match($this->getRegex(), $this->getFieldValue());
 
-            if ($test == $this->getValue()) {
+            if ($test == $this->getFieldValue()) {
             } else {
-                $this->setValue($test);
+                $this->setFieldValue($test);
             }
         }
 
-        return $this->getValue();
+        return $this->getFieldValue();
     }
 
     /**
