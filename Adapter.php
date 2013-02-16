@@ -68,7 +68,6 @@ Class Adapter
     public function __construct(
         $method,
         $filter_type,
-
         $value,
         $default = null,
         $required = true,

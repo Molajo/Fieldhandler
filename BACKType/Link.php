@@ -1,6 +1,6 @@
 <?php
 /**
- * Foldername Filters
+ * Local Adapter for Filters
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -10,22 +10,17 @@ namespace Molajo\Filters\Type;
 
 defined('MOLAJO') or die;
 
-use Exception;
-use RuntimeException;
-
-
-use Molajo\Filters\Adapter\FilterInterface;
 use Molajo\Filters\Exception\FilterException;
 
 /**
- * Foldername Filters
+ * Link Filters
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Foldername extends AbstractFilter
+class Link extends AbstractFilter
 {
     /**
      * Validate Input
@@ -42,6 +37,38 @@ class Foldername extends AbstractFilter
      * @since   1.0
      */
     public function validate(
+            $this->getValue(),
+        $this->getRequired() = true,
+        $this->getDefault() = null,
+        $this->getMin() = null,
+        $this->getMax() = null,
+        $this->getValues() = array(),
+        $this->options = array()
+    ) {
+        if ($test == $this->getValue()) {
+            return $test;
+        }
+
+else {
+    throw new FilterException('FILTER_INVALID_VALUE');
+}
+}
+
+/**
+ * Filter Input
+ *
+ * @param   mixed    $this->getValue()
+ * @param   bool     $this->getRequired()
+ * @param   null     $this->getDefault()
+ * @param   null     $this->getMin()
+ * @param   null     $this->getMax()
+ * @param   array    $this->getValues()
+ * @param   array    $this->options
+ *
+ * @return  mixed
+ * @since   1.0
+ */
+public function filter(
         $this->getValue(),
         $this->getRequired() = true,
         $this->getDefault() = null,
@@ -50,36 +77,32 @@ class Foldername extends AbstractFilter
         $this->getValues() = array(),
         $this->options = array()
     ) {
-
+    if ($this->getDefault() == null) {
+    } elseif ($this->getValue() === null) {
+        $this->getValue() = $this->getDefault();
     }
 
-    /**
-     * Filter Input
-     *
-     * @param   mixed    $this->getValue()
-     * @param   bool     $this->getRequired()
-     * @param   null     $this->getDefault()
-     * @param   null     $this->getMin()
-     * @param   null     $this->getMax()
-     * @param   array    $this->getValues()
-     * @param   array    $this->options
-     *
-     * @return  mixed
-     * @since   1.0
-     */
-    public function filter(
+    $test = filter_var(
         $this->getValue(),
-        $this->getRequired() = true,
-        $this->getDefault() = null,
-        $this->getMin() = null,
-        $this->getMax() = null,
-        $this->getValues() = array(),
-        $this->options = array()
-    ) {
-        $this->getRegex() = array('#[^A-Za-z0-9:_\\\/-]#');
+        FILTER_SANITIZE_NUMBER_INT
+    );
 
-        return preg_replace($this->getRegex(), '', $this->getValue());
+    if ($test == $this->getValue()) {
+
+        return $test;
+    } else {
+        throw new FilterException('FILTER_INVALID_VALUE');
     }
+
+
+    if ($this->getValue() === null
+        && $this->getRequired() == 0
+    ) {
+        throw new FilterException(__CLASS__ . ' ' . FILTER_VALUE_REQUIRED);
+    }
+
+    return $this->getValue();
+}
 
     /**
      * Escapes and formats output
@@ -91,7 +114,7 @@ class Foldername extends AbstractFilter
      */
     public function escape($this->getValue(), $this->options = array())
     {
-        return filter_var($this->getValue(), FILTER_SANITIZE_URL);
+        return urlencode($this->getValue());
     }
 }
 

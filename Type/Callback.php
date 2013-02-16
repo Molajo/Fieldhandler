@@ -1,6 +1,6 @@
 <?php
 /**
- *Callback Filters
+ * Callbacks Filter
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -11,114 +11,137 @@ namespace Molajo\Filters\Type;
 defined('MOLAJO') or die;
 
 /**
- * Callback Filters
+ * Callbacks Filter
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Callback extends AbstractFilter
+class Callbacks extends AbstractFilter
 {
     /**
-     * Validate Input
+     * Constructor
      *
-     * @param   mixed    $this->getValue()
-     * @param   bool     $this->getRequired()
-     * @param   null     $this->getDefault()
-     * @param   null     $this->getMin()
-     * @param   null     $this->getMax()
-     * @param   array    $this->getValues()
-     * @param   array    $this->options
+     * @param   string   $method (validate, filter, escape)
+     * @param   string   $filter_type
+     *
+     * @param   mixed    $value
+     * @param   null     $default
+     * @param   bool     $required
+     * @param   null     $min
+     * @param   null     $max
+     * @param   array    $values
+     * @param   string   $regex
+     * @param   object   $callback
+     * @param   array    $options
      *
      * @return  mixed
      * @since   1.0
      */
-    public function validate(
-        $this->getValue(),
-        $this->getRequired() = true,
-        $this->getDefault() = null,
-        $this->getMin() = null,
-        $this->getMax() = null,
-        $this->getValues() = array(),
-        $this->options = array()
+    public function __construct(
+        $method,
+        $filter_type,
+        $value,
+        $default = null,
+        $required = true,
+        $min = null,
+        $max = null,
+        $values = array(),
+        $regex = null,
+        $callback = null,
+        $options = array()
     ) {
+        return parent::__construct();
+    }
 
-        if (isset($this->options['callback'])) {
-            $this->getCallback() = $this->options['callback'];
+    /**
+     * Validate Input
+     *
+     * @return  mixed
+     * @since   1.0
+     */
+    public function validate()
+    {
+        parent::validate();
+
+        if ($this->getValue() === null) {
+
         } else {
-            throw new FilterException('Filters Validate: '
-            . 'Callback Object must be instantiated and injected into the $this->options associative array');
+
+            $test = filter_var($this->getValue(), FILTER_CALLBACK, $this->setCallback());
+
+            if ($test == $this->getValue()) {
+            } else {
+
+                throw new FilterException
+                ('Validate Callbacks: ' . FILTER_INVALID_VALUE);
+            }
         }
 
-        try {
-            return $this->getCallback()->validate($this->getValue(), $this->getRequired(), $this->getDefault(), $this->getMin(), $this->getMax(), $this->getValues(), $this->options);
-        }
-        catch (Exception $e) {
-            throw new FilterException('Filters Validate: Callback Exception Caught: ' . $e->message);
-        }
+        return $this->getValue();
     }
 
     /**
      * Filter Input
      *
-     * @param   mixed    $this->getValue()
-     * @param   bool     $this->getRequired()
-     * @param   null     $this->getDefault()
-     * @param   null     $this->getMin()
-     * @param   null     $this->getMax()
-     * @param   array    $this->getValues()
-     * @param   array    $this->options
-     *
      * @return  mixed
      * @since   1.0
      */
-    public function filter(
-        $this->getValue(),
-        $this->getRequired() = true,
-        $this->getDefault() = null,
-        $this->getMin() = null,
-        $this->getMax() = null,
-        $this->getValues() = array(),
-        $this->options = array()
-    ) {
-        if (isset($this->options['callback'])) {
-            $this->getCallback() = $this->options['callback'];
+    public function filter()
+    {
+        parent::filter();
+
+        if ($this->getValue() === null) {
+
         } else {
-            throw new FilterException('Filters Filter method: '
-            . ' Callback Object must be instantiated and injected into the $this->options associative array');
+
+            $test = filter_var($this->getValue(), FILTER_CALLBACK, $this->setCallback());
+
+            if ($test == $this->getValue()) {
+            } else {
+                $this->setValue(filter_var($this->getValue(), FILTER_CALLBACK, $this->setCallback()));
+            }
         }
 
-        try {
-            return $this->getCallback()->filter($this->getValue(), $this->getRequired(), $this->getDefault(), $this->getMin(), $this->getMax(), $this->getValues(), $this->options);
-        }
-        catch (Exception $e) {
-            throw new FilterException('Filters Filter: Callback Exception Caught: ' . $e->message);
-        }
+        return $this->getValue();
     }
 
     /**
      * Escapes and formats output
      *
-     * @param   mixed    $this->getValue()
+     * @return  mixed
+     * @since   1.0
+     */
+    public function escape()
+    {
+        parent::escape();
+
+        $test = filter_var($this->getValue(), FILTER_CALLBACK, $this->setCallback());
+
+        if ($test == $this->getValue()) {
+
+        } else {
+            $this->setValue(filter_var($this->getValue(), FILTER_CALLBACK, $this->setCallback()));
+        }
+
+        return $this->getValue();
+    }
+
+    /**
+     * Flags can be set in options array
      *
      * @return  mixed
      * @since   1.0
      */
-    public function escape($this->getValue(), $this->options = array())
+    public function setCallback()
     {
-        if (isset($this->options['callback'])) {
-            $this->getCallback() = $this->options['callback'];
-        } else {
-            throw new FilterException('Filters Escape: '
-               . ' Callback Object must be instantiated and injected into the $this->options associative array');
+        if (isset($this->options['Callback'])) {
+            $callback = $this->options['Callback'];
         }
 
-        try {
-            return $this->getCallback()->validate($this->getValue());
-        }
-        catch (Exception $e) {
-            throw new FilterException('Filters Validate: Callback Exception Caught: ' . $e->message);
-        }
+        $callback = array('options' => $callback);
+
+        return $callback;
     }
 }

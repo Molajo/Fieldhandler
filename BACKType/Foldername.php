@@ -1,6 +1,6 @@
 <?php
 /**
- *Filename Filters
+ * Foldername Filters
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -12,18 +12,20 @@ defined('MOLAJO') or die;
 
 use Exception;
 use RuntimeException;
+
+
 use Molajo\Filters\Adapter\FilterInterface;
 use Molajo\Filters\Exception\FilterException;
 
 /**
- * Filename Filters
+ * Foldername Filters
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Filename extends AbstractFilter
+class Foldername extends AbstractFilter
 {
     /**
      * Validate Input
@@ -40,7 +42,7 @@ class Filename extends AbstractFilter
      * @since   1.0
      */
     public function validate(
-        $this->getValue(),
+            $this->getValue(),
         $this->getRequired() = true,
         $this->getDefault() = null,
         $this->getMin() = null,
@@ -51,21 +53,21 @@ class Filename extends AbstractFilter
 
     }
 
-    /**
-     * Filter Input
-     *
-     * @param   mixed    $this->getValue()
-     * @param   bool     $this->getRequired()
-     * @param   null     $this->getDefault()
-     * @param   null     $this->getMin()
-     * @param   null     $this->getMax()
-     * @param   array    $this->getValues()
-     * @param   array    $this->options
-     *
-     * @return  mixed
-     * @since   1.0
-     */
-    public function filter(
+/**
+ * Filter Input
+ *
+ * @param   mixed    $this->getValue()
+ * @param   bool     $this->getRequired()
+ * @param   null     $this->getDefault()
+ * @param   null     $this->getMin()
+ * @param   null     $this->getMax()
+ * @param   array    $this->getValues()
+ * @param   array    $this->options
+ *
+ * @return  mixed
+ * @since   1.0
+ */
+public function filter(
         $this->getValue(),
         $this->getRequired() = true,
         $this->getDefault() = null,
@@ -74,10 +76,10 @@ class Filename extends AbstractFilter
         $this->getValues() = array(),
         $this->options = array()
     ) {
-        $this->getRegex() = array('#(\.){2,}#', '#[^A-Za-z0-9\.\_\- ]#', '#^\.#');
+    $this->getRegex() = array('#[^A-Za-z0-9:_\\\/-]#');
 
-        return preg_replace($this->getRegex(), '', $this->getValue());
-    }
+    return preg_replace($this->getRegex(), '', $this->getValue());
+}
 
     /**
      * Escapes and formats output
@@ -89,7 +91,7 @@ class Filename extends AbstractFilter
      */
     public function escape($this->getValue(), $this->options = array())
     {
-        return htmlentities($this->getValue(), ENT_QUOTES, 'UTF-8');
+        return filter_var($this->getValue(), FILTER_SANITIZE_URL);
     }
 }
 

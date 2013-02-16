@@ -1,6 +1,6 @@
 <?php
 /**
- * Regex Filter
+ * Extensions Filter
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -11,14 +11,14 @@ namespace Molajo\Filters\Type;
 defined('MOLAJO') or die;
 
 /**
- * Alpha Filter
+ * Extensions Filter
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Regex extends AbstractFilter
+class Extensions extends AbstractFilter
 {
     /**
      * Constructor
@@ -68,12 +68,12 @@ class Regex extends AbstractFilter
         if ($this->getValue() === null) {
         } else {
 
-            $test = preg_match($this->getRegex(), $this->getValue());
+            $test = in_array($this->getValue(), $this->getExtensions());
 
-            if ($test == $this->getValue()) {
+            if ($test == 1) {
             } else {
                 throw new FilterException
-                ('Validate Regex: ' . FILTER_INVALID_VALUE);
+                ('Validate Extensions: ' . FILTER_INVALID_VALUE);
             }
         }
 
@@ -93,11 +93,11 @@ class Regex extends AbstractFilter
         if ($this->getValue() === null) {
         } else {
 
-            $test = preg_match($this->getRegex(), $this->getValue());
+            $test = in_array($this->getValue(), $this->getExtensions());
 
-            if ($test == $this->getValue()) {
+            if ($test == 1) {
             } else {
-                $this->setValue($test);
+                $this->setValue(false);
             }
         }
 
@@ -117,11 +117,11 @@ class Regex extends AbstractFilter
         if ($this->getValue() === null) {
         } else {
 
-            $test = preg_match($this->getRegex(), $this->getValue());
+            $test = in_array($this->getValue(), $this->getExtensions());
 
-            if ($test == $this->getValue()) {
+            if ($test == 1) {
             } else {
-                $this->setValue($test);
+                $this->setValue(false);
             }
         }
 
@@ -129,18 +129,19 @@ class Regex extends AbstractFilter
     }
 
     /**
-     * Escapes and formats output
+     * Test Array Entry Extensions
      *
      * @return  mixed
      * @since   1.0
      */
-    public function getRegex()
+    public function getExtensions()
     {
-        $regex = '';
+        $values = array();
 
-        if (isset($this->options['regex'])) {
-            $regex = $this->options['regex'];
+        if (isset($this->options['array_valid_extensions'])) {
+            $values = $this->options['array_valid_extensions'];
         }
-        return $regex;
+
+        return $values;
     }
 }

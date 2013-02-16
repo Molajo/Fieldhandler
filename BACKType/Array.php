@@ -38,7 +38,7 @@ class Arrayfilter extends AbstractFilter
      * @since   1.0
      */
     public function validate(
-        $this->getValue(),
+            $this->getValue(),
         $this->getRequired() = true,
         $this->getDefault() = null,
         $this->getMin() = null,
@@ -50,24 +50,24 @@ class Arrayfilter extends AbstractFilter
             return $this->getValue();
         }
 
-        throw new FilterException(__CLASS__ . FILTER_INVALID_VALUE . ' Not an array.');
-    }
+throw new FilterException(__CLASS__ . FILTER_INVALID_VALUE . ' Not an array.');
+}
 
-    /**
-     * Filter Input
-     *
-     * @param   mixed    $this->getValue()
-     * @param   bool     $this->getRequired()
-     * @param   null     $this->getDefault()
-     * @param   null     $this->getMin()
-     * @param   null     $this->getMax()
-     * @param   array    $this->getValues()
-     * @param   array    $this->options
-     *
-     * @return  mixed
-     * @since   1.0
-     */
-    public function filter(
+/**
+ * Filter Input
+ *
+ * @param   mixed    $this->getValue()
+ * @param   bool     $this->getRequired()
+ * @param   null     $this->getDefault()
+ * @param   null     $this->getMin()
+ * @param   null     $this->getMax()
+ * @param   array    $this->getValues()
+ * @param   array    $this->options
+ *
+ * @return  mixed
+ * @since   1.0
+ */
+public function filter(
         $this->getValue(),
         $this->getRequired() = true,
         $this->getDefault() = null,
@@ -76,33 +76,33 @@ class Arrayfilter extends AbstractFilter
         $this->getValues() = array(),
         $this->options = array()
     ) {
-        if ($this->getDefault() == null) {
-        } else {
-            $this->getValue() = $this->getDefault();
-        }
-
-        if ($this->getValue() === null) {
-            $this->getValue() = $this->getDefault();
-        }
-
-        if ($this->getValue() === null
-            && $this->getRequired() == 0
-        ) {
-            throw new FilterException(__CLASS__ . ' ' . FILTER_VALUE_REQUIRED);
-        }
-
-        if ($this->getValue() === null) {
-            $this->getValue() = array();
-        } else {
-            if (is_array($this->getValue())) {
-
-            } else {
-                throw new FilterException(__CLASS__ . ' ' . FILTER_INVALID_VALUE);
-            }
-        }
-
-        return $this->getValue();
+    if ($this->getDefault() == null) {
+    } else {
+        $this->getValue() = $this->getDefault();
     }
+
+    if ($this->getValue() === null) {
+        $this->getValue() = $this->getDefault();
+    }
+
+    if ($this->getValue() === null
+        && $this->getRequired() == 0
+    ) {
+        throw new FilterException(__CLASS__ . ' ' . FILTER_VALUE_REQUIRED);
+    }
+
+    if ($this->getValue() === null) {
+        $this->getValue() = array();
+    } else {
+        if (is_array($this->getValue())) {
+
+        } else {
+            throw new FilterException(__CLASS__ . ' ' . FILTER_INVALID_VALUE);
+        }
+    }
+
+    return $this->getValue();
+}
 
     /**
      * Escapes and formats output
@@ -119,10 +119,10 @@ class Arrayfilter extends AbstractFilter
         }
 
         if (isset($this->options['limit'])) {
-            $limit = (int) $this->options['limit'];
+            $limit     = (int)$this->options['limit'];
             $newValues = array();
             if (is_array($this->getValue()) && count($this->getValue()) > 0) {
-                for ($i = 0; $i < (int) $limit; $i++) {
+                for ($i = 0; $i < (int)$limit; $i ++) {
                     $newValues = $$this->getValue()[$i];
                 }
             }

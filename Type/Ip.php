@@ -1,6 +1,6 @@
 <?php
 /**
- * Local Adapter for Filters
+ * Alpha Filter
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -10,10 +10,8 @@ namespace Molajo\Filters\Type;
 
 defined('MOLAJO') or die;
 
-use Molajo\Filters\Exception\FilterException;
-
 /**
- * Ip Filters
+ * Alpha Filter
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -23,90 +21,84 @@ use Molajo\Filters\Exception\FilterException;
 class Ip extends AbstractFilter
 {
     /**
-     * Validate Input
+     * Constructor
      *
-     * @param   mixed    $this->getValue()
-     * @param   bool     $this->getRequired()
-     * @param   null     $this->getDefault()
-     * @param   null     $this->getMin()
-     * @param   null     $this->getMax()
-     * @param   array    $this->getValues()
-     * @param   array    $this->options
+     * @param   string   $method (validate, filter, escape)
+     * @param   string   $filter_type
+     *
+     * @param   mixed    $value
+     * @param   null     $default
+     * @param   bool     $required
+     * @param   null     $min
+     * @param   null     $max
+     * @param   array    $values
+     * @param   string   $regex
+     * @param   object   $callback
+     * @param   array    $options
      *
      * @return  mixed
      * @since   1.0
      */
-    public function validate(
-        $this->getValue(),
-        $this->getRequired() = true,
-        $this->getDefault() = null,
-        $this->getMin() = null,
-        $this->getMax() = null,
-        $this->getValues() = array(),
-        $this->options = array()
+    public function __construct(
+        $method,
+        $filter_type,
+        $value,
+        $default = null,
+        $required = true,
+        $min = null,
+        $max = null,
+        $values = array(),
+        $regex = null,
+        $callback = null,
+        $options = array()
     ) {
-            $flags = 0;
-            if ($this->options['ipv4']) {
-                $flags |= FILTER_FLAG_IPV4;
-            }
-            if ($this->options['ipv6']) {
-                $flags |= FILTER_FLAG_IPV6;
-            }
-            if (!$this->options['private']) {
-                $flags |= FILTER_FLAG_NO_PRIV_RANGE;
-            }
-            if (!$this->options['reserved']) {
-                $flags |= FILTER_FLAG_NO_RES_RANGE;
-            }
+        return parent::__construct();
+    }
 
-            return filter_var($var, FILTER_VALIDATE_IP, $flags);
+    /**
+     * Validate Input
+     *
+     * @return  mixed
+     * @since   1.0
+     */
+    public function validate()
+    {
+        parent::validate();
+
+        if ($this->getValue() === null) {
+        } else {
+
+            $test = filter_var($this->getValue(), FILTER_VALIDATE_IP, $this->setFlags());
+
+            if ($test == true) {
+            } else {
+                throw new FilterException
+                ('Validate Ip: ' . FILTER_INVALID_VALUE);
+            }
+        }
+
+        return $this->getValue();
     }
 
     /**
      * Filter Input
      *
-     * @param   mixed    $this->getValue()
-     * @param   bool     $this->getRequired()
-     * @param   null     $this->getDefault()
-     * @param   null     $this->getMin()
-     * @param   null     $this->getMax()
-     * @param   array    $this->getValues()
-     * @param   array    $this->options
-     *
      * @return  mixed
      * @since   1.0
      */
-    public function filter(
-        $this->getValue(),
-        $this->getRequired() = true,
-        $this->getDefault() = null,
-        $this->getMin() = null,
-        $this->getMax() = null,
-        $this->getValues() = array(),
-        $this->options = array()
-    ) {
-        if ($this->getDefault() == null) {
-        } elseif ($this->getValue() === null) {
-            $this->getValue() = $this->getDefault();
-        }
+    public function filter()
+    {
+        parent::filter();
 
         if ($this->getValue() === null) {
         } else {
-            $this->getValue() = filter_var($this->getValue(), FILTER_SANITIZE_IP);
 
-            $test = filter_var($this->getValue(), FILTER_VALIDATE_IP);
-        }
+            $test = filter_var($this->getValue(), FILTER_VALIDATE_IP, $this->setFlags());
 
-        if ($test == $this->getValue()) {
-        } else {
-            throw new FilterException('FILTER_INVALID_VALUE');
-        }
-
-
-        if ($this->getValue() === null
-            && $this->getRequired() == 0
-        ) {
-            throw new FilterException(__CLASS__ . ' ' . FILTER_VALUE_REQUIRED);
+            if ($test == true) {
+            } else {
+                $this->setValue(false);
+            }
         }
 
         return $this->getValue();
@@ -115,13 +107,59 @@ class Ip extends AbstractFilter
     /**
      * Escapes and formats output
      *
-     * @param   mixed    $this->getValue()
+     * @return  mixed
+     * @since   1.0
+     */
+    public function escape()
+    {
+        parent::escape();
+
+        $test = filter_var($this->getValue(), FILTER_VALIDATE_IP, $this->setFlags());
+
+        if ($test == true) {
+        } else {
+            $this->setValue(false);
+        }
+
+        return $this->getValue();
+    }
+
+    /**
+     * Flags can be set in options array
      *
      * @return  mixed
      * @since   1.0
      */
-    public function escape($this->getValue(), $this->options = array())
+    public function setFlags()
     {
-        return filter_var($this->getValue(), FILTER_SANITIZE_IP);
+        $filter = '';
+        if (isset($this->options['FILTER_FLAG_IPV4'])) {
+            $filter = 'FILTER_FLAG_IPV4';
+        }
+
+        if (isset($this->options['FILTER_FLAG_IPV6'])) {
+            $filter = 'FILTER_FLAG_IPV6';
+        }
+
+        $range = '';
+        if (isset($this->options['FILTER_FLAG_NO_PRIV_RANGE'])) {
+            $range = 'FILTER_FLAG_NO_PRIV_RANGE';
+        }
+
+        if (isset($this->options['FILTER_FLAG_NO_RES_RANGE'])) {
+            $range = 'FILTER_FLAG_NO_RES_RANGE';
+        }
+
+        $filterRange = '';
+        if ($filter == '') {
+            return $filterRange;
+        }
+
+        $filterRange = $filter;
+        if ($range == '') {
+            return $filterRange;
+        }
+
+        return $filter . ' | ' . $range;
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- *File Filters
+ * Local Adapter for Filters
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -11,18 +11,19 @@ namespace Molajo\Filters\Type;
 defined('MOLAJO') or die;
 
 use Exception;
-use Molajo\Filters\Adapter\FilterInterface;
+use RuntimeException;
+
 use Molajo\Filters\Exception\FilterException;
 
 /**
- * File Filters
+ * Int Filters
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class File extends AbstractFilter
+class Int extends AbstractFilter
 {
     /**
      * Validate Input
@@ -39,7 +40,7 @@ class File extends AbstractFilter
      * @since   1.0
      */
     public function validate(
-        $this->getValue(),
+            $this->getValue(),
         $this->getRequired() = true,
         $this->getDefault() = null,
         $this->getMin() = null,
@@ -47,7 +48,18 @@ class File extends AbstractFilter
         $this->getValues() = array(),
         $this->options = array()
     ) {
+        if ($this->getDefault() == null) {
+        }
 
+elseif ($this->getValue() === null) {
+    $this->getValue() = $this->getDefault();
+}
+
+        if ($this->getValue() === null) {
+            $test = null;
+        } else {
+            $test = filter_var($this->getValue(), FILTER_SANITIZE_NUMBER_INT);
+        }
     }
 
     /**
@@ -73,10 +85,19 @@ class File extends AbstractFilter
         $this->getValues() = array(),
         $this->options = array()
     ) {
-        $this->getRegex() = array('#(\.){2,}#', '#[^A-Za-z0-9\.\_\- ]#', '#^\.#');
-
-        return preg_replace($this->getRegex(), '', $this->getValue());
+    if ($this->getDefault() == null) {
+    } elseif ($this->getValue() === null) {
+        $this->getValue() = $this->getDefault();
     }
+
+    if ($this->getValue() === null
+        && $this->getRequired() == 0
+    ) {
+        throw new FilterException(__CLASS__ . ' ' . FILTER_VALUE_REQUIRED);
+    }
+
+    return filter_var($this->getValue(), FILTER_SANITIZE_NUMBER_INT);
+}
 
     /**
      * Escapes and formats output
@@ -88,7 +109,7 @@ class File extends AbstractFilter
      */
     public function escape($this->getValue(), $this->options = array())
     {
-        return htmlentities($this->getValue(), ENT_QUOTES, 'UTF-8');
+        return filter_var($this->getValue(), FILTER_SANITIZE_NUMBER_INT);
     }
 }
 

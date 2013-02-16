@@ -1,6 +1,6 @@
 <?php
 /**
- *Url Filters
+ * Url Filter
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -10,11 +10,8 @@ namespace Molajo\Filters\Type;
 
 defined('MOLAJO') or die;
 
-use Molajo\Filters\Adapter\FilterInterface;
-use Molajo\Filters\Exception\FilterException;
-
 /**
- * Url Filters
+ * Url Filter
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -24,73 +21,98 @@ use Molajo\Filters\Exception\FilterException;
 class Url extends AbstractFilter
 {
     /**
-     * Validate Input
+     * Constructor
      *
-     * @param   mixed    $this->getValue()
-     * @param   bool     $this->getRequired()
-     * @param   null     $this->getDefault()
-     * @param   null     $this->getMin()
-     * @param   null     $this->getMax()
-     * @param   array    $this->getValues()
-     * @param   array    $this->options
+     * @param   string   $method (validate, filter, escape)
+     * @param   string   $filter_type
+     *
+     * @param   mixed    $value
+     * @param   null     $default
+     * @param   bool     $required
+     * @param   null     $min
+     * @param   null     $max
+     * @param   array    $values
+     * @param   string   $regex
+     * @param   object   $callback
+     * @param   array    $options
      *
      * @return  mixed
      * @since   1.0
      */
-    public function validate(
-        $this->getValue(),
-        $this->getRequired() = true,
-        $this->getDefault() = null,
-        $this->getMin() = null,
-        $this->getMax() = null,
-        $this->getValues() = array(),
-        $this->options = array()
+    public function __construct(
+        $method,
+        $filter_type,
+        $value,
+        $default = null,
+        $required = true,
+        $min = null,
+        $max = null,
+        $values = array(),
+        $regex = null,
+        $callback = null,
+        $options = array()
     ) {
-            //checkdnsrr
+        return parent::__construct();
+    }
+
+    /**
+     * Validate Input
+     *
+     * @return  mixed
+     * @since   1.0
+     */
+    public function validate()
+    {
+        parent::validate();
+
+        if ($this->getValue() === null) {
+        } else {
+
+            $url = str_replace(
+                array('ftp://', 'ftps://', 'http://', 'https://'),
+                ''
+                ,
+                strtolower($this->getValue())
+            );
+
+            $test = filter_var($url, FILTER_VALIDATE_URL, $this->setFlags());
+
+            if ($test == true) {
+            } else {
+                throw new FilterException
+                ('Validate Url: ' . FILTER_INVALID_VALUE);
+            }
+        }
+
+        return $this->getValue();
     }
 
     /**
      * Filter Input
      *
-     * @param   mixed    $this->getValue()
-     * @param   bool     $this->getRequired()
-     * @param   null     $this->getDefault()
-     * @param   null     $this->getMin()
-     * @param   null     $this->getMax()
-     * @param   array    $this->getValues()
-     * @param   array    $this->options
-     *
      * @return  mixed
      * @since   1.0
      */
-    public function filter(
-        $this->getValue(),
-        $this->getRequired() = true,
-        $this->getDefault() = null,
-        $this->getMin() = null,
-        $this->getMax() = null,
-        $this->getValues() = array(),
-        $this->options = array()
-    ) {
-        if ($this->getDefault() == null) {
-        } else {
-            $this->getValue() = $this->getDefault();
-        }
+    public function filter()
+    {
+        parent::filter();
 
         if ($this->getValue() === null) {
         } else {
-            $test = filter_var($this->getValue(), FILTER_SANITIZE_URL);
-            if (filter_var($test, FILTER_VALIDATE_URL)) {
-                return $test;
-            } else {
-                throw new FilterException('FILTER_INVALID_VALUE');
-            }
-        }
 
-        if ($this->getValue() === null
-            && $this->getRequired() == 0
-        ) {
-            throw new FilterException(__CLASS__ . ' ' . FILTER_VALUE_REQUIRED);
+            $url = str_replace(
+                array('ftp://', 'ftps://', 'http://', 'https://'),
+                ''
+                ,
+                strtolower($this->getValue())
+            );
+
+            $test = filter_var($url, FILTER_SANITIZE_URL, $this->setFlags());
+
+            if ($test == true) {
+            } else {
+                $this->setValue(filter_var($url, FILTER_SANITIZE_URL));
+            }
         }
 
         return $this->getValue();
@@ -99,18 +121,52 @@ class Url extends AbstractFilter
     /**
      * Escapes and formats output
      *
-     * @param   mixed    $this->getValue()
+     * @return  mixed
+     * @since   1.0
+     */
+    public function escape()
+    {
+        parent::escape();
+
+        $url = str_replace(
+            array('ftp://', 'ftps://', 'http://', 'https://'),
+            ''
+            ,
+            strtolower($this->getValue())
+        );
+
+        $test = filter_var($url, FILTER_SANITIZE_URL, $this->setFlags());
+
+        if ($test == true) {
+        } else {
+            $this->setValue(filter_var($url, FILTER_SANITIZE_URL));
+        }
+
+        return $this->getValue();
+    }
+
+    /**
+     * Flags can be set in options array
      *
      * @return  mixed
      * @since   1.0
      */
-    public function escape($this->getValue(), $this->options = array())
+    public function setFlags()
     {
-        if (Services::Application()->get('url_unicode_slugs') == 1) {
-//            return FilterOutput::stringURLUnicodeSlug($url);
-        } else {
-//            return FilterOutput::stringURLSafe($url);
+        $filter = '';
+
+        if (isset($this->options['FILTER_FLAG_PATH_REQUIRED'])) {
+            $filter = 'FILTER_FLAG_PATH_REQUIRED';
         }
+
+        if (isset($this->options['FILTER_FLAG_IPV6'])) {
+            if ($filter == '') {
+            } else {
+                $filter .= ', ';
+            }
+            $filter .= 'FILTER_FLAG_QUERY_REQUIRED';
+        }
+
+        return $filter;
     }
 }
-

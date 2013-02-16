@@ -1,6 +1,6 @@
 <?php
 /**
- * Regex Filter
+ * Lower Filter
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -11,14 +11,14 @@ namespace Molajo\Filters\Type;
 defined('MOLAJO') or die;
 
 /**
- * Alpha Filter
+ * Lower Filter
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Regex extends AbstractFilter
+class Lower extends AbstractFilter
 {
     /**
      * Constructor
@@ -68,12 +68,11 @@ class Regex extends AbstractFilter
         if ($this->getValue() === null) {
         } else {
 
-            $test = preg_match($this->getRegex(), $this->getValue());
-
-            if ($test == $this->getValue()) {
+            $test = ctype_lower($this->getValue());
+            if ($test == 1) {
             } else {
                 throw new FilterException
-                ('Validate Regex: ' . FILTER_INVALID_VALUE);
+                ('Validate Lower: ' . FILTER_INVALID_VALUE);
             }
         }
 
@@ -93,11 +92,10 @@ class Regex extends AbstractFilter
         if ($this->getValue() === null) {
         } else {
 
-            $test = preg_match($this->getRegex(), $this->getValue());
-
-            if ($test == $this->getValue()) {
+            $test = ctype_lower($this->getValue());
+            if ($test == 1) {
             } else {
-                $this->setValue($test);
+                $this->setValue($this->filterByCharacter('ctype_lower', $this->getValue()));
             }
         }
 
@@ -114,33 +112,8 @@ class Regex extends AbstractFilter
     {
         parent::escape();
 
-        if ($this->getValue() === null) {
-        } else {
-
-            $test = preg_match($this->getRegex(), $this->getValue());
-
-            if ($test == $this->getValue()) {
-            } else {
-                $this->setValue($test);
-            }
-        }
+        $this->setValue($this->filterByCharacter('ctype_lower', $this->getValue()));
 
         return $this->getValue();
-    }
-
-    /**
-     * Escapes and formats output
-     *
-     * @return  mixed
-     * @since   1.0
-     */
-    public function getRegex()
-    {
-        $regex = '';
-
-        if (isset($this->options['regex'])) {
-            $regex = $this->options['regex'];
-        }
-        return $regex;
     }
 }

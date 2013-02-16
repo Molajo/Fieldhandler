@@ -1,6 +1,6 @@
 <?php
 /**
- * Regex Filter
+ * Maximum Filter
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -11,14 +11,14 @@ namespace Molajo\Filters\Type;
 defined('MOLAJO') or die;
 
 /**
- * Alpha Filter
+ * Maximum Filter
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Regex extends AbstractFilter
+class Maximum extends AbstractFilter
 {
     /**
      * Constructor
@@ -68,12 +68,10 @@ class Regex extends AbstractFilter
         if ($this->getValue() === null) {
         } else {
 
-            $test = preg_match($this->getRegex(), $this->getValue());
-
-            if ($test == $this->getValue()) {
+            if ($this->getMaximum() < $this->getValue()) {
             } else {
                 throw new FilterException
-                ('Validate Regex: ' . FILTER_INVALID_VALUE);
+                ('Validate Maximum: ' . FILTER_INVALID_VALUE);
             }
         }
 
@@ -93,11 +91,9 @@ class Regex extends AbstractFilter
         if ($this->getValue() === null) {
         } else {
 
-            $test = preg_match($this->getRegex(), $this->getValue());
-
-            if ($test == $this->getValue()) {
+            if ($this->getMaximum() < $this->getValue()) {
             } else {
-                $this->setValue($test);
+                $this->setValue($this->getMaximum());
             }
         }
 
@@ -117,11 +113,9 @@ class Regex extends AbstractFilter
         if ($this->getValue() === null) {
         } else {
 
-            $test = preg_match($this->getRegex(), $this->getValue());
-
-            if ($test == $this->getValue()) {
+            if ($this->getMaximum() < $this->getValue()) {
             } else {
-                $this->setValue($test);
+                $this->setValue($this->getMaximum());
             }
         }
 
@@ -129,18 +123,19 @@ class Regex extends AbstractFilter
     }
 
     /**
-     * Escapes and formats output
+     * Flags can be set in options array
      *
      * @return  mixed
      * @since   1.0
      */
-    public function getRegex()
+    public function getMaximum()
     {
-        $regex = '';
+        $value = '';
 
-        if (isset($this->options['regex'])) {
-            $regex = $this->options['regex'];
+        if (isset($this->options['maximum'])) {
+            $value = $this->options['maximum'];
         }
-        return $regex;
+
+        return $value;
     }
 }

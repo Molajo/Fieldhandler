@@ -1,6 +1,6 @@
 <?php
 /**
- * Raw Filters
+ * Raw Filter
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -10,11 +10,8 @@ namespace Molajo\Filters\Type;
 
 defined('MOLAJO') or die;
 
-use Molajo\Filters\Adapter\FilterInterface;
-use Molajo\Filters\Exception\FilterException;
-
 /**
- * Raw Filters
+ * Raw Filter
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -24,90 +21,163 @@ use Molajo\Filters\Exception\FilterException;
 class Raw extends AbstractFilter
 {
     /**
-     * Validate Input
+     * Constructor
      *
-     * @param   mixed    $this->getValue()
-     * @param   bool     $this->getRequired()
-     * @param   null     $this->getDefault()
-     * @param   null     $this->getMin()
-     * @param   null     $this->getMax()
-     * @param   array    $this->getValues()
-     * @param   array    $this->options
+     * @param   string   $method (validate, filter, escape)
+     * @param   string   $filter_type
+     *
+     * @param   mixed    $value
+     * @param   null     $default
+     * @param   bool     $required
+     * @param   null     $min
+     * @param   null     $max
+     * @param   array    $values
+     * @param   string   $regex
+     * @param   object   $callback
+     * @param   array    $options
      *
      * @return  mixed
      * @since   1.0
      */
-    public function validate(
-        $this->getValue(),
-        $this->getRequired() = true,
-        $this->getDefault() = null,
-        $this->getMin() = null,
-        $this->getMax() = null,
-        $this->getValues() = array(),
-        $this->options = array()
+    public function __construct(
+        $method,
+        $filter_type,
+        $value,
+        $default = null,
+        $required = true,
+        $min = null,
+        $max = null,
+        $values = array(),
+        $regex = null,
+        $callback = null,
+        $options = array()
     ) {
+        return parent::__construct();
+    }
 
+    /**
+     * Validate Input
+     *
+     * @return  mixed
+     * @since   1.0
+     */
+    public function validate()
+    {
+        parent::validate();
+
+        if ($this->getValue() === null) {
+        } else {
+
+            $test = filter_var($this->getValue(), FILTER_UNSAFE_RAW, $this->setFlags());
+
+            if ($test == $this->getValue()) {
+            } else {
+
+                throw new FilterException
+                ('Validate Raw: ' . FILTER_INVALID_VALUE);
+            }
+        }
+
+        return $this->getValue();
     }
 
     /**
      * Filter Input
      *
-     * @param   mixed    $this->getValue()
-     * @param   bool     $this->getRequired()
-     * @param   null     $this->getDefault()
-     * @param   null     $this->getMin()
-     * @param   null     $this->getMax()
-     * @param   array    $this->getValues()
-     * @param   array    $this->options
-     *
      * @return  mixed
      * @since   1.0
      */
-    public function filter(
-        $this->getValue(),
-        $this->getRequired() = true,
-        $this->getDefault() = null,
-        $this->getMin() = null,
-        $this->getMax() = null,
-        $this->getValues() = array(),
-        $this->options = array()
-    ) {
-        if ($this->getDefault() == null) {
-        } else {
-            if ($this->getValue() === null) {
-                $this->getValue() = $this->getDefault();
-            }
-        }
+    public function filter()
+    {
+        parent::filter();
 
         if ($this->getValue() === null) {
         } else {
-            $test = filter_var($this->getValue(), FILTER_SANITIZE_STRING);
+
+            $test = filter_var($this->getValue(), FILTER_UNSAFE_RAW, $this->setFlags());
+
             if ($test == $this->getValue()) {
-                return $test;
             } else {
-                throw new FilterException('FILTER_INVALID_VALUE');
+                $this->setValue(filter_var($this->getValue(), FILTER_UNSAFE_RAW, $this->setFlags()));
             }
         }
 
-        if ($this->getValue() === null
-            && $this->getRequired() == 0
-        ) {
-            throw new FilterException(__CLASS__ . ' ' . FILTER_VALUE_REQUIRED);
-        }
-
-        return trim($this->getValue());
+        return $this->getValue();
     }
 
     /**
      * Escapes and formats output
      *
-     * @param   mixed    $this->getValue()
+     * @return  mixed
+     * @since   1.0
+     */
+    public function escape()
+    {
+        parent::escape();
+
+        $test = filter_var($this->getValue(), FILTER_UNSAFE_RAW, $this->setFlags());
+
+        if ($test == $this->getValue()) {
+        } else {
+            $this->setValue(filter_var($this->getValue(), FILTER_UNSAFE_RAW, $this->setFlags()));
+        }
+
+        return $this->getValue();
+    }
+
+    /**
+     * Flags can be set in options array
      *
      * @return  mixed
      * @since   1.0
      */
-    public function escape($this->getValue(), $this->options = array())
+    public function setFlags()
     {
-        return htmlentities($this->getValue(), ENT_QUOTES, 'UTF-8');
+        $filter = '';
+        if (isset($this->options['FILTER_FLAG_STRIP_LOW'])) {
+            $filter = 'FILTER_FLAG_STRIP_LOW';
+        }
+
+        if (isset($this->options['FILTER_FLAG_STRIP_HIGH'])) {
+            if ($filter == '') {
+            } else {
+                $filter .= ', ';
+            }
+            $filter .= 'FILTER_FLAG_STRIP_HIGH';
+        }
+
+        if (isset($this->options['FILTER_FLAG_ENCODE_LOW'])) {
+            if ($filter == '') {
+            } else {
+                $filter .= ', ';
+            }
+            $filter .= 'FILTER_FLAG_ENCODE_LOW';
+        }
+
+        if (isset($this->options['FILTER_FLAG_ENCODE_HIGH'])) {
+            if ($filter == '') {
+            } else {
+                $filter .= ', ';
+            }
+            $filter .= 'FILTER_FLAG_ENCODE_HIGH';
+        }
+
+        if (isset($this->options['FILTER_FLAG_ENCODE_HIGH'])) {
+            if ($filter == '') {
+            } else {
+                $filter .= ', ';
+            }
+            $filter .= 'FILTER_FLAG_ENCODE_HIGH';
+        }
+
+        if (isset($this->options['FILTER_FLAG_ENCODE_AMP'])) {
+            if ($filter == '') {
+            } else {
+                $filter .= ', ';
+            }
+            $filter .= 'FILTER_FLAG_ENCODE_AMP';
+        }
+
+        return $filter;
     }
 }

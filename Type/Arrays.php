@@ -1,6 +1,6 @@
 <?php
 /**
- * Regex Filter
+ * Arrays Filter
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -11,14 +11,14 @@ namespace Molajo\Filters\Type;
 defined('MOLAJO') or die;
 
 /**
- * Alpha Filter
+ * Arrays Filter
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Regex extends AbstractFilter
+class Arrays extends AbstractFilter
 {
     /**
      * Constructor
@@ -68,13 +68,15 @@ class Regex extends AbstractFilter
         if ($this->getValue() === null) {
         } else {
 
-            $test = preg_match($this->getRegex(), $this->getValue());
+            $test = is_array($this->getValue());
 
-            if ($test == $this->getValue()) {
+            if ($test == 1) {
             } else {
                 throw new FilterException
-                ('Validate Regex: ' . FILTER_INVALID_VALUE);
+                ('Validate Array: ' . FILTER_INVALID_VALUE);
             }
+
+            $this->testValues();
         }
 
         return $this->getValue();
@@ -93,12 +95,16 @@ class Regex extends AbstractFilter
         if ($this->getValue() === null) {
         } else {
 
-            $test = preg_match($this->getRegex(), $this->getValue());
+            $test = is_array($this->getValue());
 
-            if ($test == $this->getValue()) {
+            if ($test == 1) {
             } else {
-                $this->setValue($test);
+                $temp   = array();
+                $temp[] = $this->getValue();
+                $this->setValue($temp);
             }
+
+            $this->testValues();
         }
 
         return $this->getValue();
@@ -114,33 +120,49 @@ class Regex extends AbstractFilter
     {
         parent::escape();
 
-        if ($this->getValue() === null) {
-        } else {
+        $temp   = array();
+        $temp[] = $this->getValue();
+        $this->setValue($temp);
 
-            $test = preg_match($this->getRegex(), $this->getValue());
-
-            if ($test == $this->getValue()) {
-            } else {
-                $this->setValue($test);
-            }
-        }
+        $this->testValues();
 
         return $this->getValue();
     }
 
     /**
-     * Escapes and formats output
+     * Test Array Entry Values
      *
      * @return  mixed
      * @since   1.0
      */
-    public function getRegex()
+    public function testValues($filter = false)
     {
-        $regex = '';
+        $values = array();
 
-        if (isset($this->options['regex'])) {
-            $regex = $this->options['regex'];
+        if (isset($this->options['array_valid_values'])) {
+            $values = $this->options['array_valid_values'];
         }
-        return $regex;
+
+        if (is_array($values) || count($values) === 0) {
+            return;
+        }
+
+        $entries = $this->getValue();
+
+        foreach ($entries as $entry) {
+            if (in_array($entry, $values)) {
+            } else {
+                if ($filter === true) {
+                    unset ($entry);
+                } else {
+                    throw new FilterException
+                    ('Filters Arrays: Array Value is not valid');
+                }
+            }
+        }
+
+        $this->setValue($entries);
+
+        return;
     }
 }

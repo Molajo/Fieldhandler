@@ -1,6 +1,6 @@
 <?php
 /**
- * Regex Filter
+ * Equals Filter
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -11,14 +11,14 @@ namespace Molajo\Filters\Type;
 defined('MOLAJO') or die;
 
 /**
- * Alpha Filter
+ * Equals Filter
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Regex extends AbstractFilter
+class Equals extends AbstractFilter
 {
     /**
      * Constructor
@@ -63,20 +63,6 @@ class Regex extends AbstractFilter
      */
     public function validate()
     {
-        parent::validate();
-
-        if ($this->getValue() === null) {
-        } else {
-
-            $test = preg_match($this->getRegex(), $this->getValue());
-
-            if ($test == $this->getValue()) {
-            } else {
-                throw new FilterException
-                ('Validate Regex: ' . FILTER_INVALID_VALUE);
-            }
-        }
-
         return $this->getValue();
     }
 
@@ -93,11 +79,9 @@ class Regex extends AbstractFilter
         if ($this->getValue() === null) {
         } else {
 
-            $test = preg_match($this->getRegex(), $this->getValue());
-
-            if ($test == $this->getValue()) {
+            if ($this->getDefault() === false) {
             } else {
-                $this->setValue($test);
+                $this->setValue($this->getDefault());
             }
         }
 
@@ -117,11 +101,9 @@ class Regex extends AbstractFilter
         if ($this->getValue() === null) {
         } else {
 
-            $test = preg_match($this->getRegex(), $this->getValue());
-
-            if ($test == $this->getValue()) {
+            if ($this->getDefault() === false) {
             } else {
-                $this->setValue($test);
+                $this->setValue($this->getDefault());
             }
         }
 
@@ -129,18 +111,19 @@ class Regex extends AbstractFilter
     }
 
     /**
-     * Escapes and formats output
+     * Flags can be set in options array
      *
      * @return  mixed
      * @since   1.0
      */
-    public function getRegex()
+    public function getDefault()
     {
-        $regex = '';
+        $value = false;
 
-        if (isset($this->options['regex'])) {
-            $regex = $this->options['regex'];
+        if (isset($this->options['default'])) {
+            $value = $this->options['default'];
         }
-        return $regex;
+
+        return $value;
     }
 }

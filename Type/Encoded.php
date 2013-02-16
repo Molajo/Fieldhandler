@@ -1,6 +1,6 @@
 <?php
 /**
- * Regex Filter
+ * Encoded Filter
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -11,14 +11,14 @@ namespace Molajo\Filters\Type;
 defined('MOLAJO') or die;
 
 /**
- * Alpha Filter
+ * Encoded Filter
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Regex extends AbstractFilter
+class Encoded extends AbstractFilter
 {
     /**
      * Constructor
@@ -68,12 +68,12 @@ class Regex extends AbstractFilter
         if ($this->getValue() === null) {
         } else {
 
-            $test = preg_match($this->getRegex(), $this->getValue());
+            $test = filter_var($this->getValue(), FILTER_SANITIZE_ENCODED, $this->setFlags());
 
             if ($test == $this->getValue()) {
             } else {
                 throw new FilterException
-                ('Validate Regex: ' . FILTER_INVALID_VALUE);
+                ('Validate Encoded: ' . FILTER_INVALID_VALUE);
             }
         }
 
@@ -93,11 +93,11 @@ class Regex extends AbstractFilter
         if ($this->getValue() === null) {
         } else {
 
-            $test = preg_match($this->getRegex(), $this->getValue());
+            $test = filter_var($this->getValue(), FILTER_SANITIZE_ENCODED, $this->setFlags());
 
-            if ($test == $this->getValue()) {
+            if ($test == true) {
             } else {
-                $this->setValue($test);
+                $this->setValue(filter_var($this->getValue(), FILTER_SANITIZE_ENCODED));
             }
         }
 
@@ -114,33 +114,53 @@ class Regex extends AbstractFilter
     {
         parent::escape();
 
-        if ($this->getValue() === null) {
+        $test = filter_var($this->getValue(), FILTER_SANITIZE_ENCODED, $this->setFlags());
+
+        if ($test == true) {
         } else {
-
-            $test = preg_match($this->getRegex(), $this->getValue());
-
-            if ($test == $this->getValue()) {
-            } else {
-                $this->setValue($test);
-            }
+            $this->setValue(filter_var($this->getValue(), FILTER_SANITIZE_ENCODED));
         }
 
         return $this->getValue();
     }
 
     /**
-     * Escapes and formats output
+     * Flags can be set in options array
      *
      * @return  mixed
      * @since   1.0
      */
-    public function getRegex()
+    public function setFlags()
     {
-        $regex = '';
-
-        if (isset($this->options['regex'])) {
-            $regex = $this->options['regex'];
+        $filter = '';
+        if (isset($this->options['FILTER_FLAG_STRIP_LOW'])) {
+            $filter = 'FILTER_FLAG_STRIP_LOW';
         }
-        return $regex;
+
+        if (isset($this->options['FILTER_FLAG_STRIP_HIGH'])) {
+            if ($filter == '') {
+            } else {
+                $filter .= ', ';
+            }
+            $filter .= 'FILTER_FLAG_STRIP_HIGH';
+        }
+
+        if (isset($this->options['FILTER_FLAG_ENCODE_LOW'])) {
+            if ($filter == '') {
+            } else {
+                $filter .= ', ';
+            }
+            $filter .= 'FILTER_FLAG_ENCODE_LOW';
+        }
+
+        if (isset($this->options['FILTER_FLAG_ENCODE_HIGH'])) {
+            if ($filter == '') {
+            } else {
+                $filter .= ', ';
+            }
+            $filter .= 'FILTER_FLAG_ENCODE_HIGH';
+        }
+
+        return $filter;
     }
 }

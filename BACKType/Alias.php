@@ -1,6 +1,6 @@
 <?php
 /**
- * Regex Filter
+ * Alias Filters
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -11,14 +11,14 @@ namespace Molajo\Filters\Type;
 defined('MOLAJO') or die;
 
 /**
- * Alpha Filter
+ * Alias Filters
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Regex extends AbstractFilter
+class Alias extends AbstractFilter
 {
     /**
      * Constructor
@@ -65,19 +65,13 @@ class Regex extends AbstractFilter
     {
         parent::validate();
 
-        if ($this->getValue() === null) {
-        } else {
+        $test = $this->createAlias();
 
-            $test = preg_match($this->getRegex(), $this->getValue());
-
-            if ($test == $this->getValue()) {
-            } else {
-                throw new FilterException
-                ('Validate Regex: ' . FILTER_INVALID_VALUE);
-            }
+        if ($test == $this->getValue()) {
+            return $this->getValue();
         }
 
-        return $this->getValue();
+        throw new FilterException(__CLASS__ . ' ' . FILTER_VALUE_INVALID);
     }
 
     /**
@@ -92,13 +86,21 @@ class Regex extends AbstractFilter
 
         if ($this->getValue() === null) {
         } else {
+            $test = filter_var($this->getValue(), FILTER_VALIDATE_ALNUM);
+        }
 
-            $test = preg_match($this->getRegex(), $this->getValue());
+        if ($this->getValue() === null
+            && $this->getRequired() == 0
+        ) {
+            throw new FilterException(__CLASS__ . ' ' . FILTER_VALUE_REQUIRED);
+        }
 
-            if ($test == $this->getValue()) {
-            } else {
-                $this->setValue($test);
-            }
+        $this->createAlias($this->getValue());
+
+        if ($this->getValue() === null
+            && $this->getRequired() == 0
+        ) {
+            throw new FilterException(__CLASS__ . ' ' . FILTER_VALUE_REQUIRED);
         }
 
         return $this->getValue();
@@ -114,33 +116,38 @@ class Regex extends AbstractFilter
     {
         parent::escape();
 
+        return $this->createAlias($this->getValue());
+    }
+
+    /**
+     * Create Alias from Text Value
+     *
+     * @return mixed
+     * @since  1.0
+     */
+    public function createAlias()
+    {
         if ($this->getValue() === null) {
         } else {
+            $alias = filter_var($this->getValue(), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-            $test = preg_match($this->getRegex(), $this->getValue());
+            /** Replace dashes with spaces */
+            $alias = str_replace('-', ' ', strtolower(trim($alias)));
 
-            if ($test == $this->getValue()) {
-            } else {
-                $this->setValue($test);
-            }
+            /** Removes double spaces, ensures only alphanumeric characters */
+            $alias = preg_replace('/(\s|[^A-Za-z0-9\-])+/', '-', $alias);
+
+            /** Trim dashes at beginning and end */
+            $alias = trim($alias, '-');
+
+            /** Replace spaces with underscores */
+            $alias = str_replace(' ', '_', strtolower(trim($alias)));
+
+            $this->setValue($alias);
         }
 
         return $this->getValue();
     }
-
-    /**
-     * Escapes and formats output
-     *
-     * @return  mixed
-     * @since   1.0
-     */
-    public function getRegex()
-    {
-        $regex = '';
-
-        if (isset($this->options['regex'])) {
-            $regex = $this->options['regex'];
-        }
-        return $regex;
-    }
 }
+
+

@@ -1,6 +1,6 @@
 <?php
 /**
- * Regex Filter
+ * Boolean Filters
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -11,14 +11,14 @@ namespace Molajo\Filters\Type;
 defined('MOLAJO') or die;
 
 /**
- * Alpha Filter
+ * Boolean Filters
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Regex extends AbstractFilter
+class Boolean extends AbstractFilter
 {
     /**
      * Constructor
@@ -63,21 +63,7 @@ class Regex extends AbstractFilter
      */
     public function validate()
     {
-        parent::validate();
-
-        if ($this->getValue() === null) {
-        } else {
-
-            $test = preg_match($this->getRegex(), $this->getValue());
-
-            if ($test == $this->getValue()) {
-            } else {
-                throw new FilterException
-                ('Validate Regex: ' . FILTER_INVALID_VALUE);
-            }
-        }
-
-        return $this->getValue();
+        return parent::validate();
     }
 
     /**
@@ -92,13 +78,13 @@ class Regex extends AbstractFilter
 
         if ($this->getValue() === null) {
         } else {
+            $test = filter_var($this->getValue(), FILTER_VALIDATE_BOOLEAN);
+        }
 
-            $test = preg_match($this->getRegex(), $this->getValue());
-
-            if ($test == $this->getValue()) {
-            } else {
-                $this->setValue($test);
-            }
+        if ($this->getValue() === null
+            && $this->getRequired() == 0
+        ) {
+            throw new FilterException(__CLASS__ . ' ' . FILTER_VALUE_REQUIRED);
         }
 
         return $this->getValue();
@@ -114,33 +100,6 @@ class Regex extends AbstractFilter
     {
         parent::escape();
 
-        if ($this->getValue() === null) {
-        } else {
-
-            $test = preg_match($this->getRegex(), $this->getValue());
-
-            if ($test == $this->getValue()) {
-            } else {
-                $this->setValue($test);
-            }
-        }
-
-        return $this->getValue();
-    }
-
-    /**
-     * Escapes and formats output
-     *
-     * @return  mixed
-     * @since   1.0
-     */
-    public function getRegex()
-    {
-        $regex = '';
-
-        if (isset($this->options['regex'])) {
-            $regex = $this->options['regex'];
-        }
-        return $regex;
+        return filter_var($this->getValue(), FILTER_VALIDATE_BOOLEAN);
     }
 }

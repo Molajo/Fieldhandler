@@ -51,62 +51,6 @@ abstract class AbstractFilter implements FilterInterface
     protected $value;
 
     /**
-     * Default Value
-     *
-     * @var    object
-     * @since  1.0
-     */
-    protected $default;
-
-    /**
-     * Required
-     *
-     * @var    boolean
-     * @since  1.0
-     */
-    protected $required;
-
-    /**
-     * Minimum Value
-     *
-     * @var    integer
-     * @since  1.0
-     */
-    protected $min;
-
-    /**
-     * Maximum Value
-     *
-     * @var    integer
-     * @since  1.0
-     */
-    protected $max;
-
-    /**
-     * Valid Values
-     *
-     * @var    array
-     * @since  1.0
-     */
-    protected $values;
-
-    /**
-     * Regex check
-     *
-     * @var    string
-     * @since  1.0
-     */
-    protected $regex;
-
-    /**
-     * Callback
-     *
-     * @var    object
-     * @since  1.0
-     */
-    protected $callback;
-
-    /**
      * Options for custom filters
      *
      * @var    array
@@ -127,15 +71,7 @@ abstract class AbstractFilter implements FilterInterface
      *
      * @param   string   $method (validate, filter, escape)
      * @param   string   $filter_type
-     *
      * @param   mixed    $value
-     * @param   null     $default
-     * @param   bool     $required
-     * @param   null     $min
-     * @param   null     $max
-     * @param   array    $values
-     * @param   string   $regex
-     * @param   object   $callback
      * @param   array    $options
      *
      * @return  mixed
@@ -143,15 +79,8 @@ abstract class AbstractFilter implements FilterInterface
      */
     public function __construct(
         $method,
-        $filter_type,
+        $filter_list,
         $value,
-        $default = null,
-        $required = true,
-        $min = null,
-        $max = null,
-        $values = array(),
-        $regex = null,
-        $callback = null,
         $options = array()
     ) {
         return $this;
@@ -165,7 +94,6 @@ abstract class AbstractFilter implements FilterInterface
      */
     public function validate()
     {
-
         return $this->getValue();
     }
 
@@ -177,7 +105,6 @@ abstract class AbstractFilter implements FilterInterface
      */
     public function filter()
     {
-
         return $this->getValue();
     }
 
@@ -230,129 +157,6 @@ abstract class AbstractFilter implements FilterInterface
     }
 
     /**
-     * Required Check
-     *
-     * @return  void
-     * @since   1.0
-     */
-    public function checkRequired()
-    {
-        if ($this->getRequired() === true) {
-        } else {
-            return;
-        }
-
-        if ($this->getValue() === null || $this->getValue() === '') {
-            throw new \RuntimeException
-            ('');
-        }
-
-        return;
-    }
-
-    /**
-     * Set Default
-     *
-     * @return  void
-     * @since   1.0
-     */
-    public function testDefault()
-    {
-
-        if ($this->getDefault() === null) {
-            return;
-        }
-
-        if ($this->getValue() === null || $this->getValue() === '') {
-            $this->setValue($this->getDefault());
-        }
-
-        return;
-    }
-
-    /**
-     * Equals (Password validation)
-     *
-     * @return  void
-     * @since   1.0
-     */
-    public function equalsValue()
-    {
-        if (preg_match($this->getRegex(), $this->equals_value)) {
-        } else {
-            return;
-        }
-
-        throw new FilterException
-        ('');
-    }
-
-    /**
-     * Minimum Check
-     *
-     * @return  void
-     * @since   1.0
-     */
-    public function checkMinimum()
-    {
-//strtotime (if is date)
-//size, files, strings
-        if ($this->getMin() === null) {
-            return;
-        }
-
-        if ($this->getValue() >= $this->getMin()) {
-            return;
-        }
-
-        throw new \RuntimeException
-        ('');
-
-    }
-
-    /**
-     * Maximum Check
-     *
-     * @return  void
-     * @since   1.0
-     */
-    public function checkMaximum()
-    {
-
-        if ($this->getMax() === null) {
-            return;
-        }
-
-        if ($this->getValue() <= $this->getMax()) {
-            return;
-        }
-
-        throw new \RuntimeException
-        ('');
-    }
-
-    /**
-     * Values Check
-     *
-     * @return  void
-     * @since   1.0
-     */
-    public function checkValues()
-    {
-        if (is_array($this->getValues()) && count($this->getValues()) > 0) {
-        } else {
-            return;
-        }
-
-        if (in_array($this->getValue(), $this->getValues())) {
-            return;
-        }
-
-        throw new FilterException
-        ('');
-    }
-
-    /**
      * Named Pair Check
      *
      * @return  void
@@ -373,131 +177,6 @@ abstract class AbstractFilter implements FilterInterface
 
         throw new FilterException
         ('');
-    }
-
-    /**
-     * Regex Check
-     *
-     * @param   mixed    $value
-     * @param   array    $regex
-     *
-     * @return  void
-     * @since   1.0
-     */
-    public function checkRegex()
-    {
-        if (preg_match($this->getRegex(), $this->getValue())) {
-        } else {
-            return;
-        }
-
-        throw new FilterException
-        ('');
-    }
-
-    /**
-     * Callback Check
-     *
-     * Check database validity or verify against other data elements
-     * or set the default outside of the checking
-     * - runs instead ? or before? or after? or pass in errors?
-     *
-     * @return  void
-     * @since   1.0
-     */
-    public function checkCallback()
-    {
-
-        if (isset($this->options['callback'])) {
-            $callback = $this->options['callback'];
-        } else {
-            throw new FilterException('Filter: ' . $this->getFilterType()
-                . '  Method: ' . $this->getMethod()
-                . ' Callback Object must be instantiated and injected into the '
-                . ' options associative array');
-        }
-
-        try {
-            return $callback->filter();
-        } catch (Exception $e) {
-            throw new FilterException('Filters Filter: Callback Exception Caught: ' . $e->error_message);
-        }
-    }
-
-    /**
-     * trimValue
-     *
-     * @param   mixed    $value
-     * @param   array    $this->options
-     *
-     * @return  void
-     * @since   1.0
-     */
-    public function trimValue()
-    {
-        if (isset($this->options['trim'])) {
-        } else {
-            return;
-        }
-
-        return trim($this->getValue());
-    }
-
-    /**
-     * filterText
-     *
-     * @return  void
-     * @since   1.0
-     */
-    public function filterText()
-    {
-        if (isset($this->options['filter_text'])) {
-        } else {
-            return;
-        }
-
-        // allowraw, allowhtml, blacklist, whitelist
-        $callback = $this->options['callback'];
-
-        return trim($this->getValue());
-    }
-
-    /**
-     * checkExtension
-     *
-     * @return  void
-     * @since   1.0
-     */
-    public function checkExtension()
-    {
-        if (isset($this->options['extension_types'])) {
-        } else {
-            return;
-        }
-
-        // jpeg, png, bmp, or gif)
-        $callback = $this->options['callback'];
-
-        return;
-    }
-
-    /**
-     * checkExtension
-     *
-     * @return  void
-     * @since   1.0
-     */
-    public function checkMimetype()
-    {
-        if (isset($this->options['extension_types'])) {
-        } else {
-            return;
-        }
-
-        // jpeg, png, bmp, or gif)
-        $callback = $this->options['callback'];
-
-        return;
     }
 
     /**
@@ -591,114 +270,6 @@ abstract class AbstractFilter implements FilterInterface
     }
 
     /**
-     * Set the Default
-     *
-     * @param   string  $default
-     *
-     * @return  void
-     * @since   1.0
-     */
-    protected function setDefault($default)
-    {
-        $this->default = $default;
-
-        return;
-    }
-
-    /**
-     * Get the Default
-     *
-     * @return  string
-     * @since   1.0
-     */
-    protected function getDefault()
-    {
-        return $this->default;
-    }
-
-    /**
-     * Set Required
-     *
-     * @param   bool  $required
-     *
-     * @return  string
-     * @since   1.0
-     */
-    protected function setRequired($required)
-    {
-        if ($required == true) {
-            $this->required = true;
-        } else {
-            $this->required = false;
-        }
-
-        return;
-    }
-
-    /**
-     * Get Required
-     *
-     * @return  bool
-     * @since   1.0
-     */
-    protected function getRequired()
-    {
-        return $this->required;
-    }
-
-    /**
-     * Set the Min
-     *
-     * @param   int  $min
-     *
-     * @return  void
-     * @since   1.0
-     */
-    protected function setMin($min)
-    {
-        $this->min = $min;
-
-        return;
-    }
-
-    /**
-     * Get the Min
-     *
-     * @return  int
-     * @since   1.0
-     */
-    protected function getMin()
-    {
-        return $this->min;
-    }
-
-    /**
-     * Set the Max
-     *
-     * @param   int  $max
-     *
-     * @return  void
-     * @since   1.0
-     */
-    protected function setMax($max)
-    {
-        $this->max = $max;
-
-        return;
-    }
-
-    /**
-     * Get the Max
-     *
-     * @return  int
-     * @since   1.0
-     */
-    protected function getMax()
-    {
-        return $this->max;
-    }
-
-    /**
      * Set the Values array
      *
      * @param   string  $values
@@ -722,58 +293,6 @@ abstract class AbstractFilter implements FilterInterface
     protected function getValues()
     {
         return $this->values;
-    }
-
-    /**
-     * Set Regex
-     *
-     * @param   string  $regex
-     *
-     * @return  void
-     * @since   1.0
-     */
-    protected function setRegex($regex)
-    {
-        $this->regex = $regex;
-
-        return;
-    }
-
-    /**
-     * Get the Regex
-     *
-     * @return  string
-     * @since   1.0
-     */
-    protected function getRegex()
-    {
-        return $this->regex;
-    }
-
-    /**
-     * Set the Callback
-     *
-     * @param   object  $callback
-     *
-     * @return  void
-     * @since   1.0
-     */
-    protected function setCallback($callback)
-    {
-        $this->callback = $callback;
-
-        return;
-    }
-
-    /**
-     * Get the Callback object
-     *
-     * @return  object
-     * @since   1.0
-     */
-    protected function getCallback()
-    {
-        return $this->callback;
     }
 
     /**
@@ -825,7 +344,29 @@ abstract class AbstractFilter implements FilterInterface
      */
     protected function getTimezone()
     {
-        return $this->timeone;
+        return $this->timezone;
     }
 
+    /**
+     * Test the string specified in $filter using the function defined by $test
+     *
+     * @param   string  $filter
+     *
+     * @return  string
+     * @since   1.0
+     */
+    protected function filterByCharacter($filter, $test)
+    {
+        $filtered = '';
+
+        if (strlen($filter) > 0) {
+            for ($i = 0; $i < strlen($filter); $i ++) {
+                if ($test(substr($filter, $i, 1)) == 1) {
+                    $filtered .= substr($filter, $i, 1);
+                }
+            }
+        }
+
+        return $filtered;
+    }
 }

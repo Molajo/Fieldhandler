@@ -1,6 +1,6 @@
 <?php
 /**
- * Boolean Filters
+ * Alpha Filter
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -11,7 +11,7 @@ namespace Molajo\Filters\Type;
 defined('MOLAJO') or die;
 
 /**
- * Boolean Filters
+ * Alpha Filter
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -52,7 +52,7 @@ class Boolean extends AbstractFilter
         $callback = null,
         $options = array()
     ) {
-        return parent::__contruct();
+        return parent::__construct();
     }
 
     /**
@@ -63,7 +63,21 @@ class Boolean extends AbstractFilter
      */
     public function validate()
     {
-        return parent::validate();
+        parent::validate();
+
+        if ($this->getValue() === null) {
+        } else {
+
+            $test = filter_var($this->getValue(), FILTER_VALIDATE_BOOLEAN);
+
+            if ($test == true) {
+            } else {
+                throw new FilterException
+                ('Validate Boolean: ' . FILTER_INVALID_VALUE);
+            }
+        }
+
+        return $this->getValue();
     }
 
     /**
@@ -78,13 +92,13 @@ class Boolean extends AbstractFilter
 
         if ($this->getValue() === null) {
         } else {
-            $test = filter_var($this->getValue(), FILTER_VALIDATE_BOOLEAN);
-        }
 
-        if ($this->getValue() === null
-            && $this->getRequired() == 0
-        ) {
-            throw new FilterException(__CLASS__ . ' ' . FILTER_VALUE_REQUIRED);
+            $test = filter_var($this->getValue(), FILTER_VALIDATE_BOOLEAN);
+
+            if ($test == true) {
+            } else {
+                $this->setValue(false);
+            }
         }
 
         return $this->getValue();
@@ -100,6 +114,13 @@ class Boolean extends AbstractFilter
     {
         parent::escape();
 
-        return filter_var($this->getValue(), FILTER_VALIDATE_BOOLEAN);
+        $test = filter_var($this->getValue(), FILTER_VALIDATE_BOOLEAN);
+
+        if ($test == true) {
+        } else {
+            $this->setValue(false);
+        }
+
+        return $this->getValue();
     }
 }
