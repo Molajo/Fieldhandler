@@ -27,17 +27,30 @@ Supports standard data type and PHP-specific filters and validation, value lists
 Each field is processed by one, or many, field handlers for validation, filtering, or escaping.
 
 ```php
-    $fhObject = new Molajo/FieldHandler/Adapter
+try {
+    $adapter = new Molajo/FieldHandler/Adapter
         ->($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+    } catch (Exception $e) {
+
+        //handle the exception here
+    }
+
+    // Success!
+    echo $adapter->field_value;
 ```
 
-There are five parameters:
+There are five input parameters:
 
 1. **$method** can be 'validate', 'filter', or 'escape';
 2. **$field_name** name of the field containing the data value to be verified or filtered;
 3. **$field_value** contains the data value to be verified or filtered;
 4. **$fieldhandler_type_chain** one or more field handlers, separated by a comma, processed in left-to-right order;
 5. **$options** Associative array of named pair values needed for field handlers.
+
+And two possible results:
+
+1. **Success** Retrieve the resulting field value from the object.
+2. **Failure** Handle the exception.
 
 ### Example Usage ###
 
@@ -55,7 +68,7 @@ try {
 
     $options = array('default' => 14, 'required' => true);
 
-    $fhObject = new Molajo/FieldHandler/Adapter
+    $adapter = new Molajo/FieldHandler/Adapter
         ->('Validate', 'id', 12, $fieldhandler_type_chain, $options);
 
     } catch (Exception $e) {
@@ -75,38 +88,38 @@ Use the Try/Catch pattern, as presented above, to catch thrown exceptions for er
 
 ### FieldHandlers ###
 
-1. Accepted
-2. Alias
-3. Alpha
-4. Alphanumeric
-5. Arrays
-6. Boolean
-7. Callback
-8. Date
-9. Defaults
-10. Digit
-11. Email
-12. Encoded
-13. Equals
-14. Extensions
-15. Float
-16. Extensions
-17. Float
-18. Fullspecialchars
-19. Int
-20. Lower
-21. Maximum
-22. Mimetypes
-23. Minimum
-24. Numeric
-25. Raw
-26. Regex
-27. Required
-28. String
-29. Trim
-30. Upper
-31. Url
-32. Values
+* Accepted
+* Alias
+* Alpha
+* Alphanumeric
+* Arrays
+* Boolean
+* Callback
+* Date
+* Defaults
+* Digit
+* Email
+* Encoded
+* Equals
+* Extensions
+* Float
+* Extensions
+* Float
+* Fullspecialchars
+* Int
+* Lower
+* Maximum
+* Mimetypes
+* Minimum
+* Numeric
+* Raw
+* Regex
+* Required
+* String
+* Trim
+* Upper
+* Url
+* Values
 
 ### Installation
 
