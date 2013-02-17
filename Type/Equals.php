@@ -10,6 +10,8 @@ namespace Molajo\FieldHandler\Type;
 
 defined('MOLAJO') or die;
 
+use Molajo\FieldHandler\Exception\FieldHandlerException;
+
 /**
  * Equals FieldHandler
  *
@@ -23,17 +25,10 @@ class Equals extends AbstractFieldHandler
     /**
      * Constructor
      *
-     * @param   string   $method (validate, filter, escape)
-     * @param   string   $fieldhandler_type
-     *
+     * @param   string   $method
+     * @param   string   $field_name
      * @param   mixed    $field_value
-     * @param   null     $default
-     * @param   bool     $required
-     * @param   null     $min
-     * @param   null     $max
-     * @param   array    $field_values
-     * @param   string   $regex
-     * @param   object   $callback
+     * @param   array    $fieldhandler_type_chain
      * @param   array    $options
      *
      * @return  mixed
@@ -41,18 +36,12 @@ class Equals extends AbstractFieldHandler
      */
     public function __construct(
         $method,
-        $fieldhandler_type,
+        $field_name,
         $field_value,
-        $default = null,
-        $required = true,
-        $min = null,
-        $max = null,
-        $field_values = array(),
-        $regex = null,
-        $callback = null,
+        $fieldhandler_type_chain,
         $options = array()
     ) {
-        return parent::__construct();
+        return parent::__construct($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
     }
 
     /**
@@ -65,14 +54,12 @@ class Equals extends AbstractFieldHandler
     {
         parent::validate();
 
-        if ($this->getFieldValue() === null) {
-        } else {
+        $equals = $this->getEquals();
 
-            if ($this->getFieldValue() == $this->getEquals()) {
-            } else {
-                throw new FieldHandlerException
-                ('Validate Equals: ' . FILTER_INVALID_VALUE);
-            }
+        if ($this->getFieldValue() == $equals) {
+        } else {
+            throw new FieldHandlerException
+            ('Validate Equals: ' . FILTER_INVALID_VALUE);
         }
 
         return $this->getFieldValue();
@@ -88,13 +75,11 @@ class Equals extends AbstractFieldHandler
     {
         parent::filter();
 
-        if ($this->getFieldValue() === null) {
-        } else {
+        $equals = $this->getEquals();
 
-            if ($this->getFieldValue() == $this->getEquals()) {
-            } else {
-                $this->setFieldValue($this->getEquals());
-            }
+        if ($this->getFieldValue() == $equals) {
+        } else {
+            $this->setFieldValue(null);
         }
 
         return $this->getFieldValue();
@@ -110,16 +95,7 @@ class Equals extends AbstractFieldHandler
     {
         parent::escape();
 
-        if ($this->getFieldValue() === null) {
-        } else {
-
-            if ($this->getFieldValue() == $this->getEquals()) {
-            } else {
-                $this->setFieldValue($this->getEquals());
-            }
-        }
-
-        return $this->getFieldValue();
+        return $this->filter();
     }
 
     /**
@@ -130,7 +106,7 @@ class Equals extends AbstractFieldHandler
      */
     public function getEquals()
     {
-        $field_value = '';
+        $field_value = null;
 
         if (isset($this->options['equals'])) {
             $field_value = $this->options['equals'];
