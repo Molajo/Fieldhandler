@@ -10,6 +10,8 @@ namespace Molajo\FieldHandler\Type;
 
 defined('MOLAJO') or die;
 
+use Molajo\FieldHandler\Exception\FieldHandlerException;
+
 /**
  * Alias FieldHandler
  *
@@ -53,13 +55,18 @@ class Alias extends AbstractFieldHandler
         parent::validate();
 
         if ($this->getFieldValue() === null) {
-        } else {
-            $test = $this->createAlias();
-            if ($test == $this->getFieldValue()) {
-            } else {
-                throw new FieldHandlerException
-                ('Validate Alias: ' . FILTER_INVALID_VALUE);
-            }
+            $this->setFieldValue(null);
+            return $this->getFieldValue();
+        }
+
+        $this->setFieldValue($this->createAlias());
+
+
+        $bad = $this->testValidate();
+
+        if ($bad === true) {
+            throw new FieldHandlerException
+            ('Validate Alias: ' . FILTER_INVALID_VALUE);
         }
 
         return $this->getFieldValue();
@@ -75,8 +82,15 @@ class Alias extends AbstractFieldHandler
     {
         parent::filter();
 
+        $bad = false;
+
         if ($this->getFieldValue() === null) {
+            $bad = true;
         } else {
+            $bad = $this->testValidate();
+        }
+
+        if ($bad === true) {
             $this->setFieldValue($this->createAlias());
         }
 
@@ -93,7 +107,7 @@ class Alias extends AbstractFieldHandler
     {
         parent::escape();
 
-        return $this->createAlias();
+        return $this->filter();
     }
 
     /**
@@ -104,10 +118,10 @@ class Alias extends AbstractFieldHandler
      */
     public function createAlias()
     {
-        if ($this->getFieldValue() === null) {
-        } else {
+        $alias = $this->getFieldValue();
 
-            $alias = filter_var($this->getFieldValue(), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        if ($alias === null) {
+        } else {
 
             /** Replace dashes with spaces */
             $alias = str_replace('-', ' ', strtolower(trim($alias)));
@@ -121,9 +135,45 @@ class Alias extends AbstractFieldHandler
             /** Replace spaces with underscores */
             $alias = str_replace(' ', '_', strtolower(trim($alias)));
 
+            /** Sanitize */
+            $alias = filter_var($alias, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
             $this->setFieldValue($alias);
         }
 
         return $this->getFieldValue();
+    }
+
+    /**
+     * Test the Alias validity
+     *
+     * @return  bool
+     * @since   1.0
+     */
+    public function testValidate()
+    {
+        $test = $this->getFieldValue();
+
+        $bad = false;
+
+        $test = strpos($test, ' ');
+        if ($this->getFieldValue() == $test) {
+        } else {
+            $bad = true;
+        }
+
+        $test = preg_replace('/(\s|[^A-Za-z0-9\-])+/', '-', $test);
+        if ($this->getFieldValue() == $test) {
+        } else {
+            $bad = true;
+        }
+
+        $test = filter_var($test, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        if ($this->getFieldValue() == $test) {
+        } else {
+            $bad = true;
+        }
+
+        return $bad;
     }
 }

@@ -91,7 +91,7 @@ class Accepted extends AbstractFieldHandler
             if (in_array($testValue, $trueArray, true) === true) {
 
             } else {
-                $this->getFieldValue(null);
+                $this->setFieldValue(null);
             }
         }
 

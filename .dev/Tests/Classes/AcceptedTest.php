@@ -156,6 +156,53 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * test Filter Success
+     *
+     * @covers  Molajo\FieldHandler\Type\Default::validate
+     * @return  void
+     * @since   1.0
+     */
+    public function testFilterSuccess()
+    {
+        parent::setUp();
+
+        $method                  = 'Filter';
+        $field_name              = 'agreement';
+        $field_value             = true;
+        $fieldhandler_type_chain = 'Accepted';
+        $options                 = array();
+
+        $adapter = new adapter($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+
+        $this->assertEquals(true, $adapter->field_value);
+
+        return;
+    }
+
+    /**
+     * @covers Molajo\FieldHandler\Type\Default::filter
+     * @return  void
+     * @since   1.0
+     */
+    public function testFilterUnsuccessful()
+    {
+        parent::setUp();
+
+        $method                  = 'Filter';
+        $field_name              = 'agreement';
+        $field_value             = 'e';
+        $fieldhandler_type_chain = 'Accepted';
+        $options                 = array();
+
+        $adapter = new adapter($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+
+        $this->assertEquals(null, $adapter->field_value);
+
+        return;
+    }
+
+
+    /**
      * Tear down
      *
      * @return  void
