@@ -27,9 +27,10 @@ Supports standard data type and PHP-specific filters and validation, value lists
 Each field is processed by one, or many, field handlers for validation, filtering, or escaping.
 
 ```php
-try {
-    $adapter = new Molajo/FieldHandler/Adapter
-        ->($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+    try {
+        $adapter = new Molajo/FieldHandler/Adapter
+            ->($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+
     } catch (Exception $e) {
 
         //handle the exception here
@@ -45,7 +46,7 @@ There are five input parameters:
 2. **$field_name** name of the field containing the data value to be verified or filtered;
 3. **$field_value** contains the data value to be verified or filtered;
 4. **$fieldhandler_type_chain** one or more field handlers, separated by a comma, processed in left-to-right order;
-5. **$options** Associative array of named pair values needed for field handlers.
+5. **$options** associative array of named pair values required by field handlers.
 
 And two possible results:
 
@@ -63,13 +64,11 @@ Chaining is supported and field handlers are processed in left-to-right order. T
  the default before the required check in the field handler chain.
 
 ```php
-try {
-    $fieldhandler_type_chain = array('int', 'default', 'required');
-
-    $options = array('default' => 14, 'required' => true);
-
-    $adapter = new Molajo/FieldHandler/Adapter
-        ->('Validate', 'id', 12, $fieldhandler_type_chain, $options);
+    try {
+        $fieldhandler_type_chain = array('int', 'default', 'required');
+        $options = array('default' => 14, 'required' => true);
+        $adapter = new Molajo/FieldHandler/Adapter
+            ->('Validate', 'id', 12, $fieldhandler_type_chain, $options);
 
     } catch (Exception $e) {
 
