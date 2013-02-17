@@ -20,7 +20,7 @@ Supports standard data type and PHP-specific filters and validation, value lists
 
 ## What is FieldHandler? ##
 
-**FieldHandler** provides a common API to create validation, filter, escape, and formatting processes that can be associated with fields and used to ensure data integrity and security within your data collections.
+**FieldHandler** provides a common API to validate, filter, escape, and format field values.
 
 ## Basic Usage ##
 
@@ -32,7 +32,6 @@ Each field is processed by one, or many, field handlers for validation, filterin
             ->($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
 
     } catch (Exception $e) {
-
         //handle the exception here
     }
 
@@ -42,7 +41,7 @@ Each field is processed by one, or many, field handlers for validation, filterin
 
 There are five input parameters:
 
-1. **$method** can be 'validate', 'filter', or 'escape';
+1. **$method** can be `validate`, `filter`, or `escape`;
 2. **$field_name** name of the field containing the data value to be verified or filtered;
 3. **$field_value** contains the data value to be verified or filtered;
 4. **$fieldhandler_type_chain** one or more field handlers, separated by a comma, processed in left-to-right order;
@@ -55,9 +54,9 @@ And two possible results:
 
 ### Example Usage ###
 
-The following example processes the 'id' field using the 'int', 'default', and 'required' field handlers.
-The 'options' associative array defines two data elements: 'default' is the default value for the field, if needed;
-the 'required' element with a 'true' value is used by the 'required' field handler to verify a value has been
+The following example processes the `id` field using the `int`, `default`, and `required` field handlers.
+The `options` associative array defines two data elements: `default` is the default value for the field, if needed;
+the `required` element with a `true` value is used by the `required` field handler to verify a value has been
  provided.
 
 Chaining is supported and field handlers are processed in left-to-right order. The example shows how to sequence
@@ -71,7 +70,6 @@ Chaining is supported and field handlers are processed in left-to-right order. T
             ->('Validate', 'id', 12, $fieldhandler_type_chain, $options);
 
     } catch (Exception $e) {
-
         //handle the exception here
     }
 
