@@ -175,5 +175,5 @@ License
 
 More Information
 ----------------
-- [Usage](https://github.com/Molajo/FieldHandler/.dev/Doc/Extend.md)
-- [Install](https://github.com/Molajo/FieldHandler/.dev/Doc/Install.md)
+- [Extend](https://github.com/Molajo/FieldHandler/blob/master/.dev/Doc/extend.md)
+- [Install](https://github.com/Molajo/FieldHandler/blob/master/.dev/Doc/install.md)
