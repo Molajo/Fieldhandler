@@ -10,6 +10,8 @@ namespace Molajo\FieldHandler\Type;
 
 defined('MOLAJO') or die;
 
+use Molajo\FieldHandler\Exception\FieldHandlerException;
+
 /**
  * Extensions FieldHandler
  *
@@ -23,17 +25,10 @@ class Extensions extends AbstractFieldHandler
     /**
      * Constructor
      *
-     * @param   string   $method (validate, filter, escape)
-     * @param   string   $fieldhandler_type
-     *
+     * @param   string   $method
+     * @param   string   $field_name
      * @param   mixed    $field_value
-     * @param   null     $default
-     * @param   bool     $required
-     * @param   null     $min
-     * @param   null     $max
-     * @param   array    $field_values
-     * @param   string   $regex
-     * @param   object   $callback
+     * @param   array    $fieldhandler_type_chain
      * @param   array    $options
      *
      * @return  mixed
@@ -41,18 +36,12 @@ class Extensions extends AbstractFieldHandler
      */
     public function __construct(
         $method,
-        $fieldhandler_type,
+        $field_name,
         $field_value,
-        $default = null,
-        $required = true,
-        $min = null,
-        $max = null,
-        $field_values = array(),
-        $regex = null,
-        $callback = null,
+        $fieldhandler_type_chain,
         $options = array()
     ) {
-        return parent::__construct();
+        return parent::__construct($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
     }
 
     /**
@@ -68,13 +57,15 @@ class Extensions extends AbstractFieldHandler
         if ($this->getFieldValue() === null) {
         } else {
 
-            $test = in_array($this->getFieldValue(), $this->getExtensions());
+            $test = is_array($this->getFieldValue());
 
             if ($test == 1) {
             } else {
                 throw new FieldHandlerException
                 ('Validate Extensions: ' . FILTER_INVALID_VALUE);
             }
+
+            $this->testValues();
         }
 
         return $this->getFieldValue();
@@ -93,12 +84,16 @@ class Extensions extends AbstractFieldHandler
         if ($this->getFieldValue() === null) {
         } else {
 
-            $test = in_array($this->getFieldValue(), $this->getExtensions());
+            $test = is_array($this->getFieldValue());
 
             if ($test == 1) {
             } else {
-                $this->setFieldValue(false);
+                $temp   = array();
+                $temp[] = $this->getFieldValue();
+                $this->setFieldValue($temp);
             }
+
+            $this->testValues(true);
         }
 
         return $this->getFieldValue();
@@ -114,27 +109,18 @@ class Extensions extends AbstractFieldHandler
     {
         parent::escape();
 
-        if ($this->getFieldValue() === null) {
-        } else {
-
-            $test = in_array($this->getFieldValue(), $this->getExtensions());
-
-            if ($test == 1) {
-            } else {
-                $this->setFieldValue(false);
-            }
-        }
+        $this->filter();
 
         return $this->getFieldValue();
     }
 
     /**
-     * Test Array Entry Extensions
+     * Test Array Entry Values
      *
      * @return  mixed
      * @since   1.0
      */
-    public function getExtensions()
+    public function testValues($filter = false)
     {
         $field_values = array();
 
@@ -142,6 +128,31 @@ class Extensions extends AbstractFieldHandler
             $field_values = $this->options['array_valid_extensions'];
         }
 
-        return $field_values;
+        if (is_array($field_values) && count($field_values) > 0) {
+        } else {
+            return;
+        }
+
+        $entries = $this->getFieldValue();
+        $new = array();
+
+        foreach ($entries as $entry) {
+
+            if (in_array($entry, $field_values)) {
+                $new[] = $entry;
+            } else {
+
+                if ($filter === true) {
+
+                } else {
+                    throw new FieldHandlerException
+                    ('FieldHandler Extensions: Array Value is not valid');
+                }
+            }
+        }
+
+        $this->setFieldValue($new);
+
+        return;
     }
 }
