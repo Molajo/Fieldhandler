@@ -53,8 +53,7 @@ $classMap = array(
     'Molajo\\FieldHandler\\Type\\Trim'                       => BASE_FOLDER . '/Type/Trim.php',
     'Molajo\\FieldHandler\\Type\\Upper'                      => BASE_FOLDER . '/Type/Upper.php',
     'Molajo\\FieldHandler\\Type\\Url'                        => BASE_FOLDER . '/Type/Url.php',
-    'Molajo\\FieldHandler\\Type\\Values'                     => BASE_FOLDER . '/Type/Values.php',
-    'Molajo\\FieldHandler\\Tests\\Defaults'                  => BASE_FOLDER . '/Tests/Classes/TestDefaults.php'
+    'Molajo\\FieldHandler\\Type\\Values'                     => BASE_FOLDER . '/Type/Values.php'
 );
 
 spl_autoload_register(

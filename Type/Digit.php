@@ -10,6 +10,8 @@ namespace Molajo\FieldHandler\Type;
 
 defined('MOLAJO') or die;
 
+use Molajo\FieldHandler\Exception\FieldHandlerException;
+
 /**
  * Digit FieldHandler
  *
@@ -23,17 +25,10 @@ class Digit extends AbstractFieldHandler
     /**
      * Constructor
      *
-     * @param   string   $method (validate, filter, escape)
-     * @param   string   $fieldhandler_type
-     *
+     * @param   string   $method
+     * @param   string   $field_name
      * @param   mixed    $field_value
-     * @param   null     $default
-     * @param   bool     $required
-     * @param   null     $min
-     * @param   null     $max
-     * @param   array    $field_values
-     * @param   string   $regex
-     * @param   object   $callback
+     * @param   array    $fieldhandler_type_chain
      * @param   array    $options
      *
      * @return  mixed
@@ -41,18 +36,12 @@ class Digit extends AbstractFieldHandler
      */
     public function __construct(
         $method,
-        $fieldhandler_type,
+        $field_name,
         $field_value,
-        $default = null,
-        $required = true,
-        $min = null,
-        $max = null,
-        $field_values = array(),
-        $regex = null,
-        $callback = null,
+        $fieldhandler_type_chain,
         $options = array()
     ) {
-        return parent::__construct();
+        return parent::__construct($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
     }
 
     /**
@@ -69,6 +58,7 @@ class Digit extends AbstractFieldHandler
         } else {
 
             $test = ctype_digit($this->getFieldValue());
+
             if ($test == 1) {
             } else {
                 throw new FieldHandlerException
@@ -93,6 +83,7 @@ class Digit extends AbstractFieldHandler
         } else {
 
             $test = ctype_digit($this->getFieldValue());
+
             if ($test == 1) {
             } else {
                 $this->setFieldValue($this->filterByCharacter('ctype_digit', $this->getFieldValue()));
@@ -112,7 +103,7 @@ class Digit extends AbstractFieldHandler
     {
         parent::escape();
 
-        $this->setFieldValue($this->filterByCharacter('ctype_digit', $this->getFieldValue()));
+        $this->filter();
 
         return $this->getFieldValue();
     }

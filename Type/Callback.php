@@ -1,6 +1,6 @@
 <?php
 /**
- * Callbacks FieldHandler
+ * Callback FieldHandler
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -10,15 +10,17 @@ namespace Molajo\FieldHandler\Type;
 
 defined('MOLAJO') or die;
 
+use Molajo\FieldHandler\Exception\FieldHandlerException;
+
 /**
- * Callbacks FieldHandler
+ * Callback FieldHandler
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Callbacks extends AbstractFieldHandler
+class Callback extends AbstractFieldHandler
 {
     /**
      * Constructor
@@ -58,12 +60,7 @@ class Callbacks extends AbstractFieldHandler
 
             $test = filter_var($this->getFieldValue(), FILTER_CALLBACK, $this->setCallback());
 
-            if ($test == $this->getFieldValue()) {
-            } else {
-
-                throw new FieldHandlerException
-                ('Validate Callbacks: ' . FILTER_INVALID_VALUE);
-            }
+            $this->setFieldValue($test);
         }
 
         return $this->getFieldValue();
@@ -123,11 +120,9 @@ class Callbacks extends AbstractFieldHandler
      */
     public function setCallback()
     {
-        if (isset($this->options['Callback'])) {
-            $callback = $this->options['Callback'];
+        if (isset($this->options['callback'])) {
+            $callback = $this->options['callback'];
         }
-
-        $callback = array('options' => $callback);
 
         return $callback;
     }

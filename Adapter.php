@@ -189,6 +189,7 @@ Class Adapter
             }
 
             $method = $this->method;
+
             $this->field_value = $ft->$method();
         }
 
