@@ -6,8 +6,10 @@ FieldHandler
 
 [![Build Status](https://travis-ci.org/Molajo/FieldHandler.png?branch=master)](https://travis-ci.org/Molajo/FieldHandler)
 
-Validates and filters input. Escapes and formats output. Supports standard data type and PHP filters and validation, verification to value lists, callbacks, regex checking and more.
-  When used with rendering process can be used to ensure data to escaped for security and format output, as needed.
+Validates and filters input. Escapes and formats output.
+
+Supports standard data type and PHP-specific filters and validation, value lists verification, callbacks, regex checking, and more.
+ Use with rendering process to ensure proper escaping of output data and for special formatting needs.
 
 ## System Requirements ##
 
@@ -48,19 +50,6 @@ Chaining is supported and field handlers are processed in left-to-right order. T
  the default before the required check in the field handler chain.
 
 ```php
-    $fieldhandler_type_chain = array('int', 'default', 'required');
-
-    $options = array('default' => 14, 'required' => true);
-
-    $adapter = new Molajo/FieldHandler/Adapter
-        ->('Validate', 'id', 12, $fieldhandler_type_chain, $options);
-```
-
-#### Example Results ####
-
-An object is returned and the field value can be retrieved like this:
-
-```php
 try {
     $fieldhandler_type_chain = array('int', 'default', 'required');
 
@@ -78,15 +67,11 @@ try {
     echo $adapter->field_value;
 
 ```
-**Action Results:**
+**Results:**
 
-Two results can occur. If the method was success, retrieve the field from the resulting object.
-If the method was not successful, for example, validation discovered a problem, an Exception
-is thrown. Use a Try/Catch pattern, as presented above, to retrieve the error condition.
+If the method was a success, simply retrieve the field value from the resulting object.
 
-```php
-    echo $adapter->field_value;
-```
+Use the Try/Catch pattern, as presented above, to catch thrown exceptions for errors.
 
 ### FieldHandlers ###
 
