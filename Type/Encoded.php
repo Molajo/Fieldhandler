@@ -10,8 +10,12 @@ namespace Molajo\FieldHandler\Type;
 
 defined('MOLAJO') or die;
 
+use Molajo\FieldHandler\Exception\FieldHandlerException;
+
 /**
  * Encoded FieldHandler
+ *
+ * URL-encode string, optionally strip or encode special characters.
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -23,17 +27,10 @@ class Encoded extends AbstractFieldHandler
     /**
      * Constructor
      *
-     * @param   string   $method (validate, filter, escape)
-     * @param   string   $fieldhandler_type
-     *
+     * @param   string   $method
+     * @param   string   $field_name
      * @param   mixed    $field_value
-     * @param   null     $default
-     * @param   bool     $required
-     * @param   null     $min
-     * @param   null     $max
-     * @param   array    $field_values
-     * @param   string   $regex
-     * @param   object   $callback
+     * @param   array    $fieldhandler_type_chain
      * @param   array    $options
      *
      * @return  mixed
@@ -41,18 +38,12 @@ class Encoded extends AbstractFieldHandler
      */
     public function __construct(
         $method,
-        $fieldhandler_type,
+        $field_name,
         $field_value,
-        $default = null,
-        $required = true,
-        $min = null,
-        $max = null,
-        $field_values = array(),
-        $regex = null,
-        $callback = null,
+        $fieldhandler_type_chain,
         $options = array()
     ) {
-        return parent::__construct();
+        return parent::__construct($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
     }
 
     /**
@@ -63,21 +54,7 @@ class Encoded extends AbstractFieldHandler
      */
     public function validate()
     {
-        parent::validate();
-
-        if ($this->getFieldValue() === null) {
-        } else {
-
-            $test = filter_var($this->getFieldValue(), FILTER_SANITIZE_ENCODED, $this->setFlags());
-
-            if ($test == $this->getFieldValue()) {
-            } else {
-                throw new FieldHandlerException
-                ('Validate Encoded: ' . FILTER_INVALID_VALUE);
-            }
-        }
-
-        return $this->getFieldValue();
+        return parent::validate();
     }
 
     /**
@@ -90,15 +67,11 @@ class Encoded extends AbstractFieldHandler
     {
         parent::filter();
 
-        if ($this->getFieldValue() === null) {
+        $test = filter_var($this->getFieldValue(), FILTER_SANITIZE_ENCODED, $this->setFlags());
+
+        if ($test === $this->getFieldValue()) {
         } else {
-
-            $test = filter_var($this->getFieldValue(), FILTER_SANITIZE_ENCODED, $this->setFlags());
-
-            if ($test == true) {
-            } else {
-                $this->setFieldValue(filter_var($this->getFieldValue(), FILTER_SANITIZE_ENCODED));
-            }
+            $this->setFieldValue($test);
         }
 
         return $this->getFieldValue();
@@ -114,14 +87,7 @@ class Encoded extends AbstractFieldHandler
     {
         parent::escape();
 
-        $test = filter_var($this->getFieldValue(), FILTER_SANITIZE_ENCODED, $this->setFlags());
-
-        if ($test == true) {
-        } else {
-            $this->setFieldValue(filter_var($this->getFieldValue(), FILTER_SANITIZE_ENCODED));
-        }
-
-        return $this->getFieldValue();
+        return filter_var($this->getFieldValue(), FILTER_SANITIZE_ENCODED, $this->setFlags());
     }
 
     /**
@@ -132,13 +98,13 @@ class Encoded extends AbstractFieldHandler
      */
     public function setFlags()
     {
-        $filter = '';
+        $filter = null;
         if (isset($this->options['FILTER_FLAG_STRIP_LOW'])) {
             $filter = 'FILTER_FLAG_STRIP_LOW';
         }
 
         if (isset($this->options['FILTER_FLAG_STRIP_HIGH'])) {
-            if ($filter == '') {
+            if ($filter === null) {
             } else {
                 $filter .= ', ';
             }
@@ -146,7 +112,7 @@ class Encoded extends AbstractFieldHandler
         }
 
         if (isset($this->options['FILTER_FLAG_ENCODE_LOW'])) {
-            if ($filter == '') {
+            if ($filter === null) {
             } else {
                 $filter .= ', ';
             }
@@ -154,7 +120,7 @@ class Encoded extends AbstractFieldHandler
         }
 
         if (isset($this->options['FILTER_FLAG_ENCODE_HIGH'])) {
-            if ($filter == '') {
+            if ($filter === null) {
             } else {
                 $filter .= ', ';
             }
