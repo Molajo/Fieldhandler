@@ -10,6 +10,7 @@ namespace Molajo\FieldHandler\Type;
 
 defined('MOLAJO') or die;
 
+use Molajo\FieldHandler\Exception\FieldHandlerException;
 /**
  * Arrays FieldHandler
  *
@@ -60,10 +61,10 @@ class Arrays extends AbstractFieldHandler
             if ($test == 1) {
             } else {
                 throw new FieldHandlerException
-                ('Validate Array: ' . FILTER_INVALID_VALUE);
+                    ('Validate Array: ' . FILTER_INVALID_VALUE);
             }
 
-            $this->testValues();
+           $this->testValues();
         }
 
         return $this->getFieldValue();
@@ -107,11 +108,7 @@ class Arrays extends AbstractFieldHandler
     {
         parent::escape();
 
-        $temp   = array();
-        $temp[] = $this->getFieldValue();
-        $this->setFieldValue($temp);
-
-        $this->testValues();
+        $this->filter();
 
         return $this->getFieldValue();
     }
@@ -130,17 +127,21 @@ class Arrays extends AbstractFieldHandler
             $field_values = $this->options['array_valid_values'];
         }
 
-        if (is_array($field_values) || count($field_values) === 0) {
+        if (is_array($field_values) && count($field_values) > 0) {
+        } else {
             return;
         }
 
         $entries = $this->getFieldValue();
 
         foreach ($entries as $entry) {
+
             if (in_array($entry, $field_values)) {
             } else {
+
                 if ($filter === true) {
                     unset ($entry);
+
                 } else {
                     throw new FieldHandlerException
                     ('FieldHandler Arrays: Array Value is not valid');
