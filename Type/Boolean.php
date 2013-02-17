@@ -10,6 +10,8 @@ namespace Molajo\FieldHandler\Type;
 
 defined('MOLAJO') or die;
 
+use Molajo\FieldHandler\Exception\FieldHandlerException;
+
 /**
  * Boolean FieldHandler
  *
@@ -53,12 +55,20 @@ class Boolean extends AbstractFieldHandler
         parent::validate();
 
         if ($this->getFieldValue() === null) {
+
         } else {
 
-            $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_BOOLEAN);
+            if ($this->getFieldValue() === false) {
+                $test = false;
 
-            if ($test == true) {
+            } elseif ($this->getFieldValue() === true) {
+                $test = true;
+
             } else {
+                $test = null;
+            }
+
+            if ($test === null) {
                 throw new FieldHandlerException
                 ('Validate Boolean: ' . FILTER_INVALID_VALUE);
             }
@@ -80,11 +90,18 @@ class Boolean extends AbstractFieldHandler
         if ($this->getFieldValue() === null) {
         } else {
 
-            $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_BOOLEAN);
+            if ($this->getFieldValue() === false) {
+                $test = false;
 
-            if ($test == true) {
+            } elseif ($this->getFieldValue() === true) {
+                $test = true;
+
             } else {
-                $this->setFieldValue(false);
+                $test = null;
+            }
+
+            if ($test === null) {
+                $this->setFieldValue(null);
             }
         }
 
@@ -101,12 +118,7 @@ class Boolean extends AbstractFieldHandler
     {
         parent::escape();
 
-        $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_BOOLEAN);
-
-        if ($test == true) {
-        } else {
-            $this->setFieldValue(false);
-        }
+        $this->filter();
 
         return $this->getFieldValue();
     }
