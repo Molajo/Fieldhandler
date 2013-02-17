@@ -25,13 +25,13 @@ class Extensions extends AbstractFieldHandler
     /**
      * Constructor
      *
-     * @param   string   $method
-     * @param   string   $field_name
-     * @param   mixed    $field_value
-     * @param   array    $fieldhandler_type_chain
-     * @param   array    $options
+     * @param string $method
+     * @param string $field_name
+     * @param mixed  $field_value
+     * @param array  $fieldhandler_type_chain
+     * @param array  $options
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function __construct(
@@ -47,7 +47,7 @@ class Extensions extends AbstractFieldHandler
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function validate()
@@ -74,7 +74,7 @@ class Extensions extends AbstractFieldHandler
     /**
      * FieldHandler Input
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function filter()
@@ -102,7 +102,7 @@ class Extensions extends AbstractFieldHandler
     /**
      * Escapes and formats output
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function escape()
@@ -117,7 +117,7 @@ class Extensions extends AbstractFieldHandler
     /**
      * Test Array Entry Values
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function testValues($filter = false)

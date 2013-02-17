@@ -26,7 +26,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
     /**
      * Set up
      *
-     * @return  void
+     * @return void
      * @since   1.0
      */
     protected function setUp()
@@ -40,7 +40,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
      * test Validate Success
      *
      * @covers  Molajo\FieldHandler\Type\Default::validate
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function testValidateSuccess1()
@@ -64,7 +64,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
      * test Validate Success2
      *
      * @covers  Molajo\FieldHandler\Type\Default::validate
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function testValidateSuccess2()
@@ -88,7 +88,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
      * test Validate Success 3
      *
      * @covers  Molajo\FieldHandler\Type\Default::validate
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function testValidateSuccess3()
@@ -112,7 +112,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
      * test Validate Success 4
      *
      * @covers  Molajo\FieldHandler\Type\Default::validate
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function testValidateSuccess4()
@@ -135,7 +135,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
     /**
      * @covers Molajo\FieldHandler\Type\Default::validate
      * @expectedException Molajo\FieldHandler\Exception\FieldHandlerException
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function testValidateUnsuccessful()
@@ -159,7 +159,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
      * test Filter Success
      *
      * @covers  Molajo\FieldHandler\Type\Default::validate
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function testFilterSuccess()
@@ -181,7 +181,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers Molajo\FieldHandler\Type\Default::filter
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function testFilterUnsuccessful()
@@ -201,11 +201,10 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
         return;
     }
 
-
     /**
      * Tear down
      *
-     * @return  void
+     * @return void
      * @since   1.0
      */
     protected function tearDown()

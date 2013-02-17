@@ -23,13 +23,13 @@ class Defaults extends AbstractFieldHandler
     /**
      * Constructor
      *
-     * @param   string   $method
-     * @param   string   $field_name
-     * @param   mixed    $field_value
-     * @param   array    $fieldhandler_type_chain
-     * @param   array    $options
+     * @param string $method
+     * @param string $field_name
+     * @param mixed  $field_value
+     * @param array  $fieldhandler_type_chain
+     * @param array  $options
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function __construct(
@@ -45,7 +45,7 @@ class Defaults extends AbstractFieldHandler
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function validate()
@@ -60,7 +60,7 @@ class Defaults extends AbstractFieldHandler
     /**
      * FieldHandler Input
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function filter()
@@ -75,7 +75,7 @@ class Defaults extends AbstractFieldHandler
     /**
      * Escapes and formats output
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function escape()
@@ -90,7 +90,7 @@ class Defaults extends AbstractFieldHandler
     /**
      * If needed, apply default to Field
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function setDefault()

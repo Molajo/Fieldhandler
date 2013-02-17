@@ -65,13 +65,13 @@ Class Adapter
     /**
      * Constructor
      *
-     * @param   string   $method
-     * @param   string   $field_name
-     * @param   mixed    $field_value
-     * @param   array    $fieldhandler_type_chain
-     * @param   array    $options
+     * @param string $method
+     * @param string $field_name
+     * @param mixed  $field_value
+     * @param array  $fieldhandler_type_chain
+     * @param array  $options
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function __construct(
@@ -94,15 +94,15 @@ Class Adapter
     /**
      * Edit Request
      *
-     * @param   string   $method
-     * @param   string   $field_name
-     * @param   mixed    $field_value
-     * @param   string   $fieldhandler_type_chain
-     * @param   array    $options
+     * @param string $method
+     * @param string $field_name
+     * @param mixed  $field_value
+     * @param string $fieldhandler_type_chain
+     * @param array  $options
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws FieldHandlerException
      */
     protected function editRequest(
         $method,
@@ -139,7 +139,6 @@ Class Adapter
             }
         }
 
-
         if (is_array($fieldhandler_types) && count($fieldhandler_types) > 0) {
             $this->fieldhandler_types = $fieldhandler_types;
         } else {
@@ -159,9 +158,9 @@ Class Adapter
     /**
      * Process Request
      *
-     * @return  void
+     * @return void
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws FieldHandlerException
      */
     protected function processRequest()
     {
@@ -199,11 +198,11 @@ Class Adapter
     /**
      * Instantiates FieldHandler Class
      *
-     * @param   string  $fieldhandler_type
+     * @param string $fieldhandler_type
      *
-     * @return  object
+     * @return object
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws FieldHandlerException
      */
     protected function getType($fieldhandler_type)
     {
@@ -221,7 +220,7 @@ Class Adapter
     /**
      * initialise
      *
-     * @return  void
+     * @return void
      * @since   1.0
      */
     protected function initialise()

@@ -26,7 +26,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
     /**
      * Set up
      *
-     * @return  void
+     * @return void
      * @since   1.0
      */
     protected function setUp()
@@ -40,7 +40,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
      * test Validate Success
      *
      * @covers  Molajo\FieldHandler\Type\Default::validate
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function testValidateSuccess()
@@ -65,7 +65,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
      *
      * @expectedException Molajo\FieldHandler\Exception\FieldHandlerException
      * @covers  Molajo\FieldHandler\Type\Default::validate
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function testValidateSuccess2()
@@ -89,7 +89,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
      * test Filter Success
      *
      * @covers  Molajo\FieldHandler\Type\Default::validate
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function testFilterSuccess1()
@@ -109,12 +109,11 @@ class AlphaTest extends PHPUnit_Framework_TestCase
         return;
     }
 
-
     /**
      * test Filter Success2
      *
      * @covers  Molajo\FieldHandler\Type\Default::validate
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function testFilterSuccess2()
@@ -138,7 +137,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
      * test Filter Success
      *
      * @covers  Molajo\FieldHandler\Type\Default::validate
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function testEscapeSuccess1()
@@ -158,12 +157,11 @@ class AlphaTest extends PHPUnit_Framework_TestCase
         return;
     }
 
-
     /**
      * test Filter Success2
      *
      * @covers  Molajo\FieldHandler\Type\Default::validate
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function testEscapeSuccess2()
@@ -186,7 +184,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
     /**
      * Tear down
      *
-     * @return  void
+     * @return void
      * @since   1.0
      */
     protected function tearDown()

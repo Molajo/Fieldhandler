@@ -25,13 +25,13 @@ class Equals extends AbstractFieldHandler
     /**
      * Constructor
      *
-     * @param   string   $method
-     * @param   string   $field_name
-     * @param   mixed    $field_value
-     * @param   array    $fieldhandler_type_chain
-     * @param   array    $options
+     * @param string $method
+     * @param string $field_name
+     * @param mixed  $field_value
+     * @param array  $fieldhandler_type_chain
+     * @param array  $options
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function __construct(
@@ -47,7 +47,7 @@ class Equals extends AbstractFieldHandler
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function validate()
@@ -68,7 +68,7 @@ class Equals extends AbstractFieldHandler
     /**
      * FieldHandler Input
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function filter()
@@ -88,7 +88,7 @@ class Equals extends AbstractFieldHandler
     /**
      * Escapes and formats output
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function escape()
@@ -101,7 +101,7 @@ class Equals extends AbstractFieldHandler
     /**
      * Flags can be set in options array
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function getEquals()

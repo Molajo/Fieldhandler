@@ -23,7 +23,7 @@ interface FieldHandlerInterface
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function validate();
@@ -31,7 +31,7 @@ interface FieldHandlerInterface
     /**
      * FieldHandler Input
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function filter();
@@ -39,7 +39,7 @@ interface FieldHandlerInterface
     /**
      * Escape output
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function escape();

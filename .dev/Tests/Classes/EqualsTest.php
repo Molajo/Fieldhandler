@@ -27,7 +27,7 @@ class EqualsTest extends PHPUnit_Framework_TestCase
     /**
      * Set up
      *
-     * @return  void
+     * @return void
      * @since   1.0
      */
     protected function setUp()
@@ -41,7 +41,7 @@ class EqualsTest extends PHPUnit_Framework_TestCase
      * test Validate Success
      *
      * @covers  Molajo\FieldHandler\Type\Default::validate
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function testValidateSuccess()
@@ -66,7 +66,7 @@ class EqualsTest extends PHPUnit_Framework_TestCase
      *
      * @covers Molajo\FieldHandler\Type\Equals::validate
      * @expectedException Molajo\FieldHandler\Exception\FieldHandlerException
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function testValidateFailure()
@@ -90,7 +90,7 @@ class EqualsTest extends PHPUnit_Framework_TestCase
      * test Filter Success
      *
      * @covers  Molajo\FieldHandler\Type\Default::validate
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function testFilterSuccess()
@@ -114,7 +114,7 @@ class EqualsTest extends PHPUnit_Framework_TestCase
      * test Filter Success
      *
      * @covers Molajo\FieldHandler\Type\Equals::validate
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function testFilterSuccess2()
@@ -138,7 +138,7 @@ class EqualsTest extends PHPUnit_Framework_TestCase
      * test Escape Success
      *
      * @covers  Molajo\FieldHandler\Type\Default::validate
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function testEscapeSuccess()
@@ -162,7 +162,7 @@ class EqualsTest extends PHPUnit_Framework_TestCase
      * test Escape Success
      *
      * @covers Molajo\FieldHandler\Type\Equals::validate
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function testEscapeSuccess2()
@@ -185,7 +185,7 @@ class EqualsTest extends PHPUnit_Framework_TestCase
     /**
      * Tear down
      *
-     * @return  void
+     * @return void
      * @since   1.0
      */
     protected function tearDown()

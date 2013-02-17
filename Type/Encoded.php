@@ -10,8 +10,6 @@ namespace Molajo\FieldHandler\Type;
 
 defined('MOLAJO') or die;
 
-use Molajo\FieldHandler\Exception\FieldHandlerException;
-
 /**
  * Encoded FieldHandler
  *
@@ -27,13 +25,13 @@ class Encoded extends AbstractFieldHandler
     /**
      * Constructor
      *
-     * @param   string   $method
-     * @param   string   $field_name
-     * @param   mixed    $field_value
-     * @param   array    $fieldhandler_type_chain
-     * @param   array    $options
+     * @param string $method
+     * @param string $field_name
+     * @param mixed  $field_value
+     * @param array  $fieldhandler_type_chain
+     * @param array  $options
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function __construct(
@@ -49,7 +47,7 @@ class Encoded extends AbstractFieldHandler
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function validate()
@@ -60,7 +58,7 @@ class Encoded extends AbstractFieldHandler
     /**
      * FieldHandler Input
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function filter()
@@ -80,7 +78,7 @@ class Encoded extends AbstractFieldHandler
     /**
      * Escapes and formats output
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function escape()
@@ -93,7 +91,7 @@ class Encoded extends AbstractFieldHandler
     /**
      * Flags can be set in options array
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function setFlags()

@@ -25,13 +25,13 @@ class Alias extends AbstractFieldHandler
     /**
      * Constructor
      *
-     * @param   string   $method
-     * @param   string   $field_name
-     * @param   mixed    $field_value
-     * @param   array    $fieldhandler_type_chain
-     * @param   array    $options
+     * @param string $method
+     * @param string $field_name
+     * @param mixed  $field_value
+     * @param array  $fieldhandler_type_chain
+     * @param array  $options
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function __construct(
@@ -47,7 +47,7 @@ class Alias extends AbstractFieldHandler
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function validate()
@@ -56,11 +56,11 @@ class Alias extends AbstractFieldHandler
 
         if ($this->getFieldValue() === null) {
             $this->setFieldValue(null);
+
             return $this->getFieldValue();
         }
 
         $this->setFieldValue($this->createAlias());
-
 
         $bad = $this->testValidate();
 
@@ -75,7 +75,7 @@ class Alias extends AbstractFieldHandler
     /**
      * FieldHandler Input
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function filter()
@@ -100,7 +100,7 @@ class Alias extends AbstractFieldHandler
     /**
      * Escapes and formats output
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function escape()
@@ -147,7 +147,7 @@ class Alias extends AbstractFieldHandler
     /**
      * Test the Alias validity
      *
-     * @return  bool
+     * @return bool
      * @since   1.0
      */
     public function testValidate()

@@ -23,20 +23,20 @@ class Minimum extends AbstractFieldHandler
     /**
      * Constructor
      *
-     * @param   string   $method (validate, filter, escape)
-     * @param   string   $fieldhandler_type
+     * @param string $method            (validate, filter, escape)
+     * @param string $fieldhandler_type
      *
-     * @param   mixed    $field_value
-     * @param   null     $default
-     * @param   bool     $required
-     * @param   null     $min
-     * @param   null     $max
-     * @param   array    $field_values
-     * @param   string   $regex
-     * @param   object   $callback
-     * @param   array    $options
+     * @param mixed  $field_value
+     * @param null   $default
+     * @param bool   $required
+     * @param null   $min
+     * @param null   $max
+     * @param array  $field_values
+     * @param string $regex
+     * @param object $callback
+     * @param array  $options
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function __construct(
@@ -58,7 +58,7 @@ class Minimum extends AbstractFieldHandler
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function validate()
@@ -81,7 +81,7 @@ class Minimum extends AbstractFieldHandler
     /**
      * FieldHandler Input
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function filter()
@@ -103,7 +103,7 @@ class Minimum extends AbstractFieldHandler
     /**
      * Escapes and formats output
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function escape()
@@ -125,7 +125,7 @@ class Minimum extends AbstractFieldHandler
     /**
      * Flags can be set in options array
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function getMinimum()

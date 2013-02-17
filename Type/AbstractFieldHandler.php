@@ -74,13 +74,13 @@ class AbstractFieldHandler implements FieldHandlerInterface
     /**
      * Constructor
      *
-     * @param   string   $fieldhandler_type
-     * @param   string   $method
-     * @param   string   $field_name
-     * @param   mixed    $field_value
-     * @param   array    $options
+     * @param string $fieldhandler_type
+     * @param string $method
+     * @param string $field_name
+     * @param mixed  $field_value
+     * @param array  $options
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function __construct(
@@ -104,7 +104,7 @@ class AbstractFieldHandler implements FieldHandlerInterface
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function validate()
@@ -115,7 +115,7 @@ class AbstractFieldHandler implements FieldHandlerInterface
     /**
      * FieldHandler Input
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function filter()
@@ -126,7 +126,7 @@ class AbstractFieldHandler implements FieldHandlerInterface
     /**
      * Escapes and formats output
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function escape()
@@ -137,9 +137,9 @@ class AbstractFieldHandler implements FieldHandlerInterface
     /**
      * Set the Method
      *
-     * @param   string  $method
+     * @param string $method
      *
-     * @return  string
+     * @return string
      * @since   1.0
      */
     protected function setMethod($method)
@@ -149,7 +149,7 @@ class AbstractFieldHandler implements FieldHandlerInterface
         if ($method == 'validate'
             || $method == 'filter'
             || $method == 'escape'
-        ) {
+) {
 
         } else {
             throw new FieldHandlerException
@@ -164,7 +164,7 @@ class AbstractFieldHandler implements FieldHandlerInterface
     /**
      * Get the Path
      *
-     * @return  string
+     * @return string
      * @since   1.0
      */
     protected function getMethod()
@@ -175,9 +175,9 @@ class AbstractFieldHandler implements FieldHandlerInterface
     /**
      * Set the FieldHandler Type
      *
-     * @param   string  $method
+     * @param string $method
      *
-     * @return  string
+     * @return string
      * @since   1.0
      */
     protected function setFieldHandlerType($fieldhandler_type)
@@ -190,7 +190,7 @@ class AbstractFieldHandler implements FieldHandlerInterface
     /**
      * Get the FieldHandler Type
      *
-     * @return  string
+     * @return string
      * @since   1.0
      */
     protected function getFieldHandlerType()
@@ -201,9 +201,9 @@ class AbstractFieldHandler implements FieldHandlerInterface
     /**
      * Set the Field Name
      *
-     * @param   string  $field_name
+     * @param string $field_name
      *
-     * @return  void
+     * @return void
      * @since   1.0
      */
     protected function setFieldName($field_name)
@@ -216,9 +216,9 @@ class AbstractFieldHandler implements FieldHandlerInterface
     /**
      * Set the Value
      *
-     * @param   string  $field_value
+     * @param string $field_value
      *
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function setFieldValue($field_value)
@@ -231,7 +231,7 @@ class AbstractFieldHandler implements FieldHandlerInterface
     /**
      * Get Value
      *
-     * @return  mixed
+     * @return mixed
      * @since   1.0
      */
     public function getFieldValue()
@@ -242,9 +242,9 @@ class AbstractFieldHandler implements FieldHandlerInterface
     /**
      * Set Options
      *
-     * @param   string  $options
+     * @param string $options
      *
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function setOptions($options)
@@ -257,7 +257,7 @@ class AbstractFieldHandler implements FieldHandlerInterface
     /**
      * Get Options
      *
-     * @return  array
+     * @return array
      * @since   1.0
      */
     public function getOptions()
@@ -268,7 +268,7 @@ class AbstractFieldHandler implements FieldHandlerInterface
     /**
      * Get timezone
      *
-     * @return  array
+     * @return array
      * @since   1.0
      */
     protected function getUserTimeZone()
@@ -305,9 +305,9 @@ class AbstractFieldHandler implements FieldHandlerInterface
     /**
      * Set the Timezone
      *
-     * @param   string  $timezone
+     * @param string $timezone
      *
-     * @return  string
+     * @return string
      * @since   1.0
      */
     protected function setTimezone($timezone)
@@ -320,7 +320,7 @@ class AbstractFieldHandler implements FieldHandlerInterface
     /**
      * Get the Timezone
      *
-     * @return  string
+     * @return string
      * @since   1.0
      */
     protected function getTimezone()
@@ -331,9 +331,9 @@ class AbstractFieldHandler implements FieldHandlerInterface
     /**
      * Test the string specified in $filter using the function defined by $test
      *
-     * @param   string  $filter
+     * @param string $filter
      *
-     * @return  string
+     * @return string
      * @since   1.0
      */
     public function filterByCharacter($test, $filter)

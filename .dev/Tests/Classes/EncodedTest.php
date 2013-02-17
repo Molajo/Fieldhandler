@@ -27,7 +27,7 @@ class EncodedTest extends PHPUnit_Framework_TestCase
     /**
      * Set up
      *
-     * @return  void
+     * @return void
      * @since   1.0
      */
     protected function setUp()
@@ -41,7 +41,7 @@ class EncodedTest extends PHPUnit_Framework_TestCase
      * test Filter Success
      *
      * @covers  Molajo\FieldHandler\Type\Default::validate
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function testFilterSuccess()
@@ -65,7 +65,7 @@ class EncodedTest extends PHPUnit_Framework_TestCase
      * test Filter Success
      *
      * @covers  Molajo\FieldHandler\Type\Default::validate
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function testFilterSuccess2()
@@ -89,7 +89,7 @@ class EncodedTest extends PHPUnit_Framework_TestCase
      * test Escape Success
      *
      * @covers  Molajo\FieldHandler\Type\Default::validate
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function testEscapeSuccess()
@@ -113,7 +113,7 @@ class EncodedTest extends PHPUnit_Framework_TestCase
      * test Escape Success
      *
      * @covers  Molajo\FieldHandler\Type\Default::validate
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function testEscapeSuccess2()

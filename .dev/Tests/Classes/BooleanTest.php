@@ -26,7 +26,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     /**
      * Set up
      *
-     * @return  void
+     * @return void
      * @since   1.0
      */
     protected function setUp()
@@ -40,7 +40,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
      * test Validate Success
      *
      * @covers  Molajo\FieldHandler\Type\Default::validate
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function testValidateSuccess1()
@@ -64,7 +64,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
      * test Validate Success2
      *
      * @covers  Molajo\FieldHandler\Type\Default::validate
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function testValidateSuccess2()
@@ -89,7 +89,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
      *
      * @expectedException Molajo\FieldHandler\Exception\FieldHandlerException
      * @covers  Molajo\FieldHandler\Type\Default::validate
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function testValidateFail1()
@@ -111,7 +111,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
      * test Validate Success3
      *
      * @covers  Molajo\FieldHandler\Type\Default::validate
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function testValidateSuccess3()
@@ -131,12 +131,11 @@ class BooleanTest extends PHPUnit_Framework_TestCase
         return;
     }
 
-
     /**
      * test Validate Success2
      *
      * @covers  Molajo\FieldHandler\Type\Default::validate
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function testFilterSuccess1()
@@ -160,7 +159,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
      * test Filter Success 2
      *
      * @covers  Molajo\FieldHandler\Type\Default::validate
-     * @return  void
+     * @return void
      * @since   1.0
      */
     public function testFilterFail1()
@@ -185,7 +184,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     /**
      * Tear down
      *
-     * @return  void
+     * @return void
      * @since   1.0
      */
     protected function tearDown()
