@@ -11,17 +11,6 @@ Validates and filters input. Escapes and formats output.
 Supports standard data type and PHP-specific filters and validation, value lists verification, callbacks, regex checking, and more.
  Use with rendering process to ensure proper escaping of output data and for special formatting needs.
 
-## System Requirements ##
-
-* PHP 5.3.3, or above
-* [PSR-0 compliant Autoloader](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md)
-* PHP Framework independent
-* [optional] PHPUnit 3.5+ to execute the test suite (phpunit --version)
-
-## What is FieldHandler? ##
-
-**FieldHandler** provides a common API to validate, filter, escape, and format field values.
-
 ## Basic Usage ##
 
 Each field is processed by one, or many, field handlers for validation, filtering, or escaping.
@@ -39,7 +28,7 @@ Each field is processed by one, or many, field handlers for validation, filterin
     echo $adapter->field_value;
 ```
 
-There are five input parameters:
+###There are five input parameters:###
 
 1. **$method** can be `validate`, `filter`, or `escape`;
 2. **$field_name** name of the field containing the data value to be verified or filtered;
@@ -47,12 +36,12 @@ There are five input parameters:
 4. **$fieldhandler_type_chain** one or more field handlers, separated by a comma, processed in left-to-right order;
 5. **$options** associative array of named pair values required by field handlers.
 
-And two possible results:
+###Two possible results:###
 
 1. **Success** Retrieve the resulting field value from the object.
 2. **Failure** Handle the exception.
 
-### Example Usage ###
+#### Example Usage ####
 
 The following example processes the `id` field using the `int`, `default`, and `required` field handlers.
 The `options` associative array defines two data elements: `default` is the default value for the field, if needed;
@@ -83,7 +72,7 @@ If the method was a success, simply retrieve the field value from the resulting 
 
 Use the Try/Catch pattern, as presented above, to catch thrown exceptions for errors.
 
-### FieldHandlers ###
+## Available FieldHandlers ##
 
 * Accepted
 * Alias
@@ -117,6 +106,13 @@ Use the Try/Catch pattern, as presented above, to catch thrown exceptions for er
 * Upper
 * Url
 * Values
+
+## System Requirements ##
+
+* PHP 5.3.3, or above
+* [PSR-0 compliant Autoloader](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md)
+* PHP Framework independent
+* [optional] PHPUnit 3.5+ to execute the test suite (phpunit --version)
 
 ### Installation
 
@@ -179,5 +175,5 @@ License
 
 More Information
 ----------------
-- [Usage](/FieldHandler/.dev/Doc/Extend.md)
-- [Install](/FieldHandler/.dev/Doc/Install.md)
+- [Usage](https://github.com/Molajo/FieldHandler/.dev/Doc/Extend.md)
+- [Install](https://github.com/Molajo/FieldHandler/.dev/Doc/Install.md)
