@@ -107,7 +107,7 @@ Class Adapter
     protected function editRequest(
         $method,
         $field_name,
-        $field_value,
+        $field_value = null,
         $fieldhandler_type_chain,
         $options = array()
     ) {
@@ -129,7 +129,16 @@ Class Adapter
 
         $this->field_value = $field_value;
 
-        $fieldhandler_types = explode(',', $fieldhandler_type_chain);
+        if (strpos($fieldhandler_type_chain, ',')) {
+            $fieldhandler_types = explode(',', $fieldhandler_type_chain);
+        } else {
+            $fieldhandler_types = array();
+            if (trim($fieldhandler_type_chain) == '' || $fieldhandler_type_chain === null) {
+            } else {
+                $fieldhandler_types[] = $fieldhandler_type_chain;
+            }
+        }
+
 
         if (is_array($fieldhandler_types) && count($fieldhandler_types) > 0) {
             $this->fieldhandler_types = $fieldhandler_types;
@@ -179,19 +188,8 @@ Class Adapter
                     . ' Class: ' . $class);
             }
 
-            try {
-
-                $method = $this->method;
-
-                $this->field_value = $ft->$method();
-
-            } catch (Exception $e) {
-
-                throw new FieldHandlerException
-                ('FieldHandler: Could not call FieldHandler Type: ' . $fieldhandler_type
-                    . ' Class: ' . $class
-                    . ' for Method: ' . $this->method);
-            }
+            $method = $this->method;
+            $this->field_value = $ft->$method();
         }
 
         return;

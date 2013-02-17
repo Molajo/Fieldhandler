@@ -10,6 +10,8 @@ namespace Molajo\FieldHandler\Type;
 
 defined('MOLAJO') or die;
 
+use Molajo\FieldHandler\Exception\FieldHandlerException;
+
 /**
  * Accepted FieldHandler
  *
@@ -55,13 +57,16 @@ class Accepted extends AbstractFieldHandler
         if ($this->getFieldValue() === null) {
         } else {
 
-            $test = in_array(strtolower($this->getFieldValue()), true, 1, 'yes', 'on');
+            $trueArray = $this->getTrueArray();
+            $testValue = $this->getTestValue();
 
-            if ($test == 1) {
+            if (in_array($testValue, $trueArray, true) === true) {
+
             } else {
                 throw new FieldHandlerException
                 ('Validate Accepted: ' . FILTER_INVALID_VALUE);
             }
+
         }
 
         return $this->getFieldValue();
@@ -80,11 +85,13 @@ class Accepted extends AbstractFieldHandler
         if ($this->getFieldValue() === null) {
         } else {
 
-            $test = in_array(strtolower($this->getFieldValue()), true, 1, 'yes', 'on');
+            $trueArray = $this->getTrueArray();
+            $testValue = $this->getTestValue();
 
-            if ($test == 1) {
+            if (in_array($testValue, $trueArray, true) === true) {
+
             } else {
-                $this->setFieldValue(false);
+                $this->getFieldValue(null);
             }
         }
 
@@ -101,13 +108,40 @@ class Accepted extends AbstractFieldHandler
     {
         parent::escape();
 
-        $test = in_array(strtolower($this->getFieldValue()), true, 1, 'yes', 'on');
+        return $this->filter();
+    }
 
-        if ($test == 1) {
+    /**
+     * Get the 'true' array
+     *
+     * @return  array
+     * @since   1.0
+     */
+    public function getTrueArray()
+    {
+        $trueArray = array();
+        $trueArray[] = true;
+        $trueArray[] = 1;
+        $trueArray[] = 'yes';
+        $trueArray[] = 'on';
+
+        return $trueArray;
+    }
+
+    /**
+     * Get the test input value
+     *
+     * @return  mixed
+     * @since   1.0
+     */
+    public function getTestValue()
+    {
+        $testValue = $this->getFieldValue();
+        if (is_numeric($testValue) || is_bool($testValue)) {
         } else {
-            $this->setFieldValue(false);
+            $testValue = strtolower($testValue);
         }
 
-        return $this->getFieldValue();
+        return $testValue;
     }
 }

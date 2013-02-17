@@ -47,7 +47,7 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $method                  = 'Validate';
+        $method                  = 'validate';
         $field_name              = 'dog';
         $field_value             = null;
         $fieldhandler_type_chain = 'defaults';

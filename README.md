@@ -74,7 +74,19 @@ Use the Try/Catch pattern, as presented above, to catch thrown exceptions for er
 
 ## Available FieldHandlers ##
 
-* Accepted
+### Accepted ###
+
+* **Validate:** True if field value is true, 1, 'yes', or 'on.'
+* **Filter:** If not true, 1, 'yes', or 'on', value is set to NULL.
+* **Escape:** If not true, 1, 'yes', or 'on', value is set to NULL.
+
+```php
+    try {
+        $fieldhandler_type_chain = array('accepted');
+        $adapter = new Molajo/FieldHandler/Adapter
+            ->('Validate', 'agreement', 1, $fieldhandler_type_chain);
+```
+
 * Alias
 * Alpha
 * Alphanumeric
@@ -97,6 +109,7 @@ Use the Try/Catch pattern, as presented above, to catch thrown exceptions for er
 * Maximum
 * Mimetypes
 * Minimum
+- Notequal
 * Numeric
 * Raw
 * Regex
@@ -105,7 +118,9 @@ Use the Try/Catch pattern, as presented above, to catch thrown exceptions for er
 * Trim
 * Upper
 * Url
-* Values
+* Values (Inarray) (Inlist)
+
+
 
 ## System Requirements ##
 
