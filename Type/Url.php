@@ -1,30 +1,30 @@
 <?php
 /**
- * Url Filter
+ * Url FieldHandler
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\Filters\Type;
+namespace Molajo\FieldHandler\Type;
 
 defined('MOLAJO') or die;
 
 /**
- * Url Filter
+ * Url FieldHandler
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Url extends AbstractFilter
+class Url extends AbstractFieldHandler
 {
     /**
      * Constructor
      *
      * @param   string   $method (validate, filter, escape)
-     * @param   string   $filter_type
+     * @param   string   $fieldhandler_type
      *
      * @param   mixed    $field_value
      * @param   null     $default
@@ -41,7 +41,7 @@ class Url extends AbstractFilter
      */
     public function __construct(
         $method,
-        $filter_type,
+        $fieldhandler_type,
         $field_value,
         $default = null,
         $required = true,
@@ -79,7 +79,7 @@ class Url extends AbstractFilter
 
             if ($test == true) {
             } else {
-                throw new FilterException
+                throw new FieldHandlerException
                 ('Validate Url: ' . FILTER_INVALID_VALUE);
             }
         }
@@ -88,7 +88,7 @@ class Url extends AbstractFilter
     }
 
     /**
-     * Filter Input
+     * FieldHandler Input
      *
      * @return  mixed
      * @since   1.0

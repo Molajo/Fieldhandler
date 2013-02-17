@@ -1,30 +1,30 @@
 <?php
 /**
- * Maximum Filter
+ * Maximum FieldHandler
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\Filters\Type;
+namespace Molajo\FieldHandler\Type;
 
 defined('MOLAJO') or die;
 
 /**
- * Maximum Filter
+ * Maximum FieldHandler
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Maximum extends AbstractFilter
+class Maximum extends AbstractFieldHandler
 {
     /**
      * Constructor
      *
      * @param   string   $method (validate, filter, escape)
-     * @param   string   $filter_type
+     * @param   string   $fieldhandler_type
      *
      * @param   mixed    $field_value
      * @param   null     $default
@@ -41,7 +41,7 @@ class Maximum extends AbstractFilter
      */
     public function __construct(
         $method,
-        $filter_type,
+        $fieldhandler_type,
         $field_value,
         $default = null,
         $required = true,
@@ -70,7 +70,7 @@ class Maximum extends AbstractFilter
 
             if ($this->getMaximum() < $this->getFieldValue()) {
             } else {
-                throw new FilterException
+                throw new FieldHandlerException
                 ('Validate Maximum: ' . FILTER_INVALID_VALUE);
             }
         }
@@ -79,7 +79,7 @@ class Maximum extends AbstractFilter
     }
 
     /**
-     * Filter Input
+     * FieldHandler Input
      *
      * @return  mixed
      * @since   1.0

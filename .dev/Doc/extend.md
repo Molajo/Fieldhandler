@@ -1,17 +1,17 @@
-Extending Filters
+Extending FieldHandler
 =============
 
 Using Adapters
 --------------
 
-Filters is available on Packagist ([Molajo/Filters](http://packagist.org/packages/Molajo/Filters))
+FieldHandler is available on Packagist ([Molajo/FieldHandler](http://packagist.org/packages/Molajo/FieldHandler))
 and as such installable via [Composer](http://getcomposer.org/).
 
 
 Creating a New Adapter
 ----------------------
 
-Filters is available on Packagist ([Molajo/Filters](http://packagist.org/packages/Molajo/Filters))
+FieldHandler is available on Packagist ([Molajo/FieldHandler](http://packagist.org/packages/Molajo/FieldHandler))
 and as such installable via [Composer](http://getcomposer.org/).
 
 ### Creating the adapter class

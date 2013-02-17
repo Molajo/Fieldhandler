@@ -1,20 +1,20 @@
 <?php
 /**
- * Defaults Filter Test
+ * Defaults FieldHandler Test
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\Filters\Tests;
+namespace Molajo\FieldHandler\Tests;
 
 defined('MOLAJO') or die;
 
-use Molajo\Filters\Adapter as filterAdapter;
+use Molajo\FieldHandler\Adapter as adapter;
 use PHPUnit_Framework_TestCase;
 
 /**
- * Defaults Filter
+ * Defaults FieldHandler
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -39,7 +39,7 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
     /**
      * test Validate Success
      *
-     * @covers  Molajo\Filters\Type\Default::validate
+     * @covers  Molajo\FieldHandler\Type\Default::validate
      * @return  void
      * @since   1.0
      */
@@ -47,15 +47,15 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $method            = 'Validate';
-        $field_name        = 'dog';
-        $field_value       = null;
-        $filter_type_chain = 'defaults';
-        $options           = array(
+        $method                  = 'Validate';
+        $field_name              = 'dog';
+        $field_value             = null;
+        $fieldhandler_type_chain = 'defaults';
+        $options                 = array(
             'default' => 'bark'
         );
 
-        $adapter = new filterAdapter($method, $field_name, $field_value, $filter_type_chain, $options);
+        $adapter = new adapter($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $this->assertEquals('bark', $adapter->field_value);
 

@@ -1,30 +1,30 @@
 <?php
 /**
- * Encoded Filter
+ * Encoded FieldHandler
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\Filters\Type;
+namespace Molajo\FieldHandler\Type;
 
 defined('MOLAJO') or die;
 
 /**
- * Encoded Filter
+ * Encoded FieldHandler
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Encoded extends AbstractFilter
+class Encoded extends AbstractFieldHandler
 {
     /**
      * Constructor
      *
      * @param   string   $method (validate, filter, escape)
-     * @param   string   $filter_type
+     * @param   string   $fieldhandler_type
      *
      * @param   mixed    $field_value
      * @param   null     $default
@@ -41,7 +41,7 @@ class Encoded extends AbstractFilter
      */
     public function __construct(
         $method,
-        $filter_type,
+        $fieldhandler_type,
         $field_value,
         $default = null,
         $required = true,
@@ -72,7 +72,7 @@ class Encoded extends AbstractFilter
 
             if ($test == $this->getFieldValue()) {
             } else {
-                throw new FilterException
+                throw new FieldHandlerException
                 ('Validate Encoded: ' . FILTER_INVALID_VALUE);
             }
         }
@@ -81,7 +81,7 @@ class Encoded extends AbstractFilter
     }
 
     /**
-     * Filter Input
+     * FieldHandler Input
      *
      * @return  mixed
      * @since   1.0

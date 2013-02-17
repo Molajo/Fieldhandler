@@ -1,30 +1,30 @@
 <?php
 /**
- * Float Filter
+ * Float FieldHandler
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\Filters\Type;
+namespace Molajo\FieldHandler\Type;
 
 defined('MOLAJO') or die;
 
 /**
- * Float Filter
+ * Float FieldHandler
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Float extends AbstractFilter
+class Float extends AbstractFieldHandler
 {
     /**
      * Constructor
      *
      * @param   string   $method (validate, filter, escape)
-     * @param   string   $filter_type
+     * @param   string   $fieldhandler_type
      *
      * @param   mixed    $field_value
      * @param   null     $default
@@ -41,7 +41,7 @@ class Float extends AbstractFilter
      */
     public function __construct(
         $method,
-        $filter_type,
+        $fieldhandler_type,
         $field_value,
         $default = null,
         $required = true,
@@ -72,7 +72,7 @@ class Float extends AbstractFilter
 
             if ($test == true) {
             } else {
-                throw new FilterException
+                throw new FieldHandlerException
                 ('Validate Float: ' . FILTER_INVALID_VALUE);
             }
         }
@@ -81,7 +81,7 @@ class Float extends AbstractFilter
     }
 
     /**
-     * Filter Input
+     * FieldHandler Input
      *
      * @return  mixed
      * @since   1.0

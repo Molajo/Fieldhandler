@@ -1,35 +1,35 @@
 <?php
 /**
- * Abstract Filters Class
+ * Abstract FieldHandler Class
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\Filters\Type;
+namespace Molajo\FieldHandler\Type;
 
 defined('MOLAJO') or die;
 
-use Molajo\Filters\Exception\FilterException;
-use Molajo\Filters\Adapter\FilterInterface;
+use Molajo\FieldHandler\Exception\FieldHandlerException;
+use Molajo\FieldHandler\Adapter\FieldHandlerInterface;
 
 /**
- * Abstract Filters Class
+ * Abstract FieldHandler Class
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class AbstractFilter implements FilterInterface
+class AbstractFieldHandler implements FieldHandlerInterface
 {
     /**
-     * Filter Type
+     * FieldHandler Type
      *
      * @var    mixed
      * @since  1.0
      */
-    protected $filter_type;
+    protected $fieldhandler_type;
 
     /**
      * Method (validate, filter, escape)
@@ -74,7 +74,7 @@ class AbstractFilter implements FilterInterface
     /**
      * Constructor
      *
-     * @param   string   $filter_type
+     * @param   string   $fieldhandler_type
      * @param   string   $method
      * @param   string   $field_name
      * @param   mixed    $field_value
@@ -84,13 +84,13 @@ class AbstractFilter implements FilterInterface
      * @since   1.0
      */
     public function __construct(
-        $filter_type,
+        $fieldhandler_type,
         $method,
         $field_name,
         $field_value,
         $options
     ) {
-        $this->setFilterType($filter_type);
+        $this->setFieldHandlerType($fieldhandler_type);
         $this->setMethod($method);
         $this->setFieldName($field_name);
         $this->setFieldValue($field_value);
@@ -113,7 +113,7 @@ class AbstractFilter implements FilterInterface
     }
 
     /**
-     * Filter Input
+     * FieldHandler Input
      *
      * @return  mixed
      * @since   1.0
@@ -152,7 +152,7 @@ class AbstractFilter implements FilterInterface
         ) {
 
         } else {
-            throw new FilterException
+            throw new FieldHandlerException
             ('');
         }
 
@@ -173,29 +173,29 @@ class AbstractFilter implements FilterInterface
     }
 
     /**
-     * Set the Filter Type
+     * Set the FieldHandler Type
      *
      * @param   string  $method
      *
      * @return  string
      * @since   1.0
      */
-    protected function setFilterType($filter_type)
+    protected function setFieldHandlerType($fieldhandler_type)
     {
-        $this->filter_type = $filter_type;
+        $this->fieldhandler_type = $fieldhandler_type;
 
         return;
     }
 
     /**
-     * Get the Filter Type
+     * Get the FieldHandler Type
      *
      * @return  string
      * @since   1.0
      */
-    protected function getFilterType()
+    protected function getFieldHandlerType()
     {
-        return $this->filter_type;
+        return $this->fieldhandler_type;
     }
 
     /**

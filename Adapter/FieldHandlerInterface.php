@@ -1,24 +1,24 @@
 <?php
 /**
- * Interface for Filters Adapter
+ * Interface for FieldHandler Adapter
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\Filters\Adapter;
+namespace Molajo\FieldHandler\Adapter;
 
 defined('MOLAJO') or die;
 
 /**
- * Interface for Filters Adapter
+ * Interface for FieldHandler Adapter
  *
  * @package   Molajo
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @since     1.0
  */
-interface FilterInterface
+interface FieldHandlerInterface
 {
     /**
      * Validate Input
@@ -29,7 +29,7 @@ interface FilterInterface
     public function validate();
 
     /**
-     * Filter Input
+     * FieldHandler Input
      *
      * @return  mixed
      * @since   1.0

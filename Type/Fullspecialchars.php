@@ -1,30 +1,30 @@
 <?php
 /**
- * Fullspecialchars Filter
+ * Fullspecialchars FieldHandler
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\Filters\Type;
+namespace Molajo\FieldHandler\Type;
 
 defined('MOLAJO') or die;
 
 /**
- * Fullspecialchars Filter
+ * Fullspecialchars FieldHandler
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Fullspecialchars extends AbstractFilter
+class Fullspecialchars extends AbstractFieldHandler
 {
     /**
      * Constructor
      *
      * @param   string   $method (validate, filter, escape)
-     * @param   string   $filter_type
+     * @param   string   $fieldhandler_type
      *
      * @param   mixed    $field_value
      * @param   null     $default
@@ -41,7 +41,7 @@ class Fullspecialchars extends AbstractFilter
      */
     public function __construct(
         $method,
-        $filter_type,
+        $fieldhandler_type,
         $field_value,
         $default = null,
         $required = true,
@@ -74,7 +74,7 @@ class Fullspecialchars extends AbstractFilter
             if ($test == $this->getFieldValue()) {
             } else {
 
-                throw new FilterException
+                throw new FieldHandlerException
                 ('Validate Fullspecialchars: ' . FILTER_INVALID_VALUE);
             }
         }
@@ -83,7 +83,7 @@ class Fullspecialchars extends AbstractFilter
     }
 
     /**
-     * Filter Input
+     * FieldHandler Input
      *
      * @return  mixed
      * @since   1.0
@@ -100,7 +100,9 @@ class Fullspecialchars extends AbstractFilter
 
             if ($test == $this->getFieldValue()) {
             } else {
-                $this->setFieldValue(filter_var($this->getFieldValue(), FILTER_SANITIZE_FULL_SPECIAL_CHARS, $this->setFlags()));
+                $this->setFieldValue(
+                    filter_var($this->getFieldValue(), FILTER_SANITIZE_FULL_SPECIAL_CHARS, $this->setFlags())
+                );
             }
         }
 
@@ -122,7 +124,9 @@ class Fullspecialchars extends AbstractFilter
         if ($test == $this->getFieldValue()) {
 
         } else {
-            $this->setFieldValue(filter_var($this->getFieldValue(), FILTER_SANITIZE_FULL_SPECIAL_CHARS, $this->setFlags()));
+            $this->setFieldValue(
+                filter_var($this->getFieldValue(), FILTER_SANITIZE_FULL_SPECIAL_CHARS, $this->setFlags())
+            );
         }
 
         return $this->getFieldValue();

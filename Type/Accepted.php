@@ -1,24 +1,24 @@
 <?php
 /**
- * Accepted Filter
+ * Accepted FieldHandler
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\Filters\Type;
+namespace Molajo\FieldHandler\Type;
 
 defined('MOLAJO') or die;
 
 /**
- * Accepted Filter
+ * Accepted FieldHandler
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Accepted extends AbstractFilter
+class Accepted extends AbstractFieldHandler
 {
     /**
      * Constructor
@@ -26,7 +26,7 @@ class Accepted extends AbstractFilter
      * @param   string   $method
      * @param   string   $field_name
      * @param   mixed    $field_value
-     * @param   array    $filter_type_chain
+     * @param   array    $fieldhandler_type_chain
      * @param   array    $options
      *
      * @return  mixed
@@ -36,10 +36,10 @@ class Accepted extends AbstractFilter
         $method,
         $field_name,
         $field_value,
-        $filter_type_chain,
+        $fieldhandler_type_chain,
         $options = array()
     ) {
-        return parent::__construct($method, $field_name, $field_value, $filter_type_chain, $options);
+        return parent::__construct($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
     }
 
     /**
@@ -59,7 +59,7 @@ class Accepted extends AbstractFilter
 
             if ($test == 1) {
             } else {
-                throw new FilterException
+                throw new FieldHandlerException
                 ('Validate Accepted: ' . FILTER_INVALID_VALUE);
             }
         }
@@ -68,7 +68,7 @@ class Accepted extends AbstractFilter
     }
 
     /**
-     * Filter Input
+     * FieldHandler Input
      *
      * @return  mixed
      * @since   1.0

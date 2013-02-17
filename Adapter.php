@@ -1,20 +1,20 @@
 <?php
 /**
- * Filter Adapter
+ * FieldHandler Adapter
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\Filters;
+namespace Molajo\FieldHandler;
 
 defined('MOLAJO') or die;
 
 use Exception;
-use Molajo\Filters\Exception\FilterException;
+use Molajo\FieldHandler\Exception\FieldHandlerException;
 
 /**
- * Filter Adapter
+ * FieldHandler Adapter
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -47,15 +47,15 @@ Class Adapter
     public $field_value;
 
     /**
-     * Array of requested filters
+     * Array of requested field handlers
      *
      * @var    array
      * @since  1.0
      */
-    public $filter_types;
+    public $fieldhandler_types;
 
     /**
-     * Array of values needed for filters
+     * Array of values needed for field handlers
      *
      * @var    array
      * @since  1.0
@@ -68,7 +68,7 @@ Class Adapter
      * @param   string   $method
      * @param   string   $field_name
      * @param   mixed    $field_value
-     * @param   array    $filter_type_chain
+     * @param   array    $fieldhandler_type_chain
      * @param   array    $options
      *
      * @return  mixed
@@ -78,13 +78,13 @@ Class Adapter
         $method,
         $field_name,
         $field_value,
-        $filter_type_chain,
+        $fieldhandler_type_chain,
         $options = array()
     ) {
 
         $this->initialise();
 
-        $this->editRequest($method, $field_name, $field_value, $filter_type_chain, $options);
+        $this->editRequest($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $this->processRequest();
 
@@ -97,18 +97,18 @@ Class Adapter
      * @param   string   $method
      * @param   string   $field_name
      * @param   mixed    $field_value
-     * @param   string   $filter_type_chain
+     * @param   string   $fieldhandler_type_chain
      * @param   array    $options
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FilterException
+     * @throws  FieldHandlerException
      */
     protected function editRequest(
         $method,
         $field_name,
         $field_value,
-        $filter_type_chain,
+        $fieldhandler_type_chain,
         $options = array()
     ) {
 
@@ -116,29 +116,29 @@ Class Adapter
         if (in_array($method, array('validate', 'filter', 'escape'))) {
             $this->method = $method;
         } else {
-            throw new FilterException
-            ('Filters: Must provide the name of the requested method.');
+            throw new FieldHandlerException
+            ('FieldHandler: Must provide the name of the requested method.');
         }
 
         if ($field_name == '' || $field_name === null) {
-            throw new FilterException
-            ('Filters: Must provide the field name.');
+            throw new FieldHandlerException
+            ('FieldHandler: Must provide the field name.');
         } else {
             $this->field_name = $field_name;
         }
 
         $this->field_value = $field_value;
 
-        $filter_types = explode(',', $filter_type_chain);
+        $fieldhandler_types = explode(',', $fieldhandler_type_chain);
 
-        if (is_array($filter_types) && count($filter_types) > 0) {
-            $this->filter_types = $filter_types;
+        if (is_array($fieldhandler_types) && count($fieldhandler_types) > 0) {
+            $this->fieldhandler_types = $fieldhandler_types;
         } else {
-            throw new FilterException
-            ('Filters: Must request at least one filter type');
+            throw new FieldHandlerException
+            ('FieldHandler: Must request at least one field handler type');
         }
 
-        if (is_array($filter_types) && count($filter_types) > 0) {
+        if (is_array($fieldhandler_types) && count($fieldhandler_types) > 0) {
             $this->options = $options;
         } else {
             $this->options = array();
@@ -152,20 +152,20 @@ Class Adapter
      *
      * @return  void
      * @since   1.0
-     * @throws  FilterException
+     * @throws  FieldHandlerException
      */
     protected function processRequest()
     {
-        foreach ($this->filter_types as $filter_type) {
+        foreach ($this->fieldhandler_types as $fieldhandler_type) {
 
-            $filter_type = ucfirst(strtolower($filter_type));
+            $fieldhandler_type = ucfirst(strtolower($fieldhandler_type));
 
-            $class = $this->getType($filter_type);
+            $class = $this->getType($fieldhandler_type);
 
             try {
 
                 $ft = new $class (
-                    $filter_type,
+                    $fieldhandler_type,
                     $this->method,
                     $this->field_name,
                     $this->field_value,
@@ -174,21 +174,21 @@ Class Adapter
 
             } catch (Exception $e) {
 
-                throw new FilterException
-                ('Filters: Could not instantiate Filter Type: ' . $filter_type
+                throw new FieldHandlerException
+                ('FieldHandler: Could not instantiate FieldHandler Type: ' . $fieldhandler_type
                     . ' Class: ' . $class);
             }
 
             try {
 
-                $method            = $this->method;
+                $method = $this->method;
 
                 $this->field_value = $ft->$method();
 
             } catch (Exception $e) {
 
-                throw new FilterException
-                ('Filters: Could not call Filter Type: ' . $filter_type
+                throw new FieldHandlerException
+                ('FieldHandler: Could not call FieldHandler Type: ' . $fieldhandler_type
                     . ' Class: ' . $class
                     . ' for Method: ' . $this->method);
             }
@@ -198,22 +198,22 @@ Class Adapter
     }
 
     /**
-     * Instantiates Filter Class
+     * Instantiates FieldHandler Class
      *
-     * @param   string  $filter_type
+     * @param   string  $fieldhandler_type
      *
      * @return  object
      * @since   1.0
-     * @throws  FilterException
+     * @throws  FieldHandlerException
      */
-    protected function getType($filter_type)
+    protected function getType($fieldhandler_type)
     {
-        $class = 'Molajo\\Filters\\Type\\' . $filter_type;
+        $class = 'Molajo\\FieldHandler\\Type\\' . $fieldhandler_type;
 
         if (class_exists($class)) {
         } else {
-            throw new FilterException
-            ('Filter Type Class ' . $class . ' does not exist.');
+            throw new FieldHandlerException
+            ('FieldHandler Type Class ' . $class . ' does not exist.');
         }
 
         return $class;

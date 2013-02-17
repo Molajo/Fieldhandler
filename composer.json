@@ -1,9 +1,9 @@
 {
-    "name":"molajo/filters",
+    "name":"molajo/fieldhandler",
     "type":"molajo-bundle",
-    "description":"Molajo Filters: Does stuff",
-    "keywords":["Filters", "Adapters", "Interface", "PSR-0"],
-    "homepage":"http://github.com/Molajo/Filters",
+    "description":"Molajo FieldHandler: Validates and Filters Input; Escapes and Formats Output",
+    "keywords":["FieldHandler", "Filter", "Validate", "Escape", "Format", "Adapters", "Interface", "PSR-0"],
+    "homepage":"http://github.com/Molajo/FieldHandler",
     "license":"MIT",
     "authors":[
         {
@@ -13,7 +13,7 @@
         },
         {
             "name":"Other Contributors",
-            "homepage":"http://github.com/Molajo/Filters/contributors"
+            "homepage":"http://github.com/Molajo/FieldHandler/contributors"
         }
     ],
     "require":{
@@ -24,10 +24,10 @@
         "email":"hello@molajo.org",
         "irc":"irc://irc.freenode.org/molajo"
     },
-    "target-dir":"Molajo/Filters",
+    "target-dir":"Molajo/FieldHandler",
     "autoload":{
         "psr-0":{
-            "Molajo\\Filters":"./"
+            "Molajo\\FieldHandler":"./"
         }
     },
     "minimum-stability":"dev",

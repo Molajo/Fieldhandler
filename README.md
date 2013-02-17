@@ -1,12 +1,12 @@
 **NOT COMPLETE**
 
 =======
-Filters
+FieldHandler
 =======
 
-[![Build Status](https://travis-ci.org/Molajo/Filters.png?branch=master)](https://travis-ci.org/Molajo/Filters)
+[![Build Status](https://travis-ci.org/Molajo/FieldHandler.png?branch=master)](https://travis-ci.org/Molajo/FieldHandler)
 
-Simple, uniform File and Directory Services API for PHP applications enabling interaction with multiple Filters types
+Simple, uniform File and Directory Services API for PHP applications enabling interaction with multiple FieldHandler types
 (ex., Local, FTP, Github, LDAP, etc.).
 
 
@@ -17,9 +17,9 @@ Simple, uniform File and Directory Services API for PHP applications enabling in
 * PHP Framework independent
 * [optional] PHPUnit 3.5+ to execute the test suite (phpunit --version)
 
-## What is Filters? ##
+## What is FieldHandler? ##
 
-**Filters** provides a common API to
+**FieldHandler** provides a common API to
 
 ## Basic Usage ##
 
@@ -42,12 +42,12 @@ The **validate** and **filter** methods each have the following parameters:
 7. **$callback** Associative array of named pair values for custom filters.
 7. **$options** Associative array of named pair values for custom filters.
 
-Validate and Filter have the same set of parameters:
+Validate and FieldHandler have the same set of parameters:
 
-### Filters Request ###
+### FieldHandler Request ###
 
 ```php
-    $result = new Molajo/Filters/Adapter($filter)
+    $result = new Molajo/FieldHandler/Adapter($filter)
         ->($field_value, $required, $default, $max, $max, $field_values, $options);
 ```
 #### Parameters ####
@@ -94,14 +94,14 @@ object, as follows:
     echo $adapter->fs->data;
 ```
 
-### Filters Commands ###
+### FieldHandler Commands ###
 
 #### Read ####
 
 To read a specific file from a filesystem:
 
 ```php
-    $adapter = new \Molajo\Filters\Adapter('Read', 'location/of/file.txt');
+    $adapter = new \Molajo\FieldHandler\Adapter('Read', 'location/of/file.txt');
     echo $adapter->fs->data;
 ```
 
@@ -120,7 +120,7 @@ To read a specific file from a filesystem:
 ```php
 {
     "require": {
-        "Molajo/Filters": "1.*"
+        "Molajo/FieldHandler": "1.*"
     }
 }
 ```
@@ -137,15 +137,15 @@ To read a specific file from a filesystem:
     require 'vendor/autoload.php';
 ```
 
-This instructs PHP to use Composer’s autoloader for **Filters** project dependencies.
+This instructs PHP to use Composer’s autoloader for **FieldHandler** project dependencies.
 
 #### Or, Install Manually
 
-Download and extract **Filters**.
+Download and extract **FieldHandler**.
 
 Copy the Molajo folder (first subfolder of src) into your Vendor directory.
 
-Register Molajo\Filters\ subfolder in your autoload process.
+Register Molajo\FieldHandler\ subfolder in your autoload process.
 
 About
 =====
@@ -178,7 +178,7 @@ See also the list of [contributors](https://github.com/Molajo/Fileservices/contr
 License
 -------
 
-**Molajo Filters** is licensed under the MIT License - see the `LICENSE` file for details
+**Molajo FieldHandler** is licensed under the MIT License - see the `LICENSE` file for details
 
 Acknowledgements
 ----------------
@@ -188,6 +188,6 @@ specifications were followed, as closely as possible.
 
 More Information
 ----------------
-- [Usage](/Filters/doc/usage.md)
-- [Extend](/Filters/doc/extend.md)
-- [Specifications](/Filters/doc/specifications.md)
+- [Usage](/FieldHandler/doc/usage.md)
+- [Extend](/FieldHandler/doc/extend.md)
+- [Specifications](/FieldHandler/doc/specifications.md)
