@@ -10,8 +10,10 @@ namespace Molajo\FieldHandler\Type;
 
 defined('MOLAJO') or die;
 
+use Molajo\FieldHandler\Exception\FieldHandlerException;
+
 /**
- * Alpha FieldHandler
+ * Email FieldHandler
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -23,17 +25,10 @@ class Email extends AbstractFieldHandler
     /**
      * Constructor
      *
-     * @param   string   $method (validate, filter, escape)
-     * @param   string   $fieldhandler_type
-     *
+     * @param   string   $method
+     * @param   string   $field_name
      * @param   mixed    $field_value
-     * @param   null     $default
-     * @param   bool     $required
-     * @param   null     $min
-     * @param   null     $max
-     * @param   array    $field_values
-     * @param   string   $regex
-     * @param   object   $callback
+     * @param   array    $fieldhandler_type_chain
      * @param   array    $options
      *
      * @return  mixed
@@ -41,18 +36,12 @@ class Email extends AbstractFieldHandler
      */
     public function __construct(
         $method,
-        $fieldhandler_type,
+        $field_name,
         $field_value,
-        $default = null,
-        $required = true,
-        $min = null,
-        $max = null,
-        $field_values = array(),
-        $regex = null,
-        $callback = null,
+        $fieldhandler_type_chain,
         $options = array()
     ) {
-        return parent::__construct();
+        return parent::__construct($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
     }
 
     /**
@@ -70,7 +59,7 @@ class Email extends AbstractFieldHandler
 
             $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_EMAIL);
 
-            if ($test == true) {
+            if ($test === $this->getFieldValue()) {
             } else {
                 throw new FieldHandlerException
                 ('Validate Email: ' . FILTER_INVALID_VALUE);
@@ -90,15 +79,11 @@ class Email extends AbstractFieldHandler
     {
         parent::filter();
 
-        if ($this->getFieldValue() === null) {
+        $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_EMAIL);
+
+        if ($test === $this->getFieldValue()) {
         } else {
-
-            $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_EMAIL);
-
-            if ($test == true) {
-            } else {
-                $this->setFieldValue(filter_var($this->getFieldValue(), FILTER_SANITIZE_EMAIL));
-            }
+            $this->setFieldValue(null);
         }
 
         return $this->getFieldValue();
@@ -114,12 +99,7 @@ class Email extends AbstractFieldHandler
     {
         parent::escape();
 
-        $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_EMAIL);
-
-        if ($test == true) {
-        } else {
-            $this->setFieldValue(filter_var($this->getFieldValue(), FILTER_SANITIZE_EMAIL));
-        }
+        $this->filter();
 
         return $this->getFieldValue();
     }
