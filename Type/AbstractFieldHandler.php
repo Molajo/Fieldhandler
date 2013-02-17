@@ -336,7 +336,7 @@ class AbstractFieldHandler implements FieldHandlerInterface
      * @return  string
      * @since   1.0
      */
-    public function filterByCharacter($filter, $test)
+    public function filterByCharacter($test, $filter)
     {
         $filtered = '';
 

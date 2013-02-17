@@ -10,6 +10,8 @@ namespace Molajo\FieldHandler\Type;
 
 defined('MOLAJO') or die;
 
+use Molajo\FieldHandler\Exception\FieldHandlerException;
+
 /**
  * Alpha FieldHandler
  *
@@ -56,6 +58,7 @@ class Alpha extends AbstractFieldHandler
         } else {
 
             $test = ctype_alpha($this->getFieldValue());
+
             if ($test == 1) {
             } else {
                 throw new FieldHandlerException
@@ -80,6 +83,7 @@ class Alpha extends AbstractFieldHandler
         } else {
 
             $test = ctype_alpha($this->getFieldValue());
+
             if ($test == 1) {
             } else {
                 $this->setFieldValue($this->filterByCharacter('ctype_alpha', $this->getFieldValue()));
@@ -99,7 +103,7 @@ class Alpha extends AbstractFieldHandler
     {
         parent::escape();
 
-        $this->setFieldValue($this->filterByCharacter('ctype_alpha', $this->getFieldValue()));
+        $this->filter();
 
         return $this->getFieldValue();
     }
