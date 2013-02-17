@@ -6,9 +6,8 @@ FieldHandler
 
 [![Build Status](https://travis-ci.org/Molajo/FieldHandler.png?branch=master)](https://travis-ci.org/Molajo/FieldHandler)
 
-Simple, uniform File and Directory Services API for PHP applications enabling interaction with multiple FieldHandler types
-(ex., Local, FTP, Github, LDAP, etc.).
-
+Validates and filters input. Escapes and formats output. Supports standard data type and PHP filters and validation, verification to value lists, callbacks, regex checking and more.
+  When used with rendering process can be used to ensure data to escaped for security and format output, as needed.
 
 ## System Requirements ##
 
@@ -19,91 +18,110 @@ Simple, uniform File and Directory Services API for PHP applications enabling in
 
 ## What is FieldHandler? ##
 
-**FieldHandler** provides a common API to
+**FieldHandler** provides a common API to create validation, filter, escape, and formatting processes that can be associated with fields and used to ensure data integrity and security within your data collections.
 
 ## Basic Usage ##
 
-There are three methods for each filter:
-
-1. **validate** - verifies if the value meets the conditions defined in the parameters, throws an
-    exception when not true;
-2. **filter** - ensures the value meets the conditions by filtering;
-3. **escape** - prepares the value for output rendering;
-
-The **escape** method only has the **value** parameter.
-
-The **validate** and **filter** methods each have the following parameters:
-1. **$field_value** contains the data value to be verified or filtered;
-2. **$required** true or false value indicating if a value is required or if null is allowed;
-3. **$default** if a null value is found, default value to use;
-4. **$min** if needed, the minimum value allowed, if not needed, pass in a null value;
-5. **$max** if needed, the maximum value allowed, if not needed, pass in a null value;
-6. **$field_values** if needed, an array of valid values;
-7. **$callback** Associative array of named pair values for custom filters.
-7. **$options** Associative array of named pair values for custom filters.
-
-Validate and FieldHandler have the same set of parameters:
-
-### FieldHandler Request ###
+Each field is processed by one, or many, field handlers for validation, filtering, or escaping.
 
 ```php
-    $result = new Molajo/FieldHandler/Adapter($filter)
-        ->($field_value, $required, $default, $max, $max, $field_values, $options);
+    $fhObject = new Molajo/FieldHandler/Adapter
+        ->($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
 ```
-#### Parameters ####
 
-- **$field_value** valid values: Read, List, Write, Delete, Rename, Copy, Move, GetRelativePath, Chmod, Touch, Metadata;
-- **$required** contains an absolute path from the filesystem root to be used to fulfill the action requested;
-- **$default** Identifier for the file system. Examples include Local (default), Ftp, Virtual, Dropbox, etc.;
-- **$min** Associative array of named pair values needed for the specific Action (examples below);
-- **$max** Associative array of named pair values needed for the specific Action (examples below);
-- **$field_values** Associative array of named pair values needed for the specific Action (examples below);
-- **$options** Associative array of named pair values needed for the specific Action (examples below).
+There are five parameters:
 
-     * @param   mixed    $field_value
-     * @param   bool     $required
-     * @param   null     $default
-     * @param   null     $min
-     * @param   null     $max
-     * @param   array    $field_values
-     * @param   array    $options
+1. **$method** can be 'validate', 'filter', or 'escape';
+2. **$field_name** name of the field containing the data value to be verified or filtered;
+3. **$field_value** contains the data value to be verified or filtered;
+4. **$fieldhandler_type_chain** one or more field handlers, separated by a comma, processed in left-to-right order;
+5. **$options** Associative array of named pair values needed for field handlers.
 
-$field_value,
-        $required = true,
-        $default = null,
-        $min = null,
-        $max = null,
-        $field_values = array(),
-        $options
-- **$field_value** valid values: Read, List, Write, Delete, Rename, Copy, Move, GetRelativePath, Chmod, Touch, Metadata;
-- **$required** contains an absolute path from the filesystem root to be used to fulfill the action requested;
-- **$default** Identifier for the file system. Examples include Local (default), Ftp, Virtual, Dropbox, etc.;
-- **$min** Associative array of named pair values needed for the specific Action (examples below);
-- **$max** Associative array of named pair values needed for the specific Action (examples below);
-- **$field_values** Associative array of named pair values needed for the specific Action (examples below);
-- **$options** Associative array of named pair values needed for the specific Action (examples below).
+### Example Usage ###
 
-#### Results ####
+The following example processes the 'id' field using the 'int', 'default', and 'required' field handlers.
+The 'options' associative array defines two data elements: 'default' is the default value for the field, if needed;
+the 'required' element with a 'true' value is used by the 'required' field handler to verify a value has been
+ provided.
 
-The output from the filesystem action request, along with relevant metadata, can be accessed from the returned
-object, as follows:
-
-**Action Results:** For any request where data is to be returned, this example shows how to retrieve the output:
+Chaining is supported and field handlers are processed in left-to-right order. The example shows how to sequence
+ the default before the required check in the field handler chain.
 
 ```php
-    echo $adapter->fs->data;
+    $fieldhandler_type_chain = array('int', 'default', 'required');
+
+    $options = array('default' => 14, 'required' => true);
+
+    $adapter = new Molajo/FieldHandler/Adapter
+        ->('Validate', 'id', 12, $fieldhandler_type_chain, $options);
 ```
 
-### FieldHandler Commands ###
+#### Example Results ####
 
-#### Read ####
-
-To read a specific file from a filesystem:
+An object is returned and the field value can be retrieved like this:
 
 ```php
-    $adapter = new \Molajo\FieldHandler\Adapter('Read', 'location/of/file.txt');
-    echo $adapter->fs->data;
+try {
+    $fieldhandler_type_chain = array('int', 'default', 'required');
+
+    $options = array('default' => 14, 'required' => true);
+
+    $fhObject = new Molajo/FieldHandler/Adapter
+        ->('Validate', 'id', 12, $fieldhandler_type_chain, $options);
+
+    } catch (Exception $e) {
+
+        //handle the exception here
+    }
+
+    // Success!
+    echo $adapter->field_value;
+
 ```
+**Action Results:**
+
+Two results can occur. If the method was success, retrieve the field from the resulting object.
+If the method was not successful, for example, validation discovered a problem, an Exception
+is thrown. Use a Try/Catch pattern, as presented above, to retrieve the error condition.
+
+```php
+    echo $adapter->field_value;
+```
+
+### FieldHandlers ###
+
+1. Accepted
+2. Alias
+3. Alpha
+4. Alphanumeric
+5. Arrays
+6. Boolean
+7. Callback
+8. Date
+9. Defaults
+10. Digit
+11. Email
+12. Encoded
+13. Equals
+14. Extensions
+15. Float
+16. Extensions
+17. Float
+18. Fullspecialchars
+19. Int
+20. Lower
+21. Maximum
+22. Mimetypes
+23. Minimum
+24. Numeric
+25. Raw
+26. Regex
+27. Required
+28. String
+29. Trim
+30. Upper
+31. Url
+32. Values
 
 ### Installation
 
@@ -131,26 +149,10 @@ To read a specific file from a filesystem:
     php composer.phar install
 ```
 
-**Step 4** Add this line to your application’s **index.php** file:
-
-```php
-    require 'vendor/autoload.php';
-```
-
-This instructs PHP to use Composer’s autoloader for **FieldHandler** project dependencies.
-
-#### Or, Install Manually
-
-Download and extract **FieldHandler**.
-
-Copy the Molajo folder (first subfolder of src) into your Vendor directory.
-
-Register Molajo\FieldHandler\ subfolder in your autoload process.
-
 About
 =====
 
-Molajo Project adopted the following:
+Molajo Project observes the following:
 
  * [Semantic Versioning](http://semver.org/)
  * [PSR-0 Autoloader Interoperability](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md)
@@ -165,29 +167,22 @@ Molajo Project adopted the following:
 Submitting pull requests and features
 ------------------------------------
 
-Pull requests [GitHub](https://github.com/Molajo/Fileservices/pulls)
+Pull requests [GitHub](https://github.com/Molajo/FieldHandler/pulls)
 
-Features [GitHub](https://github.com/Molajo/Fileservices/issues)
+Features [GitHub](https://github.com/Molajo/FieldHandler/issues)
 
 Author
 ------
 
 Amy Stephen - <AmyStephen@gmail.com> - <http://twitter.com/AmyStephen><br />
-See also the list of [contributors](https://github.com/Molajo/Fileservices/contributors) participating in this project.
+See also the list of [contributors](https://github.com/Molajo/FieldHandler/contributors) participating in this project.
 
 License
 -------
 
 **Molajo FieldHandler** is licensed under the MIT License - see the `LICENSE` file for details
 
-Acknowledgements
-----------------
-
-**W3C File API: Directories and System** [W3C Working Draft 17 April 2012 → ](http://www.w3.org/TR/file-system-api/)
-specifications were followed, as closely as possible.
-
 More Information
 ----------------
-- [Usage](/FieldHandler/doc/usage.md)
-- [Extend](/FieldHandler/doc/extend.md)
-- [Specifications](/FieldHandler/doc/specifications.md)
+- [Usage](/FieldHandler/.dev/Doc/Extend.md)
+- [Install](/FieldHandler/.dev/Doc/Install.md)

@@ -21,6 +21,7 @@ $classMap = array(
     'Molajo\\FieldHandler\\Adapter'                          => BASE_FOLDER . '/Adapter.php',
     'Molajo\\FieldHandler\\Adapter\\FieldHandlerInterface'   => BASE_FOLDER . '/Adapter/FieldHandlerInterface.php',
     'Molajo\\FieldHandler\\Exception\\FieldHandlerException' => BASE_FOLDER . '/Exception/FieldHandlerException.php',
+
     'Molajo\\FieldHandler\\Type\\AbstractFieldHandler'       => BASE_FOLDER . '/Type/AbstractFieldHandler.php',
     'Molajo\\FieldHandler\\Type\\Accepted'                   => BASE_FOLDER . '/Type/Accepted.php',
     'Molajo\\FieldHandler\\Type\\Alias'                      => BASE_FOLDER . '/Type/Alias.php',
