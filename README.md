@@ -6,6 +6,12 @@ FieldHandler
 
 [![Build Status](https://travis-ci.org/Molajo/FieldHandler.png?branch=master)](https://travis-ci.org/Molajo/FieldHandler)
 
+Maybe women should start their own colleges.  After all ...MEN started them.
+
+Read more: http://www.insidehighered.com/news/2012/09/21/study-offers-new-evidence-scientists-are-biased-against-women#ixzz2LBQF9GDc
+Inside Higher Ed
+
+
 Validates and filters input. Escapes and formats output.
 
 Supports standard data type and PHP-specific filters and validation, value lists verification, callbacks, regex checking, and more.

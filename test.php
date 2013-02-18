@@ -2,4 +2,6 @@
 
 $foo = 'my-apples&are green and red';
 
-echo urlencode($foo);
+$email = 'AmyStephen@gmail.com';
+
+echo (boolean) filter_var($email, FILTER_VALIDATE_EMAIL);
