@@ -1,6 +1,6 @@
 <?php
 /**
- * Filesystem
+ * FieldHandler
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -18,32 +18,42 @@ $base = substr(__DIR__, 0, strlen(__DIR__) - 5);
 define('BASE_FOLDER', $base);
 
 $classMap = array(
+    'Molajo\\FieldHandler\\Adapter'                          => BASE_FOLDER . '/Adapter.php',
+    'Molajo\\FieldHandler\\Adapter\\FieldHandlerInterface'   => BASE_FOLDER . '/Adapter/FieldHandlerInterface.php',
+    'Molajo\\FieldHandler\\Exception\\FieldHandlerException' => BASE_FOLDER . '/Exception/UserException.php',
 
-    'Molajo\\Filesystem\\Adapter'                                 => BASE_FOLDER . '/Adapter.php',
-    'Molajo\\Filesystem\\Adapter\\ActionsInterface'               => BASE_FOLDER . '/Adapter/ActionsInterface.php',
-    'Molajo\\Filesystem\\Adapter\\AdapterInterface'               => BASE_FOLDER . '/Adapter/AdapterInterface.php',
-    'Molajo\\Filesystem\\Adapter\\Fileupload'                     => BASE_FOLDER . '/Adapter/Fileupload.php',
-    'Molajo\\Filesystem\\Adapter\\MetadataInterface'              => BASE_FOLDER . '/Adapter/MetadataInterface.php',
-    'Molajo\\Filesystem\\Adapter\\SystemInterface'                => BASE_FOLDER . '/Adapter/SystemInterface.php',
-    'Molajo\\Filesystem\\Exception\\FilesystemException'          => BASE_FOLDER . '/Exception/FilesystemException.php',
-    'Molajo\\Filesystem\\Exception\\FilesystemExceptionInterface' => BASE_FOLDER . '/Exception/FilesystemExceptionInterface.php',
-    'Molajo\\Filesystem\\Type\\Local'                             => BASE_FOLDER . '/Type/Local.php',
-    'Molajo\\Filesystem\\Type\\Ftp'                               => BASE_FOLDER . '/Type/Ftp.php',
-    'Molajo\\Filesystem\\Type\\FilesystemType'                    => BASE_FOLDER . '/Type/FilesystemType.php',
-    'Ftp\\Data'                                                   => BASE_FOLDER . '/.dev/Tests/Ftp/Data.php',
-    'Ftp\\FtpCopyTest'                                            => BASE_FOLDER . '/.dev/Tests/Ftp/FtpCopyTest.php',
-    'Ftp\\FtpDeleteTest'                                          => BASE_FOLDER . '/.dev/Tests/Ftp/FtpDeleteTest.php',
-    'Ftp\\FtpMoveTest'                                            => BASE_FOLDER . '/.dev/Tests/Ftp/FtpMoveTest.php',
-    'Ftp\\FtpReadTest'                                            => BASE_FOLDER . '/.dev/Tests/Ftp/FtpReadTest.php',
-    'Ftp\\FtpWriteTest'                                           => BASE_FOLDER . '/.dev/Tests/Ftp/FtpWriteTest.php',
-    'Ftp\\FtpListTest'                                            => BASE_FOLDER . '/.dev/Tests/Ftp/FtpListTest.php',
-    'Local\\Data'                                                 => BASE_FOLDER . '/.dev/Tests/Local/Data.php',
-    'Local\\LocalCopyTest'                                        => BASE_FOLDER . '/.dev/Tests/Local/LocalCopyTest.php',
-    'Local\\LocalDeleteTest'                                      => BASE_FOLDER . '/.dev/Tests/Local/LocalDeleteTest.php',
-    'Local\\LocalMoveTest'                                        => BASE_FOLDER . '/.dev/Tests/Local/LocalMoveTest.php',
-    'Local\\LocalReadTest'                                        => BASE_FOLDER . '/.dev/Tests/Local/LocalReadTest.php',
-    'Local\\LocalWriteTest'                                       => BASE_FOLDER . '/.dev/Tests/Local/LocalWriteTest.php',
-    'Local\\LocalListTest'                                        => BASE_FOLDER . '/.dev/Tests/Local/LocalListTest.php'
+    'Molajo\\FieldHandler\\Type\\AbstractFieldHandler'       => BASE_FOLDER . '/Type/AbstractFieldHandler.php',
+    'Molajo\\FieldHandler\\Type\\Accepted'                   => BASE_FOLDER . '/Type/Accepted.php',
+    'Molajo\\FieldHandler\\Type\\Alias'                      => BASE_FOLDER . '/Type/Alias.php',
+    'Molajo\\FieldHandler\\Type\\Alpha'                      => BASE_FOLDER . '/Type/Alpha.php',
+    'Molajo\\FieldHandler\\Type\\Alphanumeric'               => BASE_FOLDER . '/Type/Alphanumeric.php',
+    'Molajo\\FieldHandler\\Type\\Arrays'                     => BASE_FOLDER . '/Type/Arrays.php',
+    'Molajo\\FieldHandler\\Type\\Boolean'                    => BASE_FOLDER . '/Type/Boolean.php',
+    'Molajo\\FieldHandler\\Type\\Callback'                   => BASE_FOLDER . '/Type/Callback.php',
+    'Molajo\\FieldHandler\\Type\\Date'                       => BASE_FOLDER . '/Type/Date.php',
+    'Molajo\\FieldHandler\\Type\\Defaults'                   => BASE_FOLDER . '/Type/Defaults.php',
+    'Molajo\\FieldHandler\\Type\\Digit'                      => BASE_FOLDER . '/Type/Digit.php',
+    'Molajo\\FieldHandler\\Type\\Email'                      => BASE_FOLDER . '/Type/Email.php',
+    'Molajo\\FieldHandler\\Type\\Encoded'                    => BASE_FOLDER . '/Type/Encoded.php',
+    'Molajo\\FieldHandler\\Type\\Equals'                     => BASE_FOLDER . '/Type/Equals.php',
+    'Molajo\\FieldHandler\\Type\\Extensions'                 => BASE_FOLDER . '/Type/Extensions.php',
+    'Molajo\\FieldHandler\\Type\\Float'                      => BASE_FOLDER . '/Type/Float.php',
+    'Molajo\\FieldHandler\\Type\\Fullspecialchars'           => BASE_FOLDER . '/Type/Fullspecialchars.php',
+    'Molajo\\FieldHandler\\Type\\Int'                        => BASE_FOLDER . '/Type/Int.php',
+    'Molajo\\FieldHandler\\Type\\Ip'                         => BASE_FOLDER . '/Type/Ip.php',
+    'Molajo\\FieldHandler\\Type\\Lower'                      => BASE_FOLDER . '/Type/Lower.php',
+    'Molajo\\FieldHandler\\Type\\Maximum'                    => BASE_FOLDER . '/Type/Maximum.php',
+    'Molajo\\FieldHandler\\Type\\Mimetypes'                  => BASE_FOLDER . '/Type/Mimetypes.php',
+    'Molajo\\FieldHandler\\Type\\Minimum'                    => BASE_FOLDER . '/Type/Minimum.php',
+    'Molajo\\FieldHandler\\Type\\Numeric'                    => BASE_FOLDER . '/Type/Numeric.php',
+    'Molajo\\FieldHandler\\Type\\Raw'                        => BASE_FOLDER . '/Type/Raw.php',
+    'Molajo\\FieldHandler\\Type\\Regex'                      => BASE_FOLDER . '/Type/Regex.php',
+    'Molajo\\FieldHandler\\Type\\Required'                   => BASE_FOLDER . '/Type/Required.php',
+    'Molajo\\FieldHandler\\Type\\String'                     => BASE_FOLDER . '/Type/String.php',
+    'Molajo\\FieldHandler\\Type\\Trim'                       => BASE_FOLDER . '/Type/Trim.php',
+    'Molajo\\FieldHandler\\Type\\Upper'                      => BASE_FOLDER . '/Type/Upper.php',
+    'Molajo\\FieldHandler\\Type\\Url'                        => BASE_FOLDER . '/Type/Url.php',
+    'Molajo\\FieldHandler\\Type\\Values'                     => BASE_FOLDER . '/Type/Values.php'
 );
 
 spl_autoload_register(
@@ -53,3 +63,11 @@ spl_autoload_register(
         }
     }
 );
+
+/*
+include BASE_FOLDER . '/' . 'ClassLoader.php';
+$loader = new ClassLoader();
+$loader->add('Molajo', BASE_FOLDER . '/src/');
+$loader->add('Testcase1', BASE_FOLDER . '/Tests/');
+$loader->register();
+*/

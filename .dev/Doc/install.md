@@ -1,17 +1,17 @@
-Installing Filesystem
+Installing FieldHandler
 =============
 
 Using Composer
 --------------
 
-Filesystem is available on Packagist ([Molajo/Filesystem](http://packagist.org/packages/molajo/filesystem))
+FieldHandler is available on Packagist ([Molajo/FieldHandler](http://packagist.org/packages/molajo/FieldHandler))
 and as such installable via [Composer](http://getcomposer.org/).
 
 
 Manual Installation
 -------------------
 
-Filesystem is available on Packagist ([Molajo/Filesystem](http://packagist.org/packages/molajo/filesystem))
+FieldHandler is available on Packagist ([Molajo/FieldHandler](http://packagist.org/packages/molajo/FieldHandler))
 and as such installable via [Composer](http://getcomposer.org/).
 
 ### Creating the adapter class
