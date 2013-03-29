@@ -1,132 +1,13 @@
 **NOT COMPLETE**
 
 =======
-FieldHandler
+Filesystem
 =======
 
-[![Build Status](https://travis-ci.org/Molajo/FieldHandler.png?branch=master)](https://travis-ci.org/Molajo/FieldHandler)
+[![Build Status](https://travis-ci.org/Molajo/Filesystem.png?branch=master)](https://travis-ci.org/Molajo/Filesystem)
 
-Maybe women should start their own colleges.  After all ...MEN started them.
-
-Read more: http://www.insidehighered.com/news/2012/09/21/study-offers-new-evidence-scientists-are-biased-against-women#ixzz2LBQF9GDc
-Inside Higher Ed
-
-
-Validates and filters input. Escapes and formats output.
-
-Supports standard data type and PHP-specific filters and validation, value lists verification, callbacks, regex checking, and more.
- Use with rendering process to ensure proper escaping of output data and for special formatting needs.
-
-## Basic Usage ##
-
-Each field is processed by one, or many, field handlers for validation, filtering, or escaping.
-
-```php
-    try {
-        $adapter = new Molajo/FieldHandler/Adapter
-            ->($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
-
-    } catch (Exception $e) {
-        //handle the exception here
-    }
-
-    // Success!
-    echo $adapter->field_value;
-```
-
-###There are five input parameters:###
-
-1. **$method** can be `validate`, `filter`, or `escape`;
-2. **$field_name** name of the field containing the data value to be verified or filtered;
-3. **$field_value** contains the data value to be verified or filtered;
-4. **$fieldhandler_type_chain** one or more field handlers, separated by a comma, processed in left-to-right order;
-5. **$options** associative array of named pair values required by field handlers.
-
-###Two possible results:###
-
-1. **Success** Retrieve the resulting field value from the object.
-2. **Failure** Handle the exception.
-
-#### Example Usage ####
-
-The following example processes the `id` field using the `int`, `default`, and `required` field handlers.
-The `options` associative array defines two data elements: `default` is the default value for the field, if needed;
-the `required` element with a `true` value is used by the `required` field handler to verify a value has been
- provided.
-
-Chaining is supported and field handlers are processed in left-to-right order. The example shows how to sequence
- the default before the required check in the field handler chain.
-
-```php
-    try {
-        $fieldhandler_type_chain = array('int', 'default', 'required');
-        $options = array('default' => 14, 'required' => true);
-        $adapter = new Molajo/FieldHandler/Adapter
-            ->('Validate', 'id', 12, $fieldhandler_type_chain, $options);
-
-    } catch (Exception $e) {
-        //handle the exception here
-    }
-
-    // Success!
-    echo $adapter->field_value;
-
-```
-**Results:**
-
-If the method was a success, simply retrieve the field value from the resulting object.
-
-Use the Try/Catch pattern, as presented above, to catch thrown exceptions for errors.
-
-## Available FieldHandlers ##
-
-### Accepted ###
-
-* **Validate:** True if field value is true, 1, 'yes', or 'on.'
-* **Filter:** If not true, 1, 'yes', or 'on', value is set to NULL.
-* **Escape:** If not true, 1, 'yes', or 'on', value is set to NULL.
-
-```php
-    try {
-        $fieldhandler_type_chain = array('accepted');
-        $adapter = new Molajo/FieldHandler/Adapter
-            ->('Validate', 'agreement', 1, $fieldhandler_type_chain);
-```
-
-* Alias
-* Alpha
-* Alphanumeric
-* Arrays
-* Boolean
-* Callback
-* Date
-* Defaults
-* Digit
-* Email
-* Encoded
-* Equals
-* Extensions
-* Float
-* Extensions
-* Float
-* Fullspecialchars
-* Int
-* Lower
-* Maximum
-* Mimetypes
-* Minimum
-- Notequal
-* Numeric
-* Raw
-* Regex
-* Required
-* String
-* Trim
-* Upper
-* Url
-* Values (Inarray) (Inlist)
-
-
+Simple, uniform File and Directory Services API for PHP applications enabling interaction with multiple Filesystem types
+(ex., Local, Ftp, Github, LDAP, etc.).
 
 ## System Requirements ##
 
@@ -134,6 +15,200 @@ Use the Try/Catch pattern, as presented above, to catch thrown exceptions for er
 * [PSR-0 compliant Autoloader](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md)
 * PHP Framework independent
 * [optional] PHPUnit 3.5+ to execute the test suite (phpunit --version)
+
+## What is Filesystem? ##
+
+**Filesystem** provides a common API to read, list, write, rename, delete, copy or move files and folders
+on (and between) filesystems using adapters. In addition, the API enables applications to perform system
+administrative tasks like changing the owner, group, file dates, and file and folder permissions. Benefits
+include a simple, uniform API, ability to copy and move files between filesystems, and an interface
+to fileservices for application support services, like Cache, Logging, Message, and Cache.
+
+## Basic Usage ##
+
+Each **Filesystem** command shares the same syntax and the same four parameters:
+
+### Filesystem Request ###
+
+```php
+    $adapter = new Molajo/Filesystem/Adapter($action, $path, $filesystem_type, $options);
+```
+#### Parameters ####
+
+- **$action** valid values: Read, List, Write, Delete, Rename, Copy, Move, GetRelativePath, Chmod, Touch, Metadata;
+- **$path** contains an absolute path from the filesystem root to be used to fulfill the action requested;
+- **$filesystem_type** Identifier for the file system. Examples include Local (default), Ftp, Virtual, Dropbox, etc.;
+- **$options** Associative array of named pair values needed for the specific Action (examples below).
+
+#### Results ####
+
+The output from the filesystem action request, along with relevant metadata, can be accessed from the returned
+object, as follows:
+
+**Action Results:** For any request where data is to be returned, this example shows how to retrieve the output:
+
+```php
+    echo $adapter->fs->data;
+```
+
+**Metadata** including the file or folder (name), parent, extension, etc., is accessed in this manner:
+
+```php
+    echo $adapter->fs->size;
+    echo $adapter->fs->mime_type;
+    echo $adapter->fs->parent;
+    echo 'etc';
+```
+**Metadata about the Fileystem** filesystem_type, root, persistence, default_directory_permissions,
+default_file_permissions, read_only.
+
+**Metadata about requested path** (be it a file or folder) path, is_absolute, absolute_path, exists, owner,
+group, create_date, access_date, modified_date, is_readable, is_writable, is_executable, is_directory,
+is_file, is_link, type, name, parent, extension, no_extension, size, and mime_type.
+
+Metadata is defined in the [Molajo\Filesystem\Properties](https://github.com/Molajo/Filesystem/blob/master/src/Molajo/Filesystem/Type/FilesystemType.php) class. The Properties
+class can be extended and customized, as needed, by Filesystem.
+
+### Filesystem Commands ###
+
+#### Read ####
+
+To read a specific file from a filesystem:
+
+```php
+    $adapter = new \Molajo\Filesystem\Adapter('Read', 'location/of/file.txt');
+    echo $adapter->fs->data;
+```
+
+#### List
+
+To list all files and folders for a given path, limiting the results to those files which
+have the extension types identified:
+
+```php
+    $options = array(
+        'extension'    => 'txt,doc,ppt'
+    );
+
+    $adapter = new \Molajo\Filesystem\Adapter('List', 'directory-name', $options);
+    $results = $adapter->fs->data);
+```
+
+#### Write
+
+To write the information in **$data** to the **Log** filesystem using the **standard** log.
+
+```php
+    $options = array(
+        'data'    => 'Here are the words to write to the file.',
+    );
+    $adapter      = new \Molajo\Filesystem\Adapter('Write', 'standard', $options, 'Log');
+```
+
+#### Copy
+
+To copy file(s) and folder(s) from a filesystem to a location on the same or a different filesystem.
+
+This example shows how to backup a local file to a remote location.
+
+```php
+    $options = array(
+        'target_directory'       => 'name/of/target/folder',
+        'target_name'            => 'single-file-copy.txt',
+        'replace'                => false,
+        'target_filesystem_type' => 'Cloud'
+    );
+    $adapter = new \Molajo\Filesystem\Adapter('Copy', 'name/of/source/file', $options);
+```
+
+#### Move
+
+The only difference between the copy and the move is that the files copied are removed from the
+source location after the operation is complete.
+
+This example shows how to move files from a local directory to an archive location on the local filesystem.
+
+```php
+    $options = array(
+        'target_directory'       => '/archive/year2012',
+        'replace'                => false
+    );
+
+    $adapter = new \Molajo\Filesystem\Adapter('Move', 'current/folder/year2012', $options);
+```
+
+#### Delete
+
+As with the list, copy, and move, the delete can be used for individual files and it can be used
+to specify a folder and all dependent subfolders and files should be deleted.
+
+```php
+    $adapter = new \Molajo\Filesystem\Adapter('Delete', 'name/of/source/folder');
+```
+
+### Special Purpose File Operations
+
+### Merged Filesystems
+
+```php
+    $adapter = new \Molajo\Filesystem\Adapter('List', '/first/location');
+    $data1   = $adapter->fs->data;
+
+    $adapter = new \Molajo\Filesystem\Adapter('List', '/second/location');
+    $data2   = $adapter->fs->data;
+
+    $merged  = array_merge($data1, $data2);
+```
+#### Backup
+
+This shows how to backup a file on one filesystem to another filesystem.
+
+```php
+    $options = array(
+        'source_adapter' => 'local',
+        'source_path'    => '/x/y/example',
+        'target_adapter' => 'ftp',
+        'target_path'    => '/x/y/backup',
+        'archive'        => 'zip'
+    );
+
+    $adapter = new \Molajo\Filesystem\File($options);
+    $data    = $adapter->backup ();
+```
+
+#### Download
+
+This shows how to backup a file on one filesystem to another filesystem.
+
+```php
+    $options = array(
+        'source_adapter' => 'local',
+        'source_path'    => '/x/y/example',
+        'target_adapter' => 'ftp',
+        'target_path'    => '/x/y/backup',
+        'archive'        => 'zip'
+    );
+
+    $adapter = new \Molajo\Filesystem\File($options);
+    $data    = $adapter->backup ();
+```
+
+#### Ftp Server
+
+This shows how to backup a file on one filesystem to another filesystem.
+
+```php
+    $options = array(
+        'source_adapter' => 'local',
+        'source_path'    => '/x/y/example',
+        'target_adapter' => 'ftp',
+        'target_path'    => '/x/y/backup',
+        'archive'        => 'zip'
+    );
+
+    $adapter = new \Molajo\Filesystem\File($options);
+    $data    = $adapter->backup ();
+```
 
 ### Installation
 
@@ -150,7 +225,7 @@ Use the Try/Catch pattern, as presented above, to catch thrown exceptions for er
 ```php
 {
     "require": {
-        "Molajo/FieldHandler": "1.*"
+        "Molajo/Filesystem": "1.*"
     }
 }
 ```
@@ -161,10 +236,26 @@ Use the Try/Catch pattern, as presented above, to catch thrown exceptions for er
     php composer.phar install
 ```
 
+**Step 4** Add this line to your application’s **index.php** file:
+
+```php
+    require 'vendor/autoload.php';
+```
+
+This instructs PHP to use Composer’s autoloader for **Filesystem** project dependencies.
+
+#### Or, Install Manually
+
+Download and extract **Filesystem**.
+
+Copy the Molajo folder (first subfolder of src) into your Vendor directory.
+
+Register Molajo\Filesystem\ subfolder in your autoload process.
+
 About
 =====
 
-Molajo Project observes the following:
+Molajo Project adopted the following:
 
  * [Semantic Versioning](http://semver.org/)
  * [PSR-0 Autoloader Interoperability](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md)
@@ -179,22 +270,29 @@ Molajo Project observes the following:
 Submitting pull requests and features
 ------------------------------------
 
-Pull requests [GitHub](https://github.com/Molajo/FieldHandler/pulls)
+Pull requests [GitHub](https://github.com/Molajo/Fileservices/pulls)
 
-Features [GitHub](https://github.com/Molajo/FieldHandler/issues)
+Features [GitHub](https://github.com/Molajo/Fileservices/issues)
 
 Author
 ------
 
 Amy Stephen - <AmyStephen@gmail.com> - <http://twitter.com/AmyStephen><br />
-See also the list of [contributors](https://github.com/Molajo/FieldHandler/contributors) participating in this project.
+See also the list of [contributors](https://github.com/Molajo/Fileservices/contributors) participating in this project.
 
 License
 -------
 
-**Molajo FieldHandler** is licensed under the MIT License - see the `LICENSE` file for details
+**Molajo Filesystem** is licensed under the MIT License - see the `LICENSE` file for details
+
+Acknowledgements
+----------------
+
+**W3C File API: Directories and System** [W3C Working Draft 17 April 2012 → ](http://www.w3.org/TR/file-system-api/)
+specifications were followed, as closely as possible.
 
 More Information
 ----------------
-- [Extend](https://github.com/Molajo/FieldHandler/blob/master/.dev/Doc/extend.md)
-- [Install](https://github.com/Molajo/FieldHandler/blob/master/.dev/Doc/install.md)
+- [Usage](/Filesystem/doc/usage.md)
+- [Extend](/Filesystem/doc/extend.md)
+- [Specifications](/Filesystem/doc/specifications.md)

@@ -1,244 +1,162 @@
 <?php
 /**
- * FieldHandler Adapter
+ * Adapter for Filesystem
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler;
+namespace Molajo\Filesystem;
 
 defined('MOLAJO') or die;
 
-use Exception;
-use Molajo\FieldHandler\Exception\FieldHandlerException;
+use Molajo\Filesystem\Adapter\AdapterInterface;
+use Molajo\Filesystem\Exception\FilesystemException;
 
 /**
- * FieldHandler Adapter
+ * Adapter for Filesystem
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since     1.0
  */
-Class Adapter
+Class Adapter implements AdapterInterface
 {
     /**
-     * Method (validate, filter, or escape)
+     * Filesystem Type
      *
-     * @var    string
-     * @since  1.0
-     */
-    public $method;
-
-    /**
-     * Name of Field
-     *
-     * @var    string
-     * @since  1.0
-     */
-    public $field_name;
-
-    /**
-     * Field Value
-     *
-     * @var    string
-     * @since  1.0
-     */
-    public $field_value;
-
-    /**
-     * Array of requested field handlers
-     *
-     * @var    array
-     * @since  1.0
-     */
-    public $fieldhandler_types;
-
-    /**
-     * Array of values needed for field handlers
-     *
-     * @var    array
-     * @since  1.0
-     */
-    public $options;
-
-    /**
-     * Constructor
-     *
-     * @param string $method
-     * @param string $field_name
-     * @param mixed  $field_value
-     * @param array  $fieldhandler_type_chain
-     * @param array  $options
-     *
-     * @return mixed
+     * @var     object
      * @since   1.0
      */
-    public function __construct(
-        $method,
-        $field_name,
-        $field_value,
-        $fieldhandler_type_chain,
-        $options = array()
-    ) {
+    public $fs;
 
-        $this->initialise();
+    /**
+     * Construct
+     *
+     * @param string $action
+     * @param string $path
+     * @param string $filesystem_type
+     * @param array  $options
+     *
+     * @since   1.0
+     * @throws FilesystemException
+     */
+    public function __construct($action = '', $path = '', $filesystem_type = 'Local', $options = array())
+    {
+        if ($filesystem_type == '') {
+            $filesystem_type = 'Local';
+        }
+        $this->getFilesystemType($filesystem_type);
 
-        $this->editRequest($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+        $this->connect($options);
 
-        $this->processRequest();
+        if ($path == '') {
+            throw new FilesystemException
+            ('Filesystem Path is required, but was not provided.');
+        }
+        $this->setPath($path);
 
-        return $this;
+        $this->getMetadata();
+
+        $this->doAction($action);
+
+        $this->close();
+
+        return $this->fs;
     }
 
     /**
-     * Edit Request
+     * Get the Filesystem Type (ex., Local, Ftp, etc.)
      *
-     * @param string $method
-     * @param string $field_name
-     * @param mixed  $field_value
-     * @param string $fieldhandler_type_chain
-     * @param array  $options
-     *
-     * @return mixed
-     * @since   1.0
-     * @throws FieldHandlerException
-     */
-    protected function editRequest(
-        $method,
-        $field_name,
-        $field_value = null,
-        $fieldhandler_type_chain,
-        $options = array()
-    ) {
-
-        $method = strtolower($method);
-        if (in_array($method, array('validate', 'filter', 'escape'))) {
-            $this->method = $method;
-        } else {
-            throw new FieldHandlerException
-            ('FieldHandler: Must provide the name of the requested method.');
-        }
-
-        if ($field_name == '' || $field_name === null) {
-            throw new FieldHandlerException
-            ('FieldHandler: Must provide the field name.');
-        } else {
-            $this->field_name = $field_name;
-        }
-
-        $this->field_value = $field_value;
-
-        if (strpos($fieldhandler_type_chain, ',')) {
-            $fieldhandler_types = explode(',', $fieldhandler_type_chain);
-        } else {
-            $fieldhandler_types = array();
-            if (trim($fieldhandler_type_chain) == '' || $fieldhandler_type_chain === null) {
-            } else {
-                $fieldhandler_types[] = $fieldhandler_type_chain;
-            }
-        }
-
-        if (is_array($fieldhandler_types) && count($fieldhandler_types) > 0) {
-            $this->fieldhandler_types = $fieldhandler_types;
-        } else {
-            throw new FieldHandlerException
-            ('FieldHandler: Must request at least one field handler type');
-        }
-
-        if (is_array($fieldhandler_types) && count($fieldhandler_types) > 0) {
-            $this->options = $options;
-        } else {
-            $this->options = array();
-        }
-
-        return;
-    }
-
-    /**
-     * Process Request
+     * @param string $filesystem_type
      *
      * @return void
      * @since   1.0
-     * @throws FieldHandlerException
+     * @throws FilesystemException
      */
-    protected function processRequest()
+    protected function getFilesystemType($filesystem_type)
     {
-        foreach ($this->fieldhandler_types as $fieldhandler_type) {
-
-            $fieldhandler_type = ucfirst(strtolower($fieldhandler_type));
-
-            $class = $this->getType($fieldhandler_type);
-
-            try {
-
-                $ft = new $class (
-                    $fieldhandler_type,
-                    $this->method,
-                    $this->field_name,
-                    $this->field_value,
-                    $this->options
-                );
-
-            } catch (Exception $e) {
-
-                throw new FieldHandlerException
-                ('FieldHandler: Could not instantiate FieldHandler Type: ' . $fieldhandler_type
-                    . ' Class: ' . $class);
-            }
-
-            $method = $this->method;
-
-            $this->field_value = $ft->$method();
-        }
-
-        return;
-    }
-
-    /**
-     * Instantiates FieldHandler Class
-     *
-     * @param string $fieldhandler_type
-     *
-     * @return object
-     * @since   1.0
-     * @throws FieldHandlerException
-     */
-    protected function getType($fieldhandler_type)
-    {
-        $class = 'Molajo\\FieldHandler\\Type\\' . $fieldhandler_type;
+        $class = 'Molajo\\Filesystem\\Type\\' . $filesystem_type;
 
         if (class_exists($class)) {
         } else {
-            throw new FieldHandlerException
-            ('FieldHandler Type Class ' . $class . ' does not exist.');
+            throw new FilesystemException
+            ('Filesystem Type Class ' . $class . ' does not exist.');
         }
 
-        return $class;
+        $this->fs = new $class($filesystem_type);
+
+        return;
     }
 
     /**
-     * initialise
+     * Connect to the Filesystem Type
+     *
+     * @param array $options
      *
      * @return void
      * @since   1.0
      */
-    protected function initialise()
+    public function connect($options = array())
     {
-        if (defined('FILTER_VALUE_REQUIRED')) {
-            return;
-        }
-
-        if (defined('FILTER_VALUE_REQUIRED')) {
-        } else {
-            define('FILTER_VALUE_REQUIRED', ' Value required.');
-        }
-
-        if (defined('FILTER_INVALID_VALUE')) {
-        } else {
-            define('FILTER_INVALID_VALUE', ' Invalid value.');
-        }
+        $this->fs->connect($options);
 
         return;
+    }
+
+    /**
+     * Set the Path
+     *
+     * @param string $path
+     *
+     * @return void
+     * @since   1.0
+     */
+    public function setPath($path)
+    {
+        $this->fs->setPath($path);
+
+        return;
+    }
+
+    /**
+     * Retrieves and set metadata for the file specified in path
+     *
+     * @return void
+     * @since   1.0
+     */
+    public function getMetadata()
+    {
+        $this->fs->getMetadata();
+
+        return;
+    }
+
+    /**
+     * Execute the action requested
+     *
+     * @param string $action
+     *
+     * @return void
+     * @since   1.0
+     * @throws Exception\FilesystemException
+     */
+    public function doAction($action = '')
+    {
+        $this->fs->doAction($action);
+
+        return;
+    }
+
+    /**
+     * Close the Connection
+     *
+     * @return void
+     * @since   1.0
+     */
+    public function close()
+    {
+        $this->fs->close();
     }
 }

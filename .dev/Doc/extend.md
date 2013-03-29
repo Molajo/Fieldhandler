@@ -1,17 +1,17 @@
-Extending FieldHandler
+Extending Filesystem
 =============
 
 Using Adapters
 --------------
 
-FieldHandler is available on Packagist ([Molajo/FieldHandler](http://packagist.org/packages/Molajo/FieldHandler))
+Filesystem is available on Packagist ([Molajo/Filesystem](http://packagist.org/packages/molajo/filesystem))
 and as such installable via [Composer](http://getcomposer.org/).
 
 
 Creating a New Adapter
 ----------------------
 
-FieldHandler is available on Packagist ([Molajo/FieldHandler](http://packagist.org/packages/Molajo/FieldHandler))
+Filesystem is available on Packagist ([Molajo/Filesystem](http://packagist.org/packages/molajo/filesystem))
 and as such installable via [Composer](http://getcomposer.org/).
 
 ### Creating the adapter class

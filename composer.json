@@ -1,9 +1,9 @@
 {
-    "name":"molajo/fieldhandler",
+    "name":"molajo/filesystem",
     "type":"molajo-bundle",
-    "description":"Molajo FieldHandler: Validates and Filters Input; Escapes and Formats Output",
-    "keywords":["FieldHandler", "Filter", "Validate", "Escape", "Format", "Adapters", "Interface", "PSR-0"],
-    "homepage":"http://github.com/Molajo/FieldHandler",
+    "description":"Molajo Filesystem: File and Directory Services supports various Filesystems using Adapters, PHP platform independent",
+    "keywords":["Filesystem", "Adapters", "Interface", "PSR-0"],
+    "homepage":"http://github.com/Molajo/Filesystem",
     "license":"MIT",
     "authors":[
         {
@@ -13,7 +13,7 @@
         },
         {
             "name":"Other Contributors",
-            "homepage":"http://github.com/Molajo/FieldHandler/contributors"
+            "homepage":"http://github.com/Molajo/Filesystem/contributors"
         }
     ],
     "require":{
@@ -24,16 +24,15 @@
         "email":"hello@molajo.org",
         "irc":"irc://irc.freenode.org/molajo"
     },
-    "target-dir":"Molajo/FieldHandler",
     "autoload":{
         "psr-0":{
-            "Molajo\\FieldHandler":"./"
+            "Molajo\\Filesystem":"./"
         }
     },
     "minimum-stability":"dev",
     "extra":{
         "branch-alias":{
-            "dev-master":"0.1.0-dev"
+            "dev-master":"1.0.x-dev"
         }
     }
 }
