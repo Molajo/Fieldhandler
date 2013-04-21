@@ -1,0 +1,5 @@
+Finish tests
+Add any datatypes that should be available
+Readme examples for each type
+How to extend examples
+validation on each class (missing throw tags, phpdoc incorrect input)

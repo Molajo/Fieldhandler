@@ -39,7 +39,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
     /**
      * test Validate Success
      *
-     * @covers  Molajo\FieldHandler\Type\Default::validate
+     * @covers  Molajo\FieldHandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */
@@ -63,7 +63,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
     /**
      * test Validate Success2
      *
-     * @covers  Molajo\FieldHandler\Type\Default::validate
+     * @covers  Molajo\FieldHandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */
@@ -87,7 +87,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
     /**
      * test Validate Success 3
      *
-     * @covers  Molajo\FieldHandler\Type\Default::validate
+     * @covers  Molajo\FieldHandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */
@@ -111,7 +111,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
     /**
      * test Validate Success 4
      *
-     * @covers  Molajo\FieldHandler\Type\Default::validate
+     * @covers  Molajo\FieldHandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */
@@ -133,7 +133,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Molajo\FieldHandler\Type\Default::validate
+     * @covers Molajo\FieldHandler\Handler\Default::validate
      * @expectedException Molajo\FieldHandler\Exception\FieldHandlerException
      * @return void
      * @since   1.0
@@ -158,7 +158,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
     /**
      * test Filter Success
      *
-     * @covers  Molajo\FieldHandler\Type\Default::validate
+     * @covers  Molajo\FieldHandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */
@@ -180,7 +180,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Molajo\FieldHandler\Type\Default::filter
+     * @covers Molajo\FieldHandler\Handler\Default::filter
      * @return void
      * @since   1.0
      */

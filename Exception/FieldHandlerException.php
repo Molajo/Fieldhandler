@@ -20,7 +20,7 @@ use RuntimeException;
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @since     1.0
  */
-class FieldHandlerException extends RuntimeException
+class FieldHandlerException extends RuntimeException implements ExceptionInterface
 {
 
 }

@@ -6,64 +6,73 @@ FieldHandler
 
 [![Build Status](https://travis-ci.org/Molajo/FieldHandler.png?branch=master)](https://travis-ci.org/Molajo/FieldHandler)
 
-Validates and filters input. Escapes and formats output.
+Validates input. Filters input. Escapes (and can format) output.
 
-Supports standard data type and PHP-specific filters and validation, value lists verification, callbacks, regex checking, and more.
- Use with rendering process to ensure proper escaping of output data and for special formatting needs.
+Supports standard data type and PHP-specific filters and validation, value list verification, callbacks,
+regex checking, and more. Used with rendering process to ensure proper escaping of output data and for
+special field-level formatting needs.
 
 ## Basic Usage ##
 
-Each field is processed by one, or many, field handlers for validation, filtering, or escaping.
+Each field is processed by field handler(s) for validation, filtering, or escaping.
 
 ```php
     try {
-        $adapter = new Molajo/FieldHandler/Adapter
-            ->($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+        $adapter = new Molajo/FieldHandler/Adapter();
+        $field_value = $adapter->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
     } catch (Exception $e) {
         //handle the exception here
     }
 
     // Success!
-    echo $adapter->field_value;
+    echo $field_value;
 ```
 
-###There are five input parameters:###
 
-1. **$method** can be `validate`, `filter`, or `escape`;
-2. **$field_name** name of the field containing the data value to be verified or filtered;
-3. **$field_value** contains the data value to be verified or filtered;
-4. **$fieldhandler_type_chain** one or more field handlers, separated by a comma, processed in left-to-right order;
-5. **$options** associative array of named pair values required by field handlers.
+###Three methods:###
+
+1. **validate** Validate the field value using field handlers requested.
+2. **filter** Filter the field value using field handlers requested.
+3. **escape** Escape (or format) the field for rendering, given the field handlers requested.
+
+###Four parameters:###
+
+1. **$field_name** name of the field containing the data value (used in exception messages);
+2. **$field_value** contains the data value to be processed;
+3. **$fieldhandler_type_chain** one or more field handlers, separated by a comma, processed in left-to-right order;
+4. **$options** associative array of named pair values required by field handlers.
 
 ###Two possible results:###
 
-1. **Success** Retrieve the resulting field value from the object.
+1. **Success** field value returned.
 2. **Failure** Handle the exception.
 
-#### Example Usage ####
+####Example Usage####
 
-The following example processes the `id` field using the `int`, `default`, and `required` field handlers.
-The `options` associative array defines two data elements: `default` is the default value for the field, if needed;
-the `required` element with a `true` value is used by the `required` field handler to verify a value has been
- provided.
+The following example processes:
 
-Chaining is supported and field handlers are processed in left-to-right order. The example shows how to sequence
- the default before the required check in the field handler chain.
+* The `id` field
+* A chain of field handlers: `int`, `default`, and `required` which will be processed in this order.
+* The `options` associative array with two elements:
+    1. `default` and the default value for the field;
+    2. `required` element and the value `true`.
 
 ```php
+
+    $fieldhandler_type_chain = array('int', 'default', 'required');
+    $options = array('default' => 14, 'required' => true);
+
     try {
-        $fieldhandler_type_chain = array('int', 'default', 'required');
-        $options = array('default' => 14, 'required' => true);
-        $adapter = new Molajo/FieldHandler/Adapter
-            ->('Validate', 'id', 12, $fieldhandler_type_chain, $options);
+        $adapter = new Molajo/FieldHandler/Adapter();
+        $validated_value = $adapter->validate('id', 12, $fieldhandler_type_chain, $options);
 
     } catch (Exception $e) {
         //handle the exception here
     }
 
     // Success!
-    echo $adapter->field_value;
+    echo $validated_value;
 
 ```
 **Results:**
@@ -83,16 +92,18 @@ Use the Try/Catch pattern, as presented above, to catch thrown exceptions for er
 ```php
     try {
         $fieldhandler_type_chain = array('accepted');
-        $adapter = new Molajo/FieldHandler/Adapter
-            ->('Validate', 'agreement', 1, $fieldhandler_type_chain);
+        $adapter = new Molajo/FieldHandler/Adapter();
+        $validated_value = $adapter->validate('agreement', 1, $fieldhandler_type_chain);
 ```
 
+* Accepted
 * Alias
 * Alpha
 * Alphanumeric
 * Arrays
 * Boolean
 * Callback
+* Css
 * Date
 * Defaults
 * Digit
@@ -103,13 +114,17 @@ Use the Try/Catch pattern, as presented above, to catch thrown exceptions for er
 * Float
 * Extensions
 * Float
+* FromTo
 * Fullspecialchars
+* Html
 * Int
+* Ip
+* Js
 * Lower
 * Maximum
 * Mimetypes
 * Minimum
-- Notequal
+* NotEqual
 * Numeric
 * Raw
 * Regex

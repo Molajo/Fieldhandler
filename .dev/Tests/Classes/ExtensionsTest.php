@@ -39,7 +39,7 @@ class ExtensionsTest extends PHPUnit_Framework_TestCase
     /**
      * test Validate Success
      *
-     * @covers  Molajo\FieldHandler\Type\Extensions::validate
+     * @covers  Molajo\FieldHandler\Handler\Extensions::validate
      * @return void
      * @since   1.0
      */
@@ -76,7 +76,7 @@ class ExtensionsTest extends PHPUnit_Framework_TestCase
      * test Validate Fail
      *
      * @expectedException Molajo\FieldHandler\Exception\FieldHandlerException
-     * @covers  Molajo\FieldHandler\Type\Extensions::validate
+     * @covers  Molajo\FieldHandler\Handler\Extensions::validate
      * @return void
      * @since   1.0
      */
@@ -106,7 +106,7 @@ class ExtensionsTest extends PHPUnit_Framework_TestCase
      * Test Validate Fail
      *
      * @expectedException Molajo\FieldHandler\Exception\FieldHandlerException
-     * @covers  Molajo\FieldHandler\Type\Extensions::validate
+     * @covers  Molajo\FieldHandler\Handler\Extensions::validate
      * @return void
      * @since   1.0
      */
@@ -142,7 +142,7 @@ class ExtensionsTest extends PHPUnit_Framework_TestCase
     /**
      * Test Filter Succeed
      *
-     * @covers  Molajo\FieldHandler\Type\Extensions::validate
+     * @covers  Molajo\FieldHandler\Handler\Extensions::validate
      * @return void
      * @since   1.0
      */

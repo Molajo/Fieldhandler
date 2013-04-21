@@ -37,7 +37,7 @@ class AliasTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Molajo\FieldHandler\Type\Alias::validate
+     * @covers Molajo\FieldHandler\Handler\Alias::validate
      * @expectedException Molajo\FieldHandler\Exception\FieldHandlerException
      * @return void
      * @since   1.0
@@ -60,7 +60,7 @@ class AliasTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Molajo\FieldHandler\Type\Alias::filter
+     * @covers Molajo\FieldHandler\Handler\Alias::filter
      * @return void
      * @since   1.0
      */
@@ -82,7 +82,7 @@ class AliasTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Molajo\FieldHandler\Type\Alias::escape
+     * @covers Molajo\FieldHandler\Handler\Alias::escape
      * @return void
      * @since   1.0
      */

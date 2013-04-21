@@ -40,7 +40,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
     /**
      * test Validate Success
      *
-     * @covers  Molajo\FieldHandler\Type\Default::validate
+     * @covers  Molajo\FieldHandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */
@@ -65,7 +65,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
      * test Validate Failure
      *
      * @expectedException Molajo\FieldHandler\Exception\FieldHandlerException
-     * @covers  Molajo\FieldHandler\Type\Default::validate
+     * @covers  Molajo\FieldHandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */
@@ -87,7 +87,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
     /**
      * test Filter Success
      *
-     * @covers  Molajo\FieldHandler\Type\Default::validate
+     * @covers  Molajo\FieldHandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */
@@ -111,7 +111,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
     /**
      * test Filter Success 2
      *
-     * @covers  Molajo\FieldHandler\Type\Default::validate
+     * @covers  Molajo\FieldHandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */
@@ -135,7 +135,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
     /**
      * test Escape Success
      *
-     * @covers  Molajo\FieldHandler\Type\Default::validate
+     * @covers  Molajo\FieldHandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */
@@ -159,7 +159,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
     /**
      * test Escape Success 2
      *
-     * @covers  Molajo\FieldHandler\Type\Default::validate
+     * @covers  Molajo\FieldHandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */

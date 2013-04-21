@@ -19,41 +19,45 @@ define('BASE_FOLDER', $base);
 
 $classMap = array(
     'Molajo\\FieldHandler\\Adapter'                          => BASE_FOLDER . '/Adapter.php',
-    'Molajo\\FieldHandler\\Adapter\\FieldHandlerInterface'   => BASE_FOLDER . '/Adapter/FieldHandlerInterface.php',
+    'Molajo\\FieldHandler\\Api\\FieldHandlerInterface'   => BASE_FOLDER . '/Api/FieldHandlerInterface.php',
     'Molajo\\FieldHandler\\Exception\\FieldHandlerException' => BASE_FOLDER . '/Exception/FieldHandlerException.php',
-
-    'Molajo\\FieldHandler\\Type\\AbstractFieldHandler'       => BASE_FOLDER . '/Type/AbstractFieldHandler.php',
-    'Molajo\\FieldHandler\\Type\\Accepted'                   => BASE_FOLDER . '/Type/Accepted.php',
-    'Molajo\\FieldHandler\\Type\\Alias'                      => BASE_FOLDER . '/Type/Alias.php',
-    'Molajo\\FieldHandler\\Type\\Alpha'                      => BASE_FOLDER . '/Type/Alpha.php',
-    'Molajo\\FieldHandler\\Type\\Alphanumeric'               => BASE_FOLDER . '/Type/Alphanumeric.php',
-    'Molajo\\FieldHandler\\Type\\Arrays'                     => BASE_FOLDER . '/Type/Arrays.php',
-    'Molajo\\FieldHandler\\Type\\Boolean'                    => BASE_FOLDER . '/Type/Boolean.php',
-    'Molajo\\FieldHandler\\Type\\Callback'                   => BASE_FOLDER . '/Type/Callback.php',
-    'Molajo\\FieldHandler\\Type\\Date'                       => BASE_FOLDER . '/Type/Date.php',
-    'Molajo\\FieldHandler\\Type\\Defaults'                   => BASE_FOLDER . '/Type/Defaults.php',
-    'Molajo\\FieldHandler\\Type\\Digit'                      => BASE_FOLDER . '/Type/Digit.php',
-    'Molajo\\FieldHandler\\Type\\Email'                      => BASE_FOLDER . '/Type/Email.php',
-    'Molajo\\FieldHandler\\Type\\Encoded'                    => BASE_FOLDER . '/Type/Encoded.php',
-    'Molajo\\FieldHandler\\Type\\Equals'                     => BASE_FOLDER . '/Type/Equals.php',
-    'Molajo\\FieldHandler\\Type\\Extensions'                 => BASE_FOLDER . '/Type/Extensions.php',
-    'Molajo\\FieldHandler\\Type\\Float'                      => BASE_FOLDER . '/Type/Float.php',
-    'Molajo\\FieldHandler\\Type\\Fullspecialchars'           => BASE_FOLDER . '/Type/Fullspecialchars.php',
-    'Molajo\\FieldHandler\\Type\\Int'                        => BASE_FOLDER . '/Type/Int.php',
-    'Molajo\\FieldHandler\\Type\\Ip'                         => BASE_FOLDER . '/Type/Ip.php',
-    'Molajo\\FieldHandler\\Type\\Lower'                      => BASE_FOLDER . '/Type/Lower.php',
-    'Molajo\\FieldHandler\\Type\\Maximum'                    => BASE_FOLDER . '/Type/Maximum.php',
-    'Molajo\\FieldHandler\\Type\\Mimetypes'                  => BASE_FOLDER . '/Type/Mimetypes.php',
-    'Molajo\\FieldHandler\\Type\\Minimum'                    => BASE_FOLDER . '/Type/Minimum.php',
-    'Molajo\\FieldHandler\\Type\\Numeric'                    => BASE_FOLDER . '/Type/Numeric.php',
-    'Molajo\\FieldHandler\\Type\\Raw'                        => BASE_FOLDER . '/Type/Raw.php',
-    'Molajo\\FieldHandler\\Type\\Regex'                      => BASE_FOLDER . '/Type/Regex.php',
-    'Molajo\\FieldHandler\\Type\\Required'                   => BASE_FOLDER . '/Type/Required.php',
-    'Molajo\\FieldHandler\\Type\\String'                     => BASE_FOLDER . '/Type/String.php',
-    'Molajo\\FieldHandler\\Type\\Trim'                       => BASE_FOLDER . '/Type/Trim.php',
-    'Molajo\\FieldHandler\\Type\\Upper'                      => BASE_FOLDER . '/Type/Upper.php',
-    'Molajo\\FieldHandler\\Type\\Url'                        => BASE_FOLDER . '/Type/Url.php',
-    'Molajo\\FieldHandler\\Type\\Values'                     => BASE_FOLDER . '/Type/Values.php'
+    'Molajo\\FieldHandler\\Exception\\ExceptionInterface'    => BASE_FOLDER . '/Exception/ExceptionInterface.php',
+    'Molajo\\FieldHandler\\Handler\\AbstractFieldHandler'       => BASE_FOLDER . '/Handler/AbstractFieldHandler.php',
+    'Molajo\\FieldHandler\\Handler\\Accepted'                   => BASE_FOLDER . '/Handler/Accepted.php',
+    'Molajo\\FieldHandler\\Handler\\Alias'                      => BASE_FOLDER . '/Handler/Alias.php',
+    'Molajo\\FieldHandler\\Handler\\Alpha'                      => BASE_FOLDER . '/Handler/Alpha.php',
+    'Molajo\\FieldHandler\\Handler\\Alphanumeric'               => BASE_FOLDER . '/Handler/Alphanumeric.php',
+    'Molajo\\FieldHandler\\Handler\\Arrays'                     => BASE_FOLDER . '/Handler/Arrays.php',
+    'Molajo\\FieldHandler\\Handler\\Boolean'                    => BASE_FOLDER . '/Handler/Boolean.php',
+    'Molajo\\FieldHandler\\Handler\\Callback'                   => BASE_FOLDER . '/Handler/Callback.php',
+    'Molajo\\FieldHandler\\Handler\\Css'                        => BASE_FOLDER . '/Handler/Css.php',
+    'Molajo\\FieldHandler\\Handler\\Date'                       => BASE_FOLDER . '/Handler/Date.php',
+    'Molajo\\FieldHandler\\Handler\\Defaults'                   => BASE_FOLDER . '/Handler/Defaults.php',
+    'Molajo\\FieldHandler\\Handler\\Digit'                      => BASE_FOLDER . '/Handler/Digit.php',
+    'Molajo\\FieldHandler\\Handler\\Email'                      => BASE_FOLDER . '/Handler/Email.php',
+    'Molajo\\FieldHandler\\Handler\\Encoded'                    => BASE_FOLDER . '/Handler/Encoded.php',
+    'Molajo\\FieldHandler\\Handler\\Equals'                     => BASE_FOLDER . '/Handler/Equals.php',
+    'Molajo\\FieldHandler\\Handler\\Extensions'                 => BASE_FOLDER . '/Handler/Extensions.php',
+    'Molajo\\FieldHandler\\Handler\\Float'                      => BASE_FOLDER . '/Handler/Float.php',
+    'Molajo\\FieldHandler\\Handler\\Fullspecialchars'           => BASE_FOLDER . '/Handler/Fullspecialchars.php',
+    'Molajo\\FieldHandler\\Handler\\Html'                       => BASE_FOLDER . '/Handler/Html.php',
+    'Molajo\\FieldHandler\\Handler\\Int'                        => BASE_FOLDER . '/Handler/Int.php',
+    'Molajo\\FieldHandler\\Handler\\Ip'                         => BASE_FOLDER . '/Handler/Ip.php',
+    'Molajo\\FieldHandler\\Handler\\Js'                         => BASE_FOLDER . '/Handler/Js.php',
+    'Molajo\\FieldHandler\\Handler\\Lower'                      => BASE_FOLDER . '/Handler/Lower.php',
+    'Molajo\\FieldHandler\\Handler\\Maximum'                    => BASE_FOLDER . '/Handler/Maximum.php',
+    'Molajo\\FieldHandler\\Handler\\Mimetypes'                  => BASE_FOLDER . '/Handler/Mimetypes.php',
+    'Molajo\\FieldHandler\\Handler\\Minimum'                    => BASE_FOLDER . '/Handler/Minimum.php',
+    'Molajo\\FieldHandler\\Handler\\Numeric'                    => BASE_FOLDER . '/Handler/Numeric.php',
+    'Molajo\\FieldHandler\\Handler\\Raw'                        => BASE_FOLDER . '/Handler/Raw.php',
+    'Molajo\\FieldHandler\\Handler\\Regex'                      => BASE_FOLDER . '/Handler/Regex.php',
+    'Molajo\\FieldHandler\\Handler\\Required'                   => BASE_FOLDER . '/Handler/Required.php',
+    'Molajo\\FieldHandler\\Handler\\String'                     => BASE_FOLDER . '/Handler/String.php',
+    'Molajo\\FieldHandler\\Handler\\Time'                       => BASE_FOLDER . '/Handler/Time.php',
+    'Molajo\\FieldHandler\\Handler\\Trim'                       => BASE_FOLDER . '/Handler/Trim.php',
+    'Molajo\\FieldHandler\\Handler\\Upper'                      => BASE_FOLDER . '/Handler/Upper.php',
+    'Molajo\\FieldHandler\\Handler\\Url'                        => BASE_FOLDER . '/Handler/Url.php',
+    'Molajo\\FieldHandler\\Handler\\Values'                     => BASE_FOLDER . '/Handler/Values.php'
 );
 
 spl_autoload_register(
@@ -63,11 +67,3 @@ spl_autoload_register(
         }
     }
 );
-
-/*
-include BASE_FOLDER . '/' . 'ClassLoader.php';
-$loader = new ClassLoader();
-$loader->add('Molajo', BASE_FOLDER . '/src/');
-$loader->add('Testcase1', BASE_FOLDER . '/Tests/');
-$loader->register();
-*/

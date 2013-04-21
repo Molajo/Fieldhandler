@@ -39,7 +39,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     /**
      * test Validate Success
      *
-     * @covers  Molajo\FieldHandler\Type\Default::validate
+     * @covers  Molajo\FieldHandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */
@@ -68,7 +68,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      * test Validate Fail
      *
      * @expectedException Molajo\FieldHandler\Exception\FieldHandlerException
-     * @covers  Molajo\FieldHandler\Type\Default::validate
+     * @covers  Molajo\FieldHandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */
@@ -90,7 +90,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     /**
      * test Filter Success
      *
-     * @covers  Molajo\FieldHandler\Type\Default::validate
+     * @covers  Molajo\FieldHandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */
@@ -118,7 +118,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     /**
      * test Filter Success 2
      *
-     * @covers  Molajo\FieldHandler\Type\Default::validate
+     * @covers  Molajo\FieldHandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */
@@ -145,7 +145,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     /**
      * test Filter Success 3
      *
-     * @covers  Molajo\FieldHandler\Type\Default::validate
+     * @covers  Molajo\FieldHandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */
@@ -180,7 +180,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      * test Filter Fail 1
      *
      * @expectedException Molajo\FieldHandler\Exception\FieldHandlerException
-     * @covers  Molajo\FieldHandler\Type\Default::validate
+     * @covers  Molajo\FieldHandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */
@@ -213,7 +213,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     /**
      * test Escape Success
      *
-     * @covers  Molajo\FieldHandler\Type\Default::validate
+     * @covers  Molajo\FieldHandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */
@@ -241,7 +241,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     /**
      * test Escape Fail
      *
-     * @covers  Molajo\FieldHandler\Type\Default::validate
+     * @covers  Molajo\FieldHandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */

@@ -12,7 +12,7 @@ defined('MOLAJO') or die;
 
 use Exception;
 use Molajo\FieldHandler\Exception\FieldHandlerException;
-
+use Molajo\FieldHandler\Api\FieldHandlerInterface;
 /**
  * FieldHandler Adapter
  *
@@ -20,7 +20,7 @@ use Molajo\FieldHandler\Exception\FieldHandlerException;
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  */
-class Adapter
+class Adapter implements FieldHandlerInterface
 {
     /**
      * Method (validate, filter, or escape)
@@ -65,40 +65,88 @@ class Adapter
     /**
      * Constructor
      *
-     * @param   string $method
-     * @param   string $field_name
-     * @param   mixed  $field_value
-     * @param   array  $fieldhandler_type_chain
-     * @param   array  $options
-     *
      * @return  mixed
      * @since   1.0
      */
-    public function __construct(
-        $method,
-        $field_name,
-        $field_value,
-        $fieldhandler_type_chain,
-        $options = array()
-    ) {
-
+    public function __construct()
+    {
         $this->initialise();
+    }
 
-        $this->editRequest($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+    /**
+     * Validate
+     *
+     * @param   string      $field_name
+     * @param   null|mixed  $field_value
+     * @param   string      $fieldhandler_type_chain
+     * @param   array       $options
+     *
+     * @return  mixed
+     * @since   1.0
+     * @throws  FieldHandlerException
+     */
+    public function validate(
+        $field_name,
+        $field_value = null,
+        $fieldhandler_type_chain,
+        $options = array())
+    {
+        return $this->editRequest('validate',
+            $field_name, $field_value, $fieldhandler_type_chain, $options);
+    }
 
-        $this->processRequest();
+    /**
+     * Filter
+     *
+     * @param   string      $field_name
+     * @param   null|mixed  $field_value
+     * @param   string      $fieldhandler_type_chain
+     * @param   array       $options
+     *
+     * @return  mixed
+     * @since   1.0
+     * @throws  FieldHandlerException
+     */
+    public function filter(
+        $field_name,
+        $field_value = null,
+        $fieldhandler_type_chain,
+        $options = array())
+    {
+        return $this->editRequest('filter',
+            $field_name, $field_value, $fieldhandler_type_chain, $options);
+    }
 
-        return $this;
+    /**
+     * Escape
+     *
+     * @param   string      $field_name
+     * @param   null|mixed  $field_value
+     * @param   string      $fieldhandler_type_chain
+     * @param   array       $options
+     *
+     * @return  mixed
+     * @since   1.0
+     * @throws  FieldHandlerException
+     */
+    public function escape(
+        $field_name,
+        $field_value = null,
+        $fieldhandler_type_chain,
+        $options = array())
+    {
+        return $this->editRequest('escape',
+            $field_name, $field_value, $fieldhandler_type_chain, $options);
     }
 
     /**
      * Edit Request
      *
-     * @param   string $method
-     * @param   string $field_name
-     * @param   mixed  $field_value
-     * @param   string $fieldhandler_type_chain
-     * @param   array  $options
+     * @param   string      $method
+     * @param   string      $field_name
+     * @param   null|mixed  $field_value
+     * @param   string      $fieldhandler_type_chain
+     * @param   array       $options
      *
      * @return  mixed
      * @since   1.0
@@ -111,8 +159,8 @@ class Adapter
         $fieldhandler_type_chain,
         $options = array()
     ) {
-
         $method = strtolower($method);
+
         if (in_array($method, array('validate', 'filter', 'escape'))) {
             $this->method = $method;
         } else {
@@ -152,13 +200,13 @@ class Adapter
             $this->options = array();
         }
 
-        return;
+        return $this->processRequest();
     }
 
     /**
      * Process Request
      *
-     * @return  void
+     * @return  mixed
      * @since   1.0
      * @throws  FieldHandlerException
      */
@@ -192,13 +240,13 @@ class Adapter
             $this->field_value = $ft->$method();
         }
 
-        return;
+        return $this->field_value;
     }
 
     /**
      * Instantiates FieldHandler Class
      *
-     * @param string $fieldhandler_type
+     * @param   string $fieldhandler_type
      *
      * @return  object
      * @since   1.0
@@ -206,7 +254,7 @@ class Adapter
      */
     protected function getType($fieldhandler_type)
     {
-        $class = 'Molajo\\FieldHandler\\Type\\' . $fieldhandler_type;
+        $class = 'Molajo\\FieldHandler\\Handler\\' . $fieldhandler_type;
 
         if (class_exists($class)) {
         } else {
@@ -220,10 +268,10 @@ class Adapter
     /**
      * initialise
      *
-     * @return void
+     * @return  void
      * @since   1.0
      */
-    protected function initialise()
+    public function initialise()
     {
         if (defined('FILTER_VALUE_REQUIRED')) {
             return;
@@ -241,4 +289,5 @@ class Adapter
 
         return;
     }
+
 }

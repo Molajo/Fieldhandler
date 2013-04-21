@@ -39,7 +39,7 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
     /**
      * test Validate Success
      *
-     * @covers  Molajo\FieldHandler\Type\Default::validate
+     * @covers  Molajo\FieldHandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */
