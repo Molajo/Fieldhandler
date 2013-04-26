@@ -59,8 +59,7 @@ class Float extends AbstractFieldHandler
 
             $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_FLOAT);
 
-            if ($test === $this->getFieldValue()) {
-            } else {
+            if ($test === false) {
                 throw new FieldHandlerException
                 ('Validate Float: ' . FILTER_INVALID_VALUE);
             }
@@ -81,8 +80,7 @@ class Float extends AbstractFieldHandler
 
         $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_FLOAT);
 
-        if ($test === $this->getFieldValue()) {
-        } else {
+        if ($test === false) {
             $this->setFieldValue(null);
         }
 

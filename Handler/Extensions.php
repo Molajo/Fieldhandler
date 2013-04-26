@@ -95,6 +95,13 @@ class Extensions extends AbstractFieldHandler
             $this->testValues(true);
         }
 
+        $temp = $this->getFieldValue();
+        if (is_array($temp)) {
+            if (count($temp) === 0) {
+                $this->setFieldValue(null);
+            }
+        }
+
         return $this->getFieldValue();
     }
 

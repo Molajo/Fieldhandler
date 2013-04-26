@@ -12,7 +12,7 @@ defined('MOLAJO') or die;
 
 use Molajo\FieldHandler\Adapter as adapter;
 use PHPUnit_Framework_TestCase;
-
+use Molajo\FieldHandler\Exception\FieldHandlerException;
 /**
  * Extensions FieldHandler
  *
@@ -24,6 +24,14 @@ use PHPUnit_Framework_TestCase;
 class ExtensionsTest extends PHPUnit_Framework_TestCase
 {
     /**
+     * Adapter
+     *
+     * @var    object  Molajo/Molajo/Adapter
+     * @since  1.0
+     */
+    protected $adapter;
+
+    /**
      * Set up
      *
      * @return void
@@ -31,29 +39,22 @@ class ExtensionsTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        parent::setUp();
-
-        return;
+        $this->adapter = new adapter();
     }
 
     /**
-     * test Validate Success
-     *
      * @covers  Molajo\FieldHandler\Handler\Extensions::validate
-     * @return void
+     * @return  void
      * @since   1.0
      */
-    public function testValidateSuccess()
+    public function testValidate1()
     {
-        parent::setUp();
-
         $input = array();
         $input[] = '.jpg';
         $input[] = '.gif';
         $input[] = '.png';
 
-        $method                  = 'Validate';
-        $field_name              = 'alias';
+        $field_name              = 'extensions_field';
         $field_value             = $input;
         $fieldhandler_type_chain = 'Extensions';
         $options                 = array();
@@ -65,27 +66,24 @@ class ExtensionsTest extends PHPUnit_Framework_TestCase
 
         $options = array('array_valid_extensions' => $array_valid_values);
 
-        $adapter = new adapter($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($input, $adapter->field_value);
+        $this->assertEquals($field_value, $results);
 
         return;
     }
 
+
     /**
-     * test Validate Fail
-     *
-     * @expectedException Molajo\FieldHandler\Exception\FieldHandlerException
      * @covers  Molajo\FieldHandler\Handler\Extensions::validate
-     * @return void
+     * @expectedException Molajo\FieldHandler\Exception\FieldHandlerException
+     * @return  void
      * @since   1.0
      */
-    public function testValidateSuccess2()
+    public function testValidateFail()
     {
-        parent::setUp();
 
-        $method                  = 'Validate';
-        $field_name              = 'alias';
+        $field_name              = 'extensions_field';
         $field_value             = 'dog';
         $fieldhandler_type_chain = 'Extensions';
         $options                 = array();
@@ -97,30 +95,27 @@ class ExtensionsTest extends PHPUnit_Framework_TestCase
 
         $options = array('array_valid_extensions' => $array_valid_values);
 
-        $adapter = new adapter($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+
+        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+
+        $this->assertEquals($field_value, $results);
 
         return;
     }
 
     /**
-     * Test Validate Fail
-     *
-     * @expectedException Molajo\FieldHandler\Exception\FieldHandlerException
      * @covers  Molajo\FieldHandler\Handler\Extensions::validate
-     * @return void
+     * @return  void
      * @since   1.0
      */
-    public function testValidateFail()
+    public function testFilter1()
     {
-        parent::setUp();
-
         $input = array();
-        $input[] = '.jpcccg';
+        $input[] = '.jpg';
         $input[] = '.gif';
         $input[] = '.png';
 
-        $method                  = 'Validate';
-        $field_name              = 'alias';
+        $field_name              = 'extensions_field';
         $field_value             = $input;
         $fieldhandler_type_chain = 'Extensions';
         $options                 = array();
@@ -132,32 +127,23 @@ class ExtensionsTest extends PHPUnit_Framework_TestCase
 
         $options = array('array_valid_extensions' => $array_valid_values);
 
-        $adapter = new adapter($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->adapter->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($input, $adapter->field_value);
+        $this->assertEquals($field_value, $results);
 
         return;
     }
 
     /**
-     * Test Filter Succeed
-     *
      * @covers  Molajo\FieldHandler\Handler\Extensions::validate
-     * @return void
+     * @return  void
      * @since   1.0
      */
-    public function testFilterSucceed()
+    public function testFilterFail()
     {
-        parent::setUp();
 
-        $input = array();
-        $input[] = '.jpcccg';
-        $input[] = '.gif';
-        $input[] = '.png';
-
-        $method                  = 'Filter';
-        $field_name              = 'alias';
-        $field_value             = $input;
+        $field_name              = 'extensions_field';
+        $field_value             = 'dog';
         $fieldhandler_type_chain = 'Extensions';
         $options                 = array();
 
@@ -168,17 +154,13 @@ class ExtensionsTest extends PHPUnit_Framework_TestCase
 
         $options = array('array_valid_extensions' => $array_valid_values);
 
-        $adapter = new adapter($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $input = array();
-        $input[] = '.gif';
-        $input[] = '.png';
+        $results = $this->adapter->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($input, $adapter->field_value);
+        $this->assertEquals(null, $results);
 
         return;
     }
-
     /**
      * Tear down
      *
@@ -187,6 +169,6 @@ class ExtensionsTest extends PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        parent::tearDown();
+
     }
 }
