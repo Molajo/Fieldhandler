@@ -1,6 +1,6 @@
 <?php
 /**
- * Js FieldHandler
+ * Foreignkey FieldHandler
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -12,19 +12,15 @@ defined('MOLAJO') or die;
 
 use Molajo\FieldHandler\Exception\FieldHandlerException;
 
-use Molajo\FieldHandler\Api\FieldHandlerInterface;
-
-//todo: amy this is not complete
-
 /**
- * Js FieldHandler
+ * Foreignkey FieldHandler
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Js extends AbstractFieldHandler
+class Foreignkey extends AbstractFieldHandler
 {
     /**
      * Constructor
@@ -45,7 +41,7 @@ class Js extends AbstractFieldHandler
         $fieldhandler_type_chain,
         $options = array()
     ) {
-        return parent::__construct($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+        parent::__construct($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
     }
 
     /**
@@ -54,21 +50,19 @@ class Js extends AbstractFieldHandler
      * @return  mixed
      * @since   1.0
      */
-    protected function validate()
+    public function validate()
     {
         parent::validate();
 
         if ($this->getFieldValue() === null) {
         } else {
 
-            $compare = $this->getFieldValue();
+            $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_EMAIL);
 
-            $test = $this->filter();
-
-            if ($test == $compare) {
+            if ($test === $this->getFieldValue()) {
             } else {
                 throw new FieldHandlerException
-                ('Validate Js: ' . FILTER_INVALID_VALUE);
+                ('Validate Foreignkey: ' . FILTER_INVALID_VALUE);
             }
         }
 
@@ -81,14 +75,15 @@ class Js extends AbstractFieldHandler
      * @return  mixed
      * @since   1.0
      */
-    protected function filter()
+    public function filter()
     {
         parent::filter();
 
-        if ($this->getFieldValue() === null) {
-        } else {
+        $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_EMAIL);
 
-            $test = $this->getFieldValue();
+        if ($test === $this->getFieldValue()) {
+        } else {
+            $this->setFieldValue(null);
         }
 
         return $this->getFieldValue();
@@ -100,7 +95,22 @@ class Js extends AbstractFieldHandler
      * @return  mixed
      * @since   1.0
      */
-    protected function escape()
+    public function escape()
+    {
+        parent::escape();
+
+        $this->filter();
+
+        return $this->getFieldValue();
+    }
+
+    /**
+     * Check Foreign Key
+     *
+     * @return  mixed
+     * @since   1.0
+     */
+    public function escape()
     {
         parent::escape();
 

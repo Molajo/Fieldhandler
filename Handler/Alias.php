@@ -12,8 +12,6 @@ defined('MOLAJO') or die;
 
 use Molajo\FieldHandler\Exception\FieldHandlerException;
 
-use Molajo\FieldHandler\Api\FieldHandlerInterface;
-
 /**
  * Alias FieldHandler
  *
@@ -33,7 +31,6 @@ class Alias extends AbstractFieldHandler
      * @param   array  $fieldhandler_type_chain
      * @param   array  $options
      *
-     * @return  mixed
      * @since   1.0
      */
     public function __construct(
@@ -43,7 +40,7 @@ class Alias extends AbstractFieldHandler
         $fieldhandler_type_chain,
         $options = array()
     ) {
-        return parent::__construct($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+        parent::__construct($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
     }
 
     /**
@@ -51,8 +48,9 @@ class Alias extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
+     * @throws  \Molajo\FieldHandler\Exception\FieldHandlerException
      */
-    protected function validate()
+    public function validate()
     {
         parent::validate();
 
@@ -80,11 +78,9 @@ class Alias extends AbstractFieldHandler
      * @return  mixed
      * @since   1.0
      */
-    protected function filter()
+    public function filter()
     {
         parent::filter();
-
-        $bad = false;
 
         if ($this->getFieldValue() === null) {
             $bad = true;
@@ -105,7 +101,7 @@ class Alias extends AbstractFieldHandler
      * @return  mixed
      * @since   1.0
      */
-    protected function escape()
+    public function escape()
     {
         parent::escape();
 
@@ -158,7 +154,7 @@ class Alias extends AbstractFieldHandler
 
         $bad = false;
 
-        $test = strpos($test, ' ');
+        $test = preg_replace('/ /', '-', $test);
         if ($this->getFieldValue() == $test) {
         } else {
             $bad = true;

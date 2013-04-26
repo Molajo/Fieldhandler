@@ -12,8 +12,6 @@ defined('MOLAJO') or die;
 
 use Molajo\FieldHandler\Exception\FieldHandlerException;
 
-use Molajo\FieldHandler\Api\FieldHandlerInterface;
-
 /**
  * Encoded FieldHandler
  *
@@ -35,7 +33,6 @@ class Encoded extends AbstractFieldHandler
      * @param   array  $fieldhandler_type_chain
      * @param   array  $options
      *
-     * @return  mixed
      * @since   1.0
      */
     public function __construct(
@@ -45,7 +42,7 @@ class Encoded extends AbstractFieldHandler
         $fieldhandler_type_chain,
         $options = array()
     ) {
-        return parent::__construct($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+        parent::__construct($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
     }
 
     /**
@@ -54,9 +51,17 @@ class Encoded extends AbstractFieldHandler
      * @return  mixed
      * @since   1.0
      */
-    protected function validate()
+    public function validate()
     {
         return parent::validate();
+
+        $test = filter_var($this->getFieldValue(), FILTER_SANITIZE_ENCODED, $this->setFlags());
+
+        if ($test === $this->getFieldValue()) {
+        } else {
+            throw new FieldHandlerException
+            ('Validate Encoded: ' . FILTER_INVALID_VALUE);
+        }
     }
 
     /**
@@ -65,7 +70,7 @@ class Encoded extends AbstractFieldHandler
      * @return  mixed
      * @since   1.0
      */
-    protected function filter()
+    public function filter()
     {
         parent::filter();
 
@@ -85,7 +90,7 @@ class Encoded extends AbstractFieldHandler
      * @return  mixed
      * @since   1.0
      */
-    protected function escape()
+    public function escape()
     {
         parent::escape();
 

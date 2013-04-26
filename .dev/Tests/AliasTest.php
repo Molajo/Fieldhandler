@@ -12,7 +12,7 @@ defined('MOLAJO') or die;
 
 use Molajo\FieldHandler\Adapter as adapter;
 use PHPUnit_Framework_TestCase;
-
+use Molajo\FieldHandler\Exception\FieldHandlerException;
 /**
  * Alias FieldHandler
  *
@@ -24,6 +24,14 @@ use PHPUnit_Framework_TestCase;
 class AliasTest extends PHPUnit_Framework_TestCase
 {
     /**
+     * Adapter
+     *
+     * @var    object  Molajo/Molajo/Adapter
+     * @since  1.0
+     */
+    protected $adapter;
+
+    /**
      * Set up
      *
      * @return void
@@ -31,30 +39,45 @@ class AliasTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        parent::setUp();
+        $this->adapter = new adapter();
+    }
+
+
+    /**
+     * @covers  Molajo\FieldHandler\Handler\Alias::validate
+     * @return  void
+     * @since   1.0
+     */
+    public function testValid()
+    {
+        $field_name              = 'alias';
+        $field_value             = 'jack-and-jill';
+        $fieldhandler_type_chain = 'Alias';
+        $options                 = array();
+
+        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+
+        $this->assertEquals($field_value, $results);
 
         return;
     }
 
     /**
      * @covers Molajo\FieldHandler\Handler\Alias::validate
-     * @expectedException Molajo\FieldHandler\Exception\FieldHandlerException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @return void
      * @since   1.0
      */
     public function testValidateFail()
     {
-        parent::setUp();
-
-        $method                  = 'Validate';
         $field_name              = 'alias';
         $field_value             = 'Jack and Jill';
         $fieldhandler_type_chain = 'Alias';
         $options                 = array();
 
-        $adapter = new adapter($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals(1, $adapter->field_value);
+        $this->assertEquals($field_value, $results);
 
         return;
     }
@@ -64,19 +87,16 @@ class AliasTest extends PHPUnit_Framework_TestCase
      * @return void
      * @since   1.0
      */
-    public function testFilterSucceed()
+    public function testFilterSucceed2()
     {
-        parent::setUp();
-
-        $method                  = 'Filter';
         $field_name              = 'alias';
         $field_value             = 'Jack and Jill';
         $fieldhandler_type_chain = 'Alias';
         $options                 = array();
 
-        $adapter = new adapter($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->adapter->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals('jack-and-jill', $adapter->field_value);
+        $this->assertEquals('jack-and-jill', $results);
 
         return;
     }
@@ -86,19 +106,16 @@ class AliasTest extends PHPUnit_Framework_TestCase
      * @return void
      * @since   1.0
      */
-    public function testEscapeSucceed()
+    public function testEscapeSucceed3()
     {
-        parent::setUp();
-
-        $method                  = 'Escape';
         $field_name              = 'alias';
         $field_value             = 'Jack *&and+Jill';
         $fieldhandler_type_chain = 'Alias';
         $options                 = array();
 
-        $adapter = new adapter($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->adapter->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals('jack-and-jill', $adapter->field_value);
+        $this->assertEquals('jack-and-jill', $results);
 
         return;
     }
@@ -111,6 +128,6 @@ class AliasTest extends PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        parent::tearDown();
+
     }
 }

@@ -13,6 +13,7 @@ defined('MOLAJO') or die;
 use Exception;
 use Molajo\FieldHandler\Exception\FieldHandlerException;
 use Molajo\FieldHandler\Api\FieldHandlerInterface;
+
 /**
  * FieldHandler Adapter
  *
@@ -70,7 +71,15 @@ class Adapter implements FieldHandlerInterface
      */
     public function __construct()
     {
-        $this->initialise();
+        if (defined('FILTER_VALUE_REQUIRED')) {
+        } else {
+            define('FILTER_VALUE_REQUIRED', ' Value required.');
+        }
+
+        if (defined('FILTER_INVALID_VALUE')) {
+        } else {
+            define('FILTER_INVALID_VALUE', ' Invalid value.');
+        }
     }
 
     /**
@@ -264,30 +273,4 @@ class Adapter implements FieldHandlerInterface
 
         return $class;
     }
-
-    /**
-     * initialise
-     *
-     * @return  void
-     * @since   1.0
-     */
-    public function initialise()
-    {
-        if (defined('FILTER_VALUE_REQUIRED')) {
-            return;
-        }
-
-        if (defined('FILTER_VALUE_REQUIRED')) {
-        } else {
-            define('FILTER_VALUE_REQUIRED', ' Value required.');
-        }
-
-        if (defined('FILTER_INVALID_VALUE')) {
-        } else {
-            define('FILTER_INVALID_VALUE', ' Invalid value.');
-        }
-
-        return;
-    }
-
 }

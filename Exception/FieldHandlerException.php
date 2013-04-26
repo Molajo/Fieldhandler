@@ -11,6 +11,7 @@ namespace Molajo\FieldHandler\Exception;
 defined('MOLAJO') or die;
 
 use RuntimeException;
+use Molajo\FieldHandler\Api\ExceptionInterface;
 
 /**
  * FieldHandlerException Exception

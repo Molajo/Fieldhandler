@@ -1,6 +1,6 @@
 <?php
 /**
- * Css FieldHandler
+ * Object FieldHandler
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -12,19 +12,15 @@ defined('MOLAJO') or die;
 
 use Molajo\FieldHandler\Exception\FieldHandlerException;
 
-use Molajo\FieldHandler\Api\FieldHandlerInterface;
-
-//todo: amy this is not complelte
-
 /**
- * Css FieldHandler
+ * Object FieldHandler
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Css extends AbstractFieldHandler
+class Object extends AbstractFieldHandler
 {
     /**
      * Constructor
@@ -35,7 +31,6 @@ class Css extends AbstractFieldHandler
      * @param   array  $fieldhandler_type_chain
      * @param   array  $options
      *
-     * @return  mixed
      * @since   1.0
      */
     public function __construct(
@@ -45,7 +40,7 @@ class Css extends AbstractFieldHandler
         $fieldhandler_type_chain,
         $options = array()
     ) {
-        return parent::__construct($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+        parent::__construct($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
     }
 
     /**
@@ -54,21 +49,20 @@ class Css extends AbstractFieldHandler
      * @return  mixed
      * @since   1.0
      */
-    protected function validate()
+    public function validate()
     {
         parent::validate();
 
         if ($this->getFieldValue() === null) {
+
         } else {
 
-            $compare = $this->getFieldValue();
+            $test = is_object($this->getFieldValue());
 
-            $test = $this->filter();
-
-            if ($test == $compare) {
+            if ($test == true) {
             } else {
                 throw new FieldHandlerException
-                ('Validate Css: ' . FILTER_INVALID_VALUE);
+                ('Validate Object: ' . FILTER_INVALID_VALUE);
             }
         }
 
@@ -81,14 +75,19 @@ class Css extends AbstractFieldHandler
      * @return  mixed
      * @since   1.0
      */
-    protected function filter()
+    public function filter()
     {
         parent::filter();
 
         if ($this->getFieldValue() === null) {
         } else {
 
-            $test = $this->getFieldValue();
+            $test = is_object($this->getFieldValue());
+
+            if ($test == true) {
+            } else {
+                $this->setFieldValue(null);
+            }
         }
 
         return $this->getFieldValue();
@@ -100,12 +99,10 @@ class Css extends AbstractFieldHandler
      * @return  mixed
      * @since   1.0
      */
-    protected function escape()
+    public function escape()
     {
         parent::escape();
 
-        $this->filter();
-
-        return $this->getFieldValue();
+        return $this->filter();
     }
 }

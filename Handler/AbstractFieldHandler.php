@@ -128,7 +128,7 @@ class AbstractFieldHandler
      * @return  mixed
      * @since   1.0
      */
-    protected function validate()
+    public function validate()
     {
         return $this->getFieldValue();
     }
@@ -139,7 +139,7 @@ class AbstractFieldHandler
      * @return  mixed
      * @since   1.0
      */
-    protected function filter()
+    public function filter()
     {
         return $this->getFieldValue();
     }
@@ -150,7 +150,7 @@ class AbstractFieldHandler
      * @return  mixed
      * @since   1.0
      */
-    protected function escape()
+    public function escape()
     {
         return $this->getFieldValue();
     }
@@ -360,7 +360,7 @@ class AbstractFieldHandler
      * @return  string
      * @since   1.0
      */
-    protected function filterByCharacter($test, $filter)
+    public function filterByCharacter($test, $filter)
     {
         $filtered = '';
 

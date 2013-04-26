@@ -1,6 +1,6 @@
 <?php
 /**
- * Array FieldHandler Test
+ * Arrays FieldHandler Test
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -14,7 +14,7 @@ use Molajo\FieldHandler\Adapter as adapter;
 use PHPUnit_Framework_TestCase;
 
 /**
- * Array FieldHandler
+ * Arrays FieldHandler
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -24,6 +24,14 @@ use PHPUnit_Framework_TestCase;
 class ArraysTest extends PHPUnit_Framework_TestCase
 {
     /**
+     * Adapter
+     *
+     * @var    object  Molajo/Molajo/Adapter
+     * @since  1.0
+     */
+    protected $adapter;
+
+    /**
      * Set up
      *
      * @return void
@@ -31,35 +39,28 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        parent::setUp();
-
-        return;
+        $this->adapter = new adapter();
     }
 
     /**
-     * test Validate Success
-     *
-     * @covers  Molajo\FieldHandler\Handler\Default::validate
+     * @covers Molajo\FieldHandler\Handler\Arrays::validate
      * @return void
      * @since   1.0
      */
-    public function testValidateSuccess()
+    public function testValid()
     {
-        parent::setUp();
-
-        $input = array();
+        $input   = array();
         $input[] = 1;
         $input[] = 2;
 
-        $method                  = 'Validate';
-        $field_name              = 'alias';
+        $field_name              = 'test';
         $field_value             = $input;
         $fieldhandler_type_chain = 'Arrays';
         $options                 = array();
 
-        $adapter = new adapter($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($input, $adapter->field_value);
+        $this->assertEquals($field_value, $results);
 
         return;
     }
@@ -74,15 +75,14 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateSuccess2()
     {
-        parent::setUp();
-
-        $method                  = 'Validate';
         $field_name              = 'alias';
         $field_value             = 'dog';
         $fieldhandler_type_chain = 'Arrays';
         $options                 = array();
 
-        $adapter = new adapter($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+
+        $this->assertEquals($field_value, $results);
 
         return;
     }
@@ -96,21 +96,18 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      */
     public function testFilterSuccess()
     {
-        parent::setUp();
-
-        $input = array();
+        $input   = array();
         $input[] = 1;
         $input[] = 2;
 
-        $method                  = 'Filter';
         $field_name              = 'alias';
         $field_value             = $input;
         $fieldhandler_type_chain = 'Arrays';
         $options                 = array();
 
-        $adapter = new adapter($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($input, $adapter->field_value);
+        $this->assertEquals($field_value, $results);
 
         return;
     }
@@ -124,20 +121,17 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      */
     public function testFilterSuccess2()
     {
-        parent::setUp();
-
-        $input = array();
+        $input   = array();
         $input[] = 'dog';
 
-        $method                  = 'Filter';
         $field_name              = 'alias';
-        $field_value             = 'dog';
+        $field_value             = $input;
         $fieldhandler_type_chain = 'Arrays';
         $options                 = array();
 
-        $adapter = new adapter($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($input, $adapter->field_value);
+        $this->assertEquals($field_value, $results);
 
         return;
     }
@@ -151,27 +145,24 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      */
     public function testFilterSuccess3()
     {
-        parent::setUp();
-
-        $input = array();
+        $input   = array();
         $input[] = 'dog';
         $input[] = 'cat';
 
-        $method                  = 'Filter';
         $field_name              = 'alias';
         $field_value             = $input;
         $fieldhandler_type_chain = 'Arrays';
 
-        $array_valid_values = array();
+        $array_valid_values   = array();
         $array_valid_values[] = 'dog';
         $array_valid_values[] = 'cat';
         $array_valid_values[] = 'dogs';
         $array_valid_values[] = 'cats';
-        $options = array('array_valid_values' => $array_valid_values);
+        $options              = array('array_valid_values' => $array_valid_values);
 
-        $adapter = new adapter($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($input, $adapter->field_value);
+        $this->assertEquals($field_value, $results);
 
         return;
     }
@@ -186,26 +177,23 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      */
     public function testFilterFail1()
     {
-        parent::setUp();
-
-        $input = array();
+        $input   = array();
         $input[] = 'dog';
         $input[] = 'cat';
 
-        $method                  = 'Filter';
         $field_name              = 'alias';
         $field_value             = $input;
         $fieldhandler_type_chain = 'Arrays';
 
-        $array_valid_values = array();
+        $array_valid_values   = array();
         $array_valid_values[] = 'x';
         $array_valid_values[] = 'y';
 
         $options = array('array_valid_values' => $array_valid_values);
 
-        $adapter = new adapter($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
-        var_dump($adapter);
-        $this->assertEquals($input, $adapter->field_value);
+        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+
+        $this->assertEquals($field_value, $results);
 
         return;
     }
@@ -219,21 +207,18 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      */
     public function testEscapeSuccess()
     {
-        parent::setUp();
-
-        $input = array();
+        $input   = array();
         $input[] = 1;
         $input[] = 2;
 
-        $method                  = 'Escape';
         $field_name              = 'alias';
         $field_value             = $input;
         $fieldhandler_type_chain = 'Arrays';
         $options                 = array();
 
-        $adapter = new adapter($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($input, $adapter->field_value);
+        $this->assertEquals($field_value, $results);
 
         return;
     }
@@ -247,32 +232,18 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      */
     public function testEscapeSuccess2()
     {
-        parent::setUp();
-
-        $input = array();
+        $input   = array();
         $input[] = 'dog';
 
-        $method                  = 'Escape';
         $field_name              = 'alias';
-        $field_value             = 'dog';
+        $field_value             = $input;
         $fieldhandler_type_chain = 'Arrays';
         $options                 = array();
 
-        $adapter = new adapter($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($input, $adapter->field_value);
+        $this->assertEquals($field_value, $results);
 
         return;
-    }
-
-    /**
-     * Tear down
-     *
-     * @return void
-     * @since   1.0
-     */
-    protected function tearDown()
-    {
-        parent::tearDown();
     }
 }

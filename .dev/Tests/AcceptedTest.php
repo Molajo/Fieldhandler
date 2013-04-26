@@ -24,6 +24,14 @@ use PHPUnit_Framework_TestCase;
 class AcceptedTest extends PHPUnit_Framework_TestCase
 {
     /**
+     * Adapter
+     *
+     * @var    object  Molajo/Molajo/Adapter
+     * @since  1.0
+     */
+    protected $adapter;
+
+    /**
      * Set up
      *
      * @return void
@@ -31,9 +39,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        parent::setUp();
-
-        return;
+        $this->adapter = new adapter();
     }
 
     /**
@@ -45,17 +51,14 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateSuccess1()
     {
-        parent::setUp();
-
-        $method                  = 'Validate';
         $field_name              = 'agreement';
         $field_value             = 1;
         $fieldhandler_type_chain = 'Accepted';
         $options                 = array();
 
-        $adapter = new adapter($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+        $field_value = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals(1, $adapter->field_value);
+        $this->assertEquals(1, $field_value);
 
         return;
     }
@@ -69,17 +72,14 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateSuccess2()
     {
-        parent::setUp();
-
-        $method                  = 'Validate';
         $field_name              = 'agreement';
         $field_value             = 'yes';
         $fieldhandler_type_chain = 'Accepted';
         $options                 = array();
 
-        $adapter = new adapter($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+        $field_value = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals('yes', $adapter->field_value);
+        $this->assertEquals('yes', $field_value);
 
         return;
     }
@@ -93,17 +93,14 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateSuccess3()
     {
-        parent::setUp();
-
-        $method                  = 'Validate';
         $field_name              = 'agreement';
         $field_value             = 'on';
         $fieldhandler_type_chain = 'Accepted';
         $options                 = array();
 
-        $adapter = new adapter($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+        $field_value = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals('on', $adapter->field_value);
+        $this->assertEquals('on', $field_value);
 
         return;
     }
@@ -117,17 +114,14 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateSuccess4()
     {
-        parent::setUp();
-
-        $method                  = 'Validate';
         $field_name              = 'agreement';
         $field_value             = true;
         $fieldhandler_type_chain = 'Accepted';
         $options                 = array();
 
-        $adapter = new adapter($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+        $field_value = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals(true, $adapter->field_value);
+        $this->assertEquals(true, $field_value);
 
         return;
     }
@@ -140,17 +134,12 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateUnsuccessful()
     {
-        parent::setUp();
-
-        $method                  = 'Validate';
         $field_name              = 'agreement';
-        $field_value             = 'e';
+        $field_value             = 'nope';
         $fieldhandler_type_chain = 'Accepted';
         $options                 = array();
 
-        $adapter = new adapter($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
-
-        $this->assertEquals(null, $adapter->field_value);
+        $field_value = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         return;
     }
@@ -164,17 +153,14 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
      */
     public function testFilterSuccess()
     {
-        parent::setUp();
-
-        $method                  = 'Filter';
         $field_name              = 'agreement';
-        $field_value             = true;
+        $field_value             = 'on';
         $fieldhandler_type_chain = 'Accepted';
         $options                 = array();
 
-        $adapter = new adapter($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+        $field_value = $this->adapter->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals(true, $adapter->field_value);
+        $this->assertEquals('on', $field_value);
 
         return;
     }
@@ -186,17 +172,12 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
      */
     public function testFilterUnsuccessful()
     {
-        parent::setUp();
-
-        $method                  = 'Filter';
         $field_name              = 'agreement';
-        $field_value             = 'e';
+        $field_value             = 'noway';
         $fieldhandler_type_chain = 'Accepted';
         $options                 = array();
 
-        $adapter = new adapter($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
-
-        $this->assertEquals(null, $adapter->field_value);
+        $field_value = $this->adapter->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         return;
     }

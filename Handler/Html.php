@@ -12,8 +12,6 @@ defined('MOLAJO') or die;
 
 use Molajo\FieldHandler\Exception\FieldHandlerException;
 
-use Molajo\FieldHandler\Api\FieldHandlerInterface;
-
 /**
  * Html FieldHandler
  *
@@ -33,7 +31,6 @@ class Html extends AbstractFieldHandler
      * @param   array  $fieldhandler_type_chain
      * @param   array  $options
      *
-     * @return  mixed
      * @since   1.0
      */
     public function __construct(
@@ -43,7 +40,7 @@ class Html extends AbstractFieldHandler
         $fieldhandler_type_chain,
         $options = array()
     ) {
-        return parent::__construct($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+        parent::__construct($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
     }
 
     /**
@@ -52,7 +49,7 @@ class Html extends AbstractFieldHandler
      * @return  mixed
      * @since   1.0
      */
-    protected function validate()
+    public function validate()
     {
         parent::validate();
 
@@ -80,7 +77,7 @@ class Html extends AbstractFieldHandler
      * @return  mixed
      * @since   1.0
      */
-    protected function filter()
+    public function filter()
     {
         parent::filter();
 
@@ -106,7 +103,7 @@ class Html extends AbstractFieldHandler
      * @return  mixed
      * @since   1.0
      */
-    protected function escape()
+    public function escape()
     {
         $result = htmlspecialchars($this->getFieldValue(), $this->html_entities, $this->encoding);
 

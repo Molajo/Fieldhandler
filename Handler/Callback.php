@@ -11,8 +11,7 @@ namespace Molajo\FieldHandler\Handler;
 defined('MOLAJO') or die;
 
 use Molajo\FieldHandler\Exception\FieldHandlerException;
-
-use Molajo\FieldHandler\Api\FieldHandlerInterface;
+use Whoops\Handler\PrettyPageHandler;
 
 /**
  * Callback FieldHandler
@@ -33,7 +32,6 @@ class Callback extends AbstractFieldHandler
      * @param   array  $fieldhandler_type_chain
      * @param   array  $options
      *
-     * @return  mixed
      * @since   1.0
      */
     public function __construct(
@@ -43,7 +41,7 @@ class Callback extends AbstractFieldHandler
         $fieldhandler_type_chain,
         $options = array()
     ) {
-        return parent::__construct($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
+        parent::__construct($method, $field_name, $field_value, $fieldhandler_type_chain, $options);
     }
 
     /**
@@ -52,7 +50,7 @@ class Callback extends AbstractFieldHandler
      * @return  mixed
      * @since   1.0
      */
-    protected function validate()
+    public function validate()
     {
         parent::validate();
 
@@ -62,7 +60,11 @@ class Callback extends AbstractFieldHandler
 
             $test = filter_var($this->getFieldValue(), FILTER_CALLBACK, $this->setCallback());
 
-            $this->setFieldValue($test);
+            if ($test == $this->getFieldValue()) {
+            } else {
+                throw new FieldHandlerException
+                ('Validate Callback: ' . FILTER_INVALID_VALUE);
+            }
         }
 
         return $this->getFieldValue();
@@ -74,20 +76,15 @@ class Callback extends AbstractFieldHandler
      * @return  mixed
      * @since   1.0
      */
-    protected function filter()
+    public function filter()
     {
         parent::filter();
 
         if ($this->getFieldValue() === null) {
 
         } else {
-
             $test = filter_var($this->getFieldValue(), FILTER_CALLBACK, $this->setCallback());
-
-            if ($test == $this->getFieldValue()) {
-            } else {
-                $this->setFieldValue(filter_var($this->getFieldValue(), FILTER_CALLBACK, $this->setCallback()));
-            }
+            $this->setFieldValue(filter_var($this->getFieldValue(), FILTER_CALLBACK, $this->setCallback()));
         }
 
         return $this->getFieldValue();
@@ -99,17 +96,11 @@ class Callback extends AbstractFieldHandler
      * @return  mixed
      * @since   1.0
      */
-    protected function escape()
+    public function escape()
     {
         parent::escape();
 
-        $test = filter_var($this->getFieldValue(), FILTER_CALLBACK, $this->setCallback());
-
-        if ($test == $this->getFieldValue()) {
-
-        } else {
-            $this->setFieldValue(filter_var($this->getFieldValue(), FILTER_CALLBACK, $this->setCallback()));
-        }
+        $this->filter();
 
         return $this->getFieldValue();
     }
@@ -128,6 +119,8 @@ class Callback extends AbstractFieldHandler
             $callback = $this->options['callback'];
         }
 
-        return $callback;
+        $return = array();
+        $return['options'] = $callback;
+        return $return;
     }
 }
