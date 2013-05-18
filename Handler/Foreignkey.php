@@ -8,8 +8,7 @@
  */
 namespace Molajo\FieldHandler\Handler;
 
-defined('MOLAJO') or die;
-
+use Exception;
 use Molajo\FieldHandler\Exception\FieldHandlerException;
 
 /**
@@ -49,22 +48,13 @@ class Foreignkey extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
+     * @throws  FieldHandlerException
      */
     public function validate()
     {
         parent::validate();
 
-        if ($this->getFieldValue() === null) {
-        } else {
-
-            $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_EMAIL);
-
-            if ($test === $this->getFieldValue()) {
-            } else {
-                throw new FieldHandlerException
-                ('Validate Foreignkey: ' . FILTER_INVALID_VALUE);
-            }
-        }
+        $this->filter();
 
         return $this->getFieldValue();
     }
@@ -74,16 +64,22 @@ class Foreignkey extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
+     * @throws  FieldHandlerException
      */
     public function filter()
     {
         parent::filter();
 
-        $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_EMAIL);
-
-        if ($test === $this->getFieldValue()) {
+        if ($this->getFieldValue() === null) {
         } else {
-            $this->setFieldValue(null);
+
+            $test = $this->verifyForeignKey($this->getFieldValue());
+
+            if ($test == $this->getFieldValue()) {
+            } else {
+                throw new FieldHandlerException
+                ('Validate Foreignkey: ' . FILTER_INVALID_VALUE);
+            }
         }
 
         return $this->getFieldValue();
@@ -105,17 +101,48 @@ class Foreignkey extends AbstractFieldHandler
     }
 
     /**
-     * Check Foreign Key
+     * Verify Foreign Key
+     *
+     * @param   mixed $key_value
      *
      * @return  mixed
      * @since   1.0
+     * @throws  FieldHandlerException
      */
-    public function escape()
+    public function verifyForeignKey($key_value)
     {
-        parent::escape();
+        if ($this->database === null) {
+            throw new FieldHandlerException
+            ('Validate Foreignkey: Database connection must be sent in as a database entry $options array.');
+        }
 
-        $this->filter();
+        if ($this->table === null) {
+            throw new FieldHandlerException
+            ('Validate Foreignkey: Name of table must be sent in as a table entry in the $options array.');
+        }
 
-        return $this->getFieldValue();
+        if ($this->key === null) {
+            throw new FieldHandlerException
+            ('Validate Foreignkey: Name of key must be sent in as a key entry in the $options array.');
+        }
+
+        $query = $this->database->getQueryObject();
+
+        $query->select($this->database->quoteName($this->key));
+        $query->from($this->database->quoteName($this->table));
+        $query->where(
+            $this->database->quoteName($this->key)
+            . ' =  ' . $this->database->quote($key_value)
+        );
+
+        try {
+
+            return $this->database->loadResult();
+
+        } catch (Exception $e) {
+
+            throw new FieldHandlerException
+            ('FieldHandler Foreignkey: Database query failed: ' . $e->getMessage());
+        }
     }
 }

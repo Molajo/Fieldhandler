@@ -8,8 +8,6 @@
  */
 namespace Molajo\FieldHandler\Api;
 
-defined('MOLAJO') or die;
-
 /**
  * Exception Interface
  *

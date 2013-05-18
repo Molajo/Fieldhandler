@@ -8,8 +8,6 @@
  */
 namespace Molajo\FieldHandler\Api;
 
-defined('MOLAJO') or die;
-
 use Molajo\FieldHandler\Exception\FieldHandlerException;
 
 /**
@@ -25,10 +23,10 @@ interface FieldHandlerInterface
     /**
      * Validate
      *
-     * @param   string      $field_name
-     * @param   null|mixed  $field_value
-     * @param   string      $fieldhandler_type_chain
-     * @param   array       $options
+     * @param   string     $field_name
+     * @param   null|mixed $field_value
+     * @param   string     $fieldhandler_type_chain
+     * @param   array      $options
      *
      * @return  mixed
      * @since   1.0
@@ -44,10 +42,10 @@ interface FieldHandlerInterface
     /**
      * Filter
      *
-     * @param   string      $field_name
-     * @param   null|mixed  $field_value
-     * @param   string      $fieldhandler_type_chain
-     * @param   array       $options
+     * @param   string     $field_name
+     * @param   null|mixed $field_value
+     * @param   string     $fieldhandler_type_chain
+     * @param   array      $options
      *
      * @return  mixed
      * @since   1.0
@@ -63,10 +61,10 @@ interface FieldHandlerInterface
     /**
      * Escape
      *
-     * @param   string      $field_name
-     * @param   null|mixed  $field_value
-     * @param   string      $fieldhandler_type_chain
-     * @param   array       $options
+     * @param   string     $field_name
+     * @param   null|mixed $field_value
+     * @param   string     $fieldhandler_type_chain
+     * @param   array      $options
      *
      * @return  mixed
      * @since   1.0

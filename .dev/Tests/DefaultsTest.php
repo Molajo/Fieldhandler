@@ -8,7 +8,7 @@
  */
 namespace Molajo\FieldHandler\Tests;
 
-defined('MOLAJO') or die;
+
 
 use Molajo\FieldHandler\Adapter as adapter;
 use PHPUnit_Framework_TestCase;
@@ -67,7 +67,7 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Molajo\FieldHandler\Handler\Defaults::validate
+     * @covers  Molajo\FieldHandler\Handler\Defaults::validate
      * @return void
      * @since   1.0
      */

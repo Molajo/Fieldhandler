@@ -8,8 +8,6 @@
  */
 namespace Molajo\FieldHandler\Handler;
 
-defined('MOLAJO') or die;
-
 use Molajo\FieldHandler\Exception\FieldHandlerException;
 
 /**
@@ -53,15 +51,17 @@ class Encoded extends AbstractFieldHandler
      */
     public function validate()
     {
-        return parent::validate();
+        parent::validate();
 
         $test = filter_var($this->getFieldValue(), FILTER_SANITIZE_ENCODED, $this->setFlags());
 
-        if ($test === $this->getFieldValue()) {
+        if ($test == $this->getFieldValue()) {
         } else {
             throw new FieldHandlerException
             ('Validate Encoded: ' . FILTER_INVALID_VALUE);
         }
+
+        return  $this->getFieldValue();
     }
 
     /**
@@ -76,7 +76,7 @@ class Encoded extends AbstractFieldHandler
 
         $test = filter_var($this->getFieldValue(), FILTER_SANITIZE_ENCODED, $this->setFlags());
 
-        if ($test === $this->getFieldValue()) {
+        if ($test == $this->getFieldValue()) {
         } else {
             $this->setFieldValue($test);
         }

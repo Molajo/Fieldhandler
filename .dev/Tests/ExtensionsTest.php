@@ -8,11 +8,12 @@
  */
 namespace Molajo\FieldHandler\Tests;
 
-defined('MOLAJO') or die;
+
 
 use Molajo\FieldHandler\Adapter as adapter;
 use PHPUnit_Framework_TestCase;
 use Molajo\FieldHandler\Exception\FieldHandlerException;
+
 /**
  * Extensions FieldHandler
  *
@@ -49,7 +50,7 @@ class ExtensionsTest extends PHPUnit_Framework_TestCase
      */
     public function testValidate1()
     {
-        $input = array();
+        $input   = array();
         $input[] = '.jpg';
         $input[] = '.gif';
         $input[] = '.png';
@@ -59,7 +60,7 @@ class ExtensionsTest extends PHPUnit_Framework_TestCase
         $fieldhandler_type_chain = 'Extensions';
         $options                 = array();
 
-        $array_valid_values = array();
+        $array_valid_values   = array();
         $array_valid_values[] = '.jpg';
         $array_valid_values[] = '.gif';
         $array_valid_values[] = '.png';
@@ -88,7 +89,7 @@ class ExtensionsTest extends PHPUnit_Framework_TestCase
         $fieldhandler_type_chain = 'Extensions';
         $options                 = array();
 
-        $array_valid_values = array();
+        $array_valid_values   = array();
         $array_valid_values[] = '.jpg';
         $array_valid_values[] = '.gif';
         $array_valid_values[] = '.png';
@@ -110,7 +111,7 @@ class ExtensionsTest extends PHPUnit_Framework_TestCase
      */
     public function testFilter1()
     {
-        $input = array();
+        $input   = array();
         $input[] = '.jpg';
         $input[] = '.gif';
         $input[] = '.png';
@@ -120,7 +121,7 @@ class ExtensionsTest extends PHPUnit_Framework_TestCase
         $fieldhandler_type_chain = 'Extensions';
         $options                 = array();
 
-        $array_valid_values = array();
+        $array_valid_values   = array();
         $array_valid_values[] = '.jpg';
         $array_valid_values[] = '.gif';
         $array_valid_values[] = '.png';
@@ -147,7 +148,7 @@ class ExtensionsTest extends PHPUnit_Framework_TestCase
         $fieldhandler_type_chain = 'Extensions';
         $options                 = array();
 
-        $array_valid_values = array();
+        $array_valid_values   = array();
         $array_valid_values[] = '.jpg';
         $array_valid_values[] = '.gif';
         $array_valid_values[] = '.png';
@@ -161,6 +162,7 @@ class ExtensionsTest extends PHPUnit_Framework_TestCase
 
         return;
     }
+
     /**
      * Tear down
      *

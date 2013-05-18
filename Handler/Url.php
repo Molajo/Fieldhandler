@@ -8,9 +8,8 @@
  */
 namespace Molajo\FieldHandler\Handler;
 
-defined('MOLAJO') or die;
-
 use Molajo\FieldHandler\Exception\FieldHandlerException;
+use Molajo\FieldHandler\Api\FieldHandlerInterface;
 
 /**
  * Url FieldHandler
@@ -48,28 +47,19 @@ class Url extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
+     * @throws  FieldHandlerException
      */
     public function validate()
     {
         parent::validate();
 
-        if ($this->getFieldValue() === null) {
+        $hold = $this->getFieldValue();
+
+        $test = $this->filter();
+
+        if ($test == $hold) {
         } else {
-
-            $url = str_replace(
-                array('ftp://', 'ftps://', 'http://', 'https://'),
-                ''
-                ,
-                strtolower($this->getFieldValue())
-            );
-
-            $test = filter_var($url, FILTER_VALIDATE_URL, $this->setFlags());
-
-            if ($test == true) {
-            } else {
-                throw new FieldHandlerException
-                ('Validate Url: ' . FILTER_INVALID_VALUE);
-            }
+            throw new FieldHandlerException ('Validate Url: ' . FILTER_INVALID_VALUE);
         }
 
         return $this->getFieldValue();
@@ -85,22 +75,18 @@ class Url extends AbstractFieldHandler
     {
         parent::filter();
 
-        if ($this->getFieldValue() === null) {
+        $url = str_replace(
+            array('ftp://', 'ftps://', 'http://', 'https://'),
+            ''
+            ,
+            strtolower($this->getFieldValue())
+        );
+
+        $test = filter_var($url, FILTER_SANITIZE_URL, $this->setFlags());
+
+        if ($test == $url) {
         } else {
-
-            $url = str_replace(
-                array('ftp://', 'ftps://', 'http://', 'https://'),
-                ''
-                ,
-                strtolower($this->getFieldValue())
-            );
-
-            $test = filter_var($url, FILTER_SANITIZE_URL, $this->setFlags());
-
-            if ($test == true) {
-            } else {
-                $this->setFieldValue(filter_var($url, FILTER_SANITIZE_URL));
-            }
+            $this->setFieldValue(filter_var($url, FILTER_SANITIZE_URL));
         }
 
         return $this->getFieldValue();
@@ -116,21 +102,7 @@ class Url extends AbstractFieldHandler
     {
         parent::escape();
 
-        $url = str_replace(
-            array('ftp://', 'ftps://', 'http://', 'https://'),
-            ''
-            ,
-            strtolower($this->getFieldValue())
-        );
-
-        $test = filter_var($url, FILTER_SANITIZE_URL, $this->setFlags());
-
-        if ($test == true) {
-        } else {
-            $this->setFieldValue(filter_var($url, FILTER_SANITIZE_URL));
-        }
-
-        return $this->getFieldValue();
+        return $this->filter();
     }
 
     /**

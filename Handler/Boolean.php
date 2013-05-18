@@ -8,8 +8,6 @@
  */
 namespace Molajo\FieldHandler\Handler;
 
-defined('MOLAJO') or die;
-
 use Molajo\FieldHandler\Exception\FieldHandlerException;
 
 /**

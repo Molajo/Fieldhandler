@@ -8,8 +8,6 @@
  */
 namespace Molajo\FieldHandler\Handler;
 
-defined('MOLAJO') or die;
-
 use Molajo\FieldHandler\Exception\FieldHandlerException;
 
 /**
@@ -48,6 +46,7 @@ class Trim extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
+     * @throws  FieldHandlerException
      */
     public function validate()
     {
@@ -57,7 +56,7 @@ class Trim extends AbstractFieldHandler
         } else {
 
             $test = trim($this->getFieldValue());
-            if ($test == 1) {
+            if ($test == $this->getFieldValue()) {
             } else {
                 throw new FieldHandlerException
                 ('Validate Trim: ' . FILTER_INVALID_VALUE);
@@ -98,16 +97,6 @@ class Trim extends AbstractFieldHandler
      */
     public function escape()
     {
-        if ($this->getFieldValue() === null) {
-        } else {
-
-            $test = trim($this->getFieldValue());
-            if ($test == $this->getFieldValue()) {
-            } else {
-                $this->setFieldValue($test);
-            }
-        }
-
-        return $this->getFieldValue();
+        return $this->filter();
     }
 }

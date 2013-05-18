@@ -1,6 +1,6 @@
 <?php
 /**
- * NotEqual FieldHandler
+ * Notequal FieldHandler
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -8,19 +8,17 @@
  */
 namespace Molajo\FieldHandler\Handler;
 
-defined('MOLAJO') or die;
-
 use Molajo\FieldHandler\Exception\FieldHandlerException;
 
 /**
- * NotEqual FieldHandler
+ * Notequal FieldHandler
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class NotEqual extends AbstractFieldHandler
+class Notequal extends AbstractFieldHandler
 {
     /**
      * Constructor
@@ -48,6 +46,7 @@ class NotEqual extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
+     * @throws  FieldHandlerException
      */
     public function validate()
     {
@@ -55,9 +54,7 @@ class NotEqual extends AbstractFieldHandler
 
         $notEqual = $this->getNotEqual();
 
-        if ($this->getFieldValue() != $notEqual) {
-
-        } else {
+        if ($this->getFieldValue() == $notEqual) {
 
             throw new FieldHandlerException
             ('Validate Value: ' . $this->getFieldValue() . ' must not be equal to: ' . $notEqual);
@@ -78,9 +75,7 @@ class NotEqual extends AbstractFieldHandler
 
         $notEqual = $this->getNotEqual();
 
-        if ($this->getFieldValue() != $notEqual) {
-
-        } else {
+        if ($this->getFieldValue() == $notEqual) {
             $this->setFieldValue(null);
         }
 
@@ -114,6 +109,6 @@ class NotEqual extends AbstractFieldHandler
             $field_value = $this->options['not_equal'];
         }
 
-        return array($field_value);
+        return $field_value;
     }
 }

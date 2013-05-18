@@ -8,11 +8,10 @@
  */
 namespace Molajo\FieldHandler\Tests;
 
-defined('MOLAJO') or die;
-
 use Molajo\FieldHandler\Adapter as adapter;
 use PHPUnit_Framework_TestCase;
 use Molajo\FieldHandler\Exception\FieldHandlerException;
+
 /**
  * Alias FieldHandler
  *
@@ -63,7 +62,7 @@ class AliasTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Molajo\FieldHandler\Handler\Alias::validate
+     * @covers  Molajo\FieldHandler\Handler\Alias::validate
      * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @return void
      * @since   1.0
@@ -83,7 +82,7 @@ class AliasTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Molajo\FieldHandler\Handler\Alias::filter
+     * @covers  Molajo\FieldHandler\Handler\Alias::filter
      * @return void
      * @since   1.0
      */
@@ -102,7 +101,7 @@ class AliasTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Molajo\FieldHandler\Handler\Alias::escape
+     * @covers  Molajo\FieldHandler\Handler\Alias::escape
      * @return void
      * @since   1.0
      */

@@ -8,7 +8,7 @@
  */
 namespace Molajo\FieldHandler\Tests;
 
-defined('MOLAJO') or die;
+
 
 use Molajo\FieldHandler\Adapter as adapter;
 use PHPUnit_Framework_TestCase;
@@ -43,7 +43,7 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Molajo\FieldHandler\Handler\Alphanumeric::validate
+     * @covers  Molajo\FieldHandler\Handler\Alphanumeric::validate
      * @return void
      * @since   1.0
      */
@@ -62,7 +62,7 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Molajo\FieldHandler\Handler\Alphanumeric::validate
+     * @covers  Molajo\FieldHandler\Handler\Alphanumeric::validate
      * @expectedException Molajo\FieldHandler\Exception\FieldHandlerException
      * @return void
      * @since   1.0
@@ -82,7 +82,7 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Molajo\FieldHandler\Handler\Alphanumeric::filter
+     * @covers  Molajo\FieldHandler\Handler\Alphanumeric::filter
      * @return void
      * @since   1.0
      */
@@ -101,7 +101,7 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Molajo\FieldHandler\Handler\Alphanumeric::filter
+     * @covers  Molajo\FieldHandler\Handler\Alphanumeric::filter
      * @return void
      * @since   1.0
      */
@@ -114,7 +114,7 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
 
         $results = $this->adapter->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $field_value             = 'Aa123';
+        $field_value = 'Aa123';
         $this->assertEquals($field_value, $results);
 
         return;
@@ -122,7 +122,7 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers Molajo\FieldHandler\Handler\Alphanumeric::filter
+     * @covers  Molajo\FieldHandler\Handler\Alphanumeric::filter
      * @return void
      * @since   1.0
      */
@@ -141,7 +141,7 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Molajo\FieldHandler\Handler\Alphanumeric::filter
+     * @covers  Molajo\FieldHandler\Handler\Alphanumeric::filter
      * @return void
      * @since   1.0
      */
@@ -154,7 +154,7 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
 
         $results = $this->adapter->escape($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $field_value             = 'Aa123';
+        $field_value = 'Aa123';
         $this->assertEquals($field_value, $results);
 
         return;

@@ -1,6 +1,6 @@
 <?php
 /**
- * FromTo FieldHandler
+ * Fromto FieldHandler
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -8,20 +8,18 @@
  */
 namespace Molajo\FieldHandler\Handler;
 
-defined('MOLAJO') or die;
-
 use Molajo\FieldHandler\Exception\FieldHandlerException;
-
+use Molajo\FieldHandler\Api\FieldHandlerInterface;
 
 /**
- * FromTo FieldHandler
+ * Fromto FieldHandler
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class FromTo extends AbstractFieldHandler
+class Fromto extends AbstractFieldHandler
 {
     /**
      * Constructor
@@ -50,21 +48,23 @@ class FromTo extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
+     * @throws  FieldHandlerException
      */
     public function validate()
     {
         parent::validate();
 
-        $FromTo = $this->getFromTo();
+        $Fromto = $this->getFromto();
 
-        if ($this->getFieldValue() >= $FromTo[0]
-            && $this->getFieldValue() <= $FromTo[1]) {
+        if ($this->getFieldValue() >= $Fromto[0]
+            && $this->getFieldValue() <= $Fromto[1]
+        ) {
 
         } else {
 
             throw new FieldHandlerException
             ('Validate Value: ' . $this->getFieldValue()
-                . ' is not a value From: ' . $FromTo[0] . '  To:' . $FromTo[1]);
+            . ' is not a value From: ' . $Fromto[0] . '  To:' . $Fromto[1]);
         }
 
         return $this->getFieldValue();
@@ -80,10 +80,11 @@ class FromTo extends AbstractFieldHandler
     {
         parent::filter();
 
-        $FromTo = $this->getFromTo();
+        $Fromto = $this->getFromto();
 
-        if ($this->getFieldValue() > $FromTo[0]
-            && $this->getFieldValue() < $FromTo[1]) {
+        if ($this->getFieldValue() > $Fromto[0]
+            && $this->getFieldValue() < $Fromto[1]
+        ) {
 
         } else {
             $this->setFieldValue(null);
@@ -111,17 +112,17 @@ class FromTo extends AbstractFieldHandler
      * @return  mixed
      * @since   1.0
      */
-    public function getFromTo()
+    public function getFromto()
     {
         $field_value_from = 0;
-        $field_value_to = 999999999999;
+        $field_value_to   = 999999999999;
 
-        if (isset($this->options['from_value'])) {
-            $field_value_from = $this->options['from_value'];
+        if (isset($this->options['from'])) {
+            $field_value_from = $this->options['from'];
         }
 
-        if (isset($this->options['to_value'])) {
-            $field_value_to = $this->options['to_value'];
+        if (isset($this->options['to'])) {
+            $field_value_to = $this->options['to'];
         }
 
         return array($field_value_from, $field_value_to);

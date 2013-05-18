@@ -8,9 +8,8 @@
  */
 namespace Molajo\FieldHandler\Handler;
 
-defined('MOLAJO') or die;
-
 use Molajo\FieldHandler\Exception\FieldHandlerException;
+use Molajo\FieldHandler\Api\FieldHandlerInterface;
 
 /**
  * Mimetypes FieldHandler
@@ -49,6 +48,7 @@ class Mimetypes extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
+     * @throws  FieldHandlerException
      */
     public function validate()
     {

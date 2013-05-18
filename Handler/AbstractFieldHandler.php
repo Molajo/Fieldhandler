@@ -8,11 +8,7 @@
  */
 namespace Molajo\FieldHandler\Handler;
 
-defined('MOLAJO') or die;
-
 use Molajo\FieldHandler\Exception\FieldHandlerException;
-
-use Molajo\FieldHandler\Api\FieldHandlerInterface;
 
 /**
  * Abstract FieldHandler Class
@@ -22,7 +18,7 @@ use Molajo\FieldHandler\Api\FieldHandlerInterface;
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class AbstractFieldHandler
+abstract class AbstractFieldHandler
 {
     /**
      * FieldHandler Type
@@ -63,6 +59,30 @@ class AbstractFieldHandler
      * @since  1.0
      */
     protected $options;
+
+    /**
+     * Database instance
+     *
+     * @var    object
+     * @since  1.0
+     */
+    protected $database;
+
+    /**
+     * Database Table
+     *
+     * @var    object
+     * @since  1.0
+     */
+    protected $table;
+
+    /**
+     * Table key
+     *
+     * @var    object
+     * @since  1.0
+     */
+    protected $key;
 
     /**
      * Timezone
@@ -111,22 +131,29 @@ class AbstractFieldHandler
         $field_value,
         $options
     ) {
+        if (function_exists('date_default_timezone_set') && function_exists('date_default_timezone_get')) {
+            date_default_timezone_set(@date_default_timezone_get());
+        }
+
         $this->setFieldHandlerType($fieldhandler_type);
         $this->setMethod($method);
         $this->setFieldName($field_name);
         $this->setFieldValue($field_value);
         $this->setOptions($options);
-
+        $this->setDatabase();
+        $this->setTable();
+        $this->setKey();
         $this->getUserTimeZone();
 
         return $this;
     }
 
     /**
-     * Validate Input
+     * Validate
      *
      * @return  mixed
      * @since   1.0
+     * @throws  FieldHandlerException
      */
     public function validate()
     {
@@ -134,10 +161,11 @@ class AbstractFieldHandler
     }
 
     /**
-     * FieldHandler Input
+     * Filter
      *
      * @return  mixed
      * @since   1.0
+     * @throws  FieldHandlerException
      */
     public function filter()
     {
@@ -145,10 +173,11 @@ class AbstractFieldHandler
     }
 
     /**
-     * Escapes and formats output
+     * Escape
      *
      * @return  mixed
      * @since   1.0
+     * @throws  FieldHandlerException
      */
     public function escape()
     {
@@ -176,7 +205,7 @@ class AbstractFieldHandler
         } else {
             throw new FieldHandlerException
             ('FieldHandler: Invalid Method: ' . $method
-                . ' Must be  validate, filter, escape.');
+            . ' Must be  validate, filter, escape.');
         }
 
         $this->method = $method;
@@ -289,6 +318,90 @@ class AbstractFieldHandler
     }
 
     /**
+     * Set Database
+     *
+     * @return  $this
+     * @since   1.0
+     */
+    public function setDatabase()
+    {
+        if (isset($this->options['database'])) {
+            $this->database = $this->options['database'];
+        } else {
+            $this->database = null;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get Database
+     *
+     * @return  array
+     * @since   1.0
+     */
+    public function getDatabase()
+    {
+        return $this->database;
+    }
+
+    /**
+     * Set Table
+     *
+     * @return  $this
+     * @since   1.0
+     */
+    public function setTable()
+    {
+        if (isset($this->options['table'])) {
+            $this->table = $this->options['table'];
+        } else {
+            $this->table = null;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get Table
+     *
+     * @return  array
+     * @since   1.0
+     */
+    public function getTable()
+    {
+        return $this->table;
+    }
+
+    /**
+     * Set Key
+     *
+     * @return  $this
+     * @since   1.0
+     */
+    public function setKey()
+    {
+        if (isset($this->options['key'])) {
+            $this->key = $this->options['key'];
+        } else {
+            $this->key = null;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get Key
+     *
+     * @return  array
+     * @since   1.0
+     */
+    public function getKey()
+    {
+        return $this->key;
+    }
+
+    /**
      * Get timezone
      *
      * @return  array
@@ -383,7 +496,7 @@ class AbstractFieldHandler
      */
     public function getTrueArray()
     {
-        $trueArray = array();
+        $trueArray   = array();
         $trueArray[] = true;
         $trueArray[] = 1;
         $trueArray[] = 'yes';

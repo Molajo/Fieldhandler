@@ -1,6 +1,6 @@
 <?php
 /**
- * Equals FieldHandler
+ * Equal FieldHandler
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
@@ -8,19 +8,17 @@
  */
 namespace Molajo\FieldHandler\Handler;
 
-defined('MOLAJO') or die;
-
 use Molajo\FieldHandler\Exception\FieldHandlerException;
 
 /**
- * Equals FieldHandler
+ * Equal FieldHandler
  *
  * @package   Molajo
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  * @since     1.0
  */
-class Equals extends AbstractFieldHandler
+class Equal extends AbstractFieldHandler
 {
     /**
      * Constructor
@@ -53,12 +51,12 @@ class Equals extends AbstractFieldHandler
     {
         parent::validate();
 
-        $equals = $this->getEquals();
+        $equals = $this->getEqual();
 
         if ($this->getFieldValue() == $equals) {
         } else {
             throw new FieldHandlerException
-            ('Validate Equals: ' . FILTER_INVALID_VALUE);
+            ('Validate Equal: ' . FILTER_INVALID_VALUE);
         }
 
         return $this->getFieldValue();
@@ -74,7 +72,7 @@ class Equals extends AbstractFieldHandler
     {
         parent::filter();
 
-        $equals = $this->getEquals();
+        $equals = $this->getEqual();
 
         if ($this->getFieldValue() == $equals) {
         } else {
@@ -103,7 +101,7 @@ class Equals extends AbstractFieldHandler
      * @return  mixed
      * @since   1.0
      */
-    public function getEquals()
+    public function getEqual()
     {
         $field_value = null;
 

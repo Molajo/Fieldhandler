@@ -8,7 +8,7 @@
  */
 namespace Molajo\FieldHandler\Tests;
 
-defined('MOLAJO') or die;
+
 
 use Molajo\FieldHandler\Adapter as adapter;
 use PHPUnit_Framework_TestCase;
@@ -51,8 +51,8 @@ class DateTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateFail()
     {
-        $field_name              = 'this_is_a_date_field';
-        $field_value             = 'gggghhhhhh';
+        $field_name  = 'this_is_a_date_field';
+        $field_value = 'gggghhhhhh';
 
         $fieldhandler_type_chain = 'Date';
 
@@ -88,14 +88,14 @@ class DateTest extends PHPUnit_Framework_TestCase
      */
     public function testFilterFailwNull()
     {
-        $field_name              = 'this_is_a_date_field';
-        $field_value             = 'gggghhhhhh';
+        $field_name  = 'this_is_a_date_field';
+        $field_value = 'gggghhhhhh';
 
         $fieldhandler_type_chain = 'Date';
 
         $results = $this->adapter->filter($field_name, $field_value, $fieldhandler_type_chain);
 
-        $field_value             = null;
+        $field_value = null;
         $this->assertEquals($field_value, $results);
 
         return;
@@ -126,14 +126,14 @@ class DateTest extends PHPUnit_Framework_TestCase
      */
     public function testEscapeFailwNull()
     {
-        $field_name              = 'this_is_a_date_field';
-        $field_value             = 'gggghhhhhh';
+        $field_name  = 'this_is_a_date_field';
+        $field_value = 'gggghhhhhh';
 
         $fieldhandler_type_chain = 'Date';
 
         $results = $this->adapter->escape($field_name, $field_value, $fieldhandler_type_chain);
 
-        $field_value             = null;
+        $field_value = null;
         $this->assertEquals($field_value, $results);
 
         return;

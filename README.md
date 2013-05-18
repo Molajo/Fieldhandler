@@ -15,8 +15,9 @@ special field-level formatting needs. Supports chaining.
 Each field is validated, filtered, or escaped by a single or set of field handler(s).
 
 ```php
+    $adapter = new Molajo\FieldHandler\Adapter();
+
     try {
-        $adapter = new Molajo\FieldHandler\Adapter();
         $filtered = $adapter->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
     } catch (Exception $e) {
@@ -26,7 +27,6 @@ Each field is validated, filtered, or escaped by a single or set of field handle
     // Success!
     echo $filtered;
 ```
-
 
 ###Three methods:###
 
@@ -43,7 +43,7 @@ Each field is validated, filtered, or escaped by a single or set of field handle
 
 ###Two possible results:###
 
-1. **Success** processed field value returned
+1. **Success** processed field value returned as the result
 2. **Failure** exception thrown
 
 ####Example Usage####
@@ -56,12 +56,12 @@ The following example demonstrates how to validate the `extension_id` field.
     2. `required` element and the value `true`.
 
 ```php
+    $adapter = new Molajo/FieldHandler/Adapter();
 
     $fieldhandler_type_chain = array('int', 'default', 'required', 'foreignkey');
     $options = array('default' => 14, 'required' => true, 'foreignkey' => 'id', 'table' => 'extensions');
 
     try {
-        $adapter = new Molajo/FieldHandler/Adapter();
         $validated_value = $adapter->validate('extension_id', 12, $fieldhandler_type_chain, $options);
 
     } catch (Exception $e) {
@@ -80,6 +80,44 @@ Use the Try/Catch pattern, as presented above, to catch thrown exceptions.
 
 ## Available FieldHandlers ##
 
+- [Accepted](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#accepted)
+- [Alias](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#alias)
+- [Alpha](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#alpha)
+- [Alphanumeric](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#alphanumeric)
+- [Arrays](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#arrays)
+- [Boolean](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#boolean)
+- [Callback](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#callback)
+- [Date](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#date)
+- [Defaults](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#default)
+- [Digit](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#digit)
+- [Email](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#email)
+- [Encoded](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#encoded)
+- [Equals](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#equals)
+- [Extensions](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#extensions)
+- [Float](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#float)
+- [Foreignkey](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#foreignkey)
+- [Fromto](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#Fromto)
+- [Fullspecialchars](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#fullspecialchars)
+- [Html](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#html)
+- [Int](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#int)
+- [Ip](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#ip)
+- [Lower](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#lower)
+- [Maximum](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#maximum)
+- [Mimetypes](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#mimetypes)
+- [Minimum](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#minimum)
+- [NotEqual](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#notequal)
+- [Numeric](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#numeric)
+- [Object](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#object)
+- [Raw](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#raw)
+- [Regex](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#regex)
+- [Required](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#required)
+- [String](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#string)
+- [Time](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#time)
+- [Trim](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#trim)
+- [Upper](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#upper)
+- [Url](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#url)
+- [Values](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#values)
+
 The examples in this section assume the *Fieldhandler* has been instantiated, as follows:
 
 ```php
@@ -90,7 +128,7 @@ The examples in this section assume the *Fieldhandler* has been instantiated, as
 Value is true, 1, 'yes', or 'on.'
 
 ```php
-        $validated_value = $adapter->validate('agreement', 1, 'Accepted');
+    $validated_value = $adapter->validate('agreement', 1, 'Accepted');
 
 ```
 
@@ -99,9 +137,9 @@ Tests if values are valid for a URL slug. When used with `filter` or `escape`, t
 an alias value.
 
 ```php
-        // Title 'Jack and Jill' will be returned as 'jack-and-jill' for filter and escape
-        // An exception would be thrown for validate
-        $alias = $this->adapter->filter('title', 'Jack and Jill', 'Alias');
+    // Title 'Jack and Jill' will be returned as 'jack-and-jill' for filter and escape
+    // An exception would be thrown for validate
+    $alias = $this->adapter->filter('title', 'Jack and Jill', 'Alias');
 
 ```
 
@@ -109,9 +147,9 @@ an alias value.
 Tests if values are a character of A through Z.
 
 ```php
-        // Field order_number 'ABC123#' would be returned as 'ABC' for filter and escape
-        // An exception would be thrown for validate
-        $results = $this->adapter->filter('order_number', 'ABC123#', 'Alpha');
+    // Field order_number 'ABC123#' would be returned as 'ABC' for filter and escape
+    // An exception would be thrown for validate
+    $results = $this->adapter->filter('order_number', 'ABC123#', 'Alpha');
 
 ```
 
@@ -119,9 +157,9 @@ Tests if values are a character of A through Z.
 Tests if values are a character of A through Z or 0 through 9.
 
 ```php
-        // Field order_number 'ABC123#' would be returned as 'ABC123' for filter and escape
-        // An exception would be thrown for validate
-        $results = $this->adapter->filter('order_number', 'ABC123#', 'Alphanumeric');
+    // Field order_number 'ABC123#' would be returned as 'ABC123' for filter and escape
+    // An exception would be thrown for validate
+    $results = $this->adapter->filter('order_number', 'ABC123#', 'Alphanumeric');
 
 ```
 
@@ -129,18 +167,18 @@ Tests if values are a character of A through Z or 0 through 9.
 Tests if value is an array.
 
 ```php
-        // Field order_number 'ABC123#' would be returned as 'ABC123' for filter and escape
-        // An exception would be thrown for validate
-        $results = $this->adapter->filter('order_number', 'ABC123#', 'Alphanumeric');
+    // Field order_number 'ABC123#' would be returned as 'ABC123' for filter and escape
+    // An exception would be thrown for validate
+    $results = $this->adapter->filter('order_number', 'ABC123#', 'Alphanumeric');
 
 ```
 ### Boolean ###
 Tests if value is true or false.
 
 ```php
-        // Field on_or_off_field false would be returned as NULL for filter and escape
-        // An exception would be thrown for validate
-        $results = $this->adapter->filter('on_or_off_field', false, 'Boolean');
+    // Field on_or_off_field false would be returned as NULL for filter and escape
+    // An exception would be thrown for validate
+    $results = $this->adapter->filter('on_or_off_field', false, 'Boolean');
 
 ```
 
@@ -150,11 +188,11 @@ the current value, an Exception is thrown. For Filter and Escape, the value prod
 Callback is returned.
 
 ```php
-        // The value of field `example_field` is 'DOG' and is processed by the callback `strtolower`.
-        // An exception would be thrown for validate. The value 'dog' is returned for Filter and Escape.
-        $options = array();
-        $options['callback'] = 'strtolower';
-        $results = $this->adapter->filter('example_field', 'DOG', 'Callback', $options);
+    // The value of field `example_field` is 'DOG' and is processed by the callback `strtolower`.
+    // An exception would be thrown for validate. The value 'dog' is returned for Filter and Escape.
+    $options = array();
+    $options['callback'] = 'strtolower';
+    $results = $this->adapter->filter('example_field', 'DOG', 'Callback', $options);
 
 ```
 
@@ -163,10 +201,10 @@ Processes a value to determine if it is a valid date. For Validate, if the resul
  date, an Exception is thrown. For Filter and Escape, the value returned is NULL if it is not valid.
 
 ```php
-        // The value of field `date_field` is '2013/04/01 01:00:00' and determined to be valid
-        $options = array();
-        $options['callback'] = '2013/04/01 01:00:00';
-        $results = $this->adapter->filter('date_field', '2013/04/01 01:00:00', 'Date');
+    // The value of field `date_field` is '2013/04/01 01:00:00' and determined to be valid
+    $options = array();
+    $options['callback'] = '2013/04/01 01:00:00';
+    $results = $this->adapter->filter('date_field', '2013/04/01 01:00:00', 'Date');
 
 ```
 
@@ -174,10 +212,10 @@ Processes a value to determine if it is a valid date. For Validate, if the resul
 Changes a null value to the value provided for default.
 
 ```php
-        // The value of field `dog_field` is NULL and is set to 'bark'.
-        $options = array();
-        $options['default'] = 'bark';
-        $results = $this->adapter->filter('dog_field', NULL, 'Default');
+    // The value of field `dog_field` is NULL and is set to 'bark'.
+    $options = array();
+    $options['default'] = 'bark';
+    $results = $this->adapter->filter('dog_field', NULL, 'Default');
 
 ```
 
@@ -185,10 +223,10 @@ Changes a null value to the value provided for default.
 Tests that each digit is numeric.
 
 ```php
-        // The value of field `numeric_field` is 'ABC123'. The filtered and escaped values will be 123.
-        // For 'validate', an exception is thrown.
+    // The value of field `numeric_field` is 'ABC123'. The filtered and escaped values will be 123.
+    // For 'validate', an exception is thrown.
 
-        $results = $this->adapter->filter('numeric_field', 'ABC123', 'Digit');
+    $results = $this->adapter->filter('numeric_field', 'ABC123', 'Digit');
 
 ```
 
@@ -197,7 +235,7 @@ Tests that a value is a valid email address. When invalid, validate throws excep
 Filter and Escape return null.
 
 ```php
-        $results = $this->adapter->validate('email_address', 'AmyStephen@gmail.com', 'Email');
+    $results = $this->adapter->validate('email_address', 'AmyStephen@gmail.com', 'Email');
 
 ```
 
@@ -205,18 +243,19 @@ Filter and Escape return null.
 Tests that an encoded value is sanitized.
 
 ```php
-        // The value of field `encoded_field` is 'my-apples&are green and red'.
-        // The filtered and escaped values will be 'my-apples%26are%20green%20and%20red'.
+    // The value of field `encoded_field` is 'my-apples&are green and red'.
+    // The filtered and escaped values will be 'my-apples%26are%20green%20and%20red'.
 
-        $results = $this->adapter->filter('encoded_field', 'my-apples&are green and red', 'Encoded');
+    $results = $this->adapter->filter('encoded_field', 'my-apples&are green and red', 'Encoded');
 
 ```
-### Extensions ###
-Tests that a value, or set of values, are valid values for file extensions.
+
+### Equal ###
+Tests that a value is equal to a specified value.
 
 ```php
-        // The value of field `field1` is 'dog' and is tested to see if it matches 'dog'.
-        $results = $this->adapter->filter('field1', 'dog', 'Equals');
+    // The value of field `field1` is 'dog' and is tested to see if it matches 'dog'.
+    $results = $this->adapter->filter('field1', 'dog', 'Equal');
 
 ```
 
@@ -225,25 +264,25 @@ Tests that a value is equal to the specified value. If the value does not match 
 Exception is thrown. If the value does not match for filter or escape, null is returned.
 
 ```php
-        // A set of values can be sent in for testing
-        $input = array();
-        $input[] = '.jpg';
-        $input[] = '.gif';
-        $input[] = '.png';
+    // A set of values can be sent in for testing
+    $input = array();
+    $input[] = '.jpg';
+    $input[] = '.gif';
+    $input[] = '.png';
 
-        $field_name              = 'extensions_field';
-        $field_value             = $input;
-        $fieldhandler_type_chain = 'Extensions';
+    $field_name              = 'extensions_field';
+    $field_value             = $input;
+    $fieldhandler_type_chain = 'Extensions';
 
-        $options                 = array();
-        $array_valid_values = array();
-        $array_valid_values[] = '.jpg';
-        $array_valid_values[] = '.gif';
-        $array_valid_values[] = '.png';
+    $options                 = array();
+    $array_valid_values = array();
+    $array_valid_values[] = '.jpg';
+    $array_valid_values[] = '.gif';
+    $array_valid_values[] = '.png';
 
-        $options = array('array_valid_extensions' => $array_valid_values);
+    $options = array('array_valid_extensions' => $array_valid_values);
 
-        $results = $this->adapter->filter('extensions_field', $input, 'Extensions');
+    $results = $this->adapter->filter('extensions_field', $input, 'Extensions');
 
 ```
 
@@ -251,30 +290,284 @@ Exception is thrown. If the value does not match for filter or escape, null is r
 Tests a value to determine if it is a valid Float value.
 
 ```php
-        // The value of field `numeric_field` is 1234.5678.
-
-        $results = $this->adapter->filter('numeric_field', 1234.5678, 'Float');
+    // The value of field `numeric_field` is 1234.5678.
+    $results = $this->adapter->filter('numeric_field', 1234.5678, 'Float');
 
 ```
 
-## System Requirements ##
+### Foreignkey ###
+Uses the database connection defined in $options['database'] to execute a query that verifies there is
+a row for the table named in $options['table'] with a field named $options['key'] with a value of
+$field_value.
 
-* PHP 5.3.3, or above
-* [PSR-0 compliant Autoloader](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md)
-* PHP Framework independent
-* [optional] PHPUnit 3.5+ to execute the test suite (phpunit --version)
+```php
+    $field_name              = 'my_foreign_key';
+    $field_value             = 1;
+    $fieldhandler_type_chain = 'Foreignkey';
+    $options                 = array();
+    $options['database']     = $database;
+    $options['table']        = 'molajo_actions';
+    $options['key']          = 'id';
 
-### Installation
+    $results = $adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-#### Install using Composer from Packagist
+```
 
-**Step 1** Install composer in your project:
+### From To ###
+Verifies that the $field_value is greater than the From value and less than the To value.
+
+```php
+    $field_name              = 'my_field';
+    $field_value             = 5;
+    $fieldhandler_type_chain = 'Fromto';
+    $options                 = array();
+    $options['from']         = 0;
+    $options['to']           = 10;
+
+    $results = $adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+
+```
+
+### Fullspecialchars ###
+Converts special characters to HTML entities. Equivalent to [htmlspecialchars](http://www.php.net/manual/en/function.htmlspecialchars.php)
+with with ENT_QUOTES set.
+
+```php
+    $field_name              = 'my_field';
+    $field_value             = '&';
+    $fieldhandler_type_chain = 'Fullspecialchars';
+    $options                 = array();
+
+    $results = $adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+
+```
+
+### Html ### - do white list and black list
+Escapes HTML entities. Equivalent to [htmlspecialchars](http://www.php.net/manual/en/function.htmlspecialchars.php)
+with with ENT_QUOTES set.
+
+```php
+    $field_name              = 'my_field';
+    $field_value             = '&';
+    $fieldhandler_type_chain = 'Html';
+    $options                 = array();
+
+    $results = $adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+
+```
+
+### Int ###
+Tests that the value is an integer.
+
+```php
+    // The value of field `numeric_field` is 'ABC123'. The filtered and escaped values will be 0.
+    // For 'validate', an exception is thrown. The following will return 123.
+
+    $results = $this->adapter->filter('numeric_field', '123', 'Int');
+
+```
+
+### IP Address ###
+Tests that the value is an IP Address.
+
+```php
+    // The value of field `input_field` is '127.0.0.1'.
+    // Validate, filtered and escaped values will return the same.
+    $results = $this->adapter->filter('input_field', '127.0.0.1', 'Ip');
+
+```
+
+### Lower ###
+Validates or filters/escapes each character to be lower case.
+
+```php
+    // The value of field `input_field` is 'ABC123'. Validate will fail.
+    // Filtered and escaped values will return 'abc123'.
+    $results = $this->adapter->filter('input_field', 'ABC123', 'lower');
+
+```
+
+### Maximum ###
+Validates or filters/escapes numeric value to not exceed the maximum.
+
+```php
+    // The value of field `input_field` is 10. Maximum is 3. Validate will fail.
+    // Filtered and escaped values will return 3.
+    $field_name              = 'my_field';
+    $field_value             = 10;
+    $fieldhandler_type_chain = 'Maximum';
+    $options                 = array();
+    $options['maximum']      = 3;
+
+    $results = $adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+
+```
+
+### Minimum ###
+Validates or filters/escapes numeric value to not exceed the maximum.
+
+```php
+    // The value of field `input_field` is 10. Minimum is 3.
+    // Validate, filtered and escaped values will return 10.
+    $field_name              = 'my_field';
+    $field_value             = 10;
+    $fieldhandler_type_chain = 'Minimum';
+    $options                 = array();
+    $options['minimum']      = 3;
+
+    $results = $adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+
+```
+
+### Not Equal ###
+Tests that a value is not equal to a specified value.
+
+```php
+    // The value of field `field1` is 'dog' and is tested to ensure it is NOT equal to 'dog'.
+    $results = $this->adapter->filter('field1', 'dog', 'Notequal');
+
+```
+
+### Numeric ###
+Tests that the value is an numeric.
+
+```php
+    // The value of field `numeric_field` is 'ABC123'. The filtered and escaped values will be 0.
+    // For 'validate', an exception is thrown. The following will return 123.
+
+    $results = $this->adapter->filter('numeric_field', '123', 'Numeric');
+
+```
+
+### Object ###
+Tests that a value is an object.
+
+```php
+    // The value of field `database_instance` is an object containing the database connection.
+    // All will return the object
+
+    $results = $this->adapter->filter('database_instance', $instance, 'Object');
+
+```
+
+### Raw ###
+Do nothing, optionally strip or encode special characters.  FILTER_FLAG_STRIP_LOW,
+FILTER_FLAG_STRIP_HIGH, FILTER_FLAG_ENCODE_LOW, FILTER_FLAG_ENCODE_HIGH, FILTER_FLAG_ENCODE_AMP.
+See [sanitize filters](http://php.net/manual/en/filter.filters.sanitize.php).
+
+```php
+    // The value of field `input_field` is 10. Minimum is 3.
+    // Validate, filtered and escaped values will return 10.
+    $field_name              = 'my_field';
+    $field_value             = 'Me & You';  //returns 'Me &amp; You'
+    $fieldhandler_type_chain = 'Raw';
+    $options                 = array();
+    $options['FILTER_FLAG_ENCODE_AMP']      = true;
+
+
+    $results = $adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+
+```
+
+### Regex ###
+Performs regex checking against the input value for the regex sent in.
+
+```php
+    // The value of field `input_field` may not be null
+    $field_name              = 'my_field';
+    $field_value             = AmyStephen@gmail.com;
+    $fieldhandler_type_chain = 'Regex';
+    $options                 = array();
+    $options['regex']      = $regex_expression;
+
+    $results = $adapter->validate($field_name, $field_value, $fieldhandler_type_chain);
+
+```
+
+### Required ###
+Field is required. Null value is not allowed. Use after Default when used in combination.
+
+```php
+    // The value of field `input_field` may not be null
+    $field_name              = 'my_field';
+    $field_value             = null;
+    $fieldhandler_type_chain = 'Required';
+
+    $results = $adapter->validate($field_name, $field_value, $fieldhandler_type_chain);
+
+```
+
+### String ###
+Tests that the value is a string.
+
+```php
+    // The value of field `input_field` may not be null
+    $field_name              = 'my_field';
+    $field_value             = 'Lots of stuff in here that is stringy.';
+    $fieldhandler_type_chain = 'String';
+
+    $results = $adapter->validate($field_name, $field_value, $fieldhandler_type_chain);
+```
+
+### Time ###
+Tests that the value is a string.
+
+
+### Trim ###
+Tests that the string is trimmed.
+
+```php
+
+    $field_name              = 'my_field';
+    $field_value             = 'Lots of stuff in here that is stringy.          ';
+    $fieldhandler_type_chain = 'Trim';
+
+    $results = $adapter->filter($field_name, $field_value, $fieldhandler_type_chain);
+```
+
+### Upper ###
+Validates or filters/escapes each character to be upper case.
+
+```php
+    // The value of field `input_field` is 'abc123'. Validate will value.
+    // Filtered and escaped values will return 'ABC123'.
+    $results = $this->adapter->filter('input_field', 'abc123', 'lower');
+
+```
+
+### Url ###
+Tests that a value is a valid email address. When invalid, validate throws exception while
+Filter and Escape return null.
+
+```php
+    $results = $this->adapter->validate('url_field', 'http://google.com', 'Url');
+
+```
+
+### Values ###
+Compares a field_value against a set of values;
+
+```php
+    // The value of field `input_field` must be in the array_valid_values
+    $field_name              = 'my_field';
+    $field_value             = 'a';
+    $fieldhandler_type_chain = 'Values';
+    $options                 = array();
+    $options['array_valid_values']      = array('a', 'b', 'c');
+
+    $results = $adapter->validate($field_name, $field_value, $fieldhandler_type_chain);
+
+```
+
+## Install using Composer from Packagist
+
+### Step 1: Install composer in your project
 
 ```php
     curl -s https://getcomposer.org/installer | php
 ```
 
-**Step 2** Create a **composer.json** file in your project root:
+### Step 2: Create a **composer.json** file in your project root
 
 ```php
 {
@@ -284,46 +577,23 @@ Tests a value to determine if it is a valid Float value.
 }
 ```
 
-**Step 3** Install via composer:
+### Step 3: Install via composer
 
 ```php
     php composer.phar install
 ```
 
-About
-=====
-
-Molajo Project observes the following:
-
+## Requirements and Compliance
+ * PHP framework independent, no dependencies
+ * Requires PHP 5.3, or above
  * [Semantic Versioning](http://semver.org/)
- * [PSR-0 Autoloader Interoperability](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md)
- * [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md)
- and [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)
+ * Compliant with:
+    * [PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) and [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md) Namespacing
+    * [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) Coding Standards
  * [phpDocumentor2] (https://github.com/phpDocumentor/phpDocumentor2)
  * [phpUnit Testing] (https://github.com/sebastianbergmann/phpunit)
+ * Author [AmyStephen](http://twitter.com/AmyStephen)
  * [Travis Continuous Improvement] (https://travis-ci.org/profile/Molajo)
- * [Packagist] (https://packagist.org)
-
-
-Submitting pull requests and features
-------------------------------------
-
-Pull requests [GitHub](https://github.com/Molajo/FieldHandler/pulls)
-
-Features [GitHub](https://github.com/Molajo/FieldHandler/issues)
-
-Author
-------
-
-Amy Stephen - <AmyStephen@gmail.com> - <http://twitter.com/AmyStephen><br />
-See also the list of [contributors](https://github.com/Molajo/FieldHandler/contributors) participating in this project.
-
-License
--------
-
-**Molajo FieldHandler** is licensed under the MIT License - see the `LICENSE` file for details
-
-More Information
-----------------
-- [Extend](https://github.com/Molajo/FieldHandler/blob/master/.dev/Doc/extend.md)
-- [Install](https://github.com/Molajo/FieldHandler/blob/master/.dev/Doc/install.md)
+ * Listed on [Packagist] (http://packagist.org) and installed using [Composer] (http://getcomposer.org/)
+ * Use github to submit [pull requests](https://github.com/Molajo/FieldHandler/pulls) and [features](https://github.com/Molajo/FieldHandler/issues)
+ * Licensed under the MIT License - see the `LICENSE` file for details

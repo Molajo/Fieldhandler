@@ -8,8 +8,6 @@
  */
 namespace Molajo\FieldHandler;
 
-defined('MOLAJO') or die;
-
 use Exception;
 use Molajo\FieldHandler\Exception\FieldHandlerException;
 use Molajo\FieldHandler\Api\FieldHandlerInterface;
@@ -85,10 +83,10 @@ class Adapter implements FieldHandlerInterface
     /**
      * Validate
      *
-     * @param   string      $field_name
-     * @param   null|mixed  $field_value
-     * @param   string      $fieldhandler_type_chain
-     * @param   array       $options
+     * @param   string     $field_name
+     * @param   null|mixed $field_value
+     * @param   string     $fieldhandler_type_chain
+     * @param   array      $options
      *
      * @return  mixed
      * @since   1.0
@@ -98,19 +96,24 @@ class Adapter implements FieldHandlerInterface
         $field_name,
         $field_value = null,
         $fieldhandler_type_chain,
-        $options = array())
-    {
-        return $this->editRequest('validate',
-            $field_name, $field_value, $fieldhandler_type_chain, $options);
+        $options = array()
+    ) {
+        return $this->editRequest(
+            'validate',
+            $field_name,
+            $field_value,
+            $fieldhandler_type_chain,
+            $options
+        );
     }
 
     /**
      * Filter
      *
-     * @param   string      $field_name
-     * @param   null|mixed  $field_value
-     * @param   string      $fieldhandler_type_chain
-     * @param   array       $options
+     * @param   string     $field_name
+     * @param   null|mixed $field_value
+     * @param   string     $fieldhandler_type_chain
+     * @param   array      $options
      *
      * @return  mixed
      * @since   1.0
@@ -120,19 +123,24 @@ class Adapter implements FieldHandlerInterface
         $field_name,
         $field_value = null,
         $fieldhandler_type_chain,
-        $options = array())
-    {
-        return $this->editRequest('filter',
-            $field_name, $field_value, $fieldhandler_type_chain, $options);
+        $options = array()
+    ) {
+        return $this->editRequest(
+            'filter',
+            $field_name,
+            $field_value,
+            $fieldhandler_type_chain,
+            $options
+        );
     }
 
     /**
      * Escape
      *
-     * @param   string      $field_name
-     * @param   null|mixed  $field_value
-     * @param   string      $fieldhandler_type_chain
-     * @param   array       $options
+     * @param   string     $field_name
+     * @param   null|mixed $field_value
+     * @param   string     $fieldhandler_type_chain
+     * @param   array      $options
      *
      * @return  mixed
      * @since   1.0
@@ -142,20 +150,25 @@ class Adapter implements FieldHandlerInterface
         $field_name,
         $field_value = null,
         $fieldhandler_type_chain,
-        $options = array())
-    {
-        return $this->editRequest('escape',
-            $field_name, $field_value, $fieldhandler_type_chain, $options);
+        $options = array()
+    ) {
+        return $this->editRequest(
+            'escape',
+            $field_name,
+            $field_value,
+            $fieldhandler_type_chain,
+            $options
+        );
     }
 
     /**
      * Edit Request
      *
-     * @param   string      $method
-     * @param   string      $field_name
-     * @param   null|mixed  $field_value
-     * @param   string      $fieldhandler_type_chain
-     * @param   array       $options
+     * @param   string     $method
+     * @param   string     $field_name
+     * @param   null|mixed $field_value
+     * @param   string     $fieldhandler_type_chain
+     * @param   array      $options
      *
      * @return  mixed
      * @since   1.0
@@ -241,7 +254,7 @@ class Adapter implements FieldHandlerInterface
 
                 throw new FieldHandlerException
                 ('FieldHandler: Could not instantiate FieldHandler Type: ' . $fieldhandler_type
-                    . ' Class: ' . $class);
+                . ' Class: ' . $class);
             }
 
             $method = $this->method;

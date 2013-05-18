@@ -8,11 +8,10 @@
  */
 namespace Molajo\FieldHandler\Tests;
 
-defined('MOLAJO') or die;
-
 use Molajo\FieldHandler\Adapter as adapter;
 use PHPUnit_Framework_TestCase;
 use Molajo\FieldHandler\Exception\FieldHandlerException;
+
 /**
  * Float FieldHandler
  *
@@ -100,7 +99,7 @@ class FloatTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Molajo\FieldHandler\Handler\Float::validate
+     * @covers  Molajo\FieldHandler\Handler\Float::validate
      * @expectedException Molajo\FieldHandler\Exception\FieldHandlerException
      * @return void
      * @since   1.0
@@ -177,7 +176,7 @@ class FloatTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Molajo\FieldHandler\Handler\Float::validate
+     * @covers  Molajo\FieldHandler\Handler\Float::validate
      * @return void
      * @since   1.0
      */
@@ -255,7 +254,7 @@ class FloatTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Molajo\FieldHandler\Handler\Float::validate
+     * @covers  Molajo\FieldHandler\Handler\Float::validate
      * @return void
      * @since   1.0
      */

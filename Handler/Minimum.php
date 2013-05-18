@@ -8,8 +8,6 @@
  */
 namespace Molajo\FieldHandler\Handler;
 
-defined('MOLAJO') or die;
-
 use Molajo\FieldHandler\Exception\FieldHandlerException;
 
 /**
@@ -48,6 +46,7 @@ class Minimum extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
+     * @throws  FieldHandlerException
      */
     public function validate()
     {
@@ -56,7 +55,7 @@ class Minimum extends AbstractFieldHandler
         if ($this->getFieldValue() === null) {
         } else {
 
-            if ($this->getFieldValue() > $this->getMinimum()) {
+            if ((int) $this->getFieldValue() > (int) $this->getMinimum()) {
             } else {
                 throw new FieldHandlerException
                 ('Validate Minimum: ' . FILTER_INVALID_VALUE);
@@ -79,9 +78,9 @@ class Minimum extends AbstractFieldHandler
         if ($this->getFieldValue() === null) {
         } else {
 
-            if ($this->getFieldValue() > $this->getMinimum()) {
+            if ((int) $this->getFieldValue() > (int) $this->getMinimum()) {
             } else {
-                $this->setFieldValue($this->getMinimum());
+                $this->setFieldValue((int) $this->getMinimum());
             }
         }
 
@@ -96,16 +95,7 @@ class Minimum extends AbstractFieldHandler
      */
     public function escape()
     {
-        parent::escape();
-
-        if ($this->getFieldValue() === null) {
-        } else {
-
-            if ($this->getFieldValue() > $this->getMinimum()) {
-            } else {
-                $this->setFieldValue($this->getMinimum());
-            }
-        }
+        parent::filter();
 
         return $this->getFieldValue();
     }

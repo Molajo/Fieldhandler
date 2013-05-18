@@ -8,10 +8,7 @@
  */
 namespace Molajo\FieldHandler\Handler;
 
-defined('MOLAJO') or die;
-
 use Molajo\FieldHandler\Exception\FieldHandlerException;
-
 
 /**
  * Fullspecialchars FieldHandler
@@ -49,6 +46,7 @@ class Fullspecialchars extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
+     * @throws  FieldHandlerException
      */
     public function validate()
     {

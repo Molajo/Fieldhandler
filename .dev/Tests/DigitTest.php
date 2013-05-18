@@ -8,11 +8,12 @@
  */
 namespace Molajo\FieldHandler\Tests;
 
-defined('MOLAJO') or die;
+
 
 use Molajo\FieldHandler\Adapter as adapter;
 use PHPUnit_Framework_TestCase;
 use Molajo\FieldHandler\Exception\FieldHandlerException;
+
 /**
  * Digit FieldHandler
  *
@@ -81,7 +82,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Molajo\FieldHandler\Handler\Digit::validate
+     * @covers  Molajo\FieldHandler\Handler\Digit::validate
      * @expectedException Molajo\FieldHandler\Exception\FieldHandlerException
      * @return void
      * @since   1.0

@@ -8,8 +8,6 @@
  */
 namespace Molajo\FieldHandler\Handler;
 
-defined('MOLAJO') or die;
-
 use Molajo\FieldHandler\Exception\FieldHandlerException;
 
 /**
@@ -48,24 +46,16 @@ class Html extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
+     * @throws  FieldHandlerException
      */
     public function validate()
     {
         parent::validate();
 
-        if ($this->getFieldValue() === null) {
+        if ($this->getFieldValue() == $this->filter()) {
         } else {
-
-            $trueArray = parent::getTrueArray();
-            $testValue = parent::getTestValue();
-
-            if (in_array($testValue, $trueArray, true) === true) {
-
-            } else {
-                throw new FieldHandlerException
-                ('Validate Html: ' . FILTER_INVALID_VALUE);
-            }
-
+            throw new FieldHandlerException
+            ('Validate Html: ' . FILTER_INVALID_VALUE);
         }
 
         return $this->getFieldValue();
@@ -83,15 +73,8 @@ class Html extends AbstractFieldHandler
 
         if ($this->getFieldValue() === null) {
         } else {
-
-            $trueArray = $this->getTrueArray();
-            $testValue = $this->getTestValue();
-
-            if (in_array($testValue, $trueArray, true) === true) {
-
-            } else {
-                $this->setFieldValue(null);
-            }
+            $testValue = htmlspecialchars($this->getFieldValue(), $this->html_entities, $this->encoding);
+            $this->setFieldValue($testValue);
         }
 
         return $this->getFieldValue();
@@ -105,11 +88,6 @@ class Html extends AbstractFieldHandler
      */
     public function escape()
     {
-        $result = htmlspecialchars($this->getFieldValue(), $this->html_entities, $this->encoding);
-
-        return $result;
-
         return $this->filter();
     }
-
 }

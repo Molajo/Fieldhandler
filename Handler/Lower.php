@@ -8,8 +8,6 @@
  */
 namespace Molajo\FieldHandler\Handler;
 
-defined('MOLAJO') or die;
-
 use Molajo\FieldHandler\Exception\FieldHandlerException;
 
 /**
@@ -48,6 +46,7 @@ class Lower extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
+     * @throws  FieldHandlerException
      */
     public function validate()
     {
@@ -83,7 +82,7 @@ class Lower extends AbstractFieldHandler
             $test = ctype_lower($this->getFieldValue());
             if ($test == 1) {
             } else {
-                $this->setFieldValue($this->filterByCharacter('ctype_lower', $this->getFieldValue()));
+                $this->setFieldValue(strtolower($this->getFieldValue()));
             }
         }
 
@@ -100,8 +99,6 @@ class Lower extends AbstractFieldHandler
     {
         parent::escape();
 
-        $this->setFieldValue($this->filterByCharacter('ctype_lower', $this->getFieldValue()));
-
-        return $this->getFieldValue();
+        return $this->filter();
     }
 }

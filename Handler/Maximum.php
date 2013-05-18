@@ -8,8 +8,6 @@
  */
 namespace Molajo\FieldHandler\Handler;
 
-defined('MOLAJO') or die;
-
 use Molajo\FieldHandler\Exception\FieldHandlerException;
 
 /**
@@ -48,6 +46,7 @@ class Maximum extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
+     * @throws  FieldHandlerException
      */
     public function validate()
     {
@@ -56,8 +55,7 @@ class Maximum extends AbstractFieldHandler
         if ($this->getFieldValue() === null) {
         } else {
 
-            if ($this->getMaximum() < $this->getFieldValue()) {
-            } else {
+            if ((int) $this->getMaximum() < (int) $this->getFieldValue()) {
                 throw new FieldHandlerException
                 ('Validate Maximum: ' . FILTER_INVALID_VALUE);
             }
@@ -79,9 +77,8 @@ class Maximum extends AbstractFieldHandler
         if ($this->getFieldValue() === null) {
         } else {
 
-            if ($this->getMaximum() < $this->getFieldValue()) {
-            } else {
-                $this->setFieldValue($this->getMaximum());
+            if ((int) $this->getMaximum() < (int) $this->getFieldValue()) {
+                $this->setFieldValue((int) $this->getMaximum());
             }
         }
 
@@ -96,16 +93,7 @@ class Maximum extends AbstractFieldHandler
      */
     public function escape()
     {
-        parent::escape();
-
-        if ($this->getFieldValue() === null) {
-        } else {
-
-            if ($this->getMaximum() < $this->getFieldValue()) {
-            } else {
-                $this->setFieldValue($this->getMaximum());
-            }
-        }
+        parent::filter();
 
         return $this->getFieldValue();
     }

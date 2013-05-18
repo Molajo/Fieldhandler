@@ -8,9 +8,8 @@
  */
 namespace Molajo\FieldHandler\Handler;
 
-defined('MOLAJO') or die;
-
 use Molajo\FieldHandler\Exception\FieldHandlerException;
+use Molajo\FieldHandler\Api\FieldHandlerInterface;
 
 /**
  * Required FieldHandler
@@ -48,6 +47,7 @@ class Required extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
+     * @throws  FieldHandlerException
      */
     public function validate()
     {
@@ -70,6 +70,7 @@ class Required extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
+     * @throws  FieldHandlerException
      */
     public function filter()
     {
@@ -92,6 +93,7 @@ class Required extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
+     * @throws  FieldHandlerException
      */
     public function escape()
     {

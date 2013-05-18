@@ -8,10 +8,7 @@
  */
 namespace Molajo\FieldHandler\Handler;
 
-defined('MOLAJO') or die;
-
 use Molajo\FieldHandler\Exception\FieldHandlerException;
-use Whoops\Handler\PrettyPageHandler;
 
 /**
  * Callback FieldHandler
@@ -119,7 +116,7 @@ class Callback extends AbstractFieldHandler
             $callback = $this->options['callback'];
         }
 
-        $return = array();
+        $return            = array();
         $return['options'] = $callback;
         return $return;
     }

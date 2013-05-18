@@ -8,8 +8,6 @@
  */
 namespace Molajo\FieldHandler\Handler;
 
-defined('MOLAJO') or die;
-
 use Molajo\FieldHandler\Exception\FieldHandlerException;
 
 /**
@@ -48,6 +46,7 @@ class Extensions extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
+     * @throws \Molajo\FieldHandler\Exception\FieldHandlerException
      */
     public function validate()
     {
@@ -140,7 +139,7 @@ class Extensions extends AbstractFieldHandler
         }
 
         $entries = $this->getFieldValue();
-        $new = array();
+        $new     = array();
 
         foreach ($entries as $entry) {
 

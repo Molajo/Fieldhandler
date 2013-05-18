@@ -8,11 +8,12 @@
  */
 namespace Molajo\FieldHandler\Tests;
 
-defined('MOLAJO') or die;
+
 
 use Molajo\FieldHandler\Adapter as adapter;
 use PHPUnit_Framework_TestCase;
 use Molajo\FieldHandler\Exception\FieldHandlerException;
+
 /**
  * Boolean FieldHandler
  *
@@ -41,8 +42,6 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     {
         $this->adapter = new adapter();
     }
-
-
 
 
     /**
@@ -103,7 +102,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Molajo\FieldHandler\Handler\Boolean::validate
+     * @covers  Molajo\FieldHandler\Handler\Boolean::validate
      * @expectedException Molajo\FieldHandler\Exception\FieldHandlerException
      * @return void
      * @since   1.0
@@ -180,7 +179,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Molajo\FieldHandler\Handler\Boolean::filter
+     * @covers  Molajo\FieldHandler\Handler\Boolean::filter
      * @return void
      * @since   1.0
      */
@@ -257,7 +256,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Molajo\FieldHandler\Handler\Boolean::escape
+     * @covers  Molajo\FieldHandler\Handler\Boolean::escape
      * @return void
      * @since   1.0
      */

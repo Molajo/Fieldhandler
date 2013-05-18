@@ -6,7 +6,7 @@
  * @copyright 2013 Amy Stephen. All rights reserved.
  * @license   http://www.opensource.org/licenses/mit-license.html MIT License
  */
-define('MOLAJO', 'This is a Molajo Distribution');
+
 
 if (substr($_SERVER['DOCUMENT_ROOT'], - 1) == '/') {
     define('ROOT_FOLDER', $_SERVER['DOCUMENT_ROOT']);
@@ -36,11 +36,11 @@ $classMap = array(
     'Molajo\\FieldHandler\\Handler\\Digit'                   => BASE_FOLDER . '/Handler/Digit.php',
     'Molajo\\FieldHandler\\Handler\\Email'                   => BASE_FOLDER . '/Handler/Email.php',
     'Molajo\\FieldHandler\\Handler\\Encoded'                 => BASE_FOLDER . '/Handler/Encoded.php',
-    'Molajo\\FieldHandler\\Handler\\Equals'                  => BASE_FOLDER . '/Handler/Equals.php',
+    'Molajo\\FieldHandler\\Handler\\Equal'                  => BASE_FOLDER . '/Handler/Equal.php',
     'Molajo\\FieldHandler\\Handler\\Extensions'              => BASE_FOLDER . '/Handler/Extensions.php',
     'Molajo\\FieldHandler\\Handler\\Float'                   => BASE_FOLDER . '/Handler/Float.php',
     'Molajo\\FieldHandler\\Handler\\Foreignkey'              => BASE_FOLDER . '/Handler/Foreignkey.php',
-    'Molajo\\FieldHandler\\Handler\\FromTo'                  => BASE_FOLDER . '/Handler/FromTo.php',
+    'Molajo\\FieldHandler\\Handler\\Fromto'                  => BASE_FOLDER . '/Handler/Fromto.php',
     'Molajo\\FieldHandler\\Handler\\Fullspecialchars'        => BASE_FOLDER . '/Handler/Fullspecialchars.php',
     'Molajo\\FieldHandler\\Handler\\Html'                    => BASE_FOLDER . '/Handler/Html.php',
     'Molajo\\FieldHandler\\Handler\\Int'                     => BASE_FOLDER . '/Handler/Int.php',
@@ -50,7 +50,7 @@ $classMap = array(
     'Molajo\\FieldHandler\\Handler\\Maximum'                 => BASE_FOLDER . '/Handler/Maximum.php',
     'Molajo\\FieldHandler\\Handler\\Mimetypes'               => BASE_FOLDER . '/Handler/Mimetypes.php',
     'Molajo\\FieldHandler\\Handler\\Minimum'                 => BASE_FOLDER . '/Handler/Minimum.php',
-    'Molajo\\FieldHandler\\Handler\\NotEqual'                => BASE_FOLDER . '/Handler/NotEqual.php',
+    'Molajo\\FieldHandler\\Handler\\Notequal'                => BASE_FOLDER . '/Handler/Notequal.php',
     'Molajo\\FieldHandler\\Handler\\Numeric'                 => BASE_FOLDER . '/Handler/Numeric.php',
     'Molajo\\FieldHandler\\Handler\\Object'                  => BASE_FOLDER . '/Handler/Object.php',
     'Molajo\\FieldHandler\\Handler\\Raw'                     => BASE_FOLDER . '/Handler/Raw.php',

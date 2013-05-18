@@ -8,8 +8,6 @@
  */
 namespace Molajo\FieldHandler\Handler;
 
-defined('MOLAJO') or die;
-
 use Molajo\FieldHandler\Exception\FieldHandlerException;
 
 /**
@@ -61,10 +59,10 @@ class Arrays extends AbstractFieldHandler
             if ($test == 1) {
             } else {
                 throw new FieldHandlerException
-                    ('Validate Array: ' . FILTER_INVALID_VALUE);
+                ('Validate Array: ' . FILTER_INVALID_VALUE);
             }
 
-           $this->testValues();
+            $this->testValues();
         }
 
         return $this->getFieldValue();
