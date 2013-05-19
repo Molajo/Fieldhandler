@@ -30,6 +30,7 @@ $classMap = array(
     'Molajo\\FieldHandler\\Handler\\Arrays'                  => BASE_FOLDER . '/Handler/Arrays.php',
     'Molajo\\FieldHandler\\Handler\\Boolean'                 => BASE_FOLDER . '/Handler/Boolean.php',
     'Molajo\\FieldHandler\\Handler\\Callback'                => BASE_FOLDER . '/Handler/Callback.php',
+    'Molajo\\FieldHandler\\Handler\\Contains'                => BASE_FOLDER . '/Handler/Contains.php',
     'Molajo\\FieldHandler\\Handler\\Css'                     => BASE_FOLDER . '/Handler/Css.php',
     'Molajo\\FieldHandler\\Handler\\Date'                    => BASE_FOLDER . '/Handler/Date.php',
     'Molajo\\FieldHandler\\Handler\\Defaults'                => BASE_FOLDER . '/Handler/Defaults.php',

@@ -87,6 +87,7 @@ Use the Try/Catch pattern, as presented above, to catch thrown exceptions.
 - [Arrays](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#arrays)
 - [Boolean](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#boolean)
 - [Callback](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#callback)
+- [Contains](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#contains)
 - [Date](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#date)
 - [Defaults](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#default)
 - [Digit](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/FieldHandler#digit)
@@ -193,6 +194,18 @@ Callback is returned.
     $options = array();
     $options['callback'] = 'strtolower';
     $results = $this->adapter->filter('example_field', 'DOG', 'Callback', $options);
+
+```
+
+### Contains ###
+Tests if a value is contained within the input field. If it is not, validate fails and filter and escape
+change the input to null.
+
+```php
+    // Is the value `bark` contained within the dog_field?
+    $options = array();
+    $options['contains'] = 'bark';
+    $results = $this->adapter->filter('dog_field', $dog_field, 'Contains');
 
 ```
 
