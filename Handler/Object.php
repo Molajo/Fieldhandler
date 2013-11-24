@@ -1,24 +1,24 @@
 <?php
 /**
- * Object FieldHandler
+ * Object Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Handler;
+namespace Molajo\Fieldhandler\Handler;
 
-use Molajo\FieldHandler\Exception\FieldHandlerException;
+use Exception\Model\FieldhandlerException;
 
 /**
- * Object FieldHandler
+ * Object Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
-class Object extends AbstractFieldHandler
+class Object extends AbstractFieldhandler
 {
     /**
      * Constructor
@@ -46,21 +46,20 @@ class Object extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws  FieldhandlerException
      */
     public function validate()
     {
         parent::validate();
 
         if ($this->getFieldValue() === null) {
-
         } else {
 
             $test = is_object($this->getFieldValue());
 
             if ($test == true) {
             } else {
-                throw new FieldHandlerException
+                throw new FieldhandlerException
                 ('Validate Object: ' . FILTER_INVALID_VALUE);
             }
         }
@@ -69,7 +68,7 @@ class Object extends AbstractFieldHandler
     }
 
     /**
-     * FieldHandler Input
+     * Fieldhandler Input
      *
      * @return  mixed
      * @since   1.0

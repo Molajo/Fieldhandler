@@ -1,26 +1,24 @@
 <?php
 /**
- * Email FieldHandler Test
+ * Email Fieldhandler Test
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Tests;
+namespace Molajo\Fieldhandler\Tests;
 
-
-
-use Molajo\FieldHandler\Adapter as adapter;
+use Molajo\Fieldhandler\Adapter as adapter;
 use PHPUnit_Framework_TestCase;
-use Molajo\FieldHandler\Exception\FieldHandlerException;
+use Exception\Model\FieldhandlerException;
 
 /**
- * Email FieldHandler
+ * Email Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
 class EmailTest extends PHPUnit_Framework_TestCase
 {
@@ -44,7 +42,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Email::validate
+     * @covers  Molajo\Fieldhandler\Handler\Email::validate
      * @return  void
      * @since   1.0
      */
@@ -63,8 +61,8 @@ class EmailTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Email::validate
-     * @expectedException Molajo\FieldHandler\Exception\FieldHandlerException
+     * @covers  Molajo\Fieldhandler\Handler\Email::validate
+     * @expectedException Exception\Model\FieldhandlerException
      * @return void
      * @since   1.0
      */
@@ -83,7 +81,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Email::validate
+     * @covers  Molajo\Fieldhandler\Handler\Email::validate
      * @return  void
      * @since   1.0
      */
@@ -102,7 +100,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Email::validate
+     * @covers  Molajo\Fieldhandler\Handler\Email::validate
      * @return void
      * @since   1.0
      */
@@ -122,7 +120,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Email::validate
+     * @covers  Molajo\Fieldhandler\Handler\Email::validate
      * @return  void
      * @since   1.0
      */
@@ -141,7 +139,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Email::validate
+     * @covers  Molajo\Fieldhandler\Handler\Email::validate
      * @return void
      * @since   1.0
      */
@@ -168,6 +166,5 @@ class EmailTest extends PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-
     }
 }

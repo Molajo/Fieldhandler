@@ -1,24 +1,24 @@
 <?php
 /**
- * Boolean FieldHandler
+ * Boolean Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Handler;
+namespace Molajo\Fieldhandler\Handler;
 
-use Molajo\FieldHandler\Exception\FieldHandlerException;
+use Exception\Model\FieldhandlerException;
 
 /**
- * Boolean FieldHandler
+ * Boolean Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
-class Boolean extends AbstractFieldHandler
+class Boolean extends AbstractFieldhandler
 {
     /**
      * Constructor
@@ -52,21 +52,18 @@ class Boolean extends AbstractFieldHandler
         parent::validate();
 
         if ($this->getFieldValue() === null) {
-
         } else {
 
             if ($this->getFieldValue() === false) {
                 $test = false;
-
             } elseif ($this->getFieldValue() === true) {
                 $test = true;
-
             } else {
                 $test = null;
             }
 
             if ($test === null) {
-                throw new FieldHandlerException
+                throw new FieldhandlerException
                 ('Validate Boolean: ' . FILTER_INVALID_VALUE);
             }
         }
@@ -75,7 +72,7 @@ class Boolean extends AbstractFieldHandler
     }
 
     /**
-     * FieldHandler Input
+     * Fieldhandler Input
      *
      * @return  mixed
      * @since   1.0
@@ -89,10 +86,8 @@ class Boolean extends AbstractFieldHandler
 
             if ($this->getFieldValue() === false) {
                 $test = false;
-
             } elseif ($this->getFieldValue() === true) {
                 $test = true;
-
             } else {
                 $test = null;
             }

@@ -1,24 +1,24 @@
 <?php
 /**
- * Alias FieldHandler
+ * Alias Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Handler;
+namespace Molajo\Fieldhandler\Handler;
 
-use Molajo\FieldHandler\Exception\FieldHandlerException;
+use Exception\Model\FieldhandlerException;
 
 /**
- * Alias FieldHandler
+ * Alias Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
-class Alias extends AbstractFieldHandler
+class Alias extends AbstractFieldhandler
 {
     /**
      * Constructor
@@ -46,7 +46,7 @@ class Alias extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  \Molajo\FieldHandler\Exception\FieldHandlerException
+     * @throws  \Exception\Model\FieldhandlerException
      */
     public function validate()
     {
@@ -63,7 +63,7 @@ class Alias extends AbstractFieldHandler
         $bad = $this->testValidate();
 
         if ($bad === true) {
-            throw new FieldHandlerException
+            throw new FieldhandlerException
             ('Validate Alias: ' . FILTER_INVALID_VALUE);
         }
 
@@ -71,7 +71,7 @@ class Alias extends AbstractFieldHandler
     }
 
     /**
-     * FieldHandler Input
+     * Fieldhandler Input
      *
      * @return  mixed
      * @since   1.0

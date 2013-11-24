@@ -1,23 +1,23 @@
 <?php
 /**
- * Values FieldHandler Test
+ * Values Fieldhandler Test
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Tests;
+namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\FieldHandler\Adapter as adapter;
+use Molajo\Fieldhandler\Adapter as adapter;
 use PHPUnit_Framework_TestCase;
 
 /**
- * Values FieldHandler
+ * Values Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
 class ValuesTest extends PHPUnit_Framework_TestCase
 {
@@ -41,17 +41,17 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\upper::validate
+     * @covers  Molajo\Fieldhandler\Handler\upper::validate
      * @return void
      * @since   1.0
      */
     public function testValid()
     {
-        $field_name              = 'test';
-        $field_value             = 'a';
-        $fieldhandler_type_chain = 'Values';
-        $options                 = array();
-        $options['array_valid_values']      = array('a', 'b', 'c');
+        $field_name                    = 'test';
+        $field_value                   = 'a';
+        $fieldhandler_type_chain       = 'Values';
+        $options                       = array();
+        $options['array_valid_values'] = array('a', 'b', 'c');
 
         $results = $this->adapter->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
@@ -61,18 +61,18 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\upper::validate
-     * @expectedException Molajo\FieldHandler\Exception\FieldHandlerException
+     * @covers  Molajo\Fieldhandler\Handler\upper::validate
+     * @expectedException Exception\Model\FieldhandlerException
      * @return void
      * @since   1.0
      */
     public function testValidateFail()
     {
-        $field_name              = 'test';
-        $field_value             = 'z';
-        $fieldhandler_type_chain = 'Values';
-        $options                 = array();
-        $options['array_valid_values']      = array('a', 'b', 'c');
+        $field_name                    = 'test';
+        $field_value                   = 'z';
+        $fieldhandler_type_chain       = 'Values';
+        $options                       = array();
+        $options['array_valid_values'] = array('a', 'b', 'c');
 
         $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
@@ -82,17 +82,17 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\upper::filter
+     * @covers  Molajo\Fieldhandler\Handler\upper::filter
      * @return void
      * @since   1.0
      */
     public function testFilterValid()
     {
-        $field_name              = 'test';
-        $field_value             = 'z';
-        $fieldhandler_type_chain = 'Values';
-        $options                 = array();
-        $options['array_valid_values']      = array('a', 'b', 'c');
+        $field_name                    = 'test';
+        $field_value                   = 'z';
+        $fieldhandler_type_chain       = 'Values';
+        $options                       = array();
+        $options['array_valid_values'] = array('a', 'b', 'c');
 
         $results = $this->adapter->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 

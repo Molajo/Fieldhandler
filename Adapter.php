@@ -1,25 +1,25 @@
 <?php
 /**
- * FieldHandler Adapter
+ * Fieldhandler Adapter
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler;
+namespace Molajo\Fieldhandler;
 
 use Exception;
-use Molajo\FieldHandler\Exception\FieldHandlerException;
-use Molajo\FieldHandler\Api\FieldHandlerInterface;
+use Exception\Model\FieldhandlerException;
+use CommonApi\Model\FieldhandlerInterface;
 
 /**
- * FieldHandler Adapter
+ * Fieldhandler Adapter
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-class Adapter implements FieldHandlerInterface
+class Adapter implements FieldhandlerInterface
 {
     /**
      * Method (validate, filter, or escape)
@@ -90,7 +90,7 @@ class Adapter implements FieldHandlerInterface
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws  FieldhandlerException
      */
     public function validate(
         $field_name,
@@ -117,7 +117,7 @@ class Adapter implements FieldHandlerInterface
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws  FieldhandlerException
      */
     public function filter(
         $field_name,
@@ -144,7 +144,7 @@ class Adapter implements FieldHandlerInterface
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws  FieldhandlerException
      */
     public function escape(
         $field_name,
@@ -172,7 +172,7 @@ class Adapter implements FieldHandlerInterface
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws  FieldhandlerException
      */
     protected function editRequest(
         $method,
@@ -186,13 +186,13 @@ class Adapter implements FieldHandlerInterface
         if (in_array($method, array('validate', 'filter', 'escape'))) {
             $this->method = $method;
         } else {
-            throw new FieldHandlerException
-            ('FieldHandler: Must provide the name of the requested method.');
+            throw new FieldhandlerException
+            ('Fieldhandler: Must provide the name of the requested method.');
         }
 
         if ($field_name == '' || $field_name === null) {
-            throw new FieldHandlerException
-            ('FieldHandler: Must provide the field name.');
+            throw new FieldhandlerException
+            ('Fieldhandler: Must provide the field name.');
         } else {
             $this->field_name = $field_name;
         }
@@ -212,8 +212,8 @@ class Adapter implements FieldHandlerInterface
         if (is_array($fieldhandler_types) && count($fieldhandler_types) > 0) {
             $this->fieldhandler_types = $fieldhandler_types;
         } else {
-            throw new FieldHandlerException
-            ('FieldHandler: Must request at least one field handler type');
+            throw new FieldhandlerException
+            ('Fieldhandler: Must request at least one field handler type');
         }
 
         if (is_array($fieldhandler_types) && count($fieldhandler_types) > 0) {
@@ -230,7 +230,7 @@ class Adapter implements FieldHandlerInterface
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws  FieldhandlerException
      */
     protected function processRequest()
     {
@@ -249,11 +249,10 @@ class Adapter implements FieldHandlerInterface
                     $this->field_value,
                     $this->options
                 );
-
             } catch (Exception $e) {
 
-                throw new FieldHandlerException
-                ('FieldHandler: Could not instantiate FieldHandler Type: ' . $fieldhandler_type
+                throw new FieldhandlerException
+                ('Fieldhandler: Could not instantiate Fieldhandler Type: ' . $fieldhandler_type
                 . ' Class: ' . $class);
             }
 
@@ -266,22 +265,22 @@ class Adapter implements FieldHandlerInterface
     }
 
     /**
-     * Instantiates FieldHandler Class
+     * Instantiates Fieldhandler Class
      *
      * @param   string $fieldhandler_type
      *
      * @return  object
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws  FieldhandlerException
      */
     protected function getType($fieldhandler_type)
     {
-        $class = 'Molajo\\FieldHandler\\Handler\\' . $fieldhandler_type;
+        $class = 'Molajo\\Fieldhandler\\Handler\\' . $fieldhandler_type;
 
         if (class_exists($class)) {
         } else {
-            throw new FieldHandlerException
-            ('FieldHandler Type class ' . $class . ' does not exist.');
+            throw new FieldhandlerException
+            ('Fieldhandler Type class ' . $class . ' does not exist.');
         }
 
         return $class;

@@ -1,24 +1,24 @@
 <?php
 /**
- * Fullspecialchars FieldHandler Test
+ * Fullspecialchars Fieldhandler Test
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Tests;
+namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\FieldHandler\Adapter as adapter;
+use Molajo\Fieldhandler\Adapter as adapter;
 use PHPUnit_Framework_TestCase;
-use Molajo\FieldHandler\Exception\FieldHandlerException;
+use Exception\Model\FieldhandlerException;
 
 /**
- * Fullspecialchars FieldHandler
+ * Fullspecialchars Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
 class HtmlTest extends PHPUnit_Framework_TestCase
 {
@@ -42,7 +42,7 @@ class HtmlTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Fullspecialchars::validate
+     * @covers  Molajo\Fieldhandler\Handler\Fullspecialchars::validate
      * @return  void
      * @since   1.0
      */
@@ -54,14 +54,14 @@ class HtmlTest extends PHPUnit_Framework_TestCase
 
         $results = $this->adapter->escape($field_name, $field_value, $fieldhandler_type_chain, array());
 
-        $this->assertEquals( '&#38;', $results);
+        $this->assertEquals('&#38;', $results);
 
         return;
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Fullspecialchars::validate
-     * @expectedException \Molajo\FieldHandler\Exception\FieldHandlerException
+     * @covers  Molajo\Fieldhandler\Handler\Fullspecialchars::validate
+     * @expectedException \Exception\Model\FieldhandlerException
      * @return  void
      * @since   1.0
      */
@@ -75,6 +75,7 @@ class HtmlTest extends PHPUnit_Framework_TestCase
 
         return;
     }
+
     /**
      * Tear down
      *
@@ -83,6 +84,5 @@ class HtmlTest extends PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-
     }
 }

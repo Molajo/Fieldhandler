@@ -1,25 +1,23 @@
 <?php
 /**
- * Accepted FieldHandler Test
+ * Accepted Fieldhandler Test
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Tests;
+namespace Molajo\Fieldhandler\Tests;
 
-
-
-use Molajo\FieldHandler\Adapter as adapter;
+use Molajo\Fieldhandler\Adapter as adapter;
 use PHPUnit_Framework_TestCase;
 
 /**
- * Accepted FieldHandler
+ * Accepted Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
 class AcceptedTest extends PHPUnit_Framework_TestCase
 {
@@ -45,7 +43,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
     /**
      * test Validate Success
      *
-     * @covers  Molajo\FieldHandler\Handler\Default::validate
+     * @covers  Molajo\Fieldhandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */
@@ -66,7 +64,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
     /**
      * test Validate Success2
      *
-     * @covers  Molajo\FieldHandler\Handler\Default::validate
+     * @covers  Molajo\Fieldhandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */
@@ -87,7 +85,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
     /**
      * test Validate Success 3
      *
-     * @covers  Molajo\FieldHandler\Handler\Default::validate
+     * @covers  Molajo\Fieldhandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */
@@ -108,7 +106,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
     /**
      * test Validate Success 4
      *
-     * @covers  Molajo\FieldHandler\Handler\Default::validate
+     * @covers  Molajo\Fieldhandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */
@@ -127,8 +125,8 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Default::validate
-     * @expectedException Molajo\FieldHandler\Exception\FieldHandlerException
+     * @covers  Molajo\Fieldhandler\Handler\Default::validate
+     * @expectedException Exception\Model\FieldhandlerException
      * @return void
      * @since   1.0
      */
@@ -147,7 +145,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
     /**
      * test Filter Success
      *
-     * @covers  Molajo\FieldHandler\Handler\Default::validate
+     * @covers  Molajo\Fieldhandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */
@@ -166,7 +164,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Default::filter
+     * @covers  Molajo\Fieldhandler\Handler\Default::filter
      * @return void
      * @since   1.0
      */

@@ -1,39 +1,29 @@
 {
     "name": "molajo/fieldhandler",
     "type": "molajo-bundle",
-    "description": "Molajo FieldHandler: Validates and Filters Input; Escapes and Formats Output",
-    "keywords": ["FieldHandler", "Filter", "Validate", "Escape", "Format", "Adapters", "Interface", "PSR-0"],
-    "homepage": "http://github.com/Molajo/FieldHandler",
+    "description": "Molajo Fieldhandler: Validates and Filters Input; Escapes and Formats Output",
+    "keywords": ["Fieldhandler", "Filter", "Validate", "Escape", "Format"],
+    "homepage": "http://github.com/Molajo/Fieldhandler",
     "license": "MIT",
     "authors": [
         {
             "name": "Amy Stephen",
             "email": "AmyStephen@gmail.com",
             "homepage": "http://AmyStephen.github.io"
-        },
-        {
-            "name": "Other Contributors",
-            "homepage": "http://github.com/Molajo/FieldHandler/contributors"
         }
     ],
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.10",
+        "commonapi/fieldhandler": "dev-master"
     },
 
     "support": {
-        "email": "hello@molajo.org",
+        "event": "hello@molajo.org",
         "irc": "irc://irc.freenode.org/molajo"
     },
-    "target-dir": "Molajo/FieldHandler",
     "autoload": {
-        "psr-0": {
-            "Molajo\\FieldHandler": "./"
-        }
-    },
-    "minimum-stability": "dev",
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.1.0-dev"
+        "psr-4": {
+            "Molajo\\Event": "./"
         }
     }
 }

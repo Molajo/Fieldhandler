@@ -1,24 +1,24 @@
 <?php
 /**
- * Notequal FieldHandler Test
+ * Notequal Fieldhandler Test
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Tests;
+namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\FieldHandler\Adapter as adapter;
+use Molajo\Fieldhandler\Adapter as adapter;
 use PHPUnit_Framework_TestCase;
-use Molajo\FieldHandler\Exception\FieldHandlerException;
+use Exception\Model\FieldhandlerException;
 
 /**
- * Notequal FieldHandler
+ * Notequal Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
 class NotequalTest extends PHPUnit_Framework_TestCase
 {
@@ -42,7 +42,7 @@ class NotequalTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Equals::validate
+     * @covers  Molajo\Fieldhandler\Handler\Equals::validate
      * @return  void
      * @since   1.0
      */
@@ -52,7 +52,7 @@ class NotequalTest extends PHPUnit_Framework_TestCase
         $field_value             = 'dog';
         $fieldhandler_type_chain = 'Notequal';
         $options                 = array();
-        $options['not_equal']     = 'cat';
+        $options['not_equal']    = 'cat';
 
         $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
@@ -62,8 +62,8 @@ class NotequalTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Equals::validate
-     * @expectedException Molajo\FieldHandler\Exception\FieldHandlerException
+     * @covers  Molajo\Fieldhandler\Handler\Equals::validate
+     * @expectedException Exception\Model\FieldhandlerException
      * @return void
      * @since   1.0
      */
@@ -81,7 +81,7 @@ class NotequalTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Equals::filter
+     * @covers  Molajo\Fieldhandler\Handler\Equals::filter
      * @return  void
      * @since   1.0
      */
@@ -91,7 +91,7 @@ class NotequalTest extends PHPUnit_Framework_TestCase
         $field_value             = 'dog';
         $fieldhandler_type_chain = 'Notequal';
         $options                 = array();
-        $options['not_equal']     = 'cat';
+        $options['not_equal']    = 'cat';
 
         $results = $this->adapter->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
@@ -101,7 +101,7 @@ class NotequalTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Equals::filter
+     * @covers  Molajo\Fieldhandler\Handler\Equals::filter
      * @return void
      * @since   1.0
      */
@@ -111,7 +111,7 @@ class NotequalTest extends PHPUnit_Framework_TestCase
         $field_value             = 'dog';
         $fieldhandler_type_chain = 'Notequal';
         $options                 = array();
-        $options['not_equal']     = 'dog';
+        $options['not_equal']    = 'dog';
 
         $results = $this->adapter->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
@@ -122,7 +122,7 @@ class NotequalTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Equals::escape
+     * @covers  Molajo\Fieldhandler\Handler\Equals::escape
      * @return  void
      * @since   1.0
      */
@@ -132,7 +132,7 @@ class NotequalTest extends PHPUnit_Framework_TestCase
         $field_value             = 'dog';
         $fieldhandler_type_chain = 'Notequal';
         $options                 = array();
-        $options['not_equal']     = 'cat';
+        $options['not_equal']    = 'cat';
 
         $results = $this->adapter->escape($field_name, $field_value, $fieldhandler_type_chain, $options);
 
@@ -142,7 +142,7 @@ class NotequalTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Equals::escape
+     * @covers  Molajo\Fieldhandler\Handler\Equals::escape
      * @return void
      * @since   1.0
      */
@@ -152,7 +152,7 @@ class NotequalTest extends PHPUnit_Framework_TestCase
         $field_value             = 'dog';
         $fieldhandler_type_chain = 'Notequal';
         $options                 = array();
-        $options['not_equal']     = 'dog';
+        $options['not_equal']    = 'dog';
 
         $results = $this->adapter->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 

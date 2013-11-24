@@ -1,24 +1,24 @@
 <?php
 /**
- * Extensions FieldHandler
+ * Extensions Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Handler;
+namespace Molajo\Fieldhandler\Handler;
 
-use Molajo\FieldHandler\Exception\FieldHandlerException;
+use Exception\Model\FieldhandlerException;
 
 /**
- * Extensions FieldHandler
+ * Extensions Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
-class Extensions extends AbstractFieldHandler
+class Extensions extends AbstractFieldhandler
 {
     /**
      * Constructor
@@ -46,7 +46,7 @@ class Extensions extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws \Molajo\FieldHandler\Exception\FieldHandlerException
+     * @throws \Exception\Model\FieldhandlerException
      */
     public function validate()
     {
@@ -59,7 +59,7 @@ class Extensions extends AbstractFieldHandler
 
             if ($test == 1) {
             } else {
-                throw new FieldHandlerException
+                throw new FieldhandlerException
                 ('Validate Extensions: ' . FILTER_INVALID_VALUE);
             }
 
@@ -70,7 +70,7 @@ class Extensions extends AbstractFieldHandler
     }
 
     /**
-     * FieldHandler Input
+     * Fieldhandler Input
      *
      * @return  mixed
      * @since   1.0
@@ -122,6 +122,8 @@ class Extensions extends AbstractFieldHandler
     /**
      * Test Array Entry Values
      *
+     * @param   bool $filter
+     *
      * @return  mixed
      * @since   1.0
      */
@@ -148,10 +150,9 @@ class Extensions extends AbstractFieldHandler
             } else {
 
                 if ($filter === true) {
-
                 } else {
-                    throw new FieldHandlerException
-                    ('FieldHandler Extensions: Array Value is not valid');
+                    throw new FieldhandlerException
+                    ('Fieldhandler Extensions: Array Value is not valid');
                 }
             }
         }

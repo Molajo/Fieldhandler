@@ -1,35 +1,35 @@
 <?php
 /**
- * Foreignkey FieldHandler Test
+ * Foreignkey Fieldhandler Test
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Tests;
+namespace Molajo\Fieldhandler\Tests;
 
-include __DIR__ . '/../../../' . 'Database/.dev/Bootstrap.php';
+include __DIR__ . '/../../' . 'Database/.dev/Bootstrap.php';
 
-use Molajo\FieldHandler\Adapter as Adapter;
+use Molajo\Fieldhandler\Adapter as Adapter;
 use Molajo\Database\Adapter as Database;
 use Molajo\Database\Handler\Joomla;
 use PHPUnit_Framework_TestCase;
-use Molajo\FieldHandler\Exception\FieldHandlerException;
+use Exception\Model\FieldhandlerException;
 
 /**
- * Foreignkey FieldHandler
+ * Foreignkey Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
 class ForeignkeyTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Adapter
      *
-     * @var    object  Molajo/FieldHandler/Adapter
+     * @var    object  Molajo/Fieldhandler/Adapter
      * @since  1.0
      */
     protected $adapter;
@@ -54,25 +54,22 @@ class ForeignkeyTest extends PHPUnit_Framework_TestCase
 
         $options = array();
 
-        $options['db_type']         = 'MySQLi';
-        $options['db_host']         = 'localhost';
-        $options['db_port']         = '';
-        $options['db_socket']       = '';
-        $options['db_user']         = 'root';
-        $options['db_password']     = 'root';
-        $options['db_name']         = 'molajo';
-        $options['db_prefix']       = 'molajo_';
-        $options['process_plugins'] = 1;
-        $options['select']          = true;
+        $options['db_type']        = 'MySQLi';
+        $options['db_host']        = 'localhost';
+        $options['db_user']        = 'root';
+        $options['db_password']    = 'root';
+        $options['db_name']        = 'molajo';
+        $options['db_prefix']      = 'molajo_';
+        $options['process_events'] = 1;
+        $options['select']         = true;
 
         $handler = new Joomla($options);
 
         $this->database = new Database($handler);
     }
 
-
     /**
-     * @covers  Molajo\FieldHandler\Handler\Foreignkey::validate
+     * @covers  Molajo\Fieldhandler\Handler\Foreignkey::validate
      * @return  void
      * @since   1.0
      */
@@ -94,7 +91,7 @@ class ForeignkeyTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Foreignkey::validate
+     * @covers  Molajo\Fieldhandler\Handler\Foreignkey::validate
      * @return void
      * @since   1.0
      */
@@ -115,7 +112,6 @@ class ForeignkeyTest extends PHPUnit_Framework_TestCase
         return;
     }
 
-
     /**
      * Tear down
      *
@@ -124,6 +120,5 @@ class ForeignkeyTest extends PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-
     }
 }

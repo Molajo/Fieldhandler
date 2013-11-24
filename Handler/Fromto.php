@@ -1,25 +1,25 @@
 <?php
 /**
- * Fromto FieldHandler
+ * Fromto Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Handler;
+namespace Molajo\Fieldhandler\Handler;
 
-use Molajo\FieldHandler\Exception\FieldHandlerException;
-use Molajo\FieldHandler\Api\FieldHandlerInterface;
+use Exception\Model\FieldhandlerException;
+use CommonApi\Model\FieldhandlerInterface;
 
 /**
- * Fromto FieldHandler
+ * Fromto Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
-class Fromto extends AbstractFieldHandler
+class Fromto extends AbstractFieldhandler
 {
     /**
      * Constructor
@@ -48,7 +48,7 @@ class Fromto extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws  FieldhandlerException
      */
     public function validate()
     {
@@ -59,10 +59,9 @@ class Fromto extends AbstractFieldHandler
         if ($this->getFieldValue() >= $Fromto[0]
             && $this->getFieldValue() <= $Fromto[1]
         ) {
-
         } else {
 
-            throw new FieldHandlerException
+            throw new FieldhandlerException
             ('Validate Value: ' . $this->getFieldValue()
             . ' is not a value From: ' . $Fromto[0] . '  To:' . $Fromto[1]);
         }
@@ -71,7 +70,7 @@ class Fromto extends AbstractFieldHandler
     }
 
     /**
-     * FieldHandler Input
+     * Fieldhandler Input
      *
      * @return  mixed
      * @since   1.0
@@ -85,7 +84,6 @@ class Fromto extends AbstractFieldHandler
         if ($this->getFieldValue() > $Fromto[0]
             && $this->getFieldValue() < $Fromto[1]
         ) {
-
         } else {
             $this->setFieldValue(null);
         }

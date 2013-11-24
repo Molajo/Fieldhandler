@@ -1,27 +1,27 @@
 <?php
 /**
- * Abstract FieldHandler Class
+ * Abstract Fieldhandler Class
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Handler;
+namespace Molajo\Fieldhandler\Handler;
 
-use Molajo\FieldHandler\Exception\FieldHandlerException;
+use Exception\Model\FieldhandlerException;
 
 /**
- * Abstract FieldHandler Class
+ * Abstract Fieldhandler Class
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
-abstract class AbstractFieldHandler
+abstract class AbstractFieldhandler
 {
     /**
-     * FieldHandler Type
+     * Fieldhandler Type
      *
      * @var    mixed
      * @since  1.0
@@ -135,7 +135,7 @@ abstract class AbstractFieldHandler
             date_default_timezone_set(@date_default_timezone_get());
         }
 
-        $this->setFieldHandlerType($fieldhandler_type);
+        $this->setFieldhandlerType($fieldhandler_type);
         $this->setMethod($method);
         $this->setFieldName($field_name);
         $this->setFieldValue($field_value);
@@ -153,7 +153,7 @@ abstract class AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws  FieldhandlerException
      */
     public function validate()
     {
@@ -165,7 +165,7 @@ abstract class AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws  FieldhandlerException
      */
     public function filter()
     {
@@ -177,7 +177,7 @@ abstract class AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws  FieldhandlerException
      */
     public function escape()
     {
@@ -191,7 +191,7 @@ abstract class AbstractFieldHandler
      *
      * @return  $this
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws  FieldhandlerException
      */
     protected function setMethod($method)
     {
@@ -201,10 +201,9 @@ abstract class AbstractFieldHandler
             || $method == 'filter'
             || $method == 'escape'
         ) {
-
         } else {
-            throw new FieldHandlerException
-            ('FieldHandler: Invalid Method: ' . $method
+            throw new FieldhandlerException
+            ('Fieldhandler: Invalid Method: ' . $method
             . ' Must be  validate, filter, escape.');
         }
 
@@ -225,14 +224,14 @@ abstract class AbstractFieldHandler
     }
 
     /**
-     * Set the FieldHandler Type
+     * Set the Fieldhandler Type
      *
      * @param   string $fieldhandler_type
      *
      * @return  string
      * @since   1.0
      */
-    protected function setFieldHandlerType($fieldhandler_type)
+    protected function setFieldhandlerType($fieldhandler_type)
     {
         $this->fieldhandler_type = $fieldhandler_type;
 
@@ -240,12 +239,12 @@ abstract class AbstractFieldHandler
     }
 
     /**
-     * Get the FieldHandler Type
+     * Get the Fieldhandler Type
      *
      * @return  string
      * @since   1.0
      */
-    protected function getFieldHandlerType()
+    protected function getFieldhandlerType()
     {
         return $this->fieldhandler_type;
     }

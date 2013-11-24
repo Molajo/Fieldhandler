@@ -1,25 +1,23 @@
 <?php
 /**
- * Arrays FieldHandler Test
+ * Arrays Fieldhandler Test
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Tests;
+namespace Molajo\Fieldhandler\Tests;
 
-
-
-use Molajo\FieldHandler\Adapter as adapter;
+use Molajo\Fieldhandler\Adapter as adapter;
 use PHPUnit_Framework_TestCase;
 
 /**
- * Arrays FieldHandler
+ * Arrays Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
 class ArraysTest extends PHPUnit_Framework_TestCase
 {
@@ -43,7 +41,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Arrays::validate
+     * @covers  Molajo\Fieldhandler\Handler\Arrays::validate
      * @return void
      * @since   1.0
      */
@@ -68,8 +66,8 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     /**
      * test Validate Fail
      *
-     * @expectedException Molajo\FieldHandler\Exception\FieldHandlerException
-     * @covers  Molajo\FieldHandler\Handler\Default::validate
+     * @expectedException Exception\Model\FieldhandlerException
+     * @covers  Molajo\Fieldhandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */
@@ -90,7 +88,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     /**
      * test Filter Success
      *
-     * @covers  Molajo\FieldHandler\Handler\Default::validate
+     * @covers  Molajo\Fieldhandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */
@@ -115,7 +113,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     /**
      * test Filter Success 2
      *
-     * @covers  Molajo\FieldHandler\Handler\Default::validate
+     * @covers  Molajo\Fieldhandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */
@@ -139,7 +137,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     /**
      * test Filter Success 3
      *
-     * @covers  Molajo\FieldHandler\Handler\Default::validate
+     * @covers  Molajo\Fieldhandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */
@@ -170,8 +168,8 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     /**
      * test Filter Fail 1
      *
-     * @expectedException Molajo\FieldHandler\Exception\FieldHandlerException
-     * @covers  Molajo\FieldHandler\Handler\Default::validate
+     * @expectedException Exception\Model\FieldhandlerException
+     * @covers  Molajo\Fieldhandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */
@@ -201,7 +199,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     /**
      * test Escape Success
      *
-     * @covers  Molajo\FieldHandler\Handler\Default::validate
+     * @covers  Molajo\Fieldhandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */
@@ -226,7 +224,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     /**
      * test Escape Fail
      *
-     * @covers  Molajo\FieldHandler\Handler\Default::validate
+     * @covers  Molajo\Fieldhandler\Handler\Default::validate
      * @return void
      * @since   1.0
      */

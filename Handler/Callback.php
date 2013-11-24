@@ -1,24 +1,24 @@
 <?php
 /**
- * Callback FieldHandler
+ * Callback Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Handler;
+namespace Molajo\Fieldhandler\Handler;
 
-use Molajo\FieldHandler\Exception\FieldHandlerException;
+use Exception\Model\FieldhandlerException;
 
 /**
- * Callback FieldHandler
+ * Callback Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
-class Callback extends AbstractFieldHandler
+class Callback extends AbstractFieldhandler
 {
     /**
      * Constructor
@@ -52,14 +52,13 @@ class Callback extends AbstractFieldHandler
         parent::validate();
 
         if ($this->getFieldValue() === null) {
-
         } else {
 
             $test = filter_var($this->getFieldValue(), FILTER_CALLBACK, $this->setCallback());
 
             if ($test == $this->getFieldValue()) {
             } else {
-                throw new FieldHandlerException
+                throw new FieldhandlerException
                 ('Validate Callback: ' . FILTER_INVALID_VALUE);
             }
         }
@@ -68,7 +67,7 @@ class Callback extends AbstractFieldHandler
     }
 
     /**
-     * FieldHandler Input
+     * Fieldhandler Input
      *
      * @return  mixed
      * @since   1.0
@@ -78,7 +77,6 @@ class Callback extends AbstractFieldHandler
         parent::filter();
 
         if ($this->getFieldValue() === null) {
-
         } else {
             $test = filter_var($this->getFieldValue(), FILTER_CALLBACK, $this->setCallback());
             $this->setFieldValue(filter_var($this->getFieldValue(), FILTER_CALLBACK, $this->setCallback()));

@@ -1,24 +1,24 @@
 <?php
 /**
- * Float FieldHandler
+ * Float Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Handler;
+namespace Molajo\Fieldhandler\Handler;
 
-use Molajo\FieldHandler\Exception\FieldHandlerException;
+use Exception\Model\FieldhandlerException;
 
 /**
- * Float FieldHandler
+ * Float Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
-class Float extends AbstractFieldHandler
+class Float extends AbstractFieldhandler
 {
     /**
      * Constructor
@@ -58,7 +58,7 @@ class Float extends AbstractFieldHandler
             $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_FLOAT);
 
             if ($test === false) {
-                throw new FieldHandlerException
+                throw new FieldhandlerException
                 ('Validate Float: ' . FILTER_INVALID_VALUE);
             }
         }
@@ -67,7 +67,7 @@ class Float extends AbstractFieldHandler
     }
 
     /**
-     * FieldHandler Input
+     * Fieldhandler Input
      *
      * @return  mixed
      * @since   1.0

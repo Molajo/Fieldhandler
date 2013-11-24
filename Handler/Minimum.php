@@ -1,24 +1,24 @@
 <?php
 /**
- * Minimum FieldHandler
+ * Minimum Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Handler;
+namespace Molajo\Fieldhandler\Handler;
 
-use Molajo\FieldHandler\Exception\FieldHandlerException;
+use Exception\Model\FieldhandlerException;
 
 /**
- * Minimum FieldHandler
+ * Minimum Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
-class Minimum extends AbstractFieldHandler
+class Minimum extends AbstractFieldhandler
 {
     /**
      * Constructor
@@ -46,7 +46,7 @@ class Minimum extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws  FieldhandlerException
      */
     public function validate()
     {
@@ -55,9 +55,9 @@ class Minimum extends AbstractFieldHandler
         if ($this->getFieldValue() === null) {
         } else {
 
-            if ((int) $this->getFieldValue() > (int) $this->getMinimum()) {
+            if ((int)$this->getFieldValue() > (int)$this->getMinimum()) {
             } else {
-                throw new FieldHandlerException
+                throw new FieldhandlerException
                 ('Validate Minimum: ' . FILTER_INVALID_VALUE);
             }
         }
@@ -66,7 +66,7 @@ class Minimum extends AbstractFieldHandler
     }
 
     /**
-     * FieldHandler Input
+     * Fieldhandler Input
      *
      * @return  mixed
      * @since   1.0
@@ -78,9 +78,9 @@ class Minimum extends AbstractFieldHandler
         if ($this->getFieldValue() === null) {
         } else {
 
-            if ((int) $this->getFieldValue() > (int) $this->getMinimum()) {
+            if ((int)$this->getFieldValue() > (int)$this->getMinimum()) {
             } else {
-                $this->setFieldValue((int) $this->getMinimum());
+                $this->setFieldValue((int)$this->getMinimum());
             }
         }
 

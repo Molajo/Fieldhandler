@@ -1,24 +1,24 @@
 <?php
 /**
- * Contains FieldHandler
+ * Contains Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Handler;
+namespace Molajo\Fieldhandler\Handler;
 
-use Molajo\FieldHandler\Exception\FieldHandlerException;
+use Exception\Model\FieldhandlerException;
 
 /**
- * Contains FieldHandler
+ * Contains Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
-class Contains extends AbstractFieldHandler
+class Contains extends AbstractFieldhandler
 {
     /**
      * Constructor
@@ -57,7 +57,7 @@ class Contains extends AbstractFieldHandler
 
         $results = $this->testContains();
         if ($results === false) {
-            throw new FieldHandlerException
+            throw new FieldhandlerException
             ('Validate Contains: ' . FILTER_INVALID_VALUE);
         }
 
@@ -65,7 +65,7 @@ class Contains extends AbstractFieldHandler
     }
 
     /**
-     * FieldHandler Input
+     * Fieldhandler Input
      *
      * @return  mixed
      * @since   1.0
@@ -104,7 +104,7 @@ class Contains extends AbstractFieldHandler
      *
      * @return  boolean
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws  FieldhandlerException
      */
     public function testContains()
     {
@@ -115,7 +115,7 @@ class Contains extends AbstractFieldHandler
         if (isset($this->options['contains'])) {
             $contains = $this->options['contains'];
         } else {
-            throw new FieldHandlerException
+            throw new FieldhandlerException
             ('Validate Contains: must send in options contains value: ');
         }
 

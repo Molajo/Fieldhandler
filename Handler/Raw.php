@@ -1,24 +1,24 @@
 <?php
 /**
- * Raw FieldHandler
+ * Raw Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Handler;
+namespace Molajo\Fieldhandler\Handler;
 
-use Molajo\FieldHandler\Exception\FieldHandlerException;
+use Exception\Model\FieldhandlerException;
 
 /**
- * Raw FieldHandler
+ * Raw Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
-class Raw extends AbstractFieldHandler
+class Raw extends AbstractFieldhandler
 {
     /**
      * Constructor
@@ -46,7 +46,7 @@ class Raw extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws  FieldhandlerException
      */
     public function validate()
     {
@@ -60,7 +60,7 @@ class Raw extends AbstractFieldHandler
             if ($test == $this->getFieldValue()) {
             } else {
 
-                throw new FieldHandlerException
+                throw new FieldhandlerException
                 ('Validate Raw: ' . FILTER_INVALID_VALUE);
             }
         }
@@ -69,7 +69,7 @@ class Raw extends AbstractFieldHandler
     }
 
     /**
-     * FieldHandler Input
+     * Fieldhandler Input
      *
      * @return  mixed
      * @since   1.0

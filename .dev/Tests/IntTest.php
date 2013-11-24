@@ -1,26 +1,24 @@
 <?php
 /**
- * Int FieldHandler Test
+ * Int Fieldhandler Test
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Tests;
+namespace Molajo\Fieldhandler\Tests;
 
-
-
-use Molajo\FieldHandler\Adapter as adapter;
+use Molajo\Fieldhandler\Adapter as adapter;
 use PHPUnit_Framework_TestCase;
-use Molajo\FieldHandler\Exception\FieldHandlerException;
+use Exception\Model\FieldhandlerException;
 
 /**
- * Int FieldHandler
+ * Int Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
 class IntTest extends PHPUnit_Framework_TestCase
 {
@@ -43,9 +41,8 @@ class IntTest extends PHPUnit_Framework_TestCase
         $this->adapter = new adapter();
     }
 
-
     /**
-     * @covers  Molajo\FieldHandler\Handler\Int::validate
+     * @covers  Molajo\Fieldhandler\Handler\Int::validate
      * @return  void
      * @since   1.0
      */
@@ -64,7 +61,7 @@ class IntTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Int::validate
+     * @covers  Molajo\Fieldhandler\Handler\Int::validate
      * @return  void
      * @since   1.0
      */
@@ -83,7 +80,7 @@ class IntTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Int::validate
+     * @covers  Molajo\Fieldhandler\Handler\Int::validate
      * @return  void
      * @since   1.0
      */
@@ -102,8 +99,8 @@ class IntTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Int::validate
-     * @expectedException Molajo\FieldHandler\Exception\FieldHandlerException
+     * @covers  Molajo\Fieldhandler\Handler\Int::validate
+     * @expectedException Exception\Model\FieldhandlerException
      * @return void
      * @since   1.0
      */
@@ -129,6 +126,5 @@ class IntTest extends PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-
     }
 }

@@ -1,25 +1,25 @@
 <?php
 /**
- * Url FieldHandler
+ * Url Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Handler;
+namespace Molajo\Fieldhandler\Handler;
 
-use Molajo\FieldHandler\Exception\FieldHandlerException;
-use Molajo\FieldHandler\Api\FieldHandlerInterface;
+use Exception\Model\FieldhandlerException;
+use CommonApi\Model\FieldhandlerInterface;
 
 /**
- * Url FieldHandler
+ * Url Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
-class Url extends AbstractFieldHandler
+class Url extends AbstractFieldhandler
 {
     /**
      * Constructor
@@ -47,7 +47,7 @@ class Url extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws  FieldhandlerException
      */
     public function validate()
     {
@@ -59,14 +59,14 @@ class Url extends AbstractFieldHandler
 
         if ($test == $hold) {
         } else {
-            throw new FieldHandlerException ('Validate Url: ' . FILTER_INVALID_VALUE);
+            throw new FieldhandlerException ('Validate Url: ' . FILTER_INVALID_VALUE);
         }
 
         return $this->getFieldValue();
     }
 
     /**
-     * FieldHandler Input
+     * Fieldhandler Input
      *
      * @return  mixed
      * @since   1.0

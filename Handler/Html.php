@@ -1,24 +1,24 @@
 <?php
 /**
- * Html FieldHandler
+ * Html Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Handler;
+namespace Molajo\Fieldhandler\Handler;
 
-use Molajo\FieldHandler\Exception\FieldHandlerException;
+use Exception\Model\FieldhandlerException;
 
 /**
- * Html FieldHandler
+ * Html Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
-class Html extends AbstractFieldHandler
+class Html extends AbstractFieldhandler
 {
     /**
      * Constructor
@@ -46,7 +46,7 @@ class Html extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws  FieldhandlerException
      */
     public function validate()
     {
@@ -54,7 +54,7 @@ class Html extends AbstractFieldHandler
 
         if ($this->getFieldValue() == $this->filter()) {
         } else {
-            throw new FieldHandlerException
+            throw new FieldhandlerException
             ('Validate Html: ' . FILTER_INVALID_VALUE);
         }
 
@@ -62,7 +62,7 @@ class Html extends AbstractFieldHandler
     }
 
     /**
-     * FieldHandler Input
+     * Fieldhandler Input
      *
      * @return  mixed
      * @since   1.0
@@ -73,7 +73,7 @@ class Html extends AbstractFieldHandler
 
         if ($this->getFieldValue() === null) {
         } else {
-            $testValue = htmlspecialchars($this->getFieldValue(), $this->html_entities, $this->encoding);
+            $testValue = htmlspecialchars($this->getFieldValue(), null, $this->encoding);
             $this->setFieldValue($testValue);
         }
 

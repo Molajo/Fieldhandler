@@ -1,26 +1,24 @@
 <?php
 /**
- * Digit FieldHandler Test
+ * Digit Fieldhandler Test
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Tests;
+namespace Molajo\Fieldhandler\Tests;
 
-
-
-use Molajo\FieldHandler\Adapter as adapter;
+use Molajo\Fieldhandler\Adapter as adapter;
 use PHPUnit_Framework_TestCase;
-use Molajo\FieldHandler\Exception\FieldHandlerException;
+use Exception\Model\FieldhandlerException;
 
 /**
- * Digit FieldHandler
+ * Digit Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
 class DigitTest extends PHPUnit_Framework_TestCase
 {
@@ -44,7 +42,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Digit::validate
+     * @covers  Molajo\Fieldhandler\Handler\Digit::validate
      * @return  void
      * @since   1.0
      */
@@ -63,7 +61,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Digit::validate
+     * @covers  Molajo\Fieldhandler\Handler\Digit::validate
      * @return  void
      * @since   1.0
      */
@@ -82,8 +80,8 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Digit::validate
-     * @expectedException Molajo\FieldHandler\Exception\FieldHandlerException
+     * @covers  Molajo\Fieldhandler\Handler\Digit::validate
+     * @expectedException Exception\Model\FieldhandlerException
      * @return void
      * @since   1.0
      */
@@ -102,7 +100,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Digit::filter
+     * @covers  Molajo\Fieldhandler\Handler\Digit::filter
      * @return  void
      * @since   1.0
      */
@@ -121,7 +119,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Digit::filter
+     * @covers  Molajo\Fieldhandler\Handler\Digit::filter
      * @return  void
      * @since   1.0
      */
@@ -141,7 +139,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Digit::filter
+     * @covers  Molajo\Fieldhandler\Handler\Digit::filter
      * @return  void
      * @since   1.0
      */
@@ -160,7 +158,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Digit::filter
+     * @covers  Molajo\Fieldhandler\Handler\Digit::filter
      * @return  void
      * @since   1.0
      */
@@ -179,7 +177,6 @@ class DigitTest extends PHPUnit_Framework_TestCase
         return;
     }
 
-
     /**
      * Tear down
      *
@@ -188,6 +185,5 @@ class DigitTest extends PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-
     }
 }

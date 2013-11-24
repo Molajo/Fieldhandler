@@ -1,25 +1,25 @@
 <?php
 /**
- * Values FieldHandler
+ * Values Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Handler;
+namespace Molajo\Fieldhandler\Handler;
 
-use Molajo\FieldHandler\Exception\FieldHandlerException;
-use Molajo\FieldHandler\Api\FieldHandlerInterface;
+use Exception\Model\FieldhandlerException;
+use CommonApi\Model\FieldhandlerInterface;
 
 /**
- * Values FieldHandler
+ * Values Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
-class Values extends AbstractFieldHandler
+class Values extends AbstractFieldhandler
 {
     /**
      * Constructor
@@ -47,7 +47,7 @@ class Values extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws  FieldhandlerException
      */
     public function validate()
     {
@@ -60,7 +60,7 @@ class Values extends AbstractFieldHandler
 
             if ($test == 1) {
             } else {
-                throw new FieldHandlerException
+                throw new FieldhandlerException
                 ('Validate Values: ' . FILTER_INVALID_VALUE);
             }
         }
@@ -69,7 +69,7 @@ class Values extends AbstractFieldHandler
     }
 
     /**
-     * FieldHandler Input
+     * Fieldhandler Input
      *
      * @return  mixed
      * @since   1.0

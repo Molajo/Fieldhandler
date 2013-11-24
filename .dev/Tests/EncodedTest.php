@@ -1,26 +1,24 @@
 <?php
 /**
- * Encoded FieldHandler Test
+ * Encoded Fieldhandler Test
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Tests;
+namespace Molajo\Fieldhandler\Tests;
 
-
-
-use Molajo\FieldHandler\Adapter as adapter;
+use Molajo\Fieldhandler\Adapter as adapter;
 use PHPUnit_Framework_TestCase;
-use Molajo\FieldHandler\Exception\FieldHandlerException;
+use Exception\Model\FieldhandlerException;
 
 /**
- * Encoded FieldHandler
+ * Encoded Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
 class EncodedTest extends PHPUnit_Framework_TestCase
 {
@@ -44,23 +42,22 @@ class EncodedTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Encoded::validate
-     * @expectedException \Molajo\FieldHandler\Exception\FieldHandlerException
+     * @covers  Molajo\Fieldhandler\Handler\Encoded::validate
+     * @expectedException \Exception\Model\FieldhandlerException
      * @since   1.0
      */
     public function testValidateFail()
     {
         $field_name              = 'dog';
-        $field_value             =  'my-apples&are green and red';
+        $field_value             = 'my-apples&are green and red';
         $fieldhandler_type_chain = 'Encoded';
         $options                 = array();
 
         $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
-
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Encoded::validate
+     * @covers  Molajo\Fieldhandler\Handler\Encoded::validate
      * @return  void
      * @since   1.0
      */
@@ -79,7 +76,7 @@ class EncodedTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Encoded::validate
+     * @covers  Molajo\Fieldhandler\Handler\Encoded::validate
      * @return  void
      * @since   1.0
      */
@@ -99,7 +96,7 @@ class EncodedTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Encoded::validate
+     * @covers  Molajo\Fieldhandler\Handler\Encoded::validate
      * @return void
      * @since   1.0
      */
@@ -125,6 +122,5 @@ class EncodedTest extends PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-
     }
 }

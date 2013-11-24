@@ -1,25 +1,25 @@
 <?php
 /**
- * Required FieldHandler
+ * Required Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Handler;
+namespace Molajo\Fieldhandler\Handler;
 
-use Molajo\FieldHandler\Exception\FieldHandlerException;
-use Molajo\FieldHandler\Api\FieldHandlerInterface;
+use Exception\Model\FieldhandlerException;
+use CommonApi\Model\FieldhandlerInterface;
 
 /**
- * Required FieldHandler
+ * Required Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
-class Required extends AbstractFieldHandler
+class Required extends AbstractFieldhandler
 {
     /**
      * Constructor
@@ -47,7 +47,7 @@ class Required extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws  FieldhandlerException
      */
     public function validate()
     {
@@ -57,8 +57,8 @@ class Required extends AbstractFieldHandler
 
             if ($this->getRequired() === false) {
             } else {
-                throw new FieldHandlerException
-                ('FieldHandler Required: ' . FILTER_INVALID_VALUE);
+                throw new FieldhandlerException
+                ('Fieldhandler Required: ' . FILTER_INVALID_VALUE);
             }
         }
 
@@ -66,11 +66,11 @@ class Required extends AbstractFieldHandler
     }
 
     /**
-     * FieldHandler Input
+     * Fieldhandler Input
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws  FieldhandlerException
      */
     public function filter()
     {
@@ -80,8 +80,8 @@ class Required extends AbstractFieldHandler
 
             if ($this->getRequired() === false) {
             } else {
-                throw new FieldHandlerException
-                ('FieldHandler Required: ' . FILTER_INVALID_VALUE);
+                throw new FieldhandlerException
+                ('Fieldhandler Required: ' . FILTER_INVALID_VALUE);
             }
         }
 
@@ -93,7 +93,7 @@ class Required extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws  FieldhandlerException
      */
     public function escape()
     {
@@ -103,8 +103,8 @@ class Required extends AbstractFieldHandler
 
             if ($this->getRequired() === false) {
             } else {
-                throw new FieldHandlerException
-                ('FieldHandler Required: ' . FILTER_INVALID_VALUE);
+                throw new FieldhandlerException
+                ('Fieldhandler Required: ' . FILTER_INVALID_VALUE);
             }
         }
 

@@ -1,24 +1,24 @@
 <?php
 /**
- * Fullspecialchars FieldHandler
+ * Fullspecialchars Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Handler;
+namespace Molajo\Fieldhandler\Handler;
 
-use Molajo\FieldHandler\Exception\FieldHandlerException;
+use Exception\Model\FieldhandlerException;
 
 /**
- * Fullspecialchars FieldHandler
+ * Fullspecialchars Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
-class Fullspecialchars extends AbstractFieldHandler
+class Fullspecialchars extends AbstractFieldhandler
 {
     /**
      * Constructor
@@ -46,14 +46,13 @@ class Fullspecialchars extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws  FieldhandlerException
      */
     public function validate()
     {
         parent::validate();
 
         if ($this->getFieldValue() === null) {
-
         } else {
 
             $test = filter_var($this->getFieldValue(), FILTER_SANITIZE_FULL_SPECIAL_CHARS, $this->setFlags());
@@ -61,7 +60,7 @@ class Fullspecialchars extends AbstractFieldHandler
             if ($test == $this->getFieldValue()) {
             } else {
 
-                throw new FieldHandlerException
+                throw new FieldhandlerException
                 ('Validate Fullspecialchars: ' . FILTER_INVALID_VALUE);
             }
         }
@@ -70,7 +69,7 @@ class Fullspecialchars extends AbstractFieldHandler
     }
 
     /**
-     * FieldHandler Input
+     * Fieldhandler Input
      *
      * @return  mixed
      * @since   1.0
@@ -80,7 +79,6 @@ class Fullspecialchars extends AbstractFieldHandler
         parent::filter();
 
         if ($this->getFieldValue() === null) {
-
         } else {
 
             $test = filter_var($this->getFieldValue(), FILTER_SANITIZE_FULL_SPECIAL_CHARS, $this->setFlags());
@@ -109,7 +107,6 @@ class Fullspecialchars extends AbstractFieldHandler
         $test = filter_var($this->getFieldValue(), FILTER_SANITIZE_FULL_SPECIAL_CHARS, $this->setFlags());
 
         if ($test == $this->getFieldValue()) {
-
         } else {
             $this->setFieldValue(
                 filter_var($this->getFieldValue(), FILTER_SANITIZE_FULL_SPECIAL_CHARS, $this->setFlags())

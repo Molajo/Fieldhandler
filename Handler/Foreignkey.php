@@ -1,25 +1,25 @@
 <?php
 /**
- * Foreignkey FieldHandler
+ * Foreignkey Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Handler;
+namespace Molajo\Fieldhandler\Handler;
 
 use Exception;
-use Molajo\FieldHandler\Exception\FieldHandlerException;
+use Exception\Model\FieldhandlerException;
 
 /**
- * Foreignkey FieldHandler
+ * Foreignkey Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
-class Foreignkey extends AbstractFieldHandler
+class Foreignkey extends AbstractFieldhandler
 {
     /**
      * Constructor
@@ -48,7 +48,7 @@ class Foreignkey extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws  FieldhandlerException
      */
     public function validate()
     {
@@ -60,11 +60,11 @@ class Foreignkey extends AbstractFieldHandler
     }
 
     /**
-     * FieldHandler Input
+     * Fieldhandler Input
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws  FieldhandlerException
      */
     public function filter()
     {
@@ -77,7 +77,7 @@ class Foreignkey extends AbstractFieldHandler
 
             if ($test == $this->getFieldValue()) {
             } else {
-                throw new FieldHandlerException
+                throw new FieldhandlerException
                 ('Validate Foreignkey: ' . FILTER_INVALID_VALUE);
             }
         }
@@ -107,22 +107,22 @@ class Foreignkey extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws  FieldhandlerException
      */
     public function verifyForeignKey($key_value)
     {
         if ($this->database === null) {
-            throw new FieldHandlerException
+            throw new FieldhandlerException
             ('Validate Foreignkey: Database connection must be sent in as a database entry $options array.');
         }
 
         if ($this->table === null) {
-            throw new FieldHandlerException
+            throw new FieldhandlerException
             ('Validate Foreignkey: Name of table must be sent in as a table entry in the $options array.');
         }
 
         if ($this->key === null) {
-            throw new FieldHandlerException
+            throw new FieldhandlerException
             ('Validate Foreignkey: Name of key must be sent in as a key entry in the $options array.');
         }
 
@@ -138,11 +138,10 @@ class Foreignkey extends AbstractFieldHandler
         try {
 
             return $this->database->loadResult();
-
         } catch (Exception $e) {
 
-            throw new FieldHandlerException
-            ('FieldHandler Foreignkey: Database query failed: ' . $e->getMessage());
+            throw new FieldhandlerException
+            ('Fieldhandler Foreignkey: Database query failed: ' . $e->getMessage());
         }
     }
 }

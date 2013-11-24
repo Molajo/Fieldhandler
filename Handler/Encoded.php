@@ -1,26 +1,26 @@
 <?php
 /**
- * Encoded FieldHandler
+ * Encoded Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Handler;
+namespace Molajo\Fieldhandler\Handler;
 
-use Molajo\FieldHandler\Exception\FieldHandlerException;
+use Exception\Model\FieldhandlerException;
 
 /**
- * Encoded FieldHandler
+ * Encoded Fieldhandler
  *
  * URL-encode string, optionally strip or encode special characters.
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
-class Encoded extends AbstractFieldHandler
+class Encoded extends AbstractFieldhandler
 {
     /**
      * Constructor
@@ -57,15 +57,15 @@ class Encoded extends AbstractFieldHandler
 
         if ($test == $this->getFieldValue()) {
         } else {
-            throw new FieldHandlerException
+            throw new FieldhandlerException
             ('Validate Encoded: ' . FILTER_INVALID_VALUE);
         }
 
-        return  $this->getFieldValue();
+        return $this->getFieldValue();
     }
 
     /**
-     * FieldHandler Input
+     * Fieldhandler Input
      *
      * @return  mixed
      * @since   1.0

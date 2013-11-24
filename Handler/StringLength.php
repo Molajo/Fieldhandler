@@ -1,6 +1,6 @@
 <?php
 /**
- * Notequal Fieldhandler
+ * Stringlength Fieldhandler
  *
  * @package    Molajo
  * @copyright  2013 Amy Stephen. All rights reserved.
@@ -11,14 +11,14 @@ namespace Molajo\Fieldhandler\Handler;
 use Exception\Model\FieldhandlerException;
 
 /**
- * Notequal Fieldhandler
+ * Stringlength Fieldhandler
  *
  * @package    Molajo
  * @copyright  2013 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0
  */
-class Notequal extends AbstractFieldhandler
+class Stringlength extends AbstractFieldhandler
 {
     /**
      * Constructor
@@ -52,12 +52,18 @@ class Notequal extends AbstractFieldhandler
     {
         parent::validate();
 
-        $notEqual = $this->getNotEqual();
+        $Fromto = $this->getFromto();
 
-        if ($this->getFieldValue() == $notEqual) {
+        $string_length = strlen(trim($this->getFieldValue()));
+
+        if ($string_length >= $Fromto[0]
+            && $string_length <= $Fromto[1]
+        ) {
+        } else {
 
             throw new FieldhandlerException
-            ('Validate Value: ' . $this->getFieldValue() . ' must not be equal to: ' . $notEqual);
+            ('Validate Value: ' . $string_length
+            . ' is not a value From: ' . $Fromto[0] . '  To:' . $Fromto[1]);
         }
 
         return $this->getFieldValue();
@@ -73,9 +79,12 @@ class Notequal extends AbstractFieldhandler
     {
         parent::filter();
 
-        $notEqual = $this->getNotEqual();
+        $Fromto = $this->getFromto();
 
-        if ($this->getFieldValue() == $notEqual) {
+        if ($string_length > $Fromto[0]
+            && $string_length < $Fromto[1]
+        ) {
+        } else {
             $this->setFieldValue(null);
         }
 
@@ -101,14 +110,19 @@ class Notequal extends AbstractFieldhandler
      * @return  mixed
      * @since   1.0
      */
-    public function getNotEqual()
+    public function getFromto()
     {
-        $field_value = '';
+        $string_length_from = 0;
+        $string_length_to   = 999999999999;
 
-        if (isset($this->options['not_equal'])) {
-            $field_value = $this->options['not_equal'];
+        if (isset($this->options['from'])) {
+            $string_length_from = $this->options['from'];
         }
 
-        return $field_value;
+        if (isset($this->options['to'])) {
+            $string_length_to = $this->options['to'];
+        }
+
+        return array($string_length_from, $string_length_to);
     }
 }

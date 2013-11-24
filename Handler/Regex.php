@@ -1,24 +1,24 @@
 <?php
 /**
- * Regex FieldHandler
+ * Regex Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Handler;
+namespace Molajo\Fieldhandler\Handler;
 
-use Molajo\FieldHandler\Exception\FieldHandlerException;
+use Exception\Model\FieldhandlerException;
 
 /**
- * Alpha FieldHandler
+ * Alpha Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
-class Regex extends AbstractFieldHandler
+class Regex extends AbstractFieldhandler
 {
     /**
      * Constructor
@@ -46,7 +46,7 @@ class Regex extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws  FieldhandlerException
      */
     public function validate()
     {
@@ -57,9 +57,9 @@ class Regex extends AbstractFieldHandler
 
             $test = preg_match($this->getRegex(), $this->getFieldValue());
 
-            if ($test == $this->getFieldValue()) {
+            if ($test == 1) {
             } else {
-                throw new FieldHandlerException
+                throw new FieldhandlerException
                 ('Validate Regex: ' . FILTER_INVALID_VALUE);
             }
         }
@@ -68,7 +68,7 @@ class Regex extends AbstractFieldHandler
     }
 
     /**
-     * FieldHandler Input
+     * Fieldhandler Input
      *
      * @return  mixed
      * @since   1.0
@@ -82,9 +82,9 @@ class Regex extends AbstractFieldHandler
 
             $test = preg_match($this->getRegex(), $this->getFieldValue());
 
-            if ($test == $this->getFieldValue()) {
+            if ($test == 1) {
             } else {
-                $this->setFieldValue($test);
+                $this->setFieldValue('null');
             }
         }
 
@@ -99,18 +99,7 @@ class Regex extends AbstractFieldHandler
      */
     public function escape()
     {
-        parent::escape();
-
-        if ($this->getFieldValue() === null) {
-        } else {
-
-            $test = preg_match($this->getRegex(), $this->getFieldValue());
-
-            if ($test == $this->getFieldValue()) {
-            } else {
-                $this->setFieldValue($test);
-            }
-        }
+        $this->filter();
 
         return $this->getFieldValue();
     }

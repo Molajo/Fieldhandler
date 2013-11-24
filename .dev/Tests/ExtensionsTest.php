@@ -1,26 +1,24 @@
 <?php
 /**
- * Extensions FieldHandler Test
+ * Extensions Fieldhandler Test
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Tests;
+namespace Molajo\Fieldhandler\Tests;
 
-
-
-use Molajo\FieldHandler\Adapter as adapter;
+use Molajo\Fieldhandler\Adapter as adapter;
 use PHPUnit_Framework_TestCase;
-use Molajo\FieldHandler\Exception\FieldHandlerException;
+use Exception\Model\FieldhandlerException;
 
 /**
- * Extensions FieldHandler
+ * Extensions Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
 class ExtensionsTest extends PHPUnit_Framework_TestCase
 {
@@ -44,7 +42,7 @@ class ExtensionsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Extensions::validate
+     * @covers  Molajo\Fieldhandler\Handler\Extensions::validate
      * @return  void
      * @since   1.0
      */
@@ -74,10 +72,9 @@ class ExtensionsTest extends PHPUnit_Framework_TestCase
         return;
     }
 
-
     /**
-     * @covers  Molajo\FieldHandler\Handler\Extensions::validate
-     * @expectedException Molajo\FieldHandler\Exception\FieldHandlerException
+     * @covers  Molajo\Fieldhandler\Handler\Extensions::validate
+     * @expectedException Exception\Model\FieldhandlerException
      * @return  void
      * @since   1.0
      */
@@ -96,7 +93,6 @@ class ExtensionsTest extends PHPUnit_Framework_TestCase
 
         $options = array('array_valid_extensions' => $array_valid_values);
 
-
         $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $this->assertEquals($field_value, $results);
@@ -105,7 +101,7 @@ class ExtensionsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Extensions::validate
+     * @covers  Molajo\Fieldhandler\Handler\Extensions::validate
      * @return  void
      * @since   1.0
      */
@@ -136,7 +132,7 @@ class ExtensionsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\FieldHandler\Handler\Extensions::validate
+     * @covers  Molajo\Fieldhandler\Handler\Extensions::validate
      * @return  void
      * @since   1.0
      */
@@ -155,7 +151,6 @@ class ExtensionsTest extends PHPUnit_Framework_TestCase
 
         $options = array('array_valid_extensions' => $array_valid_values);
 
-
         $results = $this->adapter->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $this->assertEquals(null, $results);
@@ -171,6 +166,5 @@ class ExtensionsTest extends PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-
     }
 }

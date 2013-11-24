@@ -1,24 +1,24 @@
 <?php
 /**
- * Maximum FieldHandler
+ * Maximum Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Handler;
+namespace Molajo\Fieldhandler\Handler;
 
-use Molajo\FieldHandler\Exception\FieldHandlerException;
+use Exception\Model\FieldhandlerException;
 
 /**
- * Maximum FieldHandler
+ * Maximum Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
-class Maximum extends AbstractFieldHandler
+class Maximum extends AbstractFieldhandler
 {
     /**
      * Constructor
@@ -46,7 +46,7 @@ class Maximum extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws  FieldhandlerException
      */
     public function validate()
     {
@@ -55,8 +55,8 @@ class Maximum extends AbstractFieldHandler
         if ($this->getFieldValue() === null) {
         } else {
 
-            if ((int) $this->getMaximum() < (int) $this->getFieldValue()) {
-                throw new FieldHandlerException
+            if ((int)$this->getMaximum() < (int)$this->getFieldValue()) {
+                throw new FieldhandlerException
                 ('Validate Maximum: ' . FILTER_INVALID_VALUE);
             }
         }
@@ -65,7 +65,7 @@ class Maximum extends AbstractFieldHandler
     }
 
     /**
-     * FieldHandler Input
+     * Fieldhandler Input
      *
      * @return  mixed
      * @since   1.0
@@ -77,8 +77,8 @@ class Maximum extends AbstractFieldHandler
         if ($this->getFieldValue() === null) {
         } else {
 
-            if ((int) $this->getMaximum() < (int) $this->getFieldValue()) {
-                $this->setFieldValue((int) $this->getMaximum());
+            if ((int)$this->getMaximum() < (int)$this->getFieldValue()) {
+                $this->setFieldValue((int)$this->getMaximum());
             }
         }
 

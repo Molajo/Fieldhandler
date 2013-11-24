@@ -1,24 +1,24 @@
 <?php
 /**
- * Time FieldHandler
+ * Time Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-namespace Molajo\FieldHandler\Handler;
+namespace Molajo\Fieldhandler\Handler;
 
-use Molajo\FieldHandler\Exception\FieldHandlerException;
+use Exception\Model\FieldhandlerException;
 
 /**
- * Time FieldHandler
+ * Time Fieldhandler
  *
- * @package   Molajo
- * @copyright 2013 Amy Stephen. All rights reserved.
- * @license   http://www.opensource.org/licenses/mit-license.html MIT License
- * @since     1.0
+ * @package    Molajo
+ * @copyright  2013 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0
  */
-class Time extends AbstractFieldHandler
+class Time extends AbstractFieldhandler
 {
     /**
      * Constructor
@@ -46,7 +46,7 @@ class Time extends AbstractFieldHandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws  FieldhandlerException
      */
     public function validate()
     {
@@ -59,7 +59,7 @@ class Time extends AbstractFieldHandler
 
             if ($test == false) {
             } else {
-                throw new FieldHandlerException
+                throw new FieldhandlerException
                 ('Validate Time: ' . FILTER_INVALID_VALUE);
             }
         }
@@ -68,11 +68,11 @@ class Time extends AbstractFieldHandler
     }
 
     /**
-     * FieldHandler Input
+     * Fieldhandler Input
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldHandlerException
+     * @throws  FieldhandlerException
      */
     public function filter()
     {
@@ -82,7 +82,7 @@ class Time extends AbstractFieldHandler
 
         if ($test == false) {
         } else {
-            throw new FieldHandlerException
+            throw new FieldhandlerException
             ('Validate Time: ' . FILTER_INVALID_VALUE);
         }
 
