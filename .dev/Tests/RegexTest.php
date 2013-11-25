@@ -49,7 +49,7 @@ class RegexTest extends PHPUnit_Framework_TestCase
     public function testValidate1()
     {
         $field_name              = 'email';
-        $field_value             = 'AmyStephen@gmail.com';
+        $field_value             = 'AmyStephen@Molajo.org';
         $fieldhandler_type_chain = 'Regex';
         $options                 = array();
         $options['regex']        = "[a-z0-9]";

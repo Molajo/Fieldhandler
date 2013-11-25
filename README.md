@@ -249,7 +249,7 @@ Tests that a value is a valid email address. When invalid, validate throws excep
 Filter and Escape return null.
 
 ```php
-    $results = $this->adapter->validate('email_address', 'AmyStephen@gmail.com', 'Email');
+    $results = $this->adapter->validate('email_address', 'AmyStephen@Molajo.org', 'Email');
 
 ```
 
@@ -489,7 +489,7 @@ Performs regex checking against the input value for the regex sent in.
 ```php
     // The value of field `input_field` may not be null
     $field_name              = 'my_field';
-    $field_value             = AmyStephen@gmail.com;
+    $field_value             = AmyStephen@Molajo.org;
     $fieldhandler_type_chain = 'Regex';
     $options                 = array();
     $options['regex']      = $regex_expression;

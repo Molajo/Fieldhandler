@@ -49,7 +49,7 @@ class TrimTest extends PHPUnit_Framework_TestCase
     public function testValidate1()
     {
         $field_name              = 'req';
-        $field_value             = 'AmyStephen@gmail.com';
+        $field_value             = 'AmyStephen@Molajo.org';
         $fieldhandler_type_chain = 'Trim';
         $options                 = array();
 
@@ -69,7 +69,7 @@ class TrimTest extends PHPUnit_Framework_TestCase
     public function testValidateFail()
     {
         $field_name              = 'email';
-        $field_value             = 'AmyStephen@gmail.com                ';
+        $field_value             = 'AmyStephen@Molajo.org                ';
         $fieldhandler_type_chain = 'Trim';
 
         $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, array());
@@ -87,13 +87,13 @@ class TrimTest extends PHPUnit_Framework_TestCase
     public function testValidateFilter()
     {
         $field_name              = 'req';
-        $field_value             = '            AmyStephen@gmail.com           ';
+        $field_value             = '            AmyStephen@Molajo.org           ';
         $fieldhandler_type_chain = 'Trim';
         $options                 = array();
 
         $results = $this->adapter->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals('AmyStephen@gmail.com', $results);
+        $this->assertEquals('AmyStephen@Molajo.org', $results);
 
         return;
     }

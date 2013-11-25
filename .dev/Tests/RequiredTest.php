@@ -49,7 +49,7 @@ class RequiredTest extends PHPUnit_Framework_TestCase
     public function testValidate1()
     {
         $field_name              = 'req';
-        $field_value             = 'AmyStephen@gmail.com';
+        $field_value             = 'AmyStephen@Molajo.org';
         $fieldhandler_type_chain = 'Required';
         $options                 = array();
 

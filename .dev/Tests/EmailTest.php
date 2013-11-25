@@ -49,7 +49,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
     public function testValidate1()
     {
         $field_name              = 'email_address';
-        $field_value             = 'AmyStephen@gmail.com';
+        $field_value             = 'AmyStephen@Molajo.org';
         $fieldhandler_type_chain = 'Email';
         $options                 = array();
 
@@ -88,7 +88,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
     public function testFilter1()
     {
         $field_name              = 'email_address';
-        $field_value             = 'AmyStephen@gmail.com';
+        $field_value             = 'AmyStephen@Molajo.org';
         $fieldhandler_type_chain = 'Email';
         $options                 = array();
 
@@ -127,7 +127,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
     public function testEscape1()
     {
         $field_name              = 'email_address';
-        $field_value             = 'AmyStephen@gmail.com';
+        $field_value             = 'AmyStephen@Molajo.org';
         $fieldhandler_type_chain = 'Email';
         $options                 = array();
 
