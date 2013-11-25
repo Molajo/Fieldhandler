@@ -54,7 +54,7 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
 
         $results = $this->adapter->escape($field_name, $field_value, $fieldhandler_type_chain, array());
 
-        $this->assertEquals('&#38;', $results);
+        $this->assertEquals('&amp;', $results);
 
         return;
     }
