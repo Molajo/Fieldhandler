@@ -8,9 +8,9 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Adapter as adapter;
+use Molajo\Fieldhandler\Adapter as Adapter;
 use PHPUnit_Framework_TestCase;
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Alias Fieldhandler
@@ -38,18 +38,19 @@ class AliasTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->adapter = new adapter();
+        $this->adapter = new Adapter();
     }
 
     /**
      * @covers  Molajo\Fieldhandler\Handler\Alias::validate
-     * @return  void
+     * @expectedException CommonApi\Exception\UnexpectedValueException
+     * @return void
      * @since   1.0
      */
-    public function testValid()
+    public function testValidateFail()
     {
         $field_name              = 'alias';
-        $field_value             = 'jack-and-jill';
+        $field_value             = 'Jack and Jill';
         $fieldhandler_type_chain = 'Alias';
         $options                 = array();
 
@@ -62,14 +63,13 @@ class AliasTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Handler\Alias::validate
-     * @expectedException PHPUnit_Framework_ExpectationFailedException
-     * @return void
+     * @return  void
      * @since   1.0
      */
-    public function testValidateFail()
+    public function testValid()
     {
         $field_name              = 'alias';
-        $field_value             = 'Jack and Jill';
+        $field_value             = 'jack-and-jill';
         $fieldhandler_type_chain = 'Alias';
         $options                 = array();
 

@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Handler;
 
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Boolean Fieldhandler
@@ -63,7 +63,7 @@ class Boolean extends AbstractFieldhandler
             }
 
             if ($test === null) {
-                throw new FieldhandlerException
+                throw new UnexpectedValueException
                 ('Validate Boolean: ' . FILTER_INVALID_VALUE);
             }
         }

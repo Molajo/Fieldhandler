@@ -10,7 +10,7 @@ namespace Molajo\Fieldhandler\Tests;
 
 use Molajo\Fieldhandler\Adapter as adapter;
 use PHPUnit_Framework_TestCase;
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Email Fieldhandler
@@ -62,7 +62,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Handler\Email::validate
-     * @expectedException Exception\Model\FieldhandlerException
+     * @expectedException CommonApi\Exception\UnexpectedValueException
      * @return void
      * @since   1.0
      */

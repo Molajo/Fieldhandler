@@ -62,7 +62,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Handler\upper::validate
-     * @expectedException Exception\Model\FieldhandlerException
+     * @expectedException CommonApi\Exception\UnexpectedValueException
      * @return void
      * @since   1.0
      */

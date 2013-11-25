@@ -14,7 +14,7 @@ use Molajo\Fieldhandler\Adapter as Adapter;
 use Molajo\Database\Adapter as Database;
 use Molajo\Database\Handler\Joomla;
 use PHPUnit_Framework_TestCase;
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Foreignkey Fieldhandler

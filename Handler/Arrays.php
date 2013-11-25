@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Handler;
 
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Arrays Fieldhandler
@@ -58,7 +58,7 @@ class Arrays extends AbstractFieldhandler
 
             if ($test == 1) {
             } else {
-                throw new FieldhandlerException
+                throw new UnexpectedValueException
                 ('Validate Array: ' . FILTER_INVALID_VALUE);
             }
 
@@ -142,7 +142,7 @@ class Arrays extends AbstractFieldhandler
                 if ($filter === true) {
                     unset ($entry);
                 } else {
-                    throw new FieldhandlerException
+                    throw new UnexpectedValueException
                     ('Fieldhandler Arrays: Array Value is not valid');
                 }
             }

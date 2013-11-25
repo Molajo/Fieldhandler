@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Handler;
 
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerInterface;
 
 /**
@@ -48,7 +48,7 @@ class Fromto extends AbstractFieldhandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
@@ -61,7 +61,7 @@ class Fromto extends AbstractFieldhandler
         ) {
         } else {
 
-            throw new FieldhandlerException
+            throw new UnexpectedValueException
             ('Validate Value: ' . $this->getFieldValue()
             . ' is not a value From: ' . $Fromto[0] . '  To:' . $Fromto[1]);
         }

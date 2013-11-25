@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Handler;
 
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Encoded Fieldhandler
@@ -57,7 +57,7 @@ class Encoded extends AbstractFieldhandler
 
         if ($test == $this->getFieldValue()) {
         } else {
-            throw new FieldhandlerException
+            throw new UnexpectedValueException
             ('Validate Encoded: ' . FILTER_INVALID_VALUE);
         }
 

@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Handler;
 
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Date Fieldhandler
@@ -57,7 +57,7 @@ class Date extends AbstractFieldhandler
             $test = strtotime($this->getFieldValue());
 
             if ($test == false) {
-                throw new FieldhandlerException
+                throw new UnexpectedValueException
                 ('Validate Date: ' . FILTER_INVALID_VALUE);
             }
         }

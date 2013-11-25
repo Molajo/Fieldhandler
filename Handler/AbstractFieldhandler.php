@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Handler;
 
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Abstract Fieldhandler Class
@@ -153,7 +153,7 @@ abstract class AbstractFieldhandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
@@ -165,7 +165,7 @@ abstract class AbstractFieldhandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
@@ -177,7 +177,7 @@ abstract class AbstractFieldhandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
     {
@@ -191,7 +191,7 @@ abstract class AbstractFieldhandler
      *
      * @return  $this
      * @since   1.0
-     * @throws  FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     protected function setMethod($method)
     {
@@ -202,7 +202,7 @@ abstract class AbstractFieldhandler
             || $method == 'escape'
         ) {
         } else {
-            throw new FieldhandlerException
+            throw new UnexpectedValueException
             ('Fieldhandler: Invalid Method: ' . $method
             . ' Must be  validate, filter, escape.');
         }

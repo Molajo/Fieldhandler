@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Handler;
 
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Notequal Fieldhandler
@@ -46,7 +46,7 @@ class Notequal extends AbstractFieldhandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
@@ -56,7 +56,7 @@ class Notequal extends AbstractFieldhandler
 
         if ($this->getFieldValue() == $notEqual) {
 
-            throw new FieldhandlerException
+            throw new UnexpectedValueException
             ('Validate Value: ' . $this->getFieldValue() . ' must not be equal to: ' . $notEqual);
         }
 

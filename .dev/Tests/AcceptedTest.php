@@ -126,7 +126,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Handler\Default::validate
-     * @expectedException Exception\Model\FieldhandlerException
+     * @expectedException CommonApi\Exception\UnexpectedValueException
      * @return void
      * @since   1.0
      */

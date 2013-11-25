@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Handler;
 
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Equal Fieldhandler
@@ -55,7 +55,7 @@ class Equal extends AbstractFieldhandler
 
         if ($this->getFieldValue() == $equals) {
         } else {
-            throw new FieldhandlerException
+            throw new UnexpectedValueException
             ('Validate Equal: ' . FILTER_INVALID_VALUE);
         }
 

@@ -10,7 +10,7 @@ namespace Molajo\Fieldhandler\Tests;
 
 use Molajo\Fieldhandler\Adapter as adapter;
 use PHPUnit_Framework_TestCase;
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Required Fieldhandler

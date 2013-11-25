@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Handler;
 
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Extensions Fieldhandler
@@ -46,7 +46,7 @@ class Extensions extends AbstractFieldhandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws \Exception\Model\FieldhandlerException
+     * @throws \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
@@ -59,7 +59,7 @@ class Extensions extends AbstractFieldhandler
 
             if ($test == 1) {
             } else {
-                throw new FieldhandlerException
+                throw new UnexpectedValueException
                 ('Validate Extensions: ' . FILTER_INVALID_VALUE);
             }
 
@@ -151,7 +151,7 @@ class Extensions extends AbstractFieldhandler
 
                 if ($filter === true) {
                 } else {
-                    throw new FieldhandlerException
+                    throw new UnexpectedValueException
                     ('Fieldhandler Extensions: Array Value is not valid');
                 }
             }

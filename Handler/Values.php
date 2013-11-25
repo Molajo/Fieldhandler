@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Handler;
 
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerInterface;
 
 /**
@@ -47,7 +47,7 @@ class Values extends AbstractFieldhandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
@@ -60,7 +60,7 @@ class Values extends AbstractFieldhandler
 
             if ($test == 1) {
             } else {
-                throw new FieldhandlerException
+                throw new UnexpectedValueException
                 ('Validate Values: ' . FILTER_INVALID_VALUE);
             }
         }

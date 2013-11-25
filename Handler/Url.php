@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Handler;
 
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerInterface;
 
 /**
@@ -47,7 +47,7 @@ class Url extends AbstractFieldhandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
@@ -59,7 +59,7 @@ class Url extends AbstractFieldhandler
 
         if ($test == $hold) {
         } else {
-            throw new FieldhandlerException ('Validate Url: ' . FILTER_INVALID_VALUE);
+            throw new UnexpectedValueException ('Validate Url: ' . FILTER_INVALID_VALUE);
         }
 
         return $this->getFieldValue();

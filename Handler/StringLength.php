@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Handler;
 
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Stringlength Fieldhandler
@@ -46,7 +46,7 @@ class Stringlength extends AbstractFieldhandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
@@ -61,7 +61,7 @@ class Stringlength extends AbstractFieldhandler
         ) {
         } else {
 
-            throw new FieldhandlerException
+            throw new UnexpectedValueException
             ('Validate Value: ' . $string_length
             . ' is not a value From: ' . $Fromto[0] . '  To:' . $Fromto[1]);
         }

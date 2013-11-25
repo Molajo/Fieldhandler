@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Handler;
 
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Callback Fieldhandler
@@ -58,7 +58,7 @@ class Callback extends AbstractFieldhandler
 
             if ($test == $this->getFieldValue()) {
             } else {
-                throw new FieldhandlerException
+                throw new UnexpectedValueException
                 ('Validate Callback: ' . FILTER_INVALID_VALUE);
             }
         }

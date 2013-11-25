@@ -9,7 +9,7 @@
 namespace Molajo\Fieldhandler;
 
 use Exception;
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerInterface;
 
 /**
@@ -90,7 +90,7 @@ class Adapter implements FieldhandlerInterface
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate(
         $field_name,
@@ -117,7 +117,7 @@ class Adapter implements FieldhandlerInterface
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter(
         $field_name,
@@ -144,7 +144,7 @@ class Adapter implements FieldhandlerInterface
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape(
         $field_name,
@@ -172,7 +172,7 @@ class Adapter implements FieldhandlerInterface
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     protected function editRequest(
         $method,
@@ -186,12 +186,12 @@ class Adapter implements FieldhandlerInterface
         if (in_array($method, array('validate', 'filter', 'escape'))) {
             $this->method = $method;
         } else {
-            throw new FieldhandlerException
+            throw new UnexpectedValueException
             ('Fieldhandler: Must provide the name of the requested method.');
         }
 
         if ($field_name == '' || $field_name === null) {
-            throw new FieldhandlerException
+            throw new UnexpectedValueException
             ('Fieldhandler: Must provide the field name.');
         } else {
             $this->field_name = $field_name;
@@ -212,7 +212,7 @@ class Adapter implements FieldhandlerInterface
         if (is_array($fieldhandler_types) && count($fieldhandler_types) > 0) {
             $this->fieldhandler_types = $fieldhandler_types;
         } else {
-            throw new FieldhandlerException
+            throw new UnexpectedValueException
             ('Fieldhandler: Must request at least one field handler type');
         }
 
@@ -230,7 +230,7 @@ class Adapter implements FieldhandlerInterface
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     protected function processRequest()
     {
@@ -251,7 +251,7 @@ class Adapter implements FieldhandlerInterface
                 );
             } catch (Exception $e) {
 
-                throw new FieldhandlerException
+                throw new UnexpectedValueException
                 ('Fieldhandler: Could not instantiate Fieldhandler Type: ' . $fieldhandler_type
                 . ' Class: ' . $class);
             }
@@ -271,7 +271,7 @@ class Adapter implements FieldhandlerInterface
      *
      * @return  object
      * @since   1.0
-     * @throws  FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     protected function getType($fieldhandler_type)
     {
@@ -279,7 +279,7 @@ class Adapter implements FieldhandlerInterface
 
         if (class_exists($class)) {
         } else {
-            throw new FieldhandlerException
+            throw new UnexpectedValueException
             ('Fieldhandler Type class ' . $class . ' does not exist.');
         }
 

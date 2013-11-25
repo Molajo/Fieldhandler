@@ -10,7 +10,7 @@ namespace Molajo\Fieldhandler\Tests;
 
 use Molajo\Fieldhandler\Adapter as adapter;
 use PHPUnit_Framework_TestCase;
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Notequal Fieldhandler
@@ -63,7 +63,7 @@ class NotequalTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Handler\Equals::validate
-     * @expectedException Exception\Model\FieldhandlerException
+     * @expectedException CommonApi\Exception\UnexpectedValueException
      * @return void
      * @since   1.0
      */

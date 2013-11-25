@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Handler;
 
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Trim Fieldhandler
@@ -46,7 +46,7 @@ class Trim extends AbstractFieldhandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
@@ -58,7 +58,7 @@ class Trim extends AbstractFieldhandler
             $test = trim($this->getFieldValue());
             if ($test == $this->getFieldValue()) {
             } else {
-                throw new FieldhandlerException
+                throw new UnexpectedValueException
                 ('Validate Trim: ' . FILTER_INVALID_VALUE);
             }
         }

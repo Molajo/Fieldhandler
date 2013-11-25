@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Handler;
 
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Maximum Fieldhandler
@@ -46,7 +46,7 @@ class Maximum extends AbstractFieldhandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
@@ -56,7 +56,7 @@ class Maximum extends AbstractFieldhandler
         } else {
 
             if ((int)$this->getMaximum() < (int)$this->getFieldValue()) {
-                throw new FieldhandlerException
+                throw new UnexpectedValueException
                 ('Validate Maximum: ' . FILTER_INVALID_VALUE);
             }
         }

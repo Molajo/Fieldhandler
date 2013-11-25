@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Handler;
 
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Html Fieldhandler
@@ -46,7 +46,7 @@ class Html extends AbstractFieldhandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
@@ -54,7 +54,7 @@ class Html extends AbstractFieldhandler
 
         if ($this->getFieldValue() == $this->filter()) {
         } else {
-            throw new FieldhandlerException
+            throw new UnexpectedValueException
             ('Validate Html: ' . FILTER_INVALID_VALUE);
         }
 

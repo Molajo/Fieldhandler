@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Handler;
 
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Alphanumeric Fieldhandler
@@ -57,7 +57,7 @@ class Alphanumeric extends AbstractFieldhandler
             $test = ctype_alnum($this->getFieldValue());
             if ($test == 1) {
             } else {
-                throw new FieldhandlerException
+                throw new UnexpectedValueException
                 ('Validate Alphanumeric: ' . FILTER_INVALID_VALUE);
             }
         }

@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Handler;
 
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Contains Fieldhandler
@@ -57,7 +57,7 @@ class Contains extends AbstractFieldhandler
 
         $results = $this->testContains();
         if ($results === false) {
-            throw new FieldhandlerException
+            throw new UnexpectedValueException
             ('Validate Contains: ' . FILTER_INVALID_VALUE);
         }
 
@@ -104,7 +104,7 @@ class Contains extends AbstractFieldhandler
      *
      * @return  boolean
      * @since   1.0
-     * @throws  FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function testContains()
     {
@@ -115,7 +115,7 @@ class Contains extends AbstractFieldhandler
         if (isset($this->options['contains'])) {
             $contains = $this->options['contains'];
         } else {
-            throw new FieldhandlerException
+            throw new UnexpectedValueException
             ('Validate Contains: must send in options contains value: ');
         }
 

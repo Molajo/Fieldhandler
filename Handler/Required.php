@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Handler;
 
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerInterface;
 
 /**
@@ -47,7 +47,7 @@ class Required extends AbstractFieldhandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
@@ -57,7 +57,7 @@ class Required extends AbstractFieldhandler
 
             if ($this->getRequired() === false) {
             } else {
-                throw new FieldhandlerException
+                throw new UnexpectedValueException
                 ('Fieldhandler Required: ' . FILTER_INVALID_VALUE);
             }
         }
@@ -70,7 +70,7 @@ class Required extends AbstractFieldhandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
@@ -80,7 +80,7 @@ class Required extends AbstractFieldhandler
 
             if ($this->getRequired() === false) {
             } else {
-                throw new FieldhandlerException
+                throw new UnexpectedValueException
                 ('Fieldhandler Required: ' . FILTER_INVALID_VALUE);
             }
         }
@@ -93,7 +93,7 @@ class Required extends AbstractFieldhandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
     {
@@ -103,7 +103,7 @@ class Required extends AbstractFieldhandler
 
             if ($this->getRequired() === false) {
             } else {
-                throw new FieldhandlerException
+                throw new UnexpectedValueException
                 ('Fieldhandler Required: ' . FILTER_INVALID_VALUE);
             }
         }

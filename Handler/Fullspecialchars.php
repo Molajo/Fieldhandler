@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Handler;
 
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Fullspecialchars Fieldhandler
@@ -46,7 +46,7 @@ class Fullspecialchars extends AbstractFieldhandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
@@ -60,7 +60,7 @@ class Fullspecialchars extends AbstractFieldhandler
             if ($test == $this->getFieldValue()) {
             } else {
 
-                throw new FieldhandlerException
+                throw new UnexpectedValueException
                 ('Validate Fullspecialchars: ' . FILTER_INVALID_VALUE);
             }
         }

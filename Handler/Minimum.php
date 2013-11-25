@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Handler;
 
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Minimum Fieldhandler
@@ -46,7 +46,7 @@ class Minimum extends AbstractFieldhandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
@@ -57,7 +57,7 @@ class Minimum extends AbstractFieldhandler
 
             if ((int)$this->getFieldValue() > (int)$this->getMinimum()) {
             } else {
-                throw new FieldhandlerException
+                throw new UnexpectedValueException
                 ('Validate Minimum: ' . FILTER_INVALID_VALUE);
             }
         }

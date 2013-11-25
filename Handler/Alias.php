@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Handler;
 
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Alias Fieldhandler
@@ -46,7 +46,7 @@ class Alias extends AbstractFieldhandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  \Exception\Model\FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
@@ -58,12 +58,10 @@ class Alias extends AbstractFieldhandler
             return $this->getFieldValue();
         }
 
-        $this->setFieldValue($this->createAlias());
-
         $bad = $this->testValidate();
 
         if ($bad === true) {
-            throw new FieldhandlerException
+            throw new UnexpectedValueException
             ('Validate Alias: ' . FILTER_INVALID_VALUE);
         }
 
@@ -159,7 +157,8 @@ class Alias extends AbstractFieldhandler
         }
 
         $test = preg_replace('/(\s|[^A-Za-z0-9\-])+/', '-', $test);
-        if ($this->getFieldValue() == $test) {
+
+        if ($this->getFieldValue() === $test) {
         } else {
             $bad = true;
         }

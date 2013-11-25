@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Handler;
 
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Numeric Fieldhandler
@@ -46,7 +46,7 @@ class Numeric extends AbstractFieldhandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
@@ -58,7 +58,7 @@ class Numeric extends AbstractFieldhandler
             $test = is_numeric($this->getFieldValue());
             if ($test == 1) {
             } else {
-                throw new FieldhandlerException
+                throw new UnexpectedValueException
                 ('Validate Numeric: ' . FILTER_INVALID_VALUE);
             }
         }

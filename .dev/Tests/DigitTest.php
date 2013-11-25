@@ -10,7 +10,7 @@ namespace Molajo\Fieldhandler\Tests;
 
 use Molajo\Fieldhandler\Adapter as adapter;
 use PHPUnit_Framework_TestCase;
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Digit Fieldhandler
@@ -81,7 +81,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Handler\Digit::validate
-     * @expectedException Exception\Model\FieldhandlerException
+     * @expectedException CommonApi\Exception\UnexpectedValueException
      * @return void
      * @since   1.0
      */

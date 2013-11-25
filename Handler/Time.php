@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Handler;
 
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Time Fieldhandler
@@ -46,7 +46,7 @@ class Time extends AbstractFieldhandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
@@ -59,7 +59,7 @@ class Time extends AbstractFieldhandler
 
             if ($test == false) {
             } else {
-                throw new FieldhandlerException
+                throw new UnexpectedValueException
                 ('Validate Time: ' . FILTER_INVALID_VALUE);
             }
         }
@@ -72,7 +72,7 @@ class Time extends AbstractFieldhandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
@@ -82,7 +82,7 @@ class Time extends AbstractFieldhandler
 
         if ($test == false) {
         } else {
-            throw new FieldhandlerException
+            throw new UnexpectedValueException
             ('Validate Time: ' . FILTER_INVALID_VALUE);
         }
 

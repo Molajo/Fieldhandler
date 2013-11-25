@@ -10,7 +10,7 @@ namespace Molajo\Fieldhandler\Tests;
 
 use Molajo\Fieldhandler\Adapter as adapter;
 use PHPUnit_Framework_TestCase;
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Regex Fieldhandler
@@ -48,11 +48,11 @@ class RegexTest extends PHPUnit_Framework_TestCase
      */
     public function testValidate1()
     {
-        $field_name              = 'email';
-        $field_value             = 'AmyStephen@Molajo.org';
+        $field_name              = 'number';
+        $field_value             = '54321';
         $fieldhandler_type_chain = 'Regex';
         $options                 = array();
-        $options['regex']        = "[a-z0-9]";
+        $options['regex']        = "/[0-9]/";
 
         $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
@@ -68,11 +68,11 @@ class RegexTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateFail()
     {
-        $field_name              = 'email';
-        $field_value             = '#$%^&';
+        $field_name              = 'number';
+        $field_value             = 'NOT54321';
         $fieldhandler_type_chain = 'Regex';
         $options                 = array();
-        $options['regex']        = "[a-z0-9]";
+        $options['regex']        = "/[0-9]/";
 
         $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 

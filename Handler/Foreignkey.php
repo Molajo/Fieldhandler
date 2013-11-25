@@ -9,7 +9,7 @@
 namespace Molajo\Fieldhandler\Handler;
 
 use Exception;
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Foreignkey Fieldhandler
@@ -48,7 +48,7 @@ class Foreignkey extends AbstractFieldhandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
@@ -64,7 +64,7 @@ class Foreignkey extends AbstractFieldhandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
@@ -77,7 +77,7 @@ class Foreignkey extends AbstractFieldhandler
 
             if ($test == $this->getFieldValue()) {
             } else {
-                throw new FieldhandlerException
+                throw new UnexpectedValueException
                 ('Validate Foreignkey: ' . FILTER_INVALID_VALUE);
             }
         }
@@ -107,22 +107,22 @@ class Foreignkey extends AbstractFieldhandler
      *
      * @return  mixed
      * @since   1.0
-     * @throws  FieldhandlerException
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function verifyForeignKey($key_value)
     {
         if ($this->database === null) {
-            throw new FieldhandlerException
+            throw new UnexpectedValueException
             ('Validate Foreignkey: Database connection must be sent in as a database entry $options array.');
         }
 
         if ($this->table === null) {
-            throw new FieldhandlerException
+            throw new UnexpectedValueException
             ('Validate Foreignkey: Name of table must be sent in as a table entry in the $options array.');
         }
 
         if ($this->key === null) {
-            throw new FieldhandlerException
+            throw new UnexpectedValueException
             ('Validate Foreignkey: Name of key must be sent in as a key entry in the $options array.');
         }
 
@@ -140,7 +140,7 @@ class Foreignkey extends AbstractFieldhandler
             return $this->database->loadResult();
         } catch (Exception $e) {
 
-            throw new FieldhandlerException
+            throw new UnexpectedValueException
             ('Fieldhandler Foreignkey: Database query failed: ' . $e->getMessage());
         }
     }

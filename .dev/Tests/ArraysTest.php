@@ -66,7 +66,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     /**
      * test Validate Fail
      *
-     * @expectedException Exception\Model\FieldhandlerException
+     * @expectedException CommonApi\Exception\UnexpectedValueException
      * @covers  Molajo\Fieldhandler\Handler\Default::validate
      * @return void
      * @since   1.0
@@ -168,7 +168,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     /**
      * test Filter Fail 1
      *
-     * @expectedException Exception\Model\FieldhandlerException
+     * @expectedException CommonApi\Exception\UnexpectedValueException
      * @covers  Molajo\Fieldhandler\Handler\Default::validate
      * @return void
      * @since   1.0

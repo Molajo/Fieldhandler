@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Handler;
 
-use Exception\Model\FieldhandlerException;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Float Fieldhandler
@@ -58,7 +58,7 @@ class Float extends AbstractFieldhandler
             $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_FLOAT);
 
             if ($test === false) {
-                throw new FieldhandlerException
+                throw new UnexpectedValueException
                 ('Validate Float: ' . FILTER_INVALID_VALUE);
             }
         }
