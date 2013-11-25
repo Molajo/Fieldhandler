@@ -8,6 +8,11 @@
  */
 include_once __DIR__ . '/CreateClassMap.php';
 
+if (!defined('PHP_VERSION_ID')) {
+    $version = explode('.', phpversion());
+    define('PHP_VERSION_ID', ($version[0] * 10000 + $version[1] * 100 + $version[2]));
+}
+
 $base                                      = substr(__DIR__, 0, strlen(__DIR__) - 5);
 $classmap                                  = array();
 $classmap                                  = createClassMap($base . '/vendor/commonapi/model', 'CommonApi\\Model\\');
