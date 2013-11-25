@@ -14,7 +14,7 @@
     ],
     "require": {
         "php": ">=5.3.10",
-        "commonapi/fieldhandler": "dev-master"
+        "commonapi/model": "dev-master"
     },
 
     "support": {
