@@ -62,6 +62,9 @@ class Url extends AbstractFieldhandler
             throw new UnexpectedValueException ('Validate Url: ' . FILTER_INVALID_VALUE);
         }
 
+
+        // todo: add active test checkdnsrr($this->getFieldValue());
+
         return $this->getFieldValue();
     }
 

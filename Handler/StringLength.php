@@ -52,18 +52,18 @@ class Stringlength extends AbstractFieldhandler
     {
         parent::validate();
 
-        $Fromto = $this->getFromto();
+        $from_to = $this->getFromto();
 
         $string_length = strlen(trim($this->getFieldValue()));
 
-        if ($string_length >= $Fromto[0]
-            && $string_length <= $Fromto[1]
+        if ($string_length >= $from_to[0]
+            && $string_length <= $from_to[1]
         ) {
         } else {
 
             throw new UnexpectedValueException
             ('Validate Value: ' . $string_length
-            . ' is not a value From: ' . $Fromto[0] . '  To:' . $Fromto[1]);
+            . ' is not a value From: ' . $from_to[0] . '  To:' . $from_to[1]);
         }
 
         return $this->getFieldValue();
@@ -79,10 +79,12 @@ class Stringlength extends AbstractFieldhandler
     {
         parent::filter();
 
-        $Fromto = $this->getFromto();
+        $from_to = $this->getFromto();
 
-        if ($string_length > $Fromto[0]
-            && $string_length < $Fromto[1]
+        $string_length = strlen(trim($this->getFieldValue()));
+
+        if ($string_length > $from_to[0]
+            && $string_length < $from_to[1]
         ) {
         } else {
             $this->setFieldValue(null);

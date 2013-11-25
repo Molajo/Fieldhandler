@@ -10,6 +10,7 @@ namespace Molajo\Fieldhandler\Handler;
 
 use CommonApi\Exception\UnexpectedValueException;
 
+// todo: test for date before, after, today's date
 /**
  * Date Fieldhandler
  *
