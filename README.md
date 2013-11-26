@@ -80,45 +80,45 @@ Use the Try/Catch pattern, as presented above, to catch thrown exceptions.
 
 ## Available Fieldhandlers ##
 
-- [Accepted](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#accepted)
-- [Alias](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#alias)
-- [Alpha](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#alpha)
-- [Alphanumeric](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#alphanumeric)
-- [Arrays](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#arrays)
-- [Boolean](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#boolean)
-- [Callback](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#callback)
-- [Contains](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#contains)
-- [Date](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#date)
-- [Defaults](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#default)
-- [Digit](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#digit)
-- [Email](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#email)
-- [Encoded](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#encoded)
-- [Equals](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#equals)
-- [Extensions](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#extensions)
-- [Float](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#float)
-- [Foreignkey](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#foreignkey)
-- [Fromto](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#Fromto)
-- [Fullspecialchars](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#fullspecialchars)
-- [Html](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#html)
-- [Int](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#int)
-- [Ip](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#ip)
-- [Lower](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#lower)
-- [Maximum](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#maximum)
-- [Mimetypes](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#mimetypes)
-- [Minimum](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#minimum)
-- [NotEqual](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#notequal)
-- [Numeric](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#numeric)
-- [Object](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#object)
-- [Raw](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#raw)
-- [Regex](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#regex)
-- [Required](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#required)
-- [String](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#string)
-- [Stringlength](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#stringlength)
-- [Time](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#time)
-- [Trim](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#trim)
-- [Upper](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#upper)
-- [Url](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#url)
-- [Values](https://github.com/Molajo/Standard/tree/master/Vendor/Molajo/Fieldhandler#values)
+- [Accepted](https://github.com/Molajo/Fieldhandler#accepted)
+- [Alias](https://github.com/Molajo/Fieldhandler#alias)
+- [Alpha](https://github.com/Molajo/Fieldhandler#alpha)
+- [Alphanumeric](https://github.com/Molajo/Fieldhandler#alphanumeric)
+- [Arrays](https://github.com/Molajo/Fieldhandler#arrays)
+- [Boolean](https://github.com/Molajo/Fieldhandler#boolean)
+- [Callback](https://github.com/Molajo/Fieldhandler#callback)
+- [Contains](https://github.com/Molajo/Fieldhandler#contains)
+- [Date](https://github.com/Molajo/Fieldhandler#date)
+- [Defaults](https://github.com/Molajo/Fieldhandler#default)
+- [Digit](https://github.com/Molajo/Fieldhandler#digit)
+- [Email](https://github.com/Molajo/Fieldhandler#email)
+- [Encoded](https://github.com/Molajo/Fieldhandler#encoded)
+- [Equals](https://github.com/Molajo/Fieldhandler#equals)
+- [Extensions](https://github.com/Molajo/Fieldhandler#extensions)
+- [Float](https://github.com/Molajo/Fieldhandler#float)
+- [Foreignkey](https://github.com/Molajo/Fieldhandler#foreignkey)
+- [Fromto](https://github.com/Molajo/Fieldhandler#Fromto)
+- [Fullspecialchars](https://github.com/Molajo/Fieldhandler#fullspecialchars)
+- [Html](https://github.com/Molajo/Fieldhandler#html)
+- [Int](https://github.com/Molajo/Fieldhandler#int)
+- [Ip](https://github.com/Molajo/Fieldhandler#ip)
+- [Lower](https://github.com/Molajo/Fieldhandler#lower)
+- [Maximum](https://github.com/Molajo/Fieldhandler#maximum)
+- [Mimetypes](https://github.com/Molajo/Fieldhandler#mimetypes)
+- [Minimum](https://github.com/Molajo/Fieldhandler#minimum)
+- [NotEqual](https://github.com/Molajo/Fieldhandler#notequal)
+- [Numeric](https://github.com/Molajo/Fieldhandler#numeric)
+- [Object](https://github.com/Molajo/Fieldhandler#object)
+- [Raw](https://github.com/Molajo/Fieldhandler#raw)
+- [Regex](https://github.com/Molajo/Fieldhandler#regex)
+- [Required](https://github.com/Molajo/Fieldhandler#required)
+- [String](https://github.com/Molajo/Fieldhandler#string)
+- [Stringlength](https://github.com/Molajo/Fieldhandler#stringlength)
+- [Time](https://github.com/Molajo/Fieldhandler#time)
+- [Trim](https://github.com/Molajo/Fieldhandler#trim)
+- [Upper](https://github.com/Molajo/Fieldhandler#upper)
+- [Url](https://github.com/Molajo/Fieldhandler#url)
+- [Values](https://github.com/Molajo/Fieldhandler#values)
 
 The examples in this section assume the *Fieldhandler* has been instantiated, as follows:
 
@@ -169,9 +169,9 @@ Tests if values are a character of A through Z or 0 through 9.
 Tests if value is an array.
 
 ```php
-    // Field order_number 'ABC123#' would be returned as 'ABC123' for filter and escape
-    // An exception would be thrown for validate
-    $results = $this->adapter->filter('order_number', 'ABC123#', 'Alphanumeric');
+    // Field order_number array('ABC123', 'DEF456') would be returned as same for
+    // filter, escape and validate
+    $results = $this->adapter->filter('order_number', array('ABC123', 'DEF456'), 'Array');
 
 ```
 ### Boolean ###
