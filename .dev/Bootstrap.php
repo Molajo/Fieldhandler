@@ -1,6 +1,6 @@
 <?php
 /**
- * Fieldhandler
+ * Bootstrap for Testing
  *
  * @package    Molajo
  * @copyright  2013 Amy Stephen. All rights reserved.
