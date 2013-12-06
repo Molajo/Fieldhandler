@@ -60,7 +60,7 @@ class Extensions extends AbstractFieldhandler
             if ($test == 1) {
             } else {
                 throw new UnexpectedValueException
-                ('Validate Extensions: ' . FILTER_INVALID_VALUE);
+                ('Validate Extensions: Invalid Value');
             }
 
             $this->testValues();

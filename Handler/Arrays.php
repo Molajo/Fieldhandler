@@ -59,7 +59,7 @@ class Arrays extends AbstractFieldhandler
             if ($test == 1) {
             } else {
                 throw new UnexpectedValueException
-                ('Validate Array: ' . FILTER_INVALID_VALUE);
+                ('Validate Array: Invalid Value');
             }
 
             $this->testValues();

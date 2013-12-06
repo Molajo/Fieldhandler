@@ -58,7 +58,7 @@ class Required extends AbstractFieldhandler
             if ($this->getRequired() === false) {
             } else {
                 throw new UnexpectedValueException
-                ('Fieldhandler Required: ' . FILTER_INVALID_VALUE);
+                ('Fieldhandler Required: Invalid Value');
             }
         }
 
@@ -81,7 +81,7 @@ class Required extends AbstractFieldhandler
             if ($this->getRequired() === false) {
             } else {
                 throw new UnexpectedValueException
-                ('Fieldhandler Required: ' . FILTER_INVALID_VALUE);
+                ('Fieldhandler Required: Invalid Value');
             }
         }
 
@@ -104,7 +104,7 @@ class Required extends AbstractFieldhandler
             if ($this->getRequired() === false) {
             } else {
                 throw new UnexpectedValueException
-                ('Fieldhandler Required: ' . FILTER_INVALID_VALUE);
+                ('Fieldhandler Required: Invalid Value');
             }
         }
 

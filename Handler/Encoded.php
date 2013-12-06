@@ -58,7 +58,7 @@ class Encoded extends AbstractFieldhandler
         if ($test == $this->getFieldValue()) {
         } else {
             throw new UnexpectedValueException
-            ('Validate Encoded: ' . FILTER_INVALID_VALUE);
+            ('Validate Encoded: Invalid Value');
         }
 
         return $this->getFieldValue();

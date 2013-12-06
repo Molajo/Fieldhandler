@@ -58,7 +58,7 @@ class Minimum extends AbstractFieldhandler
             if ((int)$this->getFieldValue() > (int)$this->getMinimum()) {
             } else {
                 throw new UnexpectedValueException
-                ('Validate Minimum: ' . FILTER_INVALID_VALUE);
+                ('Validate Minimum: Invalid Value');
             }
         }
 

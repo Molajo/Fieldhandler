@@ -61,7 +61,7 @@ class String extends AbstractFieldhandler
             if ($test == $this->getFieldValue()) {
             } else {
                 throw new UnexpectedValueException
-                ('Validate String: ' . FILTER_INVALID_VALUE);
+                ('Validate String: Invalid Value');
             }
         }
 

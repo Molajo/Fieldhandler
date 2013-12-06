@@ -60,7 +60,7 @@ class Regex extends AbstractFieldhandler
             if ($test == 1) {
             } else {
                 throw new UnexpectedValueException
-                ('Validate Regex: ' . FILTER_INVALID_VALUE);
+                ('Validate Regex: Invalid Value');
             }
         }
 

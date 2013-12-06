@@ -60,7 +60,7 @@ class Ip extends AbstractFieldhandler
             if ($test == true) {
             } else {
                 throw new UnexpectedValueException
-                ('Validate Ip: ' . FILTER_INVALID_VALUE);
+                ('Validate Ip: Invalid Value');
             }
         }
 

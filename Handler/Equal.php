@@ -56,7 +56,7 @@ class Equal extends AbstractFieldhandler
         if ($this->getFieldValue() == $equals) {
         } else {
             throw new UnexpectedValueException
-            ('Validate Equal: ' . FILTER_INVALID_VALUE);
+            ('Validate Equal: Invalid Value');
         }
 
         return $this->getFieldValue();

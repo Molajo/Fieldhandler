@@ -59,7 +59,7 @@ class Float extends AbstractFieldhandler
 
             if ($test === false) {
                 throw new UnexpectedValueException
-                ('Validate Float: ' . FILTER_INVALID_VALUE);
+                ('Validate Float: Invalid Value');
             }
         }
 

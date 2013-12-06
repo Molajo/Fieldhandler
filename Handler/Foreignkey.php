@@ -78,7 +78,7 @@ class Foreignkey extends AbstractFieldhandler
             if ($test == $this->getFieldValue()) {
             } else {
                 throw new UnexpectedValueException
-                ('Validate Foreignkey: ' . FILTER_INVALID_VALUE);
+                ('Validate Foreignkey: Invalid Value');
             }
         }
 

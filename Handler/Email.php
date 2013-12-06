@@ -60,7 +60,7 @@ class Email extends AbstractFieldhandler
             if ($test === $this->getFieldValue()) {
             } else {
                 throw new UnexpectedValueException
-                ('Validate Email: ' . FILTER_INVALID_VALUE);
+                ('Validate Email: Invalid Value');
             }
         }
 

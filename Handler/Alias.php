@@ -62,7 +62,7 @@ class Alias extends AbstractFieldhandler
 
         if ($bad === true) {
             throw new UnexpectedValueException
-            ('Validate Alias: ' . FILTER_INVALID_VALUE);
+            ('Validate Alias: Invalid Value');
         }
 
         return $this->getFieldValue();

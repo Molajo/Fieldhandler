@@ -62,7 +62,7 @@ class Mimetypes extends AbstractFieldhandler
             if ($test == 1) {
             } else {
                 throw new UnexpectedValueException
-                ('Validate Mimetypes: ' . FILTER_INVALID_VALUE);
+                ('Validate Mimetypes: Invalid Value');
             }
         }
 

@@ -59,7 +59,7 @@ class Trim extends AbstractFieldhandler
             if ($test == $this->getFieldValue()) {
             } else {
                 throw new UnexpectedValueException
-                ('Validate Trim: ' . FILTER_INVALID_VALUE);
+                ('Validate Trim: Invalid Value');
             }
         }
 

@@ -59,7 +59,7 @@ class Callback extends AbstractFieldhandler
             if ($test == $this->getFieldValue()) {
             } else {
                 throw new UnexpectedValueException
-                ('Validate Callback: ' . FILTER_INVALID_VALUE);
+                ('Validate Callback: Invalid Value');
             }
         }
 

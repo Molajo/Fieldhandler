@@ -61,7 +61,7 @@ class Raw extends AbstractFieldhandler
             } else {
 
                 throw new UnexpectedValueException
-                ('Validate Raw: ' . FILTER_INVALID_VALUE);
+                ('Validate Raw: Invalid Value');
             }
         }
 

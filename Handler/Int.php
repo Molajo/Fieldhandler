@@ -60,7 +60,7 @@ class Int extends AbstractFieldhandler
             if ($test == true) {
             } else {
                 throw new UnexpectedValueException
-                ('Validate Int: ' . FILTER_INVALID_VALUE);
+                ('Validate Int: Invalid Value');
             }
         }
 

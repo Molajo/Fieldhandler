@@ -59,7 +59,7 @@ class Numeric extends AbstractFieldhandler
             if ($test == 1) {
             } else {
                 throw new UnexpectedValueException
-                ('Validate Numeric: ' . FILTER_INVALID_VALUE);
+                ('Validate Numeric: Invalid Value');
             }
         }
 

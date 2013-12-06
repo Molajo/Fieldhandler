@@ -58,7 +58,7 @@ class Contains extends AbstractFieldhandler
         $results = $this->testContains();
         if ($results === false) {
             throw new UnexpectedValueException
-            ('Validate Contains: ' . FILTER_INVALID_VALUE);
+            ('Validate Contains: Invalid Value');
         }
 
         return $this->getFieldValue();

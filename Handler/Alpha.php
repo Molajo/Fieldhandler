@@ -60,7 +60,7 @@ class Alpha extends AbstractFieldhandler
             if ($test == 1) {
             } else {
                 throw new UnexpectedValueException
-                ('Validate Alpha: ' . FILTER_INVALID_VALUE);
+                ('Validate Alpha: Invalid Value');
             }
         }
 

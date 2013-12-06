@@ -59,7 +59,7 @@ class Upper extends AbstractFieldhandler
             if ($test == 1) {
             } else {
                 throw new UnexpectedValueException
-                ('Validate Upper: ' . FILTER_INVALID_VALUE);
+                ('Validate Upper: Invalid Value');
             }
         }
 

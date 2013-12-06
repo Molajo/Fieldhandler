@@ -59,7 +59,7 @@ class Url extends AbstractFieldhandler
 
         if ($test == $hold) {
         } else {
-            throw new UnexpectedValueException ('Validate Url: ' . FILTER_INVALID_VALUE);
+            throw new UnexpectedValueException ('Validate Url: Invalid Value');
         }
 
 

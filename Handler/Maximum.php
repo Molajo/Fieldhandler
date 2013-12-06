@@ -57,7 +57,7 @@ class Maximum extends AbstractFieldhandler
 
             if ((int)$this->getMaximum() < (int)$this->getFieldValue()) {
                 throw new UnexpectedValueException
-                ('Validate Maximum: ' . FILTER_INVALID_VALUE);
+                ('Validate Maximum: Invalid Value');
             }
         }
 

@@ -60,7 +60,7 @@ class Time extends AbstractFieldhandler
             if ($test == false) {
             } else {
                 throw new UnexpectedValueException
-                ('Validate Time: ' . FILTER_INVALID_VALUE);
+                ('Validate Time: Invalid Value');
             }
         }
 
@@ -83,7 +83,7 @@ class Time extends AbstractFieldhandler
         if ($test == false) {
         } else {
             throw new UnexpectedValueException
-            ('Validate Time: ' . FILTER_INVALID_VALUE);
+            ('Validate Time: Invalid Value');
         }
 
         return $this->getFieldValue();

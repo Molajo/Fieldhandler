@@ -59,7 +59,7 @@ class Lower extends AbstractFieldhandler
             if ($test == 1) {
             } else {
                 throw new UnexpectedValueException
-                ('Validate Lower: ' . FILTER_INVALID_VALUE);
+                ('Validate Lower: Invalid Value');
             }
         }
 

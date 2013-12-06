@@ -60,7 +60,7 @@ class Object extends AbstractFieldhandler
             if ($test == true) {
             } else {
                 throw new UnexpectedValueException
-                ('Validate Object: ' . FILTER_INVALID_VALUE);
+                ('Validate Object: Invalid Value');
             }
         }
 

@@ -55,7 +55,7 @@ class Html extends AbstractFieldhandler
         if ($this->getFieldValue() == $this->filter()) {
         } else {
             throw new UnexpectedValueException
-            ('Validate Html: ' . FILTER_INVALID_VALUE);
+            ('Validate Html: Invalid Value');
         }
 
         return $this->getFieldValue();

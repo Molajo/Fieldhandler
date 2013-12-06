@@ -64,7 +64,7 @@ class Boolean extends AbstractFieldhandler
 
             if ($test === null) {
                 throw new UnexpectedValueException
-                ('Validate Boolean: ' . FILTER_INVALID_VALUE);
+                ('Validate Boolean: Invalid Value');
             }
         }
 

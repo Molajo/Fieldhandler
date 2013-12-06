@@ -61,7 +61,7 @@ class Values extends AbstractFieldhandler
             if ($test == 1) {
             } else {
                 throw new UnexpectedValueException
-                ('Validate Values: ' . FILTER_INVALID_VALUE);
+                ('Validate Values: Invalid Value');
             }
         }
 

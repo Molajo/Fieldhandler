@@ -69,15 +69,7 @@ class Adapter implements FieldhandlerInterface
      */
     public function __construct()
     {
-        if (defined('FILTER_VALUE_REQUIRED')) {
-        } else {
-            define('FILTER_VALUE_REQUIRED', ' Value required.');
-        }
 
-        if (defined('FILTER_INVALID_VALUE')) {
-        } else {
-            define('FILTER_INVALID_VALUE', ' Invalid value.');
-        }
     }
 
     /**

@@ -61,7 +61,7 @@ class Fullspecialchars extends AbstractFieldhandler
             } else {
 
                 throw new UnexpectedValueException
-                ('Validate Fullspecialchars: ' . FILTER_INVALID_VALUE);
+                ('Validate Fullspecialchars: Invalid Value');
             }
         }
 

@@ -61,7 +61,7 @@ class Accepted extends AbstractFieldhandler
             if (in_array($testValue, $trueArray, true) === true) {
             } else {
                 throw new UnexpectedValueException
-                ('Validate Accepted: ' . FILTER_INVALID_VALUE);
+                ('Validate Accepted: Invalid Value');
             }
         }
 

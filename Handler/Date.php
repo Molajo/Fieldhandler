@@ -59,7 +59,7 @@ class Date extends AbstractFieldhandler
 
             if ($test == false) {
                 throw new UnexpectedValueException
-                ('Validate Date: ' . FILTER_INVALID_VALUE);
+                ('Validate Date: Invalid Value');
             }
         }
 
