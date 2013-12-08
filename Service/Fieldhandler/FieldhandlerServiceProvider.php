@@ -1,6 +1,6 @@
 <?php
 /**
- * Fieldhandler Dependency Injector
+ * Fieldhandler Service Provider
  *
  * @package    Molajo
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
@@ -9,19 +9,19 @@
 namespace Molajo\Service\Fieldhandler;
 
 use Exception;
-use Molajo\IoC\Handler\AbstractInjector;
-use CommonApi\IoC\ServiceHandlerInterface;
+use Molajo\IoC\AbstractServiceProvider;
+use CommonApi\IoC\ServiceProviderInterface;
 use CommonApi\Exception\RuntimeException;
 
 /**
- * Fieldhandler Dependency Injector
+ * Fieldhandler Service Provider
  *
  * @author     Amy Stephen
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @copyright  2013 Amy Stephen. All rights reserved.
  * @since      1.0
  */
-class FieldhandlerInjector extends AbstractInjector implements ServiceHandlerInterface
+class FieldhandlerServiceProvider extends AbstractServiceProvider implements ServiceProviderInterface
 {
     /**
      * Constructor
