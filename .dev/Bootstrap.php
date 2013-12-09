@@ -8,7 +8,7 @@
  */
 include_once __DIR__ . '/CreateClassMap.php';
 
-if (!defined('PHP_VERSION_ID')) {
+if (! defined('PHP_VERSION_ID')) {
     $version = explode('.', phpversion());
     define('PHP_VERSION_ID', ($version[0] * 10000 + $version[1] * 100 + $version[2]));
 }
