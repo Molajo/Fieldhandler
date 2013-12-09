@@ -21,9 +21,9 @@ $results                                   = createClassMap(
     'CommonApi\\Exception\\'
 );
 $classmap                                  = array_merge($classmap, $results);
-$results                                   = createClassMap($base . '/Handler', 'Molajo\\Fieldhandler\\Handler\\');
+$results                                   = createClassMap($base . '/Source/Handler', 'Molajo\\Fieldhandler\\Handler\\');
 $classmap                                  = array_merge($classmap, $results);
-$classmap['Molajo\\Fieldhandler\\Adapter'] = $base . '/Adapter.php';
+$classmap['Molajo\\Fieldhandler\\Adapter'] = $base . '/Source/Adapter.php';
 ksort($classmap);
 
 spl_autoload_register(
