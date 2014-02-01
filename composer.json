@@ -15,7 +15,7 @@
     "require": {
         "php": ">=5.4",
         "commonapi/model": "dev-master",
-        "commonapi/model": "dev-master"
+        "commonapi/exception": "dev-master"
     },
     "support": {
         "event": "hello@molajo.org",
@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Molajo\\Fieldhandler": "./"
+            "Molajo\\Fieldhandler\\": "Source/"
         }
     }
 }
