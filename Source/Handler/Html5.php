@@ -1,6 +1,6 @@
 <?php
 /**
- * Boolean Fieldhandler
+ * Html Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -11,14 +11,14 @@ namespace Molajo\Fieldhandler\Handler;
 use CommonApi\Exception\UnexpectedValueException;
 
 /**
- * Boolean Fieldhandler
+ * Html5 Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0
  */
-class Boolean extends AbstractFieldhandler
+class Html5 extends AbstractFieldhandler
 {
     /**
      * Constructor
@@ -46,28 +46,16 @@ class Boolean extends AbstractFieldhandler
      *
      * @return  mixed
      * @since   1.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
         parent::validate();
 
-        if ($this->getFieldValue() === null) {
+        if ($this->getFieldValue() == $this->filter()) {
         } else {
-
-            if ($this->getFieldValue() === false) {
-                $test = false;
-
-            } elseif ($this->getFieldValue() === true) {
-                $test = true;
-
-            } else {
-                $test = null;
-            }
-
-            if ($test === null) {
-                throw new UnexpectedValueException
-                ('Validate Boolean: Invalid Value');
-            }
+            throw new UnexpectedValueException
+            ('Validate Html: Invalid Value');
         }
 
         return $this->getFieldValue();
@@ -85,20 +73,8 @@ class Boolean extends AbstractFieldhandler
 
         if ($this->getFieldValue() === null) {
         } else {
-
-            if ($this->getFieldValue() == false) {
-                $test = false;
-
-            } elseif ($this->getFieldValue() == true) {
-                $test = true;
-
-            } else {
-                $test = null;
-            }
-
-            if ($test === null) {
-                $this->setFieldValue(null);
-            }
+            $testValue = htmlspecialchars($this->getFieldValue(), null, $this->encoding);
+            $this->setFieldValue($testValue);
         }
 
         return $this->getFieldValue();
@@ -112,10 +88,6 @@ class Boolean extends AbstractFieldhandler
      */
     public function escape()
     {
-        parent::escape();
-
-        $this->filter();
-
-        return $this->getFieldValue();
+        return $this->filter();
     }
 }

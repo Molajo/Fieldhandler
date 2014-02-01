@@ -13,16 +13,16 @@
         }
     ],
     "require": {
-        "php": ">=5.3.10",
+        "php": ">=5.4",
+        "commonapi/model": "dev-master",
         "commonapi/model": "dev-master"
     },
-
     "support": {
         "event": "hello@molajo.org",
         "irc": "irc://irc.freenode.org/molajo"
     },
     "autoload": {
-        "psr-0": {
+        "psr-4": {
             "Molajo\\Fieldhandler": "./"
         }
     }
