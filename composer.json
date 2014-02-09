@@ -25,5 +25,11 @@
         "psr-4": {
             "Molajo\\Fieldhandler\\": "Source/"
         }
-    }
+    },
+
+    "archive": {
+        "exclude": ["/.dev"]
+    },
+
+    "minimum-stability": "dev"
 }
