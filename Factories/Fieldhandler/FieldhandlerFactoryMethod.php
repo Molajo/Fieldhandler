@@ -1,27 +1,26 @@
 <?php
 /**
- * Fieldhandler Service Provider
+ * Fieldhandler Factory Method
  *
  * @package    Molajo
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @copyright  2014 Amy Stephen. All rights reserved.
  */
-namespace Molajo\Service\Fieldhandler;
+namespace Molajo\Factories\Fieldhandler;
 
-use Exception;
-use Molajo\IoC\AbstractServiceProvider;
-use CommonApi\IoC\ServiceProviderInterface;
-use CommonApi\Exception\RuntimeException;
+use CommonApi\IoC\FactoryMethodInterface;
+use CommonApi\IoC\FactoryMethodBatchSchedulingInterface;
+use Molajo\IoC\FactoryBase;
 
 /**
- * Fieldhandler Service Provider
+ * Fieldhandler Factory Method
  *
  * @author     Amy Stephen
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @since      1.0
  */
-class FieldhandlerServiceProvider extends AbstractServiceProvider implements ServiceProviderInterface
+class FieldhandlerFactoryMethod extends FactoryBase implements FactoryMethodInterface, FactoryMethodBatchSchedulingInterface
 {
     /**
      * Constructor
@@ -32,9 +31,9 @@ class FieldhandlerServiceProvider extends AbstractServiceProvider implements Ser
      */
     public function __construct(array $options = array())
     {
-        $options['service_name']             = basename(__DIR__);
+        $options['product_name']             = basename(__DIR__);
         $options['store_instance_indicator'] = true;
-        $options['service_namespace']        = 'Molajo\\Fieldhandler\\Adapter';
+        $options['product_namespace']        = 'Molajo\\Fieldhandler\\Adapter';
 
         parent::__construct($options);
     }
