@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Adapter as adapter;
+use Molajo\Fieldhandler\Driver as adapter;
 use PHPUnit_Framework_TestCase;
 use CommonApi\Exception\UnexpectedValueException;
 
@@ -42,7 +42,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Url::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Url::validate
      * @return  void
      * @since   1.0
      */
@@ -61,7 +61,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Url::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Url::validate
      * @expectedException CommonApi\Exception\UnexpectedValueException
      * @return void
      * @since   1.0
@@ -79,7 +79,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Url::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Url::validate
      * @return  void
      * @since   1.0
      */
@@ -98,7 +98,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Url::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Url::validate
      * @return void
      * @since   1.0
      */
@@ -117,7 +117,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Url::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Url::validate
      * @return  void
      * @since   1.0
      */
@@ -136,7 +136,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Url::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Url::validate
      * @return void
      * @since   1.0
      */

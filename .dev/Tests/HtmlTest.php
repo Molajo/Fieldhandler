@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Adapter as adapter;
+use Molajo\Fieldhandler\Driver as adapter;
 use PHPUnit_Framework_TestCase;
 use CommonApi\Exception\UnexpectedValueException;
 
@@ -42,7 +42,7 @@ class HtmlTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Fullspecialchars::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Fullspecialchars::validate
      * @return  void
      * @since   1.0
      */
@@ -64,7 +64,7 @@ class HtmlTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Fullspecialchars::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Fullspecialchars::validate
      * @expectedException CommonApi\Exception\UnexpectedValueException
      * @return  void
      * @since   1.0

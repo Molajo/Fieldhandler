@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Adapter as adapter;
+use Molajo\Fieldhandler\Driver as adapter;
 use PHPUnit_Framework_TestCase;
 
 /**
@@ -41,7 +41,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Arrays::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Arrays::validate
      * @return void
      * @since   1.0
      */
@@ -67,7 +67,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      * test Validate Fail
      *
      * @expectedException CommonApi\Exception\UnexpectedValueException
-     * @covers  Molajo\Fieldhandler\Handler\Default::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @return void
      * @since   1.0
      */
@@ -88,7 +88,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     /**
      * test Filter Success
      *
-     * @covers  Molajo\Fieldhandler\Handler\Default::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @return void
      * @since   1.0
      */
@@ -113,7 +113,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     /**
      * test Filter Success 2
      *
-     * @covers  Molajo\Fieldhandler\Handler\Default::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @return void
      * @since   1.0
      */
@@ -137,7 +137,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     /**
      * test Filter Success 3
      *
-     * @covers  Molajo\Fieldhandler\Handler\Default::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @return void
      * @since   1.0
      */
@@ -169,7 +169,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      * test Filter Fail 1
      *
      * @expectedException CommonApi\Exception\UnexpectedValueException
-     * @covers  Molajo\Fieldhandler\Handler\Default::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @return void
      * @since   1.0
      */
@@ -199,7 +199,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     /**
      * test Escape Success
      *
-     * @covers  Molajo\Fieldhandler\Handler\Default::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @return void
      * @since   1.0
      */
@@ -224,7 +224,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     /**
      * test Escape Fail
      *
-     * @covers  Molajo\Fieldhandler\Handler\Default::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @return void
      * @since   1.0
      */

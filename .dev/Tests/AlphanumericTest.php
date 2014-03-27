@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Adapter as adapter;
+use Molajo\Fieldhandler\Driver as adapter;
 use PHPUnit_Framework_TestCase;
 
 /**
@@ -41,7 +41,7 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Alphanumeric::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Alphanumeric::validate
      * @return void
      * @since   1.0
      */
@@ -60,7 +60,7 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Alphanumeric::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Alphanumeric::validate
      * @expectedException CommonApi\Exception\UnexpectedValueException
      * @return void
      * @since   1.0
@@ -80,7 +80,7 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Alphanumeric::filter
+     * @covers  Molajo\Fieldhandler\Adapter\Alphanumeric::filter
      * @return void
      * @since   1.0
      */
@@ -99,7 +99,7 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Alphanumeric::filter
+     * @covers  Molajo\Fieldhandler\Adapter\Alphanumeric::filter
      * @return void
      * @since   1.0
      */
@@ -119,7 +119,7 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Alphanumeric::filter
+     * @covers  Molajo\Fieldhandler\Adapter\Alphanumeric::filter
      * @return void
      * @since   1.0
      */
@@ -138,7 +138,7 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Alphanumeric::filter
+     * @covers  Molajo\Fieldhandler\Adapter\Alphanumeric::filter
      * @return void
      * @since   1.0
      */

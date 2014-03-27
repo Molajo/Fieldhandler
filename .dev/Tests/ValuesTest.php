@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Adapter as adapter;
+use Molajo\Fieldhandler\Driver as adapter;
 use PHPUnit_Framework_TestCase;
 
 /**
@@ -41,7 +41,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\upper::validate
+     * @covers  Molajo\Fieldhandler\Adapter\upper::validate
      * @return void
      * @since   1.0
      */
@@ -61,7 +61,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\upper::validate
+     * @covers  Molajo\Fieldhandler\Adapter\upper::validate
      * @expectedException CommonApi\Exception\UnexpectedValueException
      * @return void
      * @since   1.0
@@ -82,7 +82,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\upper::filter
+     * @covers  Molajo\Fieldhandler\Adapter\upper::filter
      * @return void
      * @since   1.0
      */

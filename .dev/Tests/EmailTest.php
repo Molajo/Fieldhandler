@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Adapter as adapter;
+use Molajo\Fieldhandler\Driver as adapter;
 use PHPUnit_Framework_TestCase;
 use CommonApi\Exception\UnexpectedValueException;
 
@@ -42,7 +42,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Email::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Email::validate
      * @return  void
      * @since   1.0
      */
@@ -61,7 +61,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Email::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Email::validate
      * @expectedException CommonApi\Exception\UnexpectedValueException
      * @return void
      * @since   1.0
@@ -81,7 +81,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Email::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Email::validate
      * @return  void
      * @since   1.0
      */
@@ -100,7 +100,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Email::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Email::validate
      * @return void
      * @since   1.0
      */
@@ -120,7 +120,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Email::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Email::validate
      * @return  void
      * @since   1.0
      */
@@ -139,7 +139,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Email::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Email::validate
      * @return void
      * @since   1.0
      */

@@ -10,7 +10,7 @@
 include __DIR__ . '/Bootstrap.php';
 include __DIR__ . '/../../' . 'Database/.dev/Bootstrap.php';
 
-use Molajo\Fieldhandler\Adapter;
+use Molajo\Fieldhandler\Driver;
 
 $adapter = new Adapter();
 
@@ -25,7 +25,7 @@ $options['db_prefix']      = 'molajo_';
 $options['process_events'] = 1;
 $options['select']         = true;
 
-use Molajo\Database\Handler\Joomla;
+use Molajo\Database\Adapter\Joomla;
 
 $handler = new Joomla($options);
 

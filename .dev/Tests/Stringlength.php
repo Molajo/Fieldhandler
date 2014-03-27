@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Adapter as adapter;
+use Molajo\Fieldhandler\Driver as adapter;
 use PHPUnit_Framework_TestCase;
 use CommonApi\Exception\UnexpectedValueException;
 
@@ -42,7 +42,7 @@ class StringlengthTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Stringlength::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Stringlength::validate
      * @return  void
      * @since   1.0
      */
@@ -63,7 +63,7 @@ class StringlengthTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Stringlength::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Stringlength::validate
      * @expectedException CommonApi\Exception\UnexpectedValueException
      * @return  void
      * @since   1.0

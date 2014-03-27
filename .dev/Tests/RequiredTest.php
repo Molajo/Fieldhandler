@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Adapter as adapter;
+use Molajo\Fieldhandler\Driver as adapter;
 use PHPUnit_Framework_TestCase;
 use CommonApi\Exception\UnexpectedValueException;
 
@@ -42,7 +42,7 @@ class RequiredTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Required::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Required::validate
      * @return  void
      * @since   1.0
      */
@@ -61,7 +61,7 @@ class RequiredTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Required::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Required::validate
      * @return void
      * @since   1.0
      */

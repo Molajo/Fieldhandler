@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Adapter as adapter;
+use Molajo\Fieldhandler\Driver as adapter;
 use PHPUnit_Framework_TestCase;
 
 /**
@@ -43,7 +43,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
     /**
      * test Validate Success
      *
-     * @covers  Molajo\Fieldhandler\Handler\Default::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @return void
      * @since   1.0
      */
@@ -64,7 +64,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
     /**
      * test Validate Success2
      *
-     * @covers  Molajo\Fieldhandler\Handler\Default::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @return void
      * @since   1.0
      */
@@ -85,7 +85,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
     /**
      * test Validate Success 3
      *
-     * @covers  Molajo\Fieldhandler\Handler\Default::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @return void
      * @since   1.0
      */
@@ -106,7 +106,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
     /**
      * test Validate Success 4
      *
-     * @covers  Molajo\Fieldhandler\Handler\Default::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @return void
      * @since   1.0
      */
@@ -125,7 +125,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Default::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @expectedException CommonApi\Exception\UnexpectedValueException
      * @return void
      * @since   1.0
@@ -145,7 +145,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
     /**
      * test Filter Success
      *
-     * @covers  Molajo\Fieldhandler\Handler\Default::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @return void
      * @since   1.0
      */
@@ -164,7 +164,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Default::filter
+     * @covers  Molajo\Fieldhandler\Adapter\Default::filter
      * @return void
      * @since   1.0
      */

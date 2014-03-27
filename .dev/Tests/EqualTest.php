@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Adapter as adapter;
+use Molajo\Fieldhandler\Driver as adapter;
 use PHPUnit_Framework_TestCase;
 use CommonApi\Exception\UnexpectedValueException;
 
@@ -42,7 +42,7 @@ class EqualTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Equals::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Equals::validate
      * @return  void
      * @since   1.0
      */
@@ -62,7 +62,7 @@ class EqualTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Equals::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Equals::validate
      * @expectedException CommonApi\Exception\UnexpectedValueException
      * @return void
      * @since   1.0
@@ -81,7 +81,7 @@ class EqualTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Equals::filter
+     * @covers  Molajo\Fieldhandler\Adapter\Equals::filter
      * @return  void
      * @since   1.0
      */
@@ -101,7 +101,7 @@ class EqualTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Equals::filter
+     * @covers  Molajo\Fieldhandler\Adapter\Equals::filter
      * @return void
      * @since   1.0
      */
@@ -122,7 +122,7 @@ class EqualTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Equals::escape
+     * @covers  Molajo\Fieldhandler\Adapter\Equals::escape
      * @return  void
      * @since   1.0
      */
@@ -142,7 +142,7 @@ class EqualTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Equals::escape
+     * @covers  Molajo\Fieldhandler\Adapter\Equals::escape
      * @return void
      * @since   1.0
      */

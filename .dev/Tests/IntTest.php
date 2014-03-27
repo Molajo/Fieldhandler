@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Adapter as adapter;
+use Molajo\Fieldhandler\Driver as adapter;
 use PHPUnit_Framework_TestCase;
 use CommonApi\Exception\UnexpectedValueException;
 
@@ -42,7 +42,7 @@ class IntTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Int::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Int::validate
      * @return  void
      * @since   1.0
      */
@@ -61,7 +61,7 @@ class IntTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Int::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Int::validate
      * @return  void
      * @since   1.0
      */
@@ -80,7 +80,7 @@ class IntTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Int::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Int::validate
      * @return  void
      * @since   1.0
      */
@@ -99,7 +99,7 @@ class IntTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Int::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Int::validate
      * @expectedException CommonApi\Exception\UnexpectedValueException
      * @return void
      * @since   1.0

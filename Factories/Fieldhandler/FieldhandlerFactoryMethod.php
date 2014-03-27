@@ -8,9 +8,9 @@
  */
 namespace Molajo\Factories\Fieldhandler;
 
-use CommonApi\IoC\FactoryMethodInterface;
-use CommonApi\IoC\FactoryMethodBatchSchedulingInterface;
-use Molajo\IoC\FactoryBase;
+use CommonApi\IoC\FactoryInterface;
+use CommonApi\IoC\FactoryBatchInterface;
+use Molajo\IoC\FactoryMethodBase;
 
 /**
  * Fieldhandler Factory Method
@@ -20,7 +20,7 @@ use Molajo\IoC\FactoryBase;
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @since      1.0
  */
-class FieldhandlerFactoryMethod extends FactoryBase implements FactoryMethodInterface, FactoryMethodBatchSchedulingInterface
+class FieldhandlerFactoryMethod extends FactoryMethodBase implements FactoryInterface, FactoryBatchInterface
 {
     /**
      * Constructor
@@ -33,7 +33,7 @@ class FieldhandlerFactoryMethod extends FactoryBase implements FactoryMethodInte
     {
         $options['product_name']             = basename(__DIR__);
         $options['store_instance_indicator'] = true;
-        $options['product_namespace']        = 'Molajo\\Fieldhandler\\Adapter';
+        $options['product_namespace']        = 'Molajo\\Fieldhandler\\Driver';
 
         parent::__construct($options);
     }

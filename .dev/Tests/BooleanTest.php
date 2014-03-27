@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Adapter as adapter;
+use Molajo\Fieldhandler\Driver as adapter;
 use PHPUnit_Framework_TestCase;
 use CommonApi\Exception\UnexpectedValueException;
 
@@ -42,7 +42,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Boolean::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Boolean::validate
      * @return  void
      * @since   1.0
      */
@@ -61,7 +61,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Boolean::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Boolean::validate
      * @return  void
      * @since   1.0
      */
@@ -80,7 +80,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Boolean::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Boolean::validate
      * @return  void
      * @since   1.0
      */
@@ -99,7 +99,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Boolean::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Boolean::validate
      * @expectedException CommonApi\Exception\UnexpectedValueException
      * @return void
      * @since   1.0
@@ -119,7 +119,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Boolean::filter
+     * @covers  Molajo\Fieldhandler\Adapter\Boolean::filter
      * @return  void
      * @since   1.0
      */
@@ -138,7 +138,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Boolean::filter
+     * @covers  Molajo\Fieldhandler\Adapter\Boolean::filter
      * @return  void
      * @since   1.0
      */
@@ -157,7 +157,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Boolean::filter
+     * @covers  Molajo\Fieldhandler\Adapter\Boolean::filter
      * @return  void
      * @since   1.0
      */
@@ -176,7 +176,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Boolean::filter
+     * @covers  Molajo\Fieldhandler\Adapter\Boolean::filter
      * @return void
      * @since   1.0
      */
@@ -195,7 +195,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Boolean::escape
+     * @covers  Molajo\Fieldhandler\Adapter\Boolean::escape
      * @return  void
      * @since   1.0
      */
@@ -214,7 +214,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Boolean::escape
+     * @covers  Molajo\Fieldhandler\Adapter\Boolean::escape
      * @return  void
      * @since   1.0
      */
@@ -233,7 +233,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Boolean::escape
+     * @covers  Molajo\Fieldhandler\Adapter\Boolean::escape
      * @return  void
      * @since   1.0
      */
@@ -252,7 +252,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Boolean::escape
+     * @covers  Molajo\Fieldhandler\Adapter\Boolean::escape
      * @return void
      * @since   1.0
      */

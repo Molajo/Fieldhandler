@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Adapter as adapter;
+use Molajo\Fieldhandler\Driver as adapter;
 use PHPUnit_Framework_TestCase;
 use CommonApi\Exception\UnexpectedValueException;
 
@@ -42,7 +42,7 @@ class ExtensionsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Extensions::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Extensions::validate
      * @return  void
      * @since   1.0
      */
@@ -73,7 +73,7 @@ class ExtensionsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Extensions::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Extensions::validate
      * @expectedException CommonApi\Exception\UnexpectedValueException
      * @return  void
      * @since   1.0
@@ -101,7 +101,7 @@ class ExtensionsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Extensions::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Extensions::validate
      * @return  void
      * @since   1.0
      */
@@ -132,7 +132,7 @@ class ExtensionsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Extensions::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Extensions::validate
      * @return  void
      * @since   1.0
      */

@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Adapter as adapter;
+use Molajo\Fieldhandler\Driver as adapter;
 use PHPUnit_Framework_TestCase;
 use CommonApi\Exception\UnexpectedValueException;
 
@@ -42,7 +42,7 @@ class RegexTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Regex::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Regex::validate
      * @return  void
      * @since   1.0
      */
@@ -62,7 +62,7 @@ class RegexTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Regex::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Regex::validate
      * @return void
      * @since   1.0
      */
