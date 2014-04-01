@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
-use CommonApi\Exception\UnexpectedValueException;
+use CommonApi\Model\FieldHandlerAdapterInterface;
 
 /**
  * Defaults Fieldhandler
@@ -18,7 +18,7 @@ use CommonApi\Exception\UnexpectedValueException;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0
  */
-class Defaults extends AbstractFieldhandler
+class Defaults extends AbstractFieldhandler implements FieldhandlerAdapterInterface
 {
     /**
      * Constructor

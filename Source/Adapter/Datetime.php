@@ -9,6 +9,7 @@
 namespace Molajo\Fieldhandler\Adapter;
 
 use CommonApi\Exception\UnexpectedValueException;
+use CommonApi\Model\FieldHandlerAdapterInterface;
 
 // todo: test for Datetime before, after, today's Datetime
 /**
@@ -19,7 +20,7 @@ use CommonApi\Exception\UnexpectedValueException;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0
  */
-class Datetime extends AbstractFieldhandler
+class Datetime extends AbstractFieldhandler implements FieldhandlerAdapterInterface
 {
     /**
      * Constructor

@@ -9,6 +9,7 @@
 namespace Molajo\Fieldhandler\Adapter;
 
 use CommonApi\Exception\UnexpectedValueException;
+use CommonApi\Model\FieldHandlerAdapterInterface;
 
 /**
  * Boolean Fieldhandler
@@ -18,7 +19,7 @@ use CommonApi\Exception\UnexpectedValueException;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0
  */
-class Boolean extends AbstractFieldhandler
+class Boolean extends AbstractFieldhandler implements FieldhandlerAdapterInterface
 {
     /**
      * Constructor
