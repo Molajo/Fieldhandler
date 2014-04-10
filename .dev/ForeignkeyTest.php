@@ -10,9 +10,9 @@ namespace Molajo\Fieldhandler\Tests;
 
 include __DIR__ . '/../../' . 'Database/.dev/Bootstrap.php';
 
-use Molajo\Fieldhandler\Adapter as Adapter;
+use Molajo\Fieldhandler\Driver as Adapter;
 use Molajo\Database\Adapter as Database;
-use Molajo\Database\Handler\Joomla;
+use Molajo\Database\Adapter\Joomla;
 use PHPUnit_Framework_TestCase;
 use CommonApi\Exception\UnexpectedValueException;
 
@@ -22,7 +22,7 @@ use CommonApi\Exception\UnexpectedValueException;
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
- * @since      1.0
+ * @since      1.0.0
  */
 class ForeignkeyTest extends PHPUnit_Framework_TestCase
 {
@@ -69,7 +69,7 @@ class ForeignkeyTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Foreignkey::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Foreignkey::validate
      * @return  void
      * @since   1.0
      */
@@ -91,7 +91,7 @@ class ForeignkeyTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Foreignkey::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Foreignkey::validate
      * @return void
      * @since   1.0
      */

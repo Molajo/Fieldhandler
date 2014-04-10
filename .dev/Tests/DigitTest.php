@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Adapter as adapter;
+use Molajo\Fieldhandler\Driver as adapter;
 use PHPUnit_Framework_TestCase;
 use CommonApi\Exception\UnexpectedValueException;
 
@@ -18,7 +18,7 @@ use CommonApi\Exception\UnexpectedValueException;
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
- * @since      1.0
+ * @since      1.0.0
  */
 class DigitTest extends PHPUnit_Framework_TestCase
 {
@@ -42,7 +42,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Digit::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Digit::validate
      * @return  void
      * @since   1.0
      */
@@ -61,7 +61,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Digit::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Digit::validate
      * @return  void
      * @since   1.0
      */
@@ -80,7 +80,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Digit::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Digit::validate
      * @expectedException CommonApi\Exception\UnexpectedValueException
      * @return void
      * @since   1.0
@@ -100,7 +100,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Digit::filter
+     * @covers  Molajo\Fieldhandler\Adapter\Digit::filter
      * @return  void
      * @since   1.0
      */
@@ -119,7 +119,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Digit::filter
+     * @covers  Molajo\Fieldhandler\Adapter\Digit::filter
      * @return  void
      * @since   1.0
      */
@@ -139,7 +139,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Digit::filter
+     * @covers  Molajo\Fieldhandler\Adapter\Digit::filter
      * @return  void
      * @since   1.0
      */
@@ -158,7 +158,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Digit::filter
+     * @covers  Molajo\Fieldhandler\Adapter\Digit::filter
      * @return  void
      * @since   1.0
      */

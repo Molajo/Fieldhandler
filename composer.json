@@ -23,7 +23,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Molajo\\Fieldhandler\\": "Source/"
+            "Molajo\\Fieldhandler\\": "Source/",
+            "Molajo\\Factories\\": "Factories/"
         }
     },
 

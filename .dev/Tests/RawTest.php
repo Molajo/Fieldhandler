@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Adapter as adapter;
+use Molajo\Fieldhandler\Driver as adapter;
 use PHPUnit_Framework_TestCase;
 
 /**
@@ -17,7 +17,7 @@ use PHPUnit_Framework_TestCase;
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
- * @since      1.0
+ * @since      1.0.0
  */
 class RawTest extends PHPUnit_Framework_TestCase
 {
@@ -41,7 +41,7 @@ class RawTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Raws::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Raws::validate
      * @return  void
      * @since   1.0
      */
@@ -59,7 +59,7 @@ class RawTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Raws::escape
+     * @covers  Molajo\Fieldhandler\Adapter\Raws::escape
      * @return void
      * @since   1.0
      */

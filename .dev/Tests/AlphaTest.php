@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Adapter as adapter;
+use Molajo\Fieldhandler\Driver as adapter;
 use PHPUnit_Framework_TestCase;
 
 /**
@@ -17,7 +17,7 @@ use PHPUnit_Framework_TestCase;
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
- * @since      1.0
+ * @since      1.0.0
  */
 class AlphaTest extends PHPUnit_Framework_TestCase
 {
@@ -41,7 +41,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Alpha::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Alpha::validate
      * @return void
      * @since   1.0
      */
@@ -60,7 +60,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Alpha::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Alpha::validate
      * @expectedException CommonApi\Exception\UnexpectedValueException
      * @return void
      * @since   1.0
@@ -80,7 +80,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Alpha::filter
+     * @covers  Molajo\Fieldhandler\Adapter\Alpha::filter
      * @return void
      * @since   1.0
      */
@@ -99,7 +99,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Alpha::filter
+     * @covers  Molajo\Fieldhandler\Adapter\Alpha::filter
      * @return void
      * @since   1.0
      */
@@ -119,7 +119,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Alpha::filter
+     * @covers  Molajo\Fieldhandler\Adapter\Alpha::filter
      * @return void
      * @since   1.0
      */
@@ -138,7 +138,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Alpha::filter
+     * @covers  Molajo\Fieldhandler\Adapter\Alpha::filter
      * @return void
      * @since   1.0
      */

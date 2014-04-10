@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Adapter as Adapter;
+use Molajo\Fieldhandler\Driver as Adapter;
 use PHPUnit_Framework_TestCase;
 use CommonApi\Exception\UnexpectedValueException;
 
@@ -18,7 +18,7 @@ use CommonApi\Exception\UnexpectedValueException;
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
- * @since      1.0
+ * @since      1.0.0
  */
 class AliasTest extends PHPUnit_Framework_TestCase
 {
@@ -42,7 +42,7 @@ class AliasTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Alias::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Alias::validate
      * @expectedException CommonApi\Exception\UnexpectedValueException
      * @return void
      * @since   1.0
@@ -62,7 +62,7 @@ class AliasTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Alias::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Alias::validate
      * @return  void
      * @since   1.0
      */
@@ -81,7 +81,7 @@ class AliasTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Alias::filter
+     * @covers  Molajo\Fieldhandler\Adapter\Alias::filter
      * @return void
      * @since   1.0
      */
@@ -100,7 +100,7 @@ class AliasTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Handler\Alias::escape
+     * @covers  Molajo\Fieldhandler\Adapter\Alias::escape
      * @return void
      * @since   1.0
      */
