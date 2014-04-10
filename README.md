@@ -8,17 +8,17 @@ Validates input. Filters input. Escapes (and formats) output.
 
 Standard data type and PHP-specific filters and validation, value list verification, callbacks,
 regex checking, and more. Use with rendering to ensure proper escaping of output data and for
-special field-level formatting needs. Supports chaining.
+special field-level formatting needs. Supports chaining. Easy to add adapters for custom need.
 
 ## Basic Usage ##
 
 Each field is validated, filtered, or escaped by a single or set of field handler(s).
 
 ```php
-    $adapter = new Molajo\Fieldhandler\Adapter();
+    $fieldhandler = new \Molajo\Fieldhandler\Driver();
 
     try {
-        $filtered = $adapter->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $filtered = $fieldhandler->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
     } catch (Exception $e) {
         //handle the exception
@@ -50,19 +50,19 @@ Each field is validated, filtered, or escaped by a single or set of field handle
 
 The following example demonstrates how to validate the `extension_id` field.
 
-* A chain of field handlers: `int`, `default`, and `required` which will be processed in this order.
+* A chain of field handlers: `int`, `default`, `required`, and `foreignkey` which will be processed in this order.
 * The `options` associative array with two elements:
     1. `default` and the default value for the field;
     2. `required` element and the value `true`.
 
 ```php
-    $adapter = new Molajo/Fieldhandler/Adapter();
+    $fieldhandler = new /Molajo/Fieldhandler/Driver();
 
     $fieldhandler_type_chain = array('int', 'default', 'required', 'foreignkey');
     $options = array('default' => 14, 'required' => true, 'foreignkey' => 'id', 'table' => 'extensions');
 
     try {
-        $validated_value = $adapter->validate('extension_id', 12, $fieldhandler_type_chain, $options);
+        $validated_value = $fieldhandler->validate('extension_id', 12, $fieldhandler_type_chain, $options);
 
     } catch (Exception $e) {
         //handle the exception here
@@ -74,9 +74,9 @@ The following example demonstrates how to validate the `extension_id` field.
 ```
 **Results:**
 
-If the method was a success, simply retrieve the field value from the resulting object.
+Success: The returned value contains the results of operations (i.e., validated or filtered or escaped result);
 
-Use the Try/Catch pattern, as presented above, to catch thrown exceptions.
+Failure: An exception will be thrown that can be caught using the Try/Catch pattern, as presented above.
 
 ## Available Fieldhandlers ##
 
@@ -126,14 +126,14 @@ Use the Try/Catch pattern, as presented above, to catch thrown exceptions.
 The examples in this section assume the *Fieldhandler* has been instantiated, as follows:
 
 ```php
-    $adapter = new Molajo/Fieldhandler/Adapter();
+    $fieldhandler = new /Molajo/Fieldhandler/Driver();
 ```
 
 ### Accepted ###
 Value is true, 1, 'yes', or 'on.'
 
 ```php
-    $validated_value = $adapter->validate('agreement', 1, 'Accepted');
+    $validated_value = $fieldhandler->validate('agreement', 1, 'Accepted');
 
 ```
 
@@ -338,7 +338,7 @@ $field_value.
     $options['table']        = 'molajo_actions';
     $options['key']          = 'id';
 
-    $results = $adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+    $results = $fieldhandler->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
 ```
 
@@ -353,7 +353,7 @@ Verifies that the $field_value is greater than the From value and less than the 
     $options['from']         = 0;
     $options['to']           = 10;
 
-    $results = $adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+    $results = $fieldhandler->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
 ```
 
@@ -367,7 +367,7 @@ with with ENT_QUOTES set.
     $fieldhandler_type_chain = 'Fullspecialchars';
     $options                 = array();
 
-    $results = $adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+    $results = $fieldhandler->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
 ```
 
@@ -383,7 +383,7 @@ with with ENT_QUOTES set.
     $fieldhandler_type_chain = 'Html';
     $options                 = array();
 
-    $results = $adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+    $results = $fieldhandler->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
 ```
 
@@ -441,7 +441,7 @@ Validates or filters/escapes numeric value to not exceed the maximum.
     $options                 = array();
     $options['maximum']      = 3;
 
-    $results = $adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+    $results = $fieldhandler->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
 ```
 
@@ -457,7 +457,7 @@ Validates or filters/escapes xxxx
     $options                 = array();
     $options['maximum']      = 3;
 
-    $results = $adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+    $results = $fieldhandler->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
 ```
 
@@ -473,7 +473,7 @@ Validates or filters/escapes numeric value to not exceed the maximum.
     $options                 = array();
     $options['minimum']      = 3;
 
-    $results = $adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+    $results = $fieldhandler->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
 ```
 
@@ -523,7 +523,7 @@ See [sanitize filters](http://php.net/manual/en/filter.filters.sanitize.php).
     $options['FILTER_FLAG_ENCODE_AMP']      = true;
 
 
-    $results = $adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+    $results = $fieldhandler->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
 ```
 
@@ -538,7 +538,7 @@ Performs regex checking against the input value for the regex sent in.
     $options                 = array();
     $options['regex']      = $regex_expression;
 
-    $results = $adapter->validate($field_name, $field_value, $fieldhandler_type_chain);
+    $results = $fieldhandler->validate($field_name, $field_value, $fieldhandler_type_chain);
 
 ```
 
@@ -551,7 +551,7 @@ Field is required. Null value is not allowed. Use after Default when used in com
     $field_value             = null;
     $fieldhandler_type_chain = 'Required';
 
-    $results = $adapter->validate($field_name, $field_value, $fieldhandler_type_chain);
+    $results = $fieldhandler->validate($field_name, $field_value, $fieldhandler_type_chain);
 
 ```
 
@@ -564,7 +564,7 @@ Tests that the value is a string.
     $field_value             = 'Lots of stuff in here that is stringy.';
     $fieldhandler_type_chain = 'String';
 
-    $results = $adapter->validate($field_name, $field_value, $fieldhandler_type_chain);
+    $results = $fieldhandler->validate($field_name, $field_value, $fieldhandler_type_chain);
 ```
 
 ### Stringlength ###
@@ -577,7 +577,7 @@ From and To testing includes the from and to values.
     $options['from']         = 5;
     $options['to']           = 10;
 
-    $results = $adapter->validate('My Field Name', $field_to_measure, 'Stringlength', $options);
+    $results = $fieldhandler->validate('My Field Name', $field_to_measure, 'Stringlength', $options);
 ```
 
 ### Tel ###
@@ -595,7 +595,7 @@ Tests that the string is trimmed.
     $field_value             = 'Lots of stuff in here that is stringy.          ';
     $fieldhandler_type_chain = 'Trim';
 
-    $results = $adapter->filter($field_name, $field_value, $fieldhandler_type_chain);
+    $results = $fieldhandler->filter($field_name, $field_value, $fieldhandler_type_chain);
 ```
 
 ### Upper ###
@@ -628,7 +628,7 @@ Compares a field_value against a set of values;
     $options                 = array();
     $options['array_valid_values']      = array('a', 'b', 'c');
 
-    $results = $adapter->validate($field_name, $field_value, $fieldhandler_type_chain);
+    $results = $fieldhandler->validate($field_name, $field_value, $fieldhandler_type_chain);
 
 ```
 
