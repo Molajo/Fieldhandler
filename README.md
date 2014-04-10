@@ -95,6 +95,7 @@ Use the Try/Catch pattern, as presented above, to catch thrown exceptions.
 - [Email](https://github.com/Molajo/Fieldhandler#email)
 - [Encoded](https://github.com/Molajo/Fieldhandler#encoded)
 - [Equal](https://github.com/Molajo/Fieldhandler#equal)
+- [Fileextension](https://github.com/Molajo/Fieldhandler#fileextension)
 - [Float](https://github.com/Molajo/Fieldhandler#float)
 - [Foreignkey](https://github.com/Molajo/Fieldhandler#foreignkey)
 - [Fromto](https://github.com/Molajo/Fieldhandler#Fromto)
@@ -287,7 +288,7 @@ Tests that a value is equal to a specified value.
 
 ```
 
-### Extensions ###
+### Fileextension ###
 Tests that a value is equal to the specified value. If the value does not match for validate, an
 Exception is thrown. If the value does not match for filter or escape, null is returned.
 
