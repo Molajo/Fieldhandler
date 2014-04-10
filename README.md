@@ -93,20 +93,20 @@ Use the Try/Catch pattern, as presented above, to catch thrown exceptions.
 - [Digit](https://github.com/Molajo/Fieldhandler#digit)
 - [Email](https://github.com/Molajo/Fieldhandler#email)
 - [Encoded](https://github.com/Molajo/Fieldhandler#encoded)
-- [Equals](https://github.com/Molajo/Fieldhandler#equals)
-- [Extensions](https://github.com/Molajo/Fieldhandler#extensions)
+- [Equal](https://github.com/Molajo/Fieldhandler#equal)
 - [Float](https://github.com/Molajo/Fieldhandler#float)
 - [Foreignkey](https://github.com/Molajo/Fieldhandler#foreignkey)
 - [Fromto](https://github.com/Molajo/Fieldhandler#Fromto)
 - [Fullspecialchars](https://github.com/Molajo/Fieldhandler#fullspecialchars)
 - [Html](https://github.com/Molajo/Fieldhandler#html)
-- [Int](https://github.com/Molajo/Fieldhandler#int)
+- [Image](https://github.com/Molajo/Fieldhandler#image)
+- [Integer](https://github.com/Molajo/Fieldhandler#integer)
 - [Ip](https://github.com/Molajo/Fieldhandler#ip)
 - [Lower](https://github.com/Molajo/Fieldhandler#lower)
 - [Maximum](https://github.com/Molajo/Fieldhandler#maximum)
 - [Mimetypes](https://github.com/Molajo/Fieldhandler#mimetypes)
 - [Minimum](https://github.com/Molajo/Fieldhandler#minimum)
-- [NotEqual](https://github.com/Molajo/Fieldhandler#notequal)
+- [Notequal](https://github.com/Molajo/Fieldhandler#notequal)
 - [Numeric](https://github.com/Molajo/Fieldhandler#numeric)
 - [Object](https://github.com/Molajo/Fieldhandler#object)
 - [Raw](https://github.com/Molajo/Fieldhandler#raw)
@@ -114,6 +114,7 @@ Use the Try/Catch pattern, as presented above, to catch thrown exceptions.
 - [Required](https://github.com/Molajo/Fieldhandler#required)
 - [String](https://github.com/Molajo/Fieldhandler#string)
 - [Stringlength](https://github.com/Molajo/Fieldhandler#stringlength)
+- [Tel](https://github.com/Molajo/Fieldhandler#tel)
 - [Time](https://github.com/Molajo/Fieldhandler#time)
 - [Trim](https://github.com/Molajo/Fieldhandler#trim)
 - [Upper](https://github.com/Molajo/Fieldhandler#upper)
@@ -612,11 +613,12 @@ Compares a field_value against a set of values;
 
 ## Requirements and Compliance
  * PHP framework independent, no dependencies
- * Requires PHP 5.3, or above
+ * Requires PHP 5.4, or above
  * [Semantic Versioning](http://semver.org/)
  * Compliant with:
-    * [PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) and [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md) Namespacing
-    * [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) Coding Standards
+    * [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md) Basic Coding Standards
+    * [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) Coding Style
+    * [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) Coding Standards
  * [phpDocumentor2] (https://github.com/phpDocumentor/phpDocumentor2)
  * [phpUnit Testing] (https://github.com/sebastianbergmann/phpunit)
  * Author [AmyStephen](http://twitter.com/AmyStephen)
