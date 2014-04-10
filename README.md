@@ -89,7 +89,8 @@ Use the Try/Catch pattern, as presented above, to catch thrown exceptions.
 - [Callback](https://github.com/Molajo/Fieldhandler#callback)
 - [Contains](https://github.com/Molajo/Fieldhandler#contains)
 - [Date](https://github.com/Molajo/Fieldhandler#date)
-- [Defaults](https://github.com/Molajo/Fieldhandler#default)
+- [Datetime](https://github.com/Molajo/Fieldhandler#datetime)
+- [Defaults](https://github.com/Molajo/Fieldhandler#defaults)
 - [Digit](https://github.com/Molajo/Fieldhandler#digit)
 - [Email](https://github.com/Molajo/Fieldhandler#email)
 - [Encoded](https://github.com/Molajo/Fieldhandler#encoded)
@@ -223,6 +224,18 @@ Processes a value to determine if it is a valid date. For Validate, if the resul
 
 ```
 
+### Datetime ###
+Processes a value to determine if it is a valid date. For Validate, if the resulting value is not a valid
+ date, an Exception is thrown. For Filter and Escape, the value returned is NULL if it is not valid.
+
+```php
+    // The value of field `date_field` is '2013/04/01 01:00:00' and determined to be valid
+    $options = array();
+    $options['callback'] = '2013/04/01 01:00:00';
+    $results = $this->adapter->filter('date_field', '2013/04/01 01:00:00', 'Date');
+
+```
+
 ### Defaults ###
 Changes a null value to the value provided for default.
 
@@ -328,7 +341,7 @@ $field_value.
 
 ```
 
-### From To ###
+### Fromto ###
 Verifies that the $field_value is greater than the From value and less than the To value.
 
 ```php
@@ -357,7 +370,9 @@ with with ENT_QUOTES set.
 
 ```
 
-### Html ### - do white list and black list
+### Html ###
+
+add whitelist description
 Escapes HTML entities. Equivalent to [htmlspecialchars](http://www.php.net/manual/en/function.htmlspecialchars.php)
 with with ENT_QUOTES set.
 
@@ -371,7 +386,18 @@ with with ENT_QUOTES set.
 
 ```
 
-### Int ###
+### Image ###
+Tests that the value is an image.
+
+```php
+    // The value of field `numeric_field` is 'ABC123'. The filtered and escaped values will be 0.
+    // For 'validate', an exception is thrown. The following will return 123.
+
+    $results = $this->adapter->filter('numeric_field', '123', 'Int');
+
+```
+
+### Integer ###
 Tests that the value is an integer.
 
 ```php
@@ -382,7 +408,7 @@ Tests that the value is an integer.
 
 ```
 
-### IP Address ###
+### Ip ###
 Tests that the value is an IP Address.
 
 ```php
@@ -418,6 +444,22 @@ Validates or filters/escapes numeric value to not exceed the maximum.
 
 ```
 
+### Mimetypes ###
+Validates or filters/escapes xxxx
+
+```php
+    // The value of field `input_field` is 10. Maximum is 3. Validate will fail.
+    // Filtered and escaped values will return 3.
+    $field_name              = 'my_field';
+    $field_value             = 10;
+    $fieldhandler_type_chain = 'Maximum';
+    $options                 = array();
+    $options['maximum']      = 3;
+
+    $results = $adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+
+```
+
 ### Minimum ###
 Validates or filters/escapes numeric value to not exceed the maximum.
 
@@ -434,7 +476,7 @@ Validates or filters/escapes numeric value to not exceed the maximum.
 
 ```
 
-### Not Equal ###
+### Notequal ###
 Tests that a value is not equal to a specified value.
 
 ```php
@@ -524,7 +566,7 @@ Tests that the value is a string.
     $results = $adapter->validate($field_name, $field_value, $fieldhandler_type_chain);
 ```
 
-### String Length ###
+### Stringlength ###
 Tests that the length of the string is from a specific value and to a second value.
 From and To testing includes the from and to values.
 
@@ -537,9 +579,11 @@ From and To testing includes the from and to values.
     $results = $adapter->validate('My Field Name', $field_to_measure, 'Stringlength', $options);
 ```
 
-### Time ###
+### Tel ###
 Tests that the value is a string.
 
+### Time ###
+Tests that the value is a string.
 
 ### Trim ###
 Tests that the string is trimmed.
