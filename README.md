@@ -74,9 +74,8 @@ The following example demonstrates how to validate the `extension_id` field.
 ```
 **Results:**
 
-Success: The returned value contains the results of operations (i.e., validated or filtered or escaped result);
-
-Failure: An exception will be thrown that can be caught using the Try/Catch pattern, as presented above.
+* **Success:** The returned value contains the results of operations (i.e., validated or filtered or escaped result);
+* **Failure:** An exception will be thrown that can be caught using the Try/Catch pattern, as presented above.
 
 ## Available Fieldhandlers ##
 
