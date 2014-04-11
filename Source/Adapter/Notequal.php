@@ -9,7 +9,7 @@
 namespace Molajo\Fieldhandler\Adapter;
 
 use CommonApi\Exception\UnexpectedValueException;
-use CommonApi\Model\FieldHandlerAdapterInterface;
+use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
  * Notequal Fieldhandler

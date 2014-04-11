@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
-use CommonApi\Model\FieldHandlerAdapterInterface;
+use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
  * Defaults Fieldhandler

@@ -10,7 +10,7 @@ namespace Molajo\Fieldhandler\Adapter;
 
 use Exception;
 use CommonApi\Exception\UnexpectedValueException;
-use CommonApi\Model\FieldHandlerAdapterInterface;
+use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
  * Foreignkey Fieldhandler

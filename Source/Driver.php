@@ -129,7 +129,7 @@ class Driver implements FieldhandlerInterface
     /**
      * Constructor
      *
-     * @param   null|array  $white_list
+     * @param   null|array $white_list
      *
      * @since   1.0
      */

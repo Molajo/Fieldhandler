@@ -9,7 +9,7 @@
 namespace Molajo\Fieldhandler\Adapter;
 
 use CommonApi\Exception\UnexpectedValueException;
-use CommonApi\Model\FieldHandlerAdapterInterface;
+use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
  * Tel Fieldhandler
@@ -19,7 +19,7 @@ use CommonApi\Model\FieldHandlerAdapterInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Tel extends AbstractFieldhandler implements FieldHandlerAdapterInterface
+class Tel extends AbstractFieldhandler implements FieldhandlerAdapterInterface
 {
     /**
      * Validate Input
