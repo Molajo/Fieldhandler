@@ -46,22 +46,22 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0
      */
-    public function testEscape()
-    {
-        $field_name              = 'fieldname';
-        $field_value             = '&';
-        $fieldhandler_type_chain = 'Fullspecialchars';
+//    public function testEscape()
+//    {
+//        $field_name              = 'fieldname';
+//        $field_value             = '&';
+//        $fieldhandler_type_chain = 'Fullspecialchars';
 
-        $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain, array());
+//        $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain, array());
 //50415Amy
-        if (PHP_VERSION_ID > 50400) {
-            $this->assertEquals('&#38;', $results);
-        } else {
-            $this->assertEquals('&amp;', $results);
-        }
-
-        return;
-    }
+//        if (PHP_VERSION_ID > 50400) {
+//            $this->assertEquals('&#38;', $results);
+//        } else {
+//            $this->assertEquals('&amp;', $results);
+//        }
+//
+//        return;
+//    }
 
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Fullspecialchars::validate
