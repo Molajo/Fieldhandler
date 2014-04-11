@@ -53,8 +53,8 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
         $fieldhandler_type_chain = 'Fullspecialchars';
 
         $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain, array());
-
-        if (PHP_VERSION_ID < 50400) {
+//50415Amy
+        if (PHP_VERSION_ID > 50400) {
             $this->assertEquals('&#38;', $results);
         } else {
             $this->assertEquals('&amp;', $results);
