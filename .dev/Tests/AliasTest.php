@@ -25,10 +25,10 @@ class AliasTest extends PHPUnit_Framework_TestCase
     /**
      * Adapter
      *
-     * @var    object  Molajo/Molajo/Adapter
+     * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0
      */
-    protected $adapter;
+    protected $driver;
 
     /**
      * Set up
@@ -38,12 +38,12 @@ class AliasTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->adapter = new Adapter();
+        $this->driver = new Adapter();
     }
 
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Alias::validate
-     * @expectedException CommonApi\Exception\UnexpectedValueException
+     * @expectedException \CommonApi\Exception\UnexpectedValueException
      * @return void
      * @since   1.0
      */
@@ -54,7 +54,7 @@ class AliasTest extends PHPUnit_Framework_TestCase
         $fieldhandler_type_chain = 'Alias';
         $options                 = array();
 
-        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $this->assertEquals($field_value, $results);
 
@@ -73,7 +73,7 @@ class AliasTest extends PHPUnit_Framework_TestCase
         $fieldhandler_type_chain = 'Alias';
         $options                 = array();
 
-        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $this->assertEquals($field_value, $results);
 
@@ -92,7 +92,7 @@ class AliasTest extends PHPUnit_Framework_TestCase
         $fieldhandler_type_chain = 'Alias';
         $options                 = array();
 
-        $results = $this->adapter->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $this->assertEquals('jack-and-jill', $results);
 
@@ -111,7 +111,7 @@ class AliasTest extends PHPUnit_Framework_TestCase
         $fieldhandler_type_chain = 'Alias';
         $options                 = array();
 
-        $results = $this->adapter->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $this->assertEquals('jack-and-jill', $results);
 

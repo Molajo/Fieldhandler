@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Driver as adapter;
+use Molajo\Fieldhandler\Driver as driver;
 use PHPUnit_Framework_TestCase;
 use CommonApi\Exception\UnexpectedValueException;
 
@@ -25,10 +25,10 @@ class IpTest extends PHPUnit_Framework_TestCase
     /**
      * Adapter
      *
-     * @var    object  Molajo/Molajo/Adapter
+     * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0
      */
-    protected $adapter;
+    protected $driver;
 
     /**
      * Set up
@@ -38,7 +38,7 @@ class IpTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->adapter = new adapter();
+        $this->driver = new Driver();
     }
 
     /**
@@ -53,7 +53,7 @@ class IpTest extends PHPUnit_Framework_TestCase
         $fieldhandler_type_chain = 'Ip';
         $options                 = array();
 
-        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $this->assertEquals($field_value, $results);
 
@@ -72,7 +72,7 @@ class IpTest extends PHPUnit_Framework_TestCase
         $fieldhandler_type_chain = 'Ip';
         $options                 = array();
 
-        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $this->assertEquals($field_value, $results);
 
@@ -81,7 +81,7 @@ class IpTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Ip::validate
-     * @expectedException CommonApi\Exception\UnexpectedValueException
+     * @expectedException \CommonApi\Exception\UnexpectedValueException
      * @return void
      * @since   1.0
      */
@@ -92,7 +92,7 @@ class IpTest extends PHPUnit_Framework_TestCase
         $fieldhandler_type_chain = 'Ip';
         $options                 = array();
 
-        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $this->assertEquals($field_value, $results);
 

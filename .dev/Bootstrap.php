@@ -13,19 +13,15 @@ if (! defined('PHP_VERSION_ID')) {
     define('PHP_VERSION_ID', ($version[0] * 10000 + $version[1] * 100 + $version[2]));
 }
 
-$base                                     = substr(__DIR__, 0, strlen(__DIR__) - 5);
-$classmap                                 = array();
-$classmap                                 = createClassMap($base . '/vendor/commonapi/model', 'CommonApi\\Model\\');
-$results                                  = createClassMap(
-    $base . '/vendor/commonapi/exception',
-    'CommonApi\\Exception\\'
-);
-$classmap                                 = array_merge($classmap, $results);
-$results                                  = createClassMap(
-    $base . '/Source/Adapter',
-    'Molajo\\Fieldhandler\\Adapter\\'
-);
-$classmap                                 = array_merge($classmap, $results);
+$base     = substr(__DIR__, 0, strlen(__DIR__) - 5);
+$classmap = array();
+$results  = createClassMap($base . '/vendor/commonapi/exception', 'CommonApi\\Exception\\');
+$classmap = array_merge($classmap, $results);
+$classmap = createClassMap($base . '/vendor/commonapi/model', 'CommonApi\\Model\\');
+$classmap = array_merge($classmap, $results);
+$results  = createClassMap($base . '/Source/Adapter', 'Molajo\\Fieldhandler\\Adapter\\');
+$classmap = array_merge($classmap, $results);
+
 $classmap['Molajo\\Fieldhandler\\Driver'] = $base . '/Source/Driver.php';
 ksort($classmap);
 

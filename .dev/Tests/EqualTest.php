@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Driver as adapter;
+use Molajo\Fieldhandler\Driver as driver;
 use PHPUnit_Framework_TestCase;
 use CommonApi\Exception\UnexpectedValueException;
 
@@ -25,10 +25,10 @@ class EqualTest extends PHPUnit_Framework_TestCase
     /**
      * Adapter
      *
-     * @var    object  Molajo/Molajo/Adapter
+     * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0
      */
-    protected $adapter;
+    protected $driver;
 
     /**
      * Set up
@@ -38,7 +38,7 @@ class EqualTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->adapter = new adapter();
+        $this->driver = new Driver();
     }
 
     /**
@@ -54,7 +54,7 @@ class EqualTest extends PHPUnit_Framework_TestCase
         $options                 = array();
         $options['equals']       = 'dog';
 
-        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $this->assertEquals($field_value, $results);
 
@@ -63,7 +63,7 @@ class EqualTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Equals::validate
-     * @expectedException CommonApi\Exception\UnexpectedValueException
+     * @expectedException \CommonApi\Exception\UnexpectedValueException
      * @return void
      * @since   1.0
      */
@@ -75,7 +75,7 @@ class EqualTest extends PHPUnit_Framework_TestCase
         $options                 = array();
         $options['equals']       = 'cat';
 
-        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         return;
     }
@@ -93,7 +93,7 @@ class EqualTest extends PHPUnit_Framework_TestCase
         $options                 = array();
         $options['equals']       = 'dog';
 
-        $results = $this->adapter->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $this->assertEquals($field_value, $results);
 
@@ -113,7 +113,7 @@ class EqualTest extends PHPUnit_Framework_TestCase
         $options                 = array();
         $options['equals']       = 'cat';
 
-        $results = $this->adapter->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $field_value = null;
         $this->assertEquals($field_value, $results);
@@ -134,7 +134,7 @@ class EqualTest extends PHPUnit_Framework_TestCase
         $options                 = array();
         $options['equals']       = 'dog';
 
-        $results = $this->adapter->escape($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $this->assertEquals($field_value, $results);
 
@@ -154,7 +154,7 @@ class EqualTest extends PHPUnit_Framework_TestCase
         $options                 = array();
         $options['equals']       = 'cat';
 
-        $results = $this->adapter->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $field_value = null;
         $this->assertEquals($field_value, $results);

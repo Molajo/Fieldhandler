@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Driver as adapter;
+use Molajo\Fieldhandler\Driver as driver;
 use PHPUnit_Framework_TestCase;
 
 /**
@@ -24,10 +24,10 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     /**
      * Adapter
      *
-     * @var    object  Molajo/Molajo/Adapter
+     * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0
      */
-    protected $adapter;
+    protected $driver;
 
     /**
      * Set up
@@ -37,7 +37,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->adapter = new adapter();
+        $this->driver = new Driver();
     }
 
     /**
@@ -56,7 +56,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
         $fieldhandler_type_chain = 'Arrays';
         $options                 = array();
 
-        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $this->assertEquals($field_value, $results);
 
@@ -66,7 +66,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     /**
      * test Validate Fail
      *
-     * @expectedException CommonApi\Exception\UnexpectedValueException
+     * @expectedException \CommonApi\Exception\UnexpectedValueException
      * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @return void
      * @since   1.0
@@ -78,7 +78,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
         $fieldhandler_type_chain = 'Arrays';
         $options                 = array();
 
-        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $this->assertEquals($field_value, $results);
 
@@ -103,7 +103,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
         $fieldhandler_type_chain = 'Arrays';
         $options                 = array();
 
-        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $this->assertEquals($field_value, $results);
 
@@ -127,7 +127,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
         $fieldhandler_type_chain = 'Arrays';
         $options                 = array();
 
-        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $this->assertEquals($field_value, $results);
 
@@ -158,7 +158,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
         $array_valid_values[] = 'cats';
         $options              = array('array_valid_values' => $array_valid_values);
 
-        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $this->assertEquals($field_value, $results);
 
@@ -168,7 +168,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     /**
      * test Filter Fail 1
      *
-     * @expectedException CommonApi\Exception\UnexpectedValueException
+     * @expectedException \CommonApi\Exception\UnexpectedValueException
      * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @return void
      * @since   1.0
@@ -189,7 +189,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $options = array('array_valid_values' => $array_valid_values);
 
-        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $this->assertEquals($field_value, $results);
 
@@ -214,7 +214,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
         $fieldhandler_type_chain = 'Arrays';
         $options                 = array();
 
-        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $this->assertEquals($field_value, $results);
 
@@ -238,7 +238,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
         $fieldhandler_type_chain = 'Arrays';
         $options                 = array();
 
-        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $this->assertEquals($field_value, $results);
 

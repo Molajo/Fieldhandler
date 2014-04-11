@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Driver as adapter;
+use Molajo\Fieldhandler\Driver as driver;
 use PHPUnit_Framework_TestCase;
 use CommonApi\Exception\UnexpectedValueException;
 
@@ -25,10 +25,10 @@ class RequiredTest extends PHPUnit_Framework_TestCase
     /**
      * Adapter
      *
-     * @var    object  Molajo/Molajo/Adapter
+     * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0
      */
-    protected $adapter;
+    protected $driver;
 
     /**
      * Set up
@@ -38,7 +38,7 @@ class RequiredTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->adapter = new adapter();
+        $this->driver = new Driver();
     }
 
     /**
@@ -53,7 +53,7 @@ class RequiredTest extends PHPUnit_Framework_TestCase
         $fieldhandler_type_chain = 'Required';
         $options                 = array();
 
-        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $this->assertEquals($field_value, $results);
 
@@ -71,7 +71,7 @@ class RequiredTest extends PHPUnit_Framework_TestCase
         $field_value             = null;
         $fieldhandler_type_chain = 'Required';
 
-        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, array());
+        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, array());
 
         $this->assertEquals($field_value, $results);
 
