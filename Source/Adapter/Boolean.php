@@ -70,19 +70,17 @@ class Boolean extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
         if ($this->getFieldValue() === null) {
         } else {
 
-            if ($this->getFieldValue() == false) {
+            if ($this->getFieldValue() === false) {
                 $test = false;
 
-            } elseif ($this->getFieldValue() == true) {
+            } elseif ($this->getFieldValue() === true) {
                 $test = true;
 
             } else {
                 $test = null;
             }
 
-            if ($test === null) {
-                $this->setFieldValue(null);
-            }
+            $this->setFieldValue($test);
         }
 
         return $this->getFieldValue();
