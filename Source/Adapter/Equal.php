@@ -30,7 +30,7 @@ class Equal extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function validate()
     {
-        parent::validate();
+
 
         $equals = $this->getEqual();
 
@@ -54,7 +54,7 @@ class Equal extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function filter()
     {
-        parent::filter();
+
 
         $equals = $this->getEqual();
 
@@ -75,7 +75,7 @@ class Equal extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function escape()
     {
-        parent::escape();
+
 
         return $this->filter();
     }

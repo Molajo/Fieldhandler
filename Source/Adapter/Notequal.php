@@ -30,7 +30,7 @@ class Notequal extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function validate()
     {
-        parent::validate();
+
 
         $notEqual = $this->getNotEqual();
 
@@ -54,7 +54,7 @@ class Notequal extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function filter()
     {
-        parent::filter();
+
 
         $notEqual = $this->getNotEqual();
 
@@ -74,7 +74,7 @@ class Notequal extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function escape()
     {
-        parent::escape();
+
 
         return $this->filter();
     }

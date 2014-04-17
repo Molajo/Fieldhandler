@@ -30,7 +30,7 @@ class Raw extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function validate()
     {
-        parent::validate();
+
 
         if ($this->getFieldValue() === null) {
         } else {
@@ -59,7 +59,7 @@ class Raw extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function filter()
     {
-        parent::filter();
+
 
         if ($this->getFieldValue() === null) {
         } else {
@@ -84,7 +84,7 @@ class Raw extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function escape()
     {
-        parent::escape();
+
 
         $test = filter_var($this->getFieldValue(), FILTER_UNSAFE_RAW, $this->setFlags());
 

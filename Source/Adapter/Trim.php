@@ -30,7 +30,7 @@ class Trim extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function validate()
     {
-        parent::validate();
+
 
         if ($this->getFieldValue() === null) {
         } else {
@@ -57,7 +57,7 @@ class Trim extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function filter()
     {
-        parent::filter();
+
 
         if ($this->getFieldValue() === null) {
         } else {

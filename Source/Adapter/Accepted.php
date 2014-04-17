@@ -30,7 +30,7 @@ class Accepted extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function validate()
     {
-        parent::validate();
+
 
         if ($this->getFieldValue() === null) {
         } else {
@@ -58,7 +58,7 @@ class Accepted extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function filter()
     {
-        parent::filter();
+
 
         if ($this->getFieldValue() === null) {
         } else {
@@ -83,7 +83,7 @@ class Accepted extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function escape()
     {
-        parent::escape();
+
 
         return $this->filter();
     }

@@ -62,85 +62,6 @@ class Driver implements FieldhandlerInterface
     public $options;
 
     /**
-     * Method (validate, filter, or escape)
-     *
-     * @var    string
-     * @since  1.0.0
-     */
-    protected $white_list = array(
-        'a'          => array(
-            'href'  => array('minlen' => 3, 'maxlen' => 50),
-            'title' => array('valueless' => 'n')
-        ),
-        'address'    => array(),
-        'article'    => array(),
-        'aside'      => array(),
-        'b'          => array(),
-        'blockquote' => array(),
-        'body'       => array(),
-        'br'         => array(),
-        'colgroup'   => array(),
-        'dd'         => array(),
-        'datagrid'   => array(),
-        'dialog'     => array(),
-        'dir'        => array(),
-        'div'        => array(),
-        'd1'         => array(),
-        'fieldset'   => array(),
-        'footer'     => array(),
-        'font'       => array(
-            'size' =>
-                array('minval' => 4, 'maxval' => 20)
-        ),
-        'form'       => array(),
-        'h1'         => array(),
-        'h2'         => array(),
-        'h3'         => array(),
-        'h4'         => array(),
-        'h5'         => array(),
-        'h6'         => array(),
-        'head'       => array(),
-        'header'     => array(),
-        'hr'         => array(),
-        'html'       => array(),
-        'i'          => array(),
-        'img'        => array('src' => 1),
-        'menu'       => array(),
-        'nav'        => array(),
-        'option'     => array(),
-        'optgroup'   => array(),
-        'ol'         => array(),
-        'p'          => array(
-            'align' => 1,
-            'dummy' => array('valueless' => 'y')
-        ),
-        'pre'        => array(),
-        'section'    => array(),
-        'table'      => array(),
-        'td'         => array(),
-        'th'         => array(),
-        'thead'      => array(),
-        'tbody'      => array(),
-        'tfoot'      => array(),
-        'tr'         => array(),
-        'ul'         => array()
-    );
-
-    /**
-     * Constructor
-     *
-     * @param   null|array $white_list
-     *
-     * @since   1.0.0
-     */
-    public function __construct(array $white_list = array())
-    {
-        if (count($white_list) > 0) {
-            $this->white_list = $white_list;
-        }
-    }
-
-    /**
      * Validate
      *
      * @param   string     $field_name
@@ -301,11 +222,6 @@ class Driver implements FieldhandlerInterface
     protected function processRequest()
     {
         foreach ($this->fieldhandler_types as $fieldhandler_type) {
-
-            if (isset($this->options['white_list'])) {
-            } else {
-                $this->options['white_list'] = $this->white_list;
-            }
 
             $fieldhandler_type = ucfirst(strtolower($fieldhandler_type));
 

@@ -32,7 +32,7 @@ class Html extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function validate()
     {
-        parent::validate();
+
 
         if ($this->getFieldValue() == $this->filter()) {
         } else {
@@ -54,7 +54,7 @@ class Html extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function filter()
     {
-        parent::filter();
+
 
         if ($this->getFieldValue() === null) {
         } else {

@@ -29,7 +29,7 @@ class Defaults extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function validate()
     {
-        parent::validate();
+
 
         $this->setDefault();
 
@@ -45,7 +45,7 @@ class Defaults extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function filter()
     {
-        parent::filter();
+
 
         $this->setDefault();
 
@@ -61,7 +61,7 @@ class Defaults extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function escape()
     {
-        parent::escape();
+
 
         $this->setDefault();
 

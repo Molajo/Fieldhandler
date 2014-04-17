@@ -32,7 +32,7 @@ class Fileextension extends AbstractFieldhandler implements FieldhandlerAdapterI
      */
     public function validate()
     {
-        parent::validate();
+
 
         $test = filter_var($this->getFieldValue(), FILTER_SANITIZE_ENCODED, $this->setFlags());
 
@@ -56,7 +56,7 @@ class Fileextension extends AbstractFieldhandler implements FieldhandlerAdapterI
      */
     public function filter()
     {
-        parent::filter();
+
 
         $test = filter_var($this->getFieldValue(), FILTER_SANITIZE_ENCODED, $this->setFlags());
 
@@ -77,7 +77,7 @@ class Fileextension extends AbstractFieldhandler implements FieldhandlerAdapterI
      */
     public function escape()
     {
-        parent::escape();
+
 
         return filter_var($this->getFieldValue(), FILTER_SANITIZE_ENCODED, $this->setFlags());
     }

@@ -30,7 +30,7 @@ class Float extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function validate()
     {
-        parent::validate();
+
 
         if ($this->getFieldValue() === null) {
         } else {
@@ -57,7 +57,7 @@ class Float extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function filter()
     {
-        parent::filter();
+
 
         $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_FLOAT);
 
@@ -77,7 +77,7 @@ class Float extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function escape()
     {
-        parent::escape();
+
 
         $this->filter();
 

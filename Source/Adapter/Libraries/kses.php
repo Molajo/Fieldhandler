@@ -571,11 +571,13 @@ function kses_normalize_entities($string)
         '&\\1;',
         $string
     );
-    $string = preg_replace(
-        '/&amp;#0*([0-9]{1,5});/e',
-        'kses_normalize_entities2("\\1")',
+
+    $string = preg_replace_callback(
+        '/&amp;#0*([0-9]{1,5});/',
+        'kses_normalize_entities2',
         $string
     );
+
     $string = preg_replace(
         '/&amp;#([Xx])0*(([0-9A-Fa-f]{2}){1,2});/',
         '&#\\1\\2;',
@@ -603,12 +605,9 @@ function kses_decode_entities($string)
 # URL protocol whitelisting system anyway.
 ###############################################################################
 {
-    $string = preg_replace('/&#([0-9]+);/e', 'chr("\\1")', $string);
-    $string = preg_replace(
-        '/&#[Xx]([0-9A-Fa-f]+);/e',
-        'chr(hexdec("\\1"))',
-        $string
-    );
+    $string = preg_replace('/&#([0-9]+);/', 'chr("\\1")', $string);
+    $string = preg_replace('/&#[Xx]([0-9A-Fa-f]+);/', 'chr(hexdec("\\1"))',
+        $string);
 
     return $string;
 } # function kses_decode_entities

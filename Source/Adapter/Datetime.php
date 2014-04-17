@@ -31,7 +31,7 @@ class Datetime extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function validate()
     {
-        parent::validate();
+
 
         if ($this->getFieldValue() === null) {
         } else {
@@ -58,7 +58,7 @@ class Datetime extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function filter()
     {
-        parent::filter();
+
 
         $test = strtotime($this->getFieldValue());
 
@@ -78,7 +78,7 @@ class Datetime extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function escape()
     {
-        parent::escape();
+
 
         $this->filter();
 

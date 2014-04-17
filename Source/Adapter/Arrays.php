@@ -30,7 +30,7 @@ class Arrays extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      */
     public function validate()
     {
-        parent::validate();
+
 
         if ($this->getFieldValue() === null) {
         } else {
@@ -60,7 +60,7 @@ class Arrays extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      */
     public function filter()
     {
-        parent::filter();
+
 
         if ($this->getFieldValue() === null) {
         } else {
@@ -89,7 +89,7 @@ class Arrays extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      */
     public function escape()
     {
-        parent::escape();
+
 
         $this->filter();
 

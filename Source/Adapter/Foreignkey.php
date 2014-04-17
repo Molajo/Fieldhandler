@@ -31,7 +31,7 @@ class Foreignkey extends AbstractFieldhandler implements FieldhandlerAdapterInte
      */
     public function validate()
     {
-        parent::validate();
+
 
         $this->filter();
 
@@ -47,7 +47,7 @@ class Foreignkey extends AbstractFieldhandler implements FieldhandlerAdapterInte
      */
     public function filter()
     {
-        parent::filter();
+
 
         if ($this->getFieldValue() === null) {
         } else {
@@ -75,7 +75,7 @@ class Foreignkey extends AbstractFieldhandler implements FieldhandlerAdapterInte
      */
     public function escape()
     {
-        parent::escape();
+
 
         $this->filter();
 

@@ -30,7 +30,7 @@ class String extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      */
     public function validate()
     {
-        parent::validate();
+
 
         if ($this->getFieldValue() === null) {
         } else {
@@ -58,7 +58,7 @@ class String extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      */
     public function filter()
     {
-        parent::filter();
+
 
         if ($this->getFieldValue() === null) {
         } else {
@@ -83,7 +83,7 @@ class String extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      */
     public function escape()
     {
-        parent::escape();
+
 
         $test = filter_var($this->getFieldValue(), FILTER_SANITIZE_STRING, $this->setFlags());
 

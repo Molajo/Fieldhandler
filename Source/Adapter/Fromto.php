@@ -30,7 +30,7 @@ class Fromto extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      */
     public function validate()
     {
-        parent::validate();
+
 
         $Fromto = $this->getFromto();
 
@@ -58,7 +58,7 @@ class Fromto extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      */
     public function filter()
     {
-        parent::filter();
+
 
         $Fromto = $this->getFromto();
 
@@ -81,7 +81,7 @@ class Fromto extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      */
     public function escape()
     {
-        parent::escape();
+
 
         return $this->filter();
     }

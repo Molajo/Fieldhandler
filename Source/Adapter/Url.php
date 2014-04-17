@@ -30,7 +30,7 @@ class Url extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function validate()
     {
-        parent::validate();
+
 
         $hold = $this->getFieldValue();
 
@@ -56,7 +56,7 @@ class Url extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function filter()
     {
-        parent::filter();
+
 
         $url = str_replace(
             array('ftp://', 'ftps://', 'http://', 'https://'),
@@ -84,7 +84,7 @@ class Url extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function escape()
     {
-        parent::escape();
+
 
         return $this->filter();
     }

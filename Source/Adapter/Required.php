@@ -30,8 +30,6 @@ class Required extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function validate()
     {
-        parent::validate();
-
         if ($this->getFieldValue() === null) {
 
             if ($this->getRequired() === false) {
@@ -55,8 +53,6 @@ class Required extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function filter()
     {
-        parent::filter();
-
         if ($this->getFieldValue() === null) {
 
             if ($this->getRequired() === false) {
@@ -80,8 +76,6 @@ class Required extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function escape()
     {
-        parent::escape();
-
         if ($this->getFieldValue() === null) {
 
             if ($this->getRequired() === false) {
