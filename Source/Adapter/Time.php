@@ -30,8 +30,6 @@ class Time extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function validate()
     {
-
-
         if ($this->getFieldValue() === null) {
         } else {
 
@@ -58,8 +56,6 @@ class Time extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function filter()
     {
-
-
         $test = strtotime($this->getFieldValue());
 
         if ($test == false) {
@@ -82,8 +78,6 @@ class Time extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function escape()
     {
-
-
         $this->setFieldValue($this->filterByCharacter('ctype_digit', $this->getFieldValue()));
 
         return $this->getFieldValue();

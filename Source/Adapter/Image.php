@@ -30,8 +30,6 @@ class Image extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function validate()
     {
-
-
         $hold = $this->getFieldValue();
 
         $test = $this->filter();
@@ -56,8 +54,6 @@ class Image extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function filter()
     {
-
-
         $url = str_replace(
             array('ftp://', 'ftps://', 'http://', 'https://'),
             ''
@@ -84,8 +80,6 @@ class Image extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function escape()
     {
-
-
         return $this->filter();
     }
 

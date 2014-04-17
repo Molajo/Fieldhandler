@@ -30,8 +30,6 @@ class Integer extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      */
     public function validate()
     {
-
-
         if ($this->getFieldValue() === null) {
         } else {
 
@@ -58,8 +56,6 @@ class Integer extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      */
     public function filter()
     {
-
-
         if ($this->getFieldValue() === null) {
         } else {
 
@@ -83,8 +79,6 @@ class Integer extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      */
     public function escape()
     {
-
-
         $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_INT, $this->setFlags());
 
         if ($test == true) {

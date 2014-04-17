@@ -78,8 +78,6 @@ class Numeric extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      */
     public function escape()
     {
-
-
         $test = is_numeric($this->getFieldValue());
 
         if ($test == 1) {

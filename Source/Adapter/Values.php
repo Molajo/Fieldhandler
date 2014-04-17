@@ -30,8 +30,6 @@ class Values extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      */
     public function validate()
     {
-
-
         if ($this->getFieldValue() === null) {
         } else {
 
@@ -58,8 +56,6 @@ class Values extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      */
     public function filter()
     {
-
-
         if ($this->getFieldValue() === null) {
         } else {
 
@@ -83,8 +79,6 @@ class Values extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      */
     public function escape()
     {
-
-
         if ($this->getFieldValue() === null) {
         } else {
 

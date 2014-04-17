@@ -30,8 +30,6 @@ class Mimetypes extends AbstractFieldhandler implements FieldhandlerAdapterInter
      */
     public function validate()
     {
-
-
         if ($this->getFieldValue() === null) {
         } else {
 
@@ -58,8 +56,6 @@ class Mimetypes extends AbstractFieldhandler implements FieldhandlerAdapterInter
      */
     public function filter()
     {
-
-
         if ($this->getFieldValue() === null) {
         } else {
 
@@ -83,8 +79,6 @@ class Mimetypes extends AbstractFieldhandler implements FieldhandlerAdapterInter
      */
     public function escape()
     {
-
-
         if ($this->getFieldValue() === null) {
         } else {
 

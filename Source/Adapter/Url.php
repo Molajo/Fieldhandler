@@ -30,8 +30,6 @@ class Url extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function validate()
     {
-
-
         $hold = $this->getFieldValue();
 
         $test = $this->filter();
@@ -40,7 +38,6 @@ class Url extends AbstractFieldhandler implements FieldhandlerAdapterInterface
         } else {
             throw new UnexpectedValueException ('Validate Url: Invalid Value');
         }
-
 
         // todo: add active test checkdnsrr($this->getFieldValue());
 
@@ -56,8 +53,6 @@ class Url extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function filter()
     {
-
-
         $url = str_replace(
             array('ftp://', 'ftps://', 'http://', 'https://'),
             ''
@@ -84,8 +79,6 @@ class Url extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function escape()
     {
-
-
         return $this->filter();
     }
 

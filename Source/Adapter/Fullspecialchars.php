@@ -30,8 +30,6 @@ class Fullspecialchars extends AbstractFieldhandler implements FieldhandlerAdapt
      */
     public function validate()
     {
-
-
         if ($this->getFieldValue() === null) {
         } else {
 
@@ -59,8 +57,6 @@ class Fullspecialchars extends AbstractFieldhandler implements FieldhandlerAdapt
      */
     public function filter()
     {
-
-
         if ($this->getFieldValue() === null) {
         } else {
 
@@ -86,8 +82,6 @@ class Fullspecialchars extends AbstractFieldhandler implements FieldhandlerAdapt
      */
     public function escape()
     {
-
-
         $test = filter_var($this->getFieldValue(), FILTER_SANITIZE_FULL_SPECIAL_CHARS, $this->setFlags());
 
         if ($test == $this->getFieldValue()) {

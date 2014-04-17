@@ -32,8 +32,6 @@ class Html extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function validate()
     {
-
-
         if ($this->getFieldValue() == $this->filter()) {
         } else {
             throw new UnexpectedValueException
@@ -54,8 +52,6 @@ class Html extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function filter()
     {
-
-
         if ($this->getFieldValue() === null) {
         } else {
             $this->setFieldValue(kses($this->getFieldValue(), $this->white_list, array('http', 'https')));

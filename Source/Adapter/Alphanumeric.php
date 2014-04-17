@@ -30,8 +30,6 @@ class Alphanumeric extends AbstractFieldhandler implements FieldhandlerAdapterIn
      */
     public function validate()
     {
-
-
         if ($this->getFieldValue() === null) {
         } else {
 
@@ -56,8 +54,6 @@ class Alphanumeric extends AbstractFieldhandler implements FieldhandlerAdapterIn
      */
     public function filter()
     {
-
-
         if ($this->getFieldValue() === null) {
         } else {
 
@@ -80,8 +76,6 @@ class Alphanumeric extends AbstractFieldhandler implements FieldhandlerAdapterIn
      */
     public function escape()
     {
-
-
         $this->setFieldValue($this->filterByCharacter('ctype_alnum', $this->getFieldValue()));
 
         return $this->getFieldValue();

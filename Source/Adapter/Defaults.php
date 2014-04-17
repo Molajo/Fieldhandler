@@ -29,8 +29,6 @@ class Defaults extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function validate()
     {
-
-
         $this->setDefault();
 
         return $this->getFieldValue();
@@ -45,8 +43,6 @@ class Defaults extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function filter()
     {
-
-
         $this->setDefault();
 
         return $this->getFieldValue();
@@ -61,8 +57,6 @@ class Defaults extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function escape()
     {
-
-
         $this->setDefault();
 
         return $this->getFieldValue();

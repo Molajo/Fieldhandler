@@ -30,8 +30,6 @@ class Stringlength extends AbstractFieldhandler implements FieldhandlerAdapterIn
      */
     public function validate()
     {
-
-
         $from_to = $this->getFromto();
 
         $string_length = strlen(trim($this->getFieldValue()));
@@ -60,8 +58,6 @@ class Stringlength extends AbstractFieldhandler implements FieldhandlerAdapterIn
      */
     public function filter()
     {
-
-
         $from_to = $this->getFromto();
 
         $string_length = strlen(trim($this->getFieldValue()));
@@ -85,8 +81,6 @@ class Stringlength extends AbstractFieldhandler implements FieldhandlerAdapterIn
      */
     public function escape()
     {
-
-
         return $this->filter();
     }
 

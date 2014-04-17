@@ -30,8 +30,6 @@ class Alias extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function validate()
     {
-
-
         if ($this->getFieldValue() === null) {
             $this->setFieldValue(null);
 
@@ -58,8 +56,6 @@ class Alias extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function filter()
     {
-
-
         if ($this->getFieldValue() === null) {
             $bad = true;
         } else {
@@ -81,8 +77,6 @@ class Alias extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function escape()
     {
-
-
         return $this->filter();
     }
 

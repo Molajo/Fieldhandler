@@ -30,8 +30,6 @@ class Email extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function validate()
     {
-
-
         if ($this->getFieldValue() === null) {
         } else {
 
@@ -58,8 +56,6 @@ class Email extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function filter()
     {
-
-
         $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_EMAIL);
 
         if ($test === $this->getFieldValue()) {
@@ -79,8 +75,6 @@ class Email extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function escape()
     {
-
-
         $this->filter();
 
         return $this->getFieldValue();

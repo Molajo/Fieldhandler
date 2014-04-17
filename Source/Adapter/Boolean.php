@@ -30,8 +30,6 @@ class Boolean extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      */
     public function validate()
     {
-
-
         if ($this->getFieldValue() === null) {
         } else {
 
@@ -65,8 +63,6 @@ class Boolean extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      */
     public function filter()
     {
-
-
         if ($this->getFieldValue() === null) {
         } else {
 
@@ -95,8 +91,6 @@ class Boolean extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      */
     public function escape()
     {
-
-
         $this->filter();
 
         return $this->getFieldValue();

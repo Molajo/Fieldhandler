@@ -30,8 +30,6 @@ class Tel extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function validate()
     {
-
-
         if ($this->getFieldValue() === null) {
         } else {
 
@@ -58,8 +56,6 @@ class Tel extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function filter()
     {
-
-
         if ($this->getFieldValue() === null) {
         } else {
 
@@ -83,8 +79,6 @@ class Tel extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function escape()
     {
-
-
         $test = filter_var($this->getFieldValue(), FILTER_SANITIZE_STRING, $this->setFlags());
 
         if ($test == true) {

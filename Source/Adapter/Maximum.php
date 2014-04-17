@@ -30,8 +30,6 @@ class Maximum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      */
     public function validate()
     {
-
-
         if ($this->getFieldValue() === null) {
         } else {
 
@@ -55,8 +53,6 @@ class Maximum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      */
     public function filter()
     {
-
-
         if ($this->getFieldValue() === null) {
         } else {
 
@@ -77,8 +73,6 @@ class Maximum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      */
     public function escape()
     {
-
-
         return $this->getFieldValue();
     }
 

@@ -30,8 +30,6 @@ class Callback extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function validate()
     {
-
-
         if ($this->getFieldValue() === null) {
         } else {
 
@@ -58,8 +56,6 @@ class Callback extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function filter()
     {
-
-
         if ($this->getFieldValue() === null) {
         } else {
             $this->setFieldValue(filter_var($this->getFieldValue(), FILTER_CALLBACK, $this->setCallback()));
@@ -77,8 +73,6 @@ class Callback extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function escape()
     {
-
-
         $this->filter();
 
         return $this->getFieldValue();

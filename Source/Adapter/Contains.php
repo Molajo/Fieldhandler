@@ -30,8 +30,6 @@ class Contains extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function validate()
     {
-
-
         if ($this->getFieldValue() === null) {
             return $this->getFieldValue();
         }
@@ -56,8 +54,6 @@ class Contains extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function filter()
     {
-
-
         if ($this->getFieldValue() === null) {
             return $this->getFieldValue();
         }
@@ -79,8 +75,6 @@ class Contains extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function escape()
     {
-
-
         return $this->filter();
     }
 

@@ -32,8 +32,6 @@ class Encoded extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      */
     public function validate()
     {
-
-
         $test = filter_var($this->getFieldValue(), FILTER_SANITIZE_ENCODED, $this->setFlags());
 
         if ($test == $this->getFieldValue()) {
@@ -56,8 +54,6 @@ class Encoded extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      */
     public function filter()
     {
-
-
         $test = filter_var($this->getFieldValue(), FILTER_SANITIZE_ENCODED, $this->setFlags());
 
         if ($test == $this->getFieldValue()) {
@@ -77,8 +73,6 @@ class Encoded extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      */
     public function escape()
     {
-
-
         return filter_var($this->getFieldValue(), FILTER_SANITIZE_ENCODED, $this->setFlags());
     }
 
