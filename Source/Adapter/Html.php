@@ -11,7 +11,7 @@ namespace Molajo\Fieldhandler\Adapter;
 use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
-include __DIR__ . '/Libraries/kses.php';
+include '../../Libraries/kses.php';
 
 /**
  * Html Fieldhandler

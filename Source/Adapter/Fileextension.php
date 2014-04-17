@@ -1,6 +1,6 @@
 <?php
 /**
- * Fileextensions Fieldhandler
+ * Fileextension Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -12,7 +12,7 @@ use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
- * Fileextensions Fieldhandler
+ * Fileextension Fieldhandler
  *
  * URL-encode string, optionally strip or encode special characters.
  *
@@ -21,7 +21,7 @@ use CommonApi\Model\FieldhandlerAdapterInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Fileextensions extends AbstractFieldhandler implements FieldhandlerAdapterInterface
+class Fileextension extends AbstractFieldhandler implements FieldhandlerAdapterInterface
 {
     /**
      * Validate Input
@@ -40,7 +40,7 @@ class Fileextensions extends AbstractFieldhandler implements FieldhandlerAdapter
         } else {
             throw new UnexpectedValueException
             (
-                'Validate Fileextensions: Invalid Value'
+                'Validate Fileextension: Invalid Value'
             );
         }
 
