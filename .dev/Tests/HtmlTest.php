@@ -42,40 +42,40 @@ class HtmlTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Fullspecialchars::validate
+     * Test HTML filter
+     *
      * @return  void
      * @since   1.0
      */
-//    public function testEscape()
-//    {
-//        $field_name              = 'fieldname';
-//        $field_value             = '&';
-//        $fieldhandler_type_chain = 'Fullspecialchars';
-//
-//        $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain, array());
-//
-//        if (PHP_VERSION_ID > 50400) {
-//            $this->assertEquals('&#38;', $results);
-//        } else {
-//            $this->assertEquals('&amp;', $results);
-//        }
-//
-//        return;
-//    }
+    public function testFilter()
+    {
+        $field_name              = 'fieldname';
+        $field_value             = '<script>("Gotcha!");</script><p>I am fine.</p>';
+        $fieldhandler_type_chain = 'Html';
+        $filtered                = '("Gotcha!");<p>I am fine.</p>';
+
+        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, array());
+
+        $this->assertEquals($filtered, $results);
+
+        return;
+    }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Fullspecialchars::validate
-     * @expectedException \CommonApi\Exception\UnexpectedValueException
+     * Test Validate
+     *
      * @return  void
      * @since   1.0
      */
     public function testValidate()
     {
         $field_name              = 'fieldname';
-        $field_value             = '&';
-        $fieldhandler_type_chain = 'Fullspecialchars';
+        $field_value             = '<p>Yup.</p>';
+        $fieldhandler_type_chain = 'Html';
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, array());
+
+        $this->assertEquals($field_value, $results);
 
         return;
     }

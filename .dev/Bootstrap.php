@@ -15,11 +15,11 @@ if (! defined('PHP_VERSION_ID')) {
 
 $base     = substr(__DIR__, 0, strlen(__DIR__) - 5);
 $classmap = array();
-$results  = createClassMap($base . '/vendor/commonapi/exception', 'CommonApi\\Exception\\');
+$results  = createClassMap($base . '/vendor/commonapi/exception/', 'CommonApi\\Exception\\');
 $classmap = array_merge($classmap, $results);
-$classmap = createClassMap($base . '/vendor/commonapi/model', 'CommonApi\\Model\\');
+$classmap = createClassMap($base . '/vendor/commonapi/model/', 'CommonApi\\Model\\');
 $classmap = array_merge($classmap, $results);
-$results  = createClassMap($base . '/Source/Adapter', 'Molajo\\Fieldhandler\\Adapter\\');
+$results  = createClassMap($base . '/Source/Adapter/', 'Molajo\\Fieldhandler\\Adapter\\');
 $classmap = array_merge($classmap, $results);
 
 $classmap['Molajo\\Fieldhandler\\Driver'] = $base . '/Source/Driver.php';
