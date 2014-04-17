@@ -153,7 +153,6 @@ class Driver implements FieldhandlerInterface
      */
     protected function editMethod($method)
     {
-        /** Method: validate, filter or escape */
         $method = strtolower($method);
 
         if (in_array($method, array('validate', 'filter', 'escape'))) {
@@ -177,9 +176,6 @@ class Driver implements FieldhandlerInterface
      */
     protected function editFieldName($field_name)
     {
-        $field_name = $this->editFieldName($field_name);
-
-        /** Field name: Required */
         if ($field_name == '' || $field_name === null) {
             throw new UnexpectedValueException
             (
