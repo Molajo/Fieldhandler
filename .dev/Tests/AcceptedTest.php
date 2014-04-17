@@ -26,7 +26,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
      * Adapter
      *
      * @var    object  Molajo\Fieldhandler\Driver
-     * @since  1.0
+     * @since  1.0.0
      */
     protected $driver;
 
@@ -34,7 +34,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
      * Set up
      *
      * @return  void
-     * @since   1.0
+     * @since   1.0.0
      */
     protected function setUp()
     {
@@ -46,7 +46,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
      *
      * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testValidateSuccess1()
     {
@@ -67,7 +67,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
      *
      * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testValidateSuccess2()
     {
@@ -88,7 +88,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
      *
      * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testValidateSuccess3()
     {
@@ -109,7 +109,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
      *
      * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testValidateSuccess4()
     {
@@ -129,7 +129,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @expectedException \CommonApi\Exception\UnexpectedValueException
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testValidateUnsuccessful()
     {
@@ -148,7 +148,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
      *
      * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testFilterSuccess()
     {
@@ -167,7 +167,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Default::filter
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testFilterUnsuccessful()
     {
@@ -185,7 +185,7 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
      * Tear down
      *
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     protected function tearDown()
     {

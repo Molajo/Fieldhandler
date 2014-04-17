@@ -25,7 +25,7 @@ class Equal extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Validate Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
@@ -49,7 +49,7 @@ class Equal extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Fieldhandler Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
@@ -70,7 +70,7 @@ class Equal extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Escapes and formats output
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
@@ -84,7 +84,7 @@ class Equal extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Flags can be set in options array
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      */
     public function getEqual()
     {

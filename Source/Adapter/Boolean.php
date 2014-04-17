@@ -25,7 +25,7 @@ class Boolean extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      * Validate Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
@@ -60,7 +60,7 @@ class Boolean extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      * Fieldhandler Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
@@ -90,7 +90,7 @@ class Boolean extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      * Escapes and formats output
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()

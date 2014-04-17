@@ -25,7 +25,7 @@ class Fromto extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      * Validate Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
@@ -53,7 +53,7 @@ class Fromto extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      * Fieldhandler Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
@@ -76,7 +76,7 @@ class Fromto extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      * Escapes and formats output
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
@@ -90,7 +90,7 @@ class Fromto extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      * From value and To value
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      */
     public function getFromto()
     {

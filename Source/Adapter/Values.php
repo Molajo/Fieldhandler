@@ -25,7 +25,7 @@ class Values extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      * Validate Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
@@ -53,7 +53,7 @@ class Values extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      * Fieldhandler Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
@@ -78,7 +78,7 @@ class Values extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      * Escapes and formats output
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
@@ -103,7 +103,7 @@ class Values extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      * Test Array Entry Values
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function getFieldValues()

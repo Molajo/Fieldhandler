@@ -25,7 +25,7 @@ class Accepted extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      * Validate Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
@@ -54,7 +54,7 @@ class Accepted extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      * Fieldhandler Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      */
     public function filter()
     {
@@ -79,7 +79,7 @@ class Accepted extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      * Escapes and formats output
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      */
     public function escape()
     {

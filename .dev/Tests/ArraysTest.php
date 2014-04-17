@@ -25,7 +25,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      * Adapter
      *
      * @var    object  Molajo\Fieldhandler\Driver
-     * @since  1.0
+     * @since  1.0.0
      */
     protected $driver;
 
@@ -33,7 +33,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      * Set up
      *
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     protected function setUp()
     {
@@ -43,7 +43,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Arrays::validate
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testValid()
     {
@@ -69,7 +69,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      * @expectedException \CommonApi\Exception\UnexpectedValueException
      * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testValidateSuccess2()
     {
@@ -90,7 +90,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      *
      * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testFilterSuccess()
     {
@@ -115,7 +115,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      *
      * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testFilterSuccess2()
     {
@@ -139,7 +139,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      *
      * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testFilterSuccess3()
     {
@@ -171,7 +171,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      * @expectedException \CommonApi\Exception\UnexpectedValueException
      * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testFilterFail1()
     {
@@ -201,7 +201,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      *
      * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testEscapeSuccess()
     {
@@ -226,7 +226,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      *
      * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testEscapeSuccess2()
     {

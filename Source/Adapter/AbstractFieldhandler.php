@@ -25,7 +25,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Fieldhandler Type
      *
      * @var    mixed
-     * @since  1.0
+     * @since  1.0.0
      */
     protected $fieldhandler_type;
 
@@ -33,7 +33,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Method (validate, filter, escape)
      *
      * @var    string
-     * @since  1.0
+     * @since  1.0.0
      */
     protected $method;
 
@@ -41,7 +41,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Field Name
      *
      * @var    string
-     * @since  1.0
+     * @since  1.0.0
      */
     protected $field_name;
 
@@ -49,7 +49,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Data Value
      *
      * @var    mixed
-     * @since  1.0
+     * @since  1.0.0
      */
     protected $field_value;
 
@@ -57,7 +57,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Options
      *
      * @var    array
-     * @since  1.0
+     * @since  1.0.0
      */
     protected $options;
 
@@ -65,7 +65,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Database instance
      *
      * @var    object
-     * @since  1.0
+     * @since  1.0.0
      */
     protected $database;
 
@@ -73,7 +73,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Database Table
      *
      * @var    object
-     * @since  1.0
+     * @since  1.0.0
      */
     protected $table;
 
@@ -81,7 +81,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Table key
      *
      * @var    object
-     * @since  1.0
+     * @since  1.0.0
      */
     protected $key;
 
@@ -89,7 +89,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Timezone
      *
      * @var    string
-     * @since  1.0
+     * @since  1.0.0
      */
     protected $timezone;
 
@@ -97,7 +97,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * HTML Entities
      *
      * @var    array
-     * @since  1.0
+     * @since  1.0.0
      */
     protected $html_entities = array(
         34 => 'quot',
@@ -110,7 +110,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Encoding
      *
      * @var    string
-     * @since  1.0
+     * @since  1.0.0
      */
     protected $encoding = 'utf-8';
 
@@ -118,7 +118,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Method (validate, filter, or escape)
      *
      * @var    string
-     * @since  1.0
+     * @since  1.0.0
      */
     protected $white_list = array();
 
@@ -131,7 +131,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * @param   mixed  $field_value
      * @param   array  $options
      *
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function __construct(
@@ -163,7 +163,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Validate
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
@@ -175,7 +175,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Filter
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
@@ -187,7 +187,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Escape
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
@@ -201,7 +201,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * @param   string $method
      *
      * @return  $this
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     protected function setMethod($method)
@@ -229,7 +229,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Get the Path
      *
      * @return  string
-     * @since   1.0
+     * @since   1.0.0
      */
     protected function getMethod()
     {
@@ -242,7 +242,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * @param   string $fieldhandler_type
      *
      * @return  string
-     * @since   1.0
+     * @since   1.0.0
      */
     protected function setFieldhandlerType($fieldhandler_type)
     {
@@ -255,7 +255,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Get the Fieldhandler Type
      *
      * @return  string
-     * @since   1.0
+     * @since   1.0.0
      */
     protected function getFieldhandlerType()
     {
@@ -268,7 +268,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * @param   string $field_name
      *
      * @return  $this
-     * @since   1.0
+     * @since   1.0.0
      */
     protected function setFieldName($field_name)
     {
@@ -283,7 +283,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * @param   string $field_value
      *
      * @return  $this
-     * @since   1.0
+     * @since   1.0.0
      */
     public function setFieldValue($field_value)
     {
@@ -296,7 +296,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Get Value
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      */
     public function getFieldValue()
     {
@@ -309,7 +309,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * @param   string $options
      *
      * @return  $this
-     * @since   1.0
+     * @since   1.0.0
      */
     public function setOptions($options)
     {
@@ -322,7 +322,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Get Options
      *
      * @return  array
-     * @since   1.0
+     * @since   1.0.0
      */
     public function getOptions()
     {
@@ -333,7 +333,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Set Database
      *
      * @return  $this
-     * @since   1.0
+     * @since   1.0.0
      */
     public function setDatabase()
     {
@@ -350,7 +350,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Get Database
      *
      * @return  array
-     * @since   1.0
+     * @since   1.0.0
      */
     public function getDatabase()
     {
@@ -361,7 +361,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Set Table
      *
      * @return  $this
-     * @since   1.0
+     * @since   1.0.0
      */
     public function setTable()
     {
@@ -378,7 +378,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Get Table
      *
      * @return  array
-     * @since   1.0
+     * @since   1.0.0
      */
     public function getTable()
     {
@@ -389,7 +389,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Set Key
      *
      * @return  $this
-     * @since   1.0
+     * @since   1.0.0
      */
     public function setKey()
     {
@@ -406,7 +406,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Get Key
      *
      * @return  array
-     * @since   1.0
+     * @since   1.0.0
      */
     public function getKey()
     {
@@ -417,7 +417,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Get timezone
      *
      * @return  array
-     * @since   1.0
+     * @since   1.0.0
      */
     protected function getUserTimeZone()
     {
@@ -456,7 +456,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * @param   string $timezone
      *
      * @return  string
-     * @since   1.0
+     * @since   1.0.0
      */
     protected function setTimezone($timezone)
     {
@@ -469,7 +469,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Get the Timezone
      *
      * @return  string
-     * @since   1.0
+     * @since   1.0.0
      */
     protected function getTimezone()
     {
@@ -483,7 +483,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * @param   string $filter
      *
      * @return  string
-     * @since   1.0
+     * @since   1.0.0
      */
     public function filterByCharacter($test, $filter)
     {
@@ -504,7 +504,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Get the 'true' array
      *
      * @return  array
-     * @since   1.0
+     * @since   1.0.0
      */
     public function getTrueArray()
     {
@@ -521,7 +521,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Get the test input value
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      */
     public function getTestValue()
     {

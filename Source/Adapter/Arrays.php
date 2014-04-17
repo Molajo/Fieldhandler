@@ -25,7 +25,7 @@ class Arrays extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      * Validate Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
@@ -55,7 +55,7 @@ class Arrays extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      * Fieldhandler Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
@@ -84,7 +84,7 @@ class Arrays extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      * Escapes and formats output
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
@@ -102,7 +102,7 @@ class Arrays extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      * @param   bool $filter
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function testValues($filter = false)

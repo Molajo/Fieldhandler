@@ -25,7 +25,7 @@ class RawTest extends PHPUnit_Framework_TestCase
      * Adapter
      *
      * @var    object  Molajo\Fieldhandler\Driver
-     * @since  1.0
+     * @since  1.0.0
      */
     protected $driver;
 
@@ -33,7 +33,7 @@ class RawTest extends PHPUnit_Framework_TestCase
      * Set up
      *
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     protected function setUp()
     {
@@ -43,7 +43,7 @@ class RawTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Raws::validate
      * @return  void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testValidate1()
     {
@@ -61,7 +61,7 @@ class RawTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Raws::escape
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testEscapeFail()
     {

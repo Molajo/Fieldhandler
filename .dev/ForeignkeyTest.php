@@ -30,7 +30,7 @@ class ForeignkeyTest extends PHPUnit_Framework_TestCase
      * Adapter
      *
      * @var    object  Molajo/Fieldhandler/Adapter
-     * @since  1.0
+     * @since  1.0.0
      */
     protected $adapter;
 
@@ -38,7 +38,7 @@ class ForeignkeyTest extends PHPUnit_Framework_TestCase
      * Database
      *
      * @var    object  Molajo/Database/Adapter
-     * @since  1.0
+     * @since  1.0.0
      */
     protected $database;
 
@@ -46,7 +46,7 @@ class ForeignkeyTest extends PHPUnit_Framework_TestCase
      * Set up
      *
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     protected function setUp()
     {
@@ -71,7 +71,7 @@ class ForeignkeyTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Foreignkey::validate
      * @return  void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testValidate1()
     {
@@ -93,7 +93,7 @@ class ForeignkeyTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Foreignkey::validate
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testEscapeFail()
     {
@@ -116,7 +116,7 @@ class ForeignkeyTest extends PHPUnit_Framework_TestCase
      * Tear down
      *
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     protected function tearDown()
     {

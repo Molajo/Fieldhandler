@@ -27,7 +27,7 @@ class Fileextension extends AbstractFieldhandler implements FieldhandlerAdapterI
      * Validate Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
@@ -51,7 +51,7 @@ class Fileextension extends AbstractFieldhandler implements FieldhandlerAdapterI
      * Fieldhandler Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
@@ -72,7 +72,7 @@ class Fileextension extends AbstractFieldhandler implements FieldhandlerAdapterI
      * Escapes and formats output
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()

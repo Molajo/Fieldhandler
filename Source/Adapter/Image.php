@@ -25,7 +25,7 @@ class Image extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Validate Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
@@ -51,7 +51,7 @@ class Image extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Fieldhandler Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
@@ -79,7 +79,7 @@ class Image extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Escapes and formats output
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
@@ -93,7 +93,7 @@ class Image extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Flags can be set in options array
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      */
     public function setFlags()
     {

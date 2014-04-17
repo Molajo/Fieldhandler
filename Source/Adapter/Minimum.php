@@ -25,7 +25,7 @@ class Minimum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      * Validate Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
@@ -51,7 +51,7 @@ class Minimum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      * Fieldhandler Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
@@ -74,7 +74,7 @@ class Minimum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      * Escapes and formats output
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
@@ -88,7 +88,7 @@ class Minimum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      * Flags can be set in options array
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      */
     public function getMinimum()
     {

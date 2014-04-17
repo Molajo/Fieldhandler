@@ -25,7 +25,7 @@ class Alias extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Validate Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
@@ -54,7 +54,7 @@ class Alias extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Fieldhandler Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      */
     public function filter()
     {
@@ -77,7 +77,7 @@ class Alias extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Escapes and formats output
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      */
     public function escape()
     {
@@ -90,7 +90,7 @@ class Alias extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Create Alias from Text Value
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      */
     public function createAlias()
     {
@@ -124,7 +124,7 @@ class Alias extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Test the Alias validity
      *
      * @return bool
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testValidate()
     {

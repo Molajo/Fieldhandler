@@ -26,7 +26,7 @@ class Foreignkey extends AbstractFieldhandler implements FieldhandlerAdapterInte
      * Validate Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
@@ -42,7 +42,7 @@ class Foreignkey extends AbstractFieldhandler implements FieldhandlerAdapterInte
      * Fieldhandler Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
@@ -70,7 +70,7 @@ class Foreignkey extends AbstractFieldhandler implements FieldhandlerAdapterInte
      * Escapes and formats output
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
@@ -88,7 +88,7 @@ class Foreignkey extends AbstractFieldhandler implements FieldhandlerAdapterInte
      * @param   mixed $key_value
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function verifyForeignKey($key_value)

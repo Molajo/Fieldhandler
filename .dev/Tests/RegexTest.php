@@ -26,7 +26,7 @@ class RegexTest extends PHPUnit_Framework_TestCase
      * Adapter
      *
      * @var    object  Molajo\Fieldhandler\Driver
-     * @since  1.0
+     * @since  1.0.0
      */
     protected $driver;
 
@@ -34,7 +34,7 @@ class RegexTest extends PHPUnit_Framework_TestCase
      * Set up
      *
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     protected function setUp()
     {
@@ -44,7 +44,7 @@ class RegexTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Regex::validate
      * @return  void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testValidate1()
     {
@@ -64,7 +64,7 @@ class RegexTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Regex::validate
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testValidateFail()
     {
@@ -85,7 +85,7 @@ class RegexTest extends PHPUnit_Framework_TestCase
      * Tear down
      *
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     protected function tearDown()
     {

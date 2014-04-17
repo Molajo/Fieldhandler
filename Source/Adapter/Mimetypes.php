@@ -25,7 +25,7 @@ class Mimetypes extends AbstractFieldhandler implements FieldhandlerAdapterInter
      * Validate Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
@@ -53,7 +53,7 @@ class Mimetypes extends AbstractFieldhandler implements FieldhandlerAdapterInter
      * Fieldhandler Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
@@ -78,7 +78,7 @@ class Mimetypes extends AbstractFieldhandler implements FieldhandlerAdapterInter
      * Escapes and formats output
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
@@ -103,7 +103,7 @@ class Mimetypes extends AbstractFieldhandler implements FieldhandlerAdapterInter
      * Test Array Entry Mimetypes
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      */
     public function getMimetypes()
     {

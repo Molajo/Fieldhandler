@@ -25,7 +25,7 @@ class Alpha extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Validate Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
@@ -53,7 +53,7 @@ class Alpha extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Fieldhandler Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      */
     public function filter()
     {
@@ -77,7 +77,7 @@ class Alpha extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      * Escapes and formats output
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      */
     public function escape()
     {

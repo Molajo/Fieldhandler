@@ -25,7 +25,7 @@ class Callback extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      * Validate Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
@@ -53,7 +53,7 @@ class Callback extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      * Fieldhandler Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
@@ -72,7 +72,7 @@ class Callback extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      * Escapes and formats output
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
@@ -88,7 +88,7 @@ class Callback extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      * Flags can be set in options array
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      */
     public function setCallback()
     {

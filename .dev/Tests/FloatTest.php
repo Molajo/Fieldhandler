@@ -26,7 +26,7 @@ class FloatTest extends PHPUnit_Framework_TestCase
      * Adapter
      *
      * @var    object  Molajo\Fieldhandler\Driver
-     * @since  1.0
+     * @since  1.0.0
      */
     protected $driver;
 
@@ -34,7 +34,7 @@ class FloatTest extends PHPUnit_Framework_TestCase
      * Set up
      *
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     protected function setUp()
     {
@@ -44,7 +44,7 @@ class FloatTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Float::validate
      * @return  void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testValidate1()
     {
@@ -63,7 +63,7 @@ class FloatTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Float::validate
      * @return  void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testValidate2()
     {
@@ -82,7 +82,7 @@ class FloatTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Float::validate
      * @return  void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testValidate3()
     {
@@ -102,7 +102,7 @@ class FloatTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Adapter\Float::validate
      * @expectedException \CommonApi\Exception\UnexpectedValueException
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testValidateFail()
     {
@@ -121,7 +121,7 @@ class FloatTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Float::validate
      * @return  void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testFilter1()
     {
@@ -140,7 +140,7 @@ class FloatTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Float::validate
      * @return  void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testFilter2()
     {
@@ -159,7 +159,7 @@ class FloatTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Float::validate
      * @return  void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testFilter3()
     {
@@ -178,7 +178,7 @@ class FloatTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Float::validate
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testFilterFail()
     {
@@ -198,7 +198,7 @@ class FloatTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Float::validate
      * @return  void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testEscape()
     {
@@ -217,7 +217,7 @@ class FloatTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Float::validate
      * @return  void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testEscape2()
     {
@@ -236,7 +236,7 @@ class FloatTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Float::validate
      * @return  void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testEscape3()
     {
@@ -255,7 +255,7 @@ class FloatTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Float::validate
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testEscapeFail()
     {
@@ -276,7 +276,7 @@ class FloatTest extends PHPUnit_Framework_TestCase
      * Tear down
      *
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     protected function tearDown()
     {

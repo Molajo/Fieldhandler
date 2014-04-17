@@ -25,7 +25,7 @@ class Stringlength extends AbstractFieldhandler implements FieldhandlerAdapterIn
      * Validate Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
@@ -55,7 +55,7 @@ class Stringlength extends AbstractFieldhandler implements FieldhandlerAdapterIn
      * Fieldhandler Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
@@ -80,7 +80,7 @@ class Stringlength extends AbstractFieldhandler implements FieldhandlerAdapterIn
      * Escapes and formats output
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
@@ -94,7 +94,7 @@ class Stringlength extends AbstractFieldhandler implements FieldhandlerAdapterIn
      * From value and To value
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      */
     public function getFromto()
     {

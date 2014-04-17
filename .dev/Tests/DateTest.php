@@ -26,7 +26,7 @@ class DateTest extends PHPUnit_Framework_TestCase
      * Adapter
      *
      * @var    object  Molajo\Fieldhandler\Driver
-     * @since  1.0
+     * @since  1.0.0
      */
     protected $driver;
 
@@ -34,7 +34,7 @@ class DateTest extends PHPUnit_Framework_TestCase
      * Set up
      *
      * @return void
-     * @since   1.0
+     * @since   1.0.0
      */
     protected function setUp()
     {
@@ -45,7 +45,7 @@ class DateTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Adapter\Date::validate
      * @expectedException \CommonApi\Exception\UnexpectedValueException
      * @return  void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testValidateFail()
     {
@@ -64,7 +64,7 @@ class DateTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Date::filter
      * @return  void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testVlidateSuccess()
     {
@@ -82,7 +82,7 @@ class DateTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Date::validate
      * @return  void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testFilterFailwNull()
     {
@@ -102,7 +102,7 @@ class DateTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Date::validate
      * @return  void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testFilterSuccess()
     {
@@ -120,7 +120,7 @@ class DateTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Date::validate
      * @return  void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testEscapeFailwNull()
     {
@@ -140,7 +140,7 @@ class DateTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Date::validate
      * @return  void
-     * @since   1.0
+     * @since   1.0.0
      */
     public function testEscapeSuccess()
     {

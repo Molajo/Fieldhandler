@@ -25,7 +25,7 @@ class Driver implements FieldhandlerInterface
      * Method (validate, filter, or escape)
      *
      * @var    string
-     * @since  1.0
+     * @since  1.0.0
      */
     public $method;
 
@@ -33,7 +33,7 @@ class Driver implements FieldhandlerInterface
      * Name of Field
      *
      * @var    string
-     * @since  1.0
+     * @since  1.0.0
      */
     public $field_name;
 
@@ -41,7 +41,7 @@ class Driver implements FieldhandlerInterface
      * Field Value
      *
      * @var    string
-     * @since  1.0
+     * @since  1.0.0
      */
     public $field_value;
 
@@ -49,7 +49,7 @@ class Driver implements FieldhandlerInterface
      * Array of requested field handlers
      *
      * @var    array
-     * @since  1.0
+     * @since  1.0.0
      */
     public $fieldhandler_types;
 
@@ -57,7 +57,7 @@ class Driver implements FieldhandlerInterface
      * Array of values needed for field handlers
      *
      * @var    array
-     * @since  1.0
+     * @since  1.0.0
      */
     public $options;
 
@@ -65,7 +65,7 @@ class Driver implements FieldhandlerInterface
      * Method (validate, filter, or escape)
      *
      * @var    string
-     * @since  1.0
+     * @since  1.0.0
      */
     protected $white_list = array(
         'a'          => array(
@@ -131,7 +131,7 @@ class Driver implements FieldhandlerInterface
      *
      * @param   null|array $white_list
      *
-     * @since   1.0
+     * @since   1.0.0
      */
     public function __construct(array $white_list = array())
     {
@@ -149,7 +149,7 @@ class Driver implements FieldhandlerInterface
      * @param   array      $options
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate(
@@ -176,7 +176,7 @@ class Driver implements FieldhandlerInterface
      * @param   array      $options
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter(
@@ -203,7 +203,7 @@ class Driver implements FieldhandlerInterface
      * @param   array      $options
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape(
@@ -231,7 +231,7 @@ class Driver implements FieldhandlerInterface
      * @param   array      $options
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     protected function editRequest(
@@ -295,7 +295,7 @@ class Driver implements FieldhandlerInterface
      * Process Request
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     protected function processRequest()
@@ -343,7 +343,7 @@ class Driver implements FieldhandlerInterface
      * @param   string $fieldhandler_type
      *
      * @return  object
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     protected function getType($fieldhandler_type)

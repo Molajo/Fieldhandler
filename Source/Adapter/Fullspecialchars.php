@@ -25,7 +25,7 @@ class Fullspecialchars extends AbstractFieldhandler implements FieldhandlerAdapt
      * Validate Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
@@ -54,7 +54,7 @@ class Fullspecialchars extends AbstractFieldhandler implements FieldhandlerAdapt
      * Fieldhandler Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
@@ -81,7 +81,7 @@ class Fullspecialchars extends AbstractFieldhandler implements FieldhandlerAdapt
      * Escapes and formats output
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
@@ -104,7 +104,7 @@ class Fullspecialchars extends AbstractFieldhandler implements FieldhandlerAdapt
      * Flags can be set in options array
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      */
     public function setFlags()
     {

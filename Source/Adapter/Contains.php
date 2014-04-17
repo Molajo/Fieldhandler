@@ -25,7 +25,7 @@ class Contains extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      * Validate Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
@@ -51,7 +51,7 @@ class Contains extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      * Fieldhandler Input
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
@@ -74,7 +74,7 @@ class Contains extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      * Escapes and formats output
      *
      * @return  mixed
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
@@ -88,7 +88,7 @@ class Contains extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      * If needed, apply default to Field
      *
      * @return  boolean
-     * @since   1.0
+     * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function testContains()
