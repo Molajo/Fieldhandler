@@ -24,7 +24,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
     /**
      * Fieldhandler Type
      *
-     * @var    mixed
+     * @var    string
      * @since  1.0.0
      */
     protected $fieldhandler_type;
@@ -59,7 +59,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * @var    array
      * @since  1.0.0
      */
-    protected $options;
+    protected $options = array();
 
     /**
      * Database instance
@@ -113,7 +113,6 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * @since  1.0.0
      */
     protected $encoding = 'utf-8';
-
 
     /**
      * White list
@@ -273,8 +272,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
         } else {
             throw new UnexpectedValueException
             (
-                'Fieldhandler: Invalid Method: ' . $method
-                . ' Must be  validate, filter, escape.'
+                'Fieldhandler: Invalid Method: ' . $method . ' Must be  validate, filter, or escape.'
             );
         }
 
@@ -338,7 +336,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
     /**
      * Set the Value
      *
-     * @param   string $field_value
+     * @param   mixed $field_value
      *
      * @return  $this
      * @since   1.0.0
@@ -364,14 +362,19 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
     /**
      * Set Options
      *
-     * @param   string $options
+     * @param   array $options
      *
      * @return  $this
      * @since   1.0.0
      */
     public function setOptions($options)
     {
-        $this->options = $options;
+        if (is_array($options)) {
+            $this->options = $options;
+            return $this;
+        }
+
+        $this->options = array();
 
         return $this;
     }
