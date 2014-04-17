@@ -22,46 +22,6 @@ use CommonApi\Model\FieldhandlerInterface;
 class Driver implements FieldhandlerInterface
 {
     /**
-     * Method (validate, filter, or escape)
-     *
-     * @var    string
-     * @since  1.0.0
-     */
-    public $method;
-
-    /**
-     * Name of Field
-     *
-     * @var    string
-     * @since  1.0.0
-     */
-    public $field_name;
-
-    /**
-     * Field Value
-     *
-     * @var    string
-     * @since  1.0.0
-     */
-    public $field_value;
-
-    /**
-     * Array of requested field handlers
-     *
-     * @var    array
-     * @since  1.0.0
-     */
-    public $fieldhandler_types;
-
-    /**
-     * Array of values needed for field handlers
-     *
-     * @var    array
-     * @since  1.0.0
-     */
-    public $options;
-
-    /**
      * Validate
      *
      * @param   string     $field_name
@@ -69,23 +29,13 @@ class Driver implements FieldhandlerInterface
      * @param   string     $fieldhandler_type_chain
      * @param   array      $options
      *
-     * @return  mixed
+     * @return  \CommonApi\Model\FieldhandlerItemInterface
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    public function validate(
-        $field_name,
-        $field_value = null,
-        $fieldhandler_type_chain,
-        $options = array()
-    ) {
-        return $this->editRequest(
-            'validate',
-            $field_name,
-            $field_value,
-            $fieldhandler_type_chain,
-            $options
-        );
+    public function validate($field_name, $field_value = null, $fieldhandler_type_chain, $options = array())
+    {
+        return $this->processRequest('validate', $field_name, $field_value, $fieldhandler_type_chain, $options);
     }
 
     /**
@@ -96,23 +46,13 @@ class Driver implements FieldhandlerInterface
      * @param   string     $fieldhandler_type_chain
      * @param   array      $options
      *
-     * @return  mixed
+     * @return  \CommonApi\Model\FieldhandlerItemInterface
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    public function filter(
-        $field_name,
-        $field_value = null,
-        $fieldhandler_type_chain,
-        $options = array()
-    ) {
-        return $this->editRequest(
-            'filter',
-            $field_name,
-            $field_value,
-            $fieldhandler_type_chain,
-            $options
-        );
+    public function filter($field_name, $field_value = null, $fieldhandler_type_chain, $options = array())
+    {
+        return $this->processRequest('filter', $field_name, $field_value, $fieldhandler_type_chain, $options);
     }
 
     /**
@@ -123,27 +63,17 @@ class Driver implements FieldhandlerInterface
      * @param   string     $fieldhandler_type_chain
      * @param   array      $options
      *
-     * @return  mixed
+     * @return  \CommonApi\Model\FieldhandlerItemInterface
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    public function escape(
-        $field_name,
-        $field_value = null,
-        $fieldhandler_type_chain,
-        $options = array()
-    ) {
-        return $this->editRequest(
-            'escape',
-            $field_name,
-            $field_value,
-            $fieldhandler_type_chain,
-            $options
-        );
+    public function escape($field_name, $field_value = null, $fieldhandler_type_chain, $options = array())
+    {
+        return $this->processRequest('escape', $field_name, $field_value, $fieldhandler_type_chain, $options);
     }
 
     /**
-     * Edit Request
+     * Process Request
      *
      * @param   string     $method
      * @param   string     $field_name
@@ -151,39 +81,126 @@ class Driver implements FieldhandlerInterface
      * @param   string     $fieldhandler_type_chain
      * @param   array      $options
      *
-     * @return  mixed
+     * @return  \CommonApi\Model\FieldhandlerItemInterface
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    protected function editRequest(
+    protected function processRequest(
         $method,
         $field_name,
         $field_value = null,
         $fieldhandler_type_chain,
         $options = array()
     ) {
+        $method             = $this->editMethod($method);
+        $field_name         = $this->editFieldName($field_name);
+        $fieldhandler_types = $this->editFieldhandlerTypes($fieldhandler_type_chain);
+
+        if (is_array($options) && count($options) > 0) {
+        } else {
+            $options = array();
+        }
+
+        $return_value   = true;
+        $error_messages = array();
+
+        foreach ($fieldhandler_types as $fieldhandler_type) {
+
+            $fieldhandler_type = ucfirst(strtolower($fieldhandler_type));
+            $class             = $this->getType($fieldhandler_type);
+
+            try {
+                $fieldhandler_instance = new $class ($fieldhandler_type, $method, $field_name, $field_value, $options);
+
+            } catch (Exception $e) {
+
+                throw new UnexpectedValueException
+                (
+                    'Fieldhandler: Could not instantiate Fieldhandler Type: ' . $fieldhandler_type
+                    . ' Class: ' . $class
+                );
+            }
+
+            $method_response = $fieldhandler_instance->$method();
+
+            $messages = $fieldhandler_instance->getErrorMessages();
+            if (count($messages) > 0 && is_array($messages)) {
+                $temp           = array_unique(array_merge($messages, $error_messages));
+                $error_messages = $temp;
+            }
+
+            if ($method === 'validate') {
+                if ($method_response === false) {
+                    $return_value = false;
+                }
+            } else {
+                $field_value  = $method_response;
+                $return_value = $method_response;
+            }
+        }
+
+        return $this->getFieldhandlerItem($field_name, $return_value, $error_messages);
+    }
+
+    /**
+     * Edit Method Value
+     *
+     * @param   string $method
+     *
+     * @return  string
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function editMethod($method)
+    {
+        /** Method: validate, filter or escape */
         $method = strtolower($method);
 
         if (in_array($method, array('validate', 'filter', 'escape'))) {
-            $this->method = $method;
+            return $method;
         } else {
             throw new UnexpectedValueException
             (
                 'Fieldhandler: Must provide the name of the requested method.'
             );
         }
+    }
 
+    /**
+     * Edit Field Name
+     *
+     * @param   string $field_name
+     *
+     * @return  string
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function editFieldName($field_name)
+    {
+        $field_name = $this->editFieldName($field_name);
+
+        /** Field name: Required */
         if ($field_name == '' || $field_name === null) {
             throw new UnexpectedValueException
             (
                 'Fieldhandler: Must provide the field name.'
             );
-        } else {
-            $this->field_name = $field_name;
         }
 
-        $this->field_value = $field_value;
+        return $field_name;
+    }
 
+    /**
+     * Edit Fieldhandler Requests
+     *
+     * @param   string $fieldhandler_type_chain
+     *
+     * @return  array
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function editFieldhandlerTypes($fieldhandler_type_chain)
+    {
         if (strpos($fieldhandler_type_chain, ',')) {
             $fieldhandler_types = explode(',', $fieldhandler_type_chain);
         } else {
@@ -195,7 +212,6 @@ class Driver implements FieldhandlerInterface
         }
 
         if (is_array($fieldhandler_types) && count($fieldhandler_types) > 0) {
-            $this->fieldhandler_types = $fieldhandler_types;
         } else {
             throw new UnexpectedValueException
             (
@@ -203,54 +219,7 @@ class Driver implements FieldhandlerInterface
             );
         }
 
-        if (is_array($fieldhandler_types) && count($fieldhandler_types) > 0) {
-            $this->options = $options;
-        } else {
-            $this->options = array();
-        }
-
-        return $this->processRequest();
-    }
-
-    /**
-     * Process Request
-     *
-     * @return  mixed
-     * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
-     */
-    protected function processRequest()
-    {
-        foreach ($this->fieldhandler_types as $fieldhandler_type) {
-
-            $fieldhandler_type = ucfirst(strtolower($fieldhandler_type));
-
-            $class = $this->getType($fieldhandler_type);
-
-            try {
-
-                $ft = new $class (
-                    $fieldhandler_type,
-                    $this->method,
-                    $this->field_name,
-                    $this->field_value,
-                    $this->options
-                );
-            } catch (Exception $e) {
-
-                throw new UnexpectedValueException
-                (
-                    'Fieldhandler: Could not instantiate Fieldhandler Type: ' . $fieldhandler_type
-                    . ' Class: ' . $class
-                );
-            }
-
-            $method = $this->method;
-
-            $this->field_value = $ft->$method();
-        }
-
-        return $this->field_value;
+        return $fieldhandler_types;
     }
 
     /**
@@ -275,5 +244,32 @@ class Driver implements FieldhandlerInterface
         }
 
         return $class;
+    }
+
+    /**
+     * Instantiates, loads and returns Fieldhandler Item Class
+     *
+     * @param   string $field_name
+     * @param   mixed  $return_value
+     * @param   array  $error_messages
+     *
+     * @return  \CommonApi\Model\FieldhandlerItemInterface
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function getFieldhandlerItem($field_name, $return_value, $error_messages)
+    {
+        $class = 'Molajo\\Fieldhandler\\FieldhandlerItem';
+
+        try {
+            return new $class($field_name, $return_value, $error_messages);
+
+        } catch (Exception $e) {
+
+            throw new UnexpectedValueException
+            (
+                'Fieldhandler getFieldhandlerItem Method: Cannot create class ' . $class
+            );
+        }
     }
 }

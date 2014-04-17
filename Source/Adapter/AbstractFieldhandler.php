@@ -180,12 +180,12 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
     );
 
     /**
-     * Errors
+     * Error Messages
      *
      * @var    array
      * @since  1.0.0
      */
-    protected $errors = array();
+    protected $error_messages = array();
 
     /**
      * Constructor
@@ -596,16 +596,27 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
     }
 
     /**
-     * Format Error Message
+     * Return error messages
+     *
+     * @return  array
+     * @since   1.0.0
+     */
+    public function getErrorMessages()
+    {
+        return $this->error_messages;
+    }
+
+    /**
+     * Set an error message
      *
      * $param   integer  $code
      *
      * @return  $this
      * @since   1.0.0
      */
-    public function set_error_message($code)
+    protected function setErrorMessage($code)
     {
-        $this->errors[$code] = trim($this->field_name) . ' Method Failed: ' . $this->method . $this->message;
+        $this->error_messages[$code] = trim($this->field_name) . ' Method Failed: ' . $this->method . $this->message;
 
         return $this;
     }
