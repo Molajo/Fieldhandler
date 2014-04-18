@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
@@ -26,24 +25,18 @@ class Upper extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
         if ($this->field_value === null) {
-        } else {
-
-            $test = ctype_upper($this->field_value);
-            if ($test == 1) {
-            } else {
-                throw new UnexpectedValueException
-                (
-                    'Validate Upper: Invalid Value'
-                );
-            }
+            return true;
         }
 
-        return $this->field_value;
+        if ($this->field_value === strtoupper($this->field_value)) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -51,18 +44,12 @@ class Upper extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
         if ($this->field_value === null) {
         } else {
-
-            $test = ctype_upper($this->field_value);
-            if ($test == 1) {
-            } else {
-                $this->setFieldValue(strtoupper($this->field_value));
-            }
+            $this->field_value = strtoupper($this->field_value);
         }
 
         return $this->field_value;
@@ -73,7 +60,6 @@ class Upper extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
     {

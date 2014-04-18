@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
@@ -26,22 +25,20 @@ class Url extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
-        $hold = $this->field_value;
-
-        $test = $this->filter();
-
-        if ($test == $hold) {
-        } else {
-            throw new UnexpectedValueException ('Validate Url: Invalid Value');
+        if ($this->field_value === null) {
+            return true;
         }
 
-        // todo: add active test checkdnsrr($this->field_value);
+        $hold = $this->field_value;
 
-        return $this->field_value;
+        if ($this->filter() === $hold) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -49,22 +46,19 @@ class Url extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
-        $url = str_replace(
-            array('ftp://', 'ftps://', 'http://', 'https://'),
-            ''
-            ,
-            strtolower($this->field_value)
-        );
-
-        $test = filter_var($url, FILTER_SANITIZE_URL, $this->setFlags());
-
-        if ($test == $url) {
+        if ($this->field_value === null) {
         } else {
-            $this->setFieldValue(filter_var($url, FILTER_SANITIZE_URL));
+            $url = str_replace(
+                array('ftp://', 'ftps://', 'http://', 'https://'),
+                ''
+                ,
+                strtolower($this->field_value)
+            );
+
+            $this->field_value = filter_var($url, FILTER_SANITIZE_URL, $this->setFlags());
         }
 
         return $this->field_value;
@@ -75,7 +69,6 @@ class Url extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
     {
@@ -85,10 +78,10 @@ class Url extends AbstractFieldhandler implements FieldhandlerAdapterInterface
     /**
      * Flags can be set in options array
      *
-     * @return  mixed
+     * @return  string
      * @since   1.0.0
      */
-    public function setFlags()
+    protected function setFlags()
     {
         $filter = '';
 

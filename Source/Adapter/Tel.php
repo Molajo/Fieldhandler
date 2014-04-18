@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
@@ -24,27 +23,20 @@ class Tel extends AbstractFieldhandler implements FieldhandlerAdapterInterface
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
         if ($this->field_value === null) {
-        } else {
-
-            $test = filter_var($this->field_value, FILTER_SANITIZE_STRING, $this->setFlags());
-
-            if ($test == $this->field_value) {
-            } else {
-                throw new UnexpectedValueException
-                (
-                    'Validate Tel: Invalid Value'
-                );
-            }
+            return true;
         }
 
-        return $this->field_value;
+        if (filter_var($this->field_value, FILTER_SANITIZE_STRING, $this->setFlags())) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -52,19 +44,12 @@ class Tel extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
         if ($this->field_value === null) {
         } else {
-
-            $test = filter_var($this->field_value, FILTER_SANITIZE_STRING, $this->setFlags());
-
-            if ($test == true) {
-            } else {
-                $this->setFieldValue(filter_var($this->field_value, FILTER_SANITIZE_STRING));
-            }
+            $this->field_value = filter_var($this->field_value, FILTER_SANITIZE_STRING, $this->setFlags());
         }
 
         return $this->field_value;
@@ -75,18 +60,10 @@ class Tel extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
     {
-        $test = filter_var($this->field_value, FILTER_SANITIZE_STRING, $this->setFlags());
-
-        if ($test == true) {
-        } else {
-            $this->setFieldValue(filter_var($this->field_value, FILTER_SANITIZE_STRING));
-        }
-
-        return $this->field_value;
+        return $this->filter();
     }
 
     /**

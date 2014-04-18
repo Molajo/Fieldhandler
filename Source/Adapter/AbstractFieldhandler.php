@@ -112,12 +112,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * @var    array
      * @since  1.0.0
      */
-    protected $true_array = array(
-        true,
-        1,
-        'yes',
-        'on',
-    );
+    protected $true_array = array();
 
     /**
      * Encoding
@@ -293,6 +288,11 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
         if (function_exists('date_default_timezone_set') && function_exists('date_default_timezone_get')) {
             date_default_timezone_set(@date_default_timezone_get());
         }
+
+        $this->true_array[] = true;
+        $this->true_array[] = 1;
+        $this->true_array[] = 'yes';
+        $this->true_array[] = 'on';
 
         $this->fieldhandler_type = $fieldhandler_type;
         $this->method            = $method;

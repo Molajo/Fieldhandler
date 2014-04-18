@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
@@ -24,12 +23,15 @@ class Stringlength extends AbstractFieldhandler implements FieldhandlerAdapterIn
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
+        if ($this->field_value === null) {
+            return true;
+        }
+
         $from_to = $this->getFromto();
 
         $string_length = strlen(trim($this->field_value));
@@ -37,16 +39,10 @@ class Stringlength extends AbstractFieldhandler implements FieldhandlerAdapterIn
         if ($string_length >= $from_to[0]
             && $string_length <= $from_to[1]
         ) {
-        } else {
-
-            throw new UnexpectedValueException
-            (
-                'Validate Value: ' . $string_length
-                . ' is not a value From: ' . $from_to[0] . '  To:' . $from_to[1]
-            );
+            return true;
         }
 
-        return $this->field_value;
+        return false;
     }
 
     /**
@@ -54,17 +50,10 @@ class Stringlength extends AbstractFieldhandler implements FieldhandlerAdapterIn
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
-        $from_to = $this->getFromto();
-
-        $string_length = strlen(trim($this->field_value));
-
-        if ($string_length > $from_to[0]
-            && $string_length < $from_to[1]
-        ) {
+        if ($this->validate()) {
         } else {
             $this->field_value = null;
         }
@@ -77,7 +66,6 @@ class Stringlength extends AbstractFieldhandler implements FieldhandlerAdapterIn
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
     {

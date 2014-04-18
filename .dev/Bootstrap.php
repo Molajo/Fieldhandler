@@ -23,6 +23,7 @@ $results  = createClassMap($base . '/Source/Adapter/', 'Molajo\\Fieldhandler\\Ad
 $classmap = array_merge($classmap, $results);
 
 $classmap['Molajo\\Fieldhandler\\Driver'] = $base . '/Source/Driver.php';
+$classmap['Molajo\\Fieldhandler\\FieldhandlerItem'] = $base . '/Source/FieldhandlerItem.php';
 ksort($classmap);
 
 spl_autoload_register(

@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use CommonApi\Exception\UnexpectedValueException;
 use Molajo\Fieldhandler\Driver as driver;
 use PHPUnit_Framework_TestCase;
 
@@ -55,9 +54,9 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
         $fieldhandler_type_chain = 'Accepted';
         $options                 = array();
 
-        $field_value = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals(1, $field_value);
+        $this->assertEquals(true, $results->getReturnValue());
 
         return;
     }
@@ -76,9 +75,9 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
         $fieldhandler_type_chain = 'Accepted';
         $options                 = array();
 
-        $field_value = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals('yes', $field_value);
+        $this->assertEquals(true, $results->getReturnValue());
 
         return;
     }
@@ -97,9 +96,9 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
         $fieldhandler_type_chain = 'Accepted';
         $options                 = array();
 
-        $field_value = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals('on', $field_value);
+        $this->assertEquals(true, $results->getReturnValue());
 
         return;
     }
@@ -118,16 +117,17 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
         $fieldhandler_type_chain = 'Accepted';
         $options                 = array();
 
-        $field_value = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals(true, $field_value);
+        $this->assertEquals(true, $results->getReturnValue());
 
         return;
     }
 
     /**
+     * Test failure
+     *
      * @covers  Molajo\Fieldhandler\Adapter\Default::validate
-     * @expectedException \CommonApi\Exception\UnexpectedValueException
      * @return void
      * @since   1.0.0
      */
@@ -138,7 +138,9 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
         $fieldhandler_type_chain = 'Accepted';
         $options                 = array();
 
-        $field_value = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+
+        $this->assertEquals(false, $results->getReturnValue());
 
         return;
     }
@@ -157,15 +159,16 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
         $fieldhandler_type_chain = 'Accepted';
         $options                 = array();
 
-        $field_value = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals('on', $field_value);
+        $this->assertEquals('on', $results->getReturnValue());
 
         return;
     }
 
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Default::filter
+     *
      * @return void
      * @since   1.0.0
      */
@@ -176,7 +179,9 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
         $fieldhandler_type_chain = 'Accepted';
         $options                 = array();
 
-        $field_value = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+
+        $this->assertEquals(null, $results->getReturnValue());
 
         return;
     }

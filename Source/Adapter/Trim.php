@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
@@ -26,24 +25,18 @@ class Trim extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
         if ($this->field_value === null) {
-        } else {
-
-            $test = trim($this->field_value);
-            if ($test == $this->field_value) {
-            } else {
-                throw new UnexpectedValueException
-                (
-                    'Validate Trim: Invalid Value'
-                );
-            }
+            return true;
         }
 
-        return $this->field_value;
+        if ($this->field_value === trim($this->field_value)) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -51,18 +44,12 @@ class Trim extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
         if ($this->field_value === null) {
         } else {
-
-            $test = trim($this->field_value);
-            if ($test == $this->field_value) {
-            } else {
-                $this->setFieldValue($test);
-            }
+            $this->field_value = trim($this->field_value);
         }
 
         return $this->field_value;
@@ -73,7 +60,6 @@ class Trim extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
     {

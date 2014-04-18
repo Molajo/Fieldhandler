@@ -26,25 +26,18 @@ class Values extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
         if ($this->field_value === null) {
-        } else {
-
-            $test = in_array($this->field_value, $this->getFieldValues());
-
-            if ($test == 1) {
-            } else {
-                throw new UnexpectedValueException
-                (
-                    'Validate Values: Invalid Value'
-                );
-            }
+            return true;
         }
 
-        return $this->field_value;
+        if (in_array($this->field_value, $this->getFieldValues())) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -52,19 +45,12 @@ class Values extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
         if ($this->field_value === null) {
         } else {
-
-            $test = in_array($this->field_value, $this->getFieldValues());
-
-            if ($test == 1) {
-            } else {
-                $this->setFieldValue(false);
-            }
+            $this->field_value = in_array($this->field_value, $this->getFieldValues());
         }
 
         return $this->field_value;
@@ -75,22 +61,10 @@ class Values extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
     {
-        if ($this->field_value === null) {
-        } else {
-
-            $test = in_array($this->field_value, $this->getFieldValues());
-
-            if ($test == 1) {
-            } else {
-                $this->setFieldValue(false);
-            }
-        }
-
-        return $this->field_value;
+        return $this->filter();
     }
 
     /**
@@ -98,11 +72,19 @@ class Values extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
+     * @throws  \CommonApi\Exception\UnexpectedValueException;
      */
     public function getFieldValues()
     {
         $field_values = array();
+
+        if (isset($this->options['array_valid_values'])) {
+        } else {
+            throw new UnexpectedValueException
+            (
+                'Validate Values: must provide options[array_valid_values] values.'
+            );
+        }
 
         if (isset($this->options['array_valid_values'])) {
             $field_values = $this->options['array_valid_values'];

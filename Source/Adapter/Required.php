@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
@@ -24,24 +23,21 @@ class Required extends AbstractFieldhandler implements FieldhandlerAdapterInterf
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
         if ($this->field_value === null) {
 
             if ($this->getRequired() === false) {
-            } else {
-                throw new UnexpectedValueException
-                (
-                    'Fieldhandler Required: Invalid Value'
-                );
+                return true;
             }
+
+            return false;
         }
 
-        return $this->field_value;
+        return true;
     }
 
     /**
@@ -53,17 +49,6 @@ class Required extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function filter()
     {
-        if ($this->field_value === null) {
-
-            if ($this->getRequired() === false) {
-            } else {
-                throw new UnexpectedValueException
-                (
-                    'Fieldhandler Required: Invalid Value'
-                );
-            }
-        }
-
         return $this->field_value;
     }
 
@@ -72,21 +57,9 @@ class Required extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
     {
-        if ($this->field_value === null) {
-
-            if ($this->getRequired() === false) {
-            } else {
-                throw new UnexpectedValueException
-                (
-                    'Fieldhandler Required: Invalid Value'
-                );
-            }
-        }
-
         return $this->field_value;
     }
 

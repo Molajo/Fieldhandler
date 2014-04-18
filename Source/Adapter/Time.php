@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
@@ -26,25 +25,18 @@ class Time extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
         if ($this->field_value === null) {
-        } else {
-
-            $test = strtotime($this->field_value);
-
-            if ($test == false) {
-            } else {
-                throw new UnexpectedValueException
-                (
-                    'Validate Time: Invalid Value'
-                );
-            }
+            return true;
         }
 
-        return $this->field_value;
+        if (strtotime($this->field_value)) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -56,15 +48,11 @@ class Time extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function filter()
     {
-        $test = strtotime($this->field_value);
-
-        if ($test == false) {
-        } else {
-            throw new UnexpectedValueException
-            (
-                'Validate Time: Invalid Value'
-            );
+        if ($this->field_value === null) {
+            return $this->field_value;
         }
+
+        $this->field_value = strtotime($this->field_value);
 
         return $this->field_value;
     }
@@ -78,8 +66,6 @@ class Time extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function escape()
     {
-        $this->setFieldValue($this->filterByCharacter('ctype_digit', $this->field_value));
-
-        return $this->field_value;
+        return $this->filter();
     }
 }

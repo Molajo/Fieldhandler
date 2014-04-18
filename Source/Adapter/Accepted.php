@@ -29,8 +29,9 @@ class Accepted extends AbstractFieldhandler implements FieldhandlerAdapterInterf
     public function validate()
     {
         if ($this->field_value === null) {
-        } else {
+            return false;
 
+        } else {
             $testValue = $this->field_value;
 
             if (is_numeric($testValue) || is_bool($testValue)) {
@@ -38,12 +39,12 @@ class Accepted extends AbstractFieldhandler implements FieldhandlerAdapterInterf
                 $testValue = strtolower($testValue);
             }
 
-            if (in_array($testValue, $this->true_array) === true) {
+            if (in_array($testValue, $this->true_array, true)) {
                 return true;
             }
         }
 
-        return $this->field_value;
+        return false;
     }
 
     /**
@@ -55,8 +56,8 @@ class Accepted extends AbstractFieldhandler implements FieldhandlerAdapterInterf
     public function filter()
     {
         if ($this->field_value === null) {
-        } else {
 
+        } else {
             $testValue = $this->field_value;
 
             if (is_numeric($testValue) || is_bool($testValue)) {
@@ -64,7 +65,7 @@ class Accepted extends AbstractFieldhandler implements FieldhandlerAdapterInterf
                 $testValue = strtolower($testValue);
             }
 
-            if (in_array($testValue, $this->true_array) === true) {
+            if (in_array($testValue, $this->true_array, true)) {
             } else {
                 $this->field_value = null;
             }
