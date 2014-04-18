@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
@@ -24,27 +23,20 @@ class Mimetypes extends AbstractFieldhandler implements FieldhandlerAdapterInter
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
         if ($this->field_value === null) {
-        } else {
-
-            $test = in_array($this->field_value, $this->getMimetypes());
-
-            if ($test == 1) {
-            } else {
-                throw new UnexpectedValueException
-                (
-                    'Validate Mimetypes: Invalid Value'
-                );
-            }
+            return true;
         }
 
-        return $this->field_value;
+        if (in_array($this->field_value, $this->getMimetypes())) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -52,18 +44,15 @@ class Mimetypes extends AbstractFieldhandler implements FieldhandlerAdapterInter
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
         if ($this->field_value === null) {
         } else {
 
-            $test = in_array($this->field_value, $this->getMimetypes());
-
-            if ($test == 1) {
+            if (in_array($this->field_value, $this->getMimetypes())) {
             } else {
-                $this->setFieldValue(false);
+                $this->field_value = null;
             }
         }
 
@@ -75,22 +64,10 @@ class Mimetypes extends AbstractFieldhandler implements FieldhandlerAdapterInter
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
     {
-        if ($this->field_value === null) {
-        } else {
-
-            $test = in_array($this->field_value, $this->getMimetypes());
-
-            if ($test == 1) {
-            } else {
-                $this->setFieldValue(false);
-            }
-        }
-
-        return $this->field_value;
+        return $this->filter();
     }
 
     /**

@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
@@ -24,25 +23,18 @@ class Image extends AbstractFieldhandler implements FieldhandlerAdapterInterface
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
         $hold = $this->field_value;
 
-        $test = $this->filter();
-
-        if ($test == $hold) {
-        } else {
-            throw new UnexpectedValueException ('Validate Image: Invalid Value');
+        if ($this->filter() === $hold) {
+            return true;
         }
 
-
-        // todo: add active test checkdnsrr($this->field_value);
-
-        return $this->field_value;
+        return false;
     }
 
     /**
@@ -50,7 +42,6 @@ class Image extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
@@ -61,11 +52,9 @@ class Image extends AbstractFieldhandler implements FieldhandlerAdapterInterface
             strtolower($this->field_value)
         );
 
-        $test = filter_var($url, FILTER_SANITIZE_URL, $this->setFlags());
-
-        if ($test == $url) {
+        if (filter_var($url, FILTER_SANITIZE_URL, $this->setFlags()) === $url) {
         } else {
-            $this->setFieldValue(filter_var($url, FILTER_SANITIZE_URL));
+            $this->field_value = null;
         }
 
         return $this->field_value;
@@ -76,7 +65,6 @@ class Image extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
     {

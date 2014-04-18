@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
@@ -24,25 +23,20 @@ class Minimum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
         if ($this->field_value === null) {
-        } else {
-
-            if ((int)$this->field_value > (int)$this->getMinimum()) {
-            } else {
-                throw new UnexpectedValueException
-                (
-                    'Validate Minimum: Invalid Value'
-                );
-            }
+            return true;
         }
 
-        return $this->field_value;
+        if ((int)$this->field_value > (int)$this->getMinimum()) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -50,16 +44,14 @@ class Minimum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
         if ($this->field_value === null) {
         } else {
-
             if ((int)$this->field_value > (int)$this->getMinimum()) {
             } else {
-                $this->setFieldValue((int)$this->getMinimum());
+                $this->field_value = null;
             }
         }
 
@@ -71,11 +63,10 @@ class Minimum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
     {
-        return $this->field_value;
+        return $this->filter();
     }
 
     /**

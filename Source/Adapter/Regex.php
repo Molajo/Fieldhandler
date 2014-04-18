@@ -26,25 +26,18 @@ class Regex extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
         if ($this->field_value === null) {
-        } else {
-
-            $test = preg_match($this->getRegex(), $this->field_value);
-
-            if ($test == 1) {
-            } else {
-                throw new UnexpectedValueException
-                (
-                    'Validate Regex: Invalid Value'
-                );
-            }
+            return true;
         }
 
-        return $this->field_value;
+        if (preg_match($this->getRegex(), $this->field_value)) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -59,12 +52,7 @@ class Regex extends AbstractFieldhandler implements FieldhandlerAdapterInterface
         if ($this->field_value === null) {
         } else {
 
-            $test = preg_match($this->getRegex(), $this->field_value);
-
-            if ($test == 1) {
-            } else {
-                $this->setFieldValue('null');
-            }
+            $this->field_value = preg_match($this->getRegex(), $this->field_value);
         }
 
         return $this->field_value;
@@ -75,13 +63,10 @@ class Regex extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
     {
-        $this->filter();
-
-        return $this->field_value;
+        return $this->filter();
     }
 
     /**
@@ -89,10 +74,19 @@ class Regex extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    public function getRegex()
+    protected function getRegex()
     {
         $regex = '';
+
+        if (isset($this->options['regex'])) {
+        } else {
+            throw new UnexpectedValueException
+            (
+                'Validate Regex: must provide options[regex] array values.'
+            );
+        }
 
         if (isset($this->options['regex'])) {
             $regex = $this->options['regex'];

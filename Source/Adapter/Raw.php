@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
@@ -26,26 +25,18 @@ class Raw extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
         if ($this->field_value === null) {
-        } else {
-
-            $test = filter_var($this->field_value, FILTER_UNSAFE_RAW, $this->setFlags());
-
-            if ($test == $this->field_value) {
-            } else {
-
-                throw new UnexpectedValueException
-                (
-                    'Validate Raw: Invalid Value'
-                );
-            }
+            return true;
         }
 
-        return $this->field_value;
+        if (filter_var($this->field_value, FILTER_UNSAFE_RAW, $this->setFlags()) === $this->field_value) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -53,19 +44,12 @@ class Raw extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
         if ($this->field_value === null) {
         } else {
-
-            $test = filter_var($this->field_value, FILTER_UNSAFE_RAW, $this->setFlags());
-
-            if ($test == $this->field_value) {
-            } else {
-                $this->setFieldValue(filter_var($this->field_value, FILTER_UNSAFE_RAW, $this->setFlags()));
-            }
+            $this->field_value = filter_var($this->field_value, FILTER_UNSAFE_RAW, $this->setFlags());
         }
 
         return $this->field_value;
@@ -76,18 +60,10 @@ class Raw extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
     {
-        $test = filter_var($this->field_value, FILTER_UNSAFE_RAW, $this->setFlags());
-
-        if ($test == $this->field_value) {
-        } else {
-            $this->setFieldValue(filter_var($this->field_value, FILTER_UNSAFE_RAW, $this->setFlags()));
-        }
-
-        return $this->field_value;
+        return $this->filter();
     }
 
     /**

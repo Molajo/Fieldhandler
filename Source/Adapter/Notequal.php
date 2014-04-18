@@ -24,23 +24,16 @@ class Notequal extends AbstractFieldhandler implements FieldhandlerAdapterInterf
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
-        $notEqual = $this->getNotEqual();
-
-        if ($this->field_value == $notEqual) {
-
-            throw new UnexpectedValueException
-            (
-                'Validate Value: ' . $this->field_value . ' must not be equal to: ' . $notEqual
-            );
+        if ($this->field_value === $this->getNotEqual()) {
+            return false;
         }
 
-        return $this->field_value;
+        return true;
     }
 
     /**
@@ -54,7 +47,7 @@ class Notequal extends AbstractFieldhandler implements FieldhandlerAdapterInterf
     {
         $notEqual = $this->getNotEqual();
 
-        if ($this->field_value == $notEqual) {
+        if ($this->field_value === $notEqual) {
             $this->field_value = null;
         }
 
@@ -74,14 +67,23 @@ class Notequal extends AbstractFieldhandler implements FieldhandlerAdapterInterf
     }
 
     /**
-     * From value and To value
+     * Not equal
      *
      * @return  mixed
      * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    public function getNotEqual()
+    protected function getNotEqual()
     {
-        $field_value = '';
+        $field_value = null;
+
+        if (isset($this->options['not_equal'])) {
+        } else {
+            throw new UnexpectedValueException
+            (
+                'Validate Notequal: must provide options[not_equal] values.'
+            );
+        }
 
         if (isset($this->options['not_equal'])) {
             $field_value = $this->options['not_equal'];

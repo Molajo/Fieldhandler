@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
@@ -24,27 +23,20 @@ class Integer extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
         if ($this->field_value === null) {
-        } else {
-
-            $test = filter_var($this->field_value, FILTER_VALIDATE_INT, $this->setFlags());
-
-            if ($test == true) {
-            } else {
-                throw new UnexpectedValueException
-                (
-                    'Validate Integer: Invalid Value'
-                );
-            }
+            return true;
         }
 
-        return $this->field_value;
+        if (filter_var($this->field_value, FILTER_VALIDATE_INT, $this->setFlags())) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -52,19 +44,12 @@ class Integer extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
         if ($this->field_value === null) {
         } else {
-
-            $test = filter_var($this->field_value, FILTER_VALIDATE_INT, $this->setFlags());
-
-            if ($test == true) {
-            } else {
-                $this->setFieldValue(filter_var($this->field_value, FILTER_SANITIZE_NUMBER_INT));
-            }
+            $this->field_value = filter_var($this->field_value, FILTER_VALIDATE_INT, $this->setFlags());
         }
 
         return $this->field_value;
@@ -79,14 +64,7 @@ class Integer extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      */
     public function escape()
     {
-        $test = filter_var($this->field_value, FILTER_VALIDATE_INT, $this->setFlags());
-
-        if ($test == true) {
-        } else {
-            $this->setFieldValue(filter_var($this->field_value, FILTER_SANITIZE_NUMBER_INT));
-        }
-
-        return $this->field_value;
+        return $this->filter();
     }
 
     /**

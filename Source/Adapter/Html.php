@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
 include __DIR__ . '/Libraries/kses.php';
@@ -28,19 +27,14 @@ class Html extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
-        if ($this->field_value == $this->filter()) {
-        } else {
-            throw new UnexpectedValueException
-            (
-                'Validate Html: Invalid Value'
-            );
+        if ($this->field_value === $this->filter()) {
+            return true;
         }
 
-        return $this->field_value;
+        return false;
     }
 
     /**
@@ -48,13 +42,12 @@ class Html extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
         if ($this->field_value === null) {
         } else {
-            $this->setFieldValue(kses($this->field_value, $this->white_list, array('http', 'https')));
+            $this->field_value = kses($this->field_value, $this->white_list, array('http', 'https'));
         }
 
         return $this->field_value;
@@ -65,7 +58,6 @@ class Html extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
     {

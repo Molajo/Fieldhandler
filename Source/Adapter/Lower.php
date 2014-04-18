@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
@@ -26,24 +25,15 @@ class Lower extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
         if ($this->field_value === null) {
         } else {
-
-            $test = ctype_lower($this->field_value);
-            if ($test == 1) {
-            } else {
-                throw new UnexpectedValueException
-                (
-                    'Validate Lower: Invalid Value'
-                );
-            }
+            return ctype_lower($this->field_value);
         }
 
-        return $this->field_value;
+        return true;
     }
 
     /**
@@ -51,18 +41,12 @@ class Lower extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
         if ($this->field_value === null) {
         } else {
-
-            $test = ctype_lower($this->field_value);
-            if ($test == 1) {
-            } else {
-                $this->setFieldValue(strtolower($this->field_value));
-            }
+            $this->field_value = strtolower($this->field_value);
         }
 
         return $this->field_value;
@@ -73,7 +57,6 @@ class Lower extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
     {

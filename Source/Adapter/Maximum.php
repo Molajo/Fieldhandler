@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
@@ -24,9 +23,8 @@ class Maximum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
@@ -34,14 +32,11 @@ class Maximum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
         } else {
 
             if ((int)$this->getMaximum() < (int)$this->field_value) {
-                throw new UnexpectedValueException
-                (
-                    'Validate Maximum: Invalid Value'
-                );
+                return false;
             }
         }
 
-        return $this->field_value;
+        return true;
     }
 
     /**
@@ -49,7 +44,6 @@ class Maximum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
@@ -57,7 +51,7 @@ class Maximum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
         } else {
 
             if ((int)$this->getMaximum() < (int)$this->field_value) {
-                $this->setFieldValue((int)$this->getMaximum());
+                $this->field_value = null;
             }
         }
 
@@ -69,7 +63,6 @@ class Maximum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
     {
