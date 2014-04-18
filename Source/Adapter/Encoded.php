@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
@@ -28,21 +27,14 @@ class Encoded extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
-        $test = filter_var($this->field_value, FILTER_SANITIZE_ENCODED, $this->setFlags());
-
-        if ($test == $this->field_value) {
-        } else {
-            throw new UnexpectedValueException
-            (
-                'Validate Encoded: Invalid Value'
-            );
+        if (filter_var($this->field_value, FILTER_SANITIZE_ENCODED, $this->setFlags()) === false) {
+            return false;
         }
 
-        return $this->field_value;
+        return true;
     }
 
     /**
@@ -50,16 +42,10 @@ class Encoded extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
-        $test = filter_var($this->field_value, FILTER_SANITIZE_ENCODED, $this->setFlags());
-
-        if ($test == $this->field_value) {
-        } else {
-            $this->setFieldValue($test);
-        }
+        $this->field_value = filter_var($this->field_value, FILTER_SANITIZE_ENCODED, $this->setFlags());
 
         return $this->field_value;
     }
@@ -69,11 +55,10 @@ class Encoded extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
     {
-        return filter_var($this->field_value, FILTER_SANITIZE_ENCODED, $this->setFlags());
+        return $this->filter();
     }
 
     /**

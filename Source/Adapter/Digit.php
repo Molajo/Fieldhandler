@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
@@ -26,25 +25,10 @@ class Digit extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
-        if ($this->field_value === null) {
-        } else {
-
-            $test = ctype_digit($this->field_value);
-
-            if ($test == 1) {
-            } else {
-                throw new UnexpectedValueException
-                (
-                    'Validate Digit: Invalid Value'
-                );
-            }
-        }
-
-        return $this->field_value;
+        return ctype_digit($this->field_value);
     }
 
     /**
@@ -52,18 +36,15 @@ class Digit extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
         if ($this->field_value === null) {
         } else {
 
-            $test = ctype_digit($this->field_value);
-
-            if ($test == 1) {
+            if (ctype_digit($this->field_value) === true) {
             } else {
-                $this->setFieldValue($this->filterByCharacter('ctype_digit', $this->field_value));
+                $this->field_value = $this->filterByCharacter('ctype_digit', $this->field_value);
             }
         }
 
@@ -75,12 +56,9 @@ class Digit extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
     {
-        $this->filter();
-
-        return $this->field_value;
+        return $this->filter();
     }
 }

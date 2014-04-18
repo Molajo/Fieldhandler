@@ -26,7 +26,6 @@ class Fromto extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
@@ -35,16 +34,10 @@ class Fromto extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
         if ($this->field_value >= $from_to[0]
             && $this->field_value <= $from_to[1]
         ) {
-        } else {
-
-            throw new UnexpectedValueException
-            (
-                'Validate Value: ' . $this->field_value
-                . ' is not a value From: ' . $from_to[0] . '  To:' . $from_to[1]
-            );
+            return true;
         }
 
-        return $this->field_value;
+        return false;
     }
 
     /**
@@ -56,14 +49,11 @@ class Fromto extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      */
     public function filter()
     {
-        $from_to = $this->getFromto();
-
-        if ($this->field_value > $from_to[0]
-            && $this->field_value < $from_to[1]
-        ) {
-        } else {
-            $this->field_value = null;
+        if ($this->validate()) {
+            return $this->field_value;
         }
+
+        $this->field_value = null;
 
         return $this->field_value;
     }

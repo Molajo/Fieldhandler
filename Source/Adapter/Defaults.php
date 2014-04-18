@@ -25,13 +25,16 @@ class Defaults extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
         $this->setDefault();
 
-        return $this->field_value;
+        if ($this->field_value === null) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -39,7 +42,6 @@ class Defaults extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
@@ -53,22 +55,19 @@ class Defaults extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
     {
-        $this->setDefault();
-
-        return $this->field_value;
+        return $this->filter();
     }
 
     /**
      * If needed, apply default to Field
      *
-     * @return  mixed
+     * @return  $this
      * @since   1.0.0
      */
-    public function setDefault()
+    protected function setDefault()
     {
         if ($this->field_value === null) {
 
@@ -80,7 +79,7 @@ class Defaults extends AbstractFieldhandler implements FieldhandlerAdapterInterf
 
             if ($default === null) {
             } else {
-                $this->setFieldValue($default);
+                $this->field_value = $default;
             }
         }
 

@@ -8,10 +8,8 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
-// todo: test for date before, after, today's date
 /**
  * Date Fieldhandler
  *
@@ -25,26 +23,23 @@ class Date extends AbstractFieldhandler implements FieldhandlerAdapterInterface
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
         if ($this->field_value === null) {
+
         } else {
 
-            $test = strtotime($this->field_value);
+            $value = strtotime($this->field_value);
 
-            if ($test == false) {
-                throw new UnexpectedValueException
-                (
-                    'Validate Date: Invalid Value'
-                );
+            if ($value === false) {
+                return false;
             }
         }
 
-        return $this->field_value;
+        return true;
     }
 
     /**
@@ -52,13 +47,12 @@ class Date extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
-        $test = strtotime($this->field_value);
+        $value = strtotime($this->field_value);
 
-        if ($test == false) {
+        if ($value === false) {
             $this->field_value = null;
         }
 
@@ -70,12 +64,9 @@ class Date extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
     {
-        $this->filter();
-
-        return $this->field_value;
+        return $this->filter();
     }
 }

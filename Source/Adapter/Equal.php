@@ -26,21 +26,14 @@ class Equal extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
-        $equals = $this->getEqual();
-
-        if ($this->field_value == $equals) {
-        } else {
-            throw new UnexpectedValueException
-            (
-                'Validate Equal: Invalid Value'
-            );
+        if ($this->field_value === $this->getEqual()) {
+            return true;
         }
 
-        return $this->field_value;
+        return false;
     }
 
     /**
@@ -48,13 +41,10 @@ class Equal extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
-        $equals = $this->getEqual();
-
-        if ($this->field_value == $equals) {
+        if ($this->field_value === $this->getEqual()) {
         } else {
             $this->field_value = null;
         }
@@ -67,7 +57,6 @@ class Equal extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
     {
@@ -86,6 +75,11 @@ class Equal extends AbstractFieldhandler implements FieldhandlerAdapterInterface
 
         if (isset($this->options['equals'])) {
             $field_value = $this->options['equals'];
+        } else {
+            throw new UnexpectedValueException
+            (
+                'Validate Equal: must provide options[equals] value.'
+            );
         }
 
         return $field_value;

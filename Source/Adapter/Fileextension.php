@@ -14,8 +14,6 @@ use CommonApi\Model\FieldhandlerAdapterInterface;
 /**
  * Fileextension Fieldhandler
  *
- * URL-encode string, optionally strip or encode special characters.
- *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
@@ -28,13 +26,21 @@ class Fileextension extends AbstractFieldhandler implements FieldhandlerAdapterI
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
-        $test = filter_var($this->field_value, FILTER_SANITIZE_ENCODED, $this->setFlags());
+        if ($this->field_value === null) {
+            return true;
+        }
 
-        if ($test == $this->field_value) {
+        if (is_file($this->field_value)) {
+        } else {
+            return false;
+        }
+
+        $path_info = pathinfo($this->field_value);
+
+        if (in_array($path_info, $this->getExtensions())) {
             return true;
         }
 
@@ -46,15 +52,15 @@ class Fileextension extends AbstractFieldhandler implements FieldhandlerAdapterI
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
-        $test = filter_var($this->field_value, FILTER_SANITIZE_ENCODED, $this->setFlags());
+        if ($this->field_value === null) {
+            return $this->field_value;
+        }
 
-        if ($test == $this->field_value) {
-        } else {
-            $this->setFieldValue($test);
+        if ($this->validate() === false) {
+            $this->field_value = null;
         }
 
         return $this->field_value;
@@ -65,10 +71,30 @@ class Fileextension extends AbstractFieldhandler implements FieldhandlerAdapterI
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
     {
-        return filter_var($this->field_value, FILTER_SANITIZE_ENCODED, $this->setFlags());
+        return $this->filter();
+    }
+
+    /**
+     * Get File Extensions
+     *
+     * @return  array
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function getExtensions()
+    {
+        if (isset($this->options['array_valid_extensions'])
+            && is_array($this->options['array_valid_extensions'])) {
+        } else {
+            throw new UnexpectedValueException
+            (
+                'Validate Contains: must provide options[contains] array values.'
+            );
+        }
+
+        return $this->options['array_valid_extensions'];
     }
 }

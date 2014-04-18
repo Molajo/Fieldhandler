@@ -27,13 +27,14 @@ class Foreignkey extends AbstractFieldhandler implements FieldhandlerAdapterInte
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
-        $this->filter();
+        if ($this->filter() === null) {
+            return false;
+        }
 
-        return $this->field_value;
+        return true;
     }
 
     /**
@@ -41,21 +42,18 @@ class Foreignkey extends AbstractFieldhandler implements FieldhandlerAdapterInte
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
         if ($this->field_value === null) {
+
         } else {
 
             $test = $this->verifyForeignKey($this->field_value);
 
-            if ($test == $this->field_value) {
+            if ($test === $this->field_value) {
             } else {
-                throw new UnexpectedValueException
-                (
-                    'Validate Foreignkey: Invalid Value'
-                );
+                $this->field_value = null;
             }
         }
 
@@ -71,9 +69,7 @@ class Foreignkey extends AbstractFieldhandler implements FieldhandlerAdapterInte
      */
     public function escape()
     {
-        $this->filter();
-
-        return $this->field_value;
+        return $this->filter();
     }
 
     /**
@@ -110,16 +106,14 @@ class Foreignkey extends AbstractFieldhandler implements FieldhandlerAdapterInte
 
         $query = $this->database->getQueryObject();
 
-        $query->select(quoteName($this->key));
-        $query->from(quoteName($this->table));
-        $query->where(
-            quoteName($this->key)
-            . ' =  ' . quote($key_value)
-        );
+        $query->select($this->key);
+        $query->from($this->table);
+        $query->where($this->key . ' =  ' . quote($key_value));
 
         try {
 
             return $this->database->loadResult($query->getSQL());
+
         } catch (Exception $e) {
 
             throw new UnexpectedValueException

@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
@@ -26,25 +25,14 @@ class Email extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
         if ($this->field_value === null) {
-        } else {
-
-            $test = filter_var($this->field_value, FILTER_VALIDATE_EMAIL);
-
-            if ($test === $this->field_value) {
-            } else {
-                throw new UnexpectedValueException
-                (
-                    'Validate Email: Invalid Value'
-                );
-            }
+            return true;
         }
 
-        return $this->field_value;
+        return filter_var($this->field_value, FILTER_VALIDATE_EMAIL);
     }
 
     /**
@@ -52,16 +40,10 @@ class Email extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
-        $test = filter_var($this->field_value, FILTER_VALIDATE_EMAIL);
-
-        if ($test === $this->field_value) {
-        } else {
-            $this->field_value = null;
-        }
+        $this->field_value = filter_var($this->field_value, FILTER_VALIDATE_EMAIL);
 
         return $this->field_value;
     }
@@ -71,12 +53,9 @@ class Email extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
     {
-        $this->filter();
-
-        return $this->field_value;
+        return $this->filter();
     }
 }
