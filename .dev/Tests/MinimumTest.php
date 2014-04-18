@@ -10,7 +10,6 @@ namespace Molajo\Fieldhandler\Tests;
 
 use Molajo\Fieldhandler\Driver as driver;
 use PHPUnit_Framework_TestCase;
-use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Minimum Fieldhandler
@@ -56,28 +55,47 @@ class MinimumTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results->getReturnValue());
+        $this->assertEquals(false, $results->getReturnValue());
 
         return;
     }
 
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Fromto::validate
-     * @expectedException \CommonApi\Exception\UnexpectedValueException
      * @return  void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
         $field_name              = 'fieldname';
-        $field_value             = 500;
+        $field_value             = 500000000000000;
         $fieldhandler_type_chain = 'Minimum';
         $options                 = array();
         $options['minimum']      = 1000000;
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results->getReturnValue());
+        $this->assertEquals(false, $results->getReturnValue());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Adapter\Fromto::validate
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testValidateAlpha()
+    {
+        $field_name              = 'fieldname';
+        $field_value             = 'z';
+        $fieldhandler_type_chain = 'Minimum';
+        $options                 = array();
+        $options['minimum']      = 'a';
+
+        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+
+        $this->assertEquals(false, $results->getReturnValue());
 
         return;
     }

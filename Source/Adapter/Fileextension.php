@@ -91,7 +91,7 @@ class Fileextension extends AbstractFieldhandler implements FieldhandlerAdapterI
         } else {
             throw new UnexpectedValueException
             (
-                'Validate Contains: must provide options[contains] array values.'
+                'Fieldhandler Contains: must provide options[contains] array values.'
             );
         }
 

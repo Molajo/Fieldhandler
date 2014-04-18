@@ -83,7 +83,7 @@ class Regex extends AbstractFieldhandler implements FieldhandlerAdapterInterface
         } else {
             throw new UnexpectedValueException
             (
-                'Validate Regex: must provide options[regex] array values.'
+                'Fieldhandler Regex: must provide options[regex] array values.'
             );
         }
 

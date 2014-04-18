@@ -39,7 +39,7 @@ class Object extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
             } else {
                 throw new UnexpectedValueException
                 (
-                    'Validate Object: Invalid Value'
+                    'Fieldhandler Object: Invalid Value'
                 );
             }
         }

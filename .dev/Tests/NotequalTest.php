@@ -56,14 +56,13 @@ class NotequalTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results->getReturnValue());
+        $this->assertEquals(true, $results->getReturnValue());
 
         return;
     }
 
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Equals::validate
-     * @expectedException \CommonApi\Exception\UnexpectedValueException
      * @return void
      * @since   1.0.0
      */
@@ -76,6 +75,8 @@ class NotequalTest extends PHPUnit_Framework_TestCase
         $options['not_equal']    = 'dog';
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+
+        $this->assertEquals(false, $results->getReturnValue());
 
         return;
     }

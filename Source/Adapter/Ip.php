@@ -49,7 +49,11 @@ class Ip extends AbstractFieldhandler implements FieldhandlerAdapterInterface
     {
         if ($this->field_value === null) {
         } else {
-            $this->field_value = filter_var($this->field_value, FILTER_VALIDATE_IP, $this->setFlags());
+
+            if (filter_var($this->field_value, FILTER_VALIDATE_IP, $this->setFlags())) {
+            } else {
+                $this->field_value = null;
+            }
         }
 
         return $this->field_value;

@@ -9,6 +9,7 @@
 namespace Molajo\Fieldhandler\Adapter;
 
 use CommonApi\Model\FieldhandlerAdapterInterface;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Mimetypes Fieldhandler
@@ -75,10 +76,20 @@ class Mimetypes extends AbstractFieldhandler implements FieldhandlerAdapterInter
      *
      * @return  mixed
      * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function getMimetypes()
     {
         $field_values = array();
+
+
+        if (isset($this->options['array_valid_mimetypes'])) {
+        } else {
+            throw new UnexpectedValueException
+            (
+                'Fieldhandler Mimetypes: must provide options[array_valid_mimetypes] array values.'
+            );
+        }
 
         if (isset($this->options['array_valid_mimetypes'])) {
             $field_values = $this->options['array_valid_mimetypes'];

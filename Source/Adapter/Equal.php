@@ -78,7 +78,7 @@ class Equal extends AbstractFieldhandler implements FieldhandlerAdapterInterface
         } else {
             throw new UnexpectedValueException
             (
-                'Validate Equal: must provide options[equals] value.'
+                'Fieldhandler Equal: must provide options[equals] value.'
             );
         }
 

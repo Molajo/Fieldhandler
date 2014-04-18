@@ -86,21 +86,21 @@ class Foreignkey extends AbstractFieldhandler implements FieldhandlerAdapterInte
         if ($this->database === null) {
             throw new UnexpectedValueException
             (
-                'Validate Foreignkey: Database connection must be sent in as a database entry $options array.'
+                'Fieldhandler Foreignkey: Database connection must be sent in as a database entry $options array.'
             );
         }
 
         if ($this->table === null) {
             throw new UnexpectedValueException
             (
-                'Validate Foreignkey: Name of table must be sent in as a table entry in the $options array.'
+                'Fieldhandler Foreignkey: Name of table must be sent in as a table entry in the $options array.'
             );
         }
 
         if ($this->key === null) {
             throw new UnexpectedValueException
             (
-                'Validate Foreignkey: Name of key must be sent in as a key entry in the $options array.'
+                'Fieldhandler Foreignkey: Name of key must be sent in as a key entry in the $options array.'
             );
         }
 

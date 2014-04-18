@@ -1,6 +1,6 @@
 <?php
 /**
- * Integer Fieldhandler Test
+ * Ip Fieldhandler Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -10,17 +10,16 @@ namespace Molajo\Fieldhandler\Tests;
 
 use Molajo\Fieldhandler\Driver as driver;
 use PHPUnit_Framework_TestCase;
-use CommonApi\Exception\UnexpectedValueException;
 
 /**
- * Integer Fieldhandler
+ * Ip Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class IntegerTest extends PHPUnit_Framework_TestCase
+class IpTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Adapter
@@ -42,78 +41,58 @@ class IntegerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Integer::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Ip::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidate1()
     {
-        $field_name              = 'Integer_fieldname';
-        $field_value             = 1;
-        $fieldhandler_type_chain = 'Integer';
+        $field_name              = 'Ip_fieldname';
+        $field_value             = '127.0.0.1';
+        $fieldhandler_type_chain = 'Ip';
         $options                 = array();
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results->getReturnValue());
+        $this->assertEquals(true, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Integer::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Ip::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidate2()
     {
-        $field_name              = 'Integer_fieldname';
-        $field_value             = 1;
-        $fieldhandler_type_chain = 'Integer';
+        $field_name              = 'Ip_fieldname';
+        $field_value             = '0.0.0.0';
+        $fieldhandler_type_chain = 'Ip';
         $options                 = array();
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results->getReturnValue());
+        $this->assertEquals(true, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Integer::validate
-     * @return  void
-     * @since   1.0.0
-     */
-    public function testValidate3()
-    {
-        $field_name              = 'Integer_fieldname';
-        $field_value             = null;
-        $fieldhandler_type_chain = 'Integer';
-        $options                 = array();
-
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
-
-        $this->assertEquals($field_value, $results->getReturnValue());
-
-        return;
-    }
-
-    /**
-     * @covers  Molajo\Fieldhandler\Adapter\Integer::validate
-     * @expectedException \CommonApi\Exception\UnexpectedValueException
+     * @covers  Molajo\Fieldhandler\Adapter\Ip::validate
      * @return void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name              = 'Integer_fieldname';
+        $field_name              = 'Int_fieldname';
         $field_value             = 'yessireebob';
-        $fieldhandler_type_chain = 'Integer';
+        $fieldhandler_type_chain = 'Ip';
         $options                 = array();
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results->getReturnValue());
+        $this->assertEquals(false, $results->getReturnValue());
 
         return;
     }

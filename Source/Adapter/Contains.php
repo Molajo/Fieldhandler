@@ -83,7 +83,7 @@ class Contains extends AbstractFieldhandler implements FieldhandlerAdapterInterf
         } else {
             throw new UnexpectedValueException
             (
-                'Validate Contains: must provide options[contains] array values.'
+                'Fieldhandler Contains: must provide options[contains] array values.'
             );
         }
 

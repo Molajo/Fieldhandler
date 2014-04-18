@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
@@ -26,24 +25,18 @@ class Numeric extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
         if ($this->field_value === null) {
-        } else {
-
-            $test = is_numeric($this->field_value);
-            if ($test == 1) {
-            } else {
-                throw new UnexpectedValueException
-                (
-                    'Validate Numeric: Invalid Value'
-                );
-            }
+            return true;
         }
 
-        return $this->field_value;
+        if (is_numeric($this->field_value)) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -51,18 +44,17 @@ class Numeric extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
         if ($this->field_value === null) {
+
         } else {
 
-            $test = is_numeric($this->field_value);
+            if (is_numeric($this->field_value)) {
 
-            if ($test == 1) {
             } else {
-                $this->setFieldValue(0);
+                $this->field_value = null;
             }
         }
 
@@ -74,17 +66,9 @@ class Numeric extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
     {
-        $test = is_numeric($this->field_value);
-
-        if ($test == 1) {
-        } else {
-            $this->setFieldValue(0);
-        }
-
-        return $this->field_value;
+        return $this->filter();
     }
 }

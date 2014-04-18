@@ -23,7 +23,7 @@ class Raw extends AbstractFieldhandler implements FieldhandlerAdapterInterface
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      */
     public function validate()
@@ -32,7 +32,7 @@ class Raw extends AbstractFieldhandler implements FieldhandlerAdapterInterface
             return true;
         }
 
-        if (filter_var($this->field_value, FILTER_UNSAFE_RAW, $this->setFlags()) === $this->field_value) {
+        if (filter_var($this->field_value, FILTER_UNSAFE_RAW, $this->setFlags())) {
             return true;
         }
 
@@ -72,7 +72,7 @@ class Raw extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      * @return  mixed
      * @since   1.0.0
      */
-    public function setFlags()
+    protected function setFlags()
     {
         $filter = '';
         if (isset($this->options['FILTER_FLAG_STRIP_LOW'])) {

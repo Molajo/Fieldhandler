@@ -23,7 +23,7 @@ class Fullspecialchars extends AbstractFieldhandler implements FieldhandlerAdapt
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      */
     public function validate()
@@ -33,10 +33,10 @@ class Fullspecialchars extends AbstractFieldhandler implements FieldhandlerAdapt
         }
 
         if (filter_var($this->field_value, FILTER_SANITIZE_FULL_SPECIAL_CHARS, $this->setFlags())) {
-            return true;
+            return false;
         }
 
-        return false;
+        return true;
     }
 
     /**

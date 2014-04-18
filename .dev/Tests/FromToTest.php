@@ -1,6 +1,6 @@
 <?php
 /**
- * Fullspecialchars Fieldhandler Test
+ * Fromto Fieldhandler Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -13,14 +13,14 @@ use PHPUnit_Framework_TestCase;
 use CommonApi\Exception\UnexpectedValueException;
 
 /**
- * Fullspecialchars Fieldhandler
+ * Fromto Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class HtmlTest extends PHPUnit_Framework_TestCase
+class FromtoTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Adapter
@@ -42,40 +42,43 @@ class HtmlTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test HTML filter
-     *
+     * @covers  Molajo\Fieldhandler\Adapter\Fromto::validate
      * @return  void
      * @since   1.0.0
      */
-    public function testFilter()
+    public function testValidate1()
     {
         $field_name              = 'fieldname';
-        $field_value             = '<script>("Gotcha!");</script><p>I am fine.</p>';
-        $fieldhandler_type_chain = 'Html';
-        $filtered                = '("Gotcha!");<p>I am fine.</p>';
+        $field_value             = 5;
+        $fieldhandler_type_chain = 'Fromto';
+        $options                 = array();
+        $options['from']         = 0;
+        $options['to']           = 10;
 
-        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, array());
+        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($filtered, $results);
+        $this->assertEquals(true, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * Test Validate
-     *
+     * @covers  Molajo\Fieldhandler\Adapter\Fromto::validate
      * @return  void
      * @since   1.0.0
      */
-    public function testValidate()
+    public function testValidateFail()
     {
         $field_name              = 'fieldname';
-        $field_value             = '<p>Yup.</p>';
-        $fieldhandler_type_chain = 'Html';
+        $field_value             = 500;
+        $fieldhandler_type_chain = 'Fromto';
+        $options                 = array();
+        $options['from']         = 0;
+        $options['to']           = 10;
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, array());
+        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results->getReturnValue());
+        $this->assertEquals(false, $results->getReturnValue());
 
         return;
     }

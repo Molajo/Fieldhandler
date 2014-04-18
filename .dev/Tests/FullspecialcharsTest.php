@@ -1,6 +1,6 @@
 <?php
 /**
- * Fromto Fieldhandler Test
+ * Fullspecialchars Fieldhandler Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -13,14 +13,14 @@ use PHPUnit_Framework_TestCase;
 use CommonApi\Exception\UnexpectedValueException;
 
 /**
- * Fromto Fieldhandler
+ * Fullspecialchars Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class FromtoTest extends PHPUnit_Framework_TestCase
+class FullspecialcharsTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Adapter
@@ -42,44 +42,41 @@ class FromtoTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Fromto::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Fullspecialchars::validate
      * @return  void
      * @since   1.0.0
      */
-    public function testValidate1()
+    public function testEscape()
     {
         $field_name              = 'fieldname';
-        $field_value             = 5;
-        $fieldhandler_type_chain = 'Fromto';
-        $options                 = array();
-        $options['from']         = 0;
-        $options['to']           = 10;
+        $field_value             = '&';
+        $fieldhandler_type_chain = 'Fullspecialchars';
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain, array());
 
-        $this->assertEquals($field_value, $results->getReturnValue());
+        if (PHP_VERSION_ID > 50400) {
+            $this->assertEquals('&#38;', $results->getReturnValue());
+        } else {
+            $this->assertEquals('&amp;', $results->getReturnValue());
+        }
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Fromto::validate
-     * @expectedException \CommonApi\Exception\UnexpectedValueException
+     * @covers  Molajo\Fieldhandler\Adapter\Fullspecialchars::validate
      * @return  void
      * @since   1.0.0
      */
-    public function testValidateFail()
+    public function testValidate()
     {
         $field_name              = 'fieldname';
-        $field_value             = 500;
-        $fieldhandler_type_chain = 'Fromto';
-        $options                 = array();
-        $options['from']         = 0;
-        $options['to']           = 10;
+        $field_value             = '&';
+        $fieldhandler_type_chain = 'Fullspecialchars';
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, array());
 
-        $this->assertEquals($field_value, $results->getReturnValue());
+        $this->assertEquals(false, $results->getReturnValue());
 
         return;
     }

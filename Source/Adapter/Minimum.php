@@ -9,6 +9,7 @@
 namespace Molajo\Fieldhandler\Adapter;
 
 use CommonApi\Model\FieldhandlerAdapterInterface;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Minimum Fieldhandler
@@ -32,11 +33,11 @@ class Minimum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
             return true;
         }
 
-        if ((int)$this->field_value > (int)$this->getMinimum()) {
-            return true;
+        if ($this->field_value > $this->getMinimum()) {
+            return false;
         }
 
-        return false;
+        return true;
     }
 
     /**
@@ -49,9 +50,9 @@ class Minimum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
     {
         if ($this->field_value === null) {
         } else {
-            if ((int)$this->field_value > (int)$this->getMinimum()) {
-            } else {
-                $this->field_value = null;
+
+            if ($this->field_value > $this->getMinimum()) {
+                $this->field_value = $this->getMinimum();
             }
         }
 
@@ -74,10 +75,19 @@ class Minimum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      *
      * @return  mixed
      * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    public function getMinimum()
+    protected function getMinimum()
     {
         $field_value = '';
+
+        if (isset($this->options['minimum'])) {
+        } else {
+            throw new UnexpectedValueException
+            (
+                'Fieldhandler Minimum: must provide options[minimum] array values.'
+            );
+        }
 
         if (isset($this->options['minimum'])) {
             $field_value = $this->options['minimum'];

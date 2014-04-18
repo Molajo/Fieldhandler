@@ -82,7 +82,7 @@ class Values extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
         } else {
             throw new UnexpectedValueException
             (
-                'Validate Values: must provide options[array_valid_values] values.'
+                'Fieldhandler Values: must provide options[array_valid_values] values.'
             );
         }
 

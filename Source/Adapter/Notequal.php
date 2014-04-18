@@ -81,7 +81,7 @@ class Notequal extends AbstractFieldhandler implements FieldhandlerAdapterInterf
         } else {
             throw new UnexpectedValueException
             (
-                'Validate Notequal: must provide options[not_equal] values.'
+                'Fieldhandler Notequal: must provide options[not_equal] values.'
             );
         }
 

@@ -8,6 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
+use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
@@ -31,12 +32,12 @@ class Maximum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
         if ($this->field_value === null) {
         } else {
 
-            if ((int)$this->getMaximum() < (int)$this->field_value) {
-                return false;
+            if ($this->getMaximum() > $this->field_value) {
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 
     /**
@@ -50,8 +51,9 @@ class Maximum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
         if ($this->field_value === null) {
         } else {
 
-            if ((int)$this->getMaximum() < (int)$this->field_value) {
-                $this->field_value = null;
+            if ($this->getMaximum() > $this->field_value) {
+            } else {
+                $this->field_value = $this->getMaximum();
             }
         }
 
@@ -74,10 +76,19 @@ class Maximum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      *
      * @return  mixed
      * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    public function getMaximum()
+    protected function getMaximum()
     {
         $field_value = '';
+
+        if (isset($this->options['maximum'])) {
+        } else {
+            throw new UnexpectedValueException
+            (
+                'Fieldhandler Maximum: must provide options[maximum] array values.'
+            );
+        }
 
         if (isset($this->options['maximum'])) {
             $field_value = $this->options['maximum'];

@@ -40,23 +40,6 @@ class RawTest extends PHPUnit_Framework_TestCase
         $this->driver = new Driver();
     }
 
-    /**
-     * @covers  Molajo\Fieldhandler\Adapter\Raws::validate
-     * @return  void
-     * @since   1.0.0
-     */
-    public function testValidate1()
-    {
-        $field_name              = 'field1';
-        $field_value             = '<h2>Raw</h2>';
-        $fieldhandler_type_chain = 'Raw';
-
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain);
-
-        $this->assertEquals($field_value, $results->getReturnValue());
-
-        return;
-    }
 
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Raws::escape
@@ -73,7 +56,12 @@ class RawTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results->getReturnValue());
+
+        if (PHP_VERSION_ID > 50400) {
+            $this->assertEquals('&', $results->getReturnValue());
+        } else {
+            $this->assertEquals('&amp;', $results->getReturnValue());
+        }
 
         return;
     }
