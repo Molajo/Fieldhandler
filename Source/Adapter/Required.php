@@ -30,7 +30,7 @@ class Required extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function validate()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
 
             if ($this->getRequired() === false) {
             } else {
@@ -41,11 +41,11 @@ class Required extends AbstractFieldhandler implements FieldhandlerAdapterInterf
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
@@ -53,7 +53,7 @@ class Required extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function filter()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
 
             if ($this->getRequired() === false) {
             } else {
@@ -64,7 +64,7 @@ class Required extends AbstractFieldhandler implements FieldhandlerAdapterInterf
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
@@ -76,7 +76,7 @@ class Required extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function escape()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
 
             if ($this->getRequired() === false) {
             } else {
@@ -87,7 +87,7 @@ class Required extends AbstractFieldhandler implements FieldhandlerAdapterInterf
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**

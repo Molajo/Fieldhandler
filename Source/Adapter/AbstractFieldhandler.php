@@ -107,6 +107,19 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
     );
 
     /**
+     * True array
+     *
+     * @var    array
+     * @since  1.0.0
+     */
+    protected $true_array = array(
+        true,
+        1,
+        'yes',
+        'on',
+    );
+
+    /**
      * Encoding
      *
      * @var    string
@@ -180,12 +193,88 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
     );
 
     /**
+     * Standard Error Messages
+     *
+     * @var    array
+     * @since  1.0.0
+     */
+    protected $standard_messages = array(
+        1000  => '',
+        2000  => '',
+        3000  => '',
+        4000  => '',
+        5000  => '',
+        6000  => '',
+        7000  => '',
+        8000  => '',
+        9000  => '',
+        10000 => '',
+        11000 => '',
+        12000 => '',
+        13000 => '',
+        14000 => '',
+        15000 => '',
+        16000 => '',
+        17000 => '',
+        18000 => '',
+        19000 => '',
+        20000 => '',
+        21000 => '',
+        22000 => '',
+        23000 => '',
+        24000 => '',
+        25000 => '',
+        26000 => '',
+        27000 => '',
+        28000 => '',
+        29000 => '',
+        30000 => '',
+        31000 => '',
+        32000 => '',
+        33000 => '',
+        34000 => '',
+        35000 => '',
+        36000 => '',
+        37000 => '',
+        38000 => '',
+        39000 => '',
+        40000 => '',
+        41000 => '',
+        42000 => '',
+        43000 => '',
+        44000 => '',
+        45000 => '',
+        46000 => '',
+        47000 => '',
+        48000 => '',
+        49000 => ''
+    );
+
+    /**
      * Error Messages
      *
      * @var    array
      * @since  1.0.0
      */
     protected $error_messages = array();
+
+    /**
+     * Allowed Properties
+     *
+     * @var object
+     * @since 1.0.0
+     */
+    protected $property_array = array(
+        'database',
+        'encoding',
+        'error_messages',
+        'html_entities',
+        'key',
+        'table',
+        'timezone',
+        'true_array',
+        'white_list'
+    );
 
     /**
      * Constructor
@@ -199,29 +288,26 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    public function __construct(
-        $fieldhandler_type,
-        $method,
-        $field_name,
-        $field_value,
-        $options
-    ) {
+    public function __construct($fieldhandler_type, $method, $field_name, $field_value, $options)
+    {
         if (function_exists('date_default_timezone_set') && function_exists('date_default_timezone_get')) {
             date_default_timezone_set(@date_default_timezone_get());
         }
 
-        if (isset($options['white_list'])) {
-            $this->white_list = $options['white_list'];
+        $this->fieldhandler_type = $fieldhandler_type;
+        $this->method            = $method;
+        $this->field_name        = $field_name;
+        $this->field_value       = $field_value;
+
+        foreach ($this->property_array as $key) {
+            if (isset($options[$key])) {
+                $this->$key = $options[$key];
+                unset($options[$key]);
+            }
         }
 
-        $this->setFieldhandlerType($fieldhandler_type);
-        $this->setMethod($method);
-        $this->setFieldName($field_name);
-        $this->setFieldValue($field_value);
-        $this->setOptions($options);
-        $this->setDatabase();
-        $this->setTable();
-        $this->setKey();
+        $this->options = $options;
+
         $this->getUserTimeZone();
     }
 
@@ -253,225 +339,29 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
     abstract public function escape();
 
     /**
-     * Set the Method
-     *
-     * @param   string $method
-     *
-     * @return  $this
-     * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
-     */
-    protected function setMethod($method)
-    {
-        $method = strtolower($method);
-
-        if ($method == 'validate'
-            || $method == 'filter'
-            || $method == 'escape'
-        ) {
-        } else {
-            throw new UnexpectedValueException
-            (
-                'Fieldhandler: Invalid Method: ' . $method . ' Must be  validate, filter, or escape.'
-            );
-        }
-
-        $this->method = $method;
-
-        return $this;
-    }
-
-    /**
-     * Get the Path
-     *
-     * @return  string
-     * @since   1.0.0
-     */
-    protected function getMethod()
-    {
-        return $this->method;
-    }
-
-    /**
-     * Set the Fieldhandler Type
-     *
-     * @param   string $fieldhandler_type
-     *
-     * @return  string
-     * @since   1.0.0
-     */
-    protected function setFieldhandlerType($fieldhandler_type)
-    {
-        $this->fieldhandler_type = $fieldhandler_type;
-
-        return $this;
-    }
-
-    /**
-     * Get the Fieldhandler Type
-     *
-     * @return  string
-     * @since   1.0.0
-     */
-    protected function getFieldhandlerType()
-    {
-        return $this->fieldhandler_type;
-    }
-
-    /**
-     * Set the Field Name
-     *
-     * @param   string $field_name
-     *
-     * @return  $this
-     * @since   1.0.0
-     */
-    protected function setFieldName($field_name)
-    {
-        $this->field_name = $field_name;
-
-        return $this;
-    }
-
-    /**
-     * Set the Value
-     *
-     * @param   mixed $field_value
-     *
-     * @return  $this
-     * @since   1.0.0
-     */
-    public function setFieldValue($field_value)
-    {
-        $this->field_value = $field_value;
-
-        return $this;
-    }
-
-    /**
-     * Get Value
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function getFieldValue()
-    {
-        return $this->field_value;
-    }
-
-    /**
-     * Set Options
-     *
-     * @param   array $options
-     *
-     * @return  $this
-     * @since   1.0.0
-     */
-    public function setOptions($options)
-    {
-        if (is_array($options)) {
-            $this->options = $options;
-            return $this;
-        }
-
-        $this->options = array();
-
-        return $this;
-    }
-
-    /**
-     * Get Options
+     * Return error messages
      *
      * @return  array
      * @since   1.0.0
      */
-    public function getOptions()
+    public function getErrorMessages()
     {
-        return $this->options;
+        return $this->error_messages;
     }
 
     /**
-     * Set Database
+     * Set an error message
+     *
+     * $param   integer  $code
      *
      * @return  $this
      * @since   1.0.0
      */
-    public function setDatabase()
+    protected function setErrorMessage($code)
     {
-        if (isset($this->options['database'])) {
-            $this->database = $this->options['database'];
-        } else {
-            $this->database = null;
-        }
+        $this->error_messages[$code] = trim($this->field_name) . ' Method Failed: ' . $this->method . $this->message;
 
         return $this;
-    }
-
-    /**
-     * Get Database
-     *
-     * @return  array
-     * @since   1.0.0
-     */
-    public function getDatabase()
-    {
-        return $this->database;
-    }
-
-    /**
-     * Set Table
-     *
-     * @return  $this
-     * @since   1.0.0
-     */
-    public function setTable()
-    {
-        if (isset($this->options['table'])) {
-            $this->table = $this->options['table'];
-        } else {
-            $this->table = null;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Get Table
-     *
-     * @return  array
-     * @since   1.0.0
-     */
-    public function getTable()
-    {
-        return $this->table;
-    }
-
-    /**
-     * Set Key
-     *
-     * @return  $this
-     * @since   1.0.0
-     */
-    public function setKey()
-    {
-        if (isset($this->options['key'])) {
-            $this->key = $this->options['key'];
-        } else {
-            $this->key = null;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Get Key
-     *
-     * @return  array
-     * @since   1.0.0
-     */
-    public function getKey()
-    {
-        return $this->key;
     }
 
     /**
@@ -506,35 +396,9 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
         ini_set('date.timezone', $timezone);
         $this->options['timezone'] = $timezone;
 
-        $this->setTimezone($timezone);
-
-        return $this;
-    }
-
-    /**
-     * Set the Timezone
-     *
-     * @param   string $timezone
-     *
-     * @return  string
-     * @since   1.0.0
-     */
-    protected function setTimezone($timezone)
-    {
         $this->timezone = $timezone;
 
         return $this;
-    }
-
-    /**
-     * Get the Timezone
-     *
-     * @return  string
-     * @since   1.0.0
-     */
-    protected function getTimezone()
-    {
-        return $this->timezone;
     }
 
     /**
@@ -546,7 +410,7 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * @return  string
      * @since   1.0.0
      */
-    public function filterByCharacter($test, $filter)
+    protected function filterByCharacter($test, $filter)
     {
         $filtered = '';
 
@@ -559,65 +423,5 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
         }
 
         return $filtered;
-    }
-
-    /**
-     * Get the 'true' array
-     *
-     * @return  array
-     * @since   1.0.0
-     */
-    public function getTrueArray()
-    {
-        $trueArray   = array();
-        $trueArray[] = true;
-        $trueArray[] = 1;
-        $trueArray[] = 'yes';
-        $trueArray[] = 'on';
-
-        return $trueArray;
-    }
-
-    /**
-     * Get the test input value
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function getTestValue()
-    {
-        $testValue = $this->getFieldValue();
-        if (is_numeric($testValue) || is_bool($testValue)) {
-        } else {
-            $testValue = strtolower($testValue);
-        }
-
-        return $testValue;
-    }
-
-    /**
-     * Return error messages
-     *
-     * @return  array
-     * @since   1.0.0
-     */
-    public function getErrorMessages()
-    {
-        return $this->error_messages;
-    }
-
-    /**
-     * Set an error message
-     *
-     * $param   integer  $code
-     *
-     * @return  $this
-     * @since   1.0.0
-     */
-    protected function setErrorMessage($code)
-    {
-        $this->error_messages[$code] = trim($this->field_name) . ' Method Failed: ' . $this->method . $this->message;
-
-        return $this;
     }
 }

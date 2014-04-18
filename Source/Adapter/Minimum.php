@@ -30,10 +30,10 @@ class Minimum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      */
     public function validate()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            if ((int)$this->getFieldValue() > (int)$this->getMinimum()) {
+            if ((int)$this->field_value > (int)$this->getMinimum()) {
             } else {
                 throw new UnexpectedValueException
                 (
@@ -42,11 +42,11 @@ class Minimum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
@@ -54,16 +54,16 @@ class Minimum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      */
     public function filter()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            if ((int)$this->getFieldValue() > (int)$this->getMinimum()) {
+            if ((int)$this->field_value > (int)$this->getMinimum()) {
             } else {
                 $this->setFieldValue((int)$this->getMinimum());
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
@@ -75,7 +75,7 @@ class Minimum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      */
     public function escape()
     {
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**

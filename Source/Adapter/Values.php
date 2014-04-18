@@ -30,10 +30,10 @@ class Values extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      */
     public function validate()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            $test = in_array($this->getFieldValue(), $this->getFieldValues());
+            $test = in_array($this->field_value, $this->getFieldValues());
 
             if ($test == 1) {
             } else {
@@ -44,11 +44,11 @@ class Values extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
@@ -56,10 +56,10 @@ class Values extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      */
     public function filter()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            $test = in_array($this->getFieldValue(), $this->getFieldValues());
+            $test = in_array($this->field_value, $this->getFieldValues());
 
             if ($test == 1) {
             } else {
@@ -67,7 +67,7 @@ class Values extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
@@ -79,10 +79,10 @@ class Values extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      */
     public function escape()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            $test = in_array($this->getFieldValue(), $this->getFieldValues());
+            $test = in_array($this->field_value, $this->getFieldValues());
 
             if ($test == 1) {
             } else {
@@ -90,7 +90,7 @@ class Values extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**

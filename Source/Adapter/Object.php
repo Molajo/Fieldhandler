@@ -30,10 +30,10 @@ class Object extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      */
     public function validate()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            $test = is_object($this->getFieldValue());
+            $test = is_object($this->field_value);
 
             if ($test == true) {
             } else {
@@ -44,11 +44,11 @@ class Object extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
@@ -56,18 +56,18 @@ class Object extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      */
     public function filter()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            $test = is_object($this->getFieldValue());
+            $test = is_object($this->field_value);
 
             if ($test == true) {
             } else {
-                $this->setFieldValue(null);
+                $this->field_value = null;
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**

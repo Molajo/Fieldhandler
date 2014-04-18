@@ -30,12 +30,12 @@ class Email extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function validate()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_EMAIL);
+            $test = filter_var($this->field_value, FILTER_VALIDATE_EMAIL);
 
-            if ($test === $this->getFieldValue()) {
+            if ($test === $this->field_value) {
             } else {
                 throw new UnexpectedValueException
                 (
@@ -44,11 +44,11 @@ class Email extends AbstractFieldhandler implements FieldhandlerAdapterInterface
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
@@ -56,14 +56,14 @@ class Email extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function filter()
     {
-        $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_EMAIL);
+        $test = filter_var($this->field_value, FILTER_VALIDATE_EMAIL);
 
-        if ($test === $this->getFieldValue()) {
+        if ($test === $this->field_value) {
         } else {
-            $this->setFieldValue(null);
+            $this->field_value = null;
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
@@ -77,6 +77,6 @@ class Email extends AbstractFieldhandler implements FieldhandlerAdapterInterface
     {
         $this->filter();
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 }

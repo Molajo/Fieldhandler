@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
@@ -26,49 +25,52 @@ class Accepted extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            $trueArray = parent::getTrueArray();
-            $testValue = parent::getTestValue();
+            $testValue = $this->field_value;
 
-            if (in_array($testValue, $trueArray, true) === true) {
+            if (is_numeric($testValue) || is_bool($testValue)) {
             } else {
-                throw new UnexpectedValueException
-                (
-                    'Validate Accepted: Invalid Value'
-                );
+                $testValue = strtolower($testValue);
+            }
+
+            if (in_array($testValue, $this->true_array) === true) {
+                return true;
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
      */
     public function filter()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            $trueArray = $this->getTrueArray();
-            $testValue = $this->getTestValue();
+            $testValue = $this->field_value;
 
-            if (in_array($testValue, $trueArray, true) === true) {
+            if (is_numeric($testValue) || is_bool($testValue)) {
             } else {
-                $this->setFieldValue(null);
+                $testValue = strtolower($testValue);
+            }
+
+            if (in_array($testValue, $this->true_array) === true) {
+            } else {
+                $this->field_value = null;
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**

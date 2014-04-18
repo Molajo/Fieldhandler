@@ -30,10 +30,10 @@ class Regex extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function validate()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            $test = preg_match($this->getRegex(), $this->getFieldValue());
+            $test = preg_match($this->getRegex(), $this->field_value);
 
             if ($test == 1) {
             } else {
@@ -44,11 +44,11 @@ class Regex extends AbstractFieldhandler implements FieldhandlerAdapterInterface
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
@@ -56,10 +56,10 @@ class Regex extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function filter()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            $test = preg_match($this->getRegex(), $this->getFieldValue());
+            $test = preg_match($this->getRegex(), $this->field_value);
 
             if ($test == 1) {
             } else {
@@ -67,7 +67,7 @@ class Regex extends AbstractFieldhandler implements FieldhandlerAdapterInterface
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
@@ -81,7 +81,7 @@ class Regex extends AbstractFieldhandler implements FieldhandlerAdapterInterface
     {
         $this->filter();
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**

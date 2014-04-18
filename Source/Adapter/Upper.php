@@ -30,10 +30,10 @@ class Upper extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function validate()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            $test = ctype_upper($this->getFieldValue());
+            $test = ctype_upper($this->field_value);
             if ($test == 1) {
             } else {
                 throw new UnexpectedValueException
@@ -43,11 +43,11 @@ class Upper extends AbstractFieldhandler implements FieldhandlerAdapterInterface
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
@@ -55,17 +55,17 @@ class Upper extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function filter()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            $test = ctype_upper($this->getFieldValue());
+            $test = ctype_upper($this->field_value);
             if ($test == 1) {
             } else {
-                $this->setFieldValue(strtoupper($this->getFieldValue()));
+                $this->setFieldValue(strtoupper($this->field_value));
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**

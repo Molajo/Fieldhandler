@@ -30,43 +30,33 @@ class Alpha extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function validate()
     {
-        if ($this->getFieldValue() === null) {
-        } else {
-
-            $test = ctype_alpha($this->getFieldValue());
-
-            if ($test == 1) {
-            } else {
-                throw new UnexpectedValueException
-                (
-                    'Validate Alpha: Invalid Value'
-                );
-            }
+        if ($this->field_value === null) {
+            return true;
         }
 
-        return $this->getFieldValue();
+        return ctype_alpha($this->field_value);
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
      */
     public function filter()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            $test = ctype_alpha($this->getFieldValue());
+            $test = ctype_alpha($this->field_value);
 
-            if ($test == 1) {
+            if ($test === true) {
             } else {
-                $this->setFieldValue($this->filterByCharacter('ctype_alpha', $this->getFieldValue()));
+                $this->field_value = $this->filterByCharacter('ctype_alpha', $this->field_value);
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
@@ -79,6 +69,6 @@ class Alpha extends AbstractFieldhandler implements FieldhandlerAdapterInterface
     {
         $this->filter();
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 }

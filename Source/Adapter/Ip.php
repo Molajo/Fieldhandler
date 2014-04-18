@@ -30,10 +30,10 @@ class Ip extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function validate()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_IP, $this->setFlags());
+            $test = filter_var($this->field_value, FILTER_VALIDATE_IP, $this->setFlags());
 
             if ($test == true) {
             } else {
@@ -44,11 +44,11 @@ class Ip extends AbstractFieldhandler implements FieldhandlerAdapterInterface
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
@@ -56,10 +56,10 @@ class Ip extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function filter()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_IP, $this->setFlags());
+            $test = filter_var($this->field_value, FILTER_VALIDATE_IP, $this->setFlags());
 
             if ($test == true) {
             } else {
@@ -67,7 +67,7 @@ class Ip extends AbstractFieldhandler implements FieldhandlerAdapterInterface
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
@@ -79,14 +79,14 @@ class Ip extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function escape()
     {
-        $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_IP, $this->setFlags());
+        $test = filter_var($this->field_value, FILTER_VALIDATE_IP, $this->setFlags());
 
         if ($test == true) {
         } else {
             $this->setFieldValue(false);
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**

@@ -32,7 +32,7 @@ class Stringlength extends AbstractFieldhandler implements FieldhandlerAdapterIn
     {
         $from_to = $this->getFromto();
 
-        $string_length = strlen(trim($this->getFieldValue()));
+        $string_length = strlen(trim($this->field_value));
 
         if ($string_length >= $from_to[0]
             && $string_length <= $from_to[1]
@@ -46,11 +46,11 @@ class Stringlength extends AbstractFieldhandler implements FieldhandlerAdapterIn
             );
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
@@ -60,16 +60,16 @@ class Stringlength extends AbstractFieldhandler implements FieldhandlerAdapterIn
     {
         $from_to = $this->getFromto();
 
-        $string_length = strlen(trim($this->getFieldValue()));
+        $string_length = strlen(trim($this->field_value));
 
         if ($string_length > $from_to[0]
             && $string_length < $from_to[1]
         ) {
         } else {
-            $this->setFieldValue(null);
+            $this->field_value = null;
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**

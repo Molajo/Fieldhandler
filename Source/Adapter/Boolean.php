@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
@@ -26,60 +25,42 @@ class Boolean extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
-        if ($this->getFieldValue() === null) {
-        } else {
-
-            if ($this->getFieldValue() === false) {
-                $test = false;
-
-            } elseif ($this->getFieldValue() === true) {
-                $test = true;
-
-            } else {
-                $test = null;
-            }
-
-            if ($test === null) {
-                throw new UnexpectedValueException
-                (
-                    'Validate Boolean: Invalid Value'
-                );
-            }
+        if ($this->field_value === null) {
+            return true;
         }
 
-        return $this->getFieldValue();
+        if ($this->field_value === false) {
+            return true;
+        }
+
+        if ($this->field_value === true) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
-        if ($this->getFieldValue() === null) {
-        } else {
-
-            if ($this->getFieldValue() === false) {
-                $test = false;
-
-            } elseif ($this->getFieldValue() === true) {
-                $test = true;
-
-            } else {
-                $test = null;
-            }
-
-            $this->setFieldValue($test);
+        if ($this->field_value === null) {
+            return $this->field_value;
         }
 
-        return $this->getFieldValue();
+        if ($this->field_value === true) {
+        } else {
+            $this->field_value = false;
+        }
+
+        return $this->field_value;
     }
 
     /**
@@ -87,12 +68,9 @@ class Boolean extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
     {
-        $this->filter();
-
-        return $this->getFieldValue();
+        return $this->filter();
     }
 }

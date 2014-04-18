@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
@@ -26,42 +25,35 @@ class Callback extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
-        if ($this->getFieldValue() === null) {
-        } else {
-
-            $test = filter_var($this->getFieldValue(), FILTER_CALLBACK, $this->setCallback());
-
-            if ($test == $this->getFieldValue()) {
-            } else {
-                throw new UnexpectedValueException
-                (
-                    'Validate Callback: Invalid Value'
-                );
-            }
+        if ($this->field_value === null) {
+            return true;
         }
 
-        return $this->getFieldValue();
+        if (filter_var($this->field_value, FILTER_CALLBACK, $this->setCallback()) === false) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
+
         } else {
-            $this->setFieldValue(filter_var($this->getFieldValue(), FILTER_CALLBACK, $this->setCallback()));
+            $this->field_value = filter_var($this->field_value, FILTER_CALLBACK, $this->setCallback());
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
@@ -69,22 +61,19 @@ class Callback extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
     {
-        $this->filter();
-
-        return $this->getFieldValue();
+        return $this->filter();
     }
 
     /**
      * Flags can be set in options array
      *
-     * @return  mixed
+     * @return  array
      * @since   1.0.0
      */
-    public function setCallback()
+    protected function setCallback()
     {
         $callback = null;
 
@@ -94,6 +83,7 @@ class Callback extends AbstractFieldhandler implements FieldhandlerAdapterInterf
 
         $return            = array();
         $return['options'] = $callback;
+
         return $return;
     }
 }

@@ -10,7 +10,9 @@ namespace Molajo\Fieldhandler;
 
 use Exception;
 use CommonApi\Exception\UnexpectedValueException;
-use CommonApi\Model\FieldhandlerInterface;
+use CommonApi\Model\ValidateInterface;
+use CommonApi\Model\FilterInterface;
+use CommonApi\Model\EscapeInterface;
 
 /**
  * Fieldhandler Driver
@@ -19,7 +21,7 @@ use CommonApi\Model\FieldhandlerInterface;
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-class Driver implements FieldhandlerInterface
+class Driver implements ValidateInterface, FilterInterface, EscapeInterface
 {
     /**
      * Validate
@@ -33,7 +35,7 @@ class Driver implements FieldhandlerInterface
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    public function validate($field_name, $field_value = null, $fieldhandler_type_chain, $options = array())
+    public function validate($field_name, $field_value = null, $fieldhandler_type_chain, array $options = array())
     {
         return $this->processRequest('validate', $field_name, $field_value, $fieldhandler_type_chain, $options);
     }
@@ -50,7 +52,7 @@ class Driver implements FieldhandlerInterface
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    public function filter($field_name, $field_value = null, $fieldhandler_type_chain, $options = array())
+    public function filter($field_name, $field_value = null, $fieldhandler_type_chain, array $options = array())
     {
         return $this->processRequest('filter', $field_name, $field_value, $fieldhandler_type_chain, $options);
     }
@@ -67,7 +69,7 @@ class Driver implements FieldhandlerInterface
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    public function escape($field_name, $field_value = null, $fieldhandler_type_chain, $options = array())
+    public function escape($field_name, $field_value = null, $fieldhandler_type_chain, array $options = array())
     {
         return $this->processRequest('escape', $field_name, $field_value, $fieldhandler_type_chain, $options);
     }
@@ -90,19 +92,13 @@ class Driver implements FieldhandlerInterface
         $field_name,
         $field_value = null,
         $fieldhandler_type_chain,
-        $options = array()
+        array $options = array()
     ) {
         $method             = $this->editMethod($method);
         $field_name         = $this->editFieldName($field_name);
         $fieldhandler_types = $this->editFieldhandlerTypes($fieldhandler_type_chain);
-
-        if (is_array($options) && count($options) > 0) {
-        } else {
-            $options = array();
-        }
-
-        $return_value   = true;
-        $error_messages = array();
+        $return_value       = true;
+        $error_messages     = array();
 
         foreach ($fieldhandler_types as $fieldhandler_type) {
 
@@ -110,13 +106,14 @@ class Driver implements FieldhandlerInterface
             $class             = $this->getType($fieldhandler_type);
 
             try {
+
                 $fieldhandler_instance = new $class ($fieldhandler_type, $method, $field_name, $field_value, $options);
 
             } catch (Exception $e) {
 
                 throw new UnexpectedValueException
                 (
-                    'Fieldhandler: Could not instantiate Fieldhandler Type: ' . $fieldhandler_type
+                    'Fieldhandler Driver: Could not instantiate Fieldhandler Adapter for Type: ' . $fieldhandler_type
                     . ' Class: ' . $class
                 );
             }
@@ -124,6 +121,7 @@ class Driver implements FieldhandlerInterface
             $method_response = $fieldhandler_instance->$method();
 
             $messages = $fieldhandler_instance->getErrorMessages();
+
             if (count($messages) > 0 && is_array($messages)) {
                 $temp           = array_unique(array_merge($messages, $error_messages));
                 $error_messages = $temp;

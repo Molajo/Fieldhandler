@@ -30,10 +30,10 @@ class Numeric extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      */
     public function validate()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            $test = is_numeric($this->getFieldValue());
+            $test = is_numeric($this->field_value);
             if ($test == 1) {
             } else {
                 throw new UnexpectedValueException
@@ -43,11 +43,11 @@ class Numeric extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
@@ -55,10 +55,10 @@ class Numeric extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      */
     public function filter()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            $test = is_numeric($this->getFieldValue());
+            $test = is_numeric($this->field_value);
 
             if ($test == 1) {
             } else {
@@ -66,7 +66,7 @@ class Numeric extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
@@ -78,13 +78,13 @@ class Numeric extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      */
     public function escape()
     {
-        $test = is_numeric($this->getFieldValue());
+        $test = is_numeric($this->field_value);
 
         if ($test == 1) {
         } else {
             $this->setFieldValue(0);
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 }

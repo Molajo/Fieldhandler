@@ -32,19 +32,19 @@ class Notequal extends AbstractFieldhandler implements FieldhandlerAdapterInterf
     {
         $notEqual = $this->getNotEqual();
 
-        if ($this->getFieldValue() == $notEqual) {
+        if ($this->field_value == $notEqual) {
 
             throw new UnexpectedValueException
             (
-                'Validate Value: ' . $this->getFieldValue() . ' must not be equal to: ' . $notEqual
+                'Validate Value: ' . $this->field_value . ' must not be equal to: ' . $notEqual
             );
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
@@ -54,11 +54,11 @@ class Notequal extends AbstractFieldhandler implements FieldhandlerAdapterInterf
     {
         $notEqual = $this->getNotEqual();
 
-        if ($this->getFieldValue() == $notEqual) {
-            $this->setFieldValue(null);
+        if ($this->field_value == $notEqual) {
+            $this->field_value = null;
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**

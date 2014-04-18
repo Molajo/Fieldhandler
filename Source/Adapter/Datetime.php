@@ -31,10 +31,10 @@ class Datetime extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function validate()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            $test = strtotime($this->getFieldValue());
+            $test = strtotime($this->field_value);
 
             if ($test == false) {
                 throw new UnexpectedValueException
@@ -44,11 +44,11 @@ class Datetime extends AbstractFieldhandler implements FieldhandlerAdapterInterf
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
@@ -56,13 +56,13 @@ class Datetime extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function filter()
     {
-        $test = strtotime($this->getFieldValue());
+        $test = strtotime($this->field_value);
 
         if ($test == false) {
-            $this->setFieldValue(null);
+            $this->field_value = null;
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
@@ -76,6 +76,6 @@ class Datetime extends AbstractFieldhandler implements FieldhandlerAdapterInterf
     {
         $this->filter();
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 }

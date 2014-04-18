@@ -30,10 +30,10 @@ class Integer extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      */
     public function validate()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_INT, $this->setFlags());
+            $test = filter_var($this->field_value, FILTER_VALIDATE_INT, $this->setFlags());
 
             if ($test == true) {
             } else {
@@ -44,11 +44,11 @@ class Integer extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
@@ -56,18 +56,18 @@ class Integer extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      */
     public function filter()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_INT, $this->setFlags());
+            $test = filter_var($this->field_value, FILTER_VALIDATE_INT, $this->setFlags());
 
             if ($test == true) {
             } else {
-                $this->setFieldValue(filter_var($this->getFieldValue(), FILTER_SANITIZE_NUMBER_INT));
+                $this->setFieldValue(filter_var($this->field_value, FILTER_SANITIZE_NUMBER_INT));
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
@@ -79,14 +79,14 @@ class Integer extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      */
     public function escape()
     {
-        $test = filter_var($this->getFieldValue(), FILTER_VALIDATE_INT, $this->setFlags());
+        $test = filter_var($this->field_value, FILTER_VALIDATE_INT, $this->setFlags());
 
         if ($test == true) {
         } else {
-            $this->setFieldValue(filter_var($this->getFieldValue(), FILTER_SANITIZE_NUMBER_INT));
+            $this->setFieldValue(filter_var($this->field_value, FILTER_SANITIZE_NUMBER_INT));
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**

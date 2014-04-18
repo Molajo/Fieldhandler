@@ -30,12 +30,12 @@ class Fullspecialchars extends AbstractFieldhandler implements FieldhandlerAdapt
      */
     public function validate()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            $test = filter_var($this->getFieldValue(), FILTER_SANITIZE_FULL_SPECIAL_CHARS, $this->setFlags());
+            $test = filter_var($this->field_value, FILTER_SANITIZE_FULL_SPECIAL_CHARS, $this->setFlags());
 
-            if ($test == $this->getFieldValue()) {
+            if ($test == $this->field_value) {
             } else {
 
                 throw new UnexpectedValueException
@@ -45,11 +45,11 @@ class Fullspecialchars extends AbstractFieldhandler implements FieldhandlerAdapt
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
@@ -57,20 +57,20 @@ class Fullspecialchars extends AbstractFieldhandler implements FieldhandlerAdapt
      */
     public function filter()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            $test = filter_var($this->getFieldValue(), FILTER_SANITIZE_FULL_SPECIAL_CHARS, $this->setFlags());
+            $test = filter_var($this->field_value, FILTER_SANITIZE_FULL_SPECIAL_CHARS, $this->setFlags());
 
-            if ($test == $this->getFieldValue()) {
+            if ($test == $this->field_value) {
             } else {
                 $this->setFieldValue(
-                    filter_var($this->getFieldValue(), FILTER_SANITIZE_FULL_SPECIAL_CHARS, $this->setFlags())
+                    filter_var($this->field_value, FILTER_SANITIZE_FULL_SPECIAL_CHARS, $this->setFlags())
                 );
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
@@ -82,16 +82,16 @@ class Fullspecialchars extends AbstractFieldhandler implements FieldhandlerAdapt
      */
     public function escape()
     {
-        $test = filter_var($this->getFieldValue(), FILTER_SANITIZE_FULL_SPECIAL_CHARS, $this->setFlags());
+        $test = filter_var($this->field_value, FILTER_SANITIZE_FULL_SPECIAL_CHARS, $this->setFlags());
 
-        if ($test == $this->getFieldValue()) {
+        if ($test == $this->field_value) {
         } else {
             $this->setFieldValue(
-                filter_var($this->getFieldValue(), FILTER_SANITIZE_FULL_SPECIAL_CHARS, $this->setFlags())
+                filter_var($this->field_value, FILTER_SANITIZE_FULL_SPECIAL_CHARS, $this->setFlags())
             );
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**

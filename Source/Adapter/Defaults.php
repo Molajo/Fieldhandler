@@ -31,11 +31,11 @@ class Defaults extends AbstractFieldhandler implements FieldhandlerAdapterInterf
     {
         $this->setDefault();
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
@@ -45,7 +45,7 @@ class Defaults extends AbstractFieldhandler implements FieldhandlerAdapterInterf
     {
         $this->setDefault();
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
@@ -59,7 +59,7 @@ class Defaults extends AbstractFieldhandler implements FieldhandlerAdapterInterf
     {
         $this->setDefault();
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
@@ -70,7 +70,7 @@ class Defaults extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function setDefault()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
 
             $default = null;
 

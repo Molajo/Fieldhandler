@@ -32,7 +32,7 @@ class Html extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function validate()
     {
-        if ($this->getFieldValue() == $this->filter()) {
+        if ($this->field_value == $this->filter()) {
         } else {
             throw new UnexpectedValueException
             (
@@ -40,11 +40,11 @@ class Html extends AbstractFieldhandler implements FieldhandlerAdapterInterface
             );
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
@@ -52,12 +52,12 @@ class Html extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function filter()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
-            $this->setFieldValue(kses($this->getFieldValue(), $this->white_list, array('http', 'https')));
+            $this->setFieldValue(kses($this->field_value, $this->white_list, array('http', 'https')));
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**

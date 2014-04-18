@@ -32,7 +32,7 @@ class Equal extends AbstractFieldhandler implements FieldhandlerAdapterInterface
     {
         $equals = $this->getEqual();
 
-        if ($this->getFieldValue() == $equals) {
+        if ($this->field_value == $equals) {
         } else {
             throw new UnexpectedValueException
             (
@@ -40,11 +40,11 @@ class Equal extends AbstractFieldhandler implements FieldhandlerAdapterInterface
             );
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
@@ -54,12 +54,12 @@ class Equal extends AbstractFieldhandler implements FieldhandlerAdapterInterface
     {
         $equals = $this->getEqual();
 
-        if ($this->getFieldValue() == $equals) {
+        if ($this->field_value == $equals) {
         } else {
-            $this->setFieldValue(null);
+            $this->field_value = null;
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**

@@ -32,9 +32,9 @@ class Encoded extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      */
     public function validate()
     {
-        $test = filter_var($this->getFieldValue(), FILTER_SANITIZE_ENCODED, $this->setFlags());
+        $test = filter_var($this->field_value, FILTER_SANITIZE_ENCODED, $this->setFlags());
 
-        if ($test == $this->getFieldValue()) {
+        if ($test == $this->field_value) {
         } else {
             throw new UnexpectedValueException
             (
@@ -42,11 +42,11 @@ class Encoded extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
             );
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
@@ -54,14 +54,14 @@ class Encoded extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      */
     public function filter()
     {
-        $test = filter_var($this->getFieldValue(), FILTER_SANITIZE_ENCODED, $this->setFlags());
+        $test = filter_var($this->field_value, FILTER_SANITIZE_ENCODED, $this->setFlags());
 
-        if ($test == $this->getFieldValue()) {
+        if ($test == $this->field_value) {
         } else {
             $this->setFieldValue($test);
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
@@ -73,7 +73,7 @@ class Encoded extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      */
     public function escape()
     {
-        return filter_var($this->getFieldValue(), FILTER_SANITIZE_ENCODED, $this->setFlags());
+        return filter_var($this->field_value, FILTER_SANITIZE_ENCODED, $this->setFlags());
     }
 
     /**

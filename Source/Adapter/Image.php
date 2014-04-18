@@ -30,7 +30,7 @@ class Image extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function validate()
     {
-        $hold = $this->getFieldValue();
+        $hold = $this->field_value;
 
         $test = $this->filter();
 
@@ -40,13 +40,13 @@ class Image extends AbstractFieldhandler implements FieldhandlerAdapterInterface
         }
 
 
-        // todo: add active test checkdnsrr($this->getFieldValue());
+        // todo: add active test checkdnsrr($this->field_value);
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
@@ -58,7 +58,7 @@ class Image extends AbstractFieldhandler implements FieldhandlerAdapterInterface
             array('ftp://', 'ftps://', 'http://', 'https://'),
             ''
             ,
-            strtolower($this->getFieldValue())
+            strtolower($this->field_value)
         );
 
         $test = filter_var($url, FILTER_SANITIZE_URL, $this->setFlags());
@@ -68,7 +68,7 @@ class Image extends AbstractFieldhandler implements FieldhandlerAdapterInterface
             $this->setFieldValue(filter_var($url, FILTER_SANITIZE_URL));
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**

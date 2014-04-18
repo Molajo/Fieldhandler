@@ -30,11 +30,11 @@ class Trim extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function validate()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            $test = trim($this->getFieldValue());
-            if ($test == $this->getFieldValue()) {
+            $test = trim($this->field_value);
+            if ($test == $this->field_value) {
             } else {
                 throw new UnexpectedValueException
                 (
@@ -43,11 +43,11 @@ class Trim extends AbstractFieldhandler implements FieldhandlerAdapterInterface
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
@@ -55,17 +55,17 @@ class Trim extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function filter()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            $test = trim($this->getFieldValue());
-            if ($test == $this->getFieldValue()) {
+            $test = trim($this->field_value);
+            if ($test == $this->field_value) {
             } else {
                 $this->setFieldValue($test);
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**

@@ -30,10 +30,10 @@ class Time extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function validate()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            $test = strtotime($this->getFieldValue());
+            $test = strtotime($this->field_value);
 
             if ($test == false) {
             } else {
@@ -44,11 +44,11 @@ class Time extends AbstractFieldhandler implements FieldhandlerAdapterInterface
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
@@ -56,7 +56,7 @@ class Time extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function filter()
     {
-        $test = strtotime($this->getFieldValue());
+        $test = strtotime($this->field_value);
 
         if ($test == false) {
         } else {
@@ -66,7 +66,7 @@ class Time extends AbstractFieldhandler implements FieldhandlerAdapterInterface
             );
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
@@ -78,8 +78,8 @@ class Time extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function escape()
     {
-        $this->setFieldValue($this->filterByCharacter('ctype_digit', $this->getFieldValue()));
+        $this->setFieldValue($this->filterByCharacter('ctype_digit', $this->field_value));
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 }

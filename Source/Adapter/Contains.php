@@ -26,44 +26,33 @@ class Contains extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
-        if ($this->getFieldValue() === null) {
-            return $this->getFieldValue();
+        if ($this->field_value === null) {
+            return true;
         }
 
-        $results = $this->testContains();
-        if ($results === false) {
-            throw new UnexpectedValueException
-            (
-                'Validate Contains: Invalid Value'
-            );
-        }
-
-        return $this->getFieldValue();
+        return $this->testContains();
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
-        if ($this->getFieldValue() === null) {
-            return $this->getFieldValue();
+        if ($this->field_value === null) {
+            return $this->field_value;
         }
 
-        $results = $this->testContains();
-        if ($results === false) {
-            $this->setFieldValue(null);
+        if ($this->testContains() === false) {
+            $this->field_value = null;
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
@@ -71,7 +60,6 @@ class Contains extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
     {
@@ -79,34 +67,26 @@ class Contains extends AbstractFieldhandler implements FieldhandlerAdapterInterf
     }
 
     /**
-     * If needed, apply default to Field
+     * Test Contains
      *
      * @return  boolean
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    public function testContains()
+    protected function testContains()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
             return false;
         }
 
         if (isset($this->options['contains'])) {
-            $contains = $this->options['contains'];
         } else {
             throw new UnexpectedValueException
             (
-                'Validate Contains: must send in options contains value: '
+                'Validate Contains: must provide options[contains] array values.'
             );
         }
 
-        $input = $this->getFieldValue();
-
-        $x = mb_strpos($input, $contains, 0, mb_detect_encoding($input));
-        if ($x === false) {
-            return false;
-        } else {
-            return true;
-        }
+        return mb_strpos($this->field_value, $this->options['contains'], 0, mb_detect_encoding($this->field_value));
     }
 }

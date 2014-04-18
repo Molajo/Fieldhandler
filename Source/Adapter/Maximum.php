@@ -30,10 +30,10 @@ class Maximum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      */
     public function validate()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            if ((int)$this->getMaximum() < (int)$this->getFieldValue()) {
+            if ((int)$this->getMaximum() < (int)$this->field_value) {
                 throw new UnexpectedValueException
                 (
                     'Validate Maximum: Invalid Value'
@@ -41,11 +41,11 @@ class Maximum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
@@ -53,15 +53,15 @@ class Maximum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      */
     public function filter()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            if ((int)$this->getMaximum() < (int)$this->getFieldValue()) {
+            if ((int)$this->getMaximum() < (int)$this->field_value) {
                 $this->setFieldValue((int)$this->getMaximum());
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
@@ -73,7 +73,7 @@ class Maximum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      */
     public function escape()
     {
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**

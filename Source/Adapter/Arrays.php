@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
@@ -26,54 +25,44 @@ class Arrays extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
-        if ($this->getFieldValue() === null) {
-        } else {
-
-            $test = is_array($this->getFieldValue());
-
-            if ($test == 1) {
-            } else {
-                throw new UnexpectedValueException
-                (
-                    'Validate Array: Invalid Value'
-                );
-            }
-
-            $this->testValues();
+        if ($this->field_value === null) {
+            return true;
         }
 
-        return $this->getFieldValue();
+        if (is_array($this->field_value)) {
+        } else {
+            return false;
+        }
+
+        return $this->testValues(false);
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            $test = is_array($this->getFieldValue());
+            if (is_array($this->field_value)) {
 
-            if ($test == 1) {
             } else {
-                $temp   = array();
-                $temp[] = $this->getFieldValue();
-                $this->setFieldValue($temp);
+                $temp              = array();
+                $temp[]            = $this->field_value;
+                $this->field_value = $temp;
             }
 
-            $this->testValues();
+            $this->testValues(true);
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
@@ -81,57 +70,54 @@ class Arrays extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
     {
-        $this->filter();
-
-        return $this->getFieldValue();
+        return $this->filter();
     }
 
     /**
      * Test Array Entry Values
      *
-     * @param   bool $filter
+     * @param   boolean $filter
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    public function testValues($filter = false)
+    protected function testValues($filter = false)
     {
-        $field_values = array();
-
         if (isset($this->options['array_valid_values'])) {
-            $field_values = $this->options['array_valid_values'];
-        }
-
-        if (is_array($field_values) && count($field_values) > 0) {
         } else {
-            return $this;
+            return true;
         }
 
-        $entries = $this->getFieldValue();
+        $array_valid_values = $this->options['array_valid_values'];
+
+        if (is_array($array_valid_values) && count($array_valid_values) > 0) {
+        } else {
+            return true;
+        }
+
+        $entries = $this->field_value;
 
         foreach ($entries as $entry) {
 
-            if (in_array($entry, $field_values)) {
+            if (in_array($entry, $array_valid_values)) {
+
             } else {
 
                 if ($filter === true) {
                     unset ($entry);
                 } else {
-                    throw new UnexpectedValueException
-                    (
-                        'Fieldhandler Arrays: Array Value is not valid'
-                    );
+                    return false;
                 }
             }
         }
 
-        $this->setFieldValue($entries);
+        if ($filter === true) {
+            $this->field_value = $entries;
+        }
 
-        return $this;
+        return true;
     }
 }

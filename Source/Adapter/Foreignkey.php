@@ -33,11 +33,11 @@ class Foreignkey extends AbstractFieldhandler implements FieldhandlerAdapterInte
     {
         $this->filter();
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
@@ -45,12 +45,12 @@ class Foreignkey extends AbstractFieldhandler implements FieldhandlerAdapterInte
      */
     public function filter()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            $test = $this->verifyForeignKey($this->getFieldValue());
+            $test = $this->verifyForeignKey($this->field_value);
 
-            if ($test == $this->getFieldValue()) {
+            if ($test == $this->field_value) {
             } else {
                 throw new UnexpectedValueException
                 (
@@ -59,7 +59,7 @@ class Foreignkey extends AbstractFieldhandler implements FieldhandlerAdapterInte
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
@@ -73,7 +73,7 @@ class Foreignkey extends AbstractFieldhandler implements FieldhandlerAdapterInte
     {
         $this->filter();
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**

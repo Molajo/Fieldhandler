@@ -30,12 +30,12 @@ class Raw extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function validate()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            $test = filter_var($this->getFieldValue(), FILTER_UNSAFE_RAW, $this->setFlags());
+            $test = filter_var($this->field_value, FILTER_UNSAFE_RAW, $this->setFlags());
 
-            if ($test == $this->getFieldValue()) {
+            if ($test == $this->field_value) {
             } else {
 
                 throw new UnexpectedValueException
@@ -45,11 +45,11 @@ class Raw extends AbstractFieldhandler implements FieldhandlerAdapterInterface
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
@@ -57,18 +57,18 @@ class Raw extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function filter()
     {
-        if ($this->getFieldValue() === null) {
+        if ($this->field_value === null) {
         } else {
 
-            $test = filter_var($this->getFieldValue(), FILTER_UNSAFE_RAW, $this->setFlags());
+            $test = filter_var($this->field_value, FILTER_UNSAFE_RAW, $this->setFlags());
 
-            if ($test == $this->getFieldValue()) {
+            if ($test == $this->field_value) {
             } else {
-                $this->setFieldValue(filter_var($this->getFieldValue(), FILTER_UNSAFE_RAW, $this->setFlags()));
+                $this->setFieldValue(filter_var($this->field_value, FILTER_UNSAFE_RAW, $this->setFlags()));
             }
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
@@ -80,14 +80,14 @@ class Raw extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function escape()
     {
-        $test = filter_var($this->getFieldValue(), FILTER_UNSAFE_RAW, $this->setFlags());
+        $test = filter_var($this->field_value, FILTER_UNSAFE_RAW, $this->setFlags());
 
-        if ($test == $this->getFieldValue()) {
+        if ($test == $this->field_value) {
         } else {
-            $this->setFieldValue(filter_var($this->getFieldValue(), FILTER_UNSAFE_RAW, $this->setFlags()));
+            $this->setFieldValue(filter_var($this->field_value, FILTER_UNSAFE_RAW, $this->setFlags()));
         }
 
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**

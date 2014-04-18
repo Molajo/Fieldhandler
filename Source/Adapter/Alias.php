@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
@@ -30,43 +29,26 @@ class Alias extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function validate()
     {
-        if ($this->getFieldValue() === null) {
-            $this->setFieldValue(null);
-
-            return $this->getFieldValue();
+        if ($this->field_value === null) {
+            return true;
         }
 
-        $bad = $this->testValidate();
-
-        if ($bad === true) {
-            throw new UnexpectedValueException
-            (
-                'Validate Alias: Invalid Value'
-            );
-        }
-
-        return $this->getFieldValue();
+        return $this->testValidate();
     }
 
     /**
-     * Fieldhandler Input
+     * Filter Input
      *
      * @return  mixed
      * @since   1.0.0
      */
     public function filter()
     {
-        if ($this->getFieldValue() === null) {
-            $bad = true;
-        } else {
-            $bad = $this->testValidate();
+        if ($this->testValidate() === true) {
+            $this->createAlias();
         }
 
-        if ($bad === true) {
-            $this->setFieldValue($this->createAlias());
-        }
-
-        return $this->getFieldValue();
+        return $this->field_value;
     }
 
     /**
@@ -83,35 +65,35 @@ class Alias extends AbstractFieldhandler implements FieldhandlerAdapterInterface
     /**
      * Create Alias from Text Value
      *
-     * @return  mixed
+     * @return  $this
      * @since   1.0.0
      */
     public function createAlias()
     {
-        $alias = $this->getFieldValue();
+        $alias = $this->field_value;
 
         if ($alias === null) {
-        } else {
-
-            /** Replace dashes with spaces */
-            $alias = str_replace('-', ' ', strtolower(trim($alias)));
-
-            /** Removes double spaces, ensures only alphanumeric characters */
-            $alias = preg_replace('/(\s|[^A-Za-z0-9\-])+/', '-', $alias);
-
-            /** Trim dashes at beginning and end */
-            $alias = trim($alias, '-');
-
-            /** Replace spaces with underscores */
-            $alias = str_replace(' ', '_', strtolower(trim($alias)));
-
-            /** Sanitize */
-            $alias = filter_var($alias, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
-            $this->setFieldValue($alias);
+            return $this;
         }
 
-        return $this->getFieldValue();
+        /** Replace dashes with spaces */
+        $alias = str_replace('-', ' ', strtolower(trim($alias)));
+
+        /** Removes double spaces, ensures only alphanumeric characters */
+        $alias = preg_replace('/(\s|[^A-Za-z0-9\-])+/', '-', $alias);
+
+        /** Trim dashes at beginning and end */
+        $alias = trim($alias, '-');
+
+        /** Replace spaces with underscores */
+        $alias = str_replace(' ', '_', strtolower(trim($alias)));
+
+        /** Sanitize */
+        $alias = filter_var($alias, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+        $this->field_value = $alias;
+
+        return $this;
     }
 
     /**
@@ -122,29 +104,28 @@ class Alias extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function testValidate()
     {
-        $test = $this->getFieldValue();
-
-        $bad = false;
+        $test = $this->field_value;
 
         $test = preg_replace('/ /', '-', $test);
-        if ($this->getFieldValue() == $test) {
+        if ($this->field_value === $test) {
         } else {
-            $bad = true;
+            return false;
         }
 
         $test = preg_replace('/(\s|[^A-Za-z0-9\-])+/', '-', $test);
 
-        if ($this->getFieldValue() === $test) {
+        if ($this->field_value === $test) {
         } else {
-            $bad = true;
+            return false;
         }
 
         $test = filter_var($test, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        if ($this->getFieldValue() == $test) {
+
+        if ($this->field_value === $test) {
         } else {
-            $bad = true;
+            return false;
         }
 
-        return $bad;
+        return true;
     }
 }
