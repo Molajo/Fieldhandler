@@ -41,11 +41,11 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\upper::validate
-     * @return void
+     * @covers  Molajo\Fieldhandler\Adapter\values::filter
+     * @return  void
      * @since   1.0.0
      */
-    public function testValid()
+    public function testFilterValid()
     {
         $field_name                    = 'test';
         $field_value                   = 'a';
@@ -55,14 +55,33 @@ class ValuesTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($results, $results);
+        $this->assertEquals('a', $results->getReturnValue());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\upper::validate
-     * @expectedException \CommonApi\Exception\UnexpectedValueException
+     * @covers  Molajo\Fieldhandler\Adapter\values::filter
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testFilterFail()
+    {
+        $field_name                    = 'test';
+        $field_value                   = 'z';
+        $fieldhandler_type_chain       = 'Values';
+        $options                       = array();
+        $options['array_valid_values'] = array('a', 'b', 'c');
+
+        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+
+        $this->assertEquals(null, $results->getReturnValue());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Adapter\values::validate
      * @return void
      * @since   1.0.0
      */
@@ -76,27 +95,27 @@ class ValuesTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results->getReturnValue());
+        $this->assertEquals(false, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\upper::filter
+     * @covers  Molajo\Fieldhandler\Adapter\values::validate
      * @return void
      * @since   1.0.0
      */
-    public function testFilterValid()
+    public function testValidateValid()
     {
         $field_name                    = 'test';
-        $field_value                   = 'z';
+        $field_value                   = 'a';
         $fieldhandler_type_chain       = 'Values';
         $options                       = array();
         $options['array_valid_values'] = array('a', 'b', 'c');
 
-        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals(null, $results);
+        $this->assertEquals(true, $results->getReturnValue());
 
         return;
     }

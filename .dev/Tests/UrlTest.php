@@ -10,7 +10,6 @@ namespace Molajo\Fieldhandler\Tests;
 
 use Molajo\Fieldhandler\Driver as driver;
 use PHPUnit_Framework_TestCase;
-use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Url Fieldhandler
@@ -55,14 +54,13 @@ class UrlTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results->getReturnValue());
+        $this->assertEquals(true, $results->getReturnValue());
 
         return;
     }
 
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Url::validate
-     * @expectedException \CommonApi\Exception\UnexpectedValueException
      * @return void
      * @since   1.0.0
      */
@@ -74,7 +72,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
         $options                 = array();
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
-        $this->assertEquals($field_value, $results->getReturnValue());
+        $this->assertEquals(false, $results->getReturnValue());
         return;
     }
 
@@ -104,14 +102,16 @@ class UrlTest extends PHPUnit_Framework_TestCase
      */
     public function testFilterFail()
     {
-        $field_name              = 'url_field';
-        $field_value             = 'yessireebob';
-        $fieldhandler_type_chain = 'Url';
-        $options                 = array();
+        $field_name                            = 'url_field';
+        $field_value                           = 'yessireebob';
+        $fieldhandler_type_chain               = 'Url';
+        $options                               = array();
+        $options['FILTER_FLAG_PATH_REQUIRED']  = true;
+        $options['FILTER_FLAG_QUERY_REQUIRED'] = true;
 
         $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results->getReturnValue());
+        $this->assertEquals(null, $results->getReturnValue());
 
         return;
     }
@@ -142,14 +142,15 @@ class UrlTest extends PHPUnit_Framework_TestCase
      */
     public function testEscapeFail()
     {
-        $field_name              = 'url_field';
-        $field_value             = 'yessireebob';
-        $fieldhandler_type_chain = 'Url';
-        $options                 = array();
+        $field_name                  = 'url_field';
+        $field_value                 = 'yessireebob';
+        $fieldhandler_type_chain     = 'Url';
+        $options                     = array();
+        $options['FILTER_FLAG_IPV6'] = true;
 
         $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results->getReturnValue());
+        $this->assertEquals(null, $results->getReturnValue());
 
         return;
     }

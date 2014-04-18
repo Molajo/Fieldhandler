@@ -1,6 +1,6 @@
 <?php
 /**
- * Stringlength Fieldhandler Test
+ * Upper Fieldhandler Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -10,17 +10,16 @@ namespace Molajo\Fieldhandler\Tests;
 
 use Molajo\Fieldhandler\Driver as driver;
 use PHPUnit_Framework_TestCase;
-use CommonApi\Exception\UnexpectedValueException;
 
 /**
- * Stringlength Fieldhandler
+ * Upper Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class StringlengthTest extends PHPUnit_Framework_TestCase
+class UpperTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Adapter
@@ -42,20 +41,18 @@ class StringlengthTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Stringlength::validate
-     * @return  void
+     * @covers  Molajo\Fieldhandler\Adapter\upper::validate
+     * @return void
      * @since   1.0.0
      */
-    public function testValidate1()
+    public function testValid()
     {
-        $field_name              = 'fieldname';
-        $field_value             = 'dogfood';
-        $fieldhandler_type_chain = 'Stringlength';
+        $field_name              = 'test';
+        $field_value             = 'AA123';
+        $fieldhandler_type_chain = 'upper';
         $options                 = array();
-        $options['from']         = 0;
-        $options['to']           = 10;
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $this->assertEquals($field_value, $results->getReturnValue());
 
@@ -63,34 +60,40 @@ class StringlengthTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Stringlength::validate
-     * @expectedException \CommonApi\Exception\UnexpectedValueException
-     * @return  void
+     * @covers  Molajo\Fieldhandler\Adapter\upper::validate
+     * @return void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name              = 'fieldname';
-        $field_value             = 'dogfood is not good to eat.';
-        $fieldhandler_type_chain = 'Stringlength';
+        $field_name              = 'test';
+        $field_value             = 'Aa123';
+        $fieldhandler_type_chain = 'upper';
         $options                 = array();
-        $options['from']         = 0;
-        $options['to']           = 10;
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results->getReturnValue());
+        $this->assertEquals(false, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * Tear down
-     *
+     * @covers  Molajo\Fieldhandler\Adapter\upper::filter
      * @return void
      * @since   1.0.0
      */
-    protected function tearDown()
+    public function testFilterValid()
     {
+        $field_name              = 'test';
+        $field_value             = 'Aa123';
+        $fieldhandler_type_chain = 'upper';
+        $options                 = array();
+
+        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+
+        $this->assertEquals('AA123', $results->getReturnValue());
+
+        return;
     }
 }

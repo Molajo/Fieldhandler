@@ -10,7 +10,6 @@ namespace Molajo\Fieldhandler\Tests;
 
 use Molajo\Fieldhandler\Driver as driver;
 use PHPUnit_Framework_TestCase;
-use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * String Fieldhandler
@@ -61,7 +60,6 @@ class StringTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Adapter\String::validate
-     * @expectedException \CommonApi\Exception\UnexpectedValueException
      * @return  void
      * @since   1.0.0
      */
@@ -72,6 +70,8 @@ class StringTest extends PHPUnit_Framework_TestCase
         $fieldhandler_type_chain = 'String';
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, array());
+
+        $this->assertEquals(false, $results->getReturnValue());
 
         return;
     }
