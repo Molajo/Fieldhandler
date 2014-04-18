@@ -23,7 +23,7 @@ class Url extends AbstractFieldhandler implements FieldhandlerAdapterInterface
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      */
     public function validate()
@@ -51,14 +51,13 @@ class Url extends AbstractFieldhandler implements FieldhandlerAdapterInterface
     {
         if ($this->field_value === null) {
         } else {
-            $url = str_replace(
-                array('ftp://', 'ftps://', 'http://', 'https://'),
-                ''
-                ,
-                strtolower($this->field_value)
-            );
 
-            $this->field_value = filter_var($url, FILTER_SANITIZE_URL, $this->setFlags());
+            if (filter_var($this->field_value, FILTER_VALIDATE_URL, $this->setFlags())) {
+                $this->field_value = filter_var($this->field_value, FILTER_SANITIZE_URL, $this->setFlags());
+            } else {
+                $this->field_value = null;
+            }
+
         }
 
         return $this->field_value;

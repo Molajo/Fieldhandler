@@ -29,11 +29,6 @@ class Required extends AbstractFieldhandler implements FieldhandlerAdapterInterf
     public function validate()
     {
         if ($this->field_value === null) {
-
-            if ($this->getRequired() === false) {
-                return true;
-            }
-
             return false;
         }
 
@@ -61,22 +56,5 @@ class Required extends AbstractFieldhandler implements FieldhandlerAdapterInterf
     public function escape()
     {
         return $this->field_value;
-    }
-
-    /**
-     * Flags can be set in options array
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function getRequired()
-    {
-        $field_value = false;
-
-        if (isset($this->options['required'])) {
-            $field_value = true;
-        }
-
-        return $field_value;
     }
 }

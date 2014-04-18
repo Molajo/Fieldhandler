@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
@@ -24,27 +23,20 @@ class Object extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
         if ($this->field_value === null) {
-        } else {
-
-            $test = is_object($this->field_value);
-
-            if ($test == true) {
-            } else {
-                throw new UnexpectedValueException
-                (
-                    'Fieldhandler Object: Invalid Value'
-                );
-            }
+            return true;
         }
 
-        return $this->field_value;
+        if (is_object($this->field_value) == true) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -52,16 +44,13 @@ class Object extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function filter()
     {
         if ($this->field_value === null) {
         } else {
 
-            $test = is_object($this->field_value);
-
-            if ($test == true) {
+            if (is_object($this->field_value) === true) {
             } else {
                 $this->field_value = null;
             }
@@ -75,7 +64,6 @@ class Object extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function escape()
     {

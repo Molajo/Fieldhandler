@@ -51,7 +51,10 @@ class Regex extends AbstractFieldhandler implements FieldhandlerAdapterInterface
         if ($this->field_value === null) {
         } else {
 
-            $this->field_value = preg_match($this->getRegex(), $this->field_value);
+            if (preg_match($this->getRegex(), $this->field_value)) {
+            } else {
+                $this->field_value = null;
+            }
         }
 
         return $this->field_value;

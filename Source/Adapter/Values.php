@@ -24,7 +24,7 @@ class Values extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      */
     public function validate()
@@ -50,7 +50,10 @@ class Values extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
     {
         if ($this->field_value === null) {
         } else {
-            $this->field_value = in_array($this->field_value, $this->getFieldValues());
+            if (in_array($this->field_value, $this->getFieldValues())) {
+            } else {
+                $this->field_value = null;
+            }
         }
 
         return $this->field_value;
