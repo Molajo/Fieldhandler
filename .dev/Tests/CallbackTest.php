@@ -43,7 +43,6 @@ class CallbackTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Callback::validate
-     * @expectedException \CommonApi\Exception\UnexpectedValueException
      * @return  void
      * @since   1.0.0
      */
@@ -57,8 +56,7 @@ class CallbackTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $field_value = 'dog';
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals(true, $results->getReturnValue());
 
         return;
     }
@@ -78,8 +76,7 @@ class CallbackTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $field_value = 'dog';
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals('dog', $results->getReturnValue());
 
         return;
     }

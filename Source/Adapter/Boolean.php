@@ -23,7 +23,7 @@ class Boolean extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      */
     public function validate()

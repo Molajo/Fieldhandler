@@ -25,16 +25,16 @@ class Encoded extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      */
     public function validate()
     {
-        if (filter_var($this->field_value, FILTER_SANITIZE_ENCODED, $this->setFlags()) === false) {
-            return false;
+        if ($this->field_value === filter_var($this->field_value, FILTER_SANITIZE_ENCODED, $this->setFlags())) {
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     /**

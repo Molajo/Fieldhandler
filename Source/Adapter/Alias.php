@@ -23,9 +23,8 @@ class Alias extends AbstractFieldhandler implements FieldhandlerAdapterInterface
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
@@ -44,7 +43,7 @@ class Alias extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function filter()
     {
-        if ($this->testValidate() === true) {
+        if ($this->testValidate() === false) {
             $this->createAlias();
         }
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Boolean Fieldhandler Test
+ * Float Fieldhandler Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -13,14 +13,14 @@ use PHPUnit_Framework_TestCase;
 use CommonApi\Exception\UnexpectedValueException;
 
 /**
- * Boolean Fieldhandler
+ * Float Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class BooleanTest extends PHPUnit_Framework_TestCase
+class FloatTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Adapter
@@ -42,230 +42,231 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Boolean::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Float::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidate1()
     {
-        $field_name              = 'boolean_fieldname';
-        $field_value             = false;
-        $fieldhandler_type_chain = 'Boolean';
+        $field_name              = 'float_fieldname';
+        $field_value             = 123456789;
+        $fieldhandler_type_chain = 'Float';
         $options                 = array();
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals(true, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Boolean::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Float::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidate2()
     {
-        $field_name              = 'boolean_fieldname';
-        $field_value             = true;
-        $fieldhandler_type_chain = 'Boolean';
+        $field_name              = 'float_fieldname';
+        $field_value             = null;
+        $fieldhandler_type_chain = 'Float';
         $options                 = array();
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals(true, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Boolean::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Float::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidate3()
     {
-        $field_name              = 'boolean_fieldname';
-        $field_value             = null;
-        $fieldhandler_type_chain = 'Boolean';
+        $field_name              = 'float_fieldname';
+        $field_value             = 12345.6789;
+        $fieldhandler_type_chain = 'Float';
         $options                 = array();
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals(true, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Boolean::validate
-     * @expectedException \CommonApi\Exception\UnexpectedValueException
+     * @covers  Molajo\Fieldhandler\Adapter\Float::validate\
      * @return void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name              = 'boolean_fieldname';
+        $field_name              = 'float_fieldname';
         $field_value             = 'yessireebob';
-        $fieldhandler_type_chain = 'Boolean';
+        $fieldhandler_type_chain = 'Float';
         $options                 = array();
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals(null, $results);
+        $this->assertEquals(false, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Boolean::filter
+     * @covers  Molajo\Fieldhandler\Adapter\Float::validate
      * @return  void
      * @since   1.0.0
      */
     public function testFilter1()
     {
-        $field_name              = 'boolean_fieldname';
-        $field_value             = false;
-        $fieldhandler_type_chain = 'Boolean';
+        $field_name              = 'float_fieldname';
+        $field_value             = 123456789;
+        $fieldhandler_type_chain = 'Float';
         $options                 = array();
 
         $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Boolean::filter
+     * @covers  Molajo\Fieldhandler\Adapter\Float::validate
      * @return  void
      * @since   1.0.0
      */
     public function testFilter2()
     {
-        $field_name              = 'boolean_fieldname';
-        $field_value             = true;
-        $fieldhandler_type_chain = 'Boolean';
+        $field_name              = 'float_fieldname';
+        $field_value             = null;
+        $fieldhandler_type_chain = 'Float';
         $options                 = array();
 
         $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Boolean::filter
+     * @covers  Molajo\Fieldhandler\Adapter\Float::validate
      * @return  void
      * @since   1.0.0
      */
     public function testFilter3()
     {
-        $field_name              = 'boolean_fieldname';
-        $field_value             = null;
-        $fieldhandler_type_chain = 'Boolean';
+        $field_name              = 'float_fieldname';
+        $field_value             = 12345.6789;
+        $fieldhandler_type_chain = 'Float';
         $options                 = array();
 
         $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Boolean::filter
+     * @covers  Molajo\Fieldhandler\Adapter\Float::validate
      * @return void
      * @since   1.0.0
      */
     public function testFilterFail()
     {
-        $field_name              = 'boolean_fieldname';
+        $field_name              = 'float_fieldname';
         $field_value             = 'yessireebob';
-        $fieldhandler_type_chain = 'Boolean';
+        $fieldhandler_type_chain = 'Float';
         $options                 = array();
 
         $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals(null, $results);
+        $field_value = null;
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Boolean::escape
+     * @covers  Molajo\Fieldhandler\Adapter\Float::validate
      * @return  void
      * @since   1.0.0
      */
-    public function testEscape1()
+    public function testEscape()
     {
-        $field_name              = 'boolean_fieldname';
-        $field_value             = false;
-        $fieldhandler_type_chain = 'Boolean';
+        $field_name              = 'float_fieldname';
+        $field_value             = 123456789;
+        $fieldhandler_type_chain = 'Float';
         $options                 = array();
 
         $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Boolean::escape
+     * @covers  Molajo\Fieldhandler\Adapter\Float::validate
      * @return  void
      * @since   1.0.0
      */
     public function testEscape2()
     {
-        $field_name              = 'boolean_fieldname';
-        $field_value             = true;
-        $fieldhandler_type_chain = 'Boolean';
+        $field_name              = 'float_fieldname';
+        $field_value             = null;
+        $fieldhandler_type_chain = 'Float';
         $options                 = array();
 
         $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Boolean::escape
+     * @covers  Molajo\Fieldhandler\Adapter\Float::validate
      * @return  void
      * @since   1.0.0
      */
     public function testEscape3()
     {
-        $field_name              = 'boolean_fieldname';
-        $field_value             = null;
-        $fieldhandler_type_chain = 'Boolean';
+        $field_name              = 'float_fieldname';
+        $field_value             = 12345.6789;
+        $fieldhandler_type_chain = 'Float';
         $options                 = array();
 
         $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Boolean::escape
+     * @covers  Molajo\Fieldhandler\Adapter\Float::validate
      * @return void
      * @since   1.0.0
      */
     public function testEscapeFail()
     {
-        $field_name              = 'boolean_fieldname';
+        $field_name              = 'float_fieldname';
         $field_value             = 'yessireebob';
-        $fieldhandler_type_chain = 'Boolean';
+        $fieldhandler_type_chain = 'Float';
         $options                 = array();
 
         $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals(null, $results);
+        $field_value = null;
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Notequal Fieldhandler Test
+ * Alphanumeric Fieldhandler Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -10,17 +10,16 @@ namespace Molajo\Fieldhandler\Tests;
 
 use Molajo\Fieldhandler\Driver as driver;
 use PHPUnit_Framework_TestCase;
-use CommonApi\Exception\UnexpectedValueException;
 
 /**
- * Notequal Fieldhandler
+ * Alphanumeric Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class NotequalTest extends PHPUnit_Framework_TestCase
+class AlphanumericTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Adapter
@@ -42,56 +41,54 @@ class NotequalTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Equals::validate
-     * @return  void
+     * @covers  Molajo\Fieldhandler\Adapter\Alphanumeric::validate
+     * @return void
      * @since   1.0.0
      */
-    public function testValidate1()
+    public function testValid()
     {
-        $field_name              = 'field1';
-        $field_value             = 'dog';
-        $fieldhandler_type_chain = 'Notequal';
+        $field_name              = 'test';
+        $field_value             = 'Aa123';
+        $fieldhandler_type_chain = 'Alphanumeric';
         $options                 = array();
-        $options['not_equal']    = 'cat';
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results->getReturnValue());
+        $this->assertEquals(true, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Equals::validate
-     * @expectedException \CommonApi\Exception\UnexpectedValueException
+     * @covers  Molajo\Fieldhandler\Adapter\Alphanumeric::validate
      * @return void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name              = 'field1';
-        $field_value             = 'dog';
-        $fieldhandler_type_chain = 'Notequal';
+        $field_name              = 'test';
+        $field_value             = '@Aa123';
+        $fieldhandler_type_chain = 'Alphanumeric';
         $options                 = array();
-        $options['not_equal']    = 'dog';
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+
+        $this->assertEquals(false, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Equals::filter
-     * @return  void
+     * @covers  Molajo\Fieldhandler\Adapter\Alphanumeric::filter
+     * @return void
      * @since   1.0.0
      */
-    public function testFilter1()
+    public function testFilterValid()
     {
-        $field_name              = 'field1';
-        $field_value             = 'dog';
-        $fieldhandler_type_chain = 'Notequal';
+        $field_name              = 'test';
+        $field_value             = 'Aa123';
+        $fieldhandler_type_chain = 'Alphanumeric';
         $options                 = array();
-        $options['not_equal']    = 'cat';
 
         $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
@@ -101,38 +98,36 @@ class NotequalTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Equals::filter
+     * @covers  Molajo\Fieldhandler\Adapter\Alphanumeric::filter
      * @return void
      * @since   1.0.0
      */
     public function testFilterFail()
     {
-        $field_name              = 'field1';
-        $field_value             = 'dog';
-        $fieldhandler_type_chain = 'Notequal';
+        $field_name              = 'test';
+        $field_value             = '@Aa123';
+        $fieldhandler_type_chain = 'Alphanumeric';
         $options                 = array();
-        $options['not_equal']    = 'dog';
 
         $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $field_value = null;
+        $field_value = 'Aa123';
         $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Equals::escape
-     * @return  void
+     * @covers  Molajo\Fieldhandler\Adapter\Alphanumeric::filter
+     * @return void
      * @since   1.0.0
      */
-    public function testEscape1()
+    public function testEscapeValid()
     {
-        $field_name              = 'field1';
-        $field_value             = 'dog';
-        $fieldhandler_type_chain = 'Notequal';
+        $field_name              = 'test';
+        $field_value             = 'Aa123';
+        $fieldhandler_type_chain = 'Alphanumeric';
         $options                 = array();
-        $options['not_equal']    = 'cat';
 
         $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain, $options);
 
@@ -142,21 +137,20 @@ class NotequalTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Equals::escape
+     * @covers  Molajo\Fieldhandler\Adapter\Alphanumeric::filter
      * @return void
      * @since   1.0.0
      */
     public function testEscapeFail()
     {
-        $field_name              = 'field1';
-        $field_value             = 'dog';
-        $fieldhandler_type_chain = 'Notequal';
+        $field_name              = 'test';
+        $field_value             = '@Aa123';
+        $fieldhandler_type_chain = 'Alphanumeric';
         $options                 = array();
-        $options['not_equal']    = 'dog';
 
-        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $field_value = null;
+        $field_value = 'Aa123';
         $this->assertEquals($field_value, $results->getReturnValue());
 
         return;

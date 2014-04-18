@@ -56,14 +56,13 @@ class ContainsTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }
 
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Contains::validate
-     * @expectedException \CommonApi\Exception\UnexpectedValueException
      * @return  void
      * @since   1.0.0
      */
@@ -77,7 +76,7 @@ class ContainsTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals(false, $results->getReturnValue());
 
         return;
     }

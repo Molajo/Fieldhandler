@@ -23,9 +23,8 @@ class Alphanumeric extends AbstractFieldhandler implements FieldhandlerAdapterIn
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
@@ -47,9 +46,7 @@ class Alphanumeric extends AbstractFieldhandler implements FieldhandlerAdapterIn
         if ($this->field_value === null) {
         } else {
 
-            $test = ctype_alnum($this->field_value);
-
-            if ($test === true) {
+            if (ctype_alnum($this->field_value) === true) {
             } else {
                 $this->field_value = $this->filterByCharacter('ctype_alnum', $this->field_value);
             }
@@ -66,6 +63,6 @@ class Alphanumeric extends AbstractFieldhandler implements FieldhandlerAdapterIn
      */
     public function escape()
     {
-        return $this->filter;
+        return $this->filter();
     }
 }

@@ -55,7 +55,7 @@ class ObjectTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }

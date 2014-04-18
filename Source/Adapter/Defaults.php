@@ -23,7 +23,7 @@ class Defaults extends AbstractFieldhandler implements FieldhandlerAdapterInterf
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      */
     public function validate()

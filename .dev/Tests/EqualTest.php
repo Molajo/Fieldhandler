@@ -1,6 +1,6 @@
 <?php
 /**
- * Email Fieldhandler Test
+ * Equal Fieldhandler Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -13,14 +13,14 @@ use PHPUnit_Framework_TestCase;
 use CommonApi\Exception\UnexpectedValueException;
 
 /**
- * Email Fieldhandler
+ * Equal Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class EmailTest extends PHPUnit_Framework_TestCase
+class EqualTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Adapter
@@ -42,129 +42,124 @@ class EmailTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Email::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Equals::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidate1()
     {
-        $field_name              = 'email_address';
-        $field_value             = 'AmyStephen@Molajo.org';
-        $fieldhandler_type_chain = 'Email';
+        $field_name              = 'field1';
+        $field_value             = 'dog';
+        $fieldhandler_type_chain = 'Equal';
         $options                 = array();
+        $options['equals']       = 'dog';
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals(true, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Email::validate
-     * @expectedException \CommonApi\Exception\UnexpectedValueException
+     * @covers  Molajo\Fieldhandler\Adapter\Equals::validate
      * @return void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name              = 'email_address';
-        $field_value             = 'yessireebob';
-        $fieldhandler_type_chain = 'Email';
+        $field_name              = 'field1';
+        $field_value             = 'dog';
+        $fieldhandler_type_chain = 'Equal';
         $options                 = array();
+        $options['equals']       = 'cat';
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals(false, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Email::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Equals::filter
      * @return  void
      * @since   1.0.0
      */
     public function testFilter1()
     {
-        $field_name              = 'email_address';
-        $field_value             = 'AmyStephen@Molajo.org';
-        $fieldhandler_type_chain = 'Email';
+        $field_name              = 'field1';
+        $field_value             = 'dog';
+        $fieldhandler_type_chain = 'Equal';
         $options                 = array();
+        $options['equals']       = 'dog';
 
         $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Email::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Equals::filter
      * @return void
      * @since   1.0.0
      */
     public function testFilterFail()
     {
-        $field_name              = 'email_address';
-        $field_value             = 'yessireebob';
-        $fieldhandler_type_chain = 'Email';
+        $field_name              = 'field1';
+        $field_value             = 'dog';
+        $fieldhandler_type_chain = 'Equal';
         $options                 = array();
+        $options['equals']       = 'cat';
 
         $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $field_value = null;
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Email::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Equals::escape
      * @return  void
      * @since   1.0.0
      */
     public function testEscape1()
     {
-        $field_name              = 'email_address';
-        $field_value             = 'AmyStephen@Molajo.org';
-        $fieldhandler_type_chain = 'Email';
+        $field_name              = 'field1';
+        $field_value             = 'dog';
+        $fieldhandler_type_chain = 'Equal';
         $options                 = array();
+        $options['equals']       = 'dog';
 
         $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Email::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Equals::escape
      * @return void
      * @since   1.0.0
      */
     public function testEscapeFail()
     {
-        $field_name              = 'email_address';
-        $field_value             = 'yessireebob';
-        $fieldhandler_type_chain = 'Email';
+        $field_name              = 'field1';
+        $field_value             = 'dog';
+        $fieldhandler_type_chain = 'Equal';
         $options                 = array();
+        $options['equals']       = 'cat';
 
-        $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $field_value = null;
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
-    }
-
-    /**
-     * Tear down
-     *
-     * @return void
-     * @since   1.0.0
-     */
-    protected function tearDown()
-    {
     }
 }

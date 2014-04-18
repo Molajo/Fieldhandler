@@ -10,7 +10,6 @@ namespace Molajo\Fieldhandler\Tests;
 
 use Molajo\Fieldhandler\Driver as driver;
 use PHPUnit_Framework_TestCase;
-use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Digit Fieldhandler
@@ -55,7 +54,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals(true, $results->getReturnValue());
 
         return;
     }
@@ -74,14 +73,13 @@ class DigitTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }
 
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Digit::validate
-     * @expectedException \CommonApi\Exception\UnexpectedValueException
      * @return void
      * @since   1.0.0
      */
@@ -94,7 +92,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals(false, $results->getReturnValue());
 
         return;
     }
@@ -113,7 +111,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }
@@ -133,7 +131,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
         $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $field_value = null;
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }
@@ -152,7 +150,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }
@@ -172,7 +170,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
         $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $field_value = null;
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }

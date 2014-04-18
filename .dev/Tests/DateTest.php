@@ -43,7 +43,6 @@ class DateTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Adapter\Date::validate
-     * @expectedException \CommonApi\Exception\UnexpectedValueException
      * @return  void
      * @since   1.0.0
      */
@@ -56,7 +55,7 @@ class DateTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals(false, $results->getReturnValue());
 
         return;
     }
@@ -66,7 +65,7 @@ class DateTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testVlidateSuccess()
+    public function testFilterSuccess2()
     {
         $field_name              = 'this_is_a_date_field';
         $field_value             = '2013/04/01 01:00:00';
@@ -74,7 +73,7 @@ class DateTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }
@@ -94,7 +93,7 @@ class DateTest extends PHPUnit_Framework_TestCase
         $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain);
 
         $field_value = null;
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }
@@ -112,7 +111,7 @@ class DateTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }
@@ -132,7 +131,7 @@ class DateTest extends PHPUnit_Framework_TestCase
         $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain);
 
         $field_value = null;
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }
@@ -150,7 +149,7 @@ class DateTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }

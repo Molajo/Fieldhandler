@@ -43,9 +43,7 @@ class Float extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function filter()
     {
-        if (filter_var($this->field_value, FILTER_VALIDATE_FLOAT) === false) {
-            $this->field_value = null;
-        }
+        $this->field_value = filter_var($this->field_value, FILTER_VALIDATE_FLOAT);
 
         return $this->field_value;
     }

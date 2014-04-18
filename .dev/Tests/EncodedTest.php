@@ -1,6 +1,6 @@
 <?php
 /**
- * Alias Fieldhandler Test
+ * Encoded Fieldhandler Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -8,19 +8,19 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Driver as Adapter;
+use Molajo\Fieldhandler\Driver as driver;
 use PHPUnit_Framework_TestCase;
 use CommonApi\Exception\UnexpectedValueException;
 
 /**
- * Alias Fieldhandler
+ * Encoded Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class AliasTest extends PHPUnit_Framework_TestCase
+class EncodedTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Adapter
@@ -38,82 +38,81 @@ class AliasTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->driver = new Adapter();
+        $this->driver = new Driver();
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Alias::validate
-     * @expectedException \CommonApi\Exception\UnexpectedValueException
-     * @return void
+     * @covers  Molajo\Fieldhandler\Adapter\Encoded::validate
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name              = 'alias';
-        $field_value             = 'Jack and Jill';
-        $fieldhandler_type_chain = 'Alias';
+        $field_name              = 'dog';
+        $field_value             = 'my-apples&are green and red';
+        $fieldhandler_type_chain = 'Encoded';
         $options                 = array();
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals(false, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Alias::validate
+     * @covers  Molajo\Fieldhandler\Adapter\Encoded::validate
      * @return  void
      * @since   1.0.0
      */
-    public function testValid()
+    public function testValidateSucceed()
     {
-        $field_name              = 'alias';
-        $field_value             = 'jack-and-jill';
-        $fieldhandler_type_chain = 'Alias';
+        $field_name              = 'dog';
+        $field_value             = 'nothing';
+        $fieldhandler_type_chain = 'Encoded';
         $options                 = array();
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals(true, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Alias::filter
+     * @covers  Molajo\Fieldhandler\Adapter\Encoded::validate
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testFilterSucceed()
+    {
+        $field_name              = 'dog';
+        $field_value             = 'my-apples&are green and red';
+        $fieldhandler_type_chain = 'Encoded';
+        $options                 = array();
+
+        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+
+        $field_value = 'my-apples%26are%20green%20and%20red';
+        $this->assertEquals($field_value, $results->getReturnValue());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Adapter\Encoded::validate
      * @return void
      * @since   1.0.0
      */
     public function testFilterSucceed2()
     {
-        $field_name              = 'alias';
-        $field_value             = 'Jack and Jill';
-        $fieldhandler_type_chain = 'Alias';
+        $field_name              = 'dog';
+        $field_value             = 'nothing';
+        $fieldhandler_type_chain = 'Encoded';
         $options                 = array();
 
         $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals('jack-and-jill', $results);
-
-        return;
-    }
-
-    /**
-     * @covers  Molajo\Fieldhandler\Adapter\Alias::escape
-     * @return void
-     * @since   1.0.0
-     */
-    public function testEscapeSucceed3()
-    {
-        $field_name              = 'alias';
-        $field_value             = 'Jack *&and+Jill';
-        $fieldhandler_type_chain = 'Alias';
-        $options                 = array();
-
-        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
-
-        $this->assertEquals('jack-and-jill', $results);
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }

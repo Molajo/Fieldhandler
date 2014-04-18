@@ -58,7 +58,7 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
         $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $field_value = 'bark';
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }
@@ -79,8 +79,7 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $field_value = 'bark';
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals(true, $results->getReturnValue());
 
         return;
     }
@@ -101,7 +100,7 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }

@@ -54,7 +54,7 @@ class StringTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain, array());
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }

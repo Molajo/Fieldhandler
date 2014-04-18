@@ -29,12 +29,9 @@ class Datetime extends AbstractFieldhandler implements FieldhandlerAdapterInterf
     public function validate()
     {
         if ($this->field_value === null) {
-
         } else {
 
-            $value = strtotime($this->field_value);
-
-            if ($value === false) {
+            if (strtotime($this->field_value) === false) {
                 return false;
             }
         }
@@ -50,9 +47,7 @@ class Datetime extends AbstractFieldhandler implements FieldhandlerAdapterInterf
      */
     public function filter()
     {
-        $value = strtotime($this->field_value);
-
-        if ($value === false) {
+        if (strtotime($this->field_value) === false) {
             $this->field_value = null;
         }
 

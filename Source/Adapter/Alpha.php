@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
@@ -26,7 +25,6 @@ class Alpha extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
@@ -48,9 +46,7 @@ class Alpha extends AbstractFieldhandler implements FieldhandlerAdapterInterface
         if ($this->field_value === null) {
         } else {
 
-            $test = ctype_alpha($this->field_value);
-
-            if ($test === true) {
+            if (ctype_alpha($this->field_value) === true) {
             } else {
                 $this->field_value = $this->filterByCharacter('ctype_alpha', $this->field_value);
             }
@@ -67,8 +63,6 @@ class Alpha extends AbstractFieldhandler implements FieldhandlerAdapterInterface
      */
     public function escape()
     {
-        $this->filter();
-
-        return $this->field_value;
+        return $this->filter();
     }
 }

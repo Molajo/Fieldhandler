@@ -1,6 +1,6 @@
 <?php
 /**
- * Alphanumeric Fieldhandler Test
+ * Email Fieldhandler Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -12,14 +12,14 @@ use Molajo\Fieldhandler\Driver as driver;
 use PHPUnit_Framework_TestCase;
 
 /**
- * Alphanumeric Fieldhandler
+ * Email Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class AlphanumericTest extends PHPUnit_Framework_TestCase
+class EmailTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Adapter
@@ -41,119 +41,128 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Alphanumeric::validate
-     * @return void
+     * @covers  Molajo\Fieldhandler\Adapter\Email::validate
+     * @return  void
      * @since   1.0.0
      */
-    public function testValid()
+    public function testValidate1()
     {
-        $field_name              = 'test';
-        $field_value             = 'Aa123';
-        $fieldhandler_type_chain = 'Alphanumeric';
+        $field_name              = 'email_address';
+        $field_value             = 'AmyStephen@Molajo.org';
+        $fieldhandler_type_chain = 'Email';
         $options                 = array();
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals(true, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Alphanumeric::validate
-     * @expectedException \CommonApi\Exception\UnexpectedValueException
+     * @covers  Molajo\Fieldhandler\Adapter\Email::validate
      * @return void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name              = 'test';
-        $field_value             = '@Aa123';
-        $fieldhandler_type_chain = 'Alphanumeric';
+        $field_name              = 'email_address';
+        $field_value             = 'yessireebob';
+        $fieldhandler_type_chain = 'Email';
         $options                 = array();
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals(false, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Alphanumeric::filter
-     * @return void
+     * @covers  Molajo\Fieldhandler\Adapter\Email::filter
+     * @return  void
      * @since   1.0.0
      */
-    public function testFilterValid()
+    public function testFilter1()
     {
-        $field_name              = 'test';
-        $field_value             = 'Aa123';
-        $fieldhandler_type_chain = 'Alphanumeric';
+        $field_name              = 'email_address';
+        $field_value             = 'AmyStephen@Molajo.org';
+        $fieldhandler_type_chain = 'Email';
         $options                 = array();
 
         $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Alphanumeric::filter
+     * @covers  Molajo\Fieldhandler\Adapter\Email::validate
      * @return void
      * @since   1.0.0
      */
     public function testFilterFail()
     {
-        $field_name              = 'test';
-        $field_value             = '@Aa123';
-        $fieldhandler_type_chain = 'Alphanumeric';
+        $field_name              = 'email_address';
+        $field_value             = 'yessireebob';
+        $fieldhandler_type_chain = 'Email';
         $options                 = array();
 
         $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $field_value = 'Aa123';
-        $this->assertEquals($field_value, $results);
+        $field_value = null;
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Alphanumeric::filter
-     * @return void
+     * @covers  Molajo\Fieldhandler\Adapter\Email::validate
+     * @return  void
      * @since   1.0.0
      */
-    public function testEscapeValid()
+    public function testEscape1()
     {
-        $field_name              = 'test';
-        $field_value             = 'Aa123';
-        $fieldhandler_type_chain = 'Alphanumeric';
+        $field_name              = 'email_address';
+        $field_value             = 'AmyStephen@Molajo.org';
+        $fieldhandler_type_chain = 'Email';
         $options                 = array();
 
         $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Alphanumeric::filter
+     * @covers  Molajo\Fieldhandler\Adapter\Email::validate
      * @return void
      * @since   1.0.0
      */
     public function testEscapeFail()
     {
-        $field_name              = 'test';
-        $field_value             = '@Aa123';
-        $fieldhandler_type_chain = 'Alphanumeric';
+        $field_name              = 'email_address';
+        $field_value             = 'yessireebob';
+        $fieldhandler_type_chain = 'Email';
         $options                 = array();
 
         $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $field_value = 'Aa123';
-        $this->assertEquals($field_value, $results);
+        $field_value = null;
+        $this->assertEquals($field_value, $results->getReturnValue());
 
         return;
+    }
+
+    /**
+     * Tear down
+     *
+     * @return void
+     * @since   1.0.0
+     */
+    protected function tearDown()
+    {
     }
 }

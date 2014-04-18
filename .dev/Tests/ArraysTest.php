@@ -58,7 +58,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals(true, $results->getReturnValue());
 
         return;
     }
@@ -66,7 +66,6 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     /**
      * test Validate Fail
      *
-     * @expectedException \CommonApi\Exception\UnexpectedValueException
      * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @return void
      * @since   1.0.0
@@ -80,7 +79,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals(false, $results->getReturnValue());
 
         return;
     }
@@ -105,7 +104,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals(true, $results->getReturnValue());
 
         return;
     }
@@ -129,7 +128,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals(true, $results->getReturnValue());
 
         return;
     }
@@ -160,7 +159,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals(true, $results->getReturnValue());
 
         return;
     }
@@ -168,7 +167,6 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     /**
      * test Filter Fail 1
      *
-     * @expectedException \CommonApi\Exception\UnexpectedValueException
      * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @return void
      * @since   1.0.0
@@ -191,7 +189,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals(false, $results->getReturnValue());
 
         return;
     }
@@ -216,7 +214,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals(true, $results->getReturnValue());
 
         return;
     }
@@ -240,7 +238,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals($field_value, $results);
+        $this->assertEquals(true, $results->getReturnValue());
 
         return;
     }
