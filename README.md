@@ -4,7 +4,7 @@ Fieldhandler [Alpha]
 
 [![Build Status](https://travis-ci.org/Molajo/Fieldhandler.png?branch=master)](https://travis-ci.org/Molajo/Fieldhandler)
 
-Validates input. Filters input. Escapes (and formats) output.
+Field handling for PHP applications. Filters input. Escapes (and formats) output. Validates data.
 
 Standard data type and PHP-specific filters and validation, value list verification, callbacks,
 regex checking, and more. Use with rendering to ensure proper escaping of output data and for
@@ -12,70 +12,73 @@ special field-level formatting needs. Supports chaining. Easy to add adapters fo
 
 ## Basic Usage ##
 
-Each field is validated, filtered, or escaped by a single or set of field handler(s).
+In this example, three critical data functions are easily accomplished using the same instantiated class
+and simple API:
+
+* First, the `title` column is validated. Note how chaining of tests is possible. If validation failed,
+formatted error codes and messages can be retrieved and used to inform the site user.
+* Next, the `title` column is filtered to ensure no dangerous data exists in the column.
+* Finally, the `title` column is `escaped` for safe display and use in database queries.
 
 ```php
-    $fieldhandler = new \Molajo\Fieldhandler\Driver();
 
-    try {
-        $filtered = $fieldhandler->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+$fieldhandler = new Molajo\Fieldhandler\Driver();
 
-    } catch (Exception $e) {
-        //handle the exception
-    }
+$results = $fieldhandler->validate('Title', $title, 'string, required');
 
-    // Success!
-    echo $filtered;
+if ($results->getReturnValue() === false) {
+    $this->handleErrors($results->getErrorMessages());
+    return false;
+}
+
+$filtered = $fieldhandler->filter('Title', $title, 'string, required');
+$escaped = $fieldhandler->escape('Title', $filtered->getReturnValue(), 'string');
+
+$title = $escaped->getReturnValue();
+
 ```
 
 ###Three methods:###
 
 1. **validate** Validates the field value using field handler(s) requested.
+All field handlers requested will run and multiple error messages could be returned.
+Validate only returns a true or false value.
+
 2. **filter** Filters the field value using field handler(s) requested.
+The field value that results following the filter operation(s) is returned.
+No error messages are returned using the `filter` method.
+
 3. **escape** Escapes (or formats) the field for display, given the field handler(s) requested.
+The field value that results following the escape operation(s) is returned.
+No error messages are returned using the `escape` method.
 
 ###Four parameters:###
 
 1. **$field_name** specify the name of the field for use in exception messages;
 2. **$field_value** send in the existing data value to be validated, filtered, escaped or formatted;
-3. **$fieldhandler_type_chain** one or more field handlers, separated by a comma, processed in left-to-right order;
+3. **$fieldhandler_type_chain** one or more field handlers, separated by a comma, to be processed in left-to-right order;
 4. **$options** associative array of named pair values required by field handlers.
 
-###Two possible results:###
+###Results:###
 
-1. **Success** processed field value returned as the result
-2. **Failure** exception thrown
+An object is returned from all three methods that can be used in the following manner:
 
-####Example Usage####
-
-The following example demonstrates how to validate the `extension_id` field.
-
-* A chain of field handlers: `int`, `default`, `required`, and `foreignkey` which will be processed in this order.
-* The `options` associative array with two elements:
-    1. `default` and the default value for the field;
-    2. `required` element and the value `true`.
+1. To retrieve the results of operations:
 
 ```php
-    $fieldhandler = new /Molajo/Fieldhandler/Driver();
 
-    $fieldhandler_type_chain = array('int', 'default', 'required', 'foreignkey');
-    $options = array('default' => 14, 'required' => true, 'foreignkey' => 'id', 'table' => 'extensions');
+    // For Validation:
+    $validation_success_or_failure = $results->getReturnValue():
 
-    try {
-        $validated_value = $fieldhandler->validate('extension_id', 12, $fieldhandler_type_chain, $options);
-
-    } catch (Exception $e) {
-        //handle the exception here
-    }
-
-    // Success!
-    echo $validated_value;
+    // For Filtering and Escaping:
+    $field_value = $results->getReturnValue();
 
 ```
-**Results:**
 
-* **Success:** The returned value contains the results of operations (i.e., validated or filtered or escaped result);
-* **Failure:** An exception will be thrown that can be caught using the Try/Catch pattern, as presented above.
+2. To retrieve an associative array (code, message) of error messages (only for validation and if validation failed):
+
+    $messages = $results->getErrorMessages();
+
 
 ## Available Fieldhandlers ##
 
@@ -133,6 +136,14 @@ Value is true, 1, 'yes', or 'on.'
 
 ```php
     $validated_value = $fieldhandler->validate('agreement', 1, 'Accepted');
+
+```
+Note: The list of `accepted` values can be customized by including an array of desired values in the `options` array, as shown below:
+
+```php
+    $options = array();
+    $options['true_array'] = array(true, 1);
+    $validated_value = $fieldhandler->validate('agreement', 1, 'Accepted', $options);
 
 ```
 

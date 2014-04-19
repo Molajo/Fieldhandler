@@ -202,11 +202,11 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
         7000  => 'Field: {field_name} does not have a default value.',
         8000  => 'Field: {field_name} did not pass the {fieldhandler_type} data type test.',
         9000  => 'Field: {field_name} does not have a valid file extension.',
-        10000  => 'Field: {field_name} exceeded maximum value allowed.',
-        11000  => 'Field: {field_name} is less than the minimum value allowed.',
-        12000  => 'Field: {field_name} does not have a valid mime type.',
-        13000  => 'Field: {field_name} value is required, but was not provided.',
-        14000  => 'Field: {field_name} value does not match a value from the list allowed.',
+        10000 => 'Field: {field_name} exceeded maximum value allowed.',
+        11000 => 'Field: {field_name} is less than the minimum value allowed.',
+        12000 => 'Field: {field_name} does not have a valid mime type.',
+        13000 => 'Field: {field_name} value is required, but was not provided.',
+        14000 => 'Field: {field_name} value does not match a value from the list allowed.',
     );
 
     /**
