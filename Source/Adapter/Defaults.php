@@ -31,6 +31,7 @@ class Defaults extends AbstractFieldhandler implements FieldhandlerAdapterInterf
         $this->setDefault();
 
         if ($this->field_value === null) {
+            $this->setErrorMessage(7000);
             return false;
         }
 

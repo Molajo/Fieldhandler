@@ -36,6 +36,8 @@ class Fromto extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
             return true;
         }
 
+        $this->setErrorMessage(8000);
+
         return false;
     }
 

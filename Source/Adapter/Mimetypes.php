@@ -37,6 +37,8 @@ class Mimetypes extends AbstractFieldhandler implements FieldhandlerAdapterInter
             return true;
         }
 
+        $this->setErrorMessage(12000);
+
         return false;
     }
 

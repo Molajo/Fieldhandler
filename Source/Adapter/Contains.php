@@ -33,7 +33,12 @@ class Contains extends AbstractFieldhandler implements FieldhandlerAdapterInterf
             return true;
         }
 
-        return $this->testContains();
+        if ($this->testContains() === false) {
+            $this->setErrorMessage(1000);
+            return false;
+        }
+
+        return true;
     }
 
     /**

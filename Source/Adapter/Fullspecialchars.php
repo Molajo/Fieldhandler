@@ -33,6 +33,7 @@ class Fullspecialchars extends AbstractFieldhandler implements FieldhandlerAdapt
         }
 
         if (filter_var($this->field_value, FILTER_SANITIZE_FULL_SPECIAL_CHARS, $this->setFlags())) {
+            $this->setErrorMessage(8000);
             return false;
         }
 

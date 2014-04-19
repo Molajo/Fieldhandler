@@ -75,6 +75,10 @@ class AlphaTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(false, $results->getReturnValue());
 
+        $expected_message        = 'Field: test must only contain Alpha values.';
+        $message = $results->getErrorMessages();
+        $this->assertEquals($expected_message, $message[2000]);
+
         return;
     }
 

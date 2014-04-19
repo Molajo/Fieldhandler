@@ -23,16 +23,20 @@ class Alpha extends AbstractFieldhandler implements FieldhandlerAdapterInterface
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      */
     public function validate()
     {
         if ($this->field_value === null) {
-            return true;
+        } else {
+            if (ctype_alpha($this->field_value) === false) {
+                $this->setErrorMessage(2000);
+                return false;
+            }
         }
 
-        return ctype_alpha($this->field_value);
+        return true;
     }
 
     /**

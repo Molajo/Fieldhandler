@@ -35,6 +35,7 @@ class Fileextension extends AbstractFieldhandler implements FieldhandlerAdapterI
 
         if (is_file($this->field_value)) {
         } else {
+            $this->setErrorMessage(9000);
             return false;
         }
 
@@ -44,7 +45,10 @@ class Fileextension extends AbstractFieldhandler implements FieldhandlerAdapterI
             return true;
         }
 
+        $this->setErrorMessage(9000);
+
         return false;
+
     }
 
     /**

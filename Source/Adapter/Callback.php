@@ -33,6 +33,8 @@ class Callback extends AbstractFieldhandler implements FieldhandlerAdapterInterf
         }
 
         if (filter_var($this->field_value, FILTER_CALLBACK, $this->setCallback()) === false) {
+            $this->setErrorMessage(1000);
+
             return false;
         }
 

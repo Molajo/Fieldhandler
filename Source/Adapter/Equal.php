@@ -33,6 +33,8 @@ class Equal extends AbstractFieldhandler implements FieldhandlerAdapterInterface
             return true;
         }
 
+        $this->setErrorMessage(8000);
+
         return false;
     }
 

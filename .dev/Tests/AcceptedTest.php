@@ -49,14 +49,17 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateSuccess1()
     {
-        $field_name              = 'agreement';
-        $field_value             = 1;
+        $field_name              = 'Agreement';
+        $field_value             = 122222;
         $fieldhandler_type_chain = 'Accepted';
         $options                 = array();
+        $expected_message        = 'Field: Agreement does not have a valid value for Accepted data type.';
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
-        $this->assertEquals(true, $results->getReturnValue());
+        $message = $results->getErrorMessages();
+        $this->assertEquals($expected_message, $message[1000]);
+        $this->assertEquals(false, $results->getReturnValue());
 
         return;
     }
@@ -133,13 +136,16 @@ class AcceptedTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateUnsuccessful()
     {
-        $field_name              = 'agreement';
+        $field_name              = 'Agreement';
         $field_value             = 'nope';
         $fieldhandler_type_chain = 'Accepted';
         $options                 = array();
+        $expected_message        = 'Field: Agreement does not have a valid value for Accepted data type.';
 
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
+        $message = $results->getErrorMessages();
+        $this->assertEquals($expected_message, $message[1000]);
         $this->assertEquals(false, $results->getReturnValue());
 
         return;

@@ -36,6 +36,8 @@ class Ip extends AbstractFieldhandler implements FieldhandlerAdapterInterface
             return true;
         }
 
+        $this->setErrorMessage(2000);
+
         return false;
     }
 

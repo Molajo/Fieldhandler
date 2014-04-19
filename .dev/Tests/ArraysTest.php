@@ -64,13 +64,42 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers  Molajo\Fieldhandler\Adapter\Arrays::validate
+     * @return void
+     * @since   1.0.0
+     */
+    public function testInvalidKeysValuesCount()
+    {
+        $input    = array();
+        $input[1] = 1;
+        $input[2] = 2;
+
+        $field_name                    = 'test';
+        $field_value                   = $input;
+        $fieldhandler_type_chain       = 'Arrays';
+        $options                       = array();
+        $options['array_valid_keys']   = array(1, 3, 4);
+        $options['array_valid_values'] = array(1, 3, 4);
+        $options['array_minimum']      = 0;
+        $options['array_maximum']      = 1;
+
+        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+
+        $this->assertEquals(false, $results->getReturnValue());
+        $messages = $results->getErrorMessages();
+        $this->assertEquals(3, count($messages));
+
+        return;
+    }
+
+    /**
      * test Validate Fail
      *
      * @covers  Molajo\Fieldhandler\Adapter\Default::validate
      * @return void
      * @since   1.0.0
      */
-    public function testValidateSuccess2()
+    public function testValidateFailure()
     {
         $field_name              = 'alias';
         $field_value             = 'dog';
@@ -80,6 +109,10 @@ class ArraysTest extends PHPUnit_Framework_TestCase
         $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
 
         $this->assertEquals(false, $results->getReturnValue());
+
+        $expected_message = 'Field: alias is not an array.';
+        $message          = $results->getErrorMessages();
+        $this->assertEquals($expected_message, $message[3000]);
 
         return;
     }

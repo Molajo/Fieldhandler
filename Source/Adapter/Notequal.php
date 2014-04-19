@@ -30,6 +30,7 @@ class Notequal extends AbstractFieldhandler implements FieldhandlerAdapterInterf
     public function validate()
     {
         if ($this->field_value === $this->getNotEqual()) {
+            $this->setErrorMessage(1000);
             return false;
         }
 

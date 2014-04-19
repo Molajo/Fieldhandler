@@ -29,6 +29,9 @@ class Required extends AbstractFieldhandler implements FieldhandlerAdapterInterf
     public function validate()
     {
         if ($this->field_value === null) {
+
+            $this->setErrorMessage(13000);
+
             return false;
         }
 

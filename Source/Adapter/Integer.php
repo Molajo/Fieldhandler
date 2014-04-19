@@ -36,6 +36,8 @@ class Integer extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
             return true;
         }
 
+        $this->setErrorMessage(2000);
+
         return false;
     }
 

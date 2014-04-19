@@ -40,6 +40,8 @@ class Boolean extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
             return true;
         }
 
+        $this->setErrorMessage(1000);
+
         return false;
     }
 

@@ -32,7 +32,12 @@ class Alias extends AbstractFieldhandler implements FieldhandlerAdapterInterface
             return true;
         }
 
-        return $this->testValidate();
+        if ($this->testValidate() === false) {
+            $this->setErrorMessage(1000);
+            return false;
+        }
+
+        return true;
     }
 
     /**

@@ -56,6 +56,10 @@ class AliasTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(false, $results->getReturnValue());
 
+        $expected_message        = 'Field: alias does not have a valid value for Alias data type.';
+        $message = $results->getErrorMessages();
+        $this->assertEquals($expected_message, $message[1000]);
+
         return;
     }
 

@@ -34,6 +34,7 @@ class Minimum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
         }
 
         if ($this->field_value > $this->getMinimum()) {
+            $this->setErrorMessage(11000);
             return false;
         }
 

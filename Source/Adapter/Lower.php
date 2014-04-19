@@ -29,8 +29,12 @@ class Lower extends AbstractFieldhandler implements FieldhandlerAdapterInterface
     public function validate()
     {
         if ($this->field_value === null) {
-        } else {
-            return ctype_lower($this->field_value);
+            return true;
+        }
+
+        if (ctype_lower($this->field_value) === false) {
+            $this->setErrorMessage(2000);
+            return false;
         }
 
         return true;

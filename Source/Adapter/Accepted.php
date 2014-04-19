@@ -23,13 +23,12 @@ class Accepted extends AbstractFieldhandler implements FieldhandlerAdapterInterf
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      */
     public function validate()
     {
         if ($this->field_value === null) {
-            return false;
 
         } else {
             $testValue = $this->field_value;
@@ -39,12 +38,13 @@ class Accepted extends AbstractFieldhandler implements FieldhandlerAdapterInterf
                 $testValue = strtolower($testValue);
             }
 
-            if (in_array($testValue, $this->true_array, true)) {
-                return true;
+            if (in_array($testValue, $this->true_array) === false) {
+                $this->setErrorMessage(1000);
+                return false;
             }
         }
 
-        return false;
+        return true;
     }
 
     /**

@@ -32,6 +32,7 @@ class Datetime extends AbstractFieldhandler implements FieldhandlerAdapterInterf
         } else {
 
             if (strtotime($this->field_value) === false) {
+                $this->setErrorMessage(2000);
                 return false;
             }
         }

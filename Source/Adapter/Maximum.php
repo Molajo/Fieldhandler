@@ -30,12 +30,16 @@ class Maximum extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
     public function validate()
     {
         if ($this->field_value === null) {
+            return true;
+
         } else {
 
             if ($this->getMaximum() > $this->field_value) {
                 return true;
             }
         }
+
+        $this->setErrorMessage(10000);
 
         return false;
     }

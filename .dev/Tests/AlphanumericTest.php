@@ -75,6 +75,10 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(false, $results->getReturnValue());
 
+        $expected_message        = 'Field: test must only contain Alphanumeric values.';
+        $message = $results->getErrorMessages();
+        $this->assertEquals($expected_message, $message[2000]);
+
         return;
     }
 

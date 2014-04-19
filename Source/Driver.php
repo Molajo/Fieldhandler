@@ -106,7 +106,6 @@ class Driver implements ValidateInterface, FilterInterface, EscapeInterface
             $class             = $this->getType($fieldhandler_type);
 
             try {
-
                 $fieldhandler_instance = new $class ($fieldhandler_type, $method, $field_name, $field_value, $options);
 
             } catch (Exception $e) {
@@ -122,9 +121,16 @@ class Driver implements ValidateInterface, FilterInterface, EscapeInterface
 
             $messages = $fieldhandler_instance->getErrorMessages();
 
+            if (count($messages) > 0) {
+                $tokens['field_name']        = $field_name;
+                $tokens['field_value']       = $field_value;
+                $tokens['fieldhandler_type'] = $fieldhandler_type;
+                $tokens['method']            = $method;
+                $messages                    = $this->setErrorMessageTokens($messages, $tokens);
+            }
+
             if (count($messages) > 0 && is_array($messages)) {
-                $temp           = array_unique(array_merge($messages, $error_messages));
-                $error_messages = $temp;
+                $error_messages = $messages + $error_messages;
             }
 
             if ($method === 'validate') {
@@ -138,6 +144,36 @@ class Driver implements ValidateInterface, FilterInterface, EscapeInterface
         }
 
         return $this->getFieldhandlerItem($field_name, $return_value, $error_messages);
+    }
+
+    /**
+     * Replace tokens in error messages
+     *
+     * @param   array $error_messages
+     * @param   array $token
+     *
+     * @return  array
+     * @since   1.0.0
+     */
+    protected function setErrorMessageTokens(array $error_messages, array $tokens)
+    {
+        $replace = array();
+        foreach ($tokens as $token => $value) {
+            if (is_array($value)) {
+                $value = implode(',', $value);
+            } elseif (is_object($value)) {
+                $value = 'object';
+            }
+            $value                       = (string)$value;
+            $replace['{' . $token . '}'] = $value;
+        }
+
+        $new = array();
+        foreach ($error_messages as $code => $message) {
+            $new[$code] = strtr($message, $replace);
+        }
+
+        return $new;
     }
 
     /**
@@ -197,8 +233,10 @@ class Driver implements ValidateInterface, FilterInterface, EscapeInterface
     {
         if (strpos($fieldhandler_type_chain, ',')) {
             $fieldhandler_types = explode(',', $fieldhandler_type_chain);
+
         } else {
             $fieldhandler_types = array();
+
             if (trim($fieldhandler_type_chain) == '' || $fieldhandler_type_chain === null) {
             } else {
                 $fieldhandler_types[] = $fieldhandler_type_chain;

@@ -32,12 +32,34 @@ class Arrays extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
             return true;
         }
 
+        $edits_passed = true;
+
         if (is_array($this->field_value)) {
         } else {
+            $this->setErrorMessage(3000);
+            $edits_passed = false;
+        }
+
+        if ($this->testValues(false) === false) {
+            $this->setErrorMessage(4000);
+            $edits_passed = false;
+        }
+
+        if ($this->testKeys(false) === false) {
+            $this->setErrorMessage(5000);
+            $edits_passed = false;
+        }
+
+        if ($this->testCount(false) === false) {
+            $this->setErrorMessage(6000);
+            $edits_passed = false;
+        }
+
+        if ($edits_passed === false) {
             return false;
         }
 
-        return $this->testValues(false);
+        return true;
     }
 
     /**
@@ -60,6 +82,10 @@ class Arrays extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
             }
 
             $this->testValues(true);
+
+            $this->testKeys(true);
+
+            $this->testCount(true);
         }
 
         return $this->field_value;
@@ -74,6 +100,51 @@ class Arrays extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
     public function escape()
     {
         return $this->filter();
+    }
+
+    /**
+     * Test Array Entry Keys
+     *
+     * @param   boolean $filter
+     *
+     * @return  boolean
+     * @since   1.0.0
+     */
+    protected function testKeys($filter = false)
+    {
+        if (isset($this->options['array_valid_keys'])) {
+        } else {
+            return true;
+        }
+
+        $array_valid_values = $this->options['array_valid_keys'];
+
+        if (is_array($array_valid_values) && count($array_valid_values) > 0) {
+        } else {
+            return true;
+        }
+
+        $entries = $this->field_value;
+
+        foreach ($entries as $entry) {
+
+            if (in_array($entry, $array_valid_values)) {
+
+            } else {
+
+                if ($filter === true) {
+                    unset ($entry);
+                } else {
+                    return false;
+                }
+            }
+        }
+
+        if ($filter === true) {
+            $this->field_value = $entries;
+        }
+
+        return true;
     }
 
     /**
@@ -116,6 +187,42 @@ class Arrays extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
 
         if ($filter === true) {
             $this->field_value = $entries;
+        }
+
+        return true;
+    }
+
+    /**
+     * Test Array Entry Values
+     *
+     * @param   boolean $filter
+     *
+     * @return  boolean
+     * @since   1.0.0
+     */
+    protected function testCount($filter = false)
+    {
+        if (isset($this->options['array_minimum'])) {
+            $array_minimum = (int)$this->options['array_minimum'];
+        } else {
+            $array_minimum = 0;
+        }
+
+        if (isset($this->options['array_maximum'])) {
+            $array_maximum = (int)$this->options['array_maximum'];
+        } else {
+            $array_maximum = 9999999999;
+        }
+
+        if (count($this->field_value) < $array_minimum
+            || count($this->field_value) > $array_maximum
+        ) {
+
+            if ($filter === true) {
+                $this->field_value = null;
+            }
+
+            return false;
         }
 
         return true;

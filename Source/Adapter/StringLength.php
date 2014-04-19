@@ -42,6 +42,8 @@ class Stringlength extends AbstractFieldhandler implements FieldhandlerAdapterIn
             return true;
         }
 
+        $this->setErrorMessage(8000);
+
         return false;
     }
 

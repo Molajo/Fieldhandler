@@ -36,6 +36,8 @@ class String extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
             return true;
         }
 
+        $this->setErrorMessage(1000);
+
         return false;
     }
 

@@ -23,12 +23,21 @@ class Digit extends AbstractFieldhandler implements FieldhandlerAdapterInterface
     /**
      * Validate Input
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      */
     public function validate()
     {
-        return ctype_digit($this->field_value);
+        if ($this->field_value === null) {
+            return true;
+        }
+
+        if (ctype_digit($this->field_value) === false) {
+            $this->setErrorMessage(2000);
+            return false;
+        }
+
+        return true;
     }
 
     /**

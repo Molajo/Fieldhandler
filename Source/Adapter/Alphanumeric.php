@@ -32,7 +32,13 @@ class Alphanumeric extends AbstractFieldhandler implements FieldhandlerAdapterIn
             return true;
         }
 
-        return ctype_alnum($this->field_value);
+        if (ctype_alnum($this->field_value)) {
+            return true;
+        }
+
+        $this->setErrorMessage(2000);
+
+        return false;
     }
 
     /**

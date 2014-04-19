@@ -32,7 +32,13 @@ class Float extends AbstractFieldhandler implements FieldhandlerAdapterInterface
             return true;
         }
 
-        return filter_var($this->field_value, FILTER_VALIDATE_FLOAT);
+        if (filter_var($this->field_value, FILTER_VALIDATE_FLOAT)) {
+            return true;
+        }
+
+        $this->setErrorMessage(1000);
+
+        return false;
     }
 
     /**

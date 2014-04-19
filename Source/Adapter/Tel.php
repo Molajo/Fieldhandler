@@ -36,6 +36,8 @@ class Tel extends AbstractFieldhandler implements FieldhandlerAdapterInterface
             return true;
         }
 
+        $this->setErrorMessage(1000);
+
         return false;
     }
 

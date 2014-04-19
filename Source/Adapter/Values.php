@@ -37,6 +37,8 @@ class Values extends AbstractFieldhandler implements FieldhandlerAdapterInterfac
             return true;
         }
 
+        $this->setErrorMessage(14000);
+
         return false;
     }
 

@@ -30,9 +30,15 @@ class Encoded extends AbstractFieldhandler implements FieldhandlerAdapterInterfa
      */
     public function validate()
     {
+        if ($this->field_value === null) {
+            return true;
+        }
+
         if ($this->field_value === filter_var($this->field_value, FILTER_SANITIZE_ENCODED, $this->setFlags())) {
             return true;
         }
+
+        $this->setErrorMessage(8000);
 
         return false;
     }

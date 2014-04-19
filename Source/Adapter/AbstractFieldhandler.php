@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Adapter;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\FieldhandlerAdapterInterface;
 
 /**
@@ -194,55 +193,20 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
      * @since  1.0.0
      */
     protected $standard_messages = array(
-        1000  => '',
-        2000  => '',
-        3000  => '',
-        4000  => '',
-        5000  => '',
-        6000  => '',
-        7000  => '',
-        8000  => '',
-        9000  => '',
-        10000 => '',
-        11000 => '',
-        12000 => '',
-        13000 => '',
-        14000 => '',
-        15000 => '',
-        16000 => '',
-        17000 => '',
-        18000 => '',
-        19000 => '',
-        20000 => '',
-        21000 => '',
-        22000 => '',
-        23000 => '',
-        24000 => '',
-        25000 => '',
-        26000 => '',
-        27000 => '',
-        28000 => '',
-        29000 => '',
-        30000 => '',
-        31000 => '',
-        32000 => '',
-        33000 => '',
-        34000 => '',
-        35000 => '',
-        36000 => '',
-        37000 => '',
-        38000 => '',
-        39000 => '',
-        40000 => '',
-        41000 => '',
-        42000 => '',
-        43000 => '',
-        44000 => '',
-        45000 => '',
-        46000 => '',
-        47000 => '',
-        48000 => '',
-        49000 => ''
+        1000  => 'Field: {field_name} does not have a valid value for {fieldhandler_type} data type.',
+        2000  => 'Field: {field_name} must only contain {fieldhandler_type} values.',
+        3000  => 'Field: {field_name} is not an array.',
+        4000  => 'Field: {field_name} has an invalid array element value.',
+        5000  => 'Field: {field_name} has an invalid array key entry.',
+        6000  => 'Field: {field_name} does not have the correct number of array values.',
+        7000  => 'Field: {field_name} does not have a default value.',
+        8000  => 'Field: {field_name} did not pass the {fieldhandler_type} data type test.',
+        9000  => 'Field: {field_name} does not have a valid file extension.',
+        10000  => 'Field: {field_name} exceeded maximum value allowed.',
+        11000  => 'Field: {field_name} is less than the minimum value allowed.',
+        12000  => 'Field: {field_name} does not have a valid mime type.',
+        13000  => 'Field: {field_name} value is required, but was not provided.',
+        14000  => 'Field: {field_name} value does not match a value from the list allowed.',
     );
 
     /**
@@ -289,10 +253,10 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
             date_default_timezone_set(@date_default_timezone_get());
         }
 
-        $this->true_array[] = true;
-        $this->true_array[] = 1;
-        $this->true_array[] = 'yes';
-        $this->true_array[] = 'on';
+        $this->true_array[true]  = true;
+        $this->true_array[1]     = 1;
+        $this->true_array['yes'] = 'yes';
+        $this->true_array['on']  = 'on';
 
         $this->fieldhandler_type = $fieldhandler_type;
         $this->method            = $method;
@@ -339,6 +303,26 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
     abstract public function escape();
 
     /**
+     * Set an error message
+     *
+     * $param   integer  $code
+     * $param   string   $message
+     *
+     * @return  $this
+     * @since   1.0.0
+     */
+    protected function setErrorMessage($code, $message = '')
+    {
+        if (isset($this->standard_messages[$code])) {
+            $this->error_messages[$code] = $this->standard_messages[$code];
+        } else {
+            $this->error_messages[$code] = $message;
+        }
+
+        return $this;
+    }
+
+    /**
      * Return error messages
      *
      * @return  array
@@ -347,21 +331,6 @@ abstract class AbstractFieldhandler implements FieldhandlerAdapterInterface
     public function getErrorMessages()
     {
         return $this->error_messages;
-    }
-
-    /**
-     * Set an error message
-     *
-     * $param   integer  $code
-     *
-     * @return  $this
-     * @since   1.0.0
-     */
-    protected function setErrorMessage($code)
-    {
-        $this->error_messages[$code] = trim($this->field_name) . ' Method Failed: ' . $this->method . $this->message;
-
-        return $this;
     }
 
     /**

@@ -32,7 +32,12 @@ class Email extends AbstractFieldhandler implements FieldhandlerAdapterInterface
             return true;
         }
 
-        return filter_var($this->field_value, FILTER_VALIDATE_EMAIL);
+        if (filter_var($this->field_value, FILTER_VALIDATE_EMAIL) === false) {
+            $this->setErrorMessage(2000);
+            return false;
+        }
+
+        return true;
     }
 
     /**
