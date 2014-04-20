@@ -19,11 +19,13 @@ $results  = createClassMap($base . '/vendor/commonapi/exception/', 'CommonApi\\E
 $classmap = array_merge($classmap, $results);
 $classmap = createClassMap($base . '/vendor/commonapi/model/', 'CommonApi\\Model\\');
 $classmap = array_merge($classmap, $results);
-$results  = createClassMap($base . '/Source/Adapter/', 'Molajo\\Fieldhandler\\Adapter\\');
+$results  = createClassMap($base . '/Source/Constraint/', 'Molajo\\Fieldhandler\\Constraint\\');
 $classmap = array_merge($classmap, $results);
 
-$classmap['Molajo\\Fieldhandler\\Driver'] = $base . '/Source/Driver.php';
-$classmap['Molajo\\Fieldhandler\\FieldhandlerItem'] = $base . '/Source/FieldhandlerItem.php';
+$classmap['Molajo\\Fieldhandler\\Driver']             = $base . '/Source/Driver.php';
+$classmap['Molajo\\Fieldhandler\\EscapeResponse']     = $base . '/Source/EscapeResponse.php';
+$classmap['Molajo\\Fieldhandler\\FilterResponse']     = $base . '/Source/FilterResponse.php';
+$classmap['Molajo\\Fieldhandler\\ValidationResponse'] = $base . '/Source/ValidationResponse.php';
 ksort($classmap);
 
 spl_autoload_register(

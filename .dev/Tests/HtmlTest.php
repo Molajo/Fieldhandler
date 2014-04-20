@@ -23,7 +23,7 @@ use CommonApi\Exception\UnexpectedValueException;
 class HtmlTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Adapter
+     * Constraint
      *
      * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0.0
@@ -49,12 +49,12 @@ class HtmlTest extends PHPUnit_Framework_TestCase
      */
     public function testFilter()
     {
-        $field_name              = 'fieldname';
-        $field_value             = '<script>("Gotcha!");</script><p>I am fine.</p>';
-        $fieldhandler_type_chain = 'Html';
-        $filtered                = '("Gotcha!");<p>I am fine.</p>';
+        $field_name  = 'fieldname';
+        $field_value = '<script>("Gotcha!");</script><p>I am fine.</p>';
+        $constraint  = 'Html';
+        $filtered    = '("Gotcha!");<p>I am fine.</p>';
 
-        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, array());
+        $results = $this->driver->filter($field_name, $field_value, $constraint, array());
 
         $this->assertEquals($filtered, $results->getReturnValue());
 
@@ -69,11 +69,11 @@ class HtmlTest extends PHPUnit_Framework_TestCase
      */
     public function testValidate()
     {
-        $field_name              = 'fieldname';
-        $field_value             = '<p>Yup.</p>';
-        $fieldhandler_type_chain = 'Html';
+        $field_name  = 'fieldname';
+        $field_value = '<p>Yup.</p>';
+        $constraint  = 'Html';
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, array());
+        $results = $this->driver->validate($field_name, $field_value, $constraint, array());
 
         $this->assertEquals(true, $results->getReturnValue());
 

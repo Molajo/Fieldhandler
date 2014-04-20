@@ -22,7 +22,7 @@ use PHPUnit_Framework_TestCase;
 class EmailTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Adapter
+     * Constraint
      *
      * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0.0
@@ -41,18 +41,18 @@ class EmailTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Email::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Email::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidate1()
     {
-        $field_name              = 'email_address';
-        $field_value             = 'AmyStephen@Molajo.org';
-        $fieldhandler_type_chain = 'Email';
-        $options                 = array();
+        $field_name  = 'email_address';
+        $field_value = 'AmyStephen@Molajo.org';
+        $constraint  = 'Email';
+        $options     = array();
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getReturnValue());
 
@@ -60,18 +60,18 @@ class EmailTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Email::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Email::validate
      * @return void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name              = 'email_address';
-        $field_value             = 'yessireebob';
-        $fieldhandler_type_chain = 'Email';
-        $options                 = array();
+        $field_name  = 'email_address';
+        $field_value = 'yessireebob';
+        $constraint  = 'Email';
+        $options     = array();
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(false, $results->getReturnValue());
 
@@ -79,18 +79,18 @@ class EmailTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Email::filter
+     * @covers  Molajo\Fieldhandler\Constraint\Email::filter
      * @return  void
      * @since   1.0.0
      */
     public function testFilter1()
     {
-        $field_name              = 'email_address';
-        $field_value             = 'AmyStephen@Molajo.org';
-        $fieldhandler_type_chain = 'Email';
-        $options                 = array();
+        $field_name  = 'email_address';
+        $field_value = 'AmyStephen@Molajo.org';
+        $constraint  = 'Email';
+        $options     = array();
 
-        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getReturnValue());
 
@@ -98,18 +98,18 @@ class EmailTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Email::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Email::validate
      * @return void
      * @since   1.0.0
      */
     public function testFilterFail()
     {
-        $field_name              = 'email_address';
-        $field_value             = 'yessireebob';
-        $fieldhandler_type_chain = 'Email';
-        $options                 = array();
+        $field_name  = 'email_address';
+        $field_value = 'yessireebob';
+        $constraint  = 'Email';
+        $options     = array();
 
-        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $constraint, $options);
 
         $field_value = null;
         $this->assertEquals($field_value, $results->getReturnValue());
@@ -118,18 +118,18 @@ class EmailTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Email::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Email::validate
      * @return  void
      * @since   1.0.0
      */
     public function testEscape1()
     {
-        $field_name              = 'email_address';
-        $field_value             = 'AmyStephen@Molajo.org';
-        $fieldhandler_type_chain = 'Email';
-        $options                 = array();
+        $field_name  = 'email_address';
+        $field_value = 'AmyStephen@Molajo.org';
+        $constraint  = 'Email';
+        $options     = array();
 
-        $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->escape($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getReturnValue());
 
@@ -137,18 +137,18 @@ class EmailTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Email::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Email::validate
      * @return void
      * @since   1.0.0
      */
     public function testEscapeFail()
     {
-        $field_name              = 'email_address';
-        $field_value             = 'yessireebob';
-        $fieldhandler_type_chain = 'Email';
-        $options                 = array();
+        $field_name  = 'email_address';
+        $field_value = 'yessireebob';
+        $constraint  = 'Email';
+        $options     = array();
 
-        $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->escape($field_name, $field_value, $constraint, $options);
 
         $field_value = null;
         $this->assertEquals($field_value, $results->getReturnValue());

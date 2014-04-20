@@ -23,7 +23,7 @@ use CommonApi\Exception\UnexpectedValueException;
 class RegexTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Adapter
+     * Constraint
      *
      * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0.0
@@ -42,19 +42,19 @@ class RegexTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Regex::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Regex::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidate1()
     {
-        $field_name              = 'number';
-        $field_value             = '54321';
-        $fieldhandler_type_chain = 'Regex';
-        $options                 = array();
-        $options['regex']        = "/[0-9]/";
+        $field_name       = 'number';
+        $field_value      = '54321';
+        $constraint       = 'Regex';
+        $options          = array();
+        $options['regex'] = "/[0-9]/";
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getReturnValue());
 
@@ -62,19 +62,19 @@ class RegexTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Regex::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Regex::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name              = 'alpha';
-        $field_value             = '123';
-        $fieldhandler_type_chain = 'Regex';
-        $options                 = array();
-        $options['regex']        = "/[A-Z]/";
+        $field_name       = 'alpha';
+        $field_value      = '123';
+        $constraint       = 'Regex';
+        $options          = array();
+        $options['regex'] = "/[A-Z]/";
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(false, $results->getReturnValue());
 

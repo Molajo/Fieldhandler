@@ -23,7 +23,7 @@ use CommonApi\Exception\UnexpectedValueException;
 class FromtoTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Adapter
+     * Constraint
      *
      * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0.0
@@ -42,20 +42,20 @@ class FromtoTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Fromto::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Fromto::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidate1()
     {
-        $field_name              = 'fieldname';
-        $field_value             = 5;
-        $fieldhandler_type_chain = 'Fromto';
-        $options                 = array();
-        $options['from']         = 0;
-        $options['to']           = 10;
+        $field_name      = 'fieldname';
+        $field_value     = 5;
+        $constraint      = 'Fromto';
+        $options         = array();
+        $options['from'] = 0;
+        $options['to']   = 10;
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getReturnValue());
 
@@ -63,20 +63,20 @@ class FromtoTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Fromto::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Fromto::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name              = 'fieldname';
-        $field_value             = 500;
-        $fieldhandler_type_chain = 'Fromto';
-        $options                 = array();
-        $options['from']         = 0;
-        $options['to']           = 10;
+        $field_name      = 'fieldname';
+        $field_value     = 500;
+        $constraint      = 'Fromto';
+        $options         = array();
+        $options['from'] = 0;
+        $options['to']   = 10;
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(false, $results->getReturnValue());
 

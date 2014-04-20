@@ -23,7 +23,7 @@ use CommonApi\Exception\UnexpectedValueException;
 class ObjectTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Adapter
+     * Constraint
      *
      * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0.0
@@ -42,18 +42,18 @@ class ObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Objects::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Objects::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidate1()
     {
-        $field_name              = 'field1';
-        $field_value             = new \stdClass();
-        $fieldhandler_type_chain = 'Object';
-        $options                 = array();
+        $field_name  = 'field1';
+        $field_value = new \stdClass();
+        $constraint  = 'Object';
+        $options     = array();
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getReturnValue());
 
@@ -61,19 +61,19 @@ class ObjectTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Objects::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Objects::validate
      * @expectedException \CommonApi\Exception\UnexpectedValueException
      * @return void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name              = 'field1';
-        $field_value             = 'dog';
-        $fieldhandler_type_chain = 'Object';
-        $options                 = array();
+        $field_name  = 'field1';
+        $field_value = 'dog';
+        $constraint  = 'Object';
+        $options     = array();
 
-        $results = $this->driver->validate(false, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate(false, $field_value, $constraint, $options);
 
         return;
     }

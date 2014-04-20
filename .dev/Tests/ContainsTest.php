@@ -23,7 +23,7 @@ use CommonApi\Exception\UnexpectedValueException;
 class ContainsTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Adapter
+     * Constraint
      *
      * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0.0
@@ -42,19 +42,19 @@ class ContainsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Contains::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Contains::validate
      * @return  void
      * @since   1.0.0
      */
     public function testEscape()
     {
-        $field_name              = 'fieldname';
-        $field_value             = 'first dog last';
-        $fieldhandler_type_chain = 'Contains';
-        $options                 = array();
-        $options['contains']     = 'dog';
+        $field_name          = 'fieldname';
+        $field_value         = 'first dog last';
+        $constraint          = 'Contains';
+        $options             = array();
+        $options['contains'] = 'dog';
 
-        $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->escape($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getReturnValue());
 
@@ -62,19 +62,19 @@ class ContainsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Contains::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Contains::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name              = 'fieldname';
-        $field_value             = 'first cat last';
-        $fieldhandler_type_chain = 'Contains';
-        $options                 = array();
-        $options['contains']     = 'dog';
+        $field_name          = 'fieldname';
+        $field_value         = 'first cat last';
+        $constraint          = 'Contains';
+        $options             = array();
+        $options['contains'] = 'dog';
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(false, $results->getReturnValue());
 

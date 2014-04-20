@@ -22,7 +22,7 @@ use PHPUnit_Framework_TestCase;
 class ValuesTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Adapter
+     * Constraint
      *
      * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0.0
@@ -41,7 +41,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\values::filter
+     * @covers  Molajo\Fieldhandler\Constraint\values::filter
      * @return  void
      * @since   1.0.0
      */
@@ -49,11 +49,11 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     {
         $field_name                    = 'test';
         $field_value                   = 'a';
-        $fieldhandler_type_chain       = 'Values';
+        $constraint                    = 'Values';
         $options                       = array();
         $options['array_valid_values'] = array('a', 'b', 'c');
 
-        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('a', $results->getReturnValue());
 
@@ -61,7 +61,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\values::filter
+     * @covers  Molajo\Fieldhandler\Constraint\values::filter
      * @return  void
      * @since   1.0.0
      */
@@ -69,11 +69,11 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     {
         $field_name                    = 'test';
         $field_value                   = 'z';
-        $fieldhandler_type_chain       = 'Values';
+        $constraint                    = 'Values';
         $options                       = array();
         $options['array_valid_values'] = array('a', 'b', 'c');
 
-        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(null, $results->getReturnValue());
 
@@ -81,7 +81,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\values::validate
+     * @covers  Molajo\Fieldhandler\Constraint\values::validate
      * @return void
      * @since   1.0.0
      */
@@ -89,11 +89,11 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     {
         $field_name                    = 'test';
         $field_value                   = 'z';
-        $fieldhandler_type_chain       = 'Values';
+        $constraint                    = 'Values';
         $options                       = array();
         $options['array_valid_values'] = array('a', 'b', 'c');
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(false, $results->getReturnValue());
 
@@ -101,7 +101,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\values::validate
+     * @covers  Molajo\Fieldhandler\Constraint\values::validate
      * @return void
      * @since   1.0.0
      */
@@ -109,11 +109,11 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     {
         $field_name                    = 'test';
         $field_value                   = 'a';
-        $fieldhandler_type_chain       = 'Values';
+        $constraint                    = 'Values';
         $options                       = array();
         $options['array_valid_values'] = array('a', 'b', 'c');
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getReturnValue());
 

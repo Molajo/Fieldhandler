@@ -22,7 +22,7 @@ use PHPUnit_Framework_TestCase;
 class LowerTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Adapter
+     * Constraint
      *
      * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0.0
@@ -41,18 +41,18 @@ class LowerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\lower::validate
+     * @covers  Molajo\Fieldhandler\Constraint\lower::validate
      * @return void
      * @since   1.0.0
      */
     public function testFilter()
     {
-        $field_name              = 'test';
-        $field_value             = 'aa123';
-        $fieldhandler_type_chain = 'lower';
-        $options                 = array();
+        $field_name  = 'test';
+        $field_value = 'aa123';
+        $constraint  = 'lower';
+        $options     = array();
 
-        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('aa123', $results->getReturnValue());
 
@@ -60,18 +60,18 @@ class LowerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\lower::validate
+     * @covers  Molajo\Fieldhandler\Constraint\lower::validate
      * @return void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name              = 'test';
-        $field_value             = 'Aa123';
-        $fieldhandler_type_chain = 'lower';
-        $options                 = array();
+        $field_name  = 'test';
+        $field_value = 'Aa123';
+        $constraint  = 'lower';
+        $options     = array();
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(false, $results->getReturnValue());
 
@@ -79,18 +79,18 @@ class LowerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\lower::filter
+     * @covers  Molajo\Fieldhandler\Constraint\lower::filter
      * @return void
      * @since   1.0.0
      */
     public function testFilterValid()
     {
-        $field_name              = 'test';
-        $field_value             = 'Aa123';
-        $fieldhandler_type_chain = 'lower';
-        $options                 = array();
+        $field_name  = 'test';
+        $field_value = 'Aa123';
+        $constraint  = 'lower';
+        $options     = array();
 
-        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('aa123', $results->getReturnValue());
 

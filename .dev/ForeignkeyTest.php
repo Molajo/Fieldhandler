@@ -10,9 +10,9 @@ namespace Molajo\Fieldhandler\Tests;
 
 include __DIR__ . '/../../' . 'Database/.dev/Bootstrap.php';
 
-use Molajo\Fieldhandler\Driver as Adapter;
-use Molajo\Database\Adapter as Database;
-use Molajo\Database\Adapter\Joomla;
+use Molajo\Fieldhandler\Driver as Constraint;
+use Molajo\Database\Constraint as Database;
+use Molajo\Database\Constraint\Joomla;
 use PHPUnit_Framework_TestCase;
 use CommonApi\Exception\UnexpectedValueException;
 
@@ -27,9 +27,9 @@ use CommonApi\Exception\UnexpectedValueException;
 class ForeignkeyTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Adapter
+     * Constraint
      *
-     * @var    object  Molajo/Fieldhandler/Adapter
+     * @var    object  Molajo/Fieldhandler/Constraint
      * @since  1.0.0
      */
     protected $adapter;
@@ -37,7 +37,7 @@ class ForeignkeyTest extends PHPUnit_Framework_TestCase
     /**
      * Database
      *
-     * @var    object  Molajo/Database/Adapter
+     * @var    object  Molajo/Database/Constraint
      * @since  1.0.0
      */
     protected $database;
@@ -50,7 +50,7 @@ class ForeignkeyTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->adapter = new Adapter();
+        $this->adapter = new Constraint();
 
         $options = array();
 
@@ -69,21 +69,21 @@ class ForeignkeyTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Foreignkey::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Foreignkey::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidate1()
     {
-        $field_name              = 'my_foreign_key';
-        $field_value             = 1;
-        $fieldhandler_type_chain = 'Foreignkey';
-        $options                 = array();
-        $options['database']     = $this->database;
-        $options['table']        = 'molajo_actions';
-        $options['key']          = 'id';
+        $field_name          = 'my_foreign_key';
+        $field_value         = 1;
+        $constraint          = 'Foreignkey';
+        $options             = array();
+        $options['database'] = $this->database;
+        $options['table']    = 'molajo_actions';
+        $options['key']      = 'id';
 
-        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->adapter->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getReturnValue());
 
@@ -91,21 +91,21 @@ class ForeignkeyTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Foreignkey::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Foreignkey::validate
      * @return void
      * @since   1.0.0
      */
     public function testEscapeFail()
     {
-        $field_name              = 'my_foreign_key';
-        $field_value             = 100000;
-        $fieldhandler_type_chain = 'Foreignkey';
-        $options                 = array();
-        $options['database']     = $this->database;
-        $options['table']        = 'molajo_actions';
-        $options['key']          = 'id';
+        $field_name          = 'my_foreign_key';
+        $field_value         = 100000;
+        $constraint          = 'Foreignkey';
+        $options             = array();
+        $options['database'] = $this->database;
+        $options['table']    = 'molajo_actions';
+        $options['key']      = 'id';
 
-        $results = $this->adapter->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->adapter->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getReturnValue());
 

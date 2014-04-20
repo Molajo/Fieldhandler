@@ -1,6 +1,6 @@
 <?php
 /**
- * Stringlength Fieldhandler Test
+ * Length Fieldhandler Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -12,17 +12,17 @@ use Molajo\Fieldhandler\Driver as driver;
 use PHPUnit_Framework_TestCase;
 
 /**
- * Stringlength Fieldhandler
+ * Length Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class StringlengthTest extends PHPUnit_Framework_TestCase
+class LengthTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Adapter
+     * Constraint
      *
      * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0.0
@@ -41,20 +41,20 @@ class StringlengthTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Stringlength::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Length::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidate1()
     {
-        $field_name              = 'fieldname';
-        $field_value             = 'dogfood';
-        $fieldhandler_type_chain = 'Stringlength';
-        $options                 = array();
-        $options['from']         = 0;
-        $options['to']           = 10;
+        $field_name      = 'fieldname';
+        $field_value     = 'dogfood';
+        $constraint      = 'Length';
+        $options         = array();
+        $options['from'] = 0;
+        $options['to']   = 10;
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getReturnValue());
 
@@ -62,20 +62,20 @@ class StringlengthTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Stringlength::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Length::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name              = 'fieldname';
-        $field_value             = 'dogfood is not good to eat.';
-        $fieldhandler_type_chain = 'Stringlength';
-        $options                 = array();
-        $options['from']         = 0;
-        $options['to']           = 10;
+        $field_name      = 'fieldname';
+        $field_value     = 'dogfood is not good to eat.';
+        $constraint      = 'Length';
+        $options         = array();
+        $options['from'] = 0;
+        $options['to']   = 10;
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(false, $results->getReturnValue());
 

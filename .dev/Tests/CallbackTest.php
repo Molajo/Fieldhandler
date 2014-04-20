@@ -23,7 +23,7 @@ use CommonApi\Exception\UnexpectedValueException;
 class CallbackTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Adapter
+     * Constraint
      *
      * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0.0
@@ -42,19 +42,19 @@ class CallbackTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Callback::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Callback::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidate1()
     {
-        $field_name              = 'attention';
-        $field_value             = 'DOG';
-        $fieldhandler_type_chain = 'Callback';
-        $options                 = array();
-        $options['callback']     = 'strtolower';
+        $field_name          = 'attention';
+        $field_value         = 'DOG';
+        $constraint          = 'Callback';
+        $options             = array();
+        $options['callback'] = 'strtolower';
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getReturnValue());
 
@@ -62,19 +62,19 @@ class CallbackTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Callback::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Callback::validate
      * @return  void
      * @since   1.0.0
      */
     public function testFilter1()
     {
-        $field_name              = 'attention';
-        $field_value             = 'DOG';
-        $fieldhandler_type_chain = 'Callback';
-        $options                 = array();
-        $options['callback']     = 'strtolower';
+        $field_name          = 'attention';
+        $field_value         = 'DOG';
+        $constraint          = 'Callback';
+        $options             = array();
+        $options['callback'] = 'strtolower';
 
-        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('dog', $results->getReturnValue());
 

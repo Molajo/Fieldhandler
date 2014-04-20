@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Driver as Adapter;
+use Molajo\Fieldhandler\Driver as Constraint;
 use PHPUnit_Framework_TestCase;
 
 /**
@@ -22,7 +22,7 @@ use PHPUnit_Framework_TestCase;
 class AliasTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Adapter
+     * Constraint
      *
      * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0.0
@@ -37,45 +37,45 @@ class AliasTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->driver = new Adapter();
+        $this->driver = new Constraint();
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Alias::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::validate
      * @return void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name              = 'alias';
-        $field_value             = 'Jack and Jill';
-        $fieldhandler_type_chain = 'Alias';
-        $options                 = array();
+        $field_name  = 'alias';
+        $field_value = 'Jack and Jill';
+        $constraint  = 'Alias';
+        $options     = array();
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(false, $results->getReturnValue());
 
-        $expected_message        = 'Field: alias does not have a valid value for Alias data type.';
-        $message = $results->getErrorMessages();
+        $expected_message = 'Field: alias does not have a valid value for Alias data type.';
+        $message          = $results->getErrorMessages();
         $this->assertEquals($expected_message, $message[1000]);
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Alias::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValid()
     {
-        $field_name              = 'alias';
-        $field_value             = 'jack-and-jill';
-        $fieldhandler_type_chain = 'Alias';
-        $options                 = array();
+        $field_name  = 'alias';
+        $field_value = 'jack-and-jill';
+        $constraint  = 'Alias';
+        $options     = array();
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getReturnValue());
 
@@ -83,18 +83,18 @@ class AliasTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Alias::filter
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::filter
      * @return void
      * @since   1.0.0
      */
     public function testFilterSucceed2()
     {
-        $field_name              = 'alias';
-        $field_value             = 'Jack and Jill';
-        $fieldhandler_type_chain = 'Alias';
-        $options                 = array();
+        $field_name  = 'alias';
+        $field_value = 'Jack and Jill';
+        $constraint  = 'Alias';
+        $options     = array();
 
-        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('jack-and-jill', $results->getReturnValue());
 
@@ -102,18 +102,18 @@ class AliasTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Alias::escape
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::escape
      * @return void
      * @since   1.0.0
      */
     public function testEscapeSucceed3()
     {
-        $field_name              = 'alias';
-        $field_value             = 'Jack *&and+Jill';
-        $fieldhandler_type_chain = 'Alias';
-        $options                 = array();
+        $field_name  = 'alias';
+        $field_value = 'Jack *&and+Jill';
+        $constraint  = 'Alias';
+        $options     = array();
 
-        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('jack-and-jill', $results->getReturnValue());
 

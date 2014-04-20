@@ -22,7 +22,7 @@ use PHPUnit_Framework_TestCase;
 class DigitTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Adapter
+     * Constraint
      *
      * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0.0
@@ -41,18 +41,18 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Digit::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Digit::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidate1()
     {
-        $field_name              = 'digit_fieldname';
-        $field_value             = '1234';
-        $fieldhandler_type_chain = 'Digit';
-        $options                 = array();
+        $field_name  = 'digit_fieldname';
+        $field_value = '1234';
+        $constraint  = 'Digit';
+        $options     = array();
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getReturnValue());
 
@@ -60,18 +60,18 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Digit::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Digit::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidate2()
     {
-        $field_name              = 'digit_fieldname';
-        $field_value             = null;
-        $fieldhandler_type_chain = 'Digit';
-        $options                 = array();
+        $field_name  = 'digit_fieldname';
+        $field_value = null;
+        $constraint  = 'Digit';
+        $options     = array();
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getReturnValue());
 
@@ -79,18 +79,18 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Digit::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Digit::validate
      * @return void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name              = 'digit_fieldname';
-        $field_value             = 'yessireebob';
-        $fieldhandler_type_chain = 'Digit';
-        $options                 = array();
+        $field_name  = 'digit_fieldname';
+        $field_value = 'yessireebob';
+        $constraint  = 'Digit';
+        $options     = array();
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(false, $results->getReturnValue());
 
@@ -98,18 +98,18 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Digit::filter
+     * @covers  Molajo\Fieldhandler\Constraint\Digit::filter
      * @return  void
      * @since   1.0.0
      */
     public function testFilter1()
     {
-        $field_name              = 'digit_fieldname';
-        $field_value             = 123;
-        $fieldhandler_type_chain = 'Digit';
-        $options                 = array();
+        $field_name  = 'digit_fieldname';
+        $field_value = 123;
+        $constraint  = 'Digit';
+        $options     = array();
 
-        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getReturnValue());
 
@@ -117,18 +117,18 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Digit::filter
+     * @covers  Molajo\Fieldhandler\Constraint\Digit::filter
      * @return  void
      * @since   1.0.0
      */
     public function testFilter2()
     {
-        $field_name              = 'digit_fieldname';
-        $field_value             = 'dog';
-        $fieldhandler_type_chain = 'Digit';
-        $options                 = array();
+        $field_name  = 'digit_fieldname';
+        $field_value = 'dog';
+        $constraint  = 'Digit';
+        $options     = array();
 
-        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $constraint, $options);
 
         $field_value = null;
         $this->assertEquals($field_value, $results->getReturnValue());
@@ -137,18 +137,18 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Digit::filter
+     * @covers  Molajo\Fieldhandler\Constraint\Digit::filter
      * @return  void
      * @since   1.0.0
      */
     public function testEscape1()
     {
-        $field_name              = 'digit_fieldname';
-        $field_value             = 123;
-        $fieldhandler_type_chain = 'Digit';
-        $options                 = array();
+        $field_name  = 'digit_fieldname';
+        $field_value = 123;
+        $constraint  = 'Digit';
+        $options     = array();
 
-        $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->escape($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getReturnValue());
 
@@ -156,18 +156,18 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Digit::filter
+     * @covers  Molajo\Fieldhandler\Constraint\Digit::filter
      * @return  void
      * @since   1.0.0
      */
     public function testEscape2()
     {
-        $field_name              = 'digit_fieldname';
-        $field_value             = 'dog';
-        $fieldhandler_type_chain = 'Digit';
-        $options                 = array();
+        $field_name  = 'digit_fieldname';
+        $field_value = 'dog';
+        $constraint  = 'Digit';
+        $options     = array();
 
-        $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->escape($field_name, $field_value, $constraint, $options);
 
         $field_value = null;
         $this->assertEquals($field_value, $results->getReturnValue());

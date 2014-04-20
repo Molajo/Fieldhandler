@@ -23,7 +23,7 @@ use CommonApi\Exception\UnexpectedValueException;
 class DateTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Adapter
+     * Constraint
      *
      * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0.0
@@ -42,7 +42,7 @@ class DateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Date::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Date::validate
      * @return  void
      * @since   1.0.0
      */
@@ -51,9 +51,9 @@ class DateTest extends PHPUnit_Framework_TestCase
         $field_name  = 'this_is_a_date_field';
         $field_value = 'gggghhhhhh';
 
-        $fieldhandler_type_chain = 'Date';
+        $constraint = 'Date';
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain);
+        $results = $this->driver->validate($field_name, $field_value, $constraint);
 
         $this->assertEquals(false, $results->getReturnValue());
 
@@ -61,17 +61,17 @@ class DateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Date::filter
+     * @covers  Molajo\Fieldhandler\Constraint\Date::filter
      * @return  void
      * @since   1.0.0
      */
     public function testFilterSuccess2()
     {
-        $field_name              = 'this_is_a_date_field';
-        $field_value             = '2013/04/01 01:00:00';
-        $fieldhandler_type_chain = 'Date';
+        $field_name  = 'this_is_a_date_field';
+        $field_value = '2013/04/01 01:00:00';
+        $constraint  = 'Date';
 
-        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain);
+        $results = $this->driver->filter($field_name, $field_value, $constraint);
 
         $this->assertEquals($field_value, $results->getReturnValue());
 
@@ -79,7 +79,7 @@ class DateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Date::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Date::validate
      * @return  void
      * @since   1.0.0
      */
@@ -88,9 +88,9 @@ class DateTest extends PHPUnit_Framework_TestCase
         $field_name  = 'this_is_a_date_field';
         $field_value = 'gggghhhhhh';
 
-        $fieldhandler_type_chain = 'Date';
+        $constraint = 'Date';
 
-        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain);
+        $results = $this->driver->filter($field_name, $field_value, $constraint);
 
         $field_value = null;
         $this->assertEquals($field_value, $results->getReturnValue());
@@ -99,17 +99,17 @@ class DateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Date::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Date::validate
      * @return  void
      * @since   1.0.0
      */
     public function testFilterSuccess()
     {
-        $field_name              = 'this_is_a_date_field';
-        $field_value             = '2013/04/01 01:00:00';
-        $fieldhandler_type_chain = 'Date';
+        $field_name  = 'this_is_a_date_field';
+        $field_value = '2013/04/01 01:00:00';
+        $constraint  = 'Date';
 
-        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain);
+        $results = $this->driver->filter($field_name, $field_value, $constraint);
 
         $this->assertEquals($field_value, $results->getReturnValue());
 
@@ -117,7 +117,7 @@ class DateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Date::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Date::validate
      * @return  void
      * @since   1.0.0
      */
@@ -126,9 +126,9 @@ class DateTest extends PHPUnit_Framework_TestCase
         $field_name  = 'this_is_a_date_field';
         $field_value = 'gggghhhhhh';
 
-        $fieldhandler_type_chain = 'Date';
+        $constraint = 'Date';
 
-        $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain);
+        $results = $this->driver->escape($field_name, $field_value, $constraint);
 
         $field_value = null;
         $this->assertEquals($field_value, $results->getReturnValue());
@@ -137,17 +137,17 @@ class DateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Date::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Date::validate
      * @return  void
      * @since   1.0.0
      */
     public function testEscapeSuccess()
     {
-        $field_name              = 'this_is_a_date_field';
-        $field_value             = '2013/04/01 01:00:00';
-        $fieldhandler_type_chain = 'Date';
+        $field_name  = 'this_is_a_date_field';
+        $field_value = '2013/04/01 01:00:00';
+        $constraint  = 'Date';
 
-        $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain);
+        $results = $this->driver->escape($field_name, $field_value, $constraint);
 
         $this->assertEquals($field_value, $results->getReturnValue());
 

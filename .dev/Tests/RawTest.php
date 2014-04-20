@@ -22,7 +22,7 @@ use PHPUnit_Framework_TestCase;
 class RawTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Adapter
+     * Constraint
      *
      * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0.0
@@ -42,7 +42,7 @@ class RawTest extends PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Raws::escape
+     * @covers  Molajo\Fieldhandler\Constraint\Raws::escape
      * @return void
      * @since   1.0.0
      */
@@ -50,11 +50,11 @@ class RawTest extends PHPUnit_Framework_TestCase
     {
         $field_name                        = 'field1';
         $field_value                       = '&';
-        $fieldhandler_type_chain           = 'Raw';
+        $constraint                        = 'Raw';
         $options                           = array();
         $options['FILTER_FLAG_ENCODE_AMP'] = true;
 
-        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $constraint, $options);
 
 
         if (PHP_VERSION_ID > 50400) {

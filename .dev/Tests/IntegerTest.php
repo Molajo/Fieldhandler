@@ -22,7 +22,7 @@ use PHPUnit_Framework_TestCase;
 class IntegerTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Adapter
+     * Constraint
      *
      * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0.0
@@ -41,18 +41,18 @@ class IntegerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Integer::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Integer::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidateTrue()
     {
-        $field_name              = 'Integer_fieldname';
-        $field_value             = 1;
-        $fieldhandler_type_chain = 'Integer';
-        $options                 = array();
+        $field_name  = 'Integer_fieldname';
+        $field_value = 1;
+        $constraint  = 'Integer';
+        $options     = array();
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getReturnValue());
 
@@ -60,18 +60,18 @@ class IntegerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Integer::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Integer::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidateFalse()
     {
-        $field_name              = 'Integer_fieldname';
-        $field_value             = 'i';
-        $fieldhandler_type_chain = 'Integer';
-        $options                 = array();
+        $field_name  = 'Integer_fieldname';
+        $field_value = 'i';
+        $constraint  = 'Integer';
+        $options     = array();
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(false, $results->getReturnValue());
 
@@ -79,18 +79,18 @@ class IntegerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Integer::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Integer::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidateNull()
     {
-        $field_name              = 'Integer_fieldname';
-        $field_value             = null;
-        $fieldhandler_type_chain = 'Integer';
-        $options                 = array();
+        $field_name  = 'Integer_fieldname';
+        $field_value = null;
+        $constraint  = 'Integer';
+        $options     = array();
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getReturnValue());
 
@@ -98,18 +98,18 @@ class IntegerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Integer::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Integer::validate
      * @return void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name              = 'Integer_fieldname';
-        $field_value             = 'yessireebob';
-        $fieldhandler_type_chain = 'Integer';
-        $options                 = array();
+        $field_name  = 'Integer_fieldname';
+        $field_value = 'yessireebob';
+        $constraint  = 'Integer';
+        $options     = array();
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(false, $results->getReturnValue());
 

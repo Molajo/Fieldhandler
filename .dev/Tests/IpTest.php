@@ -22,7 +22,7 @@ use PHPUnit_Framework_TestCase;
 class IpTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Adapter
+     * Constraint
      *
      * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0.0
@@ -41,18 +41,18 @@ class IpTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Ip::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Ip::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidate1()
     {
-        $field_name              = 'Ip_fieldname';
-        $field_value             = '127.0.0.1';
-        $fieldhandler_type_chain = 'Ip';
-        $options                 = array();
+        $field_name  = 'Ip_fieldname';
+        $field_value = '127.0.0.1';
+        $constraint  = 'Ip';
+        $options     = array();
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getReturnValue());
 
@@ -60,18 +60,18 @@ class IpTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Ip::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Ip::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidate2()
     {
-        $field_name              = 'Ip_fieldname';
-        $field_value             = '0.0.0.0';
-        $fieldhandler_type_chain = 'Ip';
-        $options                 = array();
+        $field_name  = 'Ip_fieldname';
+        $field_value = '0.0.0.0';
+        $constraint  = 'Ip';
+        $options     = array();
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getReturnValue());
 
@@ -79,18 +79,18 @@ class IpTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Ip::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Ip::validate
      * @return void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name              = 'Int_fieldname';
-        $field_value             = 'yessireebob';
-        $fieldhandler_type_chain = 'Ip';
-        $options                 = array();
+        $field_name  = 'Int_fieldname';
+        $field_value = 'yessireebob';
+        $constraint  = 'Ip';
+        $options     = array();
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(false, $results->getReturnValue());
 

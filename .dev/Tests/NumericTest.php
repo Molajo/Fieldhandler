@@ -22,7 +22,7 @@ use PHPUnit_Framework_TestCase;
 class NumericTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Adapter
+     * Constraint
      *
      * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0.0
@@ -41,18 +41,18 @@ class NumericTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Numeric::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Numeric::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidate1()
     {
-        $field_name              = 'Numeric_fieldname';
-        $field_value             = 1;
-        $fieldhandler_type_chain = 'Numeric';
-        $options                 = array();
+        $field_name  = 'Numeric_fieldname';
+        $field_value = 1;
+        $constraint  = 'Numeric';
+        $options     = array();
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getReturnValue());
 
@@ -60,18 +60,18 @@ class NumericTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Numeric::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Numeric::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidate2()
     {
-        $field_name              = 'Numeric_fieldname';
-        $field_value             = 1;
-        $fieldhandler_type_chain = 'Numeric';
-        $options                 = array();
+        $field_name  = 'Numeric_fieldname';
+        $field_value = 1;
+        $constraint  = 'Numeric';
+        $options     = array();
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getReturnValue());
 
@@ -79,18 +79,18 @@ class NumericTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Numeric::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Numeric::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidate3()
     {
-        $field_name              = 'Numeric_fieldname';
-        $field_value             = null;
-        $fieldhandler_type_chain = 'Numeric';
-        $options                 = array();
+        $field_name  = 'Numeric_fieldname';
+        $field_value = null;
+        $constraint  = 'Numeric';
+        $options     = array();
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getReturnValue());
 
@@ -98,18 +98,18 @@ class NumericTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Numeric::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Numeric::validate
      * @return void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name              = 'Numeric_fieldname';
-        $field_value             = 'yessireebob';
-        $fieldhandler_type_chain = 'Numeric';
-        $options                 = array();
+        $field_name  = 'Numeric_fieldname';
+        $field_value = 'yessireebob';
+        $constraint  = 'Numeric';
+        $options     = array();
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(false, $results->getReturnValue());
 

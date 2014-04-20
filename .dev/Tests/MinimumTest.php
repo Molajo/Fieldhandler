@@ -22,7 +22,7 @@ use PHPUnit_Framework_TestCase;
 class MinimumTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Adapter
+     * Constraint
      *
      * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0.0
@@ -41,19 +41,19 @@ class MinimumTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Fromto::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Fromto::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidate1()
     {
-        $field_name              = 'fieldname';
-        $field_value             = 5;
-        $fieldhandler_type_chain = 'Minimum';
-        $options                 = array();
-        $options['minimum']      = 1;
+        $field_name         = 'fieldname';
+        $field_value        = 5;
+        $constraint         = 'Minimum';
+        $options            = array();
+        $options['minimum'] = 1;
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(false, $results->getReturnValue());
 
@@ -61,19 +61,19 @@ class MinimumTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Fromto::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Fromto::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name              = 'fieldname';
-        $field_value             = 500000000000000;
-        $fieldhandler_type_chain = 'Minimum';
-        $options                 = array();
-        $options['minimum']      = 1000000;
+        $field_name         = 'fieldname';
+        $field_value        = 500000000000000;
+        $constraint         = 'Minimum';
+        $options            = array();
+        $options['minimum'] = 1000000;
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(false, $results->getReturnValue());
 
@@ -81,19 +81,19 @@ class MinimumTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Fromto::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Fromto::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidateAlpha()
     {
-        $field_name              = 'fieldname';
-        $field_value             = 'z';
-        $fieldhandler_type_chain = 'Minimum';
-        $options                 = array();
-        $options['minimum']      = 'a';
+        $field_name         = 'fieldname';
+        $field_value        = 'z';
+        $constraint         = 'Minimum';
+        $options            = array();
+        $options['minimum'] = 'a';
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(false, $results->getReturnValue());
 

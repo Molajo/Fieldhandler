@@ -22,7 +22,7 @@ use PHPUnit_Framework_TestCase;
 class TrimTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Adapter
+     * Constraint
      *
      * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0.0
@@ -41,18 +41,18 @@ class TrimTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Trim::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Trim::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidate1()
     {
-        $field_name              = 'req';
-        $field_value             = 'AmyStephen@Molajo.org';
-        $fieldhandler_type_chain = 'Trim';
-        $options                 = array();
+        $field_name  = 'req';
+        $field_value = 'AmyStephen@Molajo.org';
+        $constraint  = 'Trim';
+        $options     = array();
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getReturnValue());
 
@@ -60,17 +60,17 @@ class TrimTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Trim::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Trim::validate
      * @return void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name              = 'email';
-        $field_value             = 'AmyStephen@Molajo.org                ';
-        $fieldhandler_type_chain = 'Trim';
+        $field_name  = 'email';
+        $field_value = 'AmyStephen@Molajo.org                ';
+        $constraint  = 'Trim';
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, array());
+        $results = $this->driver->validate($field_name, $field_value, $constraint, array());
 
         $this->assertEquals(false, $results->getReturnValue());
 
@@ -78,18 +78,18 @@ class TrimTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Trim::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Trim::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidateFilter()
     {
-        $field_name              = 'req';
-        $field_value             = '            AmyStephen@Molajo.org           ';
-        $fieldhandler_type_chain = 'Trim';
-        $options                 = array();
+        $field_name  = 'req';
+        $field_value = '            AmyStephen@Molajo.org           ';
+        $constraint  = 'Trim';
+        $options     = array();
 
-        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('AmyStephen@Molajo.org', $results->getReturnValue());
 

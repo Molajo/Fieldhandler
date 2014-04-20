@@ -23,7 +23,7 @@ use CommonApi\Exception\UnexpectedValueException;
 class EncodedTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Adapter
+     * Constraint
      *
      * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0.0
@@ -42,17 +42,17 @@ class EncodedTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Encoded::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Encoded::validate
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name              = 'dog';
-        $field_value             = 'my-apples&are green and red';
-        $fieldhandler_type_chain = 'Encoded';
-        $options                 = array();
+        $field_name  = 'dog';
+        $field_value = 'my-apples&are green and red';
+        $constraint  = 'Encoded';
+        $options     = array();
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(false, $results->getReturnValue());
 
@@ -60,18 +60,18 @@ class EncodedTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Encoded::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Encoded::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidateSucceed()
     {
-        $field_name              = 'dog';
-        $field_value             = 'nothing';
-        $fieldhandler_type_chain = 'Encoded';
-        $options                 = array();
+        $field_name  = 'dog';
+        $field_value = 'nothing';
+        $constraint  = 'Encoded';
+        $options     = array();
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getReturnValue());
 
@@ -79,18 +79,18 @@ class EncodedTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Encoded::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Encoded::validate
      * @return  void
      * @since   1.0.0
      */
     public function testFilterSucceed()
     {
-        $field_name              = 'dog';
-        $field_value             = 'my-apples&are green and red';
-        $fieldhandler_type_chain = 'Encoded';
-        $options                 = array();
+        $field_name  = 'dog';
+        $field_value = 'my-apples&are green and red';
+        $constraint  = 'Encoded';
+        $options     = array();
 
-        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $constraint, $options);
 
         $field_value = 'my-apples%26are%20green%20and%20red';
         $this->assertEquals($field_value, $results->getReturnValue());
@@ -99,18 +99,18 @@ class EncodedTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Encoded::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Encoded::validate
      * @return void
      * @since   1.0.0
      */
     public function testFilterSucceed2()
     {
-        $field_name              = 'dog';
-        $field_value             = 'nothing';
-        $fieldhandler_type_chain = 'Encoded';
-        $options                 = array();
+        $field_name  = 'dog';
+        $field_value = 'nothing';
+        $constraint  = 'Encoded';
+        $options     = array();
 
-        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getReturnValue());
 

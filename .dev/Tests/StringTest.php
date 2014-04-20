@@ -22,7 +22,7 @@ use PHPUnit_Framework_TestCase;
 class StringTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Adapter
+     * Constraint
      *
      * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0.0
@@ -41,17 +41,17 @@ class StringTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\String::validate
+     * @covers  Molajo\Fieldhandler\Constraint\String::validate
      * @return  void
      * @since   1.0.0
      */
     public function testEscape()
     {
-        $field_name              = 'fieldname';
-        $field_value             = '&';
-        $fieldhandler_type_chain = 'String';
+        $field_name  = 'fieldname';
+        $field_value = '&';
+        $constraint  = 'String';
 
-        $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain, array());
+        $results = $this->driver->escape($field_name, $field_value, $constraint, array());
 
         $this->assertEquals($field_value, $results->getReturnValue());
 
@@ -59,17 +59,17 @@ class StringTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\String::validate
+     * @covers  Molajo\Fieldhandler\Constraint\String::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidate()
     {
-        $field_name              = 'fieldname';
-        $field_value             = new \stdClass();
-        $fieldhandler_type_chain = 'String';
+        $field_name  = 'fieldname';
+        $field_value = new \stdClass();
+        $constraint  = 'String';
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, array());
+        $results = $this->driver->validate($field_name, $field_value, $constraint, array());
 
         $this->assertEquals(false, $results->getReturnValue());
 

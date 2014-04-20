@@ -23,7 +23,7 @@ use CommonApi\Exception\UnexpectedValueException;
 class DefaultsTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Adapter
+     * Constraint
      *
      * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0.0
@@ -42,20 +42,20 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Defaults::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Defaults::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValid()
     {
-        $field_name              = 'dog';
-        $field_value             = null;
-        $fieldhandler_type_chain = 'Defaults';
-        $options                 = array(
+        $field_name  = 'dog';
+        $field_value = null;
+        $constraint  = 'Defaults';
+        $options     = array(
             'default' => 'bark'
         );
 
-        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $constraint, $options);
 
         $field_value = 'bark';
         $this->assertEquals($field_value, $results->getReturnValue());
@@ -64,20 +64,20 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Defaults::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Defaults::validate
      * @return void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name              = 'dog';
-        $field_value             = null;
-        $fieldhandler_type_chain = 'Defaults';
-        $options                 = array(
+        $field_name  = 'dog';
+        $field_value = null;
+        $constraint  = 'Defaults';
+        $options     = array(
             'default' => 'bark'
         );
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getReturnValue());
 
@@ -85,20 +85,20 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Defaults::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Defaults::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidCat()
     {
-        $field_name              = 'cat';
-        $field_value             = 'meow';
-        $fieldhandler_type_chain = 'Defaults';
-        $options                 = array(
+        $field_name  = 'cat';
+        $field_value = 'meow';
+        $constraint  = 'Defaults';
+        $options     = array(
             'default' => 'bark'
         );
 
-        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getReturnValue());
 

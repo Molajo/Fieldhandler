@@ -23,7 +23,7 @@ use CommonApi\Exception\UnexpectedValueException;
 class EqualTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Adapter
+     * Constraint
      *
      * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0.0
@@ -42,19 +42,19 @@ class EqualTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Equals::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Equals::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidate1()
     {
-        $field_name              = 'field1';
-        $field_value             = 'dog';
-        $fieldhandler_type_chain = 'Equal';
-        $options                 = array();
-        $options['equals']       = 'dog';
+        $field_name        = 'field1';
+        $field_value       = 'dog';
+        $constraint        = 'Equal';
+        $options           = array();
+        $options['equals'] = 'dog';
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getReturnValue());
 
@@ -62,19 +62,19 @@ class EqualTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Equals::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Equals::validate
      * @return void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name              = 'field1';
-        $field_value             = 'dog';
-        $fieldhandler_type_chain = 'Equal';
-        $options                 = array();
-        $options['equals']       = 'cat';
+        $field_name        = 'field1';
+        $field_value       = 'dog';
+        $constraint        = 'Equal';
+        $options           = array();
+        $options['equals'] = 'cat';
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(false, $results->getReturnValue());
 
@@ -82,19 +82,19 @@ class EqualTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Equals::filter
+     * @covers  Molajo\Fieldhandler\Constraint\Equals::filter
      * @return  void
      * @since   1.0.0
      */
     public function testFilter1()
     {
-        $field_name              = 'field1';
-        $field_value             = 'dog';
-        $fieldhandler_type_chain = 'Equal';
-        $options                 = array();
-        $options['equals']       = 'dog';
+        $field_name        = 'field1';
+        $field_value       = 'dog';
+        $constraint        = 'Equal';
+        $options           = array();
+        $options['equals'] = 'dog';
 
-        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getReturnValue());
 
@@ -102,19 +102,19 @@ class EqualTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Equals::filter
+     * @covers  Molajo\Fieldhandler\Constraint\Equals::filter
      * @return void
      * @since   1.0.0
      */
     public function testFilterFail()
     {
-        $field_name              = 'field1';
-        $field_value             = 'dog';
-        $fieldhandler_type_chain = 'Equal';
-        $options                 = array();
-        $options['equals']       = 'cat';
+        $field_name        = 'field1';
+        $field_value       = 'dog';
+        $constraint        = 'Equal';
+        $options           = array();
+        $options['equals'] = 'cat';
 
-        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $constraint, $options);
 
         $field_value = null;
         $this->assertEquals($field_value, $results->getReturnValue());
@@ -123,19 +123,19 @@ class EqualTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Equals::escape
+     * @covers  Molajo\Fieldhandler\Constraint\Equals::escape
      * @return  void
      * @since   1.0.0
      */
     public function testEscape1()
     {
-        $field_name              = 'field1';
-        $field_value             = 'dog';
-        $fieldhandler_type_chain = 'Equal';
-        $options                 = array();
-        $options['equals']       = 'dog';
+        $field_name        = 'field1';
+        $field_value       = 'dog';
+        $constraint        = 'Equal';
+        $options           = array();
+        $options['equals'] = 'dog';
 
-        $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->escape($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getReturnValue());
 
@@ -143,19 +143,19 @@ class EqualTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Equals::escape
+     * @covers  Molajo\Fieldhandler\Constraint\Equals::escape
      * @return void
      * @since   1.0.0
      */
     public function testEscapeFail()
     {
-        $field_name              = 'field1';
-        $field_value             = 'dog';
-        $fieldhandler_type_chain = 'Equal';
-        $options                 = array();
-        $options['equals']       = 'cat';
+        $field_name        = 'field1';
+        $field_value       = 'dog';
+        $constraint        = 'Equal';
+        $options           = array();
+        $options['equals'] = 'cat';
 
-        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $constraint, $options);
 
         $field_value = null;
         $this->assertEquals($field_value, $results->getReturnValue());

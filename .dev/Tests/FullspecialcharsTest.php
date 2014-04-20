@@ -23,7 +23,7 @@ use CommonApi\Exception\UnexpectedValueException;
 class FullspecialcharsTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Adapter
+     * Constraint
      *
      * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0.0
@@ -42,17 +42,17 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Fullspecialchars::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Fullspecialchars::validate
      * @return  void
      * @since   1.0.0
      */
     public function testEscape()
     {
-        $field_name              = 'fieldname';
-        $field_value             = '&';
-        $fieldhandler_type_chain = 'Fullspecialchars';
+        $field_name  = 'fieldname';
+        $field_value = '&';
+        $constraint  = 'Fullspecialchars';
 
-        $results = $this->driver->escape($field_name, $field_value, $fieldhandler_type_chain, array());
+        $results = $this->driver->escape($field_name, $field_value, $constraint, array());
 
 // Anger is too intense.
 //    if (PHP_VERSION_ID > 50400) {
@@ -65,17 +65,17 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Fullspecialchars::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Fullspecialchars::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidate()
     {
-        $field_name              = 'fieldname';
-        $field_value             = '&';
-        $fieldhandler_type_chain = 'Fullspecialchars';
+        $field_name  = 'fieldname';
+        $field_value = '&';
+        $constraint  = 'Fullspecialchars';
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, array());
+        $results = $this->driver->validate($field_name, $field_value, $constraint, array());
 
         $this->assertEquals(false, $results->getReturnValue());
 

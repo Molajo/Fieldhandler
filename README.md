@@ -4,32 +4,202 @@ Fieldhandler [Alpha]
 
 [![Build Status](https://travis-ci.org/Molajo/Fieldhandler.png?branch=master)](https://travis-ci.org/Molajo/Fieldhandler)
 
-Field handling for PHP applications. Filters input. Escapes (and formats) output. Validates data.
+The *Molajo Fieldhandler* is a data integrity assurance package for PHP applications. As the name suggests, the
+focus of the package is cleansing, verifying, and formatting field values.
 
-Standard data type and PHP-specific filters and validation, value list verification, callbacks,
-regex checking, and more. Use with rendering to ensure proper escaping of output data and for
-special field-level formatting needs. Supports chaining. Easy to add adapters for custom need.
+Combined, these data custodial activities ensure clean, verified and useful information. Failure to build
+protections into data collection processes is guaranteed to eventually lead to data corruption challenges.
 
-## Basic Usage ##
+Mission critical applications rely on well designed and carefully implemented cleansing, formatting and verification
+routines. The goal of the *Molajo Fieldhandler* is to make it easier for PHP developers to accomplish this goal.
 
-In this example, three critical data functions are easily accomplished using the same instantiated class
-and simple API:
 
-* First, the `title` column is validated. Note how chaining of tests is possible. If validation failed,
-formatted error codes and messages can be retrieved and used to inform the site user.
-* Next, the `title` column is filtered to ensure no dangerous data exists in the column.
-* Finally, the `title` column is `escaped` for safe display and use in database queries.
+## Fieldhandler Data Integrity Support ##
+
+### Request ###
+
+1. **validate** Validates the field value using field handler(s) requested.
+All field handlers requested will run and multiple error messages could be returned.
+Validate only returns a true or false value.
+
+2. **clean** Cleans the field value using field handler(s) requested.
+The field value that results following the filter operation(s) is returned.
+No error messages are returned using the `filter` method.
+
+3. **format** Formats (or formats) the field for display, given the field handler(s) requested.
+The field value that results following the escape operation(s) is returned.
+No error messages are returned using the `escape` method.
+
+#### Parameters ####
+
+There are four parameters for the `validate` request. (And the same four parameters are used for
+the `clean` and `format` requests.):
+
+1. **$field_name** specify the name of the field for use in error messages;
+2. **$field_value** existing data value that is subject to validation, cleansing and formattingd;
+3. **$constraint** one or more field handler constraints, separated by commas, to be processed in left-to-right order;
+4. **$options** (optional) am associative array of named pair values required by field handlers.
+
+### Fieldhandler Validate ###
+
+Ensuring data integrity requires validating `constraints` (rules) for each input data element.
+It is not uncommon to define a collection of constraints to ensure correctness of each data element.
+
+Consider how these data constraints are implemented in the following code example:
+
+* Order quantity must be numeric.
+* Order quantity is required.
+
+1. Note how multiple tests are chained in the third parameter using the same validation request. The
+Fieldhandler will process requests in left to right order.
+2. Validation results in a `true` response when data conforms.
+3. A `false` response isolates data integrity issues defined in an accompanying error message.
+
+#### Validate Example ####
 
 ```php
 
 $fieldhandler = new Molajo\Fieldhandler\Driver();
 
-$results = $fieldhandler->validate('Title', $title, 'string, required');
+$results = $fieldhandler->validate('Order Quantity', $order_quantity, 'numeric, required');
 
 if ($results->getReturnValue() === false) {
-    $this->handleErrors($results->getErrorMessages());
-    return false;
+    $error_messages = $results->getErrorMessages());
 }
+
+```
+
+#### Validation Constraints and NULL Data Value ####
+
+Constraints are not used to test conformance with the data element if the data element value is NULL.
+The obvious exception to that is `Null` and `Notnull` validation constraints.
+
+If a NULL value is incorrect for the field, include a clean request to set the `default` value for
+ the data element. If that is not possible, add a `required` validation constraint to ensure
+ the NULL value is returned to the user along with the `required` error message.
+
+
+### Fieldhandler Clean ###
+
+Filter input for expected values.
+
+It is important to understand that data validation does not modify field values. However,
+ data cleansing requests can modify the value of the data. Both validation and cleansing are necessary
+ for safe data collection.
+
+Perhaps you recognized a problem with the previous data validation example? The constraints allow a value
+of 0 for order quantity. Clearly there is a need to tighten the logic. So, let's add the following
+data cleansing constraints.
+
+* Filter order quantity as an integer.
+* If order quantity is 0, set order quantity to a default value of 1.
+
+1. Since data cleansing operations can change data values, the data element must be retrieved following
+ each cleansing request.
+
+2. If the user failed to enter an order quantity, consider the impact of testing `required` before
+issuing the data cleansing `default assignment` request.
+
+#### Clean Example ####
+
+```php
+
+$fieldhandler = new Molajo\Fieldhandler\Driver();
+
+// 1. Cleansing: order quantity must be an integer
+
+$results = $fieldhandler->clean('Order Quantity', $order_quantity, 'integer');
+$order_quantity = $results->getReturnValue();
+
+// 2. Validation: order quantity is required.
+
+$results = $fieldhandler->validate('Order Quantity', $order_quantity, 'required');
+if ($results->getReturnValue() === false) {
+    $error_messages = $error_messages + $results->getErrorMessages());
+}
+
+// 3. Cleansing: if order quantity is zero, set the default value to 1
+
+$results = $fieldhandler->clean('Order Quantity', $order_quantity, 'default', array('default_value' => 1));
+$order_quantity = $results->getReturnValue();
+
+// 4. Validation: Order Quantity must be numeric
+
+$results = $fieldhandler->validate('Order Quantity', $order_quantity, 'numeric');
+if ($results->getReturnValue() === false) {
+    $error_messages = $error_messages + $results->getErrorMessages());
+}
+
+```
+
+Hopefully, this example helps underscore the potential for using both data cleansing and validation
+constraints. It is equally important to consider the proper sequence of these requests to obtain
+the desired result.
+
+
+
+### Fieldhandler Format ###
+
+Filter input for expected values.
+
+It is important to understand that data validation does not modify field values. However,
+ data cleansing requests can modify the value of the data. Both validation and cleansing are necessary
+ for safe data collection.
+
+Perhaps you recognized a problem with the previous data validation example? The constraints allow a value
+of 0 for order quantity. Clearly there is a need to tighten the logic. So, let's add the following
+data cleansing constraints.
+
+* Filter order quantity as an integer.
+* If order quantity is 0, set order quantity to a default value of 1.
+
+1. Since data cleansing operations can change data values, the data element must be retrieved following
+ each cleansing request.
+
+2. If the user failed to enter an order quantity, consider the impact of testing `required` before
+issuing the data cleansing `default assignment` request.
+
+#### Format Example ####
+
+```php
+
+$fieldhandler = new Molajo\Fieldhandler\Driver();
+
+// 1. Formatting: display phone number as (402) 555-1212
+
+$results = $fieldhandler->format('phone_number', $phone_number, 'tel');
+$phone_number = $results->getReturnValue();
+
+
+```
+
+Hopefully, this example helps underscore the potential for using both data cleansing and validation
+constraints. It is equally important to consider the proper sequence of these requests to obtain
+the desired result.
+
+## Creating Custom Constraints ##
+
+How? Do it.
+
+## Messages ##
+
+Messages are defined for each delivered constraint and available for translating language strings.
+ The messages can also be customized .
+
+Messages
+Tokens
+Localization
+
+
+## Basic Usage ##
+
+Types
+Multiple
+Messages
+Tokens
+Localization
+Custom Constraints
+
 
 $filtered = $fieldhandler->filter('Title', $title, 'string, required');
 $escaped = $fieldhandler->escape('Title', $filtered->getReturnValue(), 'string');
@@ -38,26 +208,7 @@ $title = $escaped->getReturnValue();
 
 ```
 
-###Three methods:###
 
-1. **validate** Validates the field value using field handler(s) requested.
-All field handlers requested will run and multiple error messages could be returned.
-Validate only returns a true or false value.
-
-2. **filter** Filters the field value using field handler(s) requested.
-The field value that results following the filter operation(s) is returned.
-No error messages are returned using the `filter` method.
-
-3. **escape** Escapes (or formats) the field for display, given the field handler(s) requested.
-The field value that results following the escape operation(s) is returned.
-No error messages are returned using the `escape` method.
-
-###Four parameters:###
-
-1. **$field_name** specify the name of the field for use in exception messages;
-2. **$field_value** send in the existing data value to be validated, filtered, escaped or formatted;
-3. **$fieldhandler_type_chain** one or more field handlers, separated by a comma, to be processed in left-to-right order;
-4. **$options** associative array of named pair values required by field handlers.
 
 ###Results:###
 
@@ -80,55 +231,120 @@ An object is returned from all three methods that can be used in the following m
     $messages = $results->getErrorMessages();
 
 
-## Available Fieldhandlers ##
+## Constraints ##
 
-- [Accepted](https://github.com/Molajo/Fieldhandler#accepted)
-- [Alias](https://github.com/Molajo/Fieldhandler#alias)
+- [Callback](https://github.com/Molajo/Fieldhandler#callback)
+
+Basic
+- [Required](https://github.com/Molajo/Fieldhandler#required)
+- [Defaults](https://github.com/Molajo/Fieldhandler#defaults)
 - [Alpha](https://github.com/Molajo/Fieldhandler#alpha)
 - [Alphanumeric](https://github.com/Molajo/Fieldhandler#alphanumeric)
-- [Arrays](https://github.com/Molajo/Fieldhandler#arrays)
 - [Boolean](https://github.com/Molajo/Fieldhandler#boolean)
-- [Callback](https://github.com/Molajo/Fieldhandler#callback)
-- [Contains](https://github.com/Molajo/Fieldhandler#contains)
-- [Date](https://github.com/Molajo/Fieldhandler#date)
-- [Datetime](https://github.com/Molajo/Fieldhandler#datetime)
-- [Defaults](https://github.com/Molajo/Fieldhandler#defaults)
 - [Digit](https://github.com/Molajo/Fieldhandler#digit)
-- [Email](https://github.com/Molajo/Fieldhandler#email)
-- [Encoded](https://github.com/Molajo/Fieldhandler#encoded)
-- [Equal](https://github.com/Molajo/Fieldhandler#equal)
-- [Fileextension](https://github.com/Molajo/Fieldhandler#fileextension)
+
+- Double - [use Float](http://php.net/manual/en/function.is-double.php)
 - [Float](https://github.com/Molajo/Fieldhandler#float)
-- [Foreignkey](https://github.com/Molajo/Fieldhandler#foreignkey)
-- [Fromto](https://github.com/Molajo/Fieldhandler#Fromto)
-- [Fullspecialchars](https://github.com/Molajo/Fieldhandler#fullspecialchars)
-- [Html](https://github.com/Molajo/Fieldhandler#html)
-- [Image](https://github.com/Molajo/Fieldhandler#image)
 - [Integer](https://github.com/Molajo/Fieldhandler#integer)
-- [Ip](https://github.com/Molajo/Fieldhandler#ip)
-- [Lower](https://github.com/Molajo/Fieldhandler#lower)
-- [Maximum](https://github.com/Molajo/Fieldhandler#maximum)
-- [Mimetypes](https://github.com/Molajo/Fieldhandler#mimetypes)
-- [Minimum](https://github.com/Molajo/Fieldhandler#minimum)
-- [Notequal](https://github.com/Molajo/Fieldhandler#notequal)
 - [Numeric](https://github.com/Molajo/Fieldhandler#numeric)
 - [Object](https://github.com/Molajo/Fieldhandler#object)
 - [Raw](https://github.com/Molajo/Fieldhandler#raw)
-- [Regex](https://github.com/Molajo/Fieldhandler#regex)
-- [Required](https://github.com/Molajo/Fieldhandler#required)
+
+- Real - [use Float](http://php.net/manual/en/function.is-real.php)
+- [Scalar]
 - [String](https://github.com/Molajo/Fieldhandler#string)
-- [Stringlength](https://github.com/Molajo/Fieldhandler#stringlength)
-- [Tel](https://github.com/Molajo/Fieldhandler#tel)
+
+Date/Time
+- [Date](https://github.com/Molajo/Fieldhandler#date)
+- [Datetime](https://github.com/Molajo/Fieldhandler#datetime)
 - [Time](https://github.com/Molajo/Fieldhandler#time)
-- [Trim](https://github.com/Molajo/Fieldhandler#trim)
-- [Upper](https://github.com/Molajo/Fieldhandler#upper)
-- [Url](https://github.com/Molajo/Fieldhandler#url)
+
+File-related Data Types
+- [Fileextension](https://github.com/Molajo/Fieldhandler#fileextension)
+- [Image](https://github.com/Molajo/Fieldhandler#image)
+- [Mimetypes](https://github.com/Molajo/Fieldhandler#mimetypes)
+- [File]
+- [Size]
+- [Path]
+- [Filename]
+- [Exists]
+
+Value
+- [True](https://github.com/Molajo/Fieldhandler#true)
+- [False]
+- [Null]
+- [Not null]
+- [Nothing]
+- [Something]
+- [Space]
+
+- [Fromto](https://github.com/Molajo/Fieldhandler#Fromto)
+- [Range] see Fromto...
+
+- [Contains](https://github.com/Molajo/Fieldhandler#contains)
 - [Values](https://github.com/Molajo/Fieldhandler#values)
+
+- [Minimum](https://github.com/Molajo/Fieldhandler#minimum)
+- [Maximum](https://github.com/Molajo/Fieldhandler#maximum)
+
+- [Regex](https://github.com/Molajo/Fieldhandler#regex)
+
+- [Length](https://github.com/Molajo/Fieldhandler#stringlength)
+
+Arrays
+- [Arrays](https://github.com/Molajo/Fieldhandler#arrays)
+- [Count]
+- [Values]
+- [Keys]
+- Unique
+- Sorted
+
+Comparison
+- [Equal](https://github.com/Molajo/Fieldhandler#equal)
+- [Notequal](https://github.com/Molajo/Fieldhandler#notequal)
+- [GreaterThan]
+- [LessThan] or equal to
+
+Database
+- [Foreignkey](https://github.com/Molajo/Fieldhandler#foreignkey)
+- [Lookup](https://github.com/Molajo/Fieldhandler#lookup)
+
+User
+- Password
+- Userid
+- Username
+- [Email](https://github.com/Molajo/Fieldhandler#email)
+- [Tel](https://github.com/Molajo/Fieldhandler#tel)
+- Credit Card
+- Zip Code
+
+Special Handling
+- [Fullspecialchars](https://github.com/Molajo/Fieldhandler#fullspecialchars)
+- [Html](https://github.com/Molajo/Fieldhandler#html)
+- [Encoded](https://github.com/Molajo/Fieldhandler#encoded)
+
+Formatting
+- [Lower](https://github.com/Molajo/Fieldhandler#lower)
+- [Upper](https://github.com/Molajo/Fieldhandler#upper)
+- [Trim](https://github.com/Molajo/Fieldhandler#trim)
+- [Format]
+- [Printable]
+- [Punctuation]
+- [Controlcharacters]
+
+Special Field Types
+- [Alias](https://github.com/Molajo/Fieldhandler#alias)
+- [Ip](https://github.com/Molajo/Fieldhandler#ip)
+- [Uuid]()
+- [Url](https://github.com/Molajo/Fieldhandler#url)
+
 
 The examples in this section assume the *Fieldhandler* has been instantiated, as follows:
 
 ```php
-    $fieldhandler = new /Molajo/Fieldhandler/Driver();
+
+    $fieldhandler = new Molajo/Fieldhandler/Driver();
+
 ```
 
 ### Accepted ###
@@ -138,7 +354,8 @@ Value is true, 1, 'yes', or 'on.'
     $validated_value = $fieldhandler->validate('agreement', 1, 'Accepted');
 
 ```
-Note: The list of `accepted` values can be customized by including an array of desired values in the `options` array, as shown below:
+Note: The list of `accepted` values can be customized by including an array of desired values
+in the `options` array, as shown below:
 
 ```php
     $options = array();
@@ -311,7 +528,7 @@ Exception is thrown. If the value does not match for filter or escape, null is r
 
     $field_name              = 'extensions_field';
     $field_value             = $input;
-    $fieldhandler_type_chain = 'Extensions';
+    $constraint = 'Extensions';
 
     $options                 = array();
     $array_valid_values = array();
@@ -342,13 +559,13 @@ $field_value.
 ```php
     $field_name              = 'my_foreign_key';
     $field_value             = 1;
-    $fieldhandler_type_chain = 'Foreignkey';
+    $constraint = 'Foreignkey';
     $options                 = array();
     $options['database']     = $database;
     $options['table']        = 'molajo_actions';
     $options['key']          = 'id';
 
-    $results = $fieldhandler->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+    $results = $fieldhandler->validate($field_name, $field_value, $constraint, $options);
 
 ```
 
@@ -358,12 +575,12 @@ Verifies that the $field_value is greater than the From value and less than the 
 ```php
     $field_name              = 'my_field';
     $field_value             = 5;
-    $fieldhandler_type_chain = 'Fromto';
+    $constraint = 'Fromto';
     $options                 = array();
     $options['from']         = 0;
     $options['to']           = 10;
 
-    $results = $fieldhandler->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+    $results = $fieldhandler->validate($field_name, $field_value, $constraint, $options);
 
 ```
 
@@ -374,10 +591,10 @@ with with ENT_QUOTES set.
 ```php
     $field_name              = 'my_field';
     $field_value             = '&';
-    $fieldhandler_type_chain = 'Fullspecialchars';
+    $constraint = 'Fullspecialchars';
     $options                 = array();
 
-    $results = $fieldhandler->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+    $results = $fieldhandler->validate($field_name, $field_value, $constraint, $options);
 
 ```
 
@@ -390,10 +607,10 @@ with with ENT_QUOTES set.
 ```php
     $field_name              = 'my_field';
     $field_value             = '&';
-    $fieldhandler_type_chain = 'Html';
+    $constraint = 'Html';
     $options                 = array();
 
-    $results = $fieldhandler->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+    $results = $fieldhandler->validate($field_name, $field_value, $constraint, $options);
 
 ```
 
@@ -447,11 +664,11 @@ Validates or filters/escapes numeric value to not exceed the maximum.
     // Filtered and escaped values will return 3.
     $field_name              = 'my_field';
     $field_value             = 10;
-    $fieldhandler_type_chain = 'Maximum';
+    $constraint = 'Maximum';
     $options                 = array();
     $options['maximum']      = 3;
 
-    $results = $fieldhandler->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+    $results = $fieldhandler->validate($field_name, $field_value, $constraint, $options);
 
 ```
 
@@ -463,11 +680,11 @@ Validates or filters/escapes xxxx
     // Filtered and escaped values will return 3.
     $field_name              = 'my_field';
     $field_value             = 10;
-    $fieldhandler_type_chain = 'Maximum';
+    $constraint = 'Maximum';
     $options                 = array();
     $options['maximum']      = 3;
 
-    $results = $fieldhandler->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+    $results = $fieldhandler->validate($field_name, $field_value, $constraint, $options);
 
 ```
 
@@ -479,11 +696,11 @@ Validates or filters/escapes numeric value to not exceed the maximum.
     // Validate, filtered and escaped values will return 10.
     $field_name              = 'my_field';
     $field_value             = 10;
-    $fieldhandler_type_chain = 'Minimum';
+    $constraint = 'Minimum';
     $options                 = array();
     $options['minimum']      = 3;
 
-    $results = $fieldhandler->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+    $results = $fieldhandler->validate($field_name, $field_value, $constraint, $options);
 
 ```
 
@@ -528,12 +745,12 @@ See [sanitize filters](http://php.net/manual/en/filter.filters.sanitize.php).
     // Validate, filtered and escaped values will return 10.
     $field_name              = 'my_field';
     $field_value             = 'Me & You';  //returns 'Me &amp; You'
-    $fieldhandler_type_chain = 'Raw';
+    $constraint = 'Raw';
     $options                 = array();
     $options['FILTER_FLAG_ENCODE_AMP']      = true;
 
 
-    $results = $fieldhandler->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+    $results = $fieldhandler->validate($field_name, $field_value, $constraint, $options);
 
 ```
 
@@ -544,11 +761,11 @@ Performs regex checking against the input value for the regex sent in.
     // The value of field `input_field` may not be null
     $field_name              = 'my_field';
     $field_value             = AmyStephen@Molajo.org;
-    $fieldhandler_type_chain = 'Regex';
+    $constraint = 'Regex';
     $options                 = array();
     $options['regex']      = $regex_expression;
 
-    $results = $fieldhandler->validate($field_name, $field_value, $fieldhandler_type_chain);
+    $results = $fieldhandler->validate($field_name, $field_value, $constraint);
 
 ```
 
@@ -559,9 +776,9 @@ Field is required. Null value is not allowed. Use after Default when used in com
     // The value of field `input_field` may not be null
     $field_name              = 'my_field';
     $field_value             = null;
-    $fieldhandler_type_chain = 'Required';
+    $constraint = 'Required';
 
-    $results = $fieldhandler->validate($field_name, $field_value, $fieldhandler_type_chain);
+    $results = $fieldhandler->validate($field_name, $field_value, $constraint);
 
 ```
 
@@ -572,9 +789,9 @@ Tests that the value is a string.
     // The value of field `input_field` may not be null
     $field_name              = 'my_field';
     $field_value             = 'Lots of stuff in here that is stringy.';
-    $fieldhandler_type_chain = 'String';
+    $constraint = 'String';
 
-    $results = $fieldhandler->validate($field_name, $field_value, $fieldhandler_type_chain);
+    $results = $fieldhandler->validate($field_name, $field_value, $constraint);
 ```
 
 ### Stringlength ###
@@ -603,9 +820,9 @@ Tests that the string is trimmed.
 
     $field_name              = 'my_field';
     $field_value             = 'Lots of stuff in here that is stringy.          ';
-    $fieldhandler_type_chain = 'Trim';
+    $constraint = 'Trim';
 
-    $results = $fieldhandler->filter($field_name, $field_value, $fieldhandler_type_chain);
+    $results = $fieldhandler->filter($field_name, $field_value, $constraint);
 ```
 
 ### Upper ###
@@ -634,36 +851,12 @@ Compares a field_value against a set of values;
     // The value of field `input_field` must be in the array_valid_values
     $field_name              = 'my_field';
     $field_value             = 'a';
-    $fieldhandler_type_chain = 'Values';
+    $constraint = 'Values';
     $options                 = array();
     $options['array_valid_values']      = array('a', 'b', 'c');
 
-    $results = $fieldhandler->validate($field_name, $field_value, $fieldhandler_type_chain);
+    $results = $fieldhandler->validate($field_name, $field_value, $constraint);
 
-```
-
-## Install using Composer from Packagist
-
-### Step 1: Install composer in your project
-
-```php
-    curl -s https://getcomposer.org/installer | php
-```
-
-### Step 2: Create a **composer.json** file in your project root
-
-```php
-{
-    "require": {
-        "Molajo/Fieldhandler": "1.*"
-    }
-}
-```
-
-### Step 3: Install via composer
-
-```php
-    php composer.phar install
 ```
 
 ## Requirements and Compliance

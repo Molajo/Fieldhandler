@@ -22,7 +22,7 @@ use PHPUnit_Framework_TestCase;
 class RequiredTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Adapter
+     * Constraint
      *
      * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0.0
@@ -41,18 +41,18 @@ class RequiredTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Required::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Required::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidate1()
     {
-        $field_name              = 'req';
-        $field_value             = 'AmyStephen@Molajo.org';
-        $fieldhandler_type_chain = 'Required';
-        $options                 = array();
+        $field_name  = 'req';
+        $field_value = 'AmyStephen@Molajo.org';
+        $constraint  = 'Required';
+        $options     = array();
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getReturnValue());
 
@@ -60,17 +60,17 @@ class RequiredTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\Required::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Required::validate
      * @return void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name              = 'email';
-        $field_value             = null;
-        $fieldhandler_type_chain = 'Required';
+        $field_name  = 'email';
+        $field_value = null;
+        $constraint  = 'Required';
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, array());
+        $results = $this->driver->validate($field_name, $field_value, $constraint, array());
 
         $this->assertEquals(false, $results->getReturnValue());
 

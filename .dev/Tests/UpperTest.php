@@ -22,7 +22,7 @@ use PHPUnit_Framework_TestCase;
 class UpperTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Adapter
+     * Constraint
      *
      * @var    object  Molajo\Fieldhandler\Driver
      * @since  1.0.0
@@ -41,18 +41,18 @@ class UpperTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\upper::validate
+     * @covers  Molajo\Fieldhandler\Constraint\upper::validate
      * @return void
      * @since   1.0.0
      */
     public function testValid()
     {
-        $field_name              = 'test';
-        $field_value             = 'AA123';
-        $fieldhandler_type_chain = 'upper';
-        $options                 = array();
+        $field_name  = 'test';
+        $field_value = 'AA123';
+        $constraint  = 'upper';
+        $options     = array();
 
-        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getReturnValue());
 
@@ -60,18 +60,18 @@ class UpperTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\upper::validate
+     * @covers  Molajo\Fieldhandler\Constraint\upper::validate
      * @return void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name              = 'test';
-        $field_value             = 'Aa123';
-        $fieldhandler_type_chain = 'upper';
-        $options                 = array();
+        $field_name  = 'test';
+        $field_value = 'Aa123';
+        $constraint  = 'upper';
+        $options     = array();
 
-        $results = $this->driver->validate($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(false, $results->getReturnValue());
 
@@ -79,18 +79,18 @@ class UpperTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Adapter\upper::filter
+     * @covers  Molajo\Fieldhandler\Constraint\upper::filter
      * @return void
      * @since   1.0.0
      */
     public function testFilterValid()
     {
-        $field_name              = 'test';
-        $field_value             = 'Aa123';
-        $fieldhandler_type_chain = 'upper';
-        $options                 = array();
+        $field_name  = 'test';
+        $field_value = 'Aa123';
+        $constraint  = 'upper';
+        $options     = array();
 
-        $results = $this->driver->filter($field_name, $field_value, $fieldhandler_type_chain, $options);
+        $results = $this->driver->filter($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('AA123', $results->getReturnValue());
 
