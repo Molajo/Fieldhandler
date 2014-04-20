@@ -10,7 +10,7 @@ namespace Molajo\Fieldhandler\Tests;
 
 include __DIR__ . '/../../' . 'Database/.dev/Bootstrap.php';
 
-use Molajo\Fieldhandler\Driver as Constraint;
+use Molajo\Fieldhandler\Request;
 use Molajo\Database\Constraint as Database;
 use Molajo\Database\Constraint\Joomla;
 use PHPUnit_Framework_TestCase;
@@ -27,7 +27,7 @@ use CommonApi\Exception\UnexpectedValueException;
 class ForeignkeyTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Constraint
+     * Request
      *
      * @var    object  Molajo/Fieldhandler/Constraint
      * @since  1.0.0
@@ -50,7 +50,7 @@ class ForeignkeyTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->adapter = new Constraint();
+        $this->adapter = new Request();
 
         $options = array();
 
@@ -85,7 +85,7 @@ class ForeignkeyTest extends PHPUnit_Framework_TestCase
 
         $results = $this->adapter->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getReturnValue());
+        $this->assertEquals($field_value, $results->getValidationResponse());
 
         return;
     }
@@ -107,7 +107,7 @@ class ForeignkeyTest extends PHPUnit_Framework_TestCase
 
         $results = $this->adapter->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getReturnValue());
+        $this->assertEquals($field_value, $results->getValidationResponse());
 
         return;
     }

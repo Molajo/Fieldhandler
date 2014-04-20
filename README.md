@@ -59,12 +59,12 @@ Fieldhandler will process requests in left to right order.
 
 ```php
 
-$fieldhandler = new Molajo\Fieldhandler\Driver();
+$fieldhandler = new Molajo\Fieldhandler\Request();
 
 $results = $fieldhandler->validate('Order Quantity', $order_quantity, 'numeric, required');
 
-if ($results->getReturnValue() === false) {
-    $error_messages = $results->getErrorMessages());
+if ($results->getValidationResponse() === false) {
+    $error_messages = $results->getValidationMessages());
 }
 
 ```
@@ -104,30 +104,30 @@ issuing the data cleansing `default assignment` request.
 
 ```php
 
-$fieldhandler = new Molajo\Fieldhandler\Driver();
+$fieldhandler = new Molajo\Fieldhandler\Request();
 
 // 1. Cleansing: order quantity must be an integer
 
 $results = $fieldhandler->clean('Order Quantity', $order_quantity, 'integer');
-$order_quantity = $results->getReturnValue();
+$order_quantity = $results->getValidationResponse();
 
 // 2. Validation: order quantity is required.
 
 $results = $fieldhandler->validate('Order Quantity', $order_quantity, 'required');
-if ($results->getReturnValue() === false) {
-    $error_messages = $error_messages + $results->getErrorMessages());
+if ($results->getValidationResponse() === false) {
+    $error_messages = $error_messages + $results->getValidationMessages());
 }
 
 // 3. Cleansing: if order quantity is zero, set the default value to 1
 
 $results = $fieldhandler->clean('Order Quantity', $order_quantity, 'default', array('default_value' => 1));
-$order_quantity = $results->getReturnValue();
+$order_quantity = $results->getValidationResponse();
 
 // 4. Validation: Order Quantity must be numeric
 
 $results = $fieldhandler->validate('Order Quantity', $order_quantity, 'numeric');
-if ($results->getReturnValue() === false) {
-    $error_messages = $error_messages + $results->getErrorMessages());
+if ($results->getValidationResponse() === false) {
+    $error_messages = $error_messages + $results->getValidationMessages());
 }
 
 ```
@@ -163,12 +163,12 @@ issuing the data cleansing `default assignment` request.
 
 ```php
 
-$fieldhandler = new Molajo\Fieldhandler\Driver();
+$fieldhandler = new Molajo\Fieldhandler\Request();
 
 // 1. Formatting: display phone number as (402) 555-1212
 
 $results = $fieldhandler->format('phone_number', $phone_number, 'tel');
-$phone_number = $results->getReturnValue();
+$phone_number = $results->getValidationResponse();
 
 
 ```
@@ -202,9 +202,9 @@ Custom Constraints
 
 
 $filtered = $fieldhandler->filter('Title', $title, 'string, required');
-$escaped = $fieldhandler->escape('Title', $filtered->getReturnValue(), 'string');
+$escaped = $fieldhandler->escape('Title', $filtered->getValidationResponse(), 'string');
 
-$title = $escaped->getReturnValue();
+$title = $escaped->getValidationResponse();
 
 ```
 
@@ -219,16 +219,16 @@ An object is returned from all three methods that can be used in the following m
 ```php
 
     // For Validation:
-    $validation_success_or_failure = $results->getReturnValue():
+    $validation_success_or_failure = $results->getValidationResponse():
 
     // For Filtering and Escaping:
-    $field_value = $results->getReturnValue();
+    $field_value = $results->getValidationResponse();
 
 ```
 
 2. To retrieve an associative array (code, message) of error messages (only for validation and if validation failed):
 
-    $messages = $results->getErrorMessages();
+    $messages = $results->getValidationMessages();
 
 
 ## Constraints ##

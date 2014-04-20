@@ -1,6 +1,6 @@
 <?php
 /**
- * Alpha Fieldhandler Test
+ * Alphanumeric Fieldhandler Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -12,14 +12,14 @@ use Molajo\Fieldhandler\Request as request;
 use PHPUnit_Framework_TestCase;
 
 /**
- * Alpha Fieldhandler
+ * Alphanumeric Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class AlphaTest extends PHPUnit_Framework_TestCase
+class AlphanumericTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Request
@@ -41,28 +41,26 @@ class AlphaTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::validate
      * @return void
      * @since   1.0.0
      */
-    public function testValidateSucceed()
+    public function testValid()
     {
         $field_name  = 'test';
-        $field_value = 'AbCdEfG';
-        $constraint  = 'Alpha';
+        $field_value = 'Aa123';
+        $constraint  = 'Alphanumeric';
         $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getValidationResponse());
-        $messages = $results->getValidationMessages();
-        $this->assertEquals(array(), $messages);
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::validate
      * @return void
      * @since   1.0.0
      */
@@ -70,100 +68,94 @@ class AlphaTest extends PHPUnit_Framework_TestCase
     {
         $field_name  = 'test';
         $field_value = '@Aa123';
-        $constraint  = 'Alpha';
+        $constraint  = 'Alphanumeric';
         $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(false, $results->getValidationResponse());
 
-        $expected_code    = 2000;
-        $expected_message = 'Field: test must only contain Alpha values.';
-        $messages         = $results->getValidationMessages();
-        $this->assertEquals($expected_code, $messages[0]->code);
-        $this->assertEquals($expected_message, $messages[0]->message);
+        $expected_message = 'Field: test must only contain Alphanumeric values.';
+        $message          = $results->getValidationMessages();
+        $this->assertEquals($expected_message, $message[2000]);
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::filter
+     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::filter
      * @return void
      * @since   1.0.0
      */
-    public function testFilterNoChange()
+    public function testFilterValid()
     {
         $field_name  = 'test';
-        $field_value = 'AbCdEfG';
-        $constraint  = 'Alpha';
+        $field_value = 'Aa123';
+        $constraint  = 'Alphanumeric';
         $options     = array();
 
         $results = $this->request->filter($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getFilteredValue());
-        $this->assertEquals(false, $results->getChangeIndicator());
+        $this->assertEquals($field_value, $results->getValidationResponse());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::filter
+     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::filter
      * @return void
      * @since   1.0.0
      */
-    public function testFilterChange()
+    public function testFilterFail()
     {
         $field_name  = 'test';
         $field_value = '@Aa123';
-        $constraint  = 'Alpha';
+        $constraint  = 'Alphanumeric';
         $options     = array();
 
         $results = $this->request->filter($field_name, $field_value, $constraint, $options);
 
-        $expected_value    = 'Aa';
-        $this->assertEquals($expected_value, $results->getFilteredValue());
-        $this->assertEquals(true, $results->getChangeIndicator());
+        $field_value = 'Aa123';
+        $this->assertEquals($field_value, $results->getValidationResponse());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::filter
+     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::filter
      * @return void
      * @since   1.0.0
      */
-    public function testEscapeChange()
+    public function testEscapeValid()
     {
         $field_name  = 'test';
-        $field_value = '1A2b3C4d5E6f7G8';
-        $constraint  = 'Alpha';
+        $field_value = 'Aa123';
+        $constraint  = 'Alphanumeric';
         $options     = array();
 
         $results = $this->request->escape($field_name, $field_value, $constraint, $options);
 
-        $field_value = 'AbCdEfG';
-        $this->assertEquals($field_value, $results->getEscapedValue());
-        $this->assertEquals(true, $results->getChangeIndicator());
+        $this->assertEquals($field_value, $results->getValidationResponse());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::filter
+     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::filter
      * @return void
      * @since   1.0.0
      */
-    public function testEscapeNoChange()
+    public function testEscapeFail()
     {
         $field_name  = 'test';
-        $field_value = 'Aa';
-        $constraint  = 'Alpha';
+        $field_value = '@Aa123';
+        $constraint  = 'Alphanumeric';
         $options     = array();
 
         $results = $this->request->escape($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getEscapedValue());
-        $this->assertEquals(false, $results->getChangeIndicator());
+        $field_value = 'Aa123';
+        $this->assertEquals($field_value, $results->getValidationResponse());
 
         return;
     }

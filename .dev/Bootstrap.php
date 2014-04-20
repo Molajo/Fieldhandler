@@ -22,10 +22,11 @@ $classmap = array_merge($classmap, $results);
 $results  = createClassMap($base . '/Source/Constraint/', 'Molajo\\Fieldhandler\\Constraint\\');
 $classmap = array_merge($classmap, $results);
 
-$classmap['Molajo\\Fieldhandler\\Driver']             = $base . '/Source/Driver.php';
 $classmap['Molajo\\Fieldhandler\\EscapeResponse']     = $base . '/Source/EscapeResponse.php';
 $classmap['Molajo\\Fieldhandler\\FilterResponse']     = $base . '/Source/FilterResponse.php';
 $classmap['Molajo\\Fieldhandler\\ValidationResponse'] = $base . '/Source/ValidationResponse.php';
+$classmap['Molajo\\Fieldhandler\\Message']            = $base . '/Source/Message.php';
+$classmap['Molajo\\Fieldhandler\\Request']            = $base . '/Source/Request.php';
 ksort($classmap);
 
 spl_autoload_register(

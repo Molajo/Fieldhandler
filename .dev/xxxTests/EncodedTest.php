@@ -1,6 +1,6 @@
 <?php
 /**
- * Alias Fieldhandler Test
+ * Encoded Fieldhandler Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -8,18 +8,19 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Request;
+use Molajo\Fieldhandler\Request as request;
 use PHPUnit_Framework_TestCase;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
- * Alias Fieldhandler
+ * Encoded Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class AliasTest extends PHPUnit_Framework_TestCase
+class EncodedTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Request
@@ -32,7 +33,7 @@ class AliasTest extends PHPUnit_Framework_TestCase
     /**
      * Set up
      *
-     * @return  void
+     * @return void
      * @since   1.0.0
      */
     protected function setUp()
@@ -41,88 +42,77 @@ class AliasTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alias::validate
-     * @return void
+     * @covers  Molajo\Fieldhandler\Constraint\Encoded::validate
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name  = 'alias';
-        $field_value = 'Jack and Jill';
-        $constraint  = 'Alias';
+        $field_name  = 'dog';
+        $field_value = 'my-apples&are green and red';
+        $constraint  = 'Encoded';
         $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(false, $results->getValidationResponse());
 
-        $expected_code    = 1000;
-        $expected_message = 'Field: alias does not have a valid value for Alias data type.';
-        $messages         = $results->getValidationMessages();
-        $this->assertEquals($expected_code, $messages[0]->code);
-        $this->assertEquals($expected_message, $messages[0]->message);
-
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alias::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Encoded::validate
      * @return  void
      * @since   1.0.0
      */
-    public function testValid()
+    public function testValidateSucceed()
     {
-        $field_name  = 'alias';
-        $field_value = 'jack-and-jill';
-        $constraint  = 'Alias';
+        $field_name  = 'dog';
+        $field_value = 'nothing';
+        $constraint  = 'Encoded';
         $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getValidationResponse());
 
-        $messages         = $results->getValidationMessages();
-        $this->assertEquals(array(), $messages);
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Encoded::validate
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testFilterSucceed()
+    {
+        $field_name  = 'dog';
+        $field_value = 'my-apples&are green and red';
+        $constraint  = 'Encoded';
+        $options     = array();
+
+        $results = $this->request->filter($field_name, $field_value, $constraint, $options);
+
+        $field_value = 'my-apples%26are%20green%20and%20red';
+        $this->assertEquals($field_value, $results->getValidationResponse());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alias::filter
+     * @covers  Molajo\Fieldhandler\Constraint\Encoded::validate
      * @return void
      * @since   1.0.0
      */
     public function testFilterSucceed2()
     {
-        $field_name  = 'alias';
-        $field_value = 'Jack and Jill';
-        $constraint  = 'Alias';
+        $field_name  = 'dog';
+        $field_value = 'nothing';
+        $constraint  = 'Encoded';
         $options     = array();
 
         $results = $this->request->filter($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals('jack-and-jill', $results->getFilteredValue());
-        $this->assertEquals(true, $results->getChangeIndicator());
-
-        return;
-    }
-
-    /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alias::escape
-     * @return void
-     * @since   1.0.0
-     */
-    public function testEscapeSucceed3()
-    {
-        $field_name  = 'alias';
-        $field_value = 'Jack *&and+Jill';
-        $constraint  = 'Alias';
-        $options     = array();
-
-        $results = $this->request->filter($field_name, $field_value, $constraint, $options);
-
-        $this->assertEquals('jack-and-jill', $results->getFilteredValue());
-        $this->assertEquals(true, $results->getChangeIndicator());
+        $this->assertEquals($field_value, $results->getValidationResponse());
 
         return;
     }

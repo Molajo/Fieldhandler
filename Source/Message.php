@@ -28,22 +28,7 @@ class Message implements MessageInterface
      * @var    array
      * @since  1.0.0
      */
-    protected $message_templates = array(
-        1000  => 'Field: {field_name} does not have a valid value for {constraint} data type.',
-        2000  => 'Field: {field_name} must only contain {constraint} values.',
-        3000  => 'Field: {field_name} is not an array.',
-        4000  => 'Field: {field_name} has an invalid array element value.',
-        5000  => 'Field: {field_name} has an invalid array key entry.',
-        6000  => 'Field: {field_name} does not have the correct number of array values.',
-        7000  => 'Field: {field_name} does not have a default value.',
-        8000  => 'Field: {field_name} did not pass the {constraint} data type test.',
-        9000  => 'Field: {field_name} does not have a valid file extension.',
-        10000 => 'Field: {field_name} exceeded maximum value allowed.',
-        11000 => 'Field: {field_name} is less than the minimum value allowed.',
-        12000 => 'Field: {field_name} does not have a valid mime type.',
-        13000 => 'Field: {field_name} value is required, but was not provided.',
-        14000 => 'Field: {field_name} value does not match a value from the list allowed.',
-    );
+    protected $message_templates = array();
 
     /**
      * Parameter injected tokens

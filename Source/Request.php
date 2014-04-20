@@ -24,7 +24,7 @@ use CommonApi\Model\ValidateInterface;
 class Request implements EscapeInterface, FilterInterface, ValidateInterface
 {
     /**
-     * Constraint
+     * Request
      *
      * @var    string
      * @since  1.0.0
@@ -32,7 +32,7 @@ class Request implements EscapeInterface, FilterInterface, ValidateInterface
     protected $constraint;
 
     /**
-     * Constraint Instance
+     * Request Instance
      *
      * @var    object  CommonApi\Model\ConstraintInterface
      * @since  1.0.0
@@ -86,6 +86,29 @@ class Request implements EscapeInterface, FilterInterface, ValidateInterface
      * @since  1.0.0
      */
     protected $message_instance;
+
+    /**
+     * Message Templates
+     *
+     * @var    array
+     * @since  1.0.0
+     */
+    protected $message_templates = array(
+        1000  => 'Field: {field_name} does not have a valid value for {constraint} data type.',
+        2000  => 'Field: {field_name} must only contain {constraint} values.',
+        3000  => 'Field: {field_name} is not an array.',
+        4000  => 'Field: {field_name} has an invalid array element value.',
+        5000  => 'Field: {field_name} has an invalid array key entry.',
+        6000  => 'Field: {field_name} does not have the correct number of array values.',
+        7000  => 'Field: {field_name} does not have a default value.',
+        8000  => 'Field: {field_name} did not pass the {constraint} data type test.',
+        9000  => 'Field: {field_name} does not have a valid file extension.',
+        10000 => 'Field: {field_name} exceeded maximum value allowed.',
+        11000 => 'Field: {field_name} is less than the minimum value allowed.',
+        12000 => 'Field: {field_name} does not have a valid mime type.',
+        13000 => 'Field: {field_name} value is required, but was not provided.',
+        14000 => 'Field: {field_name} value does not match a value from the list allowed.',
+    );
 
     /**
      * Constructor
@@ -186,14 +209,12 @@ class Request implements EscapeInterface, FilterInterface, ValidateInterface
             if ($response === false) {
                 $this->validation_response = false;
             }
-        } else {
-            $this->field_value = $response;
         }
 
-        if ($constraint === 'escape') {
+        if ($method === 'escape') {
             return $this->setEscapeResponse($response);
 
-        } elseif ($constraint === 'filter') {
+        } elseif ($method === 'filter') {
             return $this->setFilterResponse($response);
         }
 
@@ -214,7 +235,7 @@ class Request implements EscapeInterface, FilterInterface, ValidateInterface
             return $this;
         }
 
-        $messages = $this->constraint_instance->getErrorMessages();
+        $messages = $this->constraint_instance->getValidationMessages();
 
         if (count($messages) > 0) {
             $tokens['field_name']  = $this->field_name;
@@ -393,7 +414,10 @@ class Request implements EscapeInterface, FilterInterface, ValidateInterface
         $class = 'Molajo\\Fieldhandler\\EscapeResponse';
 
         try {
-            return new $class($response);
+            return new $class(
+                $this->field_value,
+                $response
+            );
 
         } catch (Exception $e) {
 
@@ -418,7 +442,10 @@ class Request implements EscapeInterface, FilterInterface, ValidateInterface
         $class = 'Molajo\\Fieldhandler\\FilterResponse';
 
         try {
-            return new $class($response);
+            return new $class(
+                $this->field_value,
+                $response
+            );
 
         } catch (Exception $e) {
 
