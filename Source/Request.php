@@ -267,9 +267,9 @@ class Request implements EscapeInterface, FilterInterface, ValidateInterface
      */
     protected function setFieldName($field_name)
     {
-        $this->field_name = $field_name;
+        $this->field_name = ltrim(rtrim($field_name));
 
-        if ($field_name == '' || $field_name === null) {
+        if ($field_name === '' || $field_name === null) {
         } else {
             return $this;
         }
