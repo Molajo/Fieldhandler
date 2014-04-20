@@ -1,6 +1,6 @@
 <?php
 /**
- * Array Fieldhandler
+ * Array Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -11,7 +11,7 @@ namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Arrays Fieldhandler
+ * Arrays Constraint
  *
  * @link       http://php.net/manual/en/function.is-array.php
  * @package    Molajo

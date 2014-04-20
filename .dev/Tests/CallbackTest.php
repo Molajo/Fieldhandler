@@ -1,6 +1,6 @@
 <?php
 /**
- * Callback Fieldhandler Test
+ * Callback Constraint Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -46,7 +46,7 @@ class CallbackTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testValidate1()
+    public function testValidateSuccess()
     {
         $field_name          = 'attention';
         $field_value         = 'DOG';
@@ -57,6 +57,9 @@ class CallbackTest extends PHPUnit_Framework_TestCase
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getValidationResponse());
+
+        $messages         = $results->getValidationMessages();
+        $this->assertEquals(array(), $messages);
 
         return;
     }
@@ -76,7 +79,8 @@ class CallbackTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->filter($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals('dog', $results->getValidationResponse());
+        $this->assertEquals('dog', $results->getFilteredValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }

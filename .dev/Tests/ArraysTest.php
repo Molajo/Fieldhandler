@@ -1,6 +1,6 @@
 <?php
 /**
- * Arrays Fieldhandler Test
+ * Arrays Constraint Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -60,6 +60,9 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(true, $results->getValidationResponse());
 
+        $messages         = $results->getValidationMessages();
+        $this->assertEquals(array(), $messages);
+
         return;
     }
 
@@ -110,9 +113,12 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(false, $results->getValidationResponse());
 
+        $messages         = $results->getValidationMessages();
+        $expected_code    = 3000;
         $expected_message = 'Field: alias is not an array.';
-        $message          = $results->getValidationMessages();
-        $this->assertEquals($expected_message, $message[3000]);
+        $messages         = $results->getValidationMessages();
+        $this->assertEquals($expected_code, $messages[0]->code);
+        $this->assertEquals($expected_message, $messages[0]->message);
 
         return;
     }
@@ -139,6 +145,9 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(true, $results->getValidationResponse());
 
+        $messages         = $results->getValidationMessages();
+        $this->assertEquals(array(), $messages);
+
         return;
     }
 
@@ -162,6 +171,9 @@ class ArraysTest extends PHPUnit_Framework_TestCase
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getValidationResponse());
+
+        $messages         = $results->getValidationMessages();
+        $this->assertEquals(array(), $messages);
 
         return;
     }
@@ -222,7 +234,12 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(false, $results->getValidationResponse());
+        $messages         = $results->getValidationMessages();
+        $expected_code    = 4000;
+        $expected_message = 'Field: alias has an invalid array element value.';
+        $messages         = $results->getValidationMessages();
+        $this->assertEquals($expected_code, $messages[0]->code);
+        $this->assertEquals($expected_message, $messages[0]->message);
 
         return;
     }

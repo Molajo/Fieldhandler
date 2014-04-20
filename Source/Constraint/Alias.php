@@ -1,6 +1,6 @@
 <?php
 /**
- * Alias Fieldhandler
+ * Alias Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -11,7 +11,7 @@ namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Alias Fieldhandler
+ * Alias Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.

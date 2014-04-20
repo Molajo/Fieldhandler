@@ -1,6 +1,6 @@
 <?php
 /**
- * Alias Fieldhandler Test
+ * Alias Constraint Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -70,7 +70,7 @@ class AliasTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testValid()
+    public function testValidateSucceed()
     {
         $field_name  = 'alias';
         $field_value = 'jack-and-jill';
@@ -92,7 +92,7 @@ class AliasTest extends PHPUnit_Framework_TestCase
      * @return void
      * @since   1.0.0
      */
-    public function testFilterSucceed2()
+    public function testFilterSucceed()
     {
         $field_name  = 'alias';
         $field_value = 'Jack and Jill';
@@ -112,7 +112,7 @@ class AliasTest extends PHPUnit_Framework_TestCase
      * @return void
      * @since   1.0.0
      */
-    public function testEscapeSucceed3()
+    public function testFilterFailure()
     {
         $field_name  = 'alias';
         $field_value = 'Jack *&and+Jill';
@@ -122,6 +122,46 @@ class AliasTest extends PHPUnit_Framework_TestCase
         $results = $this->request->filter($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('jack-and-jill', $results->getFilteredValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::escape
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testEscapeSucceed()
+    {
+        $field_name  = 'alias';
+        $field_value = 'Jack *&and+Jill';
+        $constraint  = 'Alias';
+        $options     = array();
+
+        $results = $this->request->escape($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals('jack-and-jill', $results->getEscapedValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::escape
+     * @return void
+     * @since   1.0.0
+     */
+    public function testEscapeFailure()
+    {
+        $field_name  = 'alias';
+        $field_value = 'Jack *&and+Jill';
+        $constraint  = 'Alias';
+        $options     = array();
+
+        $results = $this->request->escape($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals('jack-and-jill', $results->getEscapedValue());
         $this->assertEquals(true, $results->getChangeIndicator());
 
         return;

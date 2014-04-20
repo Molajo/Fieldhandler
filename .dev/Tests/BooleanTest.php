@@ -1,6 +1,6 @@
 <?php
 /**
- * Boolean Fieldhandler Test
+ * Boolean Constraint Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -10,7 +10,6 @@ namespace Molajo\Fieldhandler\Tests;
 
 use Molajo\Fieldhandler\Request as request;
 use PHPUnit_Framework_TestCase;
-use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Boolean Fieldhandler
@@ -46,7 +45,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testValidate1()
+    public function testValidateSuccessFalse()
     {
         $field_name  = 'boolean_fieldname';
         $field_value = false;
@@ -57,6 +56,9 @@ class BooleanTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(true, $results->getValidationResponse());
 
+        $messages = $results->getValidationMessages();
+        $this->assertEquals(array(), $messages);
+
         return;
     }
 
@@ -65,7 +67,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testValidate2()
+    public function testValidateSuccessTrue()
     {
         $field_name  = 'boolean_fieldname';
         $field_value = true;
@@ -76,6 +78,9 @@ class BooleanTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(true, $results->getValidationResponse());
 
+        $messages = $results->getValidationMessages();
+        $this->assertEquals(array(), $messages);
+
         return;
     }
 
@@ -84,7 +89,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testValidate3()
+    public function testValidateSuccessNull()
     {
         $field_name  = 'boolean_fieldname';
         $field_value = null;
@@ -94,6 +99,9 @@ class BooleanTest extends PHPUnit_Framework_TestCase
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getValidationResponse());
+
+        $messages = $results->getValidationMessages();
+        $this->assertEquals(array(), $messages);
 
         return;
     }
@@ -112,7 +120,14 @@ class BooleanTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
+
         $this->assertEquals(false, $results->getValidationResponse());
+
+        $expected_code    = 1000;
+        $expected_message = 'Field: boolean_fieldname does not have a valid value for Boolean data type.';
+        $messages         = $results->getValidationMessages();
+        $this->assertEquals($expected_code, $messages[0]->code);
+        $this->assertEquals($expected_message, $messages[0]->message);
 
         return;
     }
@@ -131,7 +146,8 @@ class BooleanTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->filter($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(false, $results->getValidationResponse());
+        $this->assertEquals($field_value, $results->getFilteredValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
@@ -150,7 +166,8 @@ class BooleanTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->filter($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidationResponse());
+        $this->assertEquals($field_value, $results->getFilteredValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
@@ -169,7 +186,8 @@ class BooleanTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->filter($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(null, $results->getValidationResponse());
+        $this->assertEquals($field_value, $results->getFilteredValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
@@ -188,7 +206,8 @@ class BooleanTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->filter($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(null, $results->getValidationResponse());
+        $this->assertEquals(null, $results->getFilteredValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }
@@ -207,7 +226,8 @@ class BooleanTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->escape($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getValidationResponse());
+        $this->assertEquals(null, $results->getEscapedValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
@@ -226,7 +246,8 @@ class BooleanTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->escape($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getValidationResponse());
+        $this->assertEquals($field_value, $results->getEscapedValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
@@ -245,7 +266,8 @@ class BooleanTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->escape($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getValidationResponse());
+        $this->assertEquals($field_value, $results->getEscapedValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
@@ -264,7 +286,8 @@ class BooleanTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->escape($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(null, $results->getValidationResponse());
+        $this->assertEquals(null, $results->getEscapedValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }

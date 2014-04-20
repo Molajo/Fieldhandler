@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains Fieldhandler Test
+ * Contains Constraint Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -13,7 +13,7 @@ use PHPUnit_Framework_TestCase;
 use CommonApi\Exception\UnexpectedValueException;
 
 /**
- * Contains Fieldhandler
+ * Contains Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -46,7 +46,7 @@ class ContainsTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testEscape()
+    public function testValidateSuccess()
     {
         $field_name          = 'fieldname';
         $field_value         = 'first dog last';
@@ -54,9 +54,12 @@ class ContainsTest extends PHPUnit_Framework_TestCase
         $options             = array();
         $options['contains'] = 'dog';
 
-        $results = $this->request->escape($field_name, $field_value, $constraint, $options);
+        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getValidationResponse());
+        $this->assertEquals(true, $results->getValidationResponse());
+
+        $messages         = $results->getValidationMessages();
+        $this->assertEquals(array(), $messages);
 
         return;
     }
@@ -77,6 +80,12 @@ class ContainsTest extends PHPUnit_Framework_TestCase
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(false, $results->getValidationResponse());
+
+        $expected_code    = 1000;
+        $expected_message = 'Field: fieldname does not have a valid value for Contains data type.';
+        $messages         = $results->getValidationMessages();
+        $this->assertEquals($expected_code, $messages[0]->code);
+        $this->assertEquals($expected_message, $messages[0]->message);
 
         return;
     }

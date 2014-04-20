@@ -1,6 +1,6 @@
 <?php
 /**
- * Date Fieldhandler Test
+ * Date Constraint Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.

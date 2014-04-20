@@ -1,6 +1,6 @@
 <?php
 /**
- * Alpha Fieldhandler
+ * Alpha Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -11,7 +11,7 @@ namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Alpha Fieldhandler
+ * Alpha Constraint
  *
  * @link       http://us1.php.net/manual/en/function.ctype-alpha.php
  * @package    Molajo

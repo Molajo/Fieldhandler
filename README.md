@@ -400,8 +400,13 @@ Tests if value is an array.
 
 ```php
     // Field order_number array('ABC123', 'DEF456') would be returned as same for
-    // filter, escape and validate
+
     $results = $this->adapter->filter('order_number', array('ABC123', 'DEF456'), 'Array');
+
+    array_valid_keys
+    array_valid_values
+    array_minimum (default 0)
+    array_maximum (default 9999999999)
 
 ```
 ### Boolean ###

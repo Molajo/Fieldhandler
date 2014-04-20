@@ -1,6 +1,6 @@
 <?php
 /**
- * Alphanumeric Fieldhandler Test
+ * Alphanumeric Constraint Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -8,7 +8,8 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Request as request;
+use Molajo\Fieldhandler\Request;
+
 use PHPUnit_Framework_TestCase;
 
 /**
@@ -42,10 +43,10 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::validate
-     * @return void
+     * @return  void
      * @since   1.0.0
      */
-    public function testValid()
+    public function testValidationSucceed()
     {
         $field_name  = 'test';
         $field_value = 'Aa123';
@@ -55,16 +56,18 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getValidationResponse());
+        $messages = $results->getValidationMessages();
+        $this->assertEquals(array(), $messages);
 
         return;
     }
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::validate
-     * @return void
+     * @return  void
      * @since   1.0.0
      */
-    public function testValidateFail()
+    public function testValidationFail()
     {
         $field_name  = 'test';
         $field_value = '@Aa123';
@@ -75,16 +78,18 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(false, $results->getValidationResponse());
 
+        $expected_code    = 2000;
         $expected_message = 'Field: test must only contain Alphanumeric values.';
-        $message          = $results->getValidationMessages();
-        $this->assertEquals($expected_message, $message[2000]);
+        $messages         = $results->getValidationMessages();
+        $this->assertEquals($expected_code, $messages[0]->code);
+        $this->assertEquals($expected_message, $messages[0]->message);
 
         return;
     }
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::filter
-     * @return void
+     * @return  void
      * @since   1.0.0
      */
     public function testFilterValid()
@@ -96,14 +101,15 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->filter($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getValidationResponse());
+        $this->assertEquals($field_value, $results->getFilteredValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::filter
-     * @return void
+     * @return  void
      * @since   1.0.0
      */
     public function testFilterFail()
@@ -115,15 +121,16 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->filter($field_name, $field_value, $constraint, $options);
 
-        $field_value = 'Aa123';
-        $this->assertEquals($field_value, $results->getValidationResponse());
+        $expected_value = 'Aa123';
+        $this->assertEquals($expected_value, $results->getFilteredValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::filter
-     * @return void
+     * @return  void
      * @since   1.0.0
      */
     public function testEscapeValid()
@@ -135,14 +142,15 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->escape($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getValidationResponse());
+        $this->assertEquals($field_value, $results->getEscapedValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::filter
-     * @return void
+     * @return  void
      * @since   1.0.0
      */
     public function testEscapeFail()
@@ -155,7 +163,8 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
         $results = $this->request->escape($field_name, $field_value, $constraint, $options);
 
         $field_value = 'Aa123';
-        $this->assertEquals($field_value, $results->getValidationResponse());
+        $this->assertEquals($field_value, $results->getEscapedValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }

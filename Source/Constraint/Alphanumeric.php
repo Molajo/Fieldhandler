@@ -1,6 +1,6 @@
 <?php
 /**
- * Alphanumeric Fieldhandler
+ * Alphanumeric Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -11,7 +11,7 @@ namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Alphanumeric Fieldhandler
+ * Alphanumeric Constraint
  *
  * @link       http://us1.php.net/manual/en/function.ctype-alnum.php
  * @package    Molajo

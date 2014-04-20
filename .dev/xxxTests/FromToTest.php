@@ -1,6 +1,6 @@
 <?php
 /**
- * Fromto Fieldhandler Test
+ * Fromto Constraint Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.

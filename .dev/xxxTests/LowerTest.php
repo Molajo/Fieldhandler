@@ -1,6 +1,6 @@
 <?php
 /**
- * lower Fieldhandler Test
+ * lower Constraint Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
