@@ -1,8 +1,8 @@
 <?php
 /**
- * Fieldhandler Validation Response
+ * Validation Response
  *
- * @package    Model
+ * @package    Fieldhandler
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
@@ -11,7 +11,7 @@ namespace Molajo\Fieldhandler;
 use CommonApi\Model\ValidateResponseInterface;
 
 /**
- * Fieldhandler Validation Response
+ * Validation Response
  *
  * @package    Fieldhandler
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
@@ -29,27 +29,27 @@ class ValidationResponse implements ValidateResponseInterface
     protected $validation_response;
 
     /**
-     * Associative array of error messages
+     * Associative array of validation messages
      *
      * @var    array
      * @since  1.0.0
      */
-    protected $error_messages;
+    protected $validation_messages;
 
     /**
      * Constructor
      *
      * @param   string $validation_response
-     * @param   array  $error_messages
+     * @param   array  $validation_messages
      *
      * @since   1.0.0
      */
     public function __construct(
         $validation_response,
-        array $error_messages = array()
+        array $validation_messages = array()
     ) {
         $this->validation_response = $validation_response;
-        $this->error_messages      = $error_messages;
+        $this->validation_messages = $validation_messages;
     }
 
     /**
@@ -71,6 +71,6 @@ class ValidationResponse implements ValidateResponseInterface
      */
     public function getValidationMessages()
     {
-        return $this->error_messages;
+        return $this->validation_messages;
     }
 }
