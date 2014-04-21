@@ -4,10 +4,12 @@ Molajo Fieldhandler [Alpha]
 
 [![Build Status](https://travis-ci.org/Molajo/Fieldhandler.png?branch=master)](https://travis-ci.org/Molajo/Fieldhandler)
 
-The *Molajo Fieldhandler* is a data integrity assurance package for PHP applications which bundles *filtering*,
-*escaping* and *validation* functionality into one easy-to-use package. Unifying data custodial functionality
-makes it easier to consider the role of each approach in enforcing constraint definitions and providing clean,
-verified, useful application information.
+*Molajo Fieldhandler* bundles *filter*, *escape* and *validate*
+into an integrated data integrity assurance package for PHP applications.
+The approach aligns fields with constraints, applying *filter*, *escape* and *validate*
+functionality very specifically as specialised tools. In unifying tool usage around a focus
+on field-level rule compliance, applications ensure data
+collection processes provide clean, verified, and useful information.
 
 ## Example Usage ##
 
@@ -62,7 +64,7 @@ describing data integrity is organized by constraint.
 *Molajo Fieldhandler* allows you to take this further. By defining what fields belong to a data object,
  you can also define what constraints are required for each field. With that information, *Molajo Fieldhandler*
  can manage these constraints for you.
-  
+
 ```php
 
 // 1. Instantiate the Molajo Fieldhandler and inject $fieldhandler into class
