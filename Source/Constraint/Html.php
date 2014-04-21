@@ -1,6 +1,6 @@
 <?php
 /**
- * Html Fieldhandler
+ * Html Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -13,7 +13,7 @@ use CommonApi\Model\ConstraintInterface;
 include __DIR__ . '/Libraries/kses.php';
 
 /**
- * Html Fieldhandler
+ * Html Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -30,22 +30,22 @@ class Html extends AbstractConstraint implements ConstraintInterface
      */
     public function validate()
     {
-        if ($this->field_value === $this->filter()) {
+        if ($this->field_value === $this->handleInput()) {
             return true;
         }
 
-        $this->setValidationMessage(8000);
+        $this->setValidateMessage(8000);
 
         return false;
     }
 
     /**
-     * Filter
+     * Handle Input
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function filter()
+    public function handleInput()
     {
         if ($this->field_value === null) {
         } else {
@@ -56,13 +56,13 @@ class Html extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Escape
+     * Handle Output
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function escape()
+    public function handleOutput()
     {
-        return $this->filter();
+        return $this->handleInput();
     }
 }

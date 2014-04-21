@@ -1,6 +1,6 @@
 <?php
 /**
- * Fileextension Fieldhandler
+ * Fileextension Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -12,7 +12,7 @@ use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Fileextension Fieldhandler
+ * Fileextension Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -35,7 +35,7 @@ class Fileextension extends AbstractConstraint implements ConstraintInterface
 
         if (is_file($this->field_value)) {
         } else {
-            $this->setValidationMessage(9000);
+            $this->setValidateMessage(9000);
             return false;
         }
 
@@ -45,19 +45,19 @@ class Fileextension extends AbstractConstraint implements ConstraintInterface
             return true;
         }
 
-        $this->setValidationMessage(9000);
+        $this->setValidateMessage(9000);
 
         return false;
 
     }
 
     /**
-     * Filter
+     * Handle Input
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function filter()
+    public function handleInput()
     {
         if ($this->field_value === null) {
             return $this->field_value;
@@ -71,14 +71,14 @@ class Fileextension extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Escape
+     * Handle Output
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function escape()
+    public function handleOutput()
     {
-        return $this->filter();
+        return $this->handleInput();
     }
 
     /**

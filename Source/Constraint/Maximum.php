@@ -1,6 +1,6 @@
 <?php
 /**
- * Maximum Fieldhandler
+ * Maximum Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -12,7 +12,7 @@ use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Maximum Fieldhandler
+ * Maximum Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -39,18 +39,18 @@ class Maximum extends AbstractConstraint implements ConstraintInterface
             }
         }
 
-        $this->setValidationMessage(10000);
+        $this->setValidateMessage(10000);
 
         return false;
     }
 
     /**
-     * Filter
+     * Handle Input
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function filter()
+    public function handleInput()
     {
         if ($this->field_value === null) {
         } else {
@@ -65,12 +65,12 @@ class Maximum extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Escape
+     * Handle Output
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function escape()
+    public function handleOutput()
     {
         return $this->field_value;
     }

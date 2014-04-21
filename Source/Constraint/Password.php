@@ -1,6 +1,6 @@
 <?php
 /**
- * Password Fieldhandler
+ * Password Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -11,7 +11,7 @@ namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Password Fieldhandler
+ * Password Constraint
  *
  * @link       http://php.net/manual/en/function.ctype-print.php
  * @package    Molajo
@@ -32,7 +32,7 @@ class Password extends AbstractConstraint implements ConstraintInterface
         if ($this->field_value === null) {
         } else {
             if (ctype_print($this->field_value) === false) {
-                $this->setValidationMessage(2000);
+                $this->setValidateMessage(2000);
                 return false;
             }
         }
@@ -41,24 +41,24 @@ class Password extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Filter
+     * Handle Input
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function filter()
+    public function handleInput()
     {
         // if the password is 90 days or more, expire the password
     }
 
     /**
-     * Escape
+     * Handle Output
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function escape()
+    public function handleOutput()
     {
-        return $this->filter();
+        return $this->handleInput();
     }
 }

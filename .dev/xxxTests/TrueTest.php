@@ -57,9 +57,9 @@ class TrueTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $message = $results->getValidationMessages();
+        $message = $results->getValidateMessages();
         $this->assertEquals($expected_message, $message[1000]);
-        $this->assertEquals(false, $results->getValidationResponse());
+        $this->assertEquals(false, $results->getValidateResponse());
 
         return;
     }
@@ -80,7 +80,7 @@ class TrueTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidationResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
 
         return;
     }
@@ -101,7 +101,7 @@ class TrueTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidationResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
 
         return;
     }
@@ -122,7 +122,7 @@ class TrueTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidationResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
 
         return;
     }
@@ -144,9 +144,9 @@ class TrueTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $message = $results->getValidationMessages();
+        $message = $results->getValidateMessages();
         $this->assertEquals($expected_message, $message[1000]);
-        $this->assertEquals(false, $results->getValidationResponse());
+        $this->assertEquals(false, $results->getValidateResponse());
 
         return;
     }
@@ -165,15 +165,15 @@ class TrueTest extends PHPUnit_Framework_TestCase
         $constraint  = 'True';
         $options     = array();
 
-        $results = $this->request->filter($field_name, $field_value, $constraint, $options);
+        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals('on', $results->getValidationResponse());
+        $this->assertEquals('on', $results->getValidateResponse());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Default::filter
+     * @covers  Molajo\Fieldhandler\Constraint\Default::handleInput
      *
      * @return void
      * @since   1.0.0
@@ -185,9 +185,9 @@ class TrueTest extends PHPUnit_Framework_TestCase
         $constraint  = 'True';
         $options     = array();
 
-        $results = $this->request->filter($field_name, $field_value, $constraint, $options);
+        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(null, $results->getValidationResponse());
+        $this->assertEquals(null, $results->getValidateResponse());
 
         return;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Encoded Fieldhandler
+ * Encoded Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -11,7 +11,7 @@ namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Encoded Fieldhandler
+ * Encoded Constraint
  *
  * URL-encode string, optionally strip or encode special characters.
  *
@@ -38,18 +38,18 @@ class Encoded extends AbstractConstraint implements ConstraintInterface
             return true;
         }
 
-        $this->setValidationMessage(8000);
+        $this->setValidateMessage(8000);
 
         return false;
     }
 
     /**
-     * Filter
+     * Handle Input
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function filter()
+    public function handleInput()
     {
         $this->field_value = filter_var($this->field_value, FILTER_SANITIZE_ENCODED, $this->setFlags());
 
@@ -57,14 +57,14 @@ class Encoded extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Escape
+     * Handle Output
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function escape()
+    public function handleOutput()
     {
-        return $this->filter();
+        return $this->handleInput();
     }
 
     /**

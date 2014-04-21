@@ -1,6 +1,6 @@
 <?php
 /**
- * Required Fieldhandler
+ * Required Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -11,7 +11,7 @@ namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Required Fieldhandler
+ * Required Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -30,7 +30,7 @@ class Required extends AbstractConstraint implements ConstraintInterface
     {
         if ($this->field_value === null) {
 
-            $this->setValidationMessage(13000);
+            $this->setValidateMessage(13000);
 
             return false;
         }
@@ -39,24 +39,24 @@ class Required extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Filter
+     * Handle Input
      *
      * @return  mixed
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    public function filter()
+    public function handleInput()
     {
         return $this->field_value;
     }
 
     /**
-     * Escape
+     * Handle Output
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function escape()
+    public function handleOutput()
     {
         return $this->field_value;
     }

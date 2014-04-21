@@ -58,9 +58,9 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidationResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
 
-        $messages         = $results->getValidationMessages();
+        $messages = $results->getValidateMessages();
         $this->assertEquals(array(), $messages);
 
         return;
@@ -88,8 +88,8 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(false, $results->getValidationResponse());
-        $messages = $results->getValidationMessages();
+        $this->assertEquals(false, $results->getValidateResponse());
+        $messages = $results->getValidateMessages();
         $this->assertEquals(3, count($messages));
 
         return;
@@ -111,12 +111,12 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(false, $results->getValidationResponse());
+        $this->assertEquals(false, $results->getValidateResponse());
 
-        $messages         = $results->getValidationMessages();
+        $messages         = $results->getValidateMessages();
         $expected_code    = 3000;
         $expected_message = 'Field: alias is not an array.';
-        $messages         = $results->getValidationMessages();
+        $messages         = $results->getValidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);
 
@@ -143,9 +143,9 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidationResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
 
-        $messages         = $results->getValidationMessages();
+        $messages = $results->getValidateMessages();
         $this->assertEquals(array(), $messages);
 
         return;
@@ -170,9 +170,9 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidationResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
 
-        $messages         = $results->getValidationMessages();
+        $messages = $results->getValidateMessages();
         $this->assertEquals(array(), $messages);
 
         return;
@@ -204,7 +204,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidationResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
 
         return;
     }
@@ -234,10 +234,10 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $messages         = $results->getValidationMessages();
+        $messages         = $results->getValidateMessages();
         $expected_code    = 4000;
         $expected_message = 'Field: alias has an invalid array element value.';
-        $messages         = $results->getValidationMessages();
+        $messages         = $results->getValidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);
 
@@ -264,7 +264,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidationResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
 
         return;
     }
@@ -288,7 +288,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidationResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
 
         return;
     }

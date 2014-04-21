@@ -54,7 +54,7 @@ class RequiredTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidationResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
 
         return;
     }
@@ -72,7 +72,7 @@ class RequiredTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, array());
 
-        $this->assertEquals(false, $results->getValidationResponse());
+        $this->assertEquals(false, $results->getValidateResponse());
 
         return;
     }

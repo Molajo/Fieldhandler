@@ -52,9 +52,9 @@ class LowerTest extends PHPUnit_Framework_TestCase
         $constraint  = 'lower';
         $options     = array();
 
-        $results = $this->request->filter($field_name, $field_value, $constraint, $options);
+        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals('aa123', $results->getValidationResponse());
+        $this->assertEquals('aa123', $results->getValidateResponse());
 
         return;
     }
@@ -73,13 +73,13 @@ class LowerTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(false, $results->getValidationResponse());
+        $this->assertEquals(false, $results->getValidateResponse());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\lower::filter
+     * @covers  Molajo\Fieldhandler\Constraint\lower::handleInput
      * @return void
      * @since   1.0.0
      */
@@ -90,9 +90,9 @@ class LowerTest extends PHPUnit_Framework_TestCase
         $constraint  = 'lower';
         $options     = array();
 
-        $results = $this->request->filter($field_name, $field_value, $constraint, $options);
+        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals('aa123', $results->getValidationResponse());
+        $this->assertEquals('aa123', $results->getValidateResponse());
 
         return;
     }

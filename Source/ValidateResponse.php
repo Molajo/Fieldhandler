@@ -1,6 +1,6 @@
 <?php
 /**
- * Validation Response
+ * Validate Response
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -11,45 +11,45 @@ namespace Molajo\Fieldhandler;
 use CommonApi\Model\ValidateResponseInterface;
 
 /**
- * Validation Response
+ * Validate Response
  *
  * @package    Molajo
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @since      1.0.0
  */
-class ValidationResponse implements ValidateResponseInterface
+class ValidateResponse implements ValidateResponseInterface
 {
     /**
-     * Validation Response
+     * Validate Response
      *
      * @var    boolean
      * @since  1.0.0
      */
-    protected $validation_response;
+    protected $validate_response;
 
     /**
-     * Associative array of validation messages
+     * Validation messages
      *
      * @var    array
      * @since  1.0.0
      */
-    protected $validation_messages;
+    protected $validate_messages;
 
     /**
      * Constructor
      *
-     * @param   string $validation_response
-     * @param   array  $validation_messages
+     * @param   string $validate_response
+     * @param   array  $validate_messages
      *
      * @since   1.0.0
      */
     public function __construct(
-        $validation_response,
-        array $validation_messages = array()
+        $validate_response,
+        array $validate_messages = array()
     ) {
-        $this->validation_response = $validation_response;
-        $this->validation_messages = $validation_messages;
+        $this->validate_response = $validate_response;
+        $this->validate_messages = $validate_messages;
     }
 
     /**
@@ -58,9 +58,9 @@ class ValidationResponse implements ValidateResponseInterface
      * @return  boolean
      * @since   1.0.0
      */
-    public function getValidationResponse()
+    public function getValidateResponse()
     {
-        return $this->validation_response;
+        return $this->validate_response;
     }
 
     /**
@@ -69,8 +69,8 @@ class ValidationResponse implements ValidateResponseInterface
      * @return  array
      * @since   1.0.0
      */
-    public function getValidationMessages()
+    public function getValidateMessages()
     {
-        return $this->validation_messages;
+        return $this->validate_messages;
     }
 }

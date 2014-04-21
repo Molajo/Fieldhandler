@@ -16,7 +16,7 @@
         "php": ">=5.4",
         "commonapi/model": "dev-master",
         "commonapi/exception": "dev-master",
-        "zend/escaper": "dev-master"
+        "zendframework/zend-escaper": "dev-master"
     },
     "support": {
         "event": "hello@molajo.org",

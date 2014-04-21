@@ -41,7 +41,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\values::filter
+     * @covers  Molajo\Fieldhandler\Constraint\values::handleInput
      * @return  void
      * @since   1.0.0
      */
@@ -53,15 +53,15 @@ class ValuesTest extends PHPUnit_Framework_TestCase
         $options                       = array();
         $options['array_valid_values'] = array('a', 'b', 'c');
 
-        $results = $this->request->filter($field_name, $field_value, $constraint, $options);
+        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals('a', $results->getValidationResponse());
+        $this->assertEquals('a', $results->getValidateResponse());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\values::filter
+     * @covers  Molajo\Fieldhandler\Constraint\values::handleInput
      * @return  void
      * @since   1.0.0
      */
@@ -73,9 +73,9 @@ class ValuesTest extends PHPUnit_Framework_TestCase
         $options                       = array();
         $options['array_valid_values'] = array('a', 'b', 'c');
 
-        $results = $this->request->filter($field_name, $field_value, $constraint, $options);
+        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(null, $results->getValidationResponse());
+        $this->assertEquals(null, $results->getValidateResponse());
 
         return;
     }
@@ -95,7 +95,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(false, $results->getValidationResponse());
+        $this->assertEquals(false, $results->getValidateResponse());
 
         return;
     }
@@ -115,7 +115,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidationResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
 
         return;
     }

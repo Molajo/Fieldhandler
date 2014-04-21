@@ -1,6 +1,6 @@
 <?php
 /**
- * Minimum Fieldhandler
+ * Minimum Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -12,7 +12,7 @@ use CommonApi\Model\ConstraintInterface;
 use CommonApi\Exception\UnexpectedValueException;
 
 /**
- * Minimum Fieldhandler
+ * Minimum Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -34,7 +34,7 @@ class Minimum extends AbstractConstraint implements ConstraintInterface
         }
 
         if ($this->field_value > $this->getMinimum()) {
-            $this->setValidationMessage(11000);
+            $this->setValidateMessage(11000);
             return false;
         }
 
@@ -42,12 +42,12 @@ class Minimum extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Filter
+     * Handle Input
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function filter()
+    public function handleInput()
     {
         if ($this->field_value === null) {
         } else {
@@ -61,14 +61,14 @@ class Minimum extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Escape
+     * Handle Output
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function escape()
+    public function handleOutput()
     {
-        return $this->filter();
+        return $this->handleInput();
     }
 
     /**

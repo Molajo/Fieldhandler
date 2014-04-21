@@ -3,9 +3,9 @@
 
 ## Definition
 
-Each character must be a value of A through Z (upper or lowercase) or a digit value ranging from 0 to 9.
+Each character must be a value of A through Z (upper or lowercase) or a digit ranging from 0 to 9.
 
-[Source Code]()
+[Source Code](https://github.com/Molajo/Fieldhandler/blob/bd65c83e7705b010555146fa6b2090d7e4bdd25e/Source/Constraint/Alphanumeric.php)
 
 ## Escape
 
@@ -18,10 +18,10 @@ Each value conforms.
 ```php
 
 $employee_name = 'Janet Jackson';
-$results       = $request->filter('employee_name', $employee_name, 'Alphanumeric');
+$results       = $request->handleInput('employee_name', $employee_name, 'Alphanumeric');
 
 if ($results->getChangeIndicator() === true) {
-    $employee_name = $results->getFilteredValue();
+    $employee_name = $results->getFieldValue();
 } else {
     // Filtering did not change the Employee Name
 }
@@ -30,15 +30,15 @@ if ($results->getChangeIndicator() === true) {
 
 ### Escape Example 2
 
-Each value does not conform. Use the filtered value as the data value.
+Each value does not conform. Use the returned value as the data value.
 
 ```php
 
 $employee_name = 'Janet @ Jackson';
-$results       = $request->filter('employee_name', $employee_name, 'Alphanumeric');
+$results       = $request->handleInput('employee_name', $employee_name, 'Alphanumeric');
 
 if ($results->getChangeIndicator() === true) {
-    $employee_name = $results->getFilteredValue();
+    $employee_name = $results->getFieldValue();
     // The employee_name value now contains 'Janet Jackson'
 }
 
@@ -56,10 +56,10 @@ Each value conforms.
 ```php
 
 $employee_name = 'Janet Jackson';
-$results       = $request->filter('employee_name', $employee_name, 'Alphanumeric');
+$results       = $request->handleInput('employee_name', $employee_name, 'Alphanumeric');
 
 if ($results->getChangeIndicator() === true) {
-    $employee_name = $results->getFilteredValue();
+    $employee_name = $results->getFieldValue();
 } else {
     // Filtering did not change the Employee Name
 }
@@ -68,15 +68,15 @@ if ($results->getChangeIndicator() === true) {
 
 ### Filter Example 2
 
-Each value does not conform. Use the filtered value as the data value.
+Each value does not conform. Use the returned value as the data value.
 
 ```php
 
 $employee_name = 'Janet @ Jackson';
-$results       = $request->filter('employee_name', $employee_name, 'Alphanumeric');
+$results       = $request->handleInput('employee_name', $employee_name, 'Alphanumeric');
 
 if ($results->getChangeIndicator() === true) {
-    $employee_name = $results->getFilteredValue();
+    $employee_name = $results->getFieldValue();
     // The employee_name value now contains 'Janet Jackson'
 }
 
@@ -95,7 +95,7 @@ Each value conforms.
 $employee_name = 'Janet Jackson';
 $results       = $request->validate('employee_name', $employee_name, 'Alphanumeric');
 
-if ($results->getValidationResponse() === true) {
+if ($results->getValidateResponse() === true) {
     // Yea! Each value conforms to the defined constraint!
 }
 
@@ -110,9 +110,9 @@ if ($results->getValidationResponse() === true) {
 $employee_name = 'Janet @ Jackson';
 $results       = $request->validate('employee_name', $employee_name, 'Alphanumeric');
 
-if ($results->getValidationResponse() === false) {
+if ($results->getValidateResponse() === false) {
     // Retrieve error messages and codes
-    $messages = $results->getValidationMessages();
+    $messages = $results->getValidateMessages();
 }
 
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Datetime Fieldhandler
+ * Datetime Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -11,7 +11,7 @@ namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Datetime Fieldhandler
+ * Datetime Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -32,7 +32,7 @@ class Datetime extends AbstractConstraint implements ConstraintInterface
         } else {
 
             if (strtotime($this->field_value) === false) {
-                $this->setValidationMessage(2000);
+                $this->setValidateMessage(2000);
                 return false;
             }
         }
@@ -41,12 +41,12 @@ class Datetime extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Filter
+     * Handle Input
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function filter()
+    public function handleInput()
     {
         if (strtotime($this->field_value) === false) {
             $this->field_value = null;
@@ -56,13 +56,13 @@ class Datetime extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Escape
+     * Handle Output
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function escape()
+    public function handleOutput()
     {
-        return $this->filter();
+        return $this->handleInput();
     }
 }

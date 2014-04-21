@@ -1,6 +1,6 @@
 <?php
 /**
- * Escape Response
+ * Handle Response
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -8,17 +8,17 @@
  */
 namespace Molajo\Fieldhandler;
 
-use CommonApi\Model\EscapeResponseInterface;
+use CommonApi\Model\HandleResponseInterface;
 
 /**
- * Escape Response
+ * Handle Response
  *
  * @package    Molajo
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @since      1.0.0
  */
-class EscapeResponse implements EscapeResponseInterface
+class HandleResponse implements HandleResponseInterface
 {
     /**
      * Original Data Value
@@ -29,49 +29,49 @@ class EscapeResponse implements EscapeResponseInterface
     protected $original_data_value;
 
     /**
-     * Escape Response
+     * Handle Value
      *
      * @var    mixed
      * @since  1.0.0
      */
-    protected $escape_response;
+    protected $response_value;
 
     /**
      * Constructor
      *
-     * @param   mixed $escaped_value
      * @param   mixed $original_data_value
+     * @param   mixed $response_value
      *
      * @since   1.0.0
      */
     public function __construct(
         $original_data_value,
-        $escaped_value
+        $response_value
     ) {
         $this->original_data_value = $original_data_value;
-        $this->escaped_value       = $escaped_value;
+        $this->response_value      = $response_value;
     }
 
     /**
-     * Get Escaped Value
+     * Get Response Value
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function getEscapedValue()
+    public function getFieldValue()
     {
-        return $this->escaped_value;
+        return $this->response_value;
     }
 
     /**
-     * Did the data value change as a result of escaping the data?
+     * Did the data value change as a result of processing?
      *
      * @return  boolean
      * @since   1.0.0
      */
     public function getChangeIndicator()
     {
-        if ($this->original_data_value === $this->escaped_value) {
+        if ($this->original_data_value === $this->response_value) {
             return false;
         }
 

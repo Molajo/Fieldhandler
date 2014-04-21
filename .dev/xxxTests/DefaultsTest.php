@@ -55,10 +55,10 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
             'default' => 'bark'
         );
 
-        $results = $this->request->filter($field_name, $field_value, $constraint, $options);
+        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
         $field_value = 'bark';
-        $this->assertEquals($field_value, $results->getValidationResponse());
+        $this->assertEquals($field_value, $results->getValidateResponse());
 
         return;
     }
@@ -79,7 +79,7 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidationResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
 
         return;
     }
@@ -98,9 +98,9 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
             'default' => 'bark'
         );
 
-        $results = $this->request->filter($field_name, $field_value, $constraint, $options);
+        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getValidationResponse());
+        $this->assertEquals($field_value, $results->getValidateResponse());
 
         return;
     }

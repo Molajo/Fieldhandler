@@ -54,9 +54,9 @@ class HtmlTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Html';
         $filtered    = '("Gotcha!");<p>I am fine.</p>';
 
-        $results = $this->request->filter($field_name, $field_value, $constraint, array());
+        $results = $this->request->handleInput($field_name, $field_value, $constraint, array());
 
-        $this->assertEquals($filtered, $results->getValidationResponse());
+        $this->assertEquals($filtered, $results->getValidateResponse());
 
         return;
     }
@@ -75,7 +75,7 @@ class HtmlTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, array());
 
-        $this->assertEquals(true, $results->getValidationResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
 
         return;
     }

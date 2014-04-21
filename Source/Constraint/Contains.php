@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains Fieldhandler
+ * Contains Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -12,7 +12,7 @@ use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Contains Fieldhandler
+ * Contains Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -34,7 +34,7 @@ class Contains extends AbstractConstraint implements ConstraintInterface
         }
 
         if ($this->testContains() === false) {
-            $this->setValidationMessage(1000);
+            $this->setValidateMessage(1000);
             return false;
         }
 
@@ -42,12 +42,12 @@ class Contains extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Filter
+     * Handle Input
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function filter()
+    public function handleInput()
     {
         if ($this->field_value === null) {
             return $this->field_value;
@@ -61,14 +61,14 @@ class Contains extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Escape
+     * Handle Output
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function escape()
+    public function handleOutput()
     {
-        return $this->filter();
+        return $this->handleInput();
     }
 
     /**

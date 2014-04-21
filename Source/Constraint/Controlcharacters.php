@@ -1,6 +1,6 @@
 <?php
 /**
- * Controlcharacters Fieldhandler
+ * Controlcharacters Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -11,7 +11,7 @@ namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Controlcharacters Fieldhandler
+ * Controlcharacters Constraint
  *
  * @link       http://us1.php.net/manual/en/function.ctype-alpha.php
  * @package    Molajo
@@ -32,7 +32,7 @@ class Controlcharacters extends AbstractConstraint implements ConstraintInterfac
         if ($this->field_value === null) {
         } else {
             if (ctype_cntrl($this->field_value) === false) {
-                $this->setValidationMessage(2000);
+                $this->setValidateMessage(2000);
                 return false;
             }
         }
@@ -41,12 +41,12 @@ class Controlcharacters extends AbstractConstraint implements ConstraintInterfac
     }
 
     /**
-     * Filter
+     * Handle Input
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function filter()
+    public function handleInput()
     {
         if ($this->field_value === null) {
         } else {
@@ -61,13 +61,13 @@ class Controlcharacters extends AbstractConstraint implements ConstraintInterfac
     }
 
     /**
-     * Escape
+     * Handle Output
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function escape()
+    public function handleOutput()
     {
-        return $this->filter();
+        return $this->handleInput();
     }
 }

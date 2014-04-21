@@ -1,6 +1,6 @@
 <?php
 /**
- * Hexidecimal Fieldhandler
+ * Hexidecimal Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -11,7 +11,7 @@ namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Hexidecimal Fieldhandler
+ * Hexidecimal Constraint
  *
  * @link       http://php.net/manual/en/function.ctype-xdigit.php
  * @package    Molajo
@@ -37,18 +37,18 @@ class Hexidecimal extends AbstractConstraint implements ConstraintInterface
             return true;
         }
 
-        $this->setValidationMessage(2000);
+        $this->setValidateMessage(2000);
 
         return false;
     }
 
     /**
-     * Filter
+     * Handle Input
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function filter()
+    public function handleInput()
     {
         if ($this->field_value === null) {
         } elseif (ctype_xdigit($this->field_value)) {
@@ -60,15 +60,15 @@ class Hexidecimal extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Escape
+     * Handle Output
      *
      * @return  mixed
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    public function escape()
+    public function handleOutput()
     {
-        return $this->filter();
+        return $this->handleInput();
     }
 
     /**

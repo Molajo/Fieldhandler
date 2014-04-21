@@ -1,6 +1,6 @@
 <?php
 /**
- * Fullspecialchars Fieldhandler
+ * Fullspecialchars Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -11,7 +11,7 @@ namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Fullspecialchars Fieldhandler
+ * Fullspecialchars Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -33,7 +33,7 @@ class Fullspecialchars extends AbstractConstraint implements ConstraintInterface
         }
 
         if (filter_var($this->field_value, FILTER_SANITIZE_FULL_SPECIAL_CHARS, $this->setFlags())) {
-            $this->setValidationMessage(8000);
+            $this->setValidateMessage(8000);
             return false;
         }
 
@@ -41,12 +41,12 @@ class Fullspecialchars extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Filter
+     * Handle Input
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function filter()
+    public function handleInput()
     {
         if ($this->field_value === null) {
         } else {
@@ -57,14 +57,14 @@ class Fullspecialchars extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Escape
+     * Handle Output
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function escape()
+    public function handleOutput()
     {
-        return $this->filter();
+        return $this->handleInput();
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 /**
- * Callback Fieldhandler
+ * Callback Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -11,7 +11,7 @@ namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Callback Fieldhandler
+ * Callback Constraint
  *
  * @link       http://us3.php.net/callback
  * @link       http://us3.php.net/manual/en/language.types.callable.php
@@ -35,7 +35,7 @@ class Callback extends AbstractConstraint implements ConstraintInterface
         }
 
         if (filter_var($this->field_value, FILTER_CALLBACK, $this->setCallback()) === false) {
-            $this->setValidationMessage(1000);
+            $this->setValidateMessage(1000);
 
             return false;
         }
@@ -44,12 +44,12 @@ class Callback extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Filter
+     * Handle Input
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function filter()
+    public function handleInput()
     {
         if ($this->field_value === null) {
         } else {
@@ -60,14 +60,14 @@ class Callback extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Escape
+     * Handle Output
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function escape()
+    public function handleOutput()
     {
-        return $this->filter();
+        return $this->handleInput();
     }
 
     /**

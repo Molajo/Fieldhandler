@@ -1,6 +1,6 @@
 <?php
 /**
- * Notequal Fieldhandler
+ * Notequal Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -12,7 +12,7 @@ use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Notequal Fieldhandler
+ * Notequal Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -30,7 +30,7 @@ class Notequal extends AbstractConstraint implements ConstraintInterface
     public function validate()
     {
         if ($this->field_value === $this->getNotEqual()) {
-            $this->setValidationMessage(1000);
+            $this->setValidateMessage(1000);
             return false;
         }
 
@@ -38,13 +38,13 @@ class Notequal extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Filter
+     * Handle Input
      *
      * @return  mixed
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    public function filter()
+    public function handleInput()
     {
         $notEqual = $this->getNotEqual();
 
@@ -56,15 +56,15 @@ class Notequal extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Escape
+     * Handle Output
      *
      * @return  mixed
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    public function escape()
+    public function handleOutput()
     {
-        return $this->filter();
+        return $this->handleInput();
     }
 
     /**

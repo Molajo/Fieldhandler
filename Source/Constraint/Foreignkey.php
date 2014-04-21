@@ -1,6 +1,6 @@
 <?php
 /**
- * Foreignkey Fieldhandler
+ * Foreignkey Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -13,7 +13,7 @@ use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Foreignkey Fieldhandler
+ * Foreignkey Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -30,7 +30,7 @@ class Foreignkey extends AbstractConstraint implements ConstraintInterface
      */
     public function validate()
     {
-        if ($this->filter() === null) {
+        if ($this->handleInput() === null) {
             return false;
         }
 
@@ -38,12 +38,12 @@ class Foreignkey extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Filter
+     * Handle Input
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function filter()
+    public function handleInput()
     {
         if ($this->field_value === null) {
 
@@ -61,15 +61,15 @@ class Foreignkey extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Escape
+     * Handle Output
      *
      * @return  mixed
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    public function escape()
+    public function handleOutput()
     {
-        return $this->filter();
+        return $this->handleInput();
     }
 
     /**

@@ -55,13 +55,13 @@ class DateTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint);
 
-        $this->assertEquals(false, $results->getValidationResponse());
+        $this->assertEquals(false, $results->getValidateResponse());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Date::filter
+     * @covers  Molajo\Fieldhandler\Constraint\Date::handleInput
      * @return  void
      * @since   1.0.0
      */
@@ -71,9 +71,9 @@ class DateTest extends PHPUnit_Framework_TestCase
         $field_value = '2013/04/01 01:00:00';
         $constraint  = 'Date';
 
-        $results = $this->request->filter($field_name, $field_value, $constraint);
+        $results = $this->request->handleInput($field_name, $field_value, $constraint);
 
-        $this->assertEquals($field_value, $results->getValidationResponse());
+        $this->assertEquals($field_value, $results->getValidateResponse());
 
         return;
     }
@@ -90,10 +90,10 @@ class DateTest extends PHPUnit_Framework_TestCase
 
         $constraint = 'Date';
 
-        $results = $this->request->filter($field_name, $field_value, $constraint);
+        $results = $this->request->handleInput($field_name, $field_value, $constraint);
 
         $field_value = null;
-        $this->assertEquals($field_value, $results->getValidationResponse());
+        $this->assertEquals($field_value, $results->getValidateResponse());
 
         return;
     }
@@ -109,9 +109,9 @@ class DateTest extends PHPUnit_Framework_TestCase
         $field_value = '2013/04/01 01:00:00';
         $constraint  = 'Date';
 
-        $results = $this->request->filter($field_name, $field_value, $constraint);
+        $results = $this->request->handleInput($field_name, $field_value, $constraint);
 
-        $this->assertEquals($field_value, $results->getValidationResponse());
+        $this->assertEquals($field_value, $results->getValidateResponse());
 
         return;
     }
@@ -128,10 +128,10 @@ class DateTest extends PHPUnit_Framework_TestCase
 
         $constraint = 'Date';
 
-        $results = $this->request->escape($field_name, $field_value, $constraint);
+        $results = $this->request->handleOutput($field_name, $field_value, $constraint);
 
         $field_value = null;
-        $this->assertEquals($field_value, $results->getValidationResponse());
+        $this->assertEquals($field_value, $results->getValidateResponse());
 
         return;
     }
@@ -147,9 +147,9 @@ class DateTest extends PHPUnit_Framework_TestCase
         $field_value = '2013/04/01 01:00:00';
         $constraint  = 'Date';
 
-        $results = $this->request->escape($field_name, $field_value, $constraint);
+        $results = $this->request->handleOutput($field_name, $field_value, $constraint);
 
-        $this->assertEquals($field_value, $results->getValidationResponse());
+        $this->assertEquals($field_value, $results->getValidateResponse());
 
         return;
     }

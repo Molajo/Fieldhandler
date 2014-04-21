@@ -10,8 +10,8 @@ namespace Molajo\Fieldhandler;
 
 use Exception;
 use CommonApi\Exception\UnexpectedValueException;
-use CommonApi\Model\EscapeInterface;
-use CommonApi\Model\FilterInterface;
+use CommonApi\Model\HandleInputInterface;
+use CommonApi\Model\HandleOutputInterface;
 use CommonApi\Model\ValidateInterface;
 
 /**
@@ -21,10 +21,10 @@ use CommonApi\Model\ValidateInterface;
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-class Request implements EscapeInterface, FilterInterface, ValidateInterface
+class Request implements ValidateInterface, HandleInputInterface, HandleOutputInterface
 {
     /**
-     * Request
+     * Constraint
      *
      * @var    string
      * @since  1.0.0
@@ -32,7 +32,7 @@ class Request implements EscapeInterface, FilterInterface, ValidateInterface
     protected $constraint;
 
     /**
-     * Request Instance
+     * Constraint Instance
      *
      * @var    object  CommonApi\Model\ConstraintInterface
      * @since  1.0.0
@@ -40,7 +40,7 @@ class Request implements EscapeInterface, FilterInterface, ValidateInterface
     protected $constraint_instance;
 
     /**
-     * Method (validate, filter, escape)
+     * Method (validate, handleInput, handleOutput)
      *
      * @var    string
      * @since  1.0.0
@@ -72,12 +72,12 @@ class Request implements EscapeInterface, FilterInterface, ValidateInterface
     protected $options = array();
 
     /**
-     * Validation Response
+     * Validate Response
      *
      * @var    boolean
      * @since  1.0.0
      */
-    protected $validation_response;
+    protected $validate_response;
 
     /**
      * Message Instance
@@ -126,40 +126,6 @@ class Request implements EscapeInterface, FilterInterface, ValidateInterface
     }
 
     /**
-     * Escape Request
-     *
-     * @param   string     $field_name
-     * @param   null|mixed $field_value
-     * @param   string     $constraint
-     * @param   array      $options
-     *
-     * @return  \CommonApi\Model\EscapeResponseInterface
-     * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
-     */
-    public function escape($field_name, $field_value = null, $constraint, array $options = array())
-    {
-        return $this->processRequest('escape', $field_name, $field_value, $constraint, $options);
-    }
-
-    /**
-     * Filter Request
-     *
-     * @param   string     $field_name
-     * @param   null|mixed $field_value
-     * @param   string     $constraint
-     * @param   array      $options
-     *
-     * @return  \CommonApi\Model\FilterResponseInterface
-     * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
-     */
-    public function filter($field_name, $field_value = null, $constraint, array $options = array())
-    {
-        return $this->processRequest('filter', $field_name, $field_value, $constraint, $options);
-    }
-
-    /**
      * Validate Request
      *
      * @param   string     $field_name
@@ -174,6 +140,40 @@ class Request implements EscapeInterface, FilterInterface, ValidateInterface
     public function validate($field_name, $field_value = null, $constraint, array $options = array())
     {
         return $this->processRequest('validate', $field_name, $field_value, $constraint, $options);
+    }
+
+    /**
+     * Handle Input Request
+     *
+     * @param   string     $field_name
+     * @param   null|mixed $field_value
+     * @param   string     $constraint
+     * @param   array      $options
+     *
+     * @return  \CommonApi\Model\HandleResponseInterface
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    public function handleInput($field_name, $field_value = null, $constraint, array $options = array())
+    {
+        return $this->processRequest('handleInput', $field_name, $field_value, $constraint, $options);
+    }
+
+    /**
+     * Handle Output Request
+     *
+     * @param   string     $field_name
+     * @param   null|mixed $field_value
+     * @param   string     $constraint
+     * @param   array      $options
+     *
+     * @return  \CommonApi\Model\HandleResponseInterface
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    public function handleOutput($field_name, $field_value = null, $constraint, array $options = array())
+    {
+        return $this->processRequest('handleOutput', $field_name, $field_value, $constraint, $options);
     }
 
     /**
@@ -205,20 +205,14 @@ class Request implements EscapeInterface, FilterInterface, ValidateInterface
         $response = $this->constraint_instance->$method();
 
         if ($method === 'validate') {
-            $this->getValidationMessages();
+            $this->getValidateMessages();
             if ($response === false) {
-                $this->validation_response = false;
+                $this->validate_response = false;
             }
+            return $this->setValidateResponse();
         }
 
-        if ($method === 'escape') {
-            return $this->setEscapeResponse($response);
-
-        } elseif ($method === 'filter') {
-            return $this->setFilterResponse($response);
-        }
-
-        return $this->setValidationResponse();
+        return $this->setHandleResponse($response);
     }
 
     /**
@@ -228,14 +222,14 @@ class Request implements EscapeInterface, FilterInterface, ValidateInterface
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    protected function getValidationMessages()
+    protected function getValidateMessages()
     {
         if ($this->method === 'validate') {
         } else {
             return $this;
         }
 
-        $messages = $this->constraint_instance->getValidationMessages();
+        $messages = $this->constraint_instance->getValidateMessages();
 
         if (count($messages) > 0) {
             $tokens['field_name']  = $this->field_name;
@@ -260,19 +254,19 @@ class Request implements EscapeInterface, FilterInterface, ValidateInterface
      */
     protected function setMethod($method)
     {
-        $this->method = strtolower($method);
+        $this->method = $method;
 
-        if (in_array($this->method, array('escape', 'filter', 'validate'))) {
+        if (in_array($this->method, array('validate', 'handleInput', 'handleOutput'))) {
         } else {
             throw new UnexpectedValueException
             (
-                'Fieldhandler Request: Must provide either escape, filter, or validate as the requested method.'
+                'Fieldhandler Request: Must provide validate, handleInput, or handleOutput as requested method.'
             );
         }
 
         $this->createMessageInstance();
 
-        $this->validation_response = true;
+        $this->validate_response = true;
 
         return $this;
     }
@@ -380,7 +374,7 @@ class Request implements EscapeInterface, FilterInterface, ValidateInterface
     /**
      * Create Message Instance
      *
-     * @return  \CommonApi\Model\EscapeResponseInterface
+     * @return  \CommonApi\Model\HandleResponseInterface
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
@@ -401,75 +395,19 @@ class Request implements EscapeInterface, FilterInterface, ValidateInterface
     }
 
     /**
-     * Create Escape Response
-     *
-     * @param   mixed $response
-     *
-     * @return  \CommonApi\Model\EscapeResponseInterface
-     * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
-     */
-    protected function setEscapeResponse($response)
-    {
-        $class = 'Molajo\\Fieldhandler\\EscapeResponse';
-
-        try {
-            return new $class(
-                $this->field_value,
-                $response
-            );
-
-        } catch (Exception $e) {
-
-            throw new UnexpectedValueException
-            (
-                'Fieldhandler Request setEscapeResponse Method: Cannot create class ' . $class
-            );
-        }
-    }
-
-    /**
-     * Create Filter Response
-     *
-     * @param   mixed $response
-     *
-     * @return  \CommonApi\Model\FilterResponseInterface
-     * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
-     */
-    protected function setFilterResponse($response)
-    {
-        $class = 'Molajo\\Fieldhandler\\FilterResponse';
-
-        try {
-            return new $class(
-                $this->field_value,
-                $response
-            );
-
-        } catch (Exception $e) {
-
-            throw new UnexpectedValueException
-            (
-                'Fieldhandler Request setFilterResponse Method: Cannot create class ' . $class
-            );
-        }
-    }
-
-    /**
      * Instantiates Validation Response
      *
      * @return  \CommonApi\Model\ValidateResponseInterface
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    protected function setValidationResponse()
+    protected function setValidateResponse()
     {
-        $class = 'Molajo\\Fieldhandler\\ValidationResponse';
+        $class = 'Molajo\\Fieldhandler\\ValidateResponse';
 
         try {
             return new $class(
-                $this->validation_response,
+                $this->validate_response,
                 $this->message_instance->getMessages()
             );
 
@@ -477,7 +415,35 @@ class Request implements EscapeInterface, FilterInterface, ValidateInterface
 
             throw new UnexpectedValueException
             (
-                'Fieldhandler Request setValidationResponse Method: Cannot create class ' . $class
+                'Fieldhandler Request setValidateResponse Method: Cannot create class ' . $class
+            );
+        }
+    }
+
+    /**
+     * Create Handle Response
+     *
+     * @param   mixed $response
+     *
+     * @return  \CommonApi\Model\HandleResponseInterface
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function setHandleResponse($response)
+    {
+        $class = 'Molajo\\Fieldhandler\\HandleResponse';
+
+        try {
+            return new $class(
+                $this->field_value,
+                $response
+            );
+
+        } catch (Exception $e) {
+
+            throw new UnexpectedValueException
+            (
+                'Fieldhandler Request setHandleResponse Method: Cannot create class ' . $class
             );
         }
     }

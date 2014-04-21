@@ -21,7 +21,7 @@ use CommonApi\Model\ConstraintInterface;
 abstract class AbstractConstraint implements ConstraintInterface
 {
     /**
-     * Request
+     * Constraint
      *
      * @var    string
      * @since  1.0.0
@@ -29,7 +29,7 @@ abstract class AbstractConstraint implements ConstraintInterface
     protected $constraint;
 
     /**
-     * Method (validate, filter, escape)
+     * Method (validate, handleInput, handleOutput)
      *
      * @var    string
      * @since  1.0.0
@@ -197,8 +197,8 @@ abstract class AbstractConstraint implements ConstraintInterface
     /**
      * Properties
      *
-     * @var object
-     * @since 1.0.0
+     * @var    object
+     * @since  1.0.0
      */
     protected $property_array = array(
         'database',
@@ -218,7 +218,7 @@ abstract class AbstractConstraint implements ConstraintInterface
      * @var    array
      * @since  1.0.0
      */
-    protected $validation_messages = array();
+    protected $validate_messages = array();
 
     /**
      * Constructor
@@ -266,27 +266,27 @@ abstract class AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Get Messages
+     * Get Validate Messages
      *
      * @return  array
      * @since   1.0.0
      */
-    public function getValidationMessages()
+    public function getValidateMessages()
     {
-        return $this->validation_messages;
+        return $this->validate_messages;
     }
 
     /**
-     * Save Message Codes  for Validation Failures
+     * Save Code for Validate Message
      *
      * @param   string $message_code
      *
      * @return  $this
      * @since   1.0.0
      */
-    public function setValidationMessage($message_code)
+    public function setValidateMessage($message_code)
     {
-        $this->validation_messages[] = $message_code;
+        $this->validate_messages[] = $message_code;
 
         return $this;
     }
@@ -301,22 +301,22 @@ abstract class AbstractConstraint implements ConstraintInterface
     abstract public function validate();
 
     /**
-     * Filter
+     * Handle Input
      *
      * @return  mixed
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    abstract public function filter();
+    abstract public function handleInput();
 
     /**
-     * Escape
+     * Handle Output
      *
      * @return  mixed
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    abstract public function escape();
+    abstract public function handleOutput();
 
     /**
      * Get timezone
@@ -407,62 +407,5 @@ abstract class AbstractConstraint implements ConstraintInterface
         }
 
         return array($minimum, $maximum);
-    }
-
-    /**
-     * Set Flags using constraint allowable options
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function setFlags()
-    {
-
-
-        if (isset($this->options['FILTER_FLAG_NO_ENCODE_QUOTES'])) {
-            $filter = 'FILTER_FLAG_NO_ENCODE_QUOTES';
-        }
-
-        if (isset($this->options['FILTER_FLAG_STRIP_LOW'])) {
-            if ($filter == '') {
-            } else {
-                $filter .= ', ';
-            }
-            $filter .= 'FILTER_FLAG_STRIP_LOW';
-        }
-
-        if (isset($this->options['FILTER_FLAG_STRIP_HIGH'])) {
-            if ($filter == '') {
-            } else {
-                $filter .= ', ';
-            }
-            $filter .= 'FILTER_FLAG_STRIP_HIGH';
-        }
-
-        if (isset($this->options['FILTER_FLAG_ENCODE_LOW'])) {
-            if ($filter == '') {
-            } else {
-                $filter .= ', ';
-            }
-            $filter .= 'FILTER_FLAG_ENCODE_LOW';
-        }
-
-        if (isset($this->options['FILTER_FLAG_ENCODE_HIGH'])) {
-            if ($filter == '') {
-            } else {
-                $filter .= ', ';
-            }
-            $filter .= 'FILTER_FLAG_ENCODE_HIGH';
-        }
-
-        if (isset($this->options['FILTER_FLAG_ENCODE_AMP'])) {
-            if ($filter == '') {
-            } else {
-                $filter .= ', ';
-            }
-            $filter .= 'FILTER_FLAG_ENCODE_AMP';
-        }
-
-        return $filter;
     }
 }

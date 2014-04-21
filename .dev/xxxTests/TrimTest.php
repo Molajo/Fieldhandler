@@ -54,7 +54,7 @@ class TrimTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidationResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
 
         return;
     }
@@ -72,7 +72,7 @@ class TrimTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, array());
 
-        $this->assertEquals(false, $results->getValidationResponse());
+        $this->assertEquals(false, $results->getValidateResponse());
 
         return;
     }
@@ -89,9 +89,9 @@ class TrimTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Trim';
         $options     = array();
 
-        $results = $this->request->filter($field_name, $field_value, $constraint, $options);
+        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals('AmyStephen@Molajo.org', $results->getValidationResponse());
+        $this->assertEquals('AmyStephen@Molajo.org', $results->getValidateResponse());
 
         return;
     }

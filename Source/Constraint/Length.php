@@ -1,6 +1,6 @@
 <?php
 /**
- * Length Fieldhandler
+ * Length Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -11,7 +11,7 @@ namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Length Fieldhandler
+ * Length Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -33,20 +33,18 @@ class Length extends AbstractConstraint implements ConstraintInterface
         }
 
         $results = $this->testMinimumMaximum();
-
-
-        $this->setValidationMessage(8000);
+        $this->setValidateMessage(8000);
 
         return false;
     }
 
     /**
-     * Filter
+     * Handle Input
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function filter()
+    public function handleInput()
     {
         if ($this->validate()) {
         } else {
@@ -57,13 +55,13 @@ class Length extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Escape
+     * Handle Output
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function escape()
+    public function handleOutput()
     {
-        return $this->filter();
+        return $this->handleInput();
     }
 }

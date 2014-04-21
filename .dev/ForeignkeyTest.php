@@ -85,7 +85,7 @@ class ForeignkeyTest extends PHPUnit_Framework_TestCase
 
         $results = $this->adapter->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getValidationResponse());
+        $this->assertEquals($field_value, $results->getValidateResponse());
 
         return;
     }
@@ -107,7 +107,7 @@ class ForeignkeyTest extends PHPUnit_Framework_TestCase
 
         $results = $this->adapter->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getValidationResponse());
+        $this->assertEquals($field_value, $results->getValidateResponse());
 
         return;
     }

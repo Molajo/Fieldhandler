@@ -1,6 +1,6 @@
 <?php
 /**
- * Punctuation Fieldhandler
+ * Punctuation Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -11,7 +11,7 @@ namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Punctuation Fieldhandler
+ * Punctuation Constraint
  *
  * @link       http://us1.php.net/manual/en/function.ctype-punct.php
  * @package    Molajo
@@ -32,7 +32,7 @@ class Punctuation extends AbstractConstraint implements ConstraintInterface
         if ($this->field_value === null) {
         } else {
             if (ctype_punct($this->field_value) === false) {
-                $this->setValidationMessage(2000);
+                $this->setValidateMessage(2000);
                 return false;
             }
         }
@@ -41,12 +41,12 @@ class Punctuation extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Filter
+     * Handle Input
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function filter()
+    public function handleInput()
     {
         if ($this->field_value === null) {
         } else {
@@ -61,13 +61,13 @@ class Punctuation extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Escape
+     * Handle Output
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function escape()
+    public function handleOutput()
     {
-        return $this->filter();
+        return $this->handleInput();
     }
 }

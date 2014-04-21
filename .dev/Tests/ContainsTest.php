@@ -56,9 +56,9 @@ class ContainsTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidationResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
 
-        $messages         = $results->getValidationMessages();
+        $messages = $results->getValidateMessages();
         $this->assertEquals(array(), $messages);
 
         return;
@@ -79,11 +79,11 @@ class ContainsTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(false, $results->getValidationResponse());
+        $this->assertEquals(false, $results->getValidateResponse());
 
         $expected_code    = 1000;
         $expected_message = 'Field: fieldname does not have a valid value for Contains data type.';
-        $messages         = $results->getValidationMessages();
+        $messages         = $results->getValidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);
 

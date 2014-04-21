@@ -1,6 +1,6 @@
 <?php
 /**
- * Tel Fieldhandler
+ * Tel Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -11,7 +11,7 @@ namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Tel Fieldhandler
+ * Tel Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -51,18 +51,18 @@ class Tel extends AbstractConstraint implements ConstraintInterface
             return true;
         }
 
-        $this->setValidationMessage(1000);
+        $this->setValidateMessage(1000);
 
         return false;
     }
 
     /**
-     * Filter
+     * Handle Input
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function filter()
+    public function handleInput()
     {
         if ($this->field_value === null) {
         } else {
@@ -73,14 +73,14 @@ class Tel extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Escape
+     * Handle Output
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function escape()
+    public function handleOutput()
     {
-        $this->filter();
+        $this->handleInput();
 
         /** TODO: Apply localisation mask and remove example */
         $this->field_value = '1 (' . substr($this->field_value, 0, 3)

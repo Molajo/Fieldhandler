@@ -54,13 +54,13 @@ class RawTest extends PHPUnit_Framework_TestCase
         $options                           = array();
         $options['FILTER_FLAG_ENCODE_AMP'] = true;
 
-        $results = $this->request->filter($field_name, $field_value, $constraint, $options);
+        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
 
         if (PHP_VERSION_ID > 50400) {
-            $this->assertEquals('&', $results->getValidationResponse());
+            $this->assertEquals('&', $results->getValidateResponse());
         } else {
-            $this->assertEquals('&amp;', $results->getValidationResponse());
+            $this->assertEquals('&amp;', $results->getValidateResponse());
         }
 
         return;

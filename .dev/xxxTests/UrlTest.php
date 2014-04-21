@@ -54,7 +54,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidationResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
 
         return;
     }
@@ -72,7 +72,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
         $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
-        $this->assertEquals(false, $results->getValidationResponse());
+        $this->assertEquals(false, $results->getValidateResponse());
         return;
     }
 
@@ -88,9 +88,9 @@ class UrlTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Url';
         $options     = array();
 
-        $results = $this->request->filter($field_name, $field_value, $constraint, $options);
+        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getValidationResponse());
+        $this->assertEquals($field_value, $results->getValidateResponse());
 
         return;
     }
@@ -109,9 +109,9 @@ class UrlTest extends PHPUnit_Framework_TestCase
         $options['FILTER_FLAG_PATH_REQUIRED']  = true;
         $options['FILTER_FLAG_QUERY_REQUIRED'] = true;
 
-        $results = $this->request->filter($field_name, $field_value, $constraint, $options);
+        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(null, $results->getValidationResponse());
+        $this->assertEquals(null, $results->getValidateResponse());
 
         return;
     }
@@ -128,9 +128,9 @@ class UrlTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Url';
         $options     = array();
 
-        $results = $this->request->escape($field_name, $field_value, $constraint, $options);
+        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getValidationResponse());
+        $this->assertEquals($field_value, $results->getValidateResponse());
 
         return;
     }
@@ -148,9 +148,9 @@ class UrlTest extends PHPUnit_Framework_TestCase
         $options                     = array();
         $options['FILTER_FLAG_IPV6'] = true;
 
-        $results = $this->request->escape($field_name, $field_value, $constraint, $options);
+        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(null, $results->getValidationResponse());
+        $this->assertEquals(null, $results->getValidateResponse());
 
         return;
     }

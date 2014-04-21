@@ -54,11 +54,11 @@ class AliasTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(false, $results->getValidationResponse());
+        $this->assertEquals(false, $results->getValidateResponse());
 
         $expected_code    = 1000;
         $expected_message = 'Field: alias does not have a valid value for Alias data type.';
-        $messages         = $results->getValidationMessages();
+        $messages         = $results->getValidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);
 
@@ -79,16 +79,16 @@ class AliasTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidationResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
 
-        $messages         = $results->getValidationMessages();
+        $messages = $results->getValidateMessages();
         $this->assertEquals(array(), $messages);
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alias::filter
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::handleInput
      * @return void
      * @since   1.0.0
      */
@@ -99,9 +99,9 @@ class AliasTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Alias';
         $options     = array();
 
-        $results = $this->request->filter($field_name, $field_value, $constraint, $options);
+        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals('jack-and-jill', $results->getFilteredValue());
+        $this->assertEquals('jack-and-jill', $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
@@ -119,9 +119,9 @@ class AliasTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Alias';
         $options     = array();
 
-        $results = $this->request->filter($field_name, $field_value, $constraint, $options);
+        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals('jack-and-jill', $results->getFilteredValue());
+        $this->assertEquals('jack-and-jill', $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
@@ -139,9 +139,9 @@ class AliasTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Alias';
         $options     = array();
 
-        $results = $this->request->escape($field_name, $field_value, $constraint, $options);
+        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals('jack-and-jill', $results->getEscapedValue());
+        $this->assertEquals('jack-and-jill', $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
@@ -159,9 +159,9 @@ class AliasTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Alias';
         $options     = array();
 
-        $results = $this->request->escape($field_name, $field_value, $constraint, $options);
+        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals('jack-and-jill', $results->getEscapedValue());
+        $this->assertEquals('jack-and-jill', $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
 
         return;

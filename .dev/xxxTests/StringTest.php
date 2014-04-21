@@ -51,9 +51,9 @@ class StringTest extends PHPUnit_Framework_TestCase
         $field_value = '&';
         $constraint  = 'String';
 
-        $results = $this->request->escape($field_name, $field_value, $constraint, array());
+        $results = $this->request->handleOutput($field_name, $field_value, $constraint, array());
 
-        $this->assertEquals($field_value, $results->getValidationResponse());
+        $this->assertEquals($field_value, $results->getValidateResponse());
 
         return;
     }
@@ -71,7 +71,7 @@ class StringTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, array());
 
-        $this->assertEquals(false, $results->getValidationResponse());
+        $this->assertEquals(false, $results->getValidateResponse());
 
         return;
     }

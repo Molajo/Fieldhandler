@@ -1,6 +1,6 @@
 <?php
 /**
- * Mimetypes Fieldhandler
+ * Mimetypes Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -12,7 +12,7 @@ use CommonApi\Model\ConstraintInterface;
 use CommonApi\Exception\UnexpectedValueException;
 
 /**
- * Mimetypes Fieldhandler
+ * Mimetypes Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -37,18 +37,18 @@ class Mimetypes extends AbstractConstraint implements ConstraintInterface
             return true;
         }
 
-        $this->setValidationMessage(12000);
+        $this->setValidateMessage(12000);
 
         return false;
     }
 
     /**
-     * Filter
+     * Handle Input
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function filter()
+    public function handleInput()
     {
         if ($this->field_value === null) {
         } else {
@@ -63,14 +63,14 @@ class Mimetypes extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Escape
+     * Handle Output
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function escape()
+    public function handleOutput()
     {
-        return $this->filter();
+        return $this->handleInput();
     }
 
     /**

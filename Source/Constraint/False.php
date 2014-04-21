@@ -1,6 +1,6 @@
 <?php
 /**
- * False Fieldhandler
+ * False Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -11,7 +11,7 @@ namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * False Fieldhandler
+ * False Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -39,7 +39,7 @@ class False extends AbstractConstraint implements ConstraintInterface
             }
 
             if (in_array($testValue, $this->false_array) === false) {
-                $this->setValidationMessage(1000);
+                $this->setValidateMessage(1000);
                 return false;
             }
         }
@@ -48,12 +48,12 @@ class False extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Filter
+     * Handle Input
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function filter()
+    public function handleInput()
     {
         if ($this->field_value === null) {
 
@@ -75,13 +75,13 @@ class False extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Escape
+     * Handle Output
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function escape()
+    public function handleOutput()
     {
-        return $this->filter();
+        return $this->handleInput();
     }
 }

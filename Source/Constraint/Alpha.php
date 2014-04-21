@@ -32,7 +32,7 @@ class Alpha extends AbstractConstraint implements ConstraintInterface
         if ($this->field_value === null) {
         } else {
             if (ctype_alpha($this->field_value) === false) {
-                $this->setValidationMessage(2000);
+                $this->setValidateMessage(2000);
                 return false;
             }
         }
@@ -41,12 +41,12 @@ class Alpha extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Filter
+     * Handle Input
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function filter()
+    public function handleInput()
     {
         if ($this->field_value === null) {
         } else {
@@ -61,13 +61,13 @@ class Alpha extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Escape
+     * Handle Output
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function escape()
+    public function handleOutput()
     {
-        return $this->filter();
+        return $this->handleInput();
     }
 }

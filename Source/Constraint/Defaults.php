@@ -1,6 +1,6 @@
 <?php
 /**
- * Defaults Fieldhandler
+ * Defaults Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -11,7 +11,7 @@ namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Defaults Fieldhandler
+ * Defaults Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -31,7 +31,7 @@ class Defaults extends AbstractConstraint implements ConstraintInterface
         $this->setDefault();
 
         if ($this->field_value === null) {
-            $this->setValidationMessage(7000);
+            $this->setValidateMessage(7000);
             return false;
         }
 
@@ -39,12 +39,12 @@ class Defaults extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Filter
+     * Handle Input
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function filter()
+    public function handleInput()
     {
         $this->setDefault();
 
@@ -52,14 +52,14 @@ class Defaults extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Escape
+     * Handle Output
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function escape()
+    public function handleOutput()
     {
-        return $this->filter();
+        return $this->handleInput();
     }
 
     /**

@@ -37,22 +37,22 @@ class Arrays extends AbstractConstraint implements ConstraintInterface
 
         if (is_array($this->field_value)) {
         } else {
-            $this->setValidationMessage(3000);
+            $this->setValidateMessage(3000);
             $edits_passed = false;
         }
 
         if ($this->testValues(false) === false) {
-            $this->setValidationMessage(4000);
+            $this->setValidateMessage(4000);
             $edits_passed = false;
         }
 
         if ($this->testKeys(false) === false) {
-            $this->setValidationMessage(5000);
+            $this->setValidateMessage(5000);
             $edits_passed = false;
         }
 
         if ($this->testCount(false) === false) {
-            $this->setValidationMessage(6000);
+            $this->setValidateMessage(6000);
             $edits_passed = false;
         }
 
@@ -64,12 +64,12 @@ class Arrays extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Filter
+     * Handle Input
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function filter()
+    public function handleInput()
     {
         if ($this->field_value === null) {
         } else {
@@ -93,20 +93,20 @@ class Arrays extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Escape
+     * Handle Output
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function escape()
+    public function handleOutput()
     {
-        return $this->filter();
+        return $this->handleInput();
     }
 
     /**
      * Test Array Entry Keys
      *
-     * @param   boolean $filter
+     * @param   boolean $handleInput
      *
      * @return  boolean
      * @since   1.0.0

@@ -52,13 +52,13 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
         $field_value = '&';
         $constraint  = 'Fullspecialchars';
 
-        $results = $this->request->escape($field_name, $field_value, $constraint, array());
+        $results = $this->request->handleOutput($field_name, $field_value, $constraint, array());
 
 // Anger is too intense.
 //    if (PHP_VERSION_ID > 50400) {
-//        $this->assertEquals('&#38;', $results->getValidationResponse());
+//        $this->assertEquals('&#38;', $results->getValidateResponse());
 //     } else {
-//           $this->assertEquals('&amp;', $results->getValidationResponse());
+//           $this->assertEquals('&amp;', $results->getValidateResponse());
 //   }
 
         return;
@@ -77,7 +77,7 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, array());
 
-        $this->assertEquals(false, $results->getValidationResponse());
+        $this->assertEquals(false, $results->getValidateResponse());
 
         return;
     }

@@ -56,7 +56,7 @@ class EqualTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidationResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
 
         return;
     }
@@ -76,13 +76,13 @@ class EqualTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(false, $results->getValidationResponse());
+        $this->assertEquals(false, $results->getValidateResponse());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Equals::filter
+     * @covers  Molajo\Fieldhandler\Constraint\Equals::handleInput
      * @return  void
      * @since   1.0.0
      */
@@ -94,15 +94,15 @@ class EqualTest extends PHPUnit_Framework_TestCase
         $options           = array();
         $options['equals'] = 'dog';
 
-        $results = $this->request->filter($field_name, $field_value, $constraint, $options);
+        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getValidationResponse());
+        $this->assertEquals($field_value, $results->getValidateResponse());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Equals::filter
+     * @covers  Molajo\Fieldhandler\Constraint\Equals::handleInput
      * @return void
      * @since   1.0.0
      */
@@ -114,10 +114,10 @@ class EqualTest extends PHPUnit_Framework_TestCase
         $options           = array();
         $options['equals'] = 'cat';
 
-        $results = $this->request->filter($field_name, $field_value, $constraint, $options);
+        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
         $field_value = null;
-        $this->assertEquals($field_value, $results->getValidationResponse());
+        $this->assertEquals($field_value, $results->getValidateResponse());
 
         return;
     }
@@ -135,9 +135,9 @@ class EqualTest extends PHPUnit_Framework_TestCase
         $options           = array();
         $options['equals'] = 'dog';
 
-        $results = $this->request->escape($field_name, $field_value, $constraint, $options);
+        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getValidationResponse());
+        $this->assertEquals($field_value, $results->getValidateResponse());
 
         return;
     }
@@ -155,10 +155,10 @@ class EqualTest extends PHPUnit_Framework_TestCase
         $options           = array();
         $options['equals'] = 'cat';
 
-        $results = $this->request->filter($field_name, $field_value, $constraint, $options);
+        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
         $field_value = null;
-        $this->assertEquals($field_value, $results->getValidationResponse());
+        $this->assertEquals($field_value, $results->getValidateResponse());
 
         return;
     }

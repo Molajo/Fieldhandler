@@ -55,8 +55,8 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidationResponse());
-        $messages = $results->getValidationMessages();
+        $this->assertEquals(true, $results->getValidateResponse());
+        $messages = $results->getValidateMessages();
         $this->assertEquals(array(), $messages);
 
         return;
@@ -76,11 +76,11 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(false, $results->getValidationResponse());
+        $this->assertEquals(false, $results->getValidateResponse());
 
         $expected_code    = 2000;
         $expected_message = 'Field: test must only contain Alphanumeric values.';
-        $messages         = $results->getValidationMessages();
+        $messages         = $results->getValidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);
 
@@ -88,7 +88,7 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::filter
+     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::handleInput
      * @return  void
      * @since   1.0.0
      */
@@ -99,16 +99,16 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Alphanumeric';
         $options     = array();
 
-        $results = $this->request->filter($field_name, $field_value, $constraint, $options);
+        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getFilteredValue());
+        $this->assertEquals($field_value, $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::filter
+     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::handleInput
      * @return  void
      * @since   1.0.0
      */
@@ -119,17 +119,17 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Alphanumeric';
         $options     = array();
 
-        $results = $this->request->filter($field_name, $field_value, $constraint, $options);
+        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
         $expected_value = 'Aa123';
-        $this->assertEquals($expected_value, $results->getFilteredValue());
+        $this->assertEquals($expected_value, $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::filter
+     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::handleInput
      * @return  void
      * @since   1.0.0
      */
@@ -140,16 +140,16 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Alphanumeric';
         $options     = array();
 
-        $results = $this->request->escape($field_name, $field_value, $constraint, $options);
+        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getEscapedValue());
+        $this->assertEquals($field_value, $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::filter
+     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::handleInput
      * @return  void
      * @since   1.0.0
      */
@@ -160,10 +160,10 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Alphanumeric';
         $options     = array();
 
-        $results = $this->request->escape($field_name, $field_value, $constraint, $options);
+        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
 
         $field_value = 'Aa123';
-        $this->assertEquals($field_value, $results->getEscapedValue());
+        $this->assertEquals($field_value, $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
 
         return;

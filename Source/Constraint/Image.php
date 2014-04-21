@@ -1,6 +1,6 @@
 <?php
 /**
- * Image Fieldhandler
+ * Image Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -11,7 +11,7 @@ namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Image Fieldhandler
+ * Image Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -30,7 +30,7 @@ class Image extends AbstractConstraint implements ConstraintInterface
     {
         $hold = $this->field_value;
 
-        if ($this->filter() === $hold) {
+        if ($this->handleInput() === $hold) {
             return true;
         }
 
@@ -38,12 +38,12 @@ class Image extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Filter
+     * Handle Input
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function filter()
+    public function handleInput()
     {
         $url = str_replace(
             array('ftp://', 'ftps://', 'http://', 'https://'),
@@ -61,14 +61,14 @@ class Image extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Escape
+     * Handle Output
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function escape()
+    public function handleOutput()
     {
-        return $this->filter();
+        return $this->handleInput();
     }
 
     /**

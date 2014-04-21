@@ -1,6 +1,6 @@
 <?php
 /**
- * Boolean Fieldhandler
+ * Boolean Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -11,7 +11,7 @@ namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Boolean Fieldhandler
+ * Boolean Constraint
  *
  * @link       http://php.net/manual/en/function.is-bool.php
  * @package    Molajo
@@ -41,18 +41,18 @@ class Boolean extends AbstractConstraint implements ConstraintInterface
             return true;
         }
 
-        $this->setValidationMessage(1000);
+        $this->setValidateMessage(1000);
 
         return false;
     }
 
     /**
-     * Filter
+     * Handle Input
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function filter()
+    public function handleInput()
     {
         if ($this->field_value === null) {
             return $this->field_value;
@@ -67,13 +67,13 @@ class Boolean extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Escape
+     * Handle Output
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function escape()
+    public function handleOutput()
     {
-        return $this->filter();
+        return $this->handleInput();
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Email Fieldhandler
+ * Email Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -11,7 +11,7 @@ namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Email Fieldhandler
+ * Email Constraint
  *
  * @link       http://php.net/manual/en/function.checkdnsrr.php
  * @package    Molajo
@@ -34,7 +34,7 @@ class Email extends AbstractConstraint implements ConstraintInterface
         }
 
         if (filter_var($this->field_value, FILTER_VALIDATE_EMAIL) === false) {
-            $this->setValidationMessage(2000);
+            $this->setValidateMessage(2000);
             return false;
         }
 
@@ -43,13 +43,13 @@ class Email extends AbstractConstraint implements ConstraintInterface
         if (is_array($email_parts) && count($email_parts) === 2) {
             $host = $email_parts[1];
         } else {
-            $this->setValidationMessage(2000);
+            $this->setValidateMessage(2000);
             return false;
         }
 
         if (checkdnsrr($host, 'MX')) {
         } else {
-            $this->setValidationMessage(2000);
+            $this->setValidateMessage(2000);
             return false;
         }
 
@@ -57,12 +57,12 @@ class Email extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Filter
+     * Handle Input
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function filter()
+    public function handleInput()
     {
         if ($this->validate()) {
         } else {
@@ -73,13 +73,13 @@ class Email extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Escape
+     * Handle Output
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function escape()
+    public function handleOutput()
     {
-        return $this->filter();
+        return $this->handleInput();
     }
 }

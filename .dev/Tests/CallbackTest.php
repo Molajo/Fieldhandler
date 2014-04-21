@@ -56,9 +56,9 @@ class CallbackTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidationResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
 
-        $messages         = $results->getValidationMessages();
+        $messages = $results->getValidateMessages();
         $this->assertEquals(array(), $messages);
 
         return;
@@ -77,9 +77,9 @@ class CallbackTest extends PHPUnit_Framework_TestCase
         $options             = array();
         $options['callback'] = 'strtolower';
 
-        $results = $this->request->filter($field_name, $field_value, $constraint, $options);
+        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals('dog', $results->getFilteredValue());
+        $this->assertEquals('dog', $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
