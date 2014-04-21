@@ -12,7 +12,9 @@ Using `order quantity` as an example, one might imagine such data constraints:
 2. Order quantity is required.
 3. If no value is provided for order quantity, use a default value of 1.
 
-The *Molajo Fieldhandler* can be used in this way in support of these data constraints:
+The *Molajo Fieldhandler* can be used in this way in support of these data constraints.
+
+**Example 1**: Verbose approach used for example clarity.
 
 ```php
 
@@ -34,28 +36,40 @@ if ($results->getChangeIndicator()) {
     $order_quantity = $results->getFilteredValue();
 }
 
-// 4. Validation: order quantity must be an integer
-
-$results = $request->validate('Order Quantity', $order_quantity, 'integer');
-if ($results->getValidationResponse() === false) {
-    // deal with the problem
-    $messages = $messages + $results->getValidationMessages();
-}
-
-// 5. Validation: Order Quantity is required
-
-$results = $request->validate('Order Quantity', $order_quantity, 'required');
-if ($results->getValidationResponse() === false) {
-    // deal with the problem
-    $messages = $messages + $results->getValidationMessages();
-}
-
-// 6. Validation: order quantity must be an integer greater than 1
+// 3. Validation: order quantity must be an integer greater than 1
 
 $results = $request->validate('Order Quantity', $order_quantity, 'Minimum', array('minimum' => 1));
 if ($results->getValidationResponse() === false) {
     // deal with the problem
     $messages = $messages + $results->getValidationMessages();
+}
+
+```
+
+**Example 2**: When constraints are stored for fields and data objects, processing groups of rules
+for all fields can be easily automated.
+
+```php
+
+// 1. Instantiate the Molajo Fieldhandler and inject $fieldhandler into class
+
+$fieldhandler = new Molajo\Fieldhandler\Request();
+
+// 2. Process all fields in a loop
+foreach ($data_object as $field) {
+
+    $results = $request->ensureFieldConstraints(
+        $field->name,
+        $field->value,
+        $field->tests,
+        $field->options);
+
+    if ($results->getSuccessIndicator() === false) {
+        $field->messages = $results->getValidationMessages();
+
+    } elseif ($results->getChangeIndicator() === true) {
+        $field->value = $results->getFilteredValue();
+    }
 }
 
 ```
