@@ -61,7 +61,7 @@ Fieldhandler will process requests in left to right order.
 
 $fieldhandler = new Molajo\Fieldhandler\Request();
 
-$results = $fieldhandler->validate('Order Quantity', $order_quantity, 'numeric, required');
+$results = $request->validate('Order Quantity', $order_quantity, 'numeric, required');
 
 if ($results->getValidationResponse() === false) {
     $error_messages = $results->getValidationMessages());
@@ -108,24 +108,24 @@ $fieldhandler = new Molajo\Fieldhandler\Request();
 
 // 1. Cleansing: order quantity must be an integer
 
-$results = $fieldhandler->clean('Order Quantity', $order_quantity, 'integer');
+$results = $request->clean('Order Quantity', $order_quantity, 'integer');
 $order_quantity = $results->getValidationResponse();
 
 // 2. Validation: order quantity is required.
 
-$results = $fieldhandler->validate('Order Quantity', $order_quantity, 'required');
+$results = $request->validate('Order Quantity', $order_quantity, 'required');
 if ($results->getValidationResponse() === false) {
     $error_messages = $error_messages + $results->getValidationMessages());
 }
 
 // 3. Cleansing: if order quantity is zero, set the default value to 1
 
-$results = $fieldhandler->clean('Order Quantity', $order_quantity, 'default', array('default_value' => 1));
+$results = $request->clean('Order Quantity', $order_quantity, 'default', array('default_value' => 1));
 $order_quantity = $results->getValidationResponse();
 
 // 4. Validation: Order Quantity must be numeric
 
-$results = $fieldhandler->validate('Order Quantity', $order_quantity, 'numeric');
+$results = $request->validate('Order Quantity', $order_quantity, 'numeric');
 if ($results->getValidationResponse() === false) {
     $error_messages = $error_messages + $results->getValidationMessages());
 }
@@ -167,7 +167,7 @@ $fieldhandler = new Molajo\Fieldhandler\Request();
 
 // 1. Formatting: display phone number as (402) 555-1212
 
-$results = $fieldhandler->format('phone_number', $phone_number, 'tel');
+$results = $request->format('phone_number', $phone_number, 'tel');
 $phone_number = $results->getValidationResponse();
 
 
@@ -201,8 +201,8 @@ Localization
 Custom Constraints
 
 
-$filtered = $fieldhandler->filter('Title', $title, 'string, required');
-$escaped = $fieldhandler->escape('Title', $filtered->getValidationResponse(), 'string');
+$filtered = $request->filter('Title', $title, 'string, required');
+$escaped = $request->escape('Title', $filtered->getValidationResponse(), 'string');
 
 $title = $escaped->getValidationResponse();
 
@@ -351,7 +351,7 @@ The examples in this section assume the *Fieldhandler* has been instantiated, as
 Value is true, 1, 'yes', or 'on.'
 
 ```php
-    $validated_value = $fieldhandler->validate('agreement', 1, 'Accepted');
+    $validated_value = $request->validate('agreement', 1, 'Accepted');
 
 ```
 Note: The list of `accepted` values can be customized by including an array of desired values
@@ -360,7 +360,7 @@ in the `options` array, as shown below:
 ```php
     $options = array();
     $options['true_array'] = array(true, 1);
-    $validated_value = $fieldhandler->validate('agreement', 1, 'Accepted', $options);
+    $validated_value = $request->validate('agreement', 1, 'Accepted', $options);
 
 ```
 
@@ -371,7 +371,7 @@ an alias value.
 ```php
     // Title 'Jack and Jill' will be returned as 'jack-and-jill' for filter and escape
     // An exception would be thrown for validate
-    $alias = $this->adapter->filter('title', 'Jack and Jill', 'Alias');
+    $alias = $request->filter('title', 'Jack and Jill', 'Alias');
 
 ```
 
@@ -381,17 +381,74 @@ Tests if values are a character of A through Z.
 ```php
     // Field order_number 'ABC123#' would be returned as 'ABC' for filter and escape
     // An exception would be thrown for validate
-    $results = $this->adapter->filter('order_number', 'ABC123#', 'Alpha');
+    $results = $request->filter('order_number', 'ABC123#', 'Alpha');
 
 ```
 
-### Alphanumeric ###
-Tests if values are a character of A through Z or 0 through 9.
+### Alphanumeric Constraint ###
+
+*Definition:* Each character must be a value of A through Z (upper or lowercase) or a digit value ranging from 0 to 9.
+
+#### Filter ####
+Values failing to conform to constraint definitions are removed.
+
+*Example 1:* Each value conforms.
 
 ```php
-    // Field order_number 'ABC123#' would be returned as 'ABC123' for filter and escape
-    // An exception would be thrown for validate
-    $results = $this->adapter->filter('order_number', 'ABC123#', 'Alphanumeric');
+
+$employee_name = 'Janet Jackson';
+$results       = $request->filter('employee_name', $employee_name, 'Alphanumeric');
+
+if ($results->getChangeIndicator() === true) {
+    $employee_name = $results->getFilteredValue();
+} else {
+    // Filtering did not change the Employee Name
+}
+
+```
+
+*Example 2:* Each value does not conform. Use the filtered value as the data value.
+
+```php
+
+$employee_name = 'Janet @ Jackson';
+$results       = $request->filter('employee_name', $employee_name, 'Alphanumeric');
+
+if ($results->getChangeIndicator() === true) {
+    $employee_name = $results->getFilteredValue();
+    // The employee_name value now contains 'Janet Jackson'
+}
+
+```
+
+#### Verify ####
+Verify each value conforms to the defined constraint.
+
+*Example 1:* Each value conforms.
+
+```php
+
+$employee_name = 'Janet Jackson';
+$results       = $request->verify('employee_name', $employee_name, 'Alphanumeric');
+
+if ($results->getValidationResponse() === true) {
+    // Yea! Each value conforms to the defined constraint!
+}
+
+```
+
+*Example 2:* Each value does not conform.
+
+```php
+
+$employee_name = 'Janet @ Jackson';
+$results       = $request->verify('employee_name', $employee_name, 'Alphanumeric');
+
+if ($results->getValidationResponse() === false) {
+    // Retrieve error messages and codes
+    $messages = $results->getValidationMessages();
+}
+
 
 ```
 
@@ -401,7 +458,7 @@ Tests if value is an array.
 ```php
     // Field order_number array('ABC123', 'DEF456') would be returned as same for
 
-    $results = $this->adapter->filter('order_number', array('ABC123', 'DEF456'), 'Array');
+    $results = $request->filter('order_number', array('ABC123', 'DEF456'), 'Array');
 
     array_valid_keys
     array_valid_values
@@ -415,7 +472,7 @@ Tests if value is true or false.
 ```php
     // Field on_or_off_field false would be returned as NULL for filter and escape
     // An exception would be thrown for validate
-    $results = $this->adapter->filter('on_or_off_field', false, 'Boolean');
+    $results = $request->filter('on_or_off_field', false, 'Boolean');
 
 ```
 
@@ -429,7 +486,7 @@ Callback is returned.
     // An exception would be thrown for validate. The value 'dog' is returned for Filter and Escape.
     $options = array();
     $options['callback'] = 'strtolower';
-    $results = $this->adapter->filter('example_field', 'DOG', 'Callback', $options);
+    $results = $request->filter('example_field', 'DOG', 'Callback', $options);
 
 ```
 
@@ -441,7 +498,7 @@ change the input to null.
     // Is the value `bark` contained within the dog_field?
     $options = array();
     $options['contains'] = 'bark';
-    $results = $this->adapter->filter('dog_field', $dog_field, 'Contains');
+    $results = $request->filter('dog_field', $dog_field, 'Contains');
 
 ```
 
@@ -453,7 +510,7 @@ Processes a value to determine if it is a valid date. For Validate, if the resul
     // The value of field `date_field` is '2013/04/01 01:00:00' and determined to be valid
     $options = array();
     $options['callback'] = '2013/04/01 01:00:00';
-    $results = $this->adapter->filter('date_field', '2013/04/01 01:00:00', 'Date');
+    $results = $request->filter('date_field', '2013/04/01 01:00:00', 'Date');
 
 ```
 
@@ -465,7 +522,7 @@ Processes a value to determine if it is a valid date. For Validate, if the resul
     // The value of field `date_field` is '2013/04/01 01:00:00' and determined to be valid
     $options = array();
     $options['callback'] = '2013/04/01 01:00:00';
-    $results = $this->adapter->filter('date_field', '2013/04/01 01:00:00', 'Date');
+    $results = $request->filter('date_field', '2013/04/01 01:00:00', 'Date');
 
 ```
 
@@ -476,7 +533,7 @@ Changes a null value to the value provided for default.
     // The value of field `dog_field` is NULL and is set to 'bark'.
     $options = array();
     $options['default'] = 'bark';
-    $results = $this->adapter->filter('dog_field', NULL, 'Default');
+    $results = $request->filter('dog_field', NULL, 'Default');
 
 ```
 
@@ -487,7 +544,7 @@ Tests that each digit is numeric.
     // The value of field `numeric_field` is 'ABC123'. The filtered and escaped values will be 123.
     // For 'validate', an exception is thrown.
 
-    $results = $this->adapter->filter('numeric_field', 'ABC123', 'Digit');
+    $results = $request->filter('numeric_field', 'ABC123', 'Digit');
 
 ```
 
@@ -496,7 +553,7 @@ Tests that a value is a valid email address. When invalid, validate throws excep
 Filter and Escape return null.
 
 ```php
-    $results = $this->adapter->validate('email_address', 'AmyStephen@Molajo.org', 'Email');
+    $results = $request->validate('email_address', 'AmyStephen@Molajo.org', 'Email');
 
 ```
 
@@ -507,7 +564,7 @@ Tests that an encoded value is sanitized.
     // The value of field `encoded_field` is 'my-apples&are green and red'.
     // The filtered and escaped values will be 'my-apples%26are%20green%20and%20red'.
 
-    $results = $this->adapter->filter('encoded_field', 'my-apples&are green and red', 'Encoded');
+    $results = $request->filter('encoded_field', 'my-apples&are green and red', 'Encoded');
 
 ```
 
@@ -516,7 +573,7 @@ Tests that a value is equal to a specified value.
 
 ```php
     // The value of field `field1` is 'dog' and is tested to see if it matches 'dog'.
-    $results = $this->adapter->filter('field1', 'dog', 'Equal');
+    $results = $request->filter('field1', 'dog', 'Equal');
 
 ```
 
@@ -543,7 +600,7 @@ Exception is thrown. If the value does not match for filter or escape, null is r
 
     $options = array('array_valid_extensions' => $array_valid_values);
 
-    $results = $this->adapter->filter('extensions_field', $input, 'Extensions');
+    $results = $request->filter('extensions_field', $input, 'Extensions');
 
 ```
 
@@ -552,7 +609,7 @@ Tests a value to determine if it is a valid Float value.
 
 ```php
     // The value of field `numeric_field` is 1234.5678.
-    $results = $this->adapter->filter('numeric_field', 1234.5678, 'Float');
+    $results = $request->filter('numeric_field', 1234.5678, 'Float');
 
 ```
 
@@ -570,7 +627,7 @@ $field_value.
     $options['table']        = 'molajo_actions';
     $options['key']          = 'id';
 
-    $results = $fieldhandler->validate($field_name, $field_value, $constraint, $options);
+    $results = $request->validate($field_name, $field_value, $constraint, $options);
 
 ```
 
@@ -585,7 +642,7 @@ Verifies that the $field_value is greater than the From value and less than the 
     $options['from']         = 0;
     $options['to']           = 10;
 
-    $results = $fieldhandler->validate($field_name, $field_value, $constraint, $options);
+    $results = $request->validate($field_name, $field_value, $constraint, $options);
 
 ```
 
@@ -599,7 +656,7 @@ with with ENT_QUOTES set.
     $constraint = 'Fullspecialchars';
     $options                 = array();
 
-    $results = $fieldhandler->validate($field_name, $field_value, $constraint, $options);
+    $results = $request->validate($field_name, $field_value, $constraint, $options);
 
 ```
 
@@ -615,7 +672,7 @@ with with ENT_QUOTES set.
     $constraint = 'Html';
     $options                 = array();
 
-    $results = $fieldhandler->validate($field_name, $field_value, $constraint, $options);
+    $results = $request->validate($field_name, $field_value, $constraint, $options);
 
 ```
 
@@ -626,7 +683,7 @@ Tests that the value is an image.
     // The value of field `numeric_field` is 'ABC123'. The filtered and escaped values will be 0.
     // For 'validate', an exception is thrown. The following will return 123.
 
-    $results = $this->adapter->filter('numeric_field', '123', 'Int');
+    $results = $request->filter('numeric_field', '123', 'Int');
 
 ```
 
@@ -637,7 +694,7 @@ Tests that the value is an integer.
     // The value of field `numeric_field` is 'ABC123'. The filtered and escaped values will be 0.
     // For 'validate', an exception is thrown. The following will return 123.
 
-    $results = $this->adapter->filter('numeric_field', '123', 'Int');
+    $results = $request->filter('numeric_field', '123', 'Int');
 
 ```
 
@@ -647,7 +704,7 @@ Tests that the value is an IP Address.
 ```php
     // The value of field `input_field` is '127.0.0.1'.
     // Validate, filtered and escaped values will return the same.
-    $results = $this->adapter->filter('input_field', '127.0.0.1', 'Ip');
+    $results = $request->filter('input_field', '127.0.0.1', 'Ip');
 
 ```
 
@@ -657,7 +714,7 @@ Validates or filters/escapes each character to be lower case.
 ```php
     // The value of field `input_field` is 'ABC123'. Validate will fail.
     // Filtered and escaped values will return 'abc123'.
-    $results = $this->adapter->filter('input_field', 'ABC123', 'lower');
+    $results = $request->filter('input_field', 'ABC123', 'lower');
 
 ```
 
@@ -673,7 +730,7 @@ Validates or filters/escapes numeric value to not exceed the maximum.
     $options                 = array();
     $options['maximum']      = 3;
 
-    $results = $fieldhandler->validate($field_name, $field_value, $constraint, $options);
+    $results = $request->validate($field_name, $field_value, $constraint, $options);
 
 ```
 
@@ -689,7 +746,7 @@ Validates or filters/escapes xxxx
     $options                 = array();
     $options['maximum']      = 3;
 
-    $results = $fieldhandler->validate($field_name, $field_value, $constraint, $options);
+    $results = $request->validate($field_name, $field_value, $constraint, $options);
 
 ```
 
@@ -705,7 +762,7 @@ Validates or filters/escapes numeric value to not exceed the maximum.
     $options                 = array();
     $options['minimum']      = 3;
 
-    $results = $fieldhandler->validate($field_name, $field_value, $constraint, $options);
+    $results = $request->validate($field_name, $field_value, $constraint, $options);
 
 ```
 
@@ -714,7 +771,7 @@ Tests that a value is not equal to a specified value.
 
 ```php
     // The value of field `field1` is 'dog' and is tested to ensure it is NOT equal to 'dog'.
-    $results = $this->adapter->filter('field1', 'dog', 'Notequal');
+    $results = $request->filter('field1', 'dog', 'Notequal');
 
 ```
 
@@ -725,7 +782,7 @@ Tests that the value is an numeric.
     // The value of field `numeric_field` is 'ABC123'. The filtered and escaped values will be 0.
     // For 'validate', an exception is thrown. The following will return 123.
 
-    $results = $this->adapter->filter('numeric_field', '123', 'Numeric');
+    $results = $request->filter('numeric_field', '123', 'Numeric');
 
 ```
 
@@ -736,7 +793,7 @@ Tests that a value is an object.
     // The value of field `database` is an object containing the database connection.
     // All will return the object
 
-    $results = $this->adapter->filter('database', $instance, 'Object');
+    $results = $request->filter('database', $instance, 'Object');
 
 ```
 
@@ -755,7 +812,7 @@ See [sanitize filters](http://php.net/manual/en/filter.filters.sanitize.php).
     $options['FILTER_FLAG_ENCODE_AMP']      = true;
 
 
-    $results = $fieldhandler->validate($field_name, $field_value, $constraint, $options);
+    $results = $request->validate($field_name, $field_value, $constraint, $options);
 
 ```
 
@@ -770,7 +827,7 @@ Performs regex checking against the input value for the regex sent in.
     $options                 = array();
     $options['regex']      = $regex_expression;
 
-    $results = $fieldhandler->validate($field_name, $field_value, $constraint);
+    $results = $request->validate($field_name, $field_value, $constraint);
 
 ```
 
@@ -783,7 +840,7 @@ Field is required. Null value is not allowed. Use after Default when used in com
     $field_value             = null;
     $constraint = 'Required';
 
-    $results = $fieldhandler->validate($field_name, $field_value, $constraint);
+    $results = $request->validate($field_name, $field_value, $constraint);
 
 ```
 
@@ -796,7 +853,7 @@ Tests that the value is a string.
     $field_value             = 'Lots of stuff in here that is stringy.';
     $constraint = 'String';
 
-    $results = $fieldhandler->validate($field_name, $field_value, $constraint);
+    $results = $request->validate($field_name, $field_value, $constraint);
 ```
 
 ### Stringlength ###
@@ -809,7 +866,7 @@ From and To testing includes the from and to values.
     $options['from']         = 5;
     $options['to']           = 10;
 
-    $results = $fieldhandler->validate('My Field Name', $field_to_measure, 'Stringlength', $options);
+    $results = $request->validate('My Field Name', $field_to_measure, 'Stringlength', $options);
 ```
 
 ### Tel ###
@@ -827,7 +884,7 @@ Tests that the string is trimmed.
     $field_value             = 'Lots of stuff in here that is stringy.          ';
     $constraint = 'Trim';
 
-    $results = $fieldhandler->filter($field_name, $field_value, $constraint);
+    $results = $request->filter($field_name, $field_value, $constraint);
 ```
 
 ### Upper ###
@@ -836,7 +893,7 @@ Validates or filters/escapes each character to be upper case.
 ```php
     // The value of field `input_field` is 'abc123'. Validate will value.
     // Filtered and escaped values will return 'ABC123'.
-    $results = $this->adapter->filter('input_field', 'abc123', 'lower');
+    $results = $request->filter('input_field', 'abc123', 'lower');
 
 ```
 
@@ -845,7 +902,7 @@ Tests that a value is a valid email address. When invalid, validate throws excep
 Filter and Escape return null.
 
 ```php
-    $results = $this->adapter->validate('url_field', 'http://google.com', 'Url');
+    $results = $request->validate('url_field', 'http://google.com', 'Url');
 
 ```
 
@@ -860,7 +917,7 @@ Compares a field_value against a set of values;
     $options                 = array();
     $options['array_valid_values']      = array('a', 'b', 'c');
 
-    $results = $fieldhandler->validate($field_name, $field_value, $constraint);
+    $results = $request->validate($field_name, $field_value, $constraint);
 
 ```
 
