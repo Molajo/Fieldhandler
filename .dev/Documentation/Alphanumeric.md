@@ -7,6 +7,44 @@ Each character must be a value of A through Z (upper or lowercase) or a digit va
 
 [Source Code]()
 
+## Escape
+
+Escape field
+
+### Escape Example 1
+
+Each value conforms.
+
+```php
+
+$employee_name = 'Janet Jackson';
+$results       = $request->filter('employee_name', $employee_name, 'Alphanumeric');
+
+if ($results->getChangeIndicator() === true) {
+    $employee_name = $results->getFilteredValue();
+} else {
+    // Filtering did not change the Employee Name
+}
+
+```
+
+### Escape Example 2
+
+Each value does not conform. Use the filtered value as the data value.
+
+```php
+
+$employee_name = 'Janet @ Jackson';
+$results       = $request->filter('employee_name', $employee_name, 'Alphanumeric');
+
+if ($results->getChangeIndicator() === true) {
+    $employee_name = $results->getFilteredValue();
+    // The employee_name value now contains 'Janet Jackson'
+}
+
+```
+
+
 ## Filter
 
 Values failing to conform to constraint definitions are removed.
@@ -48,7 +86,7 @@ if ($results->getChangeIndicator() === true) {
 
 Verify each value conforms to the defined constraint.
 
-### Filter Example 1
+### Validate Example 1
 
 Each value conforms.
 
@@ -63,7 +101,7 @@ if ($results->getValidationResponse() === true) {
 
 ```
 
-### Filter Example 2
+### Validate Example 2
 
 *Example 2:* Each value does not conform.
 
