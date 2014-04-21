@@ -60,15 +60,16 @@ if ($results->getValidationResponse() === false) {
 
 ```
 
-As demonstrated in the example above, *Molajo Fieldhandler* unifies filter, escape, and validation functions
-for each data constraint. Each constraint class has `verify`, `filter` and `escape` methods for this purpose.
-In unifying data custodial activities the application is better able to ensure clean, verified and useful information.
-Failure to build such protections into data collection processes is guaranteed to eventually lead to data corruption
-challenges.
+As demonstrated in the example above, *Molajo Fieldhandler* aligns filter, escape, and validation functionality
+within each data constraint. Each constraint class has `verify`, `filter` and `escape` methods for this purpose.
+
+In unifying data custodial functionality into one tool, developers are better able to ensure clean, verified and
+useful information. Failure to build in such protections significantly increases risk of data corruption.
 
 Mission critical applications rely on well designed and carefully implemented cleansing, formatting and verification
 routines. The goal of the *Molajo Fieldhandler* is to make it easier for PHP developers not only to accomplish
-this goal but also to make it easier to communicate application functionality in terms of business rules with clients.
+this goal but as importantly to be able to communicate exactly how the application enforcing
+integrity constraints in terms that the client can understand.
 
 
 ## Fieldhandler Request Class ##
