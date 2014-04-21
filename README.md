@@ -1,20 +1,24 @@
 =======
-Fieldhandler [Alpha]
+Molajo Fieldhandler [Alpha]
 =======
 
 [![Build Status](https://travis-ci.org/Molajo/Fieldhandler.png?branch=master)](https://travis-ci.org/Molajo/Fieldhandler)
 
-The *Molajo Fieldhandler* is a data integrity assurance package for PHP applications which unifies filtering,
-escaping and validation functions into one package and defines each function for each data constraints.
+The *Molajo Fieldhandler* is a data integrity assurance package for PHP applications which bundles *filtering*,
+*escaping* and *validation* functionality into one easy-to-use package. Unifying data custodial functionality
+makes it easier to consider the role of each approach in enforcing constraint definitions and providing clean,
+verified, useful application information.
+
+## Example Usage ##
 
 Using `order quantity` as an example, one might imagine such data constraints:
 1. Order quantity must be an integer.
 2. Order quantity is required.
 3. If no value is provided for order quantity, use a default value of 1.
 
-The *Molajo Fieldhandler* can be used in this way in support of these data constraints.
+Let's see how the *Molajo Fieldhandler* can be used in support of these data constraints.
 
-**Example 1**: Verbose approach used for example clarity.
+**Example 1**: Verbose single field approach used for clarity.
 
 ```php
 
@@ -46,9 +50,19 @@ if ($results->getValidationResponse() === false) {
 
 ```
 
-**Example 2**: When constraints are stored for fields and data objects, processing groups of rules
-for all fields can be easily automated.
+**Example 2**:
 
+As demonstrated in the example above, *Molajo Fieldhandler* aligns filter, escape, and validation functionality
+within a data constraint (i.e., rules to ensure data integrity).
+
+Considering each constraint class has `verify`, `filter` and `escape` methods. That means for the
+75+ supplied constraints (and for any custom constraint you implement), the full data dictionary
+describing data integrity is organized by constraint.
+
+*Molajo Fieldhandler* allows you to take this further. By defining what fields belong to a data object,
+ you can also define what constraints are required for each field. With that information, *Molajo Fieldhandler*
+ can manage these constraints for you.
+  
 ```php
 
 // 1. Instantiate the Molajo Fieldhandler and inject $fieldhandler into class
@@ -74,11 +88,9 @@ foreach ($data_object as $field) {
 
 ```
 
-As demonstrated in the example above, *Molajo Fieldhandler* aligns filter, escape, and validation functionality
-within each data constraint. Each constraint class has `verify`, `filter` and `escape` methods for this purpose.
 
-In unifying data custodial functionality into one tool, developers are better able to ensure clean, verified and
-useful information. Failure to build in such protections significantly increases risk of data corruption.
+
+ Failure to build in such protections significantly increases risk of data corruption.
 
 Mission critical applications rely on well designed and carefully implemented cleansing, formatting and verification
 routines. The goal of the *Molajo Fieldhandler* is to make it easier for PHP developers not only to accomplish
