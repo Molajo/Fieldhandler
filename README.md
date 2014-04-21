@@ -11,16 +11,74 @@ functionality very specifically as specialised tools. In unifying tool usage aro
 on field-level rule compliance, applications ensure data
 collection processes provide clean, verified, and useful information.
 
-## Example Usage ##
+## Overview of the Methodology ##
 
-Using `order quantity` as an example, one might imagine such data constraints:
-1. Order quantity must be an integer.
-2. Order quantity is required.
-3. If no value is provided for order quantity, use a default value of 1.
+At the most basic level, *constraints* define data collection and usage rules.
 
-Let's see how the *Molajo Fieldhandler* can be used in support of these data constraints.
+For data collection, constraints can include rules related to
+minimum and maximum field length, number of occurrences,
+whether or not a value is required for the field or if there is a list or data range
+that can be used to confirm data values.
 
-**Example 1**: Verbose single field approach used for clarity.
+Constraints are just as important for using data and can include formatting requirements,
+or whether a "lookup value" should be displayed in place of key field data,
+if a mask should be used to prevent display of secure information, and so on.
+
+In *Molajo Fieldhandler*, constraints are PHP classes with methods for *filter*,
+ *validate* and *escape.* On the input side, *filter* and *validate* typically enforce rule adherence whereas
+ the *escape* function is useful in ensuring data treatment requirements.
+
+
+## Basic Approach
+
+A critical step in application development associates specific integrity
+constraints with each field in the collection. It is simply not possible to ensure clean data
+if the rules defining that state are not articulated.
+
+### Define Integrity Constraints
+
+As an example, assume these constraints for the `password` field:
+
+1. Passwords can contain alphanumeric characters, the underscore (_), dollar sign ($), and pound sign (#).
+2. Passwords must be from 8 to 30 characters in length.
+3. Passwords expire every 90 days.
+4. The new password cannot match the existing value.
+4. Passwords should never be displayed and must be masked as asterisks.
+
+### Design enforcement strategy
+
+Review the existing *Molajo Fieldhandler* Constraint classes to define enforcement.
+Custom Constraints can be created when delivered constraints are not enough.
+
+1. Validate the password 'last change date' using the *Date Constraint* to verify the date is not over 90 days previous.
+2. Validate the field data using the *Alphanumeric Constraint* and values (_), ($), and (#).
+3. Validate the field data using the *Length Constraint* to ensure a length of 8 to 30 characters.
+4. Escape the password using the *Password Constraint* class to replace password values with asterisks.
+
+### Write code to deploy enforcement strategy
+
+There are three *Molajo Fieldhandler* Request methods:
+
+1. **validate** Validates the field value using field handler(s) requested.
+All field handlers requested will run and multiple error messages could be returned.
+Validate only returns a true or false value.
+
+2. **filter** Cleans the field value using field handler(s) requested.
+The field value that results following the filter operation(s) is returned.
+No error messages are returned using the `filter` method.
+
+3. **escape** Formats (or formats) the field for display, given the field handler(s) requested.
+The field value that results following the escape operation(s) is returned.
+No error messages are returned using the `escape` method.
+
+There are four parameters for the request, regardless of whether it is `validate`, `filter`, or `escape`.
+
+1. **$field_name** the name of the field for use in error messages;
+2. **$field_value** existing data value subject to validation, filtering or escaping operations;
+3. **$constraint** the name of the constraint;
+4. **$options** (optional) am associative array of named pair values required by constraint processing.
+
+**Example: Verbse**: This is a verbose example where each constraint is specifically enforced.
 
 ```php
 
@@ -28,42 +86,69 @@ Let's see how the *Molajo Fieldhandler* can be used in support of these data con
 
 $fieldhandler = new Molajo\Fieldhandler\Request();
 
-// 2. Filter order_quantity to remove non-integer digits
+// 2. Verify the password is still valid
 
-$results = $request->filter('Order Quantity', $order_quantity, 'integer');
-if ($results->getChangeIndicator()) {
-    $order_quantity = $results->getFilteredValue();
-}
-
-// 3. Filter: if order quantity is zero, set the field value to a default value of 1
-
-$results = $request->filter('Order Quantity', $order_quantity, 'default', array('default_value' => 1));
-if ($results->getChangeIndicator()) {
-    $order_quantity = $results->getFilteredValue();
-}
-
-// 3. Validation: order quantity must be an integer greater than 1
-
-$results = $request->validate('Order Quantity', $order_quantity, 'Minimum', array('minimum' => 1));
+$results = $request->validate('Last Changed', $last_changed, 'Date', array('LT' => 91, 'Context' => 'Days');
 if ($results->getValidationResponse() === false) {
     // deal with the problem
-    $messages = $messages + $results->getValidationMessages();
+    $messages = $results->getValidationMessages();
+}
+
+// 3. Verify data values using the *Alphanumeric Constraint* and values (_), ($), and (#).
+
+$results = $request->validate('Password', $password, 'Alphanumeric', array('special_characters' => '-, $, #');
+if ($results->getValidationResponse() === false) {
+    // deal with the problem
+    $messages = $results->getValidationMessages();
+}
+
+// 4. Passwords must be from 8 to 30 characters in length.
+
+$results = $request->validate('Password', $password, 'Length', array('minimum' => 8, 'maximum' => 30);
+if ($results->getValidationResponse() === false) {
+    // deal with the problem
+    $messages = $results->getValidationMessages();
+}
+
+// 5. Display Password
+
+$results = $request->escaoe('Password', $display_password, 'Password';
+if ($results->getChangeIndicator() === true) {
+    $display_password = $results->getFilteredValue();
 }
 
 ```
+**Example: Field Collection**:
+While the previous example showed how to perform each test, one at a time, it is also possible
+to group constraints for each field:
 
-**Example 2**:
+```php
 
-As demonstrated in the example above, *Molajo Fieldhandler* aligns filter, escape, and validation functionality
-within a data constraint (i.e., rules to ensure data integrity).
+// 1. Instantiate the Molajo Fieldhandler and inject $fieldhandler into class
 
-Considering each constraint class has `verify`, `filter` and `escape` methods. That means for the
-75+ supplied constraints (and for any custom constraint you implement), the full data dictionary
-describing data integrity is organized by constraint.
+$fieldhandler = new Molajo\Fieldhandler\Request();
 
-*Molajo Fieldhandler* allows you to take this further. By defining what fields belong to a data object,
- you can also define what constraints are required for each field. With that information, *Molajo Fieldhandler*
- can manage these constraints for you.
+// 2. Enforce Password Constraints using a terse syntax
+
+    $results = $request->ensureFieldConstraints(
+        'Display Password',
+        $display_password,
+        array('verify' => 'date', 'verify' => 'Alphanumeric', 'verify' => 'Length', 'escape' => 'Password'),
+        array('LT' => 91, 'Context' => 'Days', 'special_characters' => '-, $, #' );
+
+    if ($results->getSuccessIndicator() === false) {
+        $field->messages = $results->getValidationMessages();
+
+    } elseif ($results->getChangeIndicator() === true) {
+        $field->value = $results->getFilteredValue();
+    }
+
+```
+
+**Example: Data Collection**:
+
+If you define which fields belong to a data collection and what constraints apply to each field, *Molajo Fieldhandler*
+ can manage constraint verification quite simply, as this example shows.
 
 ```php
 
@@ -72,6 +157,7 @@ describing data integrity is organized by constraint.
 $fieldhandler = new Molajo\Fieldhandler\Request();
 
 // 2. Process all fields in a loop
+
 foreach ($data_object as $field) {
 
     $results = $request->ensureFieldConstraints(
@@ -90,178 +176,13 @@ foreach ($data_object as $field) {
 
 ```
 
-
-
- Failure to build in such protections significantly increases risk of data corruption.
-
 Mission critical applications rely on well designed and carefully implemented cleansing, formatting and verification
 routines. The goal of the *Molajo Fieldhandler* is to make it easier for PHP developers not only to accomplish
 this goal but as importantly to be able to communicate exactly how the application enforcing
 integrity constraints in terms that the client can understand.
 
 
-## Fieldhandler Request Class ##
 
-### Request ###
-
-1. **validate** Validates the field value using field handler(s) requested.
-All field handlers requested will run and multiple error messages could be returned.
-Validate only returns a true or false value.
-
-2. **clean** Cleans the field value using field handler(s) requested.
-The field value that results following the filter operation(s) is returned.
-No error messages are returned using the `filter` method.
-
-3. **format** Formats (or formats) the field for display, given the field handler(s) requested.
-The field value that results following the escape operation(s) is returned.
-No error messages are returned using the `escape` method.
-
-#### Parameters ####
-
-There are four parameters for the `validate` request. (And the same four parameters are used for
-the `clean` and `format` requests.):
-
-1. **$field_name** specify the name of the field for use in error messages;
-2. **$field_value** existing data value that is subject to validation, cleansing and formattingd;
-3. **$constraint** one or more field handler constraints, separated by commas, to be processed in left-to-right order;
-4. **$options** (optional) am associative array of named pair values required by field handlers.
-
-### Fieldhandler Validate ###
-
-Ensuring data integrity requires validating `constraints` (rules) for each input data element.
-It is not uncommon to define a collection of constraints to ensure correctness of each data element.
-
-Consider how these data constraints are implemented in the following code example:
-
-* Order quantity must be numeric.
-* Order quantity is required.
-
-1. Note how multiple tests are chained in the third parameter using the same validation request. The
-Fieldhandler will process requests in left to right order.
-2. Validation results in a `true` response when data conforms.
-3. A `false` response isolates data integrity issues defined in an accompanying error message.
-
-#### Validate Example ####
-
-```php
-
-$fieldhandler = new Molajo\Fieldhandler\Request();
-
-$results = $request->validate('Order Quantity', $order_quantity, 'numeric, required');
-
-if ($results->getValidationResponse() === false) {
-    $error_messages = $results->getValidationMessages());
-}
-
-```
-
-#### Validation Constraints and NULL Data Value ####
-
-Constraints are not used to test conformance with the data element if the data element value is NULL.
-The obvious exception to that is `Null` and `Notnull` validation constraints.
-
-If a NULL value is incorrect for the field, include a clean request to set the `default` value for
- the data element. If that is not possible, add a `required` validation constraint to ensure
- the NULL value is returned to the user along with the `required` error message.
-
-
-### Fieldhandler Clean ###
-
-Filter input for expected values.
-
-It is important to understand that data validation does not modify field values. However,
- data cleansing requests can modify the value of the data. Both validation and cleansing are necessary
- for safe data collection.
-
-Perhaps you recognized a problem with the previous data validation example? The constraints allow a value
-of 0 for order quantity. Clearly there is a need to tighten the logic. So, let's add the following
-data cleansing constraints.
-
-* Filter order quantity as an integer.
-* If order quantity is 0, set order quantity to a default value of 1.
-
-1. Since data cleansing operations can change data values, the data element must be retrieved following
- each cleansing request.
-
-2. If the user failed to enter an order quantity, consider the impact of testing `required` before
-issuing the data cleansing `default assignment` request.
-
-#### Clean Example ####
-
-```php
-
-$fieldhandler = new Molajo\Fieldhandler\Request();
-
-// 1. Cleansing: order quantity must be an integer
-
-$results = $request->clean('Order Quantity', $order_quantity, 'integer');
-$order_quantity = $results->getValidationResponse();
-
-// 2. Validation: order quantity is required.
-
-$results = $request->validate('Order Quantity', $order_quantity, 'required');
-if ($results->getValidationResponse() === false) {
-    $error_messages = $error_messages + $results->getValidationMessages());
-}
-
-// 3. Cleansing: if order quantity is zero, set the default value to 1
-
-$results = $request->clean('Order Quantity', $order_quantity, 'default', array('default_value' => 1));
-$order_quantity = $results->getValidationResponse();
-
-// 4. Validation: Order Quantity must be numeric
-
-$results = $request->validate('Order Quantity', $order_quantity, 'numeric');
-if ($results->getValidationResponse() === false) {
-    $error_messages = $error_messages + $results->getValidationMessages());
-}
-
-```
-
-Hopefully, this example helps underscore the potential for using both data cleansing and validation
-constraints. It is equally important to consider the proper sequence of these requests to obtain
-the desired result.
-
-
-
-### Fieldhandler Format ###
-
-Filter input for expected values.
-
-It is important to understand that data validation does not modify field values. However,
- data cleansing requests can modify the value of the data. Both validation and cleansing are necessary
- for safe data collection.
-
-Perhaps you recognized a problem with the previous data validation example? The constraints allow a value
-of 0 for order quantity. Clearly there is a need to tighten the logic. So, let's add the following
-data cleansing constraints.
-
-* Filter order quantity as an integer.
-* If order quantity is 0, set order quantity to a default value of 1.
-
-1. Since data cleansing operations can change data values, the data element must be retrieved following
- each cleansing request.
-
-2. If the user failed to enter an order quantity, consider the impact of testing `required` before
-issuing the data cleansing `default assignment` request.
-
-#### Format Example ####
-
-```php
-
-$fieldhandler = new Molajo\Fieldhandler\Request();
-
-// 1. Formatting: display phone number as (402) 555-1212
-
-$results = $request->format('phone_number', $phone_number, 'tel');
-$phone_number = $results->getValidationResponse();
-
-
-```
-
-Hopefully, this example helps underscore the potential for using both data cleansing and validation
-constraints. It is equally important to consider the proper sequence of these requests to obtain
-the desired result.
 
 ## Creating Custom Constraints ##
 
@@ -276,17 +197,6 @@ Messages
 Tokens
 Localization
 
-
-## Basic Usage ##
-
-Types
-Multiple
-Messages
-Tokens
-Localization
-Custom Constraints
-
-
 $filtered = $request->filter('Title', $title, 'string, required');
 $escaped = $request->escape('Title', $filtered->getValidationResponse(), 'string');
 
@@ -295,29 +205,7 @@ $title = $escaped->getValidationResponse();
 ```
 
 
-
-###Results:###
-
-An object is returned from all three methods that can be used in the following manner:
-
-1. To retrieve the results of operations:
-
-```php
-
-    // For Validation:
-    $validation_success_or_failure = $results->getValidationResponse():
-
-    // For Filtering and Escaping:
-    $field_value = $results->getValidationResponse();
-
-```
-
-2. To retrieve an associative array (code, message) of error messages (only for validation and if validation failed):
-
-    $messages = $results->getValidationMessages();
-
-
-## Constraints ##
+## Package Constraints ##
 
 - [Callback](https://github.com/Molajo/Fieldhandler#callback)
 
