@@ -4,17 +4,74 @@ Fieldhandler [Alpha]
 
 [![Build Status](https://travis-ci.org/Molajo/Fieldhandler.png?branch=master)](https://travis-ci.org/Molajo/Fieldhandler)
 
-The *Molajo Fieldhandler* is a data integrity assurance package for PHP applications. As the name suggests, the
-focus of the package is cleansing, verifying, and formatting field values.
+The *Molajo Fieldhandler* is a data integrity assurance package for PHP applications which unifies filtering,
+escaping and validation functions into one package and defines each function for each data constraints.
 
-Combined, these data custodial activities ensure clean, verified and useful information. Failure to build
-protections into data collection processes is guaranteed to eventually lead to data corruption challenges.
+Using `order quantity` as an example, one might imagine such data constraints:
+1. Order quantity must be an integer.
+2. Order quantity is required.
+3. If no value is provided for order quantity, use a default value of 1.
+
+The *Molajo Fieldhandler* can be used in this way in support of these data constraints:
+
+```php
+
+// 1. Instantiate the Molajo Fieldhandler and inject $fieldhandler into class
+
+$fieldhandler = new Molajo\Fieldhandler\Request();
+
+// 2. Filter order_quantity to remove non-integer digits
+
+$results = $request->filter('Order Quantity', $order_quantity, 'integer');
+if ($results->getChangeIndicator()) {
+    $order_quantity = $results->getFilteredValue();
+}
+
+// 3. Filter: if order quantity is zero, set the field value to a default value of 1
+
+$results = $request->filter('Order Quantity', $order_quantity, 'default', array('default_value' => 1));
+if ($results->getChangeIndicator()) {
+    $order_quantity = $results->getFilteredValue();
+}
+
+// 4. Validation: order quantity must be an integer
+
+$results = $request->validate('Order Quantity', $order_quantity, 'integer');
+if ($results->getValidationResponse() === false) {
+    // deal with the problem
+    $messages = $messages + $results->getValidationMessages();
+}
+
+// 5. Validation: Order Quantity is required
+
+$results = $request->validate('Order Quantity', $order_quantity, 'required');
+if ($results->getValidationResponse() === false) {
+    // deal with the problem
+    $messages = $messages + $results->getValidationMessages();
+}
+
+// 6. Validation: order quantity must be an integer greater than 1
+
+$results = $request->validate('Order Quantity', $order_quantity, 'Minimum', array('minimum' => 1));
+if ($results->getValidationResponse() === false) {
+    // deal with the problem
+    $messages = $messages + $results->getValidationMessages();
+}
+
+```
+
+As demonstrated in the example above, *Molajo Fieldhandler* unifies filter, escape, and validation functions
+for each data constraint. Each constraint class has `verify`, `filter` and `escape` methods for this purpose.
+In unifying data custodial activities the application is better able to ensure clean, verified and useful information.
+Failure to build such protections into data collection processes is guaranteed to eventually lead to data corruption
+challenges.
 
 Mission critical applications rely on well designed and carefully implemented cleansing, formatting and verification
-routines. The goal of the *Molajo Fieldhandler* is to make it easier for PHP developers to accomplish this goal.
+routines. The goal of the *Molajo Fieldhandler* is to make it easier for PHP developers not only to accomplish
+this goal but also to make it easier to communicate application functionality in terms of business rules with clients.
 
 
-## Fieldhandler Data Integrity Support ##
+## Fieldhandler Request Class ##
 
 ### Request ###
 
