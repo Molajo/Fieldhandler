@@ -20,20 +20,7 @@ use CommonApi\Model\ConstraintInterface;
  */
 class Tel extends AbstractConstraint implements ConstraintInterface
 {
-    /**
-     * Constraint Allowable Options
-     *
-     * @var    array
-     * @since  1.0.0
-     */
-    protected $constraint_allowable_options = array(
-        'FILTER_FLAG_NO_ENCODE_QUOTES',
-        'FILTER_FLAG_STRIP_LOW',
-        'FILTER_FLAG_STRIP_HIGH',
-        'FILTER_FLAG_ENCODE_LOW',
-        'FILTER_FLAG_ENCODE_HIGH',
-        'FILTER_FLAG_ENCODE_AMP'
-    );
+
 
     /**
      * Validate
@@ -82,31 +69,9 @@ class Tel extends AbstractConstraint implements ConstraintInterface
     {
         $this->filter();
 
-        /** TODO: Apply localisation mask and remove example */
-        $this->field_value = '1 (' . substr($this->field_value, 0, 3)
+        /** TODO: Apply localisation mask */
+        $temp = '1 (' . substr($this->field_value, 0, 3)
             . ') ' . substr($this->field_value, 0, 3)
             . '-' . substr($this->field_value, 0, 4);
-
-        return $this->field_value;
-    }
-
-
-    /**
-     * Obfuscate Email
-     *
-     * @return  string
-     * @since   1.0
-     */
-    protected function obfuscateEmail()
-    {
-        $obfuscate_email = "";
-
-        for ($i = 0; $i < strlen($this->field_value); $i ++) {
-            $obfuscate_email .= "&#" . ord($this->field_value[$i]) . ";";
-        }
-
-        $this->field_value = $obfuscate_email;
-
-        return $this;
     }
 }

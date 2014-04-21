@@ -11,6 +11,11 @@ functionality very specifically as specialised tools. In unifying tool usage aro
 on field-level rule compliance, applications ensure data
 collection processes provide clean, verified, and useful information.
 
+Mission critical applications rely on well designed and carefully implemented cleansing, formatting and verification
+routines. The goal of the *Molajo Fieldhandler* is to make it easier for PHP developers not only to accomplish
+this goal but as importantly to be able to communicate exactly how the application enforcing
+integrity constraints in terms that the client can understand.
+
 ## Overview of the Methodology ##
 
 At the most basic level, *constraints* define data collection and usage rules.
@@ -24,18 +29,18 @@ Constraints are just as important for using data and can include formatting requ
 or whether a "lookup value" should be displayed in place of key field data,
 if a mask should be used to prevent display of secure information, and so on.
 
-In *Molajo Fieldhandler*, constraints are PHP classes with methods for *filter*,
+In the *Molajo Fieldhandler*, each constraint is implemented as a separate PHP classes with methods for *filter*,
  *validate* and *escape.* On the input side, *filter* and *validate* typically enforce rule adherence whereas
  the *escape* function is useful in ensuring data treatment requirements.
 
 
-## Basic Approach
+### Basic Approach
 
 A critical step in application development associates specific integrity
 constraints with each field in the collection. It is simply not possible to ensure clean data
 if the rules defining that state are not articulated.
 
-### Define Integrity Constraints
+#### Define Integrity Constraints
 
 As an example, assume these constraints for the `password` field:
 
@@ -45,7 +50,7 @@ As an example, assume these constraints for the `password` field:
 4. The new password cannot match the existing value.
 4. Passwords should never be displayed and must be masked as asterisks.
 
-### Design enforcement strategy
+#### Design enforcement strategy
 
 Review the existing *Molajo Fieldhandler* Constraint classes to define enforcement.
 Custom Constraints can be created when delivered constraints are not enough.
@@ -55,7 +60,7 @@ Custom Constraints can be created when delivered constraints are not enough.
 3. Validate the field data using the *Length Constraint* to ensure a length of 8 to 30 characters.
 4. Escape the password using the *Password Constraint* class to replace password values with asterisks.
 
-### Write code to deploy enforcement strategy
+#### Write code to deploy enforcement strategy
 
 There are three *Molajo Fieldhandler* Request methods:
 
@@ -78,7 +83,9 @@ There are four parameters for the request, regardless of whether it is `validate
 3. **$constraint** the name of the constraint;
 4. **$options** (optional) am associative array of named pair values required by constraint processing.
 
-**Example: Verbse**: This is a verbose example where each constraint is specifically enforced.
+##### Example: Verbose
+
+This is a verbose example for purposes of learning where each constraint is specifically enforced.
 
 ```php
 
@@ -118,7 +125,8 @@ if ($results->getChangeIndicator() === true) {
 }
 
 ```
-**Example: Field Collection**:
+##### Example: Field Collection
+
 While the previous example showed how to perform each test, one at a time, it is also possible
 to group constraints for each field:
 
@@ -145,7 +153,7 @@ $fieldhandler = new Molajo\Fieldhandler\Request();
 
 ```
 
-**Example: Data Collection**:
+##### Example: Data Collection
 
 If you define which fields belong to a data collection and what constraints apply to each field, *Molajo Fieldhandler*
  can manage constraint verification quite simply, as this example shows.
@@ -175,14 +183,6 @@ foreach ($data_object as $field) {
 }
 
 ```
-
-Mission critical applications rely on well designed and carefully implemented cleansing, formatting and verification
-routines. The goal of the *Molajo Fieldhandler* is to make it easier for PHP developers not only to accomplish
-this goal but as importantly to be able to communicate exactly how the application enforcing
-integrity constraints in terms that the client can understand.
-
-
-
 
 ## Creating Custom Constraints ##
 
