@@ -38,8 +38,8 @@ class Email extends AbstractConstraint implements ConstraintInterface
             return false;
         }
 
-        $host        = '';
         $email_parts = explode('@', $this->field_value);
+
         if (is_array($email_parts) && count($email_parts) === 2) {
             $host = $email_parts[1];
         } else {
@@ -47,7 +47,13 @@ class Email extends AbstractConstraint implements ConstraintInterface
             return false;
         }
 
-        if (checkdnsrr($host, 'MX')) {
+        if ($this->checkMX($host)) {
+        } else {
+            $this->setValidateMessage(2000);
+            return false;
+        }
+
+        if ($this->checkHost($host)) {
         } else {
             $this->setValidateMessage(2000);
             return false;
@@ -64,10 +70,7 @@ class Email extends AbstractConstraint implements ConstraintInterface
      */
     public function handleInput()
     {
-        if ($this->validate()) {
-        } else {
-            $this->field_value = null;
-        }
+        $this->field_value = filter_var($this->field_value, FILTER_VALIDATE_EMAIL);
 
         return $this->field_value;
     }
@@ -80,6 +83,18 @@ class Email extends AbstractConstraint implements ConstraintInterface
      */
     public function handleOutput()
     {
-        return $this->handleInput();
+        $this->handleInput();
+
+        if ($this->options['obfuscate_email'] === true) {
+            $obfuscate_email = "";
+
+            for ($i = 0; $i < strlen($this->field_value); $i ++) {
+                $obfuscate_email .= "&#" . ord($this->field_value[$i]) . ";";
+            }
+
+            $this->field_value = $obfuscate_email;
+        }
+
+        return $this->field_value;
     }
 }

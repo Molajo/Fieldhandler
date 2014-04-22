@@ -9,6 +9,7 @@
 namespace Molajo\Fieldhandler\Constraint;
 
 use CommonApi\Model\ConstraintInterface;
+use DateTime;
 
 /**
  * Date Constraint
@@ -29,12 +30,14 @@ class Date extends AbstractConstraint implements ConstraintInterface
     public function validate()
     {
         if ($this->field_value === null) {
-        } else {
+            return true;
+        }
 
-            if (strtotime($this->field_value) === false) {
-                $this->setValidateMessage(2000);
-                return false;
-            }
+        $date = $this->createFromFormat();
+
+        if ($date === false) {
+            $this->setValidateMessage(2000);
+            return false;
         }
 
         return true;
@@ -48,7 +51,13 @@ class Date extends AbstractConstraint implements ConstraintInterface
      */
     public function handleInput()
     {
-        if (strtotime($this->field_value) === false) {
+        if ($this->field_value === null) {
+            return true;
+        }
+
+        $date = $this->createFromFormat();
+
+        if ($date === false) {
             $this->field_value = null;
         }
 
@@ -63,6 +72,48 @@ class Date extends AbstractConstraint implements ConstraintInterface
      */
     public function handleOutput()
     {
-        return $this->handleInput();
+        if ($this->field_value === null) {
+            return true;
+        }
+
+        $date = $this->createFromFormat();
+
+        if ($date === false) {
+            $this->field_value = null;
+        }
+
+        if (isset($this->options['display_as_date_format'])) {
+            $format = $this->options['display_as_date_format'];
+        } else {
+            $format = 'Y-m-d';
+        }
+
+        $this->field_value = $date->format($format);
+
+        return $this->field_value;
+    }
+
+    /**
+     * Create Data from a specific format
+     *
+     * @return  mixed
+     * @since   1.0.0
+     */
+    protected function createFromFormat()
+    {
+        if (isset($this->options['create_from_date_format'])) {
+            $format = $this->options['create_from_date_format'];
+        } else {
+            $format = 'Y-m-d';
+        }
+
+        $date = DateTime::createFromFormat($format, $this->field_value);
+
+        $errors = DateTime::getLastErrors();
+        if ($errors['warning_count'] > 0) {
+            return false;
+        }
+
+        return $date;
     }
 }

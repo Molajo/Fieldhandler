@@ -22,6 +22,21 @@ use CommonApi\Model\ConstraintInterface;
 class String extends AbstractConstraint implements ConstraintInterface
 {
     /**
+     * Allowable Constraint Options
+     *
+     * @var    array
+     * @since  1.0.0
+     */
+    protected $constraint_allowable_options = array(
+        'FILTER_FLAG_NO_ENCODE_QUOTES',
+        'FILTER_FLAG_STRIP_HIGH',
+        'FILTER_FLAG_STRIP_LOW',
+        'FILTER_FLAG_ENCODE_HIGH',
+        'FILTER_FLAG_ENCODE_LOW',
+        'FILTER_FLAG_ENCODE_AMP'
+    );
+
+    /**
      * Validate
      *
      * @return  boolean
@@ -67,61 +82,5 @@ class String extends AbstractConstraint implements ConstraintInterface
     public function handleOutput()
     {
         return $this->handleInput();
-    }
-
-    /**
-     * Flags can be set in options array
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function setFlags()
-    {
-        $filter = '';
-        if (isset($this->options['FILTER_FLAG_NO_ENCODE_QUOTES'])) {
-            $filter = 'FILTER_FLAG_NO_ENCODE_QUOTES';
-        }
-
-        if (isset($this->options['FILTER_FLAG_STRIP_LOW'])) {
-            if ($filter == '') {
-            } else {
-                $filter .= ', ';
-            }
-            $filter .= 'FILTER_FLAG_STRIP_LOW';
-        }
-
-        if (isset($this->options['FILTER_FLAG_STRIP_HIGH'])) {
-            if ($filter == '') {
-            } else {
-                $filter .= ', ';
-            }
-            $filter .= 'FILTER_FLAG_STRIP_HIGH';
-        }
-
-        if (isset($this->options['FILTER_FLAG_ENCODE_LOW'])) {
-            if ($filter == '') {
-            } else {
-                $filter .= ', ';
-            }
-            $filter .= 'FILTER_FLAG_ENCODE_LOW';
-        }
-
-        if (isset($this->options['FILTER_FLAG_ENCODE_HIGH'])) {
-            if ($filter == '') {
-            } else {
-                $filter .= ', ';
-            }
-            $filter .= 'FILTER_FLAG_ENCODE_HIGH';
-        }
-
-        if (isset($this->options['FILTER_FLAG_ENCODE_AMP'])) {
-            if ($filter == '') {
-            } else {
-                $filter .= ', ';
-            }
-            $filter .= 'FILTER_FLAG_ENCODE_AMP';
-        }
-
-        return $filter;
     }
 }

@@ -30,14 +30,17 @@ class Alpha extends AbstractConstraint implements ConstraintInterface
     public function validate()
     {
         if ($this->field_value === null) {
-        } else {
-            if (ctype_alpha($this->field_value) === false) {
-                $this->setValidateMessage(2000);
-                return false;
-            }
+            return true;
         }
 
-        return true;
+        $temp = $this->filterByCharacter('ctype_alpha', $this->field_value);
+
+        if ($temp === $this->field_value) {
+            return true;
+        }
+
+        $this->setValidateMessage(2000);
+        return false;
     }
 
     /**

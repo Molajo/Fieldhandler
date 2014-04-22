@@ -28,8 +28,6 @@ class Defaults extends AbstractConstraint implements ConstraintInterface
      */
     public function validate()
     {
-        $this->setDefault();
-
         if ($this->field_value === null) {
             $this->setValidateMessage(7000);
             return false;

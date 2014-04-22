@@ -50,12 +50,13 @@ class Digit extends AbstractConstraint implements ConstraintInterface
     public function handleInput()
     {
         if ($this->field_value === null) {
-        } else {
+            return $this->field_value;
+        }
 
-            if (ctype_digit($this->field_value) === true) {
-            } else {
-                $this->field_value = $this->filterByCharacter('ctype_digit', $this->field_value);
-            }
+        if (ctype_digit($this->field_value) === true) {
+
+        } else {
+            $this->field_value = $this->filterByCharacter('ctype_digit', $this->field_value);
         }
 
         return $this->field_value;

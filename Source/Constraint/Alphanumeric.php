@@ -33,7 +33,9 @@ class Alphanumeric extends AbstractConstraint implements ConstraintInterface
             return true;
         }
 
-        if (ctype_alnum($this->field_value)) {
+        $temp = $this->filterByCharacter('ctype_alnum', $this->field_value);
+
+        if ($temp === $this->field_value) {
             return true;
         }
 
@@ -52,11 +54,7 @@ class Alphanumeric extends AbstractConstraint implements ConstraintInterface
     {
         if ($this->field_value === null) {
         } else {
-
-            if (ctype_alnum($this->field_value) === true) {
-            } else {
-                $this->field_value = $this->filterByCharacter('ctype_alnum', $this->field_value);
-            }
+            $this->field_value = $this->filterByCharacter('ctype_alnum', $this->field_value);
         }
 
         return $this->field_value;

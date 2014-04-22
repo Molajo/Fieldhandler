@@ -46,29 +46,7 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testValid()
-    {
-        $field_name  = 'dog';
-        $field_value = null;
-        $constraint  = 'Defaults';
-        $options     = array(
-            'default' => 'bark'
-        );
-
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
-
-        $field_value = 'bark';
-        $this->assertEquals($field_value, $results->getValidateResponse());
-
-        return;
-    }
-
-    /**
-     * @covers  Molajo\Fieldhandler\Constraint\Defaults::validate
-     * @return void
-     * @since   1.0.0
-     */
-    public function testValidateFail()
+    public function testValidatePass()
     {
         $field_name  = 'dog';
         $field_value = null;
@@ -79,7 +57,35 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(false, $results->getValidateResponse());
+
+        $expected_code    = 7000;
+        $expected_message = 'Field: dog does not have a default value.';
+        $messages         = $results->getValidateMessages();
+        $this->assertEquals($expected_code, $messages[0]->code);
+        $this->assertEquals($expected_message, $messages[0]->message);
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Defaults::validate
+     * @return void
+     * @since   1.0.0
+     */
+    public function testHandleInputSuccess()
+    {
+        $field_name  = 'dog';
+        $field_value = null;
+        $constraint  = 'Defaults';
+        $options     = array(
+            'default' => 'bark'
+        );
+
+        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals('bark', $results->getFieldValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }
@@ -89,10 +95,10 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testValidCat()
+    public function testValidApplyDefaultThenValidate()
     {
         $field_name  = 'cat';
-        $field_value = 'meow';
+        $field_value = null;
         $constraint  = 'Defaults';
         $options     = array(
             'default' => 'bark'
@@ -100,7 +106,16 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getValidateResponse());
+        $field_value = 'bark';
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
+
+        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals(true, $results->getValidateResponse());
+
+        $messages = $results->getValidateMessages();
+        $this->assertEquals(array(), $messages);
 
         return;
     }

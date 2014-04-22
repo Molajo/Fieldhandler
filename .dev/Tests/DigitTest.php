@@ -45,7 +45,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testValidate1()
+    public function testValidateSuccess()
     {
         $field_name  = 'digit_fieldname';
         $field_value = '1234';
@@ -55,6 +55,9 @@ class DigitTest extends PHPUnit_Framework_TestCase
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getValidateResponse());
+
+        $messages = $results->getValidateMessages();
+        $this->assertEquals(array(), $messages);
 
         return;
     }
@@ -75,6 +78,9 @@ class DigitTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(true, $results->getValidateResponse());
 
+        $messages = $results->getValidateMessages();
+        $this->assertEquals(array(), $messages);
+
         return;
     }
 
@@ -94,6 +100,12 @@ class DigitTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(false, $results->getValidateResponse());
 
+        $expected_code    = 2000;
+        $expected_message = 'Field: digit_fieldname must only contain Digit values.';
+        $messages         = $results->getValidateMessages();
+        $this->assertEquals($expected_code, $messages[0]->code);
+        $this->assertEquals($expected_message, $messages[0]->message);
+
         return;
     }
 
@@ -102,16 +114,17 @@ class DigitTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testFilter1()
+    public function testHandleInputSuccess()
     {
         $field_name  = 'digit_fieldname';
-        $field_value = 123;
+        $field_value = '123';
         $constraint  = 'Digit';
         $options     = array();
 
         $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getValidateResponse());
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
@@ -121,7 +134,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testFilter2()
+    public function testHandleInputFail()
     {
         $field_name  = 'digit_fieldname';
         $field_value = 'dog';
@@ -131,7 +144,8 @@ class DigitTest extends PHPUnit_Framework_TestCase
         $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
         $field_value = null;
-        $this->assertEquals($field_value, $results->getValidateResponse());
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }
@@ -141,16 +155,17 @@ class DigitTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testEscape1()
+    public function testHandleOutputSuccess()
     {
         $field_name  = 'digit_fieldname';
-        $field_value = 123;
+        $field_value = '123';
         $constraint  = 'Digit';
         $options     = array();
 
         $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getValidateResponse());
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
@@ -160,7 +175,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testEscape2()
+    public function testHandleOutputFail()
     {
         $field_name  = 'digit_fieldname';
         $field_value = 'dog';
@@ -170,7 +185,8 @@ class DigitTest extends PHPUnit_Framework_TestCase
         $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
 
         $field_value = null;
-        $this->assertEquals($field_value, $results->getValidateResponse());
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }

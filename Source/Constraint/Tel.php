@@ -83,30 +83,13 @@ class Tel extends AbstractConstraint implements ConstraintInterface
         $this->handleInput();
 
         /** TODO: Apply localisation mask and remove example */
-        $this->field_value = '1 (' . substr($this->field_value, 0, 3)
-            . ') ' . substr($this->field_value, 0, 3)
-            . '-' . substr($this->field_value, 0, 4);
 
-        return $this->field_value;
-    }
-
-
-    /**
-     * Obfuscate Email
-     *
-     * @return  string
-     * @since   1.0
-     */
-    protected function obfuscateEmail()
-    {
-        $obfuscate_email = "";
-
-        for ($i = 0; $i < strlen($this->field_value); $i ++) {
-            $obfuscate_email .= "&#" . ord($this->field_value[$i]) . ";";
+        if ($this->options['format_telephone']) {
+            $this->field_value = '1 (' . substr($this->field_value, 0, 3)
+                . ') ' . substr($this->field_value, 0, 3)
+                . '-' . substr($this->field_value, 0, 4);
         }
 
-        $this->field_value = $obfuscate_email;
-
-        return $this;
+        return $this->field_value;
     }
 }

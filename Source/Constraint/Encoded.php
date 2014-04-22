@@ -23,6 +23,19 @@ use CommonApi\Model\ConstraintInterface;
 class Encoded extends AbstractConstraint implements ConstraintInterface
 {
     /**
+     * Constraint Options
+     *
+     * @var    array
+     * @since  1.0.0
+     */
+    protected $constraint_allowable_options = array(
+        'FILTER_FLAG_STRIP_HIGH',
+        'FILTER_FLAG_STRIP_LOW',
+        'FILTER_FLAG_ENCODE_HIGH',
+        'FILTER_FLAG_ENCODE_LOW',
+    );
+
+    /**
      * Validate
      *
      * @return  boolean
@@ -65,45 +78,5 @@ class Encoded extends AbstractConstraint implements ConstraintInterface
     public function handleOutput()
     {
         return $this->handleInput();
-    }
-
-    /**
-     * Flags can be set in options array
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function setFlags()
-    {
-        $filter = null;
-        if (isset($this->options['FILTER_FLAG_STRIP_LOW'])) {
-            $filter = 'FILTER_FLAG_STRIP_LOW';
-        }
-
-        if (isset($this->options['FILTER_FLAG_STRIP_HIGH'])) {
-            if ($filter === null) {
-            } else {
-                $filter .= ', ';
-            }
-            $filter .= 'FILTER_FLAG_STRIP_HIGH';
-        }
-
-        if (isset($this->options['FILTER_FLAG_ENCODE_LOW'])) {
-            if ($filter === null) {
-            } else {
-                $filter .= ', ';
-            }
-            $filter .= 'FILTER_FLAG_ENCODE_LOW';
-        }
-
-        if (isset($this->options['FILTER_FLAG_ENCODE_HIGH'])) {
-            if ($filter === null) {
-            } else {
-                $filter .= ', ';
-            }
-            $filter .= 'FILTER_FLAG_ENCODE_HIGH';
-        }
-
-        return $filter;
     }
 }

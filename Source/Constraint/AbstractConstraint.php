@@ -61,6 +61,22 @@ abstract class AbstractConstraint implements ConstraintInterface
     protected $options = array();
 
     /**
+     * Available Options specifically for current Constraint
+     *
+     * @var    array
+     * @since  1.0.0
+     */
+    protected $constraint_options = array();
+
+    /**
+     * Requested Options for Constraint
+     *
+     * @var    string
+     * @since  1.0.0
+     */
+    protected $selected_constraint_options = null;
+
+    /**
      * Database instance
      *
      * @var    object
@@ -358,20 +374,27 @@ abstract class AbstractConstraint implements ConstraintInterface
     /**
      * Test the string specified in $filter using the function defined by $test
      *
-     * @param   string $test
      * @param   string $filter
+     * @param   string $test
      *
      * @return  string
      * @since   1.0.0
      */
-    protected function filterByCharacter($test, $filter)
+    protected function filterByCharacter($filter, $test)
     {
         $filtered = '';
 
-        if (strlen($filter) > 0) {
-            for ($i = 0; $i < strlen($filter); $i ++) {
-                if ($test(substr($filter, $i, 1)) == 1) {
-                    $filtered .= substr($filter, $i, 1);
+        $allow_whitespace = false;
+        if (isset($this->options['allow_whitespace'])) {
+            $allow_whitespace = true;
+        }
+
+        if (strlen($test) > 0) {
+            for ($i = 0; $i < strlen($test); $i ++) {
+                if (($filter(substr($test, $i, 1)) == 1)
+                    || ($allow_whitespace === true && substr($test, $i, 1) === ' ')
+                ) {
+                    $filtered .= substr($test, $i, 1);
                 }
             }
         }
@@ -407,5 +430,67 @@ abstract class AbstractConstraint implements ConstraintInterface
         }
 
         return array($minimum, $maximum);
+    }
+
+    /**
+     * Verify MX Record for Host
+     *
+     * @return  boolean
+     * @since   1.0.0
+     */
+    public function checkMX($host)
+    {
+        if (isset($this->options['check_mx'])) {
+            if (checkdnsrr($host, 'MX')) {
+            } else {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Check Host DNS Records for at least one (MX, A, AAAA)
+     *
+     * @param   string $host
+     *
+     * @return bool
+     */
+    protected function checkHost($host)
+    {
+        if (isset($this->options['check_host'])) {
+            if (checkdnsrr($host, 'MX') || checkdnsrr($host, "A") || checkdnsrr($host, "AAAA")) {
+            } else {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Flags can be set in options array
+     *
+     * @return  mixed
+     * @since   1.0.0
+     */
+    public function setFlags()
+    {
+        $this->selected_constraint_options = null;
+
+        if (is_array($this->constraint_options) && count($this->constraint_options) > 0) {
+            foreach ($this->constraint_options as $possible_option) {
+                if (isset($this->options[$possible_option])) {
+                    if ($this->selected_constraint_options === null) {
+                    } else {
+                        $this->selected_constraint_options .= ', ';
+                    }
+                    $this->selected_constraint_options .= $possible_option;
+                }
+            }
+        }
+
+        return $this->selected_constraint_options;
     }
 }
