@@ -32,7 +32,7 @@ class Alias extends AbstractConstraint implements ConstraintInterface
             return true;
         }
 
-        if ($this->testValidate() === false) {
+        if ($this->validateAlias() === false) {
             $this->setValidateMessage(1000);
             return false;
         }
@@ -48,9 +48,11 @@ class Alias extends AbstractConstraint implements ConstraintInterface
      */
     public function sanitize()
     {
-        if ($this->testValidate() === false) {
-            $this->createAlias();
+        if ($this->field_value === null) {
+            return null;
         }
+
+        $this->field_value = $this->sanitizeAlias($this->field_value);
 
         return $this->field_value;
     }
@@ -63,73 +65,78 @@ class Alias extends AbstractConstraint implements ConstraintInterface
      */
     public function format()
     {
-        return $this->sanitize();
-    }
-
-    /**
-     * Create Alias from Text Value
-     *
-     * @return  $this
-     * @since   1.0.0
-     */
-    public function createAlias()
-    {
-        $alias = $this->field_value;
-
-        if ($alias === null) {
-            return $this;
+        if ($this->field_value === null) {
+            return null;
         }
 
-        /** Replace dashes with spaces */
-        $alias = str_replace('-', ' ', strtolower(trim($alias)));
+        $this->field_value = $this->formatAlias($this->field_value);
 
-        /** Removes double spaces, ensures only alphanumeric characters */
-        $alias = preg_replace('/(\s|[^A-Za-z0-9\-])+/', '-', $alias);
-
-        /** Trim dashes at beginning and end */
-        $alias = trim($alias, '-');
-
-        /** Replace spaces with underscores */
-        $alias = str_replace(' ', '_', strtolower(trim($alias)));
-
-        /** Sanitize */
-        $alias = filter_var($alias, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
-        $this->field_value = $alias;
-
-        return $this;
+        return $this->field_value;
     }
 
     /**
-     * Test the Alias validity
+     * Validate Alias Slug
      *
      * @return  bool
      * @since   1.0.0
      */
-    public function testValidate()
+    protected function validateAlias()
     {
-        $test = $this->field_value;
+        $alias = $this->field_value;
 
-        $test = preg_replace('/ /', '-', $test);
-        if ($this->field_value === $test) {
+        $alias = preg_replace('/ /', '-', $alias);
+        if ($this->field_value === $alias) {
         } else {
             return false;
         }
 
-        $test = preg_replace('/(\s|[^A-Za-z0-9\-])+/', '-', $test);
+        $alias = preg_replace('/(\s|[^A-Za-z0-9\-])+/', '-', $alias);
 
-        if ($this->field_value === $test) {
+        if ($this->field_value === $alias) {
         } else {
             return false;
         }
 
-        $test = filter_var($test, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $alias = filter_var($alias, FILTER_SANITIZE_URL);
 
-        if ($this->field_value === $test) {
+        if ($this->field_value === $alias) {
         } else {
             return false;
         }
 
         return true;
+    }
+
+    /**
+     * Sanitize Alias Slug
+     *
+     * @param   string $alias
+     *
+     * @return  bool
+     * @since   1.0.0
+     */
+    public function sanitizeAlias($alias)
+    {
+        return $this->filterByCharacter('ctype_alnum', $alias, true);
+    }
+
+    /**
+     * Create Alias from Text Value
+
+     * @param   string $alias
+     *
+     * @return  string
+     * @since   1.0.0
+     */
+    public function formatAlias($alias)
+    {
+        $alias = $this->sanitizeAlias($alias);
+
+        $alias = str_replace('-', ' ', strtolower(trim($alias)));
+        $alias = trim($alias, '-');
+        $alias = str_replace('  ', ' ', strtolower(trim($alias)));
+        $alias = str_replace(' ', '-', strtolower(trim($alias)));
+
+        return $alias;
     }
 }

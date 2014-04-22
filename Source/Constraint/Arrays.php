@@ -77,9 +77,9 @@ class Arrays extends AbstractConstraint implements ConstraintInterface
             if (is_array($this->field_value)) {
 
             } else {
-                $temp              = array();
-                $temp[]            = $this->field_value;
-                $this->field_value = $temp;
+                $this->field_value = null;
+
+                return $this->field_value;
             }
 
             $this->testValues(true);
@@ -100,7 +100,7 @@ class Arrays extends AbstractConstraint implements ConstraintInterface
      */
     public function format()
     {
-        return $this->sanitize();
+        return $this->field_value;
     }
 
     /**

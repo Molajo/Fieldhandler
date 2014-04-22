@@ -99,8 +99,8 @@ class AliasTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals('jack-and-jill', $results->getFieldValue());
-        $this->assertEquals(true, $results->getChangeIndicator());
+        $this->assertEquals('Jack and Jill', $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
@@ -113,13 +113,13 @@ class AliasTest extends PHPUnit_Framework_TestCase
     public function testSanitizeFailure()
     {
         $field_name  = 'alias';
-        $field_value = 'Jack *&and+Jill';
+        $field_value = 'Jack *&and Jill';
         $constraint  = 'Alias';
         $options     = array();
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals('jack-and-jill', $results->getFieldValue());
+        $this->assertEquals('Jack and Jill', $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
@@ -133,7 +133,7 @@ class AliasTest extends PHPUnit_Framework_TestCase
     public function testFormatSucceed()
     {
         $field_name  = 'alias';
-        $field_value = 'Jack *&and+Jill';
+        $field_value = 'Jack and Jill';
         $constraint  = 'Alias';
         $options     = array();
 
@@ -153,7 +153,7 @@ class AliasTest extends PHPUnit_Framework_TestCase
     public function testFormatFailure()
     {
         $field_name  = 'alias';
-        $field_value = 'Jack *&and+Jill';
+        $field_value = 'Jack *&and Jill';
         $constraint  = 'Alias';
         $options     = array();
 

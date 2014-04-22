@@ -33,7 +33,11 @@ class Alphanumeric extends AbstractConstraint implements ConstraintInterface
             return true;
         }
 
-        $temp = $this->filterByCharacter('ctype_alnum', $this->field_value);
+        $allow_whitespace = false;
+        if (isset($this->options['allow_whitespace'])) {
+            $allow_whitespace = true;
+        }
+        $temp = $this->filterByCharacter('ctype_alnum', $this->field_value, $allow_whitespace);
 
         if ($temp === $this->field_value) {
             return true;
@@ -54,7 +58,11 @@ class Alphanumeric extends AbstractConstraint implements ConstraintInterface
     {
         if ($this->field_value === null) {
         } else {
-            $this->field_value = $this->filterByCharacter('ctype_alnum', $this->field_value);
+            $allow_whitespace = false;
+            if (isset($this->options['allow_whitespace'])) {
+                $allow_whitespace = true;
+            }
+            $this->field_value = $this->filterByCharacter('ctype_alnum', $this->field_value, $allow_whitespace);
         }
 
         return $this->field_value;
@@ -68,6 +76,6 @@ class Alphanumeric extends AbstractConstraint implements ConstraintInterface
      */
     public function format()
     {
-        return $this->sanitize();
+        return $this->field_value;
     }
 }

@@ -233,66 +233,6 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Boolean::escape
-     * @return  void
-     * @since   1.0.0
-     */
-    public function testEscape2()
-    {
-        $field_name  = 'boolean_fieldname';
-        $field_value = true;
-        $constraint  = 'Boolean';
-        $options     = array();
-
-        $results = $this->request->format($field_name, $field_value, $constraint, $options);
-
-        $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(false, $results->getChangeIndicator());
-
-        return;
-    }
-
-    /**
-     * @covers  Molajo\Fieldhandler\Constraint\Boolean::escape
-     * @return  void
-     * @since   1.0.0
-     */
-    public function testEscape3()
-    {
-        $field_name  = 'boolean_fieldname';
-        $field_value = null;
-        $constraint  = 'Boolean';
-        $options     = array();
-
-        $results = $this->request->format($field_name, $field_value, $constraint, $options);
-
-        $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(false, $results->getChangeIndicator());
-
-        return;
-    }
-
-    /**
-     * @covers  Molajo\Fieldhandler\Constraint\Boolean::escape
-     * @return void
-     * @since   1.0.0
-     */
-    public function testEscapeFail()
-    {
-        $field_name  = 'boolean_fieldname';
-        $field_value = 'yessireebob';
-        $constraint  = 'Boolean';
-        $options     = array();
-
-        $results = $this->request->format($field_name, $field_value, $constraint, $options);
-
-        $this->assertEquals(null, $results->getFieldValue());
-        $this->assertEquals(true, $results->getChangeIndicator());
-
-        return;
-    }
-
-    /**
      * Tear down
      *
      * @return void

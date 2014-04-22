@@ -33,13 +33,19 @@ class Alpha extends AbstractConstraint implements ConstraintInterface
             return true;
         }
 
-        $temp = $this->filterByCharacter('ctype_alpha', $this->field_value);
+        $allow_whitespace = false;
+        if (isset($this->options['allow_whitespace'])) {
+            $allow_whitespace = true;
+        }
+
+        $temp = $this->filterByCharacter('ctype_alpha', $this->field_value, $allow_whitespace);
 
         if ($temp === $this->field_value) {
             return true;
         }
 
         $this->setValidateMessage(2000);
+
         return false;
     }
 
@@ -56,7 +62,11 @@ class Alpha extends AbstractConstraint implements ConstraintInterface
 
             if (ctype_alpha($this->field_value) === true) {
             } else {
-                $this->field_value = $this->filterByCharacter('ctype_alpha', $this->field_value);
+                $allow_whitespace = false;
+                if (isset($this->options['allow_whitespace'])) {
+                    $allow_whitespace = true;
+                }
+                $this->field_value = $this->filterByCharacter('ctype_alpha', $this->field_value, $allow_whitespace);
             }
         }
 
@@ -71,6 +81,6 @@ class Alpha extends AbstractConstraint implements ConstraintInterface
      */
     public function format()
     {
-        return $this->sanitize();
+        return $this->field_value;
     }
 }

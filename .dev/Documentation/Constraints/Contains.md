@@ -3,7 +3,7 @@ title: Contains
 author: Amy Stephen
 published: 2014-05-01
 categories : Fieldhandler, Constraint
-tags : url
+tags : string
 featured : 0
 class : https://github.com/Molajo/Fieldhandler/blob/master/Source/Constraint/Contains.php
 namespace : Molajo\Fieldhandler\Constraint\Contains
@@ -12,72 +12,57 @@ unit_tests : https://github.com/Molajo/Fieldhandler/blob/master/.dev/Tests/Conta
 
 {{ Constraint }}
 
-
-{{ Constraint::Definition }}
-
-Tests if values are valid for a URL slug. When used with filter or escape, the value returned can be used as an alias value.
+The string must contain the defined value.
 
 {{ Constraint::Options }}
 
+Use `options['contains']` to define the value to search for in the input string.
 
 {{ Constraint::Validate }}
 
-Values failing to conform to constraint definitions are removed.
+Returns *true* or *false* indicator of constraint conformance.
 
 {{ Constraint::Validate::Usage }}
 
-Say things...
+To test validity:
 
 ```php
 
-$employee_name = 'Janet Jackson';
-$results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
+    $request = new Molajo\Fieldhandler\Request();
 
-if ($results->getChangeIndicator() === true) {
-    $employee_name = $results->getFieldValue();
-} else {
-    // Filtering did not change the Employee Name
-}
+    #options['contains'] = 'search for';
+    $results = $request->validate('Contains Field Name', $search_in_here, 'Contains');
+
+    if ($results->getValidateResponse() === true) {
+        // all is good
+    } else {
+        foreach ($results->getValidateMessages() as $error) {
+            echo  'Validation error: ' . $error->code . ': ' . $error->message . '\n';
+        }
+    }
 
 ```
 
-
 {{ Constraint::Sanitize }}
 
-Values failing to conform to constraint definitions are removed.
+If the `contains` value is not found within the input string, the string will be set to `NULL` and returned.
 
 {{ Constraint::Sanitize::Usage }}
 
-Say things...
-
 ```php
 
-$employee_name = 'Janet Jackson';
-$results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
+    $options = array();
+    $options['contains'] = 'search for';
+    $search_in_here = 'but you will not find it.';
+    $results = $this->request->sanitize('Contains Field Name', $search_in_here, 'Contains', $options);
 
-if ($results->getChangeIndicator() === true) {
-    $employee_name = $results->getFieldValue();
-} else {
-    // Filtering did not change the Employee Name
-}
+    if ($results->getChangeIndicator() === true) {
+        // $search_in_here will be NULL
+        $search_in_here = $results->getFieldValue();
+    }
 
 ```
 
 {{ Constraint::Format }}
 
-Values failing to conform to constraint definitions are removed.
-
-{{ Constraint::Format::Usage }}
-
-```php
-
-$employee_name = 'Janet Jackson';
-$results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
-
-if ($results->getChangeIndicator() === true) {
-    $employee_name = $results->getFieldValue();
-} else {
-    // Filtering did not change the Employee Name
-}
-
-```
+`Contains` has no special formatting. The value sent in is simply returned without processing.

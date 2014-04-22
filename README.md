@@ -306,7 +306,7 @@ Formatting
 - [Punctuation]
 - [Controlcharacters]
 
-Special Field Types
+Url
 - [Alias](https://github.com/Molajo/Fieldhandler#alias)
 - [Ip](https://github.com/Molajo/Fieldhandler#ip)
 - [Uuid]()
@@ -335,17 +335,6 @@ in the `options` array, as shown below:
     $options = array();
     $options['true_array'] = array(true, 1);
     $validated_value = $request->validate('agreement', 1, 'Accepted', $options);
-
-```
-
-### Alias ###
-Tests if values are valid for a URL slug. When used with `filter` or `escape`, the value returned can be used as
-an alias value.
-
-```php
-    // Title 'Jack and Jill' will be returned as 'jack-and-jill' for filter and escape
-    // An exception would be thrown for validate
-    $alias = $request->sanitize('title', 'Jack and Jill', 'Alias');
 
 ```
 

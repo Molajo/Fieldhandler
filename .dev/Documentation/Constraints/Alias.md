@@ -12,72 +12,68 @@ unit_tests : https://github.com/Molajo/Fieldhandler/blob/master/.dev/Tests/Alias
 
 {{ Constraint }}
 
+Alias, sometimes called `slug`, is a segment of a URL.
 
-{{ Constraint::Definition }}
-
-Tests if values are valid for a URL slug. When used with filter or escape, the value returned can be used as an alias value.
+Valid values for the `alias` include upper and lower case alphabetic characters, numeric values, and the dash ('-').
 
 {{ Constraint::Options }}
 
+None.
 
 {{ Constraint::Validate }}
 
-Values failing to conform to constraint definitions are removed.
+Returns *true* or *false* indicator as to whether or not `alias` conforms to constraint definition.
 
 {{ Constraint::Validate::Usage }}
 
-Say things...
+To test *alias* for validity:
 
 ```php
 
-$employee_name = 'Janet Jackson';
-$results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
+    $request = new Molajo\Fieldhandler\Request();
 
-if ($results->getChangeIndicator() === true) {
-    $employee_name = $results->getFieldValue();
-} else {
-    // Filtering did not change the Employee Name
-}
+    $results = $request->validate('Alias Field Name', $alias_value, 'Alias');
+
+    if ($results->getValidateResponse() === true) {
+        // all is good
+    } else {
+        foreach ($results->getValidateMessages() as $error) {
+            echo  'Validation error: ' . $error->code . ': ' . $error->message . '\n';
+        }
+    }
 
 ```
 
-
 {{ Constraint::Sanitize }}
 
-Values failing to conform to constraint definitions are removed.
+Alias is sanitized to remove all non-conforming values.
 
 {{ Constraint::Sanitize::Usage }}
 
-Say things...
-
 ```php
 
-$employee_name = 'Janet Jackson';
-$results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
+    $results = $this->request->sanitize('Alias Field Name', $alias_value, 'Alias');
 
-if ($results->getChangeIndicator() === true) {
-    $employee_name = $results->getFieldValue();
-} else {
-    // Filtering did not change the Employee Name
-}
+    if ($results->getChangeIndicator() === true) {
+        $alias_value = $results->getFieldValue();
+    }
 
 ```
 
 {{ Constraint::Format }}
 
-Values failing to conform to constraint definitions are removed.
+Sanitized, lowercase `Alias` is formatted replacing all non alphabetic or numeric values with dashes and trimming
+leading and trailing spaces.
 
 {{ Constraint::Format::Usage }}
 
 ```php
 
-$employee_name = 'Janet Jackson';
-$results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
+    $results = $this->request->format('Alias Field Name', $alias_value, 'Alias');
 
-if ($results->getChangeIndicator() === true) {
-    $employee_name = $results->getFieldValue();
-} else {
-    // Filtering did not change the Employee Name
-}
+    if ($results->getChangeIndicator() === true) {
+        $alias_value = $results->getFieldValue();
+    }
+
 
 ```

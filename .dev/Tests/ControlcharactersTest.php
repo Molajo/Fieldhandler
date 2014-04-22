@@ -1,6 +1,6 @@
 <?php
 /**
- * Alphanumeric Constraint Test
+ * ControlCharacters Constraint Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -9,18 +9,17 @@
 namespace Molajo\Fieldhandler\Tests;
 
 use Molajo\Fieldhandler\Request;
-
 use PHPUnit_Framework_TestCase;
 
 /**
- * Alphanumeric Fieldhandler
+ * ControlCharacters Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class AlphanumericTest extends PHPUnit_Framework_TestCase
+class ControlCharactersTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Request
@@ -42,36 +41,35 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::validate
-     * @return  void
+     * @covers  Molajo\Fieldhandler\Constraint\ControlCharacters::validate
+     * @return void
      * @since   1.0.0
      */
-    public function testValidationSucceed()
+    public function testValidateSucceed()
     {
         $field_name  = 'test';
-        $field_value = 'Aa123';
-        $constraint  = 'Alphanumeric';
+        $field_value = "\n\r\t";
+        $constraint  = 'Controlcharacters';
         $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getValidateResponse());
-        $messages = $results->getValidateMessages();
-        $this->assertEquals(array(), $messages);
+        $this->assertEquals(array(), $results->getValidateMessages());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::validate
-     * @return  void
+     * @covers  Molajo\Fieldhandler\Constraint\ControlCharacters::validate
+     * @return void
      * @since   1.0.0
      */
-    public function testValidationFail()
+    public function testValidateFail()
     {
         $field_name  = 'test';
-        $field_value = '@Aa123';
-        $constraint  = 'Alphanumeric';
+        $field_value = "xyz\n\r\t";
+        $constraint  = 'Controlcharacters';
         $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
@@ -79,7 +77,7 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(false, $results->getValidateResponse());
 
         $expected_code    = 2000;
-        $expected_message = 'Field: test must only contain Alphanumeric values.';
+        $expected_message = 'Field: test must only contain Controlcharacters values.';
         $messages         = $results->getValidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);
@@ -88,15 +86,15 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::sanitize
-     * @return  void
+     * @covers  Molajo\Fieldhandler\Constraint\ControlCharacters::sanitize
+     * @return void
      * @since   1.0.0
      */
-    public function testFilterValid()
+    public function testFilterNoChange()
     {
         $field_name  = 'test';
-        $field_value = 'Aa123';
-        $constraint  = 'Alphanumeric';
+        $field_value = "\n\r\t";
+        $constraint  = 'Controlcharacters';
         $options     = array();
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
@@ -108,20 +106,20 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::sanitize
-     * @return  void
+     * @covers  Molajo\Fieldhandler\Constraint\ControlCharacters::sanitize
+     * @return void
      * @since   1.0.0
      */
-    public function testFilterFail()
+    public function testFilterChange()
     {
         $field_name  = 'test';
-        $field_value = '@Aa123';
-        $constraint  = 'Alphanumeric';
+        $field_value = "xyz\n\r\t";
+        $constraint  = 'Controlcharacters';
         $options     = array();
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
-        $expected_value = 'Aa123';
+        $expected_value = "\n\r\t";
         $this->assertEquals($expected_value, $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
 
@@ -129,35 +127,15 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::sanitize
-     * @return  void
+     * @covers  Molajo\Fieldhandler\Constraint\ControlCharacters::sanitize
+     * @return void
      * @since   1.0.0
      */
-    public function testEscapeNothingtodo()
+    public function testEscapeNoChange1()
     {
         $field_name  = 'test';
-        $field_value = 'Aa123';
-        $constraint  = 'Alphanumeric';
-        $options     = array();
-
-        $results = $this->request->format($field_name, $field_value, $constraint, $options);
-
-        $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(false, $results->getChangeIndicator());
-
-        return;
-    }
-
-    /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::sanitize
-     * @return  void
-     * @since   1.0.0
-     */
-    public function testEscapeNothingToSee()
-    {
-        $field_name  = 'test';
-        $field_value = '@Aa123';
-        $constraint  = 'Alphanumeric';
+        $field_value = '1A2b3C4d5E6f7G8';
+        $constraint  = 'Controlcharacters';
         $options     = array();
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);

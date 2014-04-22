@@ -53,7 +53,11 @@ class Punctuation extends AbstractConstraint implements ConstraintInterface
 
             if (ctype_punct($this->field_value) === true) {
             } else {
-                $this->field_value = $this->filterByCharacter('ctype_punct', $this->field_value);
+                $allow_whitespace = false;
+                if (isset($this->options['allow_whitespace'])) {
+                    $allow_whitespace = true;
+                }
+                $this->field_value = $this->filterByCharacter('ctype_punct', $this->field_value, $allow_whitespace);
             }
         }
 

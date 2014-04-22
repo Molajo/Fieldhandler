@@ -55,7 +55,11 @@ class Digit extends AbstractConstraint implements ConstraintInterface
 
         if (ctype_digit($this->field_value) === true) {
         } else {
-            $this->field_value = $this->filterByCharacter('ctype_digit', $this->field_value);
+            $allow_whitespace = false;
+            if (isset($this->options['allow_whitespace'])) {
+                $allow_whitespace = true;
+            }
+            $this->field_value = $this->filterByCharacter('ctype_digit', $this->field_value, $allow_whitespace);
         }
 
         return $this->field_value;

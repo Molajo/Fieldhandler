@@ -30,14 +30,23 @@ class Controlcharacters extends AbstractConstraint implements ConstraintInterfac
     public function validate()
     {
         if ($this->field_value === null) {
-        } else {
-            if (ctype_cntrl($this->field_value) === false) {
-                $this->setValidateMessage(2000);
-                return false;
-            }
+            return $this->field_value;
         }
 
-        return true;
+        $allow_whitespace = false;
+        if (isset($this->options['allow_whitespace'])) {
+            $allow_whitespace = true;
+        }
+
+        $tested = $this->filterByCharacter('ctype_cntrl', $this->field_value, $allow_whitespace);
+
+        if ($tested === $this->field_value) {
+            return true;
+        }
+
+        $this->setValidateMessage(2000);
+
+        return false;
     }
 
     /**
@@ -49,13 +58,14 @@ class Controlcharacters extends AbstractConstraint implements ConstraintInterfac
     public function sanitize()
     {
         if ($this->field_value === null) {
-        } else {
-
-            if (ctype_cntrl($this->field_value) === true) {
-            } else {
-                $this->field_value = $this->filterByCharacter('ctype_cntrl', $this->field_value);
-            }
+            return $this->field_value;
         }
+
+        $allow_whitespace = false;
+        if (isset($this->options['allow_whitespace'])) {
+            $allow_whitespace = true;
+        }
+        $this->field_value = $this->filterByCharacter('ctype_cntrl', $this->field_value, $allow_whitespace);
 
         return $this->field_value;
     }
@@ -68,6 +78,6 @@ class Controlcharacters extends AbstractConstraint implements ConstraintInterfac
      */
     public function format()
     {
-        return $this->sanitize();
+        return $this->field_value;
     }
 }

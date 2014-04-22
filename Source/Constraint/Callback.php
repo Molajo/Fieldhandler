@@ -52,9 +52,14 @@ class Callback extends AbstractConstraint implements ConstraintInterface
     public function sanitize()
     {
         if ($this->field_value === null) {
-        } else {
-            $this->field_value = filter_var($this->field_value, FILTER_CALLBACK, $this->setCallback());
+            return $this->field_value;
         }
+
+        if (filter_var($this->field_value, FILTER_CALLBACK, $this->setCallback())) {
+            return $this->field_value;
+        }
+
+        $this->field_value = null;
 
         return $this->field_value;
     }
@@ -67,7 +72,7 @@ class Callback extends AbstractConstraint implements ConstraintInterface
      */
     public function format()
     {
-        return $this->sanitize();
+        return $this->field_value;
     }
 
     /**

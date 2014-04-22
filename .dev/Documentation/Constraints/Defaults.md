@@ -3,7 +3,7 @@ title: Defaults
 author: Amy Stephen
 published: 2014-05-01
 categories : Fieldhandler, Constraint
-tags : url
+tags : standard
 featured : 0
 class : https://github.com/Molajo/Fieldhandler/blob/master/Source/Constraint/Defaults.php
 namespace : Molajo\Fieldhandler\Constraint\Defaults
@@ -12,72 +12,37 @@ unit_tests : https://github.com/Molajo/Fieldhandler/blob/master/.dev/Tests/Defau
 
 {{ Constraint }}
 
-
-{{ Constraint::Definition }}
-
-Tests if values are valid for a URL slug. When used with filter or escape, the value returned can be used as an alias value.
+Establishes a value for a null input string if default value is provided.
 
 {{ Constraint::Options }}
 
+Define the value to use as a default value in `$this->options['default'] = $value;`
 
 {{ Constraint::Validate }}
 
-Values failing to conform to constraint definitions are removed.
-
-{{ Constraint::Validate::Usage }}
-
-Say things...
-
-```php
-
-$employee_name = 'Janet Jackson';
-$results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
-
-if ($results->getChangeIndicator() === true) {
-    $employee_name = $results->getFieldValue();
-} else {
-    // Filtering did not change the Employee Name
-}
-
-```
-
+Not useful for validate.
 
 {{ Constraint::Sanitize }}
 
-Values failing to conform to constraint definitions are removed.
+Sanitize applies the default to the input field if the input value is null.
 
 {{ Constraint::Sanitize::Usage }}
 
-Say things...
-
 ```php
 
-$employee_name = 'Janet Jackson';
-$results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
 
-if ($results->getChangeIndicator() === true) {
-    $employee_name = $results->getFieldValue();
-} else {
-    // Filtering did not change the Employee Name
-}
+    $request = new Molajo\Fieldhandler\Request();
+
+    $opions = array();
+    $options['default'] = $default_value;
+    $results = $request->sanitize('Defaults Field Name', $default_applied_to_this, 'Defaults', $options);
+
+    if ($results->getChangeIndicator() === true) {
+        $default_applied_to_this = $results->getFieldValue();
+    }
 
 ```
 
 {{ Constraint::Format }}
 
-Values failing to conform to constraint definitions are removed.
-
-{{ Constraint::Format::Usage }}
-
-```php
-
-$employee_name = 'Janet Jackson';
-$results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
-
-if ($results->getChangeIndicator() === true) {
-    $employee_name = $results->getFieldValue();
-} else {
-    // Filtering did not change the Employee Name
-}
-
-```
+`Defaults` has no special formatting. The value sent in is simply returned without processing.

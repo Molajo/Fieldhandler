@@ -132,7 +132,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
      * @return void
      * @since   1.0.0
      */
-    public function testEscapeChange()
+    public function testEscapeNoChange1()
     {
         $field_name  = 'test';
         $field_value = '1A2b3C4d5E6f7G8';
@@ -141,9 +141,8 @@ class AlphaTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
-        $field_value = 'AbCdEfG';
         $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(true, $results->getChangeIndicator());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
@@ -153,7 +152,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
      * @return void
      * @since   1.0.0
      */
-    public function testEscapeNoChange()
+    public function testEscapeNoChange2()
     {
         $field_name  = 'test';
         $field_value = 'Aa';

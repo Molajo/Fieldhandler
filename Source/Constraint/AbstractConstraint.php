@@ -376,18 +376,14 @@ abstract class AbstractConstraint implements ConstraintInterface
      *
      * @param   string $filter
      * @param   string $test
+     * @param   string $allow_whitespace
      *
      * @return  string
      * @since   1.0.0
      */
-    protected function filterByCharacter($filter, $test)
+    protected function filterByCharacter($filter, $test, $allow_whitespace = false)
     {
         $filtered = '';
-
-        $allow_whitespace = false;
-        if (isset($this->options['allow_whitespace'])) {
-            $allow_whitespace = true;
-        }
 
         if (strlen($test) > 0) {
             for ($i = 0; $i < strlen($test); $i ++) {
@@ -495,7 +491,6 @@ abstract class AbstractConstraint implements ConstraintInterface
             }
 
         }
-
         return $this->selected_constraint_options;
     }
 }
