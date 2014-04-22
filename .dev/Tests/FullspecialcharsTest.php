@@ -1,6 +1,6 @@
 <?php
 /**
- * HTML Constraint Test
+ * Fullspecialchars Constraint Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -8,7 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Request as request;
+use Molajo\Fieldhandler\Request;
 use PHPUnit_Framework_TestCase;
 use CommonApi\Exception\UnexpectedValueException;
 
@@ -20,7 +20,7 @@ use CommonApi\Exception\UnexpectedValueException;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class HtmlTest extends PHPUnit_Framework_TestCase
+class FullspecialcharsTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Request
@@ -42,40 +42,40 @@ class HtmlTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test HTML filter
-     *
+     * @covers  Molajo\Fieldhandler\Constraint\Fullspecialchars::validate
      * @return  void
      * @since   1.0.0
      */
-    public function testFilter()
+    public function testValidateSuccess()
     {
         $field_name  = 'fieldname';
-        $field_value = '<script>("Gotcha!");</script><p>I am fine.</p>';
-        $constraint  = 'Html';
-        $filtered    = '("Gotcha!");<p>I am fine.</p>';
+        $field_value = '&';
+        $constraint  = 'Fullspecialchars';
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, array());
+        $results = $this->request->validate($field_name, $field_value, $constraint, array());
 
-        $this->assertEquals($filtered, $results->getValidateResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(array(), $results->getValidateMessages());
 
         return;
     }
 
     /**
-     * Test Validate
-     *
+     * @covers  Molajo\Fieldhandler\Constraint\Fullspecialchars::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidate()
     {
         $field_name  = 'fieldname';
-        $field_value = '<p>Yup.</p>';
-        $constraint  = 'Html';
+        $field_value = '&';
+        $constraint  = 'Fullspecialchars';
+        $options     = array('FILTER_FLAG_NO_ENCODE_QUOTES');
 
-        $results = $this->request->validate($field_name, $field_value, $constraint, array());
+        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(array(), $results->getValidateMessages());
 
         return;
     }

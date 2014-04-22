@@ -21,6 +21,19 @@ use CommonApi\Model\ConstraintInterface;
 class Ip extends AbstractConstraint implements ConstraintInterface
 {
     /**
+     * Constraint Options
+     *
+     * @var    array
+     * @since  1.0.0
+     */
+    protected $constraint_allowable_options = array(
+        'FILTER_FLAG_IPV4',
+        'FILTER_FLAG_IPV6',
+        'FILTER_FLAG_NO_PRIV_RANGE',
+        'FILTER_FLAG_NO_RES_RANGE'
+    );
+
+    /**
      * Validate
      *
      * @return  boolean

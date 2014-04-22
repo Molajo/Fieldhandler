@@ -265,7 +265,6 @@ class Request implements ValidateInterface, HandleInputInterface, HandleOutputIn
         }
 
         $this->createMessageInstance();
-
         $this->validate_response = true;
 
         return $this;

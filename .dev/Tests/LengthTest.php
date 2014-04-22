@@ -1,6 +1,6 @@
 <?php
 /**
- * Ip Constraint Test
+ * Length Constraint Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -8,18 +8,18 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Request as request;
+use Molajo\Fieldhandler\Request;
 use PHPUnit_Framework_TestCase;
 
 /**
- * Ip Fieldhandler
+ * Length Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class IpTest extends PHPUnit_Framework_TestCase
+class LengthTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Request
@@ -41,58 +41,50 @@ class IpTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Ip::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Length::validate
      * @return  void
      * @since   1.0.0
      */
-    public function testValidate1()
+    public function testValidateSuccess()
     {
-        $field_name  = 'Ip_fieldname';
-        $field_value = '127.0.0.1';
-        $constraint  = 'Ip';
-        $options     = array();
+        $field_name                = 'fieldname';
+        $field_value               = 'dogfood';
+        $constraint                = 'Length';
+        $options                   = array();
+        $options['minimum_length'] = 0;
+        $options['maximum_length'] = 10;
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(array(), $results->getValidateMessages());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Ip::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Length::validate
      * @return  void
-     * @since   1.0.0
-     */
-    public function testValidate2()
-    {
-        $field_name  = 'Ip_fieldname';
-        $field_value = '0.0.0.0';
-        $constraint  = 'Ip';
-        $options     = array();
-
-        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
-
-        $this->assertEquals(true, $results->getValidateResponse());
-
-        return;
-    }
-
-    /**
-     * @covers  Molajo\Fieldhandler\Constraint\Ip::validate
-     * @return void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name  = 'Int_fieldname';
-        $field_value = 'yessireebob';
-        $constraint  = 'Ip';
-        $options     = array();
+        $field_name                = 'fieldname';
+        $field_value               = 'dogfood is not good to eat.';
+        $constraint                = 'Length';
+        $options                   = array();
+        $options['minimum_length'] = 0;
+        $options['maximum_length'] = 10;
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(false, $results->getValidateResponse());
+
+        $expected_code    = 8000;
+        $expected_message = 'Field: fieldname did not pass the Length data type test.';
+        $messages         = $results->getValidateMessages();
+        $this->assertEquals($expected_code, $messages[0]->code);
+        $this->assertEquals($expected_message, $messages[0]->message);
 
         return;
     }

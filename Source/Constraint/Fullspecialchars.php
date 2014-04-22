@@ -21,6 +21,16 @@ use CommonApi\Model\ConstraintInterface;
 class Fullspecialchars extends AbstractConstraint implements ConstraintInterface
 {
     /**
+     * Constraint Options
+     *
+     * @var    array
+     * @since  1.0.0
+     */
+    protected $constraint_allowable_options = array(
+        'FILTER_FLAG_NO_ENCODE_QUOTES'
+    );
+
+    /**
      * Validate
      *
      * @return  boolean
@@ -33,6 +43,7 @@ class Fullspecialchars extends AbstractConstraint implements ConstraintInterface
         }
 
         if (filter_var($this->field_value, FILTER_SANITIZE_FULL_SPECIAL_CHARS, $this->setFlags())) {
+        } else {
             $this->setValidateMessage(8000);
             return false;
         }
@@ -50,7 +61,11 @@ class Fullspecialchars extends AbstractConstraint implements ConstraintInterface
     {
         if ($this->field_value === null) {
         } else {
-            $this->field_value = filter_var($this->field_value, FILTER_SANITIZE_FULL_SPECIAL_CHARS, $this->setFlags());
+            $temp = filter_var($this->field_value, FILTER_SANITIZE_FULL_SPECIAL_CHARS, $this->setFlags());
+            if ($temp === $this->field_value) {
+            } else {
+                $this->field_value = $temp;
+            }
         }
 
         return $this->field_value;
@@ -65,22 +80,5 @@ class Fullspecialchars extends AbstractConstraint implements ConstraintInterface
     public function handleOutput()
     {
         return $this->handleInput();
-    }
-
-    /**
-     * Flags can be set in options array
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function setFlags()
-    {
-        $filter = '';
-
-        if (isset($this->options['FILTER_FLAG_NO_ENCODE_QUOTES'])) {
-            $filter = 'FILTER_FLAG_NO_ENCODE_QUOTES';
-        }
-
-        return $filter;
     }
 }

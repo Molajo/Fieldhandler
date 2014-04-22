@@ -1,6 +1,6 @@
 <?php
 /**
- * Digit Constraint Test
+ * Integer Constraint Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -12,14 +12,14 @@ use Molajo\Fieldhandler\Request;
 use PHPUnit_Framework_TestCase;
 
 /**
- * Digit Fieldhandler
+ * Integer Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class DigitTest extends PHPUnit_Framework_TestCase
+class IntegerTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Request
@@ -41,15 +41,15 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Digit::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Integer::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidateSuccess()
     {
         $field_name  = 'digit_fieldname';
-        $field_value = '1234';
-        $constraint  = 'Digit';
+        $field_value = 1234;
+        $constraint  = 'Integer';
         $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
@@ -63,7 +63,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Digit::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Integer::validate
      * @return  void
      * @since   1.0.0
      */
@@ -71,7 +71,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
     {
         $field_name  = 'digit_fieldname';
         $field_value = null;
-        $constraint  = 'Digit';
+        $constraint  = 'Integer';
         $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
@@ -85,7 +85,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Digit::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Integer::validate
      * @return void
      * @since   1.0.0
      */
@@ -93,7 +93,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
     {
         $field_name  = 'digit_fieldname';
         $field_value = 'yessireebob';
-        $constraint  = 'Digit';
+        $constraint  = 'Integer';
         $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
@@ -101,7 +101,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(false, $results->getValidateResponse());
 
         $expected_code    = 2000;
-        $expected_message = 'Field: digit_fieldname must only contain Digit values.';
+        $expected_message = 'Field: digit_fieldname must only contain Integer values.';
         $messages         = $results->getValidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);
@@ -110,15 +110,15 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Digit::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Integer::handleInput
      * @return  void
      * @since   1.0.0
      */
     public function testHandleInputSuccess()
     {
         $field_name  = 'digit_fieldname';
-        $field_value = '123';
-        $constraint  = 'Digit';
+        $field_value = 123;
+        $constraint  = 'Integer';
         $options     = array();
 
         $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
@@ -130,7 +130,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Digit::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Integer::handleInput
      * @return  void
      * @since   1.0.0
      */
@@ -138,7 +138,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
     {
         $field_name  = 'digit_fieldname';
         $field_value = 'dog';
-        $constraint  = 'Digit';
+        $constraint  = 'Integer';
         $options     = array();
 
         $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
@@ -151,15 +151,15 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Digit::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Integer::handleInput
      * @return  void
      * @since   1.0.0
      */
     public function testHandleOutputSuccess()
     {
         $field_name  = 'digit_fieldname';
-        $field_value = '123';
-        $constraint  = 'Digit';
+        $field_value = 123;
+        $constraint  = 'Integer';
         $options     = array();
 
         $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
@@ -171,7 +171,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Digit::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Integer::handleInput
      * @return  void
      * @since   1.0.0
      */
@@ -179,7 +179,7 @@ class DigitTest extends PHPUnit_Framework_TestCase
     {
         $field_name  = 'digit_fieldname';
         $field_value = 'dog';
-        $constraint  = 'Digit';
+        $constraint  = 'Integer';
         $options     = array();
 
         $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);

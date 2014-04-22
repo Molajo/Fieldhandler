@@ -1,6 +1,6 @@
 <?php
 /**
- * Integer Constraint Test
+ * Ip Constraint Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -8,18 +8,18 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Request as request;
+use Molajo\Fieldhandler\Request;
 use PHPUnit_Framework_TestCase;
 
 /**
- * Integer Fieldhandler
+ * Ip Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class IntegerTest extends PHPUnit_Framework_TestCase
+class IpTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Request
@@ -41,77 +41,66 @@ class IntegerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Integer::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Ip::validate
      * @return  void
      * @since   1.0.0
      */
-    public function testValidateTrue()
+    public function testValidateSuccess()
     {
-        $field_name  = 'Integer_fieldname';
-        $field_value = 1;
-        $constraint  = 'Integer';
+        $field_name  = 'Ip_fieldname';
+        $field_value = '127.0.0.1';
+        $constraint  = 'Ip';
         $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(array(), $results->getValidateMessages());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Integer::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Ip::validate
      * @return  void
      * @since   1.0.0
      */
-    public function testValidateFalse()
+    public function testValidateSuccess2()
     {
-        $field_name  = 'Integer_fieldname';
-        $field_value = 'i';
-        $constraint  = 'Integer';
-        $options     = array();
-
-        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
-
-        $this->assertEquals(false, $results->getValidateResponse());
-
-        return;
-    }
-
-    /**
-     * @covers  Molajo\Fieldhandler\Constraint\Integer::validate
-     * @return  void
-     * @since   1.0.0
-     */
-    public function testValidateNull()
-    {
-        $field_name  = 'Integer_fieldname';
-        $field_value = null;
-        $constraint  = 'Integer';
+        $field_name  = 'Ip_fieldname';
+        $field_value = '0.0.0.0';
+        $constraint  = 'Ip';
         $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(array(), $results->getValidateMessages());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Integer::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Ip::validate
      * @return void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name  = 'Integer_fieldname';
+        $field_name  = 'Int_fieldname';
         $field_value = 'yessireebob';
-        $constraint  = 'Integer';
+        $constraint  = 'Ip';
         $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(false, $results->getValidateResponse());
+
+        $expected_code    = 2000;
+        $expected_message = 'Field: Int_fieldname must only contain Ip values.';
+        $messages         = $results->getValidateMessages();
+        $this->assertEquals($expected_code, $messages[0]->code);
+        $this->assertEquals($expected_message, $messages[0]->message);
 
         return;
     }

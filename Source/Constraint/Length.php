@@ -32,7 +32,10 @@ class Length extends AbstractConstraint implements ConstraintInterface
             return true;
         }
 
-        $results = $this->testMinimumMaximum();
+        if ($this->testMinimumMaximum()) {
+            return true;
+        }
+
         $this->setValidateMessage(8000);
 
         return false;

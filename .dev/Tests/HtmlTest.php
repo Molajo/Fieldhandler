@@ -1,6 +1,6 @@
 <?php
 /**
- * Fullspecialchars Constraint Test
+ * HTML Constraint Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -8,19 +8,19 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Request as request;
+use Molajo\Fieldhandler\Request;
 use PHPUnit_Framework_TestCase;
 use CommonApi\Exception\UnexpectedValueException;
 
 /**
- * Fullspecialchars Fieldhandler
+ * Html Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class FullspecialcharsTest extends PHPUnit_Framework_TestCase
+class HtmlTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Request
@@ -42,45 +42,45 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Fullspecialchars::validate
+     * Test Validate
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testEscape()
+    public function testValidateSuccess()
     {
         $field_name  = 'fieldname';
-        $field_value = '&';
-        $constraint  = 'Fullspecialchars';
+        $field_value = '<p>Yup.</p>';
+        $constraint  = 'Html';
 
-        $results = $this->request->handleOutput($field_name, $field_value, $constraint, array());
+        $results = $this->request->validate($field_name, $field_value, $constraint, array());
 
-// Anger is too intense.
-//    if (PHP_VERSION_ID > 50400) {
-//        $this->assertEquals('&#38;', $results->getValidateResponse());
-//     } else {
-//           $this->assertEquals('&amp;', $results->getValidateResponse());
-//   }
+        $this->assertEquals(true, $results->getValidateResponse());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Fullspecialchars::validate
+     * Test HTML filter
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testValidate()
+    public function testHandleInputSuccess()
     {
         $field_name  = 'fieldname';
-        $field_value = '&';
-        $constraint  = 'Fullspecialchars';
+        $field_value = '<script>("Gotcha!");</script><p>I am fine.</p>';
+        $constraint  = 'Html';
+        $filtered    = '("Gotcha!");<p>I am fine.</p>';
 
-        $results = $this->request->validate($field_name, $field_value, $constraint, array());
+        $results = $this->request->handleInput($field_name, $field_value, $constraint, array());
 
-        $this->assertEquals(false, $results->getValidateResponse());
+        $this->assertEquals($filtered, $results->getFieldValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }
+
 
     /**
      * Tear down

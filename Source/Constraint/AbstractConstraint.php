@@ -61,12 +61,12 @@ abstract class AbstractConstraint implements ConstraintInterface
     protected $options = array();
 
     /**
-     * Available Options specifically for current Constraint
+     * Available Options defined within properties by Constraint
      *
      * @var    array
      * @since  1.0.0
      */
-    protected $constraint_options = array();
+    protected $constraint_allowable_options = array();
 
     /**
      * Requested Options for Constraint
@@ -405,10 +405,10 @@ abstract class AbstractConstraint implements ConstraintInterface
     /**
      * Get Minimum and Maximum
      *
-     * @return  array
+     * @return  boolean
      * @since   1.0.0
      */
-    public function testMinimumMaximumLength()
+    public function testMinimumMaximum()
     {
         $minimum = 0;
         $maximum = 999999999999;
@@ -429,7 +429,7 @@ abstract class AbstractConstraint implements ConstraintInterface
             return true;
         }
 
-        return array($minimum, $maximum);
+        return false;
     }
 
     /**
@@ -479,8 +479,12 @@ abstract class AbstractConstraint implements ConstraintInterface
     {
         $this->selected_constraint_options = null;
 
-        if (is_array($this->constraint_options) && count($this->constraint_options) > 0) {
-            foreach ($this->constraint_options as $possible_option) {
+        if (is_array($this->constraint_allowable_options)
+            && count($this->constraint_allowable_options) > 0
+        ) {
+
+            foreach ($this->constraint_allowable_options as $possible_option) {
+
                 if (isset($this->options[$possible_option])) {
                     if ($this->selected_constraint_options === null) {
                     } else {
@@ -489,6 +493,7 @@ abstract class AbstractConstraint implements ConstraintInterface
                     $this->selected_constraint_options .= $possible_option;
                 }
             }
+
         }
 
         return $this->selected_constraint_options;
