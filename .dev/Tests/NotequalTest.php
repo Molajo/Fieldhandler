@@ -46,7 +46,7 @@ class NotequalTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testValidate1()
+    public function testValidateSuccess()
     {
         $field_name           = 'field1';
         $field_value          = 'dog';
@@ -57,6 +57,7 @@ class NotequalTest extends PHPUnit_Framework_TestCase
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(array(), $results->getValidateMessages());
 
         return;
     }
@@ -76,7 +77,11 @@ class NotequalTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(false, $results->getValidateResponse());
+        $expected_code    = 1000;
+        $expected_message = 'Field: field1 does not have a valid value for Notequal data type.';
+        $messages         = $results->getValidateMessages();
+        $this->assertEquals($expected_code, $messages[0]->code);
+        $this->assertEquals($expected_message, $messages[0]->message);
 
         return;
     }
@@ -86,7 +91,7 @@ class NotequalTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testFilter1()
+    public function testHandleInputSuccess()
     {
         $field_name           = 'field1';
         $field_value          = 'dog';
@@ -96,7 +101,8 @@ class NotequalTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getValidateResponse());
+        $this->assertEquals('dog', $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
@@ -106,7 +112,7 @@ class NotequalTest extends PHPUnit_Framework_TestCase
      * @return void
      * @since   1.0.0
      */
-    public function testFilterFail()
+    public function testHandleInputFail()
     {
         $field_name           = 'field1';
         $field_value          = 'dog';
@@ -116,8 +122,8 @@ class NotequalTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
-        $field_value = null;
-        $this->assertEquals($field_value, $results->getValidateResponse());
+        $this->assertEquals(null, $results->getFieldValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }
@@ -127,7 +133,7 @@ class NotequalTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testEscape1()
+    public function testHandleOutputSucceed()
     {
         $field_name           = 'field1';
         $field_value          = 'dog';
@@ -137,7 +143,8 @@ class NotequalTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getValidateResponse());
+        $this->assertEquals('dog', $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
@@ -147,7 +154,7 @@ class NotequalTest extends PHPUnit_Framework_TestCase
      * @return void
      * @since   1.0.0
      */
-    public function testEscapeFail()
+    public function testHandleOutputFail()
     {
         $field_name           = 'field1';
         $field_value          = 'dog';
@@ -158,7 +165,8 @@ class NotequalTest extends PHPUnit_Framework_TestCase
         $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
         $field_value = null;
-        $this->assertEquals($field_value, $results->getValidateResponse());
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }

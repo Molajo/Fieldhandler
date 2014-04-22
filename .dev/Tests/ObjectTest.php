@@ -46,7 +46,7 @@ class ObjectTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testValidate1()
+    public function testValidateSuccess()
     {
         $field_name  = 'field1';
         $field_value = new \stdClass();
@@ -56,13 +56,13 @@ class ObjectTest extends PHPUnit_Framework_TestCase
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(array(), $results->getValidateMessages());
 
         return;
     }
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Objects::validate
-     * @expectedException \CommonApi\Exception\UnexpectedValueException
      * @return void
      * @since   1.0.0
      */
@@ -74,6 +74,14 @@ class ObjectTest extends PHPUnit_Framework_TestCase
         $options     = array();
 
         $results = $this->request->validate(false, $field_value, $constraint, $options);
+
+        $this->assertEquals(false, $results->getValidateResponse());
+
+        $expected_code    = 1000;
+        $expected_message = 'Field:  does not have a valid value for Object data type.';
+        $messages         = $results->getValidateMessages();
+        $this->assertEquals($expected_code, $messages[0]->code);
+        $this->assertEquals($expected_message, $messages[0]->message);
 
         return;
     }

@@ -104,7 +104,7 @@ class Url extends AbstractConstraint implements ConstraintInterface
      * @return  string
      * @since   1.0.0
      */
-    protected function setFlags()
+    public function setFlags()
     {
         $filter = '';
 

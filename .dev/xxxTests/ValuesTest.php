@@ -45,7 +45,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testFilterValid()
+    public function testHandleOutputSuccess()
     {
         $field_name                    = 'test';
         $field_value                   = 'a';
@@ -55,7 +55,8 @@ class ValuesTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals('a', $results->getValidateResponse());
+        $this->assertEquals('a', $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
@@ -65,7 +66,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testFilterFail()
+    public function testHandleInputFail()
     {
         $field_name                    = 'test';
         $field_value                   = 'z';
@@ -75,7 +76,8 @@ class ValuesTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(null, $results->getValidateResponse());
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
@@ -95,7 +97,8 @@ class ValuesTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(false, $results->getValidateResponse());
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
@@ -115,7 +118,8 @@ class ValuesTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }

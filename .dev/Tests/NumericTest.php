@@ -1,6 +1,6 @@
 <?php
 /**
- * Url Constraint Test
+ * Numeric Constraint Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -12,14 +12,14 @@ use Molajo\Fieldhandler\Request;
 use PHPUnit_Framework_TestCase;
 
 /**
- * Url Fieldhandler
+ * Numeric Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class UrlTest extends PHPUnit_Framework_TestCase
+class NumericTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Request
@@ -41,43 +41,67 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Url::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Numeric::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidateSuccess()
     {
-        $field_name  = 'url_field';
-        $field_value = 'http://google.com/';
-        $constraint  = 'Url';
+        $field_name  = 'numeric_fieldname';
+        $field_value = 1234;
+        $constraint  = 'Numeric';
         $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getValidateResponse());
-        $this->assertEquals(array(), $results->getValidateMessages());
+
+        $messages = $results->getValidateMessages();
+        $this->assertEquals(array(), $messages);
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Url::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Numeric::validate
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testValidate2()
+    {
+        $field_name  = 'numeric_fieldname';
+        $field_value = null;
+        $constraint  = 'Numeric';
+        $options     = array();
+
+        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals(true, $results->getValidateResponse());
+
+        $messages = $results->getValidateMessages();
+        $this->assertEquals(array(), $messages);
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Numeric::validate
      * @return void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name  = 'url_field';
-        $field_value = ' $-_.+!';
-        $constraint  = 'Url';
+        $field_name  = 'numeric_fieldname';
+        $field_value = 'yessireebob';
+        $constraint  = 'Numeric';
         $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(false, $results->getValidateResponse());
 
-        $expected_code    = 8000;
-        $expected_message = 'Field: url_field did not pass the Url data type test.';
+        $expected_code    = 1000;
+        $expected_message = 'Field: numeric_fieldname does not have a valid value for Numeric data type.';
         $messages         = $results->getValidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);
@@ -86,38 +110,36 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Url::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Numeric::handleInput
      * @return  void
      * @since   1.0.0
      */
     public function testHandleInputSuccess()
     {
-        $field_name  = 'url_field';
-        $field_value = 'http://google.com/';
-        $constraint  = 'Url';
+        $field_name  = 'numeric_fieldname';
+        $field_value = 123;
+        $constraint  = 'Numeric';
         $options     = array();
 
         $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidateResponse());
-        $this->assertEquals(array(), $results->getValidateMessages());
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Url::validate
-     * @return void
+     * @covers  Molajo\Fieldhandler\Constraint\Numeric::handleInput
+     * @return  void
      * @since   1.0.0
      */
     public function testHandleInputFail()
     {
-        $field_name                            = 'url_field';
-        $field_value                           = 'yessireebob';
-        $constraint                            = 'Url';
-        $options                               = array();
-        $options['FILTER_FLAG_PATH_REQUIRED']  = true;
-        $options['FILTER_FLAG_QUERY_REQUIRED'] = true;
+        $field_name  = 'numeric_fieldname';
+        $field_value = 'dog';
+        $constraint  = 'Numeric';
+        $options     = array();
 
         $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
@@ -129,15 +151,15 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Url::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Numeric::handleInput
      * @return  void
      * @since   1.0.0
      */
     public function testHandleOutputSuccess()
     {
-        $field_name  = 'url_field';
-        $field_value = 'http://google.com/';
-        $constraint  = 'Url';
+        $field_name  = 'numeric_fieldname';
+        $field_value = 123;
+        $constraint  = 'Numeric';
         $options     = array();
 
         $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
@@ -149,17 +171,16 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Url::validate
-     * @return void
+     * @covers  Molajo\Fieldhandler\Constraint\Numeric::handleInput
+     * @return  void
      * @since   1.0.0
      */
     public function testHandleOutputFail()
     {
-        $field_name                  = 'url_field';
-        $field_value                 = 'yessireebob';
-        $constraint                  = 'Url';
-        $options                     = array();
-        $options['FILTER_FLAG_IPV6'] = true;
+        $field_name  = 'numeric_fieldname';
+        $field_value = 'dog';
+        $constraint  = 'Numeric';
+        $options     = array();
 
         $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
 

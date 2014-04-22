@@ -1,6 +1,6 @@
 <?php
 /**
- * Required Constraint Test
+ * Trim Constraint Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -12,14 +12,14 @@ use Molajo\Fieldhandler\Request;
 use PHPUnit_Framework_TestCase;
 
 /**
- * Required Fieldhandler
+ * Trim Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class RequiredTest extends PHPUnit_Framework_TestCase
+class TrimTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Request
@@ -41,38 +41,63 @@ class RequiredTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Required::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Trim::validate
      * @return  void
      * @since   1.0.0
      */
-    public function testValidate1()
+    public function testValidateSuccess()
     {
         $field_name  = 'req';
         $field_value = 'AmyStephen@Molajo.org';
-        $constraint  = 'Required';
+        $constraint  = 'Trim';
         $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(array(), $results->getValidateMessages());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Required::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Trim::validate
      * @return void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
         $field_name  = 'email';
-        $field_value = null;
-        $constraint  = 'Required';
+        $field_value = 'AmyStephen@Molajo.org                ';
+        $constraint  = 'Trim';
 
         $results = $this->request->validate($field_name, $field_value, $constraint, array());
 
-        $this->assertEquals(false, $results->getValidateResponse());
+        $expected_code    = 8000;
+        $expected_message = 'Field: email did not pass the Trim data type test.';
+        $messages         = $results->getValidateMessages();
+        $this->assertEquals($expected_code, $messages[0]->code);
+        $this->assertEquals($expected_message, $messages[0]->message);
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Trim::validate
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testValidateFail2()
+    {
+        $field_name  = 'req';
+        $field_value = '            AmyStephen@Molajo.org           ';
+        $constraint  = 'Trim';
+        $options     = array();
+
+        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals('AmyStephen@Molajo.org', $results->getFieldValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }

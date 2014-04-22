@@ -1,6 +1,6 @@
 <?php
 /**
- * Regex Constraint Test
+ * Required Constraint Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -10,17 +10,16 @@ namespace Molajo\Fieldhandler\Tests;
 
 use Molajo\Fieldhandler\Request;
 use PHPUnit_Framework_TestCase;
-use CommonApi\Exception\UnexpectedValueException;
 
 /**
- * Regex Fieldhandler
+ * Required Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class RegexTest extends PHPUnit_Framework_TestCase
+class RequiredTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Request
@@ -42,41 +41,43 @@ class RegexTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Regex::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Required::validate
      * @return  void
      * @since   1.0.0
      */
-    public function testValidate1()
+    public function testValidateSuccess()
     {
-        $field_name       = 'number';
-        $field_value      = '54321';
-        $constraint       = 'Regex';
-        $options          = array();
-        $options['regex'] = "/[0-9]/";
+        $field_name  = 'req';
+        $field_value = 'AmyStephen@Molajo.org';
+        $constraint  = 'Required';
+        $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(array(), $results->getValidateMessages());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Regex::validate
-     * @return  void
+     * @covers  Molajo\Fieldhandler\Constraint\Required::validate
+     * @return void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name       = 'alpha';
-        $field_value      = '123';
-        $constraint       = 'Regex';
-        $options          = array();
-        $options['regex'] = "/[A-Z]/";
+        $field_name  = 'email';
+        $field_value = null;
+        $constraint  = 'Required';
 
-        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
+        $results = $this->request->validate($field_name, $field_value, $constraint, array());
 
-        $this->assertEquals(false, $results->getValidateResponse());
+        $expected_code    = 13000;
+        $expected_message = 'Field: email value is required, but was not provided.';
+        $messages         = $results->getValidateMessages();
+        $this->assertEquals($expected_code, $messages[0]->code);
+        $this->assertEquals($expected_message, $messages[0]->message);
 
         return;
     }

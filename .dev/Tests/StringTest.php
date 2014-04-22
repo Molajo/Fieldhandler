@@ -45,15 +45,21 @@ class StringTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testEscape()
+    public function testValidateFailure()
     {
         $field_name  = 'fieldname';
-        $field_value = '&';
+        $field_value = new \stdClass();
         $constraint  = 'String';
 
-        $results = $this->request->handleOutput($field_name, $field_value, $constraint, array());
+        $results = $this->request->validate($field_name, $field_value, $constraint, array());
 
-        $this->assertEquals($field_value, $results->getValidateResponse());
+        $this->assertEquals(false, $results->getValidateResponse());
+
+        $expected_code    = 1000;
+        $expected_message = 'Field: fieldname does not have a valid value for String data type.';
+        $messages         = $results->getValidateMessages();
+        $this->assertEquals($expected_code, $messages[0]->code);
+        $this->assertEquals($expected_message, $messages[0]->message);
 
         return;
     }
@@ -63,15 +69,16 @@ class StringTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testValidate()
+    public function testHandleOutputSuccess()
     {
         $field_name  = 'fieldname';
-        $field_value = new \stdClass();
+        $field_value = '&';
         $constraint  = 'String';
 
-        $results = $this->request->validate($field_name, $field_value, $constraint, array());
+        $results = $this->request->handleOutput($field_name, $field_value, $constraint, array());
 
-        $this->assertEquals(false, $results->getValidateResponse());
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }

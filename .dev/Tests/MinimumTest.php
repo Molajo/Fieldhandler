@@ -1,6 +1,6 @@
 <?php
 /**
- * Numeric Constraint Test
+ * Minimum Constraint Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -10,16 +10,17 @@ namespace Molajo\Fieldhandler\Tests;
 
 use Molajo\Fieldhandler\Request;
 use PHPUnit_Framework_TestCase;
+use CommonApi\Exception\UnexpectedValueException;
 
 /**
- * Numeric Fieldhandler
+ * Minimum Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class NumericTest extends PHPUnit_Framework_TestCase
+class MinimumTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Request
@@ -41,73 +42,59 @@ class NumericTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Numeric::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Minimumvalidate
      * @return  void
      * @since   1.0.0
      */
-    public function testValidate1()
+    public function testValidateSuccess()
     {
-        $field_name  = 'Numeric_fieldname';
-        $field_value = 1;
-        $constraint  = 'Numeric';
-        $options     = array();
+        $field_name         = 'fieldname';
+        $field_value        = 5;
+        $constraint         = 'Minimum';
+        $options            = array();
+        $options['minimum'] = 10;
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(array(), $results->getValidateMessages());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Numeric::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Minimumvalidate
      * @return  void
      * @since   1.0.0
      */
-    public function testValidate2()
+    public function testValidateAlpha()
     {
-        $field_name  = 'Numeric_fieldname';
-        $field_value = 1;
-        $constraint  = 'Numeric';
-        $options     = array();
+        $field_name         = 'fieldname';
+        $field_value        = 'a';
+        $constraint         = 'Minimum';
+        $options            = array();
+        $options['minimum'] = 'z';
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(array(), $results->getValidateMessages());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Numeric::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Minimumvalidate
      * @return  void
-     * @since   1.0.0
-     */
-    public function testValidate3()
-    {
-        $field_name  = 'Numeric_fieldname';
-        $field_value = null;
-        $constraint  = 'Numeric';
-        $options     = array();
-
-        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
-
-        $this->assertEquals(true, $results->getValidateResponse());
-
-        return;
-    }
-
-    /**
-     * @covers  Molajo\Fieldhandler\Constraint\Numeric::validate
-     * @return void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name  = 'Numeric_fieldname';
-        $field_value = 'yessireebob';
-        $constraint  = 'Numeric';
-        $options     = array();
+        $field_name         = 'fieldname';
+        $field_value        = 500;
+        $constraint         = 'Minimum';
+        $options            = array();
+        $options['minimum'] = 10;
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 

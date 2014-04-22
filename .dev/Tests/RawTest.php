@@ -56,12 +56,12 @@ class RawTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
-
         if (PHP_VERSION_ID > 50400) {
-            $this->assertEquals('&', $results->getValidateResponse());
+            $this->assertEquals('&', $results->getFieldValue());
         } else {
-            $this->assertEquals('&amp;', $results->getValidateResponse());
+            $this->assertEquals('&amp;', $results->getFieldValue());
         }
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
