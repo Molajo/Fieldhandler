@@ -66,14 +66,14 @@ class HtmlTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleInputSuccess()
+    public function testSanitizeSuccess()
     {
         $field_name  = 'fieldname';
         $field_value = '<script>("Gotcha!");</script><p>I am fine.</p>';
         $constraint  = 'Html';
         $filtered    = '("Gotcha!");<p>I am fine.</p>';
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, array());
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, array());
 
         $this->assertEquals($filtered, $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());

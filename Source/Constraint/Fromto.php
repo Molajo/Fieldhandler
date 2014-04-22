@@ -42,12 +42,12 @@ class Fromto extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Handle Input
+     * Sanitize
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function handleInput()
+    public function sanitize()
     {
         if ($this->validate()) {
             return $this->field_value;
@@ -59,14 +59,14 @@ class Fromto extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Handle Output
+     * Format
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function handleOutput()
+    public function format()
     {
-        return $this->handleInput();
+        return $this->sanitize();
     }
 
     /**

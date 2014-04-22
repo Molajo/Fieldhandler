@@ -1,62 +1,28 @@
+---
+title :
+subtitle:
+author: Amy Stephen
+published: 2014-05-01
+categories : constraint
+tags :
+featured : 0
+class :
+unit_tests :
+---
 
-# Model Constraint
+{{ Constraint::Definition }}
 
-## Definition
-
-xxx
-[Validate]()
-[handleInput]()
-[handleOutput]()
-[View Code](https://github.com/Molajo/Fieldhandler/blob/bd65c83e7705b010555146fa6b2090d7e4bdd25e/Source/Constraint/Model.php)
+{{ Constraint::Options }}
 
 
-## Validate
-
-Verify xxx.
-
-### Validate Example 1
-
-Each value conforms.
-
-```php
-
-$employee_name = 'Janet Jackson';
-$results       = $request->validate('employee_name', $employee_name, 'Alphanumeric');
-
-if ($results->getValidateResponse() === true) {
-    // Yea! Each value conforms to the defined constraint!
-}
-
-```
-
-### Validate Example 2
-
-*Example 2:* Each value does *not* conform.
-
-```php
-
-$employee_name = 'Janet @ Jackson';
-$results       = $request->validate('employee_name', $employee_name, 'Alphanumeric');
-
-if ($results->getValidateResponse() === false) {
-    // Retrieve error messages and codes
-    $messages = $results->getValidateMessages();
-}
-
-```
-
-## Handle Input
+{{ Validate }}
 
 Values failing to conform to constraint definitions are removed.
 
-### handleInput Example 1
-
-Each value conforms.
-
-```php
+{{ Validate::Usage }}
 
 $employee_name = 'Janet Jackson';
-$results       = $request->handleInput('employee_name', $employee_name, 'Alphanumeric');
+$results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
 
 if ($results->getChangeIndicator() === true) {
     $employee_name = $results->getFieldValue();
@@ -64,37 +30,15 @@ if ($results->getChangeIndicator() === true) {
     // Filtering did not change the Employee Name
 }
 
-```
 
-### handleInput Example 2
+{{ Sanitize }}
 
-Each value does not conform. Use the new value as the data value.
+Values failing to conform to constraint definitions are removed.
 
-```php
-
-$employee_name = 'Janet @ Jackson';
-$results       = $request->handleInput('employee_name', $employee_name, 'Alphanumeric');
-
-if ($results->getChangeIndicator() === true) {
-    $employee_name = $results->getFieldValue();
-    // The employee_name value now contains 'Janet Jackson'
-}
-
-```
-
-
-## Handle Output
-
-handleOutput field
-
-### Handle Output Example 1
-
-Each value conforms.
-
-```php
+{{ Sanitize::Usage }}
 
 $employee_name = 'Janet Jackson';
-$results       = $request->handleOutput('employee_name', $employee_name, 'Alphanumeric');
+$results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
 
 if ($results->getChangeIndicator() === true) {
     $employee_name = $results->getFieldValue();
@@ -102,26 +46,23 @@ if ($results->getChangeIndicator() === true) {
     // Filtering did not change the Employee Name
 }
 
-```
 
-### Handle Output Example 2
+{{ Format }}
 
-Each value does not conform. Use the new value as the data value.
+Values failing to conform to constraint definitions are removed.
 
-```php
+{{ Format::Usage }}
 
-$employee_name = 'Janet @ Jackson';
-$results       = $request->handleOutput('employee_name', $employee_name, 'Alphanumeric');
+$employee_name = 'Janet Jackson';
+$results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
 
 if ($results->getChangeIndicator() === true) {
     $employee_name = $results->getFieldValue();
-    // The employee_name value now contains 'Janet Jackson'
+} else {
+    // Filtering did not change the Employee Name
 }
 
-```
+### Format Example: Success
 
+Each value conforms.
 
-
-
-Return to:
- * [Constraint List](https://github.com/Molajo/Fieldhandler#constraints)

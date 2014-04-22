@@ -45,14 +45,14 @@ class UpperTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleInputSuccess()
+    public function testSanitizeSuccess()
     {
         $field_name  = 'test';
         $field_value = 'AA123';
         $constraint  = 'Upper';
         $options     = array();
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('AA123', $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());

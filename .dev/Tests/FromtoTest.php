@@ -90,11 +90,11 @@ class FromtoTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Fromto::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Fromto::sanitize
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleInputSucceed()
+    public function testSanitizeSucceed()
     {
         $field_name      = 'fieldname';
         $field_value     = 5;
@@ -103,7 +103,7 @@ class FromtoTest extends PHPUnit_Framework_TestCase
         $options['from'] = 0;
         $options['to']   = 10;
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());
@@ -112,11 +112,11 @@ class FromtoTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Fromto::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Fromto::sanitize
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleInputFailure()
+    public function testSanitizeFailure()
     {
         $field_name      = 'fieldname';
         $field_value     = 500;
@@ -125,7 +125,7 @@ class FromtoTest extends PHPUnit_Framework_TestCase
         $options['from'] = 0;
         $options['to']   = 10;
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(null, $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
@@ -134,11 +134,11 @@ class FromtoTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Fromto::handleOutput
+     * @covers  Molajo\Fieldhandler\Constraint\Fromto::format
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleOutputSucceed()
+    public function testFormatSucceed()
     {
         $field_name      = 'fieldname';
         $field_value     = 5;
@@ -147,7 +147,7 @@ class FromtoTest extends PHPUnit_Framework_TestCase
         $options['from'] = 0;
         $options['to']   = 10;
 
-        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());
@@ -156,11 +156,11 @@ class FromtoTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Fromto::handleOutput
+     * @covers  Molajo\Fieldhandler\Constraint\Fromto::format
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleOutputFailure()
+    public function testFormatFailure()
     {
         $field_name      = 'fieldname';
         $field_value     = 500;
@@ -169,7 +169,7 @@ class FromtoTest extends PHPUnit_Framework_TestCase
         $options['from'] = 0;
         $options['to']   = 10;
 
-        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(null, $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());

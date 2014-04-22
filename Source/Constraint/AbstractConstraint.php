@@ -29,7 +29,7 @@ abstract class AbstractConstraint implements ConstraintInterface
     protected $constraint;
 
     /**
-     * Method (validate, handleInput, handleOutput)
+     * Method (validate, sanitize, format)
      *
      * @var    string
      * @since  1.0.0
@@ -317,22 +317,22 @@ abstract class AbstractConstraint implements ConstraintInterface
     abstract public function validate();
 
     /**
-     * Handle Input
+     * Sanitize
      *
      * @return  mixed
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    abstract public function handleInput();
+    abstract public function sanitize();
 
     /**
-     * Handle Output
+     * Format
      *
      * @return  mixed
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    abstract public function handleOutput();
+    abstract public function format();
 
     /**
      * Get timezone

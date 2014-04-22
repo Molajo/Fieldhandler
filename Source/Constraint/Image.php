@@ -30,7 +30,7 @@ class Image extends AbstractConstraint implements ConstraintInterface
     {
         $hold = $this->field_value;
 
-        if ($this->handleInput() === $hold) {
+        if ($this->sanitize() === $hold) {
             return true;
         }
 
@@ -38,12 +38,12 @@ class Image extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Handle Input
+     * Sanitize
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function handleInput()
+    public function sanitize()
     {
         $url = str_replace(
             array('ftp://', 'ftps://', 'http://', 'https://'),
@@ -61,14 +61,14 @@ class Image extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Handle Output
+     * Format
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function handleOutput()
+    public function format()
     {
-        return $this->handleInput();
+        return $this->sanitize();
     }
 
     /**

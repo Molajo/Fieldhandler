@@ -110,18 +110,18 @@ class IntegerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Integer::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Integer::sanitize
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleInputSuccess()
+    public function testSanitizeSuccess()
     {
         $field_name  = 'digit_fieldname';
         $field_value = 123;
         $constraint  = 'Integer';
         $options     = array();
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());
@@ -130,18 +130,18 @@ class IntegerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Integer::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Integer::sanitize
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleInputFail()
+    public function testSanitizeFail()
     {
         $field_name  = 'digit_fieldname';
         $field_value = 'dog';
         $constraint  = 'Integer';
         $options     = array();
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $field_value = null;
         $this->assertEquals($field_value, $results->getFieldValue());
@@ -151,18 +151,18 @@ class IntegerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Integer::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Integer::sanitize
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleOutputSuccess()
+    public function testFormatSuccess()
     {
         $field_name  = 'digit_fieldname';
         $field_value = 123;
         $constraint  = 'Integer';
         $options     = array();
 
-        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());
@@ -171,18 +171,18 @@ class IntegerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Integer::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Integer::sanitize
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleOutputFail()
+    public function testFormatFail()
     {
         $field_name  = 'digit_fieldname';
         $field_value = 'dog';
         $constraint  = 'Integer';
         $options     = array();
 
-        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $field_value = null;
         $this->assertEquals($field_value, $results->getFieldValue());

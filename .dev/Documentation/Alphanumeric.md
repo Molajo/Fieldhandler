@@ -18,7 +18,7 @@ Each value conforms.
 ```php
 
 $employee_name = 'Janet Jackson';
-$results       = $request->handleInput('employee_name', $employee_name, 'Alphanumeric');
+$results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
 
 if ($results->getChangeIndicator() === true) {
     $employee_name = $results->getFieldValue();
@@ -35,7 +35,7 @@ Each value does not conform. Use the returned value as the data value.
 ```php
 
 $employee_name = 'Janet @ Jackson';
-$results       = $request->handleInput('employee_name', $employee_name, 'Alphanumeric');
+$results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
 
 if ($results->getChangeIndicator() === true) {
     $employee_name = $results->getFieldValue();
@@ -56,7 +56,7 @@ Each value conforms.
 ```php
 
 $employee_name = 'Janet Jackson';
-$results       = $request->handleInput('employee_name', $employee_name, 'Alphanumeric');
+$results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
 
 if ($results->getChangeIndicator() === true) {
     $employee_name = $results->getFieldValue();
@@ -73,7 +73,7 @@ Each value does not conform. Use the returned value as the data value.
 ```php
 
 $employee_name = 'Janet @ Jackson';
-$results       = $request->handleInput('employee_name', $employee_name, 'Alphanumeric');
+$results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
 
 if ($results->getChangeIndicator() === true) {
     $employee_name = $results->getFieldValue();

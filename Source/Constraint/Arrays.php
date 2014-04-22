@@ -64,12 +64,12 @@ class Arrays extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Handle Input
+     * Sanitize
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function handleInput()
+    public function sanitize()
     {
         if ($this->field_value === null) {
         } else {
@@ -93,20 +93,20 @@ class Arrays extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Handle Output
+     * Format
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function handleOutput()
+    public function format()
     {
-        return $this->handleInput();
+        return $this->sanitize();
     }
 
     /**
      * Test Array Entry Keys
      *
-     * @param   boolean $handleInput
+     * @param   boolean $sanitize
      *
      * @return  boolean
      * @since   1.0.0

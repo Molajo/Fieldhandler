@@ -86,18 +86,18 @@ class EncodedTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Encoded::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Encoded::sanitize
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleInputSucceed()
+    public function testSanitizeSucceed()
     {
         $field_name  = 'dog';
         $field_value = 'my-apples&are green and red';
         $constraint  = 'Encoded';
         $options     = array();
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('my-apples%26are%20green%20and%20red', $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
@@ -106,18 +106,18 @@ class EncodedTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Encoded::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Encoded::sanitize
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleInputFailure()
+    public function testSanitizeFailure()
     {
         $field_name  = 'encoded';
         $field_value = 'Jack *&and+Jill';
         $constraint  = 'Encoded';
         $options     = array();
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('Jack%20%2A%26and%2BJill', $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
@@ -126,18 +126,18 @@ class EncodedTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Encoded::handleOutput
+     * @covers  Molajo\Fieldhandler\Constraint\Encoded::format
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleOutputSucceed()
+    public function testFormatSucceed()
     {
         $field_name  = 'encoded';
         $field_value = 'Jack *&and+Jill';
         $constraint  = 'Encoded';
         $options     = array();
 
-        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('Jack%20%2A%26and%2BJill', $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
@@ -146,18 +146,18 @@ class EncodedTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Encoded::handleOutput
+     * @covers  Molajo\Fieldhandler\Constraint\Encoded::format
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleOutputFailure()
+    public function testFormatFailure()
     {
         $field_name  = 'encoded';
         $field_value = 'Jack *&and+Jill';
         $constraint  = 'Encoded';
         $options     = array();
 
-        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('Jack%20%2A%26and%2BJill', $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());

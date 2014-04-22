@@ -73,7 +73,7 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
      * @return void
      * @since   1.0.0
      */
-    public function testHandleInputSuccess()
+    public function testSanitizeSuccess()
     {
         $field_name  = 'dog';
         $field_value = null;
@@ -82,7 +82,7 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
             'default' => 'bark'
         );
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('bark', $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
@@ -104,7 +104,7 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
             'default' => 'bark'
         );
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $field_value = 'bark';
         $this->assertEquals($field_value, $results->getFieldValue());

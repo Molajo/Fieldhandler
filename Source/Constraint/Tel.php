@@ -57,12 +57,12 @@ class Tel extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Handle Input
+     * Sanitize
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function handleInput()
+    public function sanitize()
     {
         if ($this->field_value === null) {
         } else {
@@ -73,14 +73,14 @@ class Tel extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Handle Output
+     * Format
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function handleOutput()
+    public function format()
     {
-        $this->handleInput();
+        $this->sanitize();
 
         /** TODO: Apply localisation mask and remove example */
 

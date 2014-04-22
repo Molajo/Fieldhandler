@@ -89,18 +89,18 @@ class EmailTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Email::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Email::sanitize
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleInputSuccess()
+    public function testSanitizeSuccess()
     {
         $field_name  = 'email_address';
         $field_value = 'AmyStephen@Molajo.org';
         $constraint  = 'Email';
         $options     = array();
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());
@@ -113,14 +113,14 @@ class EmailTest extends PHPUnit_Framework_TestCase
      * @return void
      * @since   1.0.0
      */
-    public function testHandleInputFail()
+    public function testSanitizeFail()
     {
         $field_name  = 'email_address';
         $field_value = 'yessireebob';
         $constraint  = 'Email';
         $options     = array();
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $field_value = null;
         $this->assertEquals($field_value, $results->getFieldValue());
@@ -134,7 +134,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleOutputSuccess()
+    public function testFormatSuccess()
     {
         $field_name                 = 'email_address';
         $field_value                = 'AmyStephen@Molajo.org';
@@ -142,7 +142,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
         $options                    = array();
         $options['obfuscate_email'] = true;
 
-        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $obfuscate = "&#65;&#109;&#121;&#83;&#116;&#101;&#112;&#104;&#101;&#110;&#64;&#77;&#111;&#108;&#97;&#106;&#111;&#46;&#111;&#114;&#103;";
 
@@ -163,7 +163,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Email';
         $options     = array();
 
-        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $field_value = null;
         $this->assertEquals($field_value, $results->getFieldValue());

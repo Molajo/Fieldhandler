@@ -69,13 +69,13 @@ class StringTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleOutputSuccess()
+    public function testFormatSuccess()
     {
         $field_name  = 'fieldname';
         $field_value = '&';
         $constraint  = 'String';
 
-        $results = $this->request->handleOutput($field_name, $field_value, $constraint, array());
+        $results = $this->request->format($field_name, $field_value, $constraint, array());
 
         $this->assertEquals($field_value, $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());

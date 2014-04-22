@@ -133,7 +133,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Boolean::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Boolean::sanitize
      * @return  void
      * @since   1.0.0
      */
@@ -144,7 +144,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Boolean';
         $options     = array();
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());
@@ -153,7 +153,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Boolean::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Boolean::sanitize
      * @return  void
      * @since   1.0.0
      */
@@ -164,7 +164,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Boolean';
         $options     = array();
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());
@@ -173,7 +173,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Boolean::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Boolean::sanitize
      * @return  void
      * @since   1.0.0
      */
@@ -184,7 +184,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Boolean';
         $options     = array();
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());
@@ -193,7 +193,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Boolean::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Boolean::sanitize
      * @return void
      * @since   1.0.0
      */
@@ -204,7 +204,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Boolean';
         $options     = array();
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(null, $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
@@ -224,7 +224,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Boolean';
         $options     = array();
 
-        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(null, $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());
@@ -244,7 +244,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Boolean';
         $options     = array();
 
-        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());
@@ -264,7 +264,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Boolean';
         $options     = array();
 
-        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());
@@ -284,7 +284,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Boolean';
         $options     = array();
 
-        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(null, $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());

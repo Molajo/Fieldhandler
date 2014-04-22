@@ -88,11 +88,11 @@ class EqualTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Equal::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Equal::sanitize
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleInputSucceed()
+    public function testSanitizeSucceed()
     {
         $field_name        = 'field1';
         $field_value       = 'dog';
@@ -100,7 +100,7 @@ class EqualTest extends PHPUnit_Framework_TestCase
         $options           = array();
         $options['equals'] = 'dog';
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('dog', $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());
@@ -109,11 +109,11 @@ class EqualTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Equal::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Equal::sanitize
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleInputFailure()
+    public function testSanitizeFailure()
     {
         $field_name        = 'field1';
         $field_value       = 'dog';
@@ -121,7 +121,7 @@ class EqualTest extends PHPUnit_Framework_TestCase
         $options           = array();
         $options['equals'] = 'cat';
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(null, $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
@@ -130,11 +130,11 @@ class EqualTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Equal::handleOutput
+     * @covers  Molajo\Fieldhandler\Constraint\Equal::format
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleOutputSucceed()
+    public function testFormatSucceed()
     {
         $field_name        = 'field1';
         $field_value       = 'dog';
@@ -142,7 +142,7 @@ class EqualTest extends PHPUnit_Framework_TestCase
         $options           = array();
         $options['equals'] = 'dog';
 
-        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('dog', $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());
@@ -151,11 +151,11 @@ class EqualTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Equal::handleOutput
+     * @covers  Molajo\Fieldhandler\Constraint\Equal::format
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleOutputFailure()
+    public function testFormatFailure()
     {
         $field_name        = 'field1';
         $field_value       = 'dog';
@@ -163,7 +163,7 @@ class EqualTest extends PHPUnit_Framework_TestCase
         $options           = array();
         $options['equals'] = 'cat';
 
-        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(null, $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());

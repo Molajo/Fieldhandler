@@ -77,7 +77,7 @@ class CallbackTest extends PHPUnit_Framework_TestCase
         $options             = array();
         $options['callback'] = 'strtolower';
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('dog', $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());

@@ -45,14 +45,14 @@ class LowerTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleInputSuccess()
+    public function testSanitizeSuccess()
     {
         $field_name  = 'test';
         $field_value = 'aa123';
         $constraint  = 'Lower';
         $options     = array();
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('aa123', $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());

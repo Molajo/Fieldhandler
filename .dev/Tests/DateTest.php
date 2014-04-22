@@ -42,7 +42,7 @@ class DateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Date::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Date::sanitize
      * @return  void
      * @since   1.0.0
      */
@@ -87,11 +87,11 @@ class DateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Date::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Date::sanitize
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleInputSuccessDefault()
+    public function testSanitizeSuccessDefault()
     {
         $field_name  = 'this_is_a_date_field';
         $field_value = '2012-09-13';
@@ -101,7 +101,7 @@ class DateTest extends PHPUnit_Framework_TestCase
             'display_as_date_format' => 'd/m/Y'
         );
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());
@@ -114,14 +114,14 @@ class DateTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleInputFailNull()
+    public function testSanitizeFailNull()
     {
         $field_name  = 'this_is_a_date_field';
         $field_value = 'gggghhhhhh';
 
         $constraint = 'Date';
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint);
 
         $this->assertEquals(null, $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
@@ -130,11 +130,11 @@ class DateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Date::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Date::sanitize
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleOutputSuccessDefault()
+    public function testFormatSuccessDefault()
     {
         $field_name  = 'this_is_a_date_field';
         $field_value = '2012-09-13';
@@ -144,7 +144,7 @@ class DateTest extends PHPUnit_Framework_TestCase
             'display_as_date_format' => 'm/d/Y'
         );
 
-        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('09/13/2012', $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());

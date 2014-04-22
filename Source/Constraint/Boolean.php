@@ -47,12 +47,12 @@ class Boolean extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Handle Input
+     * Sanitize
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function handleInput()
+    public function sanitize()
     {
         if ($this->field_value === null) {
             return $this->field_value;
@@ -67,13 +67,13 @@ class Boolean extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Handle Output
+     * Format
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function handleOutput()
+    public function format()
     {
-        return $this->handleInput();
+        return $this->sanitize();
     }
 }

@@ -10,8 +10,8 @@ namespace Molajo\Fieldhandler;
 
 use Exception;
 use CommonApi\Exception\UnexpectedValueException;
-use CommonApi\Model\HandleInputInterface;
-use CommonApi\Model\HandleOutputInterface;
+use CommonApi\Model\SanitizeInterface;
+use CommonApi\Model\FormatInterface;
 use CommonApi\Model\ValidateInterface;
 
 /**
@@ -21,7 +21,7 @@ use CommonApi\Model\ValidateInterface;
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
-class Request implements ValidateInterface, HandleInputInterface, HandleOutputInterface
+class Request implements ValidateInterface, SanitizeInterface, FormatInterface
 {
     /**
      * Constraint
@@ -40,7 +40,7 @@ class Request implements ValidateInterface, HandleInputInterface, HandleOutputIn
     protected $constraint_instance;
 
     /**
-     * Method (validate, handleInput, handleOutput)
+     * Method (validate, sanitize, format)
      *
      * @var    string
      * @since  1.0.0
@@ -143,7 +143,7 @@ class Request implements ValidateInterface, HandleInputInterface, HandleOutputIn
     }
 
     /**
-     * Handle Input Request
+     * Sanitize Request
      *
      * @param   string     $field_name
      * @param   null|mixed $field_value
@@ -154,13 +154,13 @@ class Request implements ValidateInterface, HandleInputInterface, HandleOutputIn
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    public function handleInput($field_name, $field_value = null, $constraint, array $options = array())
+    public function sanitize($field_name, $field_value = null, $constraint, array $options = array())
     {
-        return $this->processRequest('handleInput', $field_name, $field_value, $constraint, $options);
+        return $this->processRequest('sanitize', $field_name, $field_value, $constraint, $options);
     }
 
     /**
-     * Handle Output Request
+     * Format Request
      *
      * @param   string     $field_name
      * @param   null|mixed $field_value
@@ -171,9 +171,9 @@ class Request implements ValidateInterface, HandleInputInterface, HandleOutputIn
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    public function handleOutput($field_name, $field_value = null, $constraint, array $options = array())
+    public function format($field_name, $field_value = null, $constraint, array $options = array())
     {
-        return $this->processRequest('handleOutput', $field_name, $field_value, $constraint, $options);
+        return $this->processRequest('format', $field_name, $field_value, $constraint, $options);
     }
 
     /**
@@ -232,6 +232,7 @@ class Request implements ValidateInterface, HandleInputInterface, HandleOutputIn
         $messages = $this->constraint_instance->getValidateMessages();
 
         if (count($messages) > 0) {
+
             $tokens['field_name']  = $this->field_name;
             $tokens['field_value'] = $this->field_value;
             $tokens['constraint']  = $this->constraint;
@@ -256,11 +257,11 @@ class Request implements ValidateInterface, HandleInputInterface, HandleOutputIn
     {
         $this->method = $method;
 
-        if (in_array($this->method, array('validate', 'handleInput', 'handleOutput'))) {
+        if (in_array($this->method, array('validate', 'sanitize', 'format'))) {
         } else {
             throw new UnexpectedValueException
             (
-                'Fieldhandler Request: Must provide validate, handleInput, or handleOutput as requested method.'
+                'Fieldhandler Request: Must provide validate, sanitize, or format as requested method.'
             );
         }
 

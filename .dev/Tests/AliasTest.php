@@ -86,18 +86,18 @@ class AliasTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alias::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::sanitize
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleInputSucceed()
+    public function testSanitizeSucceed()
     {
         $field_name  = 'alias';
         $field_value = 'Jack and Jill';
         $constraint  = 'Alias';
         $options     = array();
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('jack-and-jill', $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
@@ -106,18 +106,18 @@ class AliasTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alias::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::sanitize
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleInputFailure()
+    public function testSanitizeFailure()
     {
         $field_name  = 'alias';
         $field_value = 'Jack *&and+Jill';
         $constraint  = 'Alias';
         $options     = array();
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('jack-and-jill', $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
@@ -126,18 +126,18 @@ class AliasTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alias::handleOutput
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::format
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleOutputSucceed()
+    public function testFormatSucceed()
     {
         $field_name  = 'alias';
         $field_value = 'Jack *&and+Jill';
         $constraint  = 'Alias';
         $options     = array();
 
-        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('jack-and-jill', $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
@@ -146,18 +146,18 @@ class AliasTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alias::handleOutput
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::format
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleOutputFailure()
+    public function testFormatFailure()
     {
         $field_name  = 'alias';
         $field_value = 'Jack *&and+Jill';
         $constraint  = 'Alias';
         $options     = array();
 
-        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('jack-and-jill', $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());

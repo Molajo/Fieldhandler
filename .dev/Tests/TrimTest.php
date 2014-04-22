@@ -94,7 +94,7 @@ class TrimTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Trim';
         $options     = array();
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('AmyStephen@Molajo.org', $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());

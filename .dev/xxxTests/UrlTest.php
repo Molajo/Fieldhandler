@@ -90,14 +90,14 @@ class UrlTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleInputSuccess()
+    public function testSanitizeSuccess()
     {
         $field_name  = 'url_field';
         $field_value = 'http://google.com/';
         $constraint  = 'Url';
         $options     = array();
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getValidateResponse());
         $this->assertEquals(array(), $results->getValidateMessages());
@@ -110,7 +110,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
      * @return void
      * @since   1.0.0
      */
-    public function testHandleInputFail()
+    public function testSanitizeFail()
     {
         $field_name                            = 'url_field';
         $field_value                           = 'yessireebob';
@@ -119,7 +119,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
         $options['FILTER_FLAG_PATH_REQUIRED']  = true;
         $options['FILTER_FLAG_QUERY_REQUIRED'] = true;
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $field_value = null;
         $this->assertEquals($field_value, $results->getFieldValue());
@@ -133,14 +133,14 @@ class UrlTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleOutputSuccess()
+    public function testFormatSuccess()
     {
         $field_name  = 'url_field';
         $field_value = 'http://google.com/';
         $constraint  = 'Url';
         $options     = array();
 
-        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());
@@ -153,7 +153,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
      * @return void
      * @since   1.0.0
      */
-    public function testHandleOutputFail()
+    public function testFormatFail()
     {
         $field_name                  = 'url_field';
         $field_value                 = 'yessireebob';
@@ -161,7 +161,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
         $options                     = array();
         $options['FILTER_FLAG_IPV6'] = true;
 
-        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $field_value = null;
         $this->assertEquals($field_value, $results->getFieldValue());

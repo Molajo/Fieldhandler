@@ -86,18 +86,18 @@ class FloatTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Float::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Float::sanitize
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleInputSucceed()
+    public function testSanitizeSucceed()
     {
         $field_name = 'float_fieldname';
         $field_value = 123;
         $constraint = 'Float';
         $options = array();
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(trim($field_value), trim($results->getFieldValue()));
         $this->assertEquals(false, $results->getChangeIndicator());
@@ -106,18 +106,18 @@ class FloatTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Float::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Float::sanitize
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleInputFailure()
+    public function testSanitizeFailure()
     {
         $field_name = 'float_fieldname';
         $field_value = 'yessireebob';
         $constraint = 'Float';
         $options = array();
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(null, $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
@@ -126,18 +126,18 @@ class FloatTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Float::handleOutput
+     * @covers  Molajo\Fieldhandler\Constraint\Float::format
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleOutputSucceed()
+    public function testFormatSucceed()
     {
         $field_name = 'float_fieldname';
         $field_value = 123456789;
         $constraint = 'Float';
         $options = array();
 
-        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(123456789, $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());
@@ -146,18 +146,18 @@ class FloatTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Float::handleOutput
+     * @covers  Molajo\Fieldhandler\Constraint\Float::format
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleOutputFailure()
+    public function testFormatFailure()
     {
         $field_name = 'float_fieldname';
         $field_value = 'yessireebob';
         $constraint = 'Float';
         $options = array();
 
-        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(null, $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());

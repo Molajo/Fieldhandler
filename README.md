@@ -197,8 +197,8 @@ Messages
 Tokens
 Localization
 
-$filtered = $request->handleInput('Title', $title, 'string, required');
-$escaped = $request->handleOutput('Title', $filtered->getValidateResponse(), 'string');
+$filtered = $request->sanitize('Title', $title, 'string, required');
+$escaped = $request->format('Title', $filtered->getValidateResponse(), 'string');
 
 $title = $escaped->getValidateResponse();
 
@@ -345,7 +345,7 @@ an alias value.
 ```php
     // Title 'Jack and Jill' will be returned as 'jack-and-jill' for filter and escape
     // An exception would be thrown for validate
-    $alias = $request->handleInput('title', 'Jack and Jill', 'Alias');
+    $alias = $request->sanitize('title', 'Jack and Jill', 'Alias');
 
 ```
 
@@ -355,7 +355,7 @@ Tests if values are a character of A through Z.
 ```php
     // Field order_number 'ABC123#' would be returned as 'ABC' for filter and escape
     // An exception would be thrown for validate
-    $results = $request->handleInput('order_number', 'ABC123#', 'Alpha');
+    $results = $request->sanitize('order_number', 'ABC123#', 'Alpha');
 
 ```
 
@@ -366,7 +366,7 @@ Tests if value is an array.
 ```php
     // Field order_number array('ABC123', 'DEF456') would be returned as same for
 
-    $results = $request->handleInput('order_number', array('ABC123', 'DEF456'), 'Array');
+    $results = $request->sanitize('order_number', array('ABC123', 'DEF456'), 'Array');
 
     array_valid_keys
     array_valid_values
@@ -380,7 +380,7 @@ Tests if value is true or false.
 ```php
     // Field on_or_off_field false would be returned as NULL for filter and escape
     // An exception would be thrown for validate
-    $results = $request->handleInput('on_or_off_field', false, 'Boolean');
+    $results = $request->sanitize('on_or_off_field', false, 'Boolean');
 
 ```
 
@@ -394,7 +394,7 @@ Callback is returned.
     // An exception would be thrown for validate. The value 'dog' is returned for Filter and Escape.
     $options = array();
     $options['callback'] = 'strtolower';
-    $results = $request->handleInput('example_field', 'DOG', 'Callback', $options);
+    $results = $request->sanitize('example_field', 'DOG', 'Callback', $options);
 
 ```
 
@@ -406,7 +406,7 @@ change the input to null.
     // Is the value `bark` contained within the dog_field?
     $options = array();
     $options['contains'] = 'bark';
-    $results = $request->handleInput('dog_field', $dog_field, 'Contains');
+    $results = $request->sanitize('dog_field', $dog_field, 'Contains');
 
 ```
 
@@ -418,7 +418,7 @@ Processes a value to determine if it is a valid date. For Validate, if the resul
     // The value of field `date_field` is '2013/04/01 01:00:00' and determined to be valid
     $options = array();
     $options['callback'] = '2013/04/01 01:00:00';
-    $results = $request->handleInput('date_field', '2013/04/01 01:00:00', 'Date');
+    $results = $request->sanitize('date_field', '2013/04/01 01:00:00', 'Date');
 
 ```
 
@@ -430,7 +430,7 @@ Processes a value to determine if it is a valid date. For Validate, if the resul
     // The value of field `date_field` is '2013/04/01 01:00:00' and determined to be valid
     $options = array();
     $options['callback'] = '2013/04/01 01:00:00';
-    $results = $request->handleInput('date_field', '2013/04/01 01:00:00', 'Date');
+    $results = $request->sanitize('date_field', '2013/04/01 01:00:00', 'Date');
 
 ```
 
@@ -441,7 +441,7 @@ Changes a null value to the value provided for default.
     // The value of field `dog_field` is NULL and is set to 'bark'.
     $options = array();
     $options['default'] = 'bark';
-    $results = $request->handleInput('dog_field', NULL, 'Default');
+    $results = $request->sanitize('dog_field', NULL, 'Default');
 
 ```
 
@@ -452,7 +452,7 @@ Tests that each digit is numeric.
     // The value of field `numeric_field` is 'ABC123'. The filtered and escaped values will be 123.
     // For 'validate', an exception is thrown.
 
-    $results = $request->handleInput('numeric_field', 'ABC123', 'Digit');
+    $results = $request->sanitize('numeric_field', 'ABC123', 'Digit');
 
 ```
 
@@ -472,7 +472,7 @@ Tests that an encoded value is sanitized.
     // The value of field `encoded_field` is 'my-apples&are green and red'.
     // The filtered and escaped values will be 'my-apples%26are%20green%20and%20red'.
 
-    $results = $request->handleInput('encoded_field', 'my-apples&are green and red', 'Encoded');
+    $results = $request->sanitize('encoded_field', 'my-apples&are green and red', 'Encoded');
 
 ```
 
@@ -481,7 +481,7 @@ Tests that a value is equal to a specified value.
 
 ```php
     // The value of field `field1` is 'dog' and is tested to see if it matches 'dog'.
-    $results = $request->handleInput('field1', 'dog', 'Equal');
+    $results = $request->sanitize('field1', 'dog', 'Equal');
 
 ```
 
@@ -508,7 +508,7 @@ Exception is thrown. If the value does not match for filter or escape, null is r
 
     $options = array('array_valid_extensions' => $array_valid_values);
 
-    $results = $request->handleInput('extensions_field', $input, 'Extensions');
+    $results = $request->sanitize('extensions_field', $input, 'Extensions');
 
 ```
 
@@ -517,7 +517,7 @@ Tests a value to determine if it is a valid Float value.
 
 ```php
     // The value of field `numeric_field` is 1234.5678.
-    $results = $request->handleInput('numeric_field', 1234.5678, 'Float');
+    $results = $request->sanitize('numeric_field', 1234.5678, 'Float');
 
 ```
 
@@ -591,7 +591,7 @@ Tests that the value is an image.
     // The value of field `numeric_field` is 'ABC123'. The filtered and escaped values will be 0.
     // For 'validate', an exception is thrown. The following will return 123.
 
-    $results = $request->handleInput('numeric_field', '123', 'Int');
+    $results = $request->sanitize('numeric_field', '123', 'Int');
 
 ```
 
@@ -602,7 +602,7 @@ Tests that the value is an integer.
     // The value of field `numeric_field` is 'ABC123'. The filtered and escaped values will be 0.
     // For 'validate', an exception is thrown. The following will return 123.
 
-    $results = $request->handleInput('numeric_field', '123', 'Int');
+    $results = $request->sanitize('numeric_field', '123', 'Int');
 
 ```
 
@@ -612,7 +612,7 @@ Tests that the value is an IP Address.
 ```php
     // The value of field `input_field` is '127.0.0.1'.
     // Validate, filtered and escaped values will return the same.
-    $results = $request->handleInput('input_field', '127.0.0.1', 'Ip');
+    $results = $request->sanitize('input_field', '127.0.0.1', 'Ip');
 
 ```
 
@@ -622,7 +622,7 @@ Validates or filters/escapes each character to be lower case.
 ```php
     // The value of field `input_field` is 'ABC123'. Validate will fail.
     // Filtered and escaped values will return 'abc123'.
-    $results = $request->handleInput('input_field', 'ABC123', 'lower');
+    $results = $request->sanitize('input_field', 'ABC123', 'lower');
 
 ```
 
@@ -679,7 +679,7 @@ Tests that a value is not equal to a specified value.
 
 ```php
     // The value of field `field1` is 'dog' and is tested to ensure it is NOT equal to 'dog'.
-    $results = $request->handleInput('field1', 'dog', 'Notequal');
+    $results = $request->sanitize('field1', 'dog', 'Notequal');
 
 ```
 
@@ -690,7 +690,7 @@ Tests that the value is an numeric.
     // The value of field `numeric_field` is 'ABC123'. The filtered and escaped values will be 0.
     // For 'validate', an exception is thrown. The following will return 123.
 
-    $results = $request->handleInput('numeric_field', '123', 'Numeric');
+    $results = $request->sanitize('numeric_field', '123', 'Numeric');
 
 ```
 
@@ -701,7 +701,7 @@ Tests that a value is an object.
     // The value of field `database` is an object containing the database connection.
     // All will return the object
 
-    $results = $request->handleInput('database', $instance, 'Object');
+    $results = $request->sanitize('database', $instance, 'Object');
 
 ```
 
@@ -792,7 +792,7 @@ Tests that the string is trimmed.
     $field_value             = 'Lots of stuff in here that is stringy.          ';
     $constraint = 'Trim';
 
-    $results = $request->handleInput($field_name, $field_value, $constraint);
+    $results = $request->sanitize($field_name, $field_value, $constraint);
 ```
 
 ### Upper ###
@@ -801,7 +801,7 @@ Validates or filters/escapes each character to be upper case.
 ```php
     // The value of field `input_field` is 'abc123'. Validate will value.
     // Filtered and escaped values will return 'ABC123'.
-    $results = $request->handleInput('input_field', 'abc123', 'lower');
+    $results = $request->sanitize('input_field', 'abc123', 'lower');
 
 ```
 

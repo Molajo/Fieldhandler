@@ -165,7 +165,7 @@ class TrueTest extends PHPUnit_Framework_TestCase
         $constraint  = 'True';
         $options     = array();
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('on', $results->getValidateResponse());
 
@@ -173,7 +173,7 @@ class TrueTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Default::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Default::sanitize
      *
      * @return void
      * @since   1.0.0
@@ -185,7 +185,7 @@ class TrueTest extends PHPUnit_Framework_TestCase
         $constraint  = 'True';
         $options     = array();
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(null, $results->getValidateResponse());
 

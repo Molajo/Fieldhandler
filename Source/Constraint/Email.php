@@ -63,12 +63,12 @@ class Email extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Handle Input
+     * Sanitize
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function handleInput()
+    public function sanitize()
     {
         if (filter_var($this->field_value, FILTER_VALIDATE_EMAIL) === false) {
             $this->field_value = null;
@@ -78,14 +78,14 @@ class Email extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Handle Output
+     * Format
      *
      * @return  mixed
      * @since   1.0.0
      */
-    public function handleOutput()
+    public function format()
     {
-        $this->handleInput();
+        $this->sanitize();
 
         if (isset($this->options['obfuscate_email'])) {
             $obfuscate_email = "";

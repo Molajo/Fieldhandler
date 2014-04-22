@@ -41,11 +41,11 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\values::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\values::sanitize
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleOutputSuccess()
+    public function testFormatSuccess()
     {
         $field_name                    = 'test';
         $field_value                   = 'a';
@@ -53,7 +53,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
         $options                       = array();
         $options['array_valid_values'] = array('a', 'b', 'c');
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('a', $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());
@@ -62,11 +62,11 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\values::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\values::sanitize
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleInputFail()
+    public function testSanitizeFail()
     {
         $field_name                    = 'test';
         $field_value                   = 'z';
@@ -74,7 +74,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
         $options                       = array();
         $options['array_valid_values'] = array('a', 'b', 'c');
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());

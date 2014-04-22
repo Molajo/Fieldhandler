@@ -87,7 +87,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Alpha::sanitize
      * @return void
      * @since   1.0.0
      */
@@ -98,7 +98,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Alpha';
         $options     = array();
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());
@@ -107,7 +107,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Alpha::sanitize
      * @return void
      * @since   1.0.0
      */
@@ -118,7 +118,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Alpha';
         $options     = array();
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $expected_value = 'Aa';
         $this->assertEquals($expected_value, $results->getFieldValue());
@@ -128,7 +128,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Alpha::sanitize
      * @return void
      * @since   1.0.0
      */
@@ -139,7 +139,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Alpha';
         $options     = array();
 
-        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $field_value = 'AbCdEfG';
         $this->assertEquals($field_value, $results->getFieldValue());
@@ -149,7 +149,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Alpha::sanitize
      * @return void
      * @since   1.0.0
      */
@@ -160,7 +160,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Alpha';
         $options     = array();
 
-        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());

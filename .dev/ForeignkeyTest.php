@@ -8,8 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-include __DIR__ . '/../../' . 'Database/.dev/Bootstrap.php';
-
 use Molajo\Fieldhandler\Request;
 use Molajo\Database\Constraint as Database;
 use Molajo\Database\Constraint\Joomla;
@@ -52,20 +50,7 @@ class ForeignkeyTest extends PHPUnit_Framework_TestCase
     {
         $this->adapter = new Request();
 
-        $options = array();
-
-        $options['db_type']        = 'MySQLi';
-        $options['db_host']        = 'localhost';
-        $options['db_user']        = 'root';
-        $options['db_password']    = 'root';
-        $options['db_name']        = 'molajo';
-        $options['db_prefix']      = 'molajo_';
-        $options['process_events'] = 1;
-        $options['select']         = true;
-
-        $handler = new Joomla($options);
-
-        $this->database = new Database($handler);
+        $this->database = new MockDB();
     }
 
     /**
@@ -121,4 +106,8 @@ class ForeignkeyTest extends PHPUnit_Framework_TestCase
     protected function tearDown()
     {
     }
+}
+class MockDB
+{
+
 }

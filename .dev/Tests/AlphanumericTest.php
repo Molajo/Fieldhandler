@@ -88,7 +88,7 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::sanitize
      * @return  void
      * @since   1.0.0
      */
@@ -99,7 +99,7 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Alphanumeric';
         $options     = array();
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());
@@ -108,7 +108,7 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::sanitize
      * @return  void
      * @since   1.0.0
      */
@@ -119,7 +119,7 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Alphanumeric';
         $options     = array();
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $expected_value = 'Aa123';
         $this->assertEquals($expected_value, $results->getFieldValue());
@@ -129,7 +129,7 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::sanitize
      * @return  void
      * @since   1.0.0
      */
@@ -140,7 +140,7 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Alphanumeric';
         $options     = array();
 
-        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());
@@ -149,7 +149,7 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::sanitize
      * @return  void
      * @since   1.0.0
      */
@@ -160,7 +160,7 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Alphanumeric';
         $options     = array();
 
-        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $field_value = 'Aa123';
         $this->assertEquals($field_value, $results->getFieldValue());

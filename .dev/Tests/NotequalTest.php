@@ -91,7 +91,7 @@ class NotequalTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleInputSuccess()
+    public function testSanitizeSuccess()
     {
         $field_name           = 'field1';
         $field_value          = 'dog';
@@ -99,7 +99,7 @@ class NotequalTest extends PHPUnit_Framework_TestCase
         $options              = array();
         $options['not_equal'] = 'cat';
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('dog', $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());
@@ -108,11 +108,11 @@ class NotequalTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Equals::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Equals::sanitize
      * @return void
      * @since   1.0.0
      */
-    public function testHandleInputFail()
+    public function testSanitizeFail()
     {
         $field_name           = 'field1';
         $field_value          = 'dog';
@@ -120,7 +120,7 @@ class NotequalTest extends PHPUnit_Framework_TestCase
         $options              = array();
         $options['not_equal'] = 'dog';
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(null, $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
@@ -133,7 +133,7 @@ class NotequalTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testHandleOutputSucceed()
+    public function testFormatSucceed()
     {
         $field_name           = 'field1';
         $field_value          = 'dog';
@@ -141,7 +141,7 @@ class NotequalTest extends PHPUnit_Framework_TestCase
         $options              = array();
         $options['not_equal'] = 'cat';
 
-        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('dog', $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());
@@ -154,7 +154,7 @@ class NotequalTest extends PHPUnit_Framework_TestCase
      * @return void
      * @since   1.0.0
      */
-    public function testHandleOutputFail()
+    public function testFormatFail()
     {
         $field_name           = 'field1';
         $field_value          = 'dog';
@@ -162,7 +162,7 @@ class NotequalTest extends PHPUnit_Framework_TestCase
         $options              = array();
         $options['not_equal'] = 'dog';
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $field_value = null;
         $this->assertEquals($field_value, $results->getFieldValue());
