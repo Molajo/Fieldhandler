@@ -38,7 +38,8 @@ class False extends AbstractConstraint implements ConstraintInterface
                 $testValue = strtolower($testValue);
             }
 
-            if (in_array($testValue, $this->false_array) === false) {
+            if (in_array($testValue, $this->false_array) === true || $testValue === false) {
+            } else {
                 $this->setValidateMessage(1000);
                 return false;
             }
@@ -56,20 +57,29 @@ class False extends AbstractConstraint implements ConstraintInterface
     public function sanitize()
     {
         if ($this->field_value === null) {
+            return $this->field_value;
+        }
 
+        $testValue = $this->field_value;
+
+        if (is_numeric($testValue) || is_bool($testValue)) {
         } else {
-            $testValue = $this->field_value;
+            $testValue = strtolower($testValue);
+        }
 
-            if (is_numeric($testValue) || is_bool($testValue)) {
-            } else {
-                $testValue = strtolower($testValue);
-            }
+        if (is_bool($testValue) && $testValue === false) {
+            return $this->field_value;
+        }
 
-            if (in_array($testValue, $this->false_array) === true) {
-            } else {
-                $this->field_value = null;
+        if (count($this->false_array) > 0) {
+            foreach ($this->false_array as $item) {
+                if ($item === $testValue) {
+                    return $this->field_value;
+                }
             }
         }
+
+        $this->field_value = null;
 
         return $this->field_value;
     }
@@ -82,6 +92,13 @@ class False extends AbstractConstraint implements ConstraintInterface
      */
     public function format()
     {
-        return $this->sanitize();
+        $this->sanitize();
+
+        if ($this->field_value === null) {
+        } else {
+            $this->field_value = false;
+        }
+
+        return $this->field_value;
     }
 }
