@@ -41,26 +41,27 @@ class UpperTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\upper::validate
-     * @return void
+     * @covers  Molajo\Fieldhandler\Constraint\Upper::validate
+     * @return  void
      * @since   1.0.0
      */
-    public function testValid()
+    public function testHandleInputSuccess()
     {
         $field_name  = 'test';
         $field_value = 'AA123';
-        $constraint  = 'upper';
+        $constraint  = 'Upper';
         $options     = array();
 
         $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getValidateResponse());
+        $this->assertEquals('AA123', $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\upper::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Upper::validate
      * @return void
      * @since   1.0.0
      */
@@ -68,31 +69,16 @@ class UpperTest extends PHPUnit_Framework_TestCase
     {
         $field_name  = 'test';
         $field_value = 'Aa123';
-        $constraint  = 'upper';
+        $constraint  = 'Upper';
         $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(false, $results->getValidateResponse());
-
-        return;
-    }
-
-    /**
-     * @covers  Molajo\Fieldhandler\Constraint\upper::handleInput
-     * @return void
-     * @since   1.0.0
-     */
-    public function testFilterValid()
-    {
-        $field_name  = 'test';
-        $field_value = 'Aa123';
-        $constraint  = 'upper';
-        $options     = array();
-
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
-
-        $this->assertEquals('AA123', $results->getValidateResponse());
+        $expected_code    = 8000;
+        $expected_message = 'Field: test did not pass the Upper data type test.';
+        $messages         = $results->getValidateMessages();
+        $this->assertEquals($expected_code, $messages[0]->code);
+        $this->assertEquals($expected_message, $messages[0]->message);
 
         return;
     }

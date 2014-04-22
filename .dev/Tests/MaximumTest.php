@@ -42,11 +42,11 @@ class MaximumTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Fromto::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Maximumvalidate
      * @return  void
      * @since   1.0.0
      */
-    public function testValidate1()
+    public function testValidateSuccess()
     {
         $field_name         = 'fieldname';
         $field_value        = 5;
@@ -57,12 +57,13 @@ class MaximumTest extends PHPUnit_Framework_TestCase
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(array(), $results->getValidateMessages());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Fromto::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Maximumvalidate
      * @return  void
      * @since   1.0.0
      */
@@ -77,12 +78,13 @@ class MaximumTest extends PHPUnit_Framework_TestCase
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(array(), $results->getValidateMessages());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Fromto::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Maximumvalidate
      * @return  void
      * @since   1.0.0
      */

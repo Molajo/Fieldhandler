@@ -42,19 +42,20 @@ class LowerTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\lower::validate
-     * @return void
+     * @return  void
      * @since   1.0.0
      */
-    public function testFilter()
+    public function testHandleInputSuccess()
     {
         $field_name  = 'test';
         $field_value = 'aa123';
-        $constraint  = 'lower';
+        $constraint  = 'Lower';
         $options     = array();
 
         $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals('aa123', $results->getValidateResponse());
+        $this->assertEquals('aa123', $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
@@ -68,31 +69,16 @@ class LowerTest extends PHPUnit_Framework_TestCase
     {
         $field_name  = 'test';
         $field_value = 'Aa123';
-        $constraint  = 'lower';
+        $constraint  = 'Lower';
         $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(false, $results->getValidateResponse());
-
-        return;
-    }
-
-    /**
-     * @covers  Molajo\Fieldhandler\Constraint\lower::handleInput
-     * @return void
-     * @since   1.0.0
-     */
-    public function testFilterValid()
-    {
-        $field_name  = 'test';
-        $field_value = 'Aa123';
-        $constraint  = 'lower';
-        $options     = array();
-
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
-
-        $this->assertEquals('aa123', $results->getValidateResponse());
+        $expected_code    = 2000;
+        $expected_message = 'Field: test must only contain Lower values.';
+        $messages         = $results->getValidateMessages();
+        $this->assertEquals($expected_code, $messages[0]->code);
+        $this->assertEquals($expected_message, $messages[0]->message);
 
         return;
     }
