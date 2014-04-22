@@ -1,14 +1,13 @@
 ---
-title:
-subtitle:
+title: Nothing
 author: Amy Stephen
 published: 2014-05-01
-categories : constraint
-tags :
+categories : Fieldhandler, Constraint
+tags : url
 featured : 0
-class :
-namespace :
-unit_tests :
+class : https://github.com/Molajo/Fieldhandler/blob/master/Source/Constraint/Nothing.php
+namespace : Molajo\Fieldhandler\Constraint\Nothing
+unit_tests : https://github.com/Molajo/Fieldhandler/blob/master/.dev/Tests/NothingTest.php
 ---
 
 {{ Constraint }}
@@ -16,6 +15,7 @@ unit_tests :
 
 {{ Constraint::Definition }}
 
+Tests if values are valid for a URL slug. When used with filter or escape, the value returned can be used as an alias value.
 
 {{ Constraint::Options }}
 
@@ -26,6 +26,10 @@ Values failing to conform to constraint definitions are removed.
 
 {{ Constraint::Validate::Usage }}
 
+Say things...
+
+```php
+
 $employee_name = 'Janet Jackson';
 $results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
 
@@ -34,6 +38,8 @@ if ($results->getChangeIndicator() === true) {
 } else {
     // Filtering did not change the Employee Name
 }
+
+```
 
 
 {{ Constraint::Sanitize }}
@@ -42,6 +48,10 @@ Values failing to conform to constraint definitions are removed.
 
 {{ Constraint::Sanitize::Usage }}
 
+Say things...
+
+```php
+
 $employee_name = 'Janet Jackson';
 $results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
 
@@ -51,6 +61,7 @@ if ($results->getChangeIndicator() === true) {
     // Filtering did not change the Employee Name
 }
 
+```
 
 {{ Constraint::Format }}
 
@@ -58,6 +69,8 @@ Values failing to conform to constraint definitions are removed.
 
 {{ Constraint::Format::Usage }}
 
+```php
+
 $employee_name = 'Janet Jackson';
 $results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
 
@@ -66,3 +79,5 @@ if ($results->getChangeIndicator() === true) {
 } else {
     // Filtering did not change the Employee Name
 }
+
+```

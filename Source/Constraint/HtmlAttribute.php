@@ -1,6 +1,6 @@
 <?php
 /**
- * HtmlAttribute Constraint
+ * Htmlattribute Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -13,14 +13,14 @@ use CommonApi\Model\ConstraintInterface;
 include __DIR__ . '/Libraries/kses.php';
 
 /**
- * HtmlAttribute Constraint
+ * Htmlattribute Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class HtmlAttribute extends AbstractConstraint implements ConstraintInterface
+class Htmlattribute extends AbstractConstraint implements ConstraintInterface
 {
     /**
      * Validate
