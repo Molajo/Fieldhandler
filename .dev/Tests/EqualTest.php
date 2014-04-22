@@ -8,9 +8,8 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use Molajo\Fieldhandler\Request as request;
+use Molajo\Fieldhandler\Request;
 use PHPUnit_Framework_TestCase;
-use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Equal Fieldhandler
@@ -33,7 +32,7 @@ class EqualTest extends PHPUnit_Framework_TestCase
     /**
      * Set up
      *
-     * @return void
+     * @return  void
      * @since   1.0.0
      */
     protected function setUp()
@@ -42,11 +41,11 @@ class EqualTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Equals::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Equal::validate
      * @return  void
      * @since   1.0.0
      */
-    public function testValidate1()
+    public function testValidateSucceed()
     {
         $field_name        = 'field1';
         $field_value       = 'dog';
@@ -57,13 +56,14 @@ class EqualTest extends PHPUnit_Framework_TestCase
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(array(), $results->getValidateMessages());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Equals::validate
-     * @return void
+     * @covers  Molajo\Fieldhandler\Constraint\Equal::validate
+     * @return  void
      * @since   1.0.0
      */
     public function testValidateFail()
@@ -78,15 +78,21 @@ class EqualTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(false, $results->getValidateResponse());
 
+        $expected_code    = 8000;
+        $expected_message = 'Field: field1 did not pass the Equal data type test.';
+        $messages         = $results->getValidateMessages();
+        $this->assertEquals($expected_code, $messages[0]->code);
+        $this->assertEquals($expected_message, $messages[0]->message);
+
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Equals::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Equal::handleInput
      * @return  void
      * @since   1.0.0
      */
-    public function testFilter1()
+    public function testHandleInputSucceed()
     {
         $field_name        = 'field1';
         $field_value       = 'dog';
@@ -96,17 +102,18 @@ class EqualTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getValidateResponse());
+        $this->assertEquals('dog', $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Equals::handleInput
-     * @return void
+     * @covers  Molajo\Fieldhandler\Constraint\Equal::handleInput
+     * @return  void
      * @since   1.0.0
      */
-    public function testFilterFail()
+    public function testHandleInputFailure()
     {
         $field_name        = 'field1';
         $field_value       = 'dog';
@@ -116,18 +123,18 @@ class EqualTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
-        $field_value = null;
-        $this->assertEquals($field_value, $results->getValidateResponse());
+        $this->assertEquals(null, $results->getFieldValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Equals::escape
+     * @covers  Molajo\Fieldhandler\Constraint\Equal::handleOutput
      * @return  void
      * @since   1.0.0
      */
-    public function testEscape1()
+    public function testHandleOutputSucceed()
     {
         $field_name        = 'field1';
         $field_value       = 'dog';
@@ -137,17 +144,18 @@ class EqualTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getValidateResponse());
+        $this->assertEquals('dog', $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Equals::escape
-     * @return void
+     * @covers  Molajo\Fieldhandler\Constraint\Equal::handleOutput
+     * @return  void
      * @since   1.0.0
      */
-    public function testEscapeFail()
+    public function testHandleOutputFailure()
     {
         $field_name        = 'field1';
         $field_value       = 'dog';
@@ -155,11 +163,21 @@ class EqualTest extends PHPUnit_Framework_TestCase
         $options           = array();
         $options['equals'] = 'cat';
 
-        $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
+        $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
 
-        $field_value = null;
-        $this->assertEquals($field_value, $results->getValidateResponse());
+        $this->assertEquals(null, $results->getFieldValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
+    }
+
+    /**
+     * Tear down
+     *
+     * @return void
+     * @since   1.0.0
+     */
+    protected function tearDown()
+    {
     }
 }

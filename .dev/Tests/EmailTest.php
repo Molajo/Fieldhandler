@@ -45,7 +45,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testValidate1()
+    public function testValidateSuccess()
     {
         $field_name  = 'email_address';
         $field_value = 'AmyStephen@Molajo.org';
@@ -55,6 +55,9 @@ class EmailTest extends PHPUnit_Framework_TestCase
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getValidateResponse());
+
+        $messages = $results->getValidateMessages();
+        $this->assertEquals(array(), $messages);
 
         return;
     }
@@ -73,7 +76,14 @@ class EmailTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
+
         $this->assertEquals(false, $results->getValidateResponse());
+
+        $expected_code    = 2000;
+        $expected_message = 'Field: email_address must only contain Email values.';
+        $messages         = $results->getValidateMessages();
+        $this->assertEquals($expected_code, $messages[0]->code);
+        $this->assertEquals($expected_message, $messages[0]->message);
 
         return;
     }
@@ -83,7 +93,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testFilter1()
+    public function testHandleInputSuccess()
     {
         $field_name  = 'email_address';
         $field_value = 'AmyStephen@Molajo.org';
@@ -92,7 +102,8 @@ class EmailTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getValidateResponse());
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
@@ -102,7 +113,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
      * @return void
      * @since   1.0.0
      */
-    public function testFilterFail()
+    public function testHandleInputFail()
     {
         $field_name  = 'email_address';
         $field_value = 'yessireebob';
@@ -112,7 +123,8 @@ class EmailTest extends PHPUnit_Framework_TestCase
         $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
         $field_value = null;
-        $this->assertEquals($field_value, $results->getValidateResponse());
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }
@@ -122,16 +134,19 @@ class EmailTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testEscape1()
+    public function testHandleOutputSuccess()
     {
-        $field_name  = 'email_address';
-        $field_value = 'AmyStephen@Molajo.org';
-        $constraint  = 'Email';
-        $options     = array();
+        $field_name                 = 'email_address';
+        $field_value                = 'AmyStephen@Molajo.org';
+        $constraint                 = 'Email';
+        $options                    = array();
+        $options['obfuscate_email'] = true;
 
         $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getValidateResponse());
+        $obfuscate = "&#65;&#109;&#121;&#83;&#116;&#101;&#112;&#104;&#101;&#110;&#64;&#77;&#111;&#108;&#97;&#106;&#111;&#46;&#111;&#114;&#103;";
+
+        $this->assertEquals($obfuscate, $results->getFieldValue());
 
         return;
     }
@@ -151,7 +166,8 @@ class EmailTest extends PHPUnit_Framework_TestCase
         $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
 
         $field_value = null;
-        $this->assertEquals($field_value, $results->getValidateResponse());
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }

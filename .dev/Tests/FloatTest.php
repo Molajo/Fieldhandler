@@ -1,6 +1,6 @@
 <?php
 /**
- * Alias Constraint Test
+ * Float Constraint Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -12,14 +12,14 @@ use Molajo\Fieldhandler\Request;
 use PHPUnit_Framework_TestCase;
 
 /**
- * Alias Fieldhandler
+ * Float Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class AliasTest extends PHPUnit_Framework_TestCase
+class FloatTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Request
@@ -41,16 +41,16 @@ class AliasTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alias::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Float::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidateSucceed()
     {
-        $field_name  = 'alias';
-        $field_value = 'jack-and-jill';
-        $constraint  = 'Alias';
-        $options     = array();
+        $field_name = 'float_fieldname';
+        $field_value = 123456789;
+        $constraint = 'Float';
+        $options = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
@@ -61,23 +61,23 @@ class AliasTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alias::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Float::validate
      * @return  void
      * @since   1.0.0
      */
     public function testValidateFail()
     {
-        $field_name  = 'alias';
-        $field_value = 'Jack and Jill';
-        $constraint  = 'Alias';
-        $options     = array();
+        $field_name = 'float_fieldname';
+        $field_value = 'yessireebob';
+        $constraint = 'Float';
+        $options = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(false, $results->getValidateResponse());
 
         $expected_code    = 1000;
-        $expected_message = 'Field: alias does not have a valid value for Alias data type.';
+        $expected_message = 'Field: float_fieldname does not have a valid value for Float data type.';
         $messages         = $results->getValidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);
@@ -86,80 +86,80 @@ class AliasTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alias::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Float::handleInput
      * @return  void
      * @since   1.0.0
      */
     public function testHandleInputSucceed()
     {
-        $field_name  = 'alias';
-        $field_value = 'Jack and Jill';
-        $constraint  = 'Alias';
-        $options     = array();
+        $field_name = 'float_fieldname';
+        $field_value = 123;
+        $constraint = 'Float';
+        $options = array();
 
         $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals('jack-and-jill', $results->getFieldValue());
-        $this->assertEquals(true, $results->getChangeIndicator());
+        $this->assertEquals(trim($field_value), trim($results->getFieldValue()));
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alias::handleInput
+     * @covers  Molajo\Fieldhandler\Constraint\Float::handleInput
      * @return  void
      * @since   1.0.0
      */
     public function testHandleInputFailure()
     {
-        $field_name  = 'alias';
-        $field_value = 'Jack *&and+Jill';
-        $constraint  = 'Alias';
-        $options     = array();
+        $field_name = 'float_fieldname';
+        $field_value = 'yessireebob';
+        $constraint = 'Float';
+        $options = array();
 
         $results = $this->request->handleInput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals('jack-and-jill', $results->getFieldValue());
+        $this->assertEquals(null, $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alias::handleOutput
+     * @covers  Molajo\Fieldhandler\Constraint\Float::handleOutput
      * @return  void
      * @since   1.0.0
      */
     public function testHandleOutputSucceed()
     {
-        $field_name  = 'alias';
-        $field_value = 'Jack *&and+Jill';
-        $constraint  = 'Alias';
-        $options     = array();
+        $field_name = 'float_fieldname';
+        $field_value = 123456789;
+        $constraint = 'Float';
+        $options = array();
 
         $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals('jack-and-jill', $results->getFieldValue());
-        $this->assertEquals(true, $results->getChangeIndicator());
+        $this->assertEquals(123456789, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alias::handleOutput
+     * @covers  Molajo\Fieldhandler\Constraint\Float::handleOutput
      * @return  void
      * @since   1.0.0
      */
     public function testHandleOutputFailure()
     {
-        $field_name  = 'alias';
-        $field_value = 'Jack *&and+Jill';
-        $constraint  = 'Alias';
-        $options     = array();
+        $field_name = 'float_fieldname';
+        $field_value = 'yessireebob';
+        $constraint = 'Float';
+        $options = array();
 
         $results = $this->request->handleOutput($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals('jack-and-jill', $results->getFieldValue());
+        $this->assertEquals(null, $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
 
         return;

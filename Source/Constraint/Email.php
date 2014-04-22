@@ -70,7 +70,9 @@ class Email extends AbstractConstraint implements ConstraintInterface
      */
     public function handleInput()
     {
-        $this->field_value = filter_var($this->field_value, FILTER_VALIDATE_EMAIL);
+        if (filter_var($this->field_value, FILTER_VALIDATE_EMAIL) === false) {
+            $this->field_value = null;
+        }
 
         return $this->field_value;
     }
@@ -85,7 +87,7 @@ class Email extends AbstractConstraint implements ConstraintInterface
     {
         $this->handleInput();
 
-        if ($this->options['obfuscate_email'] === true) {
+        if (isset($this->options['obfuscate_email'])) {
             $obfuscate_email = "";
 
             for ($i = 0; $i < strlen($this->field_value); $i ++) {

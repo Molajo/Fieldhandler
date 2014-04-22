@@ -54,7 +54,6 @@ class Digit extends AbstractConstraint implements ConstraintInterface
         }
 
         if (ctype_digit($this->field_value) === true) {
-
         } else {
             $this->field_value = $this->filterByCharacter('ctype_digit', $this->field_value);
         }

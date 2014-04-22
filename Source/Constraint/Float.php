@@ -35,13 +35,13 @@ class Float extends AbstractConstraint implements ConstraintInterface
             return true;
         }
 
-        if (filter_var($this->field_value, FILTER_VALIDATE_FLOAT)) {
-            return true;
+        if (filter_var($this->field_value, FILTER_VALIDATE_FLOAT) === false) {
+            $this->setValidateMessage(1000);
+
+            return false;
         }
 
-        $this->setValidateMessage(1000);
-
-        return false;
+        return true;
     }
 
     /**
@@ -52,7 +52,17 @@ class Float extends AbstractConstraint implements ConstraintInterface
      */
     public function handleInput()
     {
-        $this->field_value = filter_var($this->field_value, FILTER_VALIDATE_FLOAT);
+        $results = filter_var($this->field_value, FILTER_VALIDATE_FLOAT);
+
+        if ($results === false) {
+            $this->field_value = null;
+            return $this->field_value;
+        }
+
+        if ((float) $results === (float) $this->field_value) {
+        } else {
+            $this->field_value = $results;
+        }
 
         return $this->field_value;
     }
