@@ -10,8 +10,8 @@ namespace Molajo\Fieldhandler;
 
 use Exception;
 use CommonApi\Exception\UnexpectedValueException;
-use CommonApi\Model\SanitizeInterface;
 use CommonApi\Model\FormatInterface;
+use CommonApi\Model\SanitizeInterface;
 use CommonApi\Model\ValidateInterface;
 
 /**
