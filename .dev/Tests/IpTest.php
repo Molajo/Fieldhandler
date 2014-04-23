@@ -96,8 +96,8 @@ class IpTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(false, $results->getValidateResponse());
 
-        $expected_code    = 2000;
-        $expected_message = 'Field: Int_fieldname must only contain Ip values.';
+        $expected_code    = 1000;
+        $expected_message = 'Field: Int_fieldname does not have a valid value for Ip data type.';
         $messages         = $results->getValidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);

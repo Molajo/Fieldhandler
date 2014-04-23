@@ -52,10 +52,9 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
         $field_value = '&';
         $constraint  = 'Fullspecialchars';
 
+        // validate using data already fullspecialchared -- FALSE - does not compute - nothing to see here.
         $results = $this->request->validate($field_name, $field_value, $constraint, array());
-
-        $this->assertEquals(true, $results->getValidateResponse());
-        $this->assertEquals(array(), $results->getValidateMessages());
+        $this->assertEquals(false, $results->getValidateResponse());
 
         return;
     }
@@ -72,10 +71,10 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Fullspecialchars';
         $options     = array('FILTER_FLAG_NO_ENCODE_QUOTES');
 
-        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidateResponse());
-        $this->assertEquals(array(), $results->getValidateMessages());
+        $this->assertEquals('&#38;', $results->getFieldValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }

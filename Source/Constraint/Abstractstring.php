@@ -43,11 +43,12 @@ class Abstractstring extends AbstractConstraint implements ConstraintInterface
         $temp = $this->doStringFunction();
 
         if ($temp === $this->field_value) {
-            $this->setValidateMessage(2000);
-            return false;
+            return true;
         }
 
-        return true;
+        $this->setValidateMessage(2000);
+
+        return false;
     }
 
     /**

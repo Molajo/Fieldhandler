@@ -85,4 +85,41 @@ class Email extends Abstractfiltervar implements ConstraintInterface
 
         return $this->field_value;
     }
+
+    /**
+     * Verify MX Record for Host
+     *
+     * @return  boolean
+     * @since   1.0.0
+     */
+    protected function checkMX($host)
+    {
+        if (isset($this->options['check_mx'])) {
+            if (checkdnsrr($host, 'MX')) {
+            } else {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Check Host DNS Records for at least one (MX, A, AAAA)
+     *
+     * @param   string $host
+     *
+     * @return bool
+     */
+    protected function checkHost($host)
+    {
+        if (isset($this->options['check_host'])) {
+            if (checkdnsrr($host, 'MX') || checkdnsrr($host, "A") || checkdnsrr($host, "AAAA")) {
+            } else {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

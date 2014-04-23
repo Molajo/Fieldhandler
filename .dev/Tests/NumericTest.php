@@ -184,9 +184,8 @@ class NumericTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
-        $field_value = null;
         $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(true, $results->getChangeIndicator());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }

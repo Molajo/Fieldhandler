@@ -82,13 +82,6 @@ class True extends AbstractConstraint implements ConstraintInterface
      */
     public function format()
     {
-        $this->sanitize();
-
-        if ($this->field_value === null) {
-        } else {
-            $this->field_value = true;
-        }
-
         return $this->field_value;
     }
 }

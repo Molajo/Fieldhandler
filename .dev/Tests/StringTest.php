@@ -45,6 +45,26 @@ class StringTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
+    public function testValidateSucceed()
+    {
+        $field_name  = 'alias';
+        $field_value = 'jack-and-jill';
+        $constraint  = 'String';
+        $options     = array();
+
+        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(array(), $results->getValidateMessages());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\String::validate
+     * @return  void
+     * @since   1.0.0
+     */
     public function testValidateFailure()
     {
         $field_name  = 'fieldname';
@@ -60,6 +80,46 @@ class StringTest extends PHPUnit_Framework_TestCase
         $messages         = $results->getValidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\String::sanitize
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testSanitizeSucceed()
+    {
+        $field_name  = 'alias';
+        $field_value = 'Jack and Jill';
+        $constraint  = 'String';
+        $options     = array();
+
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals('Jack and Jill', $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\String::sanitize
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testSanitizeItIsFine()
+    {
+        $field_name  = 'alias';
+        $field_value = 'Jack *&and Jill';
+        $constraint  = 'String';
+        $options     = array();
+
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }

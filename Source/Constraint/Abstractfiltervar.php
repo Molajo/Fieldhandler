@@ -43,7 +43,9 @@ class Abstractfiltervar extends AbstractConstraint implements ConstraintInterfac
             return true;
         }
 
-        if (filter_var($this->field_value, $this->filter_type, $this->setFlags()) === false) {
+        $results = $this->testFilterVar('validate');
+
+        if ($results === false) {
             $this->setValidateMessage(1000);
 
             return false;
@@ -60,9 +62,9 @@ class Abstractfiltervar extends AbstractConstraint implements ConstraintInterfac
      */
     public function sanitize()
     {
-        $this->field_value = filter_var($this->field_value, $this->filter_type, $this->setFlags());
+        $results = $this->testFilterVar('sanitize');
 
-        if ($this->field_value === false) {
+        if ($results == false) {
             $this->field_value = null;
         }
 
@@ -78,5 +80,38 @@ class Abstractfiltervar extends AbstractConstraint implements ConstraintInterfac
     public function format()
     {
         return $this->field_value;
+    }
+
+    /**
+     * Sanitize
+     *
+     * @return  mixed
+     * @since   1.0.0
+     */
+    public function testFilterVar($method)
+    {
+        $results = filter_var($this->field_value, $this->filter_type, $this->setFlags());
+
+        if ($results === false) {
+            return false;
+        }
+
+        if ($method === 'sanitize') {
+            $this->field_value = $results;
+
+            return $results;
+        }
+
+        if ($this->filter_type === FILTER_VALIDATE_FLOAT) {
+            if ((float)$results === (float)$this->field_value) {
+                return true;
+            }
+        }
+
+        if ($this->field_value === $results) {
+            return true;
+        }
+
+        return false;
     }
 }

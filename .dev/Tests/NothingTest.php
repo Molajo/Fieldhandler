@@ -1,6 +1,6 @@
 <?php
 /**
- * Float Constraint Test
+ * Nothing Constraint Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -12,14 +12,14 @@ use Molajo\Fieldhandler\Request;
 use PHPUnit_Framework_TestCase;
 
 /**
- * Float Fieldhandler
+ * Nothing Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class FloatTest extends PHPUnit_Framework_TestCase
+class NothingTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Request
@@ -41,15 +41,17 @@ class FloatTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Float::validate
-     * @return  void
+     * Validate Success: Invalid Field Value
+     *
+     * @covers  Molajo\Fieldhandler\Constraint\Nothing::validate
+     * @return void
      * @since   1.0.0
      */
-    public function testValidateSucceed()
+    public function testValidateSuccessNull()
     {
-        $field_name  = 'float_fieldname';
-        $field_value = 123456789;
-        $constraint  = 'Float';
+        $field_name  = 'agreement';
+        $field_value = null;
+        $constraint  = 'Nothing';
         $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
@@ -61,15 +63,59 @@ class FloatTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Float::validate
+     * Validate Success: Invalid Field Value
+     *
+     * @covers  Molajo\Fieldhandler\Constraint\Nothing::validate
+     * @return void
+     * @since   1.0.0
+     */
+    public function testValidateSuccessSpace()
+    {
+        $field_name  = 'agreement';
+        $field_value = ' ';
+        $constraint  = 'Nothing';
+        $options     = array();
+
+        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(array(), $results->getValidateMessages());
+
+        return;
+    }
+
+    /**
+     * Validate Success: Invalid Field Value
+     *
+     * @covers  Molajo\Fieldhandler\Constraint\Nothing::validate
+     * @return void
+     * @since   1.0.0
+     */
+    public function testValidateSuccessZero()
+    {
+        $field_name  = 'agreement';
+        $field_value = 0;
+        $constraint  = 'Nothing';
+        $options     = array();
+
+        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(array(), $results->getValidateMessages());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Nothing::sanitize
      * @return  void
      * @since   1.0.0
      */
-    public function testValidateFail()
+    public function testValidateFalse()
     {
-        $field_name  = 'float_fieldname';
-        $field_value = 'yessireebob';
-        $constraint  = 'Float';
+        $field_name  = 'single';
+        $field_value = true;
+        $constraint  = 'Nothing';
         $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
@@ -77,7 +123,7 @@ class FloatTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(false, $results->getValidateResponse());
 
         $expected_code    = 1000;
-        $expected_message = 'Field: float_fieldname does not have a valid value for Float data type.';
+        $expected_message = 'Field: single does not have a valid value for Nothing data type.';
         $messages         = $results->getValidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);
@@ -86,18 +132,19 @@ class FloatTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Float::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::sanitize
      * @return  void
      * @since   1.0.0
      */
     public function testSanitizeSucceed()
     {
-        $field_name  = 'float_fieldname';
-        $field_value = 123;
-        $constraint  = 'Float';
+        $field_name  = 'alias';
+        $field_value = 0;
+        $constraint  = 'Nothing';
         $options     = array();
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
+
         $this->assertEquals($field_value, $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());
 
@@ -105,15 +152,15 @@ class FloatTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Float::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Nothing::sanitize
      * @return  void
      * @since   1.0.0
      */
     public function testSanitizeFailure()
     {
-        $field_name  = 'float_fieldname';
-        $field_value = 'yessireebob';
-        $constraint  = 'Float';
+        $field_name  = 'single';
+        $field_value = true;
+        $constraint  = 'Nothing';
         $options     = array();
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
@@ -125,40 +172,40 @@ class FloatTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Float::format
+     * @covers  Molajo\Fieldhandler\Constraint\Nothing::format
      * @return  void
      * @since   1.0.0
      */
     public function testFormatSucceed()
     {
-        $field_name  = 'float_fieldname';
-        $field_value = 123456789;
-        $constraint  = 'Float';
+        $field_name  = 'single';
+        $field_value = 0;
+        $constraint  = 'Nothing';
         $options     = array();
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(123456789, $results->getFieldValue());
+        $this->assertEquals(0, $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Float::format
+     * @covers  Molajo\Fieldhandler\Constraint\Nothing::form
      * @return  void
      * @since   1.0.0
      */
     public function testFormatFailure()
     {
-        $field_name  = 'float_fieldname';
-        $field_value = 'yessireebob';
-        $constraint  = 'Float';
+        $field_name  = 'single';
+        $field_value = true;
+        $constraint  = 'Nothing';
         $options     = array();
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(true, $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
@@ -172,5 +219,6 @@ class FloatTest extends PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        parent::tearDown();
     }
 }

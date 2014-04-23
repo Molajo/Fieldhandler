@@ -62,7 +62,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Url::validate
-     * @return void
+     * @return  void
      * @since   1.0.0
      */
     public function testValidateFail()
@@ -76,8 +76,8 @@ class UrlTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(false, $results->getValidateResponse());
 
-        $expected_code    = 8000;
-        $expected_message = 'Field: url_field did not pass the Url data type test.';
+        $expected_code    = 1000;
+        $expected_message = 'Field: url_field does not have a valid value for Url data type.';
         $messages         = $results->getValidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);
@@ -99,15 +99,15 @@ class UrlTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidateResponse());
-        $this->assertEquals(array(), $results->getValidateMessages());
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Url::validate
-     * @return void
+     * @return  void
      * @since   1.0.0
      */
     public function testSanitizeFail()
@@ -121,9 +121,8 @@ class UrlTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
-        $field_value = null;
         $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(true, $results->getChangeIndicator());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
@@ -150,7 +149,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Url::validate
-     * @return void
+     * @return  void
      * @since   1.0.0
      */
     public function testFormatFail()
@@ -163,9 +162,8 @@ class UrlTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
-        $field_value = null;
         $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(true, $results->getChangeIndicator());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
@@ -173,7 +171,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
     /**
      * Tear down
      *
-     * @return void
+     * @return  void
      * @since   1.0.0
      */
     protected function tearDown()

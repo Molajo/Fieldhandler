@@ -76,8 +76,8 @@ class EncodedTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(false, $results->getValidateResponse());
 
-        $expected_code    = 8000;
-        $expected_message = 'Field: dog did not pass the Encoded data type test.';
+        $expected_code    = 1000;
+        $expected_message = 'Field: dog does not have a valid value for Encoded data type.';
         $messages         = $results->getValidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);
@@ -139,28 +139,8 @@ class EncodedTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals('Jack%20%2A%26and%2BJill', $results->getFieldValue());
-        $this->assertEquals(true, $results->getChangeIndicator());
-
-        return;
-    }
-
-    /**
-     * @covers  Molajo\Fieldhandler\Constraint\Encoded::format
-     * @return  void
-     * @since   1.0.0
-     */
-    public function testFormatFailure()
-    {
-        $field_name  = 'encoded';
-        $field_value = 'Jack *&and+Jill';
-        $constraint  = 'Encoded';
-        $options     = array();
-
-        $results = $this->request->format($field_name, $field_value, $constraint, $options);
-
-        $this->assertEquals('Jack%20%2A%26and%2BJill', $results->getFieldValue());
-        $this->assertEquals(true, $results->getChangeIndicator());
+        $this->assertEquals('Jack *&and+Jill', $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }

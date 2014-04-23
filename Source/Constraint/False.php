@@ -92,13 +92,6 @@ class False extends AbstractConstraint implements ConstraintInterface
      */
     public function format()
     {
-        $this->sanitize();
-
-        if ($this->field_value === null) {
-        } else {
-            $this->field_value = false;
-        }
-
         return $this->field_value;
     }
 }

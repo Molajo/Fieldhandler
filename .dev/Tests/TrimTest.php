@@ -73,8 +73,8 @@ class TrimTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, array());
 
-        $expected_code    = 8000;
-        $expected_message = 'Field: email did not pass the Trim data type test.';
+        $expected_code    = 2000;
+        $expected_message = 'Field: email must only contain Trim values.';
         $messages         = $results->getValidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);
@@ -96,7 +96,7 @@ class TrimTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals('AmyStephen@Molajo.org', $results->getFieldValue());
+        $this->assertEquals(null, $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
 
         return;

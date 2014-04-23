@@ -32,7 +32,9 @@ class Length extends AbstractConstraint implements ConstraintInterface
             return true;
         }
 
-        if ($this->testMinimumMaximum()) {
+        $results = $this->testMinimumMaximum();
+
+        if ($results === true) {
             return true;
         }
 
@@ -66,5 +68,35 @@ class Length extends AbstractConstraint implements ConstraintInterface
     public function format()
     {
         return $this->field_value;
+    }
+
+    /**
+     * Get Minimum and Maximum
+     *
+     * @return  boolean
+     * @since   1.0.0
+     */
+    protected function testMinimumMaximum()
+    {
+        $minimum = 0;
+        $maximum = 999999999999;
+
+        if (isset($this->options['minimum_length'])) {
+            $minimum = $this->options['minimum_length'];
+        }
+
+        if (isset($this->options['maximum_length'])) {
+            $maximum = $this->options['maximum_length'];
+        }
+
+        $string_length = strlen(trim($this->field_value));
+
+        if ($string_length >= $minimum
+            && $string_length <= $maximum
+        ) {
+            return true;
+        }
+
+        return false;
     }
 }
