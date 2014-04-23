@@ -3,7 +3,7 @@ title: Html
 author: Amy Stephen
 published: 2014-05-01
 categories : Fieldhandler, Constraint
-tags : url
+tags : standard
 featured : 0
 class : https://github.com/Molajo/Fieldhandler/blob/master/Source/Constraint/Html.php
 namespace : Molajo\Fieldhandler\Constraint\Html
@@ -12,72 +12,73 @@ unit_tests : https://github.com/Molajo/Fieldhandler/blob/master/.dev/Tests/HtmlT
 
 {{ Constraint }}
 
-
-{{ Constraint::Definition }}
-
-Tests if values are valid for a URL slug. When used with filter or escape, the value returned can be used as an alias value.
+All Html must be filtered according to a [white list](https://github.com/Molajo/Fieldhandler/blob/master/Source/Constraint/AbstractConstraint.php#L154)
+and escaped before using in the response.
 
 {{ Constraint::Options }}
 
+The whitelist can be overridden by including a new list in the $request as an $options['white_list'] array.
 
 {{ Constraint::Validate }}
 
-Values failing to conform to constraint definitions are removed.
-
-{{ Constraint::Validate::Usage }}
-
-Say things...
+HTML is validated by comparing what was input to the validate process to what would be used with a filter.
+If any of the HTML would be changed, the validation returns a false and messages.
 
 ```php
 
-$employee_name = 'Janet Jackson';
-$results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
+    $request = new Molajo\Fieldhandler\Request();
 
-if ($results->getChangeIndicator() === true) {
-    $employee_name = $results->getFieldValue();
-} else {
-    // Filtering did not change the Employee Name
-}
+    $options = array();
+    $options['default'] = $default_value;
+    $results = $request->validate('Html Name', $html, 'Html', $options);
+
+    if ($results->getValidateResponse() === true) {
+        // all is good
+    } else {
+        foreach ($results->getValidateMessages() as $error) {
+            echo  'Validation error: ' . $error->code . ': ' . $error->message . '\n';
+        }
+    }
 
 ```
 
-
 {{ Constraint::Sanitize }}
 
-Values failing to conform to constraint definitions are removed.
+HTML can be sanitized and the results used safely.
+
 
 {{ Constraint::Sanitize::Usage }}
 
-Say things...
 
 ```php
 
-$employee_name = 'Janet Jackson';
-$results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
+    $request = new Molajo\Fieldhandler\Request();
 
-if ($results->getChangeIndicator() === true) {
-    $employee_name = $results->getFieldValue();
-} else {
-    // Filtering did not change the Employee Name
-}
+    $results = $request->validate('Html Name', $html, 'Html', $options);
+
+    if ($results->getChangeIndicator() === true) {
+        $filtered_html = $results->getFieldValue();
+    }
 
 ```
 
 {{ Constraint::Format }}
 
-Values failing to conform to constraint definitions are removed.
+HTML must be escaped for security purposes. Just pass the body of your rendered output in and
+use the escaped results for the body.
 
-{{ Constraint::Format::Usage }}
+
+{{ Constraint::Sanitize::Usage }}
+
 
 ```php
 
-$employee_name = 'Janet Jackson';
-$results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
+    $request = new Molajo\Fieldhandler\Request();
 
-if ($results->getChangeIndicator() === true) {
-    $employee_name = $results->getFieldValue();
-} else {
-    // Filtering did not change the Employee Name
-}
+    $results = $request->format('Html Name', $html, 'Html', $options);
+
+    if ($results->getChangeIndicator() === true) {
+        $filtered_html = $results->getFieldValue();
+    }
 
 ```

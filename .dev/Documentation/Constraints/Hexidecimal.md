@@ -12,72 +12,56 @@ unit_tests : https://github.com/Molajo/Fieldhandler/blob/master/.dev/Tests/Hexid
 
 {{ Constraint }}
 
-
-{{ Constraint::Definition }}
-
-Tests if values are valid for a URL slug. When used with filter or escape, the value returned can be used as an alias value.
+Field must be of type hexidecimal.
 
 {{ Constraint::Options }}
 
+Two [filter flags](http://us2.php.net/manual/en/filter.filters.flags.php): $options['FILTER_FLAG_ALLOW_OCTAL'],
+$options['FILTER_FLAG_ALLOW_HEX'] can be added to the $request command
 
 {{ Constraint::Validate }}
 
-Values failing to conform to constraint definitions are removed.
+Returns *true* or *false* indicator of constraint conformance.
 
 {{ Constraint::Validate::Usage }}
 
-Say things...
+To test validity:
 
 ```php
 
-$employee_name = 'Janet Jackson';
-$results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
+    $request = new Molajo\Fieldhandler\Request();
 
-if ($results->getChangeIndicator() === true) {
-    $employee_name = $results->getFieldValue();
-} else {
-    // Filtering did not change the Employee Name
-}
+    $results = $request->validate('Hexidecimal Field', $hexidecimal_value, 'Hexidecimal');
+
+    if ($results->getValidateResponse() === true) {
+        // all is good
+    } else {
+        foreach ($results->getValidateMessages() as $error) {
+            echo  'Validation error: ' . $error->code . ': ' . $error->message . '\n';
+        }
+    }
 
 ```
 
-
 {{ Constraint::Sanitize }}
 
-Values failing to conform to constraint definitions are removed.
+Hexidecimal is sanitized using [ctype_xdigit](http://us2.php.net/manual/en/function.ctype-xdigit.php).
+If a field is found to be non-compliant it is returned as a NULL.
 
 {{ Constraint::Sanitize::Usage }}
 
-Say things...
-
 ```php
 
-$employee_name = 'Janet Jackson';
-$results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
+    $options = array();
+    $options['allow_whitespace'] = true;
+    $results = $this->request->sanitize('Hexidecimal Field', $hexidecimal_value, 'Hexidecimal', $options);
 
-if ($results->getChangeIndicator() === true) {
-    $employee_name = $results->getFieldValue();
-} else {
-    // Filtering did not change the Employee Name
-}
+    if ($results->getChangeIndicator() === true) {
+        $hexidecimal_value = $results->getFieldValue();
+    }
 
 ```
 
 {{ Constraint::Format }}
 
-Values failing to conform to constraint definitions are removed.
-
-{{ Constraint::Format::Usage }}
-
-```php
-
-$employee_name = 'Janet Jackson';
-$results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
-
-if ($results->getChangeIndicator() === true) {
-    $employee_name = $results->getFieldValue();
-} else {
-    // Filtering did not change the Employee Name
-}
-
-```
+`Hexidecimal` has no special formatting. The value sent in is simply returned without processing.

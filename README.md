@@ -4,9 +4,8 @@ Molajo Fieldhandler [Alpha]
 
 [![Build Status](https://travis-ci.org/Molajo/Fieldhandler.png?branch=master)](https://travis-ci.org/Molajo/Fieldhandler)
 
-*Molajo Fieldhandler* bundles *filter*, *escape* and *validate*
-into an integrated data integrity assurance package for PHP applications.
-The approach aligns fields with constraints, applying *filter*, *escape* and *validate*
+*Molajo Fieldhandler* is an integrated data integrity assurance package for PHP applications.
+The approach aligns data fields with constraints, applying validation and sanitation
 functionality very specifically as specialised tools. In unifying tool usage around a focus
 on field-level rule compliance, applications ensure data
 collection processes provide clean, verified, and useful information.
@@ -25,22 +24,11 @@ minimum and maximum field length, number of occurrences,
 whether or not a value is required for the field or if there is a list or data range
 that can be used to confirm data values.
 
-Constraints are just as important for using data and can include formatting requirements,
-or whether a "lookup value" should be displayed in place of key field data,
-if a mask should be used to prevent display of secure information, and so on.
-
-In the *Molajo Fieldhandler*, each constraint is implemented as a separate PHP classes with methods for *filter*,
- *validate* and *escape.* On the input side, *filter* and *validate* typically enforce rule adherence whereas
- the *escape* function is useful in ensuring data treatment requirements.
-
-
-### Basic Approach
-
 A critical step in application development associates specific integrity
 constraints with each field in the collection. It is simply not possible to ensure clean data
 if the rules defining that state are not articulated.
 
-#### Define Integrity Constraints
+### Define Integrity Constraints
 
 As an example, assume these constraints for the `password` field:
 
@@ -50,7 +38,7 @@ As an example, assume these constraints for the `password` field:
 4. The new password cannot match the existing value.
 4. Passwords should never be displayed and must be masked as asterisks.
 
-#### Design enforcement strategy
+### Design enforcement strategy
 
 Review the existing *Molajo Fieldhandler* Constraint classes to define enforcement.
 Custom Constraints can be created when delivered constraints are not enough.
@@ -60,7 +48,7 @@ Custom Constraints can be created when delivered constraints are not enough.
 3. Validate the field data using the *Length Constraint* to ensure a length of 8 to 30 characters.
 4. Escape the password using the *Password Constraint* class to replace password values with asterisks.
 
-#### Write code to deploy enforcement strategy
+### Write code to deploy enforcement strategy
 
 There are three *Molajo Fieldhandler* Request methods:
 
@@ -83,7 +71,7 @@ There are four parameters for the request, regardless of whether it is `validate
 3. **$constraint** the name of the constraint;
 4. **$options** (optional) am associative array of named pair values required by constraint processing.
 
-##### Example: Verbose
+#### Example: Verbose
 
 This is a verbose example for purposes of learning where each constraint is specifically enforced.
 
@@ -125,7 +113,7 @@ if ($results->getChangeIndicator() === true) {
 }
 
 ```
-##### Example: Field Collection
+#### Example: Field Collection
 
 While the previous example showed how to perform each test, one at a time, it is also possible
 to group constraints for each field:
@@ -186,132 +174,14 @@ foreach ($data_object as $field) {
 
 ## Creating Custom Constraints ##
 
-How? Do it.
+INCOMPLETE
 
 ## Messages ##
 
-Messages are defined for each delivered constraint and available for translating language strings.
- The messages can also be customized .
-
-Messages
-Tokens
-Localization
-
-$filtered = $request->sanitize('Title', $title, 'string, required');
-$escaped = $request->format('Title', $filtered->getValidateResponse(), 'string');
-
-$title = $escaped->getValidateResponse();
-
-```
+INCOMPLETE
 
 
 ## Package Constraints ##
-
-- [Callback](https://github.com/Molajo/Fieldhandler#callback)
-
-Basic
-- [Required](https://github.com/Molajo/Fieldhandler#required)
-- [Defaults](https://github.com/Molajo/Fieldhandler#defaults)
-- [Alpha](https://github.com/Molajo/Fieldhandler#alpha)
-- [Alphanumeric](https://github.com/Molajo/Fieldhandler#alphanumeric)
-- [Boolean](https://github.com/Molajo/Fieldhandler#boolean)
-- [Digit](https://github.com/Molajo/Fieldhandler#digit)
-
-- Double - [use Float](http://php.net/manual/en/function.is-double.php)
-- [Float](https://github.com/Molajo/Fieldhandler#float)
-- [Integer](https://github.com/Molajo/Fieldhandler#integer)
-- [Numeric](https://github.com/Molajo/Fieldhandler#numeric)
-- [Object](https://github.com/Molajo/Fieldhandler#object)
-- [Raw](https://github.com/Molajo/Fieldhandler#raw)
-
-- Real - [use Float](http://php.net/manual/en/function.is-real.php)
-- [Scalar]
-- [String](https://github.com/Molajo/Fieldhandler#string)
-
-Date/Time
-- [Date](https://github.com/Molajo/Fieldhandler#date)
-- [Datetime](https://github.com/Molajo/Fieldhandler#datetime)
-- [Time](https://github.com/Molajo/Fieldhandler#time)
-
-File-related Data Types
-- [Fileextension](https://github.com/Molajo/Fieldhandler#fileextension)
-- [Image](https://github.com/Molajo/Fieldhandler#image)
-- [Mimetypes](https://github.com/Molajo/Fieldhandler#mimetypes)
-- [File]
-- [Size]
-- [Path]
-- [Filename]
-- [Exists]
-
-Value
-- [True](https://github.com/Molajo/Fieldhandler#true)
-- [False]
-- [Null]
-- [Not null]
-- [Nothing]
-- [Something]
-- [Space]
-
-- [Fromto](https://github.com/Molajo/Fieldhandler#Fromto)
-- [Range] see Fromto...
-
-- [Contains](https://github.com/Molajo/Fieldhandler#contains)
-- [Values](https://github.com/Molajo/Fieldhandler#values)
-
-- [Minimum](https://github.com/Molajo/Fieldhandler#minimum)
-- [Maximum](https://github.com/Molajo/Fieldhandler#maximum)
-
-- [Regex](https://github.com/Molajo/Fieldhandler#regex)
-
-- [Length](https://github.com/Molajo/Fieldhandler#stringlength)
-
-Arrays
-- [Arrays](https://github.com/Molajo/Fieldhandler#arrays)
-- [Count]
-- [Values]
-- [Keys]
-- Unique
-- Sorted
-
-Comparison
-- [Equal](https://github.com/Molajo/Fieldhandler#equal)
-- [Notequal](https://github.com/Molajo/Fieldhandler#notequal)
-- [GreaterThan]
-- [LessThan] or equal to
-
-Database
-- [Foreignkey](https://github.com/Molajo/Fieldhandler#foreignkey)
-- [Lookup](https://github.com/Molajo/Fieldhandler#lookup)
-
-User
-- Password
-- Userid
-- Username
-- [Email](https://github.com/Molajo/Fieldhandler#email)
-- [Tel](https://github.com/Molajo/Fieldhandler#tel)
-- Credit Card
-- Zip Code
-
-Special Handling
-- [Fullspecialchars](https://github.com/Molajo/Fieldhandler#fullspecialchars)
-- [Html](https://github.com/Molajo/Fieldhandler#html)
-- [Encoded](https://github.com/Molajo/Fieldhandler#encoded)
-
-Formatting
-- [Lower](https://github.com/Molajo/Fieldhandler#lower)
-- [Upper](https://github.com/Molajo/Fieldhandler#upper)
-- [Trim](https://github.com/Molajo/Fieldhandler#trim)
-- [Format]
-- [Printable]
-- [Punctuation]
-- [Controlcharacters]
-
-Url
-- [Alias](https://github.com/Molajo/Fieldhandler#alias)
-- [Ip](https://github.com/Molajo/Fieldhandler#ip)
-- [Uuid]()
-- [Url](https://github.com/Molajo/Fieldhandler#url)
-
 
 The examples in this section assume the *Fieldhandler* has been instantiated, as follows:
 

@@ -41,7 +41,6 @@ if ($results->getChangeIndicator() === true) {
 
 ```
 
-
 {{ Constraint::Sanitize }}
 
 Values failing to conform to constraint definitions are removed.

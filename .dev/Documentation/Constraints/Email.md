@@ -12,72 +12,77 @@ unit_tests : https://github.com/Molajo/Fieldhandler/blob/master/.dev/Tests/Email
 
 {{ Constraint }}
 
-
-{{ Constraint::Definition }}
-
-Tests if values are valid for a URL slug. When used with filter or escape, the value returned can be used as an alias value.
+Allows only valid email addresses.
 
 {{ Constraint::Options }}
 
+To verify MX Record for Host, use the `$this->options['check_mx']` input option.
+
+To verify the Host DNS Records for at least one (MX, A, AAAA), use the `$this->options['check_host']` input option.
+
+To obfuscate the email address, use the `$this->options['obfuscate_email']` option.
 
 {{ Constraint::Validate }}
 
-Values failing to conform to constraint definitions are removed.
+Returns *true* or *false* indicator of constraint conformance.
 
 {{ Constraint::Validate::Usage }}
 
-Say things...
+To test validity:
 
 ```php
 
-$employee_name = 'Janet Jackson';
-$results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
+    $request = new Molajo\Fieldhandler\Request();
 
-if ($results->getChangeIndicator() === true) {
-    $employee_name = $results->getFieldValue();
-} else {
-    // Filtering did not change the Employee Name
-}
+    $results = $request->validate('EmailField', $email_value, 'Email');
+
+    if ($results->getValidateResponse() === true) {
+        // all is good
+    } else {
+        foreach ($results->getValidateMessages() as $error) {
+            echo  'Validation error: ' . $error->code . ': ' . $error->message . '\n';
+        }
+    }
 
 ```
 
-
 {{ Constraint::Sanitize }}
 
-Values failing to conform to constraint definitions are removed.
+Email is sanitized using [FILTER_VALIDATE_EMAIL](http://us2.php.net/manual/en/function.ctype-email.php)
+to remove non-conforming values.
+
+Additionally, te
 
 {{ Constraint::Sanitize::Usage }}
 
-Say things...
-
 ```php
 
-$employee_name = 'Janet Jackson';
-$results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
+    $results = $this->request->sanitize('Email Field Name', $email_value, 'Email');
 
-if ($results->getChangeIndicator() === true) {
-    $employee_name = $results->getFieldValue();
-} else {
-    // Filtering did not change the Employee Name
-}
+    if ($results->getChangeIndicator() === true) {
+        $email_value = $results->getFieldValue();
+    }
 
 ```
 
 {{ Constraint::Format }}
 
-Values failing to conform to constraint definitions are removed.
 
-{{ Constraint::Format::Usage }}
+To obfuscate the displayed email address, use the format method with $this->options['obfuscate_email'], as shown
+in this example.
+
+
+{{ Constraint::Sanitize::Usage }}
 
 ```php
 
-$employee_name = 'Janet Jackson';
-$results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
+    $options = array();
+    $options['obfuscate_email'] = true;
+    $results = $this->request->sanitize('Email Field Name', $email_value, 'Email', $options);
 
-if ($results->getChangeIndicator() === true) {
-    $employee_name = $results->getFieldValue();
-} else {
-    // Filtering did not change the Employee Name
-}
+    if ($results->getChangeIndicator() === true) {
+        // returns the obfuscated value
+        $email_value = $results->getFieldValue();
+    }
 
 ```

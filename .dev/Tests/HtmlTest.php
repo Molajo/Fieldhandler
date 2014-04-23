@@ -81,7 +81,25 @@ class HtmlTest extends PHPUnit_Framework_TestCase
         return;
     }
 
+    /**
+     * Test HTML filter
+     *
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testFilterSuccess()
+    {
+        $field_name  = 'fieldname';
+        $field_value = '<script>("Gotcha!");</script><p>I am fine.</p>';
+        $constraint  = 'Html';
 
+        $results = $this->request->format($field_name, $field_value, $constraint, array());
+
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
+
+        return;
+    }
     /**
      * Tear down
      *

@@ -50,7 +50,7 @@ class Escape implements EscapeInterface
      */
     public function escapeHtml($string)
     {
-        return $this->adapter->Html($string);
+        return $this->adapter->escapeHtml($string);
     }
 
     /**

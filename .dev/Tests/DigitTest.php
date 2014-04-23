@@ -171,27 +171,6 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Digit::sanitize
-     * @return  void
-     * @since   1.0.0
-     */
-    public function testFormatFail()
-    {
-        $field_name  = 'digit_fieldname';
-        $field_value = 'dog';
-        $constraint  = 'Digit';
-        $options     = array();
-
-        $results = $this->request->format($field_name, $field_value, $constraint, $options);
-
-        $field_value = null;
-        $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(true, $results->getChangeIndicator());
-
-        return;
-    }
-
-    /**
      * Tear down
      *
      * @return void

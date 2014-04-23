@@ -69,7 +69,9 @@ class Alias extends AbstractConstraint implements ConstraintInterface
             return null;
         }
 
-        $this->field_value = $this->formatAlias($this->field_value);
+        $alias = $this->sanitizeAlias($this->field_value);
+
+        $this->field_value = $this->formatAlias($alias);
 
         return $this->field_value;
     }
@@ -83,21 +85,8 @@ class Alias extends AbstractConstraint implements ConstraintInterface
     protected function validateAlias()
     {
         $alias = $this->field_value;
-
-        $alias = preg_replace('/ /', '-', $alias);
-        if ($this->field_value === $alias) {
-        } else {
-            return false;
-        }
-
-        $alias = preg_replace('/(\s|[^A-Za-z0-9\-])+/', '-', $alias);
-
-        if ($this->field_value === $alias) {
-        } else {
-            return false;
-        }
-
-        $alias = filter_var($alias, FILTER_SANITIZE_URL);
+        $alias = $this->sanitizeAlias($alias);
+        $alias = $this->formatAlias($alias);
 
         if ($this->field_value === $alias) {
         } else {
@@ -117,7 +106,7 @@ class Alias extends AbstractConstraint implements ConstraintInterface
      */
     public function sanitizeAlias($alias)
     {
-        return $this->filterByCharacter('ctype_alnum', $alias, true);
+        return $this->filterByCharacter('ctype_alnum', str_replace('-', ' ', trim($alias)), true);
     }
 
     /**
@@ -130,8 +119,6 @@ class Alias extends AbstractConstraint implements ConstraintInterface
      */
     public function formatAlias($alias)
     {
-        $alias = $this->sanitizeAlias($alias);
-
         $alias = str_replace('-', ' ', strtolower(trim($alias)));
         $alias = trim($alias, '-');
         $alias = str_replace('  ', ' ', strtolower(trim($alias)));

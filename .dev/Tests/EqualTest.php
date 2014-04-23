@@ -165,8 +165,8 @@ class EqualTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(null, $results->getFieldValue());
-        $this->assertEquals(true, $results->getChangeIndicator());
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }

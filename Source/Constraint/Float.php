@@ -55,7 +55,9 @@ class Float extends AbstractConstraint implements ConstraintInterface
         $results = filter_var($this->field_value, FILTER_VALIDATE_FLOAT);
 
         if ($results === false) {
+
             $this->field_value = null;
+
             return $this->field_value;
         }
 
@@ -75,6 +77,6 @@ class Float extends AbstractConstraint implements ConstraintInterface
      */
     public function format()
     {
-        return $this->sanitize();
+        return $this->field_value;
     }
 }

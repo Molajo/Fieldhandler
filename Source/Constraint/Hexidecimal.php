@@ -22,6 +22,17 @@ use CommonApi\Model\ConstraintInterface;
 class Hexidecimal extends AbstractConstraint implements ConstraintInterface
 {
     /**
+     * Constraint Options
+     *
+     * @var    array
+     * @since  1.0.0
+     */
+    protected $constraint_allowable_options = array(
+        'FILTER_FLAG_ALLOW_OCTAL',
+        'FILTER_FLAG_ALLOW_HEX'
+    );
+
+    /**
      * Validate
      *
      * @return  boolean
@@ -51,7 +62,9 @@ class Hexidecimal extends AbstractConstraint implements ConstraintInterface
     public function sanitize()
     {
         if ($this->field_value === null) {
+
         } elseif (ctype_xdigit($this->field_value)) {
+
         } else {
             $this->field_value = null;
         }
@@ -69,30 +82,5 @@ class Hexidecimal extends AbstractConstraint implements ConstraintInterface
     public function format()
     {
         return $this->sanitize();
-    }
-
-    /**
-     * Flags can be set in options array
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function setFlags()
-    {
-        $filter = '';
-
-        if (isset($this->options['FILTER_FLAG_ALLOW_OCTAL'])) {
-            $filter = 'FILTER_FLAG_ALLOW_OCTAL';
-        }
-
-        if (isset($this->options['FILTER_FLAG_ALLOW_HEX'])) {
-            if ($filter == '') {
-            } else {
-                $filter .= ', ';
-            }
-            $filter .= 'FILTER_FLAG_ALLOW_HEX';
-        }
-
-        return $filter;
     }
 }

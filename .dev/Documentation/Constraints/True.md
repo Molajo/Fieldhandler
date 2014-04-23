@@ -12,72 +12,57 @@ unit_tests : https://github.com/Molajo/Fieldhandler/blob/master/.dev/Tests/TrueT
 
 {{ Constraint }}
 
-
-{{ Constraint::Definition }}
-
-Tests if values are valid for a URL slug. When used with filter or escape, the value returned can be used as an alias value.
+Allows only true, 1, yes and on values.
 
 {{ Constraint::Options }}
 
+To customize the list of true values, pass in a true_array options entry with an array containing
+the preferred values with your $request.
+
+   $options['true_array'] = array('true', 0);
 
 {{ Constraint::Validate }}
 
-Values failing to conform to constraint definitions are removed.
+Returns *true* or *true* indicator of constraint conformance.
 
 {{ Constraint::Validate::Usage }}
 
-Say things...
+To test validity:
 
 ```php
 
-$employee_name = 'Janet Jackson';
-$results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
+    $request = new Molajo\Fieldhandler\Request();
 
-if ($results->getChangeIndicator() === true) {
-    $employee_name = $results->getFieldValue();
-} else {
-    // Filtering did not change the Employee Name
-}
+    $results = $request->validate('TrueField', $true_value, 'True');
+
+    if ($results->getValidateResponse() === true) {
+        // all is good
+    } else {
+        foreach ($results->getValidateMessages() as $error) {
+            echo  'Validation error: ' . $error->code . ': ' . $error->message . '\n';
+        }
+    }
 
 ```
 
-
 {{ Constraint::Sanitize }}
 
-Values failing to conform to constraint definitions are removed.
+True is sanitized performed by comparing the input value to the entries in the true array. When
+there is no array entry matching the input value, the value is returned as NULL.
 
 {{ Constraint::Sanitize::Usage }}
 
-Say things...
-
 ```php
 
-$employee_name = 'Janet Jackson';
-$results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
+    $results = $this->request->sanitize('TrueField', $not_true_value, 'True');
 
-if ($results->getChangeIndicator() === true) {
-    $employee_name = $results->getFieldValue();
-} else {
-    // Filtering did not change the Employee Name
-}
+    if ($results->getChangeIndicator() === true) {
+        // Returns NULL
+        $not_true_value = $results->getFieldValue();
+    }
 
 ```
 
 {{ Constraint::Format }}
 
-Values failing to conform to constraint definitions are removed.
-
-{{ Constraint::Format::Usage }}
-
-```php
-
-$employee_name = 'Janet Jackson';
-$results       = $request->sanitize('employee_name', $employee_name, 'Alphanumeric');
-
-if ($results->getChangeIndicator() === true) {
-    $employee_name = $results->getFieldValue();
-} else {
-    // Filtering did not change the Employee Name
-}
-
-```
+`True` has no special formatting. The value sent in is simply returned without processing.

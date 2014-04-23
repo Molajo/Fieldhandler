@@ -33,12 +33,20 @@ class Digit extends AbstractConstraint implements ConstraintInterface
             return true;
         }
 
-        if (ctype_digit($this->field_value) === false) {
-            $this->setValidateMessage(2000);
-            return false;
+        $allow_whitespace = false;
+        if (isset($this->options['allow_whitespace'])) {
+            $allow_whitespace = true;
         }
 
-        return true;
+        $results = $this->filterByCharacter('ctype_digit', $this->field_value, $allow_whitespace);
+
+        if ($results === $this->field_value) {
+            return true;
+        }
+
+        $this->setValidateMessage(2000);
+
+        return false;
     }
 
     /**
@@ -53,14 +61,12 @@ class Digit extends AbstractConstraint implements ConstraintInterface
             return $this->field_value;
         }
 
-        if (ctype_digit($this->field_value) === true) {
-        } else {
-            $allow_whitespace = false;
-            if (isset($this->options['allow_whitespace'])) {
-                $allow_whitespace = true;
-            }
-            $this->field_value = $this->filterByCharacter('ctype_digit', $this->field_value, $allow_whitespace);
+        $allow_whitespace = false;
+        if (isset($this->options['allow_whitespace'])) {
+            $allow_whitespace = true;
         }
+
+        $this->field_value = $this->filterByCharacter('ctype_digit', $this->field_value, $allow_whitespace);
 
         return $this->field_value;
     }
@@ -73,6 +79,6 @@ class Digit extends AbstractConstraint implements ConstraintInterface
      */
     public function format()
     {
-        return $this->sanitize();
+        return $this->field_value;
     }
 }

@@ -33,7 +33,7 @@ Sanitize applies the default to the input field if the input value is null.
 
     $request = new Molajo\Fieldhandler\Request();
 
-    $opions = array();
+    $options = array();
     $options['default'] = $default_value;
     $results = $request->sanitize('Defaults Field Name', $default_applied_to_this, 'Defaults', $options);
 

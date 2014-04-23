@@ -237,6 +237,14 @@ abstract class AbstractConstraint implements ConstraintInterface
     protected $validate_messages = array();
 
     /**
+     * Filter instance
+     *
+     * @var    object
+     * @since  1.0.0
+     */
+    protected $filter_instance;
+
+    /**
      * Constructor
      *
      * @param   string $constraint
