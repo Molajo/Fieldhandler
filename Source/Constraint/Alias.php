@@ -106,12 +106,12 @@ class Alias extends AbstractConstraint implements ConstraintInterface
      */
     public function sanitizeAlias($alias)
     {
-        return $this->filterByCharacter('ctype_alnum', str_replace('-', ' ', trim($alias)), true);
+        return $this->sanitizeByCharacter('ctype_alnum', str_replace('-', ' ', trim($alias)), true);
     }
 
     /**
      * Create Alias from Text Value
-
+     *
      * @param   string $alias
      *
      * @return  string

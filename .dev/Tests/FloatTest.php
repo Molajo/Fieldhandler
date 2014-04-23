@@ -47,10 +47,10 @@ class FloatTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateSucceed()
     {
-        $field_name = 'float_fieldname';
+        $field_name  = 'float_fieldname';
         $field_value = 123456789;
-        $constraint = 'Float';
-        $options = array();
+        $constraint  = 'Float';
+        $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
@@ -67,10 +67,10 @@ class FloatTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateFail()
     {
-        $field_name = 'float_fieldname';
+        $field_name  = 'float_fieldname';
         $field_value = 'yessireebob';
-        $constraint = 'Float';
-        $options = array();
+        $constraint  = 'Float';
+        $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
@@ -92,10 +92,10 @@ class FloatTest extends PHPUnit_Framework_TestCase
      */
     public function testSanitizeSucceed()
     {
-        $field_name = 'float_fieldname';
+        $field_name  = 'float_fieldname';
         $field_value = 123;
-        $constraint = 'Float';
-        $options = array();
+        $constraint  = 'Float';
+        $options     = array();
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
@@ -112,10 +112,10 @@ class FloatTest extends PHPUnit_Framework_TestCase
      */
     public function testSanitizeFailure()
     {
-        $field_name = 'float_fieldname';
+        $field_name  = 'float_fieldname';
         $field_value = 'yessireebob';
-        $constraint = 'Float';
-        $options = array();
+        $constraint  = 'Float';
+        $options     = array();
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
@@ -132,10 +132,10 @@ class FloatTest extends PHPUnit_Framework_TestCase
      */
     public function testFormatSucceed()
     {
-        $field_name = 'float_fieldname';
+        $field_name  = 'float_fieldname';
         $field_value = 123456789;
-        $constraint = 'Float';
-        $options = array();
+        $constraint  = 'Float';
+        $options     = array();
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
@@ -152,10 +152,10 @@ class FloatTest extends PHPUnit_Framework_TestCase
      */
     public function testFormatFailure()
     {
-        $field_name = 'float_fieldname';
+        $field_name  = 'float_fieldname';
         $field_value = 'yessireebob';
-        $constraint = 'Float';
-        $options = array();
+        $constraint  = 'Float';
+        $options     = array();
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 

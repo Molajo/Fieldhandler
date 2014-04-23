@@ -29,8 +29,8 @@ class Notnull extends AbstractConstraint implements ConstraintInterface
     public function validate()
     {
         if ($this->field_value === null) {
-            return false;
             $this->setValidateMessage(1000);
+            return false;
         }
 
         return false;
@@ -44,8 +44,6 @@ class Notnull extends AbstractConstraint implements ConstraintInterface
      */
     public function sanitize()
     {
-        $this->field_value = null;
-
         return $this->field_value;
     }
 
@@ -57,6 +55,6 @@ class Notnull extends AbstractConstraint implements ConstraintInterface
      */
     public function format()
     {
-        return $this->sanitize();
+        return $this->field_value;
     }
 }

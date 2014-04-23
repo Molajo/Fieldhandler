@@ -71,7 +71,7 @@ class DateTest extends PHPUnit_Framework_TestCase
     {
         $field_name  = 'this_is_a_date_field';
         $field_value = 'gggghhhhhh';
-        $constraint = 'Date';
+        $constraint  = 'Date';
 
         $results = $this->request->validate($field_name, $field_value, $constraint);
 
@@ -98,7 +98,7 @@ class DateTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Date';
         $options     = array(
             'create_from_date_format' => 'Y-m-d',
-            'display_as_date_format' => 'd/m/Y'
+            'display_as_date_format'  => 'd/m/Y'
         );
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
@@ -141,7 +141,7 @@ class DateTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Date';
         $options     = array(
             'create_from_date_format' => 'Y-m-d',
-            'display_as_date_format' => 'm/d/Y'
+            'display_as_date_format'  => 'm/d/Y'
         );
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);

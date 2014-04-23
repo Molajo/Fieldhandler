@@ -54,7 +54,6 @@ class Numeric extends AbstractConstraint implements ConstraintInterface
         } else {
 
             if (is_numeric($this->field_value)) {
-
             } else {
                 $this->field_value = null;
             }
@@ -71,6 +70,6 @@ class Numeric extends AbstractConstraint implements ConstraintInterface
      */
     public function format()
     {
-        return $this->sanitize();
+        return $this->field_value;
     }
 }

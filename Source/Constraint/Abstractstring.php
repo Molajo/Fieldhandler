@@ -1,6 +1,6 @@
 <?php
 /**
- * Regex Constraint
+ * Abstractstring Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -8,19 +8,26 @@
  */
 namespace Molajo\Fieldhandler\Constraint;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Regex Constraint
+ * Abstractstring Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Regex extends AbstractConstraint implements ConstraintInterface
+class Abstractstring extends AbstractConstraint implements ConstraintInterface
 {
+    /**
+     * String Function
+     *
+     * @var    string
+     * @since  1.0.0
+     */
+    protected $string_function;
+
     /**
      * Validate
      *
@@ -33,13 +40,14 @@ class Regex extends AbstractConstraint implements ConstraintInterface
             return true;
         }
 
-        if (preg_match($this->getRegex(), $this->field_value)) {
-            return true;
+        $temp = $this->doStringFunction();
+
+        if ($temp === $this->field_value) {
+            $this->setValidateMessage(2000);
+            return false;
         }
 
-        $this->setValidateMessage(8000);
-
-        return false;
+        return true;
     }
 
     /**
@@ -51,12 +59,14 @@ class Regex extends AbstractConstraint implements ConstraintInterface
     public function sanitize()
     {
         if ($this->field_value === null) {
-        } else {
+            return $this->field_value;
+        }
 
-            if (preg_match($this->getRegex(), $this->field_value)) {
-            } else {
-                $this->field_value = null;
-            }
+        $temp = $this->doStringFunction();
+
+        if ($this->field_value === $temp) {
+        } else {
+            $this->field_value = null;
         }
 
         return $this->field_value;
@@ -70,7 +80,7 @@ class Regex extends AbstractConstraint implements ConstraintInterface
      */
     public function format()
     {
-        return $this->field_value;
+        return $this->doStringFunction();
     }
 
     /**
@@ -78,24 +88,15 @@ class Regex extends AbstractConstraint implements ConstraintInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    protected function getRegex()
+    public function doStringFunction()
     {
-        $regex = '';
-
-        if (isset($this->options['regex'])) {
-        } else {
-            throw new UnexpectedValueException
-            (
-                'Fieldhandler Regex: must provide options[regex] array values.'
-            );
+        if ($this->string_function === 'trim') {
+            return trim($this->field_value);
+        } elseif ($this->string_function === 'lower') {
+            return strtolower($this->field_value);
+        } elseif ($this->string_function === 'upper') {
+            return strtoupper($this->field_value);
         }
-
-        if (isset($this->options['regex'])) {
-            $regex = $this->options['regex'];
-        }
-
-        return $regex;
     }
 }

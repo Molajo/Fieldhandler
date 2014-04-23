@@ -18,7 +18,7 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Raw extends AbstractConstraint implements ConstraintInterface
+class Raw extends AbstractFiltervar implements ConstraintInterface
 {
     /**
      * Constraint Allowable Options
@@ -35,50 +35,10 @@ class Raw extends AbstractConstraint implements ConstraintInterface
     );
 
     /**
-     * Validate
+     * Filter Type
      *
-     * @return  boolean
-     * @since   1.0.0
+     * @var    string
+     * @since  1.0.0
      */
-    public function validate()
-    {
-        if ($this->field_value === null) {
-            return true;
-        }
-
-        if (filter_var($this->field_value, FILTER_UNSAFE_RAW, $this->setFlags())) {
-            return true;
-        }
-
-        $this->setValidateMessage(8000);
-
-        return false;
-    }
-
-    /**
-     * Sanitize
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function sanitize()
-    {
-        if ($this->field_value === null) {
-        } else {
-            $this->field_value = filter_var($this->field_value, FILTER_UNSAFE_RAW, $this->setFlags());
-        }
-
-        return $this->field_value;
-    }
-
-    /**
-     * Format
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function format()
-    {
-        return $this->sanitize();
-    }
+    protected $filter_type = FILTER_UNSAFE_RAW;
 }

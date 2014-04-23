@@ -18,10 +18,10 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Ip extends AbstractConstraint implements ConstraintInterface
+class Ip extends Abstractfiltervar implements ConstraintInterface
 {
     /**
-     * Constraint Options
+     * Constraint Flags
      *
      * @var    array
      * @since  1.0.0
@@ -34,93 +34,10 @@ class Ip extends AbstractConstraint implements ConstraintInterface
     );
 
     /**
-     * Validate
+     * Filter Type
      *
-     * @return  boolean
-     * @since   1.0.0
+     * @var    string
+     * @since  1.0.0
      */
-    public function validate()
-    {
-        if ($this->field_value === null) {
-            return true;
-        }
-
-        if (filter_var($this->field_value, FILTER_VALIDATE_IP, $this->setFlags())) {
-            return true;
-        }
-
-        $this->setValidateMessage(2000);
-
-        return false;
-    }
-
-    /**
-     * Sanitize
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function sanitize()
-    {
-        if ($this->field_value === null) {
-        } else {
-
-            if (filter_var($this->field_value, FILTER_VALIDATE_IP, $this->setFlags())) {
-            } else {
-                $this->field_value = null;
-            }
-        }
-
-        return $this->field_value;
-    }
-
-    /**
-     * Format
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function format()
-    {
-        return $this->sanitize();
-    }
-
-    /**
-     * Flags can be set in options array
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function setFlags()
-    {
-        $filter = '';
-        if (isset($this->options['FILTER_FLAG_IPV4'])) {
-            $filter = 'FILTER_FLAG_IPV4';
-        }
-
-        if (isset($this->options['FILTER_FLAG_IPV6'])) {
-            $filter = 'FILTER_FLAG_IPV6';
-        }
-
-        $range = '';
-        if (isset($this->options['FILTER_FLAG_NO_PRIV_RANGE'])) {
-            $range = 'FILTER_FLAG_NO_PRIV_RANGE';
-        }
-
-        if (isset($this->options['FILTER_FLAG_NO_RES_RANGE'])) {
-            $range = 'FILTER_FLAG_NO_RES_RANGE';
-        }
-
-        $filterRange = '';
-        if ($filter == '') {
-            return $filterRange;
-        }
-
-        $filterRange = $filter;
-        if ($range == '') {
-            return $filterRange;
-        }
-
-        return $filter . ' | ' . $range;
-    }
+    protected $filter_type = FILTER_VALIDATE_IP;
 }

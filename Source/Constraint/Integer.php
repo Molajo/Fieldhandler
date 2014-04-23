@@ -20,79 +20,13 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Integer extends AbstractConstraint implements ConstraintInterface
+class Integer extends Abstractfiltervar implements ConstraintInterface
 {
     /**
-     * Validate
+     * Filter Type
      *
-     * @return  boolean
-     * @since   1.0.0
+     * @var    string
+     * @since  1.0.0
      */
-    public function validate()
-    {
-        if ($this->field_value === null) {
-            return true;
-        }
-
-        if (filter_var($this->field_value, FILTER_VALIDATE_INT, $this->setFlags())) {
-            return true;
-        }
-
-        $this->setValidateMessage(2000);
-
-        return false;
-    }
-
-    /**
-     * Sanitize
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function sanitize()
-    {
-        if ($this->field_value === null) {
-        } else {
-            $this->field_value = filter_var($this->field_value, FILTER_VALIDATE_INT, $this->setFlags());
-        }
-
-        return $this->field_value;
-    }
-
-    /**
-     * Format
-     *
-     * @return  mixed
-     * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
-     */
-    public function format()
-    {
-        return $this->sanitize();
-    }
-
-    /**
-     * Flags can be set in options array
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function setFlags()
-    {
-        $filter = '';
-
-        if (isset($this->options['FILTER_FLAG_ALLOW_OCTAL'])) {
-            $filter = 'FILTER_FLAG_ALLOW_OCTAL';
-        }
-
-        if (isset($this->options['FILTER_FLAG_ALLOW_HEX'])) {
-            if ($filter == '') {
-            } else {
-                $filter .= ', ';
-            }
-            $filter .= 'FILTER_FLAG_ALLOW_HEX';
-        }
-
-        return $filter;
-    }
+    protected $filter_type = FILTER_VALIDATE_INT;
 }

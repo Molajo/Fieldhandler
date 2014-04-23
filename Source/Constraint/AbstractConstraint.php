@@ -389,7 +389,7 @@ abstract class AbstractConstraint implements ConstraintInterface
      * @return  string
      * @since   1.0.0
      */
-    protected function filterByCharacter($filter, $test, $allow_whitespace = false)
+    protected function sanitizeByCharacter($filter, $test, $allow_whitespace = false)
     {
         $filtered = '';
 

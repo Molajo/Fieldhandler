@@ -21,62 +21,13 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Float extends AbstractConstraint implements ConstraintInterface
+class Float extends Abstractfiltervar implements ConstraintInterface
 {
     /**
-     * Validate
+     * Filter Type
      *
-     * @return  mixed
-     * @since   1.0.0
+     * @var    string
+     * @since  1.0.0
      */
-    public function validate()
-    {
-        if ($this->field_value === null) {
-            return true;
-        }
-
-        if (filter_var($this->field_value, FILTER_VALIDATE_FLOAT) === false) {
-            $this->setValidateMessage(1000);
-
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Sanitize
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function sanitize()
-    {
-        $results = filter_var($this->field_value, FILTER_VALIDATE_FLOAT);
-
-        if ($results === false) {
-
-            $this->field_value = null;
-
-            return $this->field_value;
-        }
-
-        if ((float) $results === (float) $this->field_value) {
-        } else {
-            $this->field_value = $results;
-        }
-
-        return $this->field_value;
-    }
-
-    /**
-     * Format
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function format()
-    {
-        return $this->field_value;
-    }
+    protected $filter_type = FILTER_VALIDATE_FLOAT;
 }

@@ -33,7 +33,7 @@ class FieldhandlerFactoryMethod extends FactoryMethodBase implements FactoryInte
     {
         $options['product_name']             = basename(__DIR__);
         $options['store_instance_indicator'] = true;
-        $options['product_namespace']        = 'Molajo\\Fieldhandler\\Driver';
+        $options['product_namespace']        = 'Molajo\\Fieldhandler\\Request';
 
         parent::__construct($options);
     }

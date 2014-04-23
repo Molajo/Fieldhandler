@@ -18,7 +18,7 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Css extends AbstractConstraint implements ConstraintInterface
+class Js extends AbstractConstraint implements ConstraintInterface
 {
     /**
      * Validate
@@ -61,6 +61,6 @@ class Css extends AbstractConstraint implements ConstraintInterface
      */
     public function format()
     {
-        return $this->sanitize();
+        return $this->field_value;
     }
 }

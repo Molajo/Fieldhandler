@@ -71,10 +71,10 @@ class TrueTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateFailure()
     {
-        $field_name       = 'Agreement';
-        $field_value      = 122222;
-        $constraint       = 'True';
-        $options          = array();
+        $field_name  = 'Agreement';
+        $field_value = 122222;
+        $constraint  = 'True';
+        $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 

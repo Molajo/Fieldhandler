@@ -61,7 +61,7 @@ will be returned as NULL.
 
     if ($results->getChangeIndicator() === true) {
         // cat is replaced with NULL
-        $input_field = $results->getReturnValue();
+        $input_field = $results->getFieldValue();
     }
 
 ```

@@ -1,6 +1,6 @@
 <?php
 /**
- * Resource Constraint
+ * Abstract Fieldhandler for filter_var data types
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -11,18 +11,26 @@ namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Resource Constraint
+ * Abstract Fieldhandler for filter_var data types
  *
- * A resource is a special variable, holding a reference to an external resource
- *
- * @link       http://www.php.net/manual/en/language.types.resource.php
+ * @link       http://php.net/manual/en/function.is-float.php
+ * @link       http://php.net/manual/en/function.is-double.php
+ * @link       http://php.net/manual/en/function.is-real.php
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Resource extends AbstractConstraint implements ConstraintInterface
+class Abstractfiltervar extends AbstractConstraint implements ConstraintInterface
 {
+    /**
+     * Filter Type
+     *
+     * @var    string
+     * @since  1.0.0
+     */
+    protected $filter_type;
+
     /**
      * Validate
      *
@@ -35,13 +43,13 @@ class Resource extends AbstractConstraint implements ConstraintInterface
             return true;
         }
 
-        if (is_resource($this->field_value)) {
-            return true;
+        if (filter_var($this->field_value, $this->filter_type, $this->setFlags()) === false) {
+            $this->setValidateMessage(1000);
+
+            return false;
         }
 
-        $this->setValidateMessage(1000);
-
-        return false;
+        return true;
     }
 
     /**
@@ -52,14 +60,10 @@ class Resource extends AbstractConstraint implements ConstraintInterface
      */
     public function sanitize()
     {
-        if ($this->field_value === null) {
+        $this->field_value = filter_var($this->field_value, $this->filter_type, $this->setFlags());
 
-        } else {
-
-            if (is_resource($this->field_value)) {
-            } else {
-                $this->field_value = null;
-            }
+        if ($this->field_value === false) {
+            $this->field_value = null;
         }
 
         return $this->field_value;

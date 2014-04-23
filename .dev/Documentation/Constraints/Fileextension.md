@@ -61,7 +61,7 @@ is returned as NULL.
 
     if ($results->getChangeIndicator() === true) {
         // Sets invalid file name to NULL
-        $path_filename = $results->getReturnValue();
+        $path_filename = $results->getFieldValue();
     }
 
 ```

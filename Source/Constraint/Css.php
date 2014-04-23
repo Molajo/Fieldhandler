@@ -1,6 +1,6 @@
 <?php
 /**
- * Unique Constraint
+ * Css Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -11,33 +11,30 @@ namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Unique Constraint
+ * Css Constraint
  *
- * @link       http://php.net/manual/en/function.ctype-print.php
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Unique extends AbstractConstraint implements ConstraintInterface
+class Css extends AbstractConstraint implements ConstraintInterface
 {
     /**
      * Validate
      *
-     * @return  boolean
+     * @return  mixed
      * @since   1.0.0
      */
     public function validate()
     {
-        if ($this->field_value === null) {
-        } else {
-            if (ctype_print($this->field_value) === false) {
-                $this->setValidateMessage(2000);
-                return false;
-            }
+        if ($this->field_value === $this->sanitize()) {
+            return true;
         }
 
-        return true;
+        $this->setValidateMessage(8000);
+
+        return false;
     }
 
     /**
@@ -50,15 +47,7 @@ class Unique extends AbstractConstraint implements ConstraintInterface
     {
         if ($this->field_value === null) {
         } else {
-
-            if (ctype_print($this->field_value) === true) {
-            } else {
-                $allow_whitespace = false;
-                if (isset($this->options['allow_whitespace'])) {
-                    $allow_whitespace = true;
-                }
-                $this->field_value = $this->sanitizeByCharacter('ctype_print', $this->field_value, $allow_whitespace);
-            }
+            $this->field_value = kses($this->field_value, $this->white_list, array('http', 'https'));
         }
 
         return $this->field_value;
@@ -72,6 +61,6 @@ class Unique extends AbstractConstraint implements ConstraintInterface
      */
     public function format()
     {
-        return $this->sanitize();
+        return $this->field_value;
     }
 }

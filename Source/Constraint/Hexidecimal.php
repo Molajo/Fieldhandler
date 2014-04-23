@@ -19,10 +19,10 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Hexidecimal extends AbstractConstraint implements ConstraintInterface
+class Hexidecimal extends Abstractctype implements ConstraintInterface
 {
     /**
-     * Constraint Options
+     * Constraint Flags
      *
      * @var    array
      * @since  1.0.0
@@ -33,54 +33,10 @@ class Hexidecimal extends AbstractConstraint implements ConstraintInterface
     );
 
     /**
-     * Validate
+     * ctype Test
      *
-     * @return  boolean
-     * @since   1.0.0
+     * @var    string
+     * @since  1.0.0
      */
-    public function validate()
-    {
-        if ($this->field_value === null) {
-            return true;
-        }
-
-        if (ctype_xdigit($this->field_value)) {
-            return true;
-        }
-
-        $this->setValidateMessage(2000);
-
-        return false;
-    }
-
-    /**
-     * Sanitize
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function sanitize()
-    {
-        if ($this->field_value === null) {
-
-        } elseif (ctype_xdigit($this->field_value)) {
-
-        } else {
-            $this->field_value = null;
-        }
-
-        return $this->field_value;
-    }
-
-    /**
-     * Format
-     *
-     * @return  mixed
-     * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
-     */
-    public function format()
-    {
-        return $this->sanitize();
-    }
+    protected $ctype = 'ctype_xdigit';
 }

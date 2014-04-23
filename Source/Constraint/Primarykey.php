@@ -57,7 +57,7 @@ class Primarykey extends AbstractConstraint implements ConstraintInterface
                 if (isset($this->options['allow_whitespace'])) {
                     $allow_whitespace = true;
                 }
-                $this->field_value = $this->filterByCharacter('ctype_print', $this->field_value, $allow_whitespace);
+                $this->field_value = $this->sanitizeByCharacter('ctype_print', $this->field_value, $allow_whitespace);
             }
         }
 

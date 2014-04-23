@@ -68,31 +68,6 @@ class Image extends AbstractConstraint implements ConstraintInterface
      */
     public function format()
     {
-        return $this->sanitize();
-    }
-
-    /**
-     * Flags can be set in options array
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function setFlags()
-    {
-        $filter = '';
-
-        if (isset($this->options['FILTER_FLAG_PATH_REQUIRED'])) {
-            $filter = 'FILTER_FLAG_PATH_REQUIRED';
-        }
-
-        if (isset($this->options['FILTER_FLAG_IPV6'])) {
-            if ($filter == '') {
-            } else {
-                $filter .= ', ';
-            }
-            $filter .= 'FILTER_FLAG_QUERY_REQUIRED';
-        }
-
-        return $filter;
+        return $this->field_value;
     }
 }

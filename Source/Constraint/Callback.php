@@ -23,6 +23,14 @@ use CommonApi\Model\ConstraintInterface;
 class Callback extends AbstractConstraint implements ConstraintInterface
 {
     /**
+     * Filter Type
+     *
+     * @var    string
+     * @since  1.0.0
+     */
+    protected $filter_type = FILTER_CALLBACK;
+
+    /**
      * Validate
      *
      * @return  boolean
@@ -34,7 +42,7 @@ class Callback extends AbstractConstraint implements ConstraintInterface
             return true;
         }
 
-        if (filter_var($this->field_value, FILTER_CALLBACK, $this->setCallback()) === false) {
+        if (filter_var($this->field_value, $this->filter_type, $this->setCallback()) === false) {
             $this->setValidateMessage(1000);
 
             return false;
@@ -55,7 +63,7 @@ class Callback extends AbstractConstraint implements ConstraintInterface
             return $this->field_value;
         }
 
-        if (filter_var($this->field_value, FILTER_CALLBACK, $this->setCallback())) {
+        if (filter_var($this->field_value, $this->filter_type, $this->setCallback())) {
             return $this->field_value;
         }
 

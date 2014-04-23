@@ -1,6 +1,6 @@
 <?php
 /**
- * Regex Constraint
+ * Abstract Fieldhandler for ctype data types
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -8,23 +8,31 @@
  */
 namespace Molajo\Fieldhandler\Constraint;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Regex Constraint
+ * Abstract Fieldhandler for ctype data types
  *
+ * @link       http://us1.php.net/manual/en/function.ctype-alpha.php
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Regex extends AbstractConstraint implements ConstraintInterface
+class Abstractctype extends AbstractConstraint implements ConstraintInterface
 {
+    /**
+     * ctype Test
+     *
+     * @var    string
+     * @since  1.0.0
+     */
+    protected $ctype;
+
     /**
      * Validate
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      */
     public function validate()
@@ -33,11 +41,13 @@ class Regex extends AbstractConstraint implements ConstraintInterface
             return true;
         }
 
-        if (preg_match($this->getRegex(), $this->field_value)) {
+        $temp = $this->sanitizeByCType($this->ctype, $this->field_value);
+
+        if ($temp === $this->field_value) {
             return true;
         }
 
-        $this->setValidateMessage(8000);
+        $this->setValidateMessage(2000);
 
         return false;
     }
@@ -52,11 +62,7 @@ class Regex extends AbstractConstraint implements ConstraintInterface
     {
         if ($this->field_value === null) {
         } else {
-
-            if (preg_match($this->getRegex(), $this->field_value)) {
-            } else {
-                $this->field_value = null;
-            }
+            $this->field_value = $this->sanitizeByCType($this->ctype, $this->field_value);
         }
 
         return $this->field_value;
@@ -74,28 +80,21 @@ class Regex extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Format
+     * Common Sanitize Method for ctype
      *
-     * @return  mixed
+     * @param   string $ctype
+     *
+     * @return  string
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    protected function getRegex()
+    public function sanitizeByCType($ctype, $field_value)
     {
-        $regex = '';
+        $allow_whitespace = false;
 
-        if (isset($this->options['regex'])) {
-        } else {
-            throw new UnexpectedValueException
-            (
-                'Fieldhandler Regex: must provide options[regex] array values.'
-            );
+        if (isset($this->options['allow_whitespace'])) {
+            $allow_whitespace = true;
         }
 
-        if (isset($this->options['regex'])) {
-            $regex = $this->options['regex'];
-        }
-
-        return $regex;
+        return $this->sanitizeByCharacter($this->ctype, $field_value, $allow_whitespace);
     }
 }
