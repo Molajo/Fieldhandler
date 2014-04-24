@@ -266,6 +266,7 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
         }
 
         $this->createMessageInstance();
+
         $this->validate_response = true;
 
         return $this;

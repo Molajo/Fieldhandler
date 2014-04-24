@@ -350,16 +350,7 @@ abstract class AbstractConstraint implements ConstraintInterface
      */
     protected function getUserTimeZone()
     {
-        $timezone = '';
-
-        if (is_array($this->options)) {
-        } else {
-            return $this;
-        }
-
-        if (isset($this->options['timezone'])) {
-            $timezone = $this->options['timezone'];
-        }
+        $timezone = $this->timezone;
 
         if ($timezone === '') {
             if (ini_get('date.timezone')) {
@@ -371,12 +362,63 @@ abstract class AbstractConstraint implements ConstraintInterface
             $timezone = 'UTC';
         }
 
-        ini_set('date.timezone', $timezone);
-        $this->options['timezone'] = $timezone;
-
         $this->timezone = $timezone;
 
         return $this;
+    }
+
+    /**
+     * Flags can be set in options array
+     *
+     * @return  mixed
+     * @since   1.0.0
+     */
+    public function setFlags()
+    {
+        $this->selected_constraint_options = null;
+
+        if (is_array($this->constraint_allowable_options)
+            && count($this->constraint_allowable_options) > 0
+        ) {
+
+            foreach ($this->constraint_allowable_options as $option) {
+
+                $have_it = $this->getOption($option);
+
+                if ($have_it === null) {
+                } else {
+
+                    if ($this->selected_constraint_options === null) {
+                    } else {
+                        $this->selected_constraint_options .= ', ';
+                    }
+
+                    $this->selected_constraint_options .= $option;
+                }
+            }
+
+        }
+
+        return $this->selected_constraint_options;
+    }
+
+    /**
+     * Get Option
+     *
+     * @return  mixed
+     * @since   1.0.0
+     */
+    public function getOption($key, $default = null)
+    {
+        if (isset($this->options[$key])) {
+        } else {
+            if ($default === null) {
+                return null;
+            }
+            $this->options[$key] = $default;
+        }
+
+        return $this->options[$key];
     }
 
     /**
@@ -404,35 +446,5 @@ abstract class AbstractConstraint implements ConstraintInterface
         }
 
         return $filtered;
-    }
-
-    /**
-     * Flags can be set in options array
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function setFlags()
-    {
-        $this->selected_constraint_options = null;
-
-        if (is_array($this->constraint_allowable_options)
-            && count($this->constraint_allowable_options) > 0
-        ) {
-
-            foreach ($this->constraint_allowable_options as $possible_option) {
-
-                if (isset($this->options[$possible_option])) {
-                    if ($this->selected_constraint_options === null) {
-                    } else {
-                        $this->selected_constraint_options .= ', ';
-                    }
-                    $this->selected_constraint_options .= $possible_option;
-                }
-            }
-
-        }
-
-        return $this->selected_constraint_options;
     }
 }

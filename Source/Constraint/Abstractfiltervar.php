@@ -88,7 +88,7 @@ class Abstractfiltervar extends AbstractConstraint implements ConstraintInterfac
      * @return  mixed
      * @since   1.0.0
      */
-    public function testFilterVar($method)
+    protected function testFilterVar($method)
     {
         $results = filter_var($this->field_value, $this->filter_type, $this->setFlags());
 

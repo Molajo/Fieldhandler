@@ -90,8 +90,10 @@ class Fileextension extends AbstractConstraint implements ConstraintInterface
      */
     protected function getExtensions()
     {
-        if (isset($this->options['array_valid_extensions'])
-            && is_array($this->options['array_valid_extensions'])
+        $array_valid_extensions = $this->getOption('array_valid_extensions', null);
+
+        if (is_array($array_valid_extensions)
+            && count($array_valid_extensions) > 0
         ) {
         } else {
             throw new UnexpectedValueException
@@ -100,6 +102,6 @@ class Fileextension extends AbstractConstraint implements ConstraintInterface
             );
         }
 
-        return $this->options['array_valid_extensions'];
+        return $array_valid_extensions;
     }
 }

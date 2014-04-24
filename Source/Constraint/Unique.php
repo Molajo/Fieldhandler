@@ -53,11 +53,12 @@ class Unique extends AbstractConstraint implements ConstraintInterface
 
             if (ctype_print($this->field_value) === true) {
             } else {
-                $allow_whitespace = false;
-                if (isset($this->options['allow_whitespace'])) {
-                    $allow_whitespace = true;
-                }
-                $this->field_value = $this->sanitizeByCharacter('ctype_print', $this->field_value, $allow_whitespace);
+
+                $this->field_value = $this->sanitizeByCharacter(
+                    'ctype_print',
+                    $this->field_value,
+                    $this->getOption('allow_whitespace', false)
+                );
             }
         }
 

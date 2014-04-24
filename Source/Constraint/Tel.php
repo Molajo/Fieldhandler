@@ -84,7 +84,9 @@ class Tel extends AbstractConstraint implements ConstraintInterface
 
         /** TODO: Apply localisation mask and remove example */
 
-        if ($this->options['format_telephone']) {
+        if ($this->getOption('format_telephone', null) === null) {
+        } else {
+
             $this->field_value = '1 (' . substr($this->field_value, 0, 3)
                 . ') ' . substr($this->field_value, 0, 3)
                 . '-' . substr($this->field_value, 0, 4);

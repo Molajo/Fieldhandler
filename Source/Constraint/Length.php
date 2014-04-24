@@ -78,16 +78,8 @@ class Length extends AbstractConstraint implements ConstraintInterface
      */
     protected function testMinimumMaximum()
     {
-        $minimum = 0;
-        $maximum = 999999999999;
-
-        if (isset($this->options['minimum_length'])) {
-            $minimum = $this->options['minimum_length'];
-        }
-
-        if (isset($this->options['maximum_length'])) {
-            $maximum = $this->options['maximum_length'];
-        }
+        $minimum = $this->getOption('minimum_length', 0);
+        $maximum = $this->getOption('maximum_length', 999999999999);
 
         $string_length = strlen(trim($this->field_value));
 

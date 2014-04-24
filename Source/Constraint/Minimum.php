@@ -80,18 +80,13 @@ class Minimum extends AbstractConstraint implements ConstraintInterface
      */
     protected function getMinimum()
     {
-        $field_value = '';
+        $field_value = $this->getOption('minimum', null);
 
-        if (isset($this->options['minimum'])) {
-        } else {
+        if ($field_value === null) {
             throw new UnexpectedValueException
             (
-                'Fieldhandler Minimum: must provide options[minimum] array values.'
+                'Fieldhandler Minimum: must provide options[minimum] value.'
             );
-        }
-
-        if (isset($this->options['minimum'])) {
-            $field_value = $this->options['minimum'];
         }
 
         return $field_value;

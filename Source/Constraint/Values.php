@@ -75,15 +75,17 @@ class Values extends AbstractConstraint implements ConstraintInterface
     /**
      * Test Array Entry Values
      *
-     * @return  mixed
+     * @return  array
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException;
      */
     public function getFieldValues()
     {
-        $field_values = array();
+        $array_valid_values = $this->getOption('array_valid_values', array());
 
-        if (isset($this->options['array_valid_values'])) {
+        if (is_array($array_valid_values)
+            && count($array_valid_values) > 0
+        ) {
         } else {
             throw new UnexpectedValueException
             (
@@ -91,10 +93,6 @@ class Values extends AbstractConstraint implements ConstraintInterface
             );
         }
 
-        if (isset($this->options['array_valid_values'])) {
-            $field_values = $this->options['array_valid_values'];
-        }
-
-        return $field_values;
+        return $array_valid_values;
     }
 }

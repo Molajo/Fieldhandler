@@ -69,17 +69,7 @@ class Defaults extends AbstractConstraint implements ConstraintInterface
     protected function setDefault()
     {
         if ($this->field_value === null) {
-
-            $default = null;
-
-            if (isset($this->options['default'])) {
-                $default = $this->options['default'];
-            }
-
-            if ($default === null) {
-            } else {
-                $this->field_value = $default;
-            }
+            $this->field_value = $this->getOption('default', null);
         }
 
         return $this;

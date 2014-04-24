@@ -73,11 +73,9 @@ class Equal extends AbstractConstraint implements ConstraintInterface
      */
     public function getEqual()
     {
-        $field_value = null;
+        $field_value = $this->getOption('equals', null);
 
-        if (isset($this->options['equals'])) {
-            $field_value = $this->options['equals'];
-        } else {
+        if ($field_value === null) {
             throw new UnexpectedValueException
             (
                 'Fieldhandler Equal: must provide options[equals] value.'

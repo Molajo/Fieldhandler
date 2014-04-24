@@ -84,21 +84,15 @@ class Callback extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Flags can be set in options array
+     * Callback set in the $options array for $request
      *
      * @return  array
      * @since   1.0.0
      */
     protected function setCallback()
     {
-        $callback = null;
-
-        if (isset($this->options['callback'])) {
-            $callback = $this->options['callback'];
-        }
-
         $return            = array();
-        $return['options'] = $callback;
+        $return['options'] = $this->getOption('callback', null);
 
         return $return;
     }

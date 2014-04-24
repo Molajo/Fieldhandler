@@ -78,14 +78,11 @@ class Arrays extends AbstractConstraint implements ConstraintInterface
 
             } else {
                 $this->field_value = null;
-
                 return $this->field_value;
             }
 
             $this->testValues(true);
-
             $this->testKeys(true);
-
             $this->testCount(true);
         }
 
@@ -113,12 +110,7 @@ class Arrays extends AbstractConstraint implements ConstraintInterface
      */
     protected function testKeys($filter = false)
     {
-        if (isset($this->options['array_valid_keys'])) {
-        } else {
-            return true;
-        }
-
-        $array_valid_values = $this->options['array_valid_keys'];
+        $array_valid_values = $this->getOption('array_valid_keys', array());
 
         if (is_array($array_valid_values) && count($array_valid_values) > 0) {
         } else {
@@ -158,12 +150,7 @@ class Arrays extends AbstractConstraint implements ConstraintInterface
      */
     protected function testValues($filter = false)
     {
-        if (isset($this->options['array_valid_values'])) {
-        } else {
-            return true;
-        }
-
-        $array_valid_values = $this->options['array_valid_values'];
+        $array_valid_values = $this->getOption('array_valid_values', array());
 
         if (is_array($array_valid_values) && count($array_valid_values) > 0) {
         } else {
@@ -203,17 +190,8 @@ class Arrays extends AbstractConstraint implements ConstraintInterface
      */
     protected function testCount($filter = false)
     {
-        if (isset($this->options['array_minimum'])) {
-            $array_minimum = (int)$this->options['array_minimum'];
-        } else {
-            $array_minimum = 0;
-        }
-
-        if (isset($this->options['array_maximum'])) {
-            $array_maximum = (int)$this->options['array_maximum'];
-        } else {
-            $array_maximum = 9999999999;
-        }
+        $array_minimum = $this->getOption('array_minimum', 0);
+        $array_maximum = $this->getOption('array_maximum', 9999999999);
 
         if (count($this->field_value) < $array_minimum
             || count($this->field_value) > $array_maximum

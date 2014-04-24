@@ -84,20 +84,15 @@ class Maximum extends AbstractConstraint implements ConstraintInterface
      */
     protected function getMaximum()
     {
-        $field_value = '';
+        $maximum = $this->getOption('maximum', null);
 
-        if (isset($this->options['maximum'])) {
-        } else {
+        if ($maximum === null) {
             throw new UnexpectedValueException
             (
                 'Fieldhandler Maximum: must provide options[maximum] array values.'
             );
         }
 
-        if (isset($this->options['maximum'])) {
-            $field_value = $this->options['maximum'];
-        }
-
-        return $field_value;
+        return $maximum;
     }
 }

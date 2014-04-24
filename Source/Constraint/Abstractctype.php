@@ -89,12 +89,6 @@ class Abstractctype extends AbstractConstraint implements ConstraintInterface
      */
     public function sanitizeByCType($ctype, $field_value)
     {
-        $allow_whitespace = false;
-
-        if (isset($this->options['allow_whitespace'])) {
-            $allow_whitespace = true;
-        }
-
-        return $this->sanitizeByCharacter($this->ctype, $field_value, $allow_whitespace);
+        return $this->sanitizeByCharacter($this->ctype, $field_value, $this->getOption('allow_whitespace', false));
     }
 }

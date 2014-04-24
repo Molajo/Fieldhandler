@@ -82,21 +82,18 @@ class Mimetypes extends AbstractConstraint implements ConstraintInterface
      */
     public function getMimetypes()
     {
-        $field_values = array();
+        $array_valid_mimetypes = $this->getOption('array_valid_mimetypes', array());
 
+        if (is_array($array_valid_mimetypes)
+            && count($array_valid_mimetypes) > 0
+        ) {
 
-        if (isset($this->options['array_valid_mimetypes'])) {
-        } else {
             throw new UnexpectedValueException
             (
-                'Fieldhandler Mimetypes: must provide options[array_valid_mimetypes] array values.'
+                'Fieldhandler Maximum: must provide options[maximum] array values.'
             );
         }
 
-        if (isset($this->options['array_valid_mimetypes'])) {
-            $field_values = $this->options['array_valid_mimetypes'];
-        }
-
-        return $field_values;
+        return $array_valid_mimetypes;
     }
 }

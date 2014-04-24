@@ -77,16 +77,8 @@ class Fromto extends AbstractConstraint implements ConstraintInterface
      */
     public function getFromto()
     {
-        $field_value_from = 0;
-        $field_value_to   = 999999999999;
-
-        if (isset($this->options['from'])) {
-            $field_value_from = $this->options['from'];
-        }
-
-        if (isset($this->options['to'])) {
-            $field_value_to = $this->options['to'];
-        }
+        $field_value_from = $this->getOption('from', 0);
+        $field_value_to   = $this->getOption('to', 999999999999);
 
         return array($field_value_from, $field_value_to);
     }

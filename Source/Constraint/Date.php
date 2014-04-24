@@ -82,11 +82,7 @@ class Date extends AbstractConstraint implements ConstraintInterface
             $this->field_value = null;
         }
 
-        if (isset($this->options['display_as_date_format'])) {
-            $format = $this->options['display_as_date_format'];
-        } else {
-            $format = 'Y-m-d';
-        }
+        $format = $this->getOption('display_as_date_format', 'Y-m-d');
 
         $this->field_value = $date->format($format);
 
@@ -101,11 +97,7 @@ class Date extends AbstractConstraint implements ConstraintInterface
      */
     protected function createFromFormat()
     {
-        if (isset($this->options['create_from_date_format'])) {
-            $format = $this->options['create_from_date_format'];
-        } else {
-            $format = 'Y-m-d';
-        }
+        $format = $this->getOption('create_from_date_format', 'Y-m-d');
 
         $date = DateTime::createFromFormat($format, $this->field_value);
 

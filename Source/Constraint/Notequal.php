@@ -76,18 +76,13 @@ class Notequal extends AbstractConstraint implements ConstraintInterface
      */
     protected function getNotEqual()
     {
-        $field_value = null;
+        $field_value = $this->getOption('not_equal', null);
 
-        if (isset($this->options['not_equal'])) {
-        } else {
+        if ($field_value === null) {
             throw new UnexpectedValueException
             (
-                'Fieldhandler Notequal: must provide options[not_equal] values.'
+                'Fieldhandler Notequal: must provide options[not_equal] value.'
             );
-        }
-
-        if (isset($this->options['not_equal'])) {
-            $field_value = $this->options['not_equal'];
         }
 
         return $field_value;

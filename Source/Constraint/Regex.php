@@ -82,20 +82,15 @@ class Regex extends AbstractConstraint implements ConstraintInterface
      */
     protected function getRegex()
     {
-        $regex = '';
+        $field_value = $this->getOption('regex', null);
 
-        if (isset($this->options['regex'])) {
-        } else {
+        if ($field_value === null) {
             throw new UnexpectedValueException
             (
-                'Fieldhandler Regex: must provide options[regex] array values.'
+                'Fieldhandler Regex: must provide options[regex] value.'
             );
         }
 
-        if (isset($this->options['regex'])) {
-            $regex = $this->options['regex'];
-        }
-
-        return $regex;
+        return $field_value;
     }
 }
