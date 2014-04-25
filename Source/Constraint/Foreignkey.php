@@ -20,7 +20,7 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Foreignkey extends AbstractConstraint implements ConstraintInterface
+class Foreignkey extends AbstractDatabase implements ConstraintInterface
 {
     /**
      * Validate

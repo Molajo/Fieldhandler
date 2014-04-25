@@ -15,16 +15,24 @@ include __DIR__ . '/Libraries/kses.php';
 /**
  * Html Constraint
  *
+ * To review or override white_list, see AbstractHtml Constraint Class
+ *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Html extends AbstractConstraint implements ConstraintInterface
+class Html extends AbstractHtml implements ConstraintInterface
 {
     /**
      * Validate
      *
+     * Verifies that the field value contents do not contain any HTML tags or attributes
+     * which are not defined in the white_list. If false, use sanitize to clean content.
+     *
+     * To review or override white_list, see AbstractHtml Constraint Class
+     *
+     * @api
      * @return  mixed
      * @since   1.0.0
      */
@@ -42,6 +50,12 @@ class Html extends AbstractConstraint implements ConstraintInterface
     /**
      * Sanitize
      *
+     * Sanitizes the field value contents so that there are no HTML tags or attributes
+     * which have not been defined in the white_list. Critical for security.
+     *
+     * To review or override white_list, see AbstractHtml Constraint Class
+     *
+     * @api
      * @return  mixed
      * @since   1.0.0
      */
@@ -58,6 +72,11 @@ class Html extends AbstractConstraint implements ConstraintInterface
     /**
      * Format
      *
+     * Escapes the field value contents for presentation on the web; critical for security
+     *
+     * To review or override white_list, see AbstractHtml Constraint Class
+     *
+     * @api
      * @return  mixed
      * @since   1.0.0
      */

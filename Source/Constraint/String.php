@@ -19,7 +19,7 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class String extends Abstractfiltervar implements ConstraintInterface
+class String extends AbstractFiltervar implements ConstraintInterface
 {
     /**
      * Allowable Constraint Options

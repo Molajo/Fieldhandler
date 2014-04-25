@@ -21,8 +21,55 @@ use CommonApi\Model\ConstraintInterface;
 class False extends AbstractConstraint implements ConstraintInterface
 {
     /**
+     * False array
+     *
+     * Override in the Request using $options['false_array'] entry.
+     *
+     * @api
+     * @var    array
+     * @since  1.0.0
+     */
+    protected $false_array = array(false => false, 0 => 0, 'no' => 'no', 'off' => 'off');
+
+    /**
+     * Constructor
+     *
+     * @param   string $constraint
+     * @param   string $method
+     * @param   string $field_name
+     * @param   mixed  $field_value
+     * @param   array  $options
+     *
+     * @api
+     * @since   1.0.0
+     */
+    public function __construct(
+        $constraint,
+        $method,
+        $field_name,
+        $field_value,
+        array $options = array()
+    ) {
+        if (isset($this->options['false_array'])) {
+            $this->false_array = $this->options['false_array'];
+            unset($this->options['false_array']);
+        }
+
+        parent::__construct(
+            $constraint,
+            $method,
+            $field_name,
+            $field_value,
+            $options
+        );
+    }
+
+    /**
      * Validate
      *
+     * Verifies value is false, 0, 'no', or 'off', responding with true or false and messages
+     *
+     * @api
      * @return  boolean
      * @since   1.0.0
      */
@@ -51,6 +98,9 @@ class False extends AbstractConstraint implements ConstraintInterface
     /**
      * Sanitize
      *
+     * Sets the return value to NULL if it is not false, 0, 'no', or 'off'
+     *
+     * @api
      * @return  mixed
      * @since   1.0.0
      */
@@ -87,6 +137,9 @@ class False extends AbstractConstraint implements ConstraintInterface
     /**
      * Format
      *
+     * Method not used for the True constraint - value simply returned
+     *
+     * @api
      * @return  mixed
      * @since   1.0.0
      */

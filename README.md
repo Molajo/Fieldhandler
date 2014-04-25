@@ -5,7 +5,7 @@ Molajo Fieldhandler [Alpha]
 [![Build Status](https://travis-ci.org/Molajo/Fieldhandler.png?branch=master)](https://travis-ci.org/Molajo/Fieldhandler)
 
 *Molajo Fieldhandler* is an integrated data integrity assurance package for PHP applications.
-The approach aligns data fields with constraints, applying validation and sanitation
+The approach validation and sanitation
 functionality very specifically as specialised tools. In unifying tool usage around a focus
 on field-level rule compliance, applications ensure data
 collection processes provide clean, verified, and useful information.
@@ -17,11 +17,9 @@ integrity constraints in terms that the client can understand.
 
 ## Overview of the Methodology ##
 
-At the most basic level, *constraints* define data collection and usage rules.
-
-For data collection, constraints can include rules related to
-minimum and maximum field length, number of occurrences,
-whether or not a value is required for the field or if there is a list or data range
+At the most basic level, *constraints* define data collection and usage rules by describing qualities of the data.
+These rules might include specifications about the minimum and maximum values, number of occurrences for an array,
+whether or not a field is required or if there is a list or data range
 that can be used to confirm data values.
 
 A critical step in application development associates specific integrity
@@ -50,26 +48,7 @@ Custom Constraints can be created when delivered constraints are not enough.
 
 ### Write code to deploy enforcement strategy
 
-There are three *Molajo Fieldhandler* Request methods:
 
-1. **validate** Validates the field value using field handler(s) requested.
-All field handlers requested will run and multiple error messages could be returned.
-Validate only returns a true or false value.
-
-2. **filter** Cleans the field value using field handler(s) requested.
-The field value that results following the filter operation(s) is returned.
-No error messages are returned using the `filter` method.
-
-3. **escape** Formats (or formats) the field for display, given the field handler(s) requested.
-The field value that results following the escape operation(s) is returned.
-No error messages are returned using the `escape` method.
-
-There are four parameters for the request, regardless of whether it is `validate`, `filter`, or `escape`.
-
-1. **$field_name** the name of the field for use in error messages;
-2. **$field_value** existing data value subject to validation, filtering or escaping operations;
-3. **$constraint** the name of the constraint;
-4. **$options** (optional) am associative array of named pair values required by constraint processing.
 
 #### Example: Verbose
 
@@ -127,8 +106,7 @@ $fieldhandler = new Molajo\Fieldhandler\Request();
 // 2. Enforce Password Constraints using a terse syntax
 
     $results = $request->ensureFieldConstraints(
-        'Display Password',
-        $display_password,
+        'Display Password', $display_password,
         array('verify' => 'date', 'verify' => 'Alphanumeric', 'verify' => 'Length', 'escape' => 'Password'),
         array('LT' => 91, 'Context' => 'Days', 'special_characters' => '-, $, #' );
 
@@ -180,7 +158,6 @@ INCOMPLETE
 
 INCOMPLETE
 
-
 ## Package Constraints ##
 
 The examples in this section assume the *Fieldhandler* has been instantiated, as follows:
@@ -190,6 +167,7 @@ The examples in this section assume the *Fieldhandler* has been instantiated, as
     $fieldhandler = new Molajo/Fieldhandler/Driver();
 
 ```
+
 
 ### Accepted ###
 Value is true, 1, 'yes', or 'on.'

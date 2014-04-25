@@ -18,7 +18,7 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Upper extends Abstractstring implements ConstraintInterface
+class Upper extends AbstractString implements ConstraintInterface
 {
     /**
      * String Function

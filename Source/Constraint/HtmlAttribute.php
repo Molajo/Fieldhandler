@@ -20,7 +20,7 @@ include __DIR__ . '/Libraries/kses.php';
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Htmlattribute extends AbstractConstraint implements ConstraintInterface
+class Htmlattribute extends AbstractHtml implements ConstraintInterface
 {
     /**
      * Validate

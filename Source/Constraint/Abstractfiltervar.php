@@ -13,19 +13,19 @@ use CommonApi\Model\ConstraintInterface;
 /**
  * Abstract Fieldhandler for filter_var data types
  *
- * @link       http://php.net/manual/en/function.is-float.php
- * @link       http://php.net/manual/en/function.is-double.php
- * @link       http://php.net/manual/en/function.is-real.php
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Abstractfiltervar extends AbstractConstraint implements ConstraintInterface
+class AbstractFiltervar extends AbstractConstraint implements ConstraintInterface
 {
     /**
      * Filter Type
      *
+     * Defined in child class
+     *
+     * @api
      * @var    string
      * @since  1.0.0
      */
@@ -34,6 +34,7 @@ class Abstractfiltervar extends AbstractConstraint implements ConstraintInterfac
     /**
      * Validate
      *
+     * @api
      * @return  mixed
      * @since   1.0.0
      */

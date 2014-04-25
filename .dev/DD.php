@@ -28,9 +28,17 @@ foreach ($classmap as $key => $path) {
     } else {
         $extra_urls = true;
     }
+    if ($project == 'Molajo') {
+    } else {
+        $extra_urls = false;
+    }
 
+
+    /**
+     *  Query
+     */
     try {
-        $reflector = new ReflectionClass($key);
+        $reflectorClass = new ReflectionClass($key);
     } catch (Exception $e) {
         $use = false;
     }
@@ -38,11 +46,25 @@ foreach ($classmap as $key => $path) {
     if ($use === true) {
 
         /**
+         *  New Class
+         */
+        $doc = new stdClass();
+
+        /**
          *  Project Repository
          */
-        $doc                    = new stdClass();
         $doc->github_repository = 'https://github.com/' . $project . '/' . $repository;
-        $doc->class_url         = $doc->github_repository . '/tree/master/' . $relative_path;
+        $doc->project = $project;
+        $doc->repository = $repository;
+
+        /**
+         *  Class
+         */
+        $doc->class_name      = $class_name;
+        $doc->class_namespace = $key; // From class map
+        $doc->namespace       = $reflectorClass->getNamespaceName(); // From reflection
+
+        $doc->class_url = $doc->github_repository . '/tree/master/' . $relative_path;
         if ($extra_urls === true) {
             $doc->document_url = $doc->github_repository . '/blob/master/.dev/Doc/' . $relative_path;
             $doc->unittest_url = $doc->github_repository . '/blob/master/.dev/Tests/' . $class_name . 'Test.php';
@@ -51,33 +73,36 @@ foreach ($classmap as $key => $path) {
             $doc->unittest_url = null;
         }
 
-        /**
-         *  Class
-         */
-        $doc->file_path       = $relative_path;
-        $doc->class_name      = $class_name;
-        $doc->class_namespace = $key;
-        $doc->class_comment   = $reflector->getDocComment();
-        $doc->namespace       = $reflector->getNamespaceName();
-        $doc->interface_names = $reflector->getInterfaceNames();
-        $doc->instantiable    = $reflector->isInstantiable();
-        $doc->final           = $reflector->isFinal();
-        $doc->abstract        = $reflector->isAbstract();
+        $doc->file_path = $relative_path;
+
+        $doc->class_comment   = $reflectorClass->getDocComment();
+
+        $temp = $reflectorClass->getParentClass();
+        if (is_object($temp)) {
+            $doc->parent_class = $temp->name;
+        } else {
+            $doc->parent_class = null;
+        }
+
+        $doc->instantiable    = $reflectorClass->isInstantiable();
+        $doc->final           = $reflectorClass->isFinal();
+        $doc->abstract        = $reflectorClass->isAbstract();
+        $doc->interface_names = $reflectorClass->getInterfaceNames();
 
         /**
          *  Class Properties
          */
         $properties_array = array();
-        foreach ($reflector->getProperties() as $property) {
 
-            $pinstance = $reflector->getProperty($property->name);
+        foreach ($reflectorClass->getProperties() as $property) {
 
-            $pinstance->setAccessible(true);
+            $reflectorProperty = $reflectorClass->getProperty($property->name);
+            $reflectorProperty->setAccessible(true);
 
             $row                   = new stdClass();
             $row->name             = $property->name;
-            $row->property_comment = $pinstance->getDocComment();
-            $row->property_value   = $pinstance->getValue($pinstance);
+            $row->property_comment = $reflectorProperty->getDocComment();
+            $row->property_value   = $reflectorProperty->getValue($reflectorProperty);
 
             $properties_array[] = $row;
         }
@@ -88,22 +113,29 @@ foreach ($classmap as $key => $path) {
          *  Methods
          */
         $method_array = array();
-        foreach ($reflector->getMethods() as $method) {
+
+        foreach ($reflectorClass->getMethods() as $method) {
 
             if ($method->isPublic()) {
 
-                $method_class                 = new stdClass();
-                $method_class->name           = $method->name;
-                $method_class->method_comment = $method->getDocComment();
-                $method_parameters            = array();
+                $reflectorMethod = $reflectorClass->getMethod($method->name);
+
+                $row                 = new stdClass();
+                $row->name           = $method->name;
+                $row->method_comment = $method->getDocComment();
+                $row->get_start_line = $method->getStartLine();
+                $row->method_url     = $doc->class_url . '#L' . $row->get_start_line;
 
                 /**
-                 *  Method Parameters
+                 *  Parameters
                  */
+                $method_parameters = array();
+
                 foreach ($method->getParameters() as $parameter) {
 
-                    $param_class       = new stdClass();
-                    $param_class->name = $parameter->name;
+                    $param_class           = new stdClass();
+                    $param_class->name     = $parameter->getName();
+                    $param_class->position = $parameter->getPosition();
 
                     if ($parameter->allowsNull()) {
                         $param_class->allows_null = 1;
@@ -123,22 +155,30 @@ foreach ($classmap as $key => $path) {
                         $param_class->is_array = false;
                     }
 
+                    if ($parameter->isCallable()) {
+                        $param_class->is_callable = true;
+                    } else {
+                        $param_class->is_callable = false;
+                    }
                     if ($parameter->isOptional()) {
                         $param_class->is_optional = true;
                     } else {
                         $param_class->is_optional = false;
                     }
 
+                    $param_class->type_hint = $parameter->getClass();
+
                     $method_parameters[] = $param_class;
                 }
 
-                $method_class->parameters = $method_parameters;
+                $row->parameters = $method_parameters;
 
-                $method_array[$method_class->name] = $method_class;
+                $method_array[$row->name] = $row;
             }
         }
 
         $doc->methods = $method_array;
     }
+
     $class_array[] = $doc;
 }

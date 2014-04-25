@@ -19,11 +19,12 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Email extends Abstractfiltervar implements ConstraintInterface
+class Email extends AbstractFiltervar implements ConstraintInterface
 {
     /**
      * Filter Type
      *
+     * @api
      * @var    string
      * @since  1.0.0
      */
@@ -31,6 +32,7 @@ class Email extends Abstractfiltervar implements ConstraintInterface
 
     /**
      * Validate
+     *
      *
      * @return  boolean
      * @since   1.0.0
@@ -66,6 +68,7 @@ class Email extends Abstractfiltervar implements ConstraintInterface
     /**
      * Format
      *
+     * @api
      * @return  mixed
      * @since   1.0.0
      */
@@ -112,7 +115,8 @@ class Email extends Abstractfiltervar implements ConstraintInterface
      *
      * @param   string $host
      *
-     * @return bool
+     * @return  boolean
+     * @since   1.0.0
      */
     protected function checkHost($host)
     {

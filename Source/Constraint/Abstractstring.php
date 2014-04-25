@@ -1,6 +1,6 @@
 <?php
 /**
- * Abstractstring Constraint
+ * AbstractString Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -11,14 +11,14 @@ namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Abstractstring Constraint
+ * AbstractString Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Abstractstring extends AbstractConstraint implements ConstraintInterface
+class AbstractString extends AbstractConstraint implements ConstraintInterface
 {
     /**
      * String Function
