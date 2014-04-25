@@ -24,6 +24,8 @@ $results  = createClassMap($base . '/Source/Constraint/', 'Molajo\\Fieldhandler\
 $classmap = array_merge($classmap, $results);
 $results  = createClassMap($base . '/Source/Escape/', 'Molajo\\Fieldhandler\\Escape\\');
 $classmap = array_merge($classmap, $results);
+$results  = createClassMap($base . '/Reflection/', 'Molajo\\Reflection\\');
+$classmap = array_merge($classmap, $results);
 
 $classmap['Molajo\\Fieldhandler\\HandleResponse']   = $base . '/Source/HandleResponse.php';
 $classmap['Molajo\\Fieldhandler\\ValidateResponse'] = $base . '/Source/ValidateResponse.php';

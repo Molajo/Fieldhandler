@@ -8,10 +8,18 @@
  */
 
 include __DIR__ . '/Bootstrap.php';
+
 $base_path   = substr(__DIR__, 0, strlen(__DIR__) - 5);
-$class_array = array();
-include __DIR__ . '/DD.php';
-include __DIR__ . '/DDRender.php';
+
+$class = 'Molajo\\Reflection\\Source';
+$source = new $class();
+$data = $source->process($base_path, $classmap);
+
+echo '<pre>';
+var_dump($data);
+
+
+//include __DIR__ . '/DDRender.php';
 
 /**
  * $parse_mask = '#Parameter (.*) ]#iU';
