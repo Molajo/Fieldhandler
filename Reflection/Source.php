@@ -284,6 +284,7 @@ class Source
         foreach ($reflectorClass->getMethods() as $method) {
             if ($method->isPublic()) {
                 $row                 = $this->getMethod($reflectorClass, $method, $doc->class_url);
+                $row                 = $this->getParameters($method, $row);
                 $methods[$row->name] = $row;
             }
         }
@@ -332,9 +333,9 @@ class Source
 
         $row = new stdClass();
 
-        $row->name             = $property_name;
-        $row = $this->processComment($reflectorProperty->getDocComment(), 'property_', $row);
-        $row->property_value   = $reflectorProperty->getValue($reflectorProperty);
+        $row->name           = $property_name;
+        $row                 = $this->processComment($reflectorProperty->getDocComment(), 'property_', $row);
+        $row->property_value = $reflectorProperty->getValue($reflectorProperty);
 
         return $row;
     }
@@ -351,62 +352,114 @@ class Source
      */
     protected function getMethod($reflectorClass, $method, $class_url)
     {
-        $reflectorMethod = $reflectorClass->getMethod($method->name);
-
         $row                 = new stdClass();
         $row->name           = $method->name;
-        $row = $this->processComment($method->getDocComment(), 'method_', $row);
+        $row                 = $this->processComment($method->getDocComment(), 'method_', $row);
         $row->get_start_line = $method->getStartLine();
         $row->method_url     = $class_url . '#L' . $row->get_start_line;
 
-        /**
-         *  Parameters
-         */
+        return $row;
+    }
+
+    /**
+     * Get all parameters for specified method
+     *
+     * @param   object $method
+     * @param   object $row
+     *
+     * @return  object
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function getParameters($method, $row)
+    {
         $method_parameters = array();
 
+        $param_array = array();
+        if (isset($row->param_array)) {
+            $param_array = $row->param_array;
+        }
+        $count = count($param_array);
+
         foreach ($method->getParameters() as $parameter) {
+            $temp             = $this->getParameter($parameter);
+            $temp->data_type  = '';
+            $temp->definition = '';
 
-            $param_class           = new stdClass();
-            $param_class->name     = $parameter->getName();
-            $param_class->position = $parameter->getPosition();
-
-            if ($parameter->allowsNull()) {
-                $param_class->allows_null = 1;
-            } else {
-                $param_class->allows_null = 0;
+            $needle = '$' . $temp->name;
+            if ($count > 0) {
+                foreach ($param_array as $param_item) {
+                    if (strpos($param_item, $needle)) {
+                        $temp->data_type = trim(substr($param_item, 0, strpos($param_item, $needle)));
+                        $x = trim(substr(
+                            $param_item,
+                            strpos($param_item, $needle) + 1 + strlen($param_item),
+                            9999
+                        ));
+                        if ($x === false) {
+                            $temp->definition = null;
+                        } else {
+                            $temp->definition = $x;
+                        }
+                    }
+                }
             }
 
-            if ($parameter->isDefaultValueAvailable()) {
-                $param_class->default_value = $parameter->getDefaultValue();
-            } else {
-                $param_class->default_value = null;
-            }
-
-            if ($parameter->isArray()) {
-                $param_class->is_array = true;
-            } else {
-                $param_class->is_array = false;
-            }
-
-            if ($parameter->isCallable()) {
-                $param_class->is_callable = true;
-            } else {
-                $param_class->is_callable = false;
-            }
-            if ($parameter->isOptional()) {
-                $param_class->is_optional = true;
-            } else {
-                $param_class->is_optional = false;
-            }
-
-            $param_class->type_hint = $parameter->getClass();
-
-            $method_parameters[] = $param_class;
+            $method_parameters[] = $temp;
         }
 
         $row->parameters = $method_parameters;
 
         return $row;
+    }
+
+    /**
+     * Get a parameter
+     *
+     * @param   object $parameter
+     *
+     * @return  object
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function getParameter($parameter)
+    {
+        $param_class           = new stdClass();
+        $param_class->name     = $parameter->getName();
+        $param_class->position = $parameter->getPosition();
+
+        if ($parameter->allowsNull()) {
+            $param_class->allows_null = 1;
+        } else {
+            $param_class->allows_null = 0;
+        }
+
+        if ($parameter->isDefaultValueAvailable()) {
+            $param_class->default_value = $parameter->getDefaultValue();
+        } else {
+            $param_class->default_value = null;
+        }
+
+        if ($parameter->isArray()) {
+            $param_class->is_array = true;
+        } else {
+            $param_class->is_array = false;
+        }
+
+        if ($parameter->isCallable()) {
+            $param_class->is_callable = true;
+        } else {
+            $param_class->is_callable = false;
+        }
+        if ($parameter->isOptional()) {
+            $param_class->is_optional = true;
+        } else {
+            $param_class->is_optional = false;
+        }
+
+        $param_class->type_hint = $parameter->getClass();
+
+        return $param_class;
     }
 
     /**
@@ -422,6 +475,8 @@ class Source
      */
     protected function processComment($comment, $prefix, $doc)
     {
+        $params = array();
+
         $results = explode('@', $comment);
 
         if (count($results) > 0 && is_array($results)) {
@@ -433,12 +488,30 @@ class Source
         foreach ($results as $item) {
             if ($i == 0) {
                 $doc->comment = $this->cleanItem($item);
+
             } else {
-                $name = $prefix . $this->cleanItem(ltrim(rtrim(substr($item, 0, strpos($item, ' ')))));
+                $name  = $this->cleanItem(ltrim(rtrim(substr($item, 0, strpos($item, ' ')))));
                 $value = $this->cleanItem(ltrim(rtrim(substr($item, strpos($item, ' ') + 1, 999999))));
-                $doc->$name = $value;
+
+                if ($name === 'param') {
+                    $params[] = $value;
+
+                } else {
+                    if ($name === 'api') {
+                        $name  = 'api';
+                        $value = true;
+
+                    } else {
+                        $name = $prefix . $name;
+                    }
+                    $doc->$name = $value;
+                }
             }
             $i ++;
+        }
+
+        if (is_array($params) && count($params) > 0) {
+            $doc->param_array = $params;
         }
 
         return $doc;
@@ -457,5 +530,4 @@ class Source
     {
         return ltrim(rtrim(str_replace(array('/**', '*/', '*'), '', $item)));
     }
-
 }
