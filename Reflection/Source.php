@@ -50,6 +50,15 @@ class Source
     protected $primary_project = 'Molajo';
 
     /**
+     * Primary Repository
+     *
+     * @api
+     * @var    string
+     * @since  1.0.0
+     */
+    protected $primary_repository = 'Fieldhandler';
+
+    /**
      * Source Repository
      *
      * @api
@@ -92,25 +101,57 @@ class Source
     protected $unit_tests_url_path = '/blob/master/.dev/Tests/';
 
     /**
+     * Relative Path to install base
+     *
+     * @api
+     * @var    string
+     * @since  1.0.0
+     */
+    protected $relative_path = null;
+
+    /**
+     * All Class URLs
+     *
+     * @api
+     * @var    array
+     * @since  1.0.0
+     */
+    protected $class_url_array = array();
+
+    /**
+     * Class Data Object
+     *
+     * @api
+     * @var    object
+     * @since  1.0.0
+     */
+    protected $class_data_object = null;
+
+    /**
+     * Class Reflection Object
+     *
+     * @api
+     * @var    object
+     * @since  1.0.0
+     */
+    protected $class_reflection_object = null;
+
+    /**
      * Constructor
      *
-     * @param   string $base_path
-     * @param   array  $classmap
+     * @param   string $source_repository
+     * @param   string $class_url_path
+     * @param   string $document_url_path
+     * @param   string $unit_tests_url_path
      *
      * @since   1.0.0
      */
     public function __construct(
-        $primary_project = '',
         $source_repository = '',
         $class_url_path = '',
         $document_url_path = '',
         $unit_tests_url_path = ''
     ) {
-        if ($primary_project === '') {
-        } else {
-            $this->primary_project = $primary_project;
-        }
-
         if ($source_repository === '') {
         } else {
             $this->source_repository = $source_repository;
@@ -136,8 +177,10 @@ class Source
      * Using PHP Reflection and for the associative array of classes and namespaces, extract
      *  Class, Interface, Property, Method, and Parameter information
      *
-     * @param  string $base_path
-     * @param  array  $classmap
+     * @param  string  $base_path
+     * @param  array   $classmap
+     * @param  string  $primary_project
+     * @param  string  $primary_repository
      *
      * ```php
      *
@@ -160,27 +203,58 @@ class Source
      */
     public function process(
         $base_path,
-        array $classmap = array()
+        array $classmap = array(),
+        $primary_project,
+        $primary_repository
     ) {
         $this->base_path = $base_path;
         $this->classmap  = $classmap;
 
+        if ($primary_project === '') {
+        } else {
+            $this->primary_project = $primary_project;
+        }
+
+        if ($primary_repository === '') {
+        } else {
+            $this->primary_repository = $primary_repository;
+        }
+
+        $this->class_url_array = array();
+        foreach ($this->classmap as $class_namespace => $class_path) {
+            $this->class_url_array[$class_namespace]
+                = $this->preprocessClassLocations($class_namespace, $class_path);
+        }
+
         $class_array = array();
         foreach ($this->classmap as $class_namespace => $class_path) {
-            $results = $this->processClass($class_namespace, $class_path);
-            if ($results === null) {
-            } else {
-                $class_array[] = $results;
+
+            if (isset($this->class_url_array[$class_namespace])
+                && $this->class_url_array[$class_namespace]->primary_project === true
+                && $this->class_url_array[$class_namespace]->primary_repository === true
+            ) {
+
+                $class_name     = $this->class_url_array[$class_namespace]->class_name;
+                $this->reflectClassNamespace($class_namespace);
+
+                if ($this->class_reflection_object === false) {
+                } else {
+                    $this->class_data_object = new stdClass();
+
+                    $this->processClass($class_name, $class_namespace);
+
+                    $class_array[] = $this->class_data_object;
+                }
             }
         }
+
         echo '<pre>';
         var_dump($class_array);
-
-
+        die;
     }
 
     /**
-     * Extract information on class
+     * Preprocess all class locations so that URL's and paths are available for parent classes
      *
      * @param   string $class_namespace
      * @param   string $class_path
@@ -189,109 +263,73 @@ class Source
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    protected function processClass($class_namespace, $class_path)
+    protected function preprocessClassLocations($class_namespace, $class_path)
     {
-        $use = true;
-
         $nodes      = explode('\\', $class_namespace);
         $project    = $nodes[0];
         $repository = $nodes[1];
         $class_name = $nodes[count($nodes) - 1];
 
         $relative_path = substr($class_path, strlen($this->base_path . '/'), 9999);
-        $remove_path   = strtolower('vendor/' . $project . '/' . $repository . '/');
 
-        if (substr($relative_path, 0, strlen($remove_path)) == $remove_path) {
-            $relative_path = substr($relative_path, strlen($remove_path), 9999);
-            $extra_urls    = false;
-        } else {
-            $extra_urls = true;
-        }
+        $class_location                    = new stdClass();
+        $class_location->project           = $project;
+        $class_location->repository        = $repository;
+        $class_location->source_repository = $this->source_repository . $project . '/' . $repository;
+        $class_location->class_name        = $class_name;
 
         if ($project == $this->primary_project) {
+            $class_location->primary_project = true;
         } else {
-            $extra_urls = false;
+            $class_location->primary_project = false;
         }
 
-        /**
-         *  New Class
-         */
-        $reflectorClass = $this->reflectClassNamespace($class_namespace);
-        if ($reflectorClass === false) {
-            return null;
-        }
-
-        $doc = new stdClass();
-
-        /**
-         *  Project Repository
-         */
-        $doc->source_repository = $this->source_repository . $project . '/' . $repository;
-        $doc->project           = $project;
-        $doc->repository        = $repository;
-
-        /**
-         *  Class
-         */
-        $doc->class_name      = $class_name;
-        $doc->class_namespace = $class_namespace;
-        $doc->namespace       = $reflectorClass->getNamespaceName();
-
-        $doc->class_url = $doc->source_repository . $this->class_url_path . $relative_path;
-
-        if ($extra_urls === true) {
-            $doc->document_url = $doc->source_repository . $this->document_url_path . $relative_path;
-            $doc->unittest_url = $doc->source_repository . $this->unit_tests_url_path . $class_name . 'Test.php';
+        if ($repository == $this->primary_repository) {
+            $class_location->primary_repository = true;
         } else {
-            $doc->document_url = null;
-            $doc->unittest_url = null;
+            $class_location->primary_repository = false;
         }
 
-        $doc->file_path       = $relative_path;
-        $doc->instantiable    = $reflectorClass->isInstantiable();
-        $doc->final           = $reflectorClass->isFinal();
-        $doc->abstract        = $reflectorClass->isAbstract();
-        $doc->interface_names = $reflectorClass->getInterfaceNames();
+        if ($class_location->primary_project === true
+            && $class_location->primary_repository === true
+        ) {
 
-        $doc = $this->processComment($reflectorClass->getDocComment(), 'class_', $doc);
-
-        /**
-         *  Parent
-         */
-        $temp = $reflectorClass->getParentClass();
-        if (is_object($temp)) {
-            $doc->parent_class = $temp->name;
+            $class_location->relative_path = $relative_path;
+            $class_location->class_url     = $class_location->source_repository . $this->class_url_path . $relative_path;
         } else {
-            $doc->parent_class = null;
+            $class_location->relative_path = null;
+            $class_location->class_url     = null;
+
         }
 
-        /**
-         *  Properties
-         */
-        $properties = array();
+        return $class_location;
+    }
 
-        foreach ($reflectorClass->getProperties() as $property) {
-            $properties[] = $this->getProperty($reflectorClass, $property->name);
-        }
+    /**
+     * Extract information on class
+     *
+     * @param   string $class_name
+     * @param   string $class_namespace
+     *
+     * @return  object
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function processClass($class_name, $class_namespace)
+    {
+        $this->getClassProject($class_namespace);
 
-        $doc->class_properties = $properties;
+        $this->getClassMeta($class_name, $class_namespace);
 
-        /**
-         *  Methods
-         */
-        $methods = array();
+        $this->processComment($this->class_reflection_object->getDocComment(), $this->class_data_object);
 
-        foreach ($reflectorClass->getMethods() as $method) {
-            if ($method->isPublic()) {
-                $row                 = $this->getMethod($reflectorClass, $method, $doc->class_url);
-                $row                 = $this->getParameters($method, $row);
-                $methods[$row->name] = $row;
-            }
-        }
+        $this->getParent();
 
-        $doc->methods = $methods;
+        $this->getProperties();
 
-        return $doc;
+        $this->getMethods();
+
+        return $this;
     }
 
     /**
@@ -299,64 +337,219 @@ class Source
      *
      * @param   string $class_namespace
      *
-     * @return  object
+     * @return  $this
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     protected function reflectClassNamespace($class_namespace)
     {
         try {
-            $reflectorClass = new ReflectionClass($class_namespace);
+            $this->class_reflection_object = new ReflectionClass($class_namespace);
 
         } catch (Exception $e) {
             return false;
         }
 
-        return $reflectorClass;
+        return $this;
     }
 
     /**
-     * Get Property
+     * Extract information on class
      *
-     * @param   object $reflectorClass
+     * @param   string $class_namespace
+     *
+     * @return  $this
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function getClassProject($class_namespace)
+    {
+        $this->class_data_object->project           = $this->primary_project;
+        $this->class_data_object->repository        = $this->primary_repository;
+        $this->class_data_object->source_repository = $this->class_url_array[$class_namespace]->source_repository;
+
+        return $this;
+    }
+
+    /**
+     * Get Class Meta Data
+     *
+     * @param   string $class_name
+     * @param   string $class_namespace
+     *
+     * @return  $this
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function getClassMeta($class_name, $class_namespace)
+    {
+        $this->class_data_object->class_name      = $class_name;
+        $this->class_data_object->class_namespace = $class_namespace;
+        $this->class_data_object->namespace       = $this->class_reflection_object->getNamespaceName();
+
+        $this->class_data_object->class_url
+            = $this->class_url_array[$class_namespace]->class_url;
+        $this->class_data_object->document_url
+            = $this->class_data_object->source_repository . $this->document_url_path . $this->relative_path;
+        $this->class_data_object->unittest_url
+            = $this->class_data_object->source_repository . $this->unit_tests_url_path . $class_name . 'Test.php';
+        $this->class_data_object->file_path
+            = $this->class_url_array[$class_namespace]->relative_path;
+
+        $this->class_data_object->instantiable    = $this->class_reflection_object->isInstantiable();
+        $this->class_data_object->final           = $this->class_reflection_object->isFinal();
+        $this->class_data_object->abstract        = $this->class_reflection_object->isAbstract();
+        $this->class_data_object->interface_names = $this->class_reflection_object->getInterfaceNames();
+
+        return $this;
+    }
+
+    /**
+     * Retrieve Parent Class information
+     *
+     * @return  $this
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function getParent()
+    {
+        $temp = $this->class_reflection_object->getParentClass();
+
+        if (is_object($temp)) {
+            $this->class_data_object->parent_class
+                = $temp->name;
+            $this->class_data_object->parent_class_url
+                = $this->class_url_array[$this->class_data_object->parent_class]->class_url;
+        } else {
+            $this->class_data_object->parent_class     = null;
+            $this->class_data_object->parent_class_url = null;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Retrieve properties for class
+     *
+     * @return  $this
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function getProperties()
+    {
+        $properties = array();
+
+        foreach ($this->class_reflection_object->getProperties() as $property) {
+            $properties[] = $this->getProperty($property->name);
+        }
+
+        $this->class_data_object->class_properties = $properties;
+
+        return $this;
+    }
+
+    /**
+     * Get a specific property for the class
+     *
+     * Appears PHP does not support getStartLine() for class properties?
+     *
      * @param   string $property_name
      *
      * @return  object
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    protected function getProperty($reflectorClass, $property_name)
+    protected function getProperty($property_name)
     {
-        $reflectorProperty = $reflectorClass->getProperty($property_name);
-
+        $reflectorProperty = $this->class_reflection_object->getProperty($property_name);
         $reflectorProperty->setAccessible(true);
 
         $row = new stdClass();
 
-        $row->name           = $property_name;
-        $row                 = $this->processComment($reflectorProperty->getDocComment(), 'property_', $row);
-        $row->property_value = $reflectorProperty->getValue($reflectorProperty);
+        $row->name            = $property_name;
+        $row->declaring_class = $reflectorProperty->getDeclaringClass()->name;
+        $row->property_url    = $this->class_url_array[$row->declaring_class]->class_url;
+
+        if ($reflectorProperty->isDefault() === true) {
+            $row->method_modifier = 'default';
+        } elseif ($reflectorProperty->isPrivate() === true) {
+            $row->method_modifier = 'private';
+        } elseif ($reflectorProperty->isProtected() === true) {
+            $row->method_modifier = 'protected';
+        } elseif ($reflectorProperty->isPublic() === true) {
+            $row->$reflectorProperty = 'public';
+        } else {
+            $row->$reflectorProperty = 'static';
+        }
+
+        $row        = $this->processComment($reflectorProperty->getDocComment(), $row);
+        $row->value = $reflectorProperty->getValue($reflectorProperty);
 
         return $row;
     }
 
     /**
-     * Get Class Method
+     * Retrieve methods for class
      *
-     * @param   object $reflectorClass
+     * @return  $this
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function getMethods()
+    {
+        $methods = array();
+
+        foreach ($this->class_reflection_object->getMethods() as $method) {
+            $row                 = $this->getMethod($method, $this->class_data_object->class_url);
+            $row                 = $this->getParameters($method, $row);
+            $methods[$row->name] = $row;
+        }
+
+        $this->class_data_object->methods = $methods;
+
+        return $this;
+    }
+
+    /**
+     * Get a specific method for the class
+     *
      * @param   object $method
      *
      * @return  object
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    protected function getMethod($reflectorClass, $method, $class_url)
+    protected function getMethod($method)
     {
-        $row                 = new stdClass();
-        $row->name           = $method->name;
-        $row                 = $this->processComment($method->getDocComment(), 'method_', $row);
-        $row->get_start_line = $method->getStartLine();
-        $row->method_url     = $class_url . '#L' . $row->get_start_line;
+        $row       = new stdClass();
+        $row->name = $method->name;
+
+        if ($method->isConstructor() === true) {
+            $row->method_modifier = 'constructor';
+        } elseif ($method->isDestructor() === true) {
+            $row->method_modifier = 'destructor';
+        } elseif ($method->isFinal() === true) {
+            $row->method_modifier = 'final';
+        } elseif ($method->isPrivate() === true) {
+            $row->method_modifier = 'private';
+        } elseif ($method->isProtected() === true) {
+            $row->method_modifier = 'protected';
+        } elseif ($method->isPublic() === true) {
+            $row->method_modifier = 'public';
+        } elseif ($method->isStatic() === true) {
+            $row->method_modifier = 'static';
+        } else {
+            $row->method_modifier = 'abstract';
+        }
+
+        $row->declaring_class = $method->getDeclaringClass()->name;
+        $row                  = $this->processComment($method->getDocComment(), $row);
+        $row->get_start_line  = $method->getStartLine();
+        $row->get_end_line    = $method->getEndLine();
+        $row->method_url      = $this->class_url_array[$row->declaring_class]->class_url
+            . '#L' . $row->get_start_line;
+        $row->method_url_end  = $this->class_url_array[$row->declaring_class]->class_url
+            . '#L' . $row->get_end_line;
 
         return $row;
     }
@@ -375,37 +568,15 @@ class Source
     {
         $method_parameters = array();
 
-        $param_array = array();
         if (isset($row->param_array)) {
-            $param_array = $row->param_array;
+            $comment_param_array = $row->param_array;
+            unset($row->param_array);
+        } else {
+            $comment_param_array = array();
         }
-        $count = count($param_array);
 
         foreach ($method->getParameters() as $parameter) {
-            $temp             = $this->getParameter($parameter);
-            $temp->data_type  = '';
-            $temp->definition = '';
-
-            $needle = '$' . $temp->name;
-            if ($count > 0) {
-                foreach ($param_array as $param_item) {
-                    if (strpos($param_item, $needle)) {
-                        $temp->data_type = trim(substr($param_item, 0, strpos($param_item, $needle)));
-                        $x = trim(substr(
-                            $param_item,
-                            strpos($param_item, $needle) + 1 + strlen($param_item),
-                            9999
-                        ));
-                        if ($x === false) {
-                            $temp->definition = null;
-                        } else {
-                            $temp->definition = $x;
-                        }
-                    }
-                }
-            }
-
-            $method_parameters[] = $temp;
+            $method_parameters[] = $this->getParameter($parameter, $comment_param_array);
         }
 
         $row->parameters = $method_parameters;
@@ -414,15 +585,16 @@ class Source
     }
 
     /**
-     * Get a parameter
+     * Get a specific method parameter
      *
      * @param   object $parameter
+     * @param   array  $comment_param_array
      *
      * @return  object
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    protected function getParameter($parameter)
+    protected function getParameter($parameter, $comment_param_array)
     {
         $param_class           = new stdClass();
         $param_class->name     = $parameter->getName();
@@ -440,21 +612,24 @@ class Source
             $param_class->default_value = null;
         }
 
-        if ($parameter->isArray()) {
-            $param_class->is_array = true;
-        } else {
-            $param_class->is_array = false;
-        }
-
-        if ($parameter->isCallable()) {
-            $param_class->is_callable = true;
-        } else {
-            $param_class->is_callable = false;
-        }
         if ($parameter->isOptional()) {
             $param_class->is_optional = true;
         } else {
             $param_class->is_optional = false;
+        }
+
+        $results              = $this->searchCommentParamArray($param_class->name, $comment_param_array);
+        $data_type            = $results[0];
+        $param_class->comment = $results[1];
+
+        if ($parameter->isArray() === true) {
+            $param_class->method_modifier = 'array';
+
+        } elseif ($parameter->isCallable() === true) {
+            $param_class->method_modifier = 'callable';
+
+        } else {
+            $param_class->method_modifier = $data_type;
         }
 
         $param_class->type_hint = $parameter->getClass();
@@ -463,17 +638,56 @@ class Source
     }
 
     /**
-     * Split comment into associative array
+     * For those parameters without type hints (array or callable), search the comments
+     *  for a matching parameter name and use the definition there
      *
-     * @param   string $comment
-     * @param   string $prefix
-     * @param   object $doc
+     * @param   string $parameter_name
+     * @param   array  $comment_param_array
      *
      * @return  object
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    protected function processComment($comment, $prefix, $doc)
+    protected function searchCommentParamArray($parameter_name, array $comment_param_array)
+    {
+        $needle = '$' . $parameter_name;
+
+        $data_type  = null;
+        $definition = null;
+
+        if (count($comment_param_array) > 0) {
+        } else {
+            return array($data_type, $definition);
+        }
+
+        foreach ($comment_param_array as $item) {
+
+            if (strpos($item, $needle)) {
+
+                $data_type  = trim(substr($item, 0, strpos($item, $needle)));
+                $definition = trim(substr($item, strpos($item, $needle) + 1 + strlen($item), 9999));
+
+                if ($definition === false) {
+                    $definition = null;
+                }
+                break;
+            }
+        }
+
+        return array($data_type, $definition);
+    }
+
+    /**
+     * Split comment into associative array
+     *
+     * @param   string $comment
+     * @param   object $source_data_object
+     *
+     * @return  object
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function processComment($comment, $source_data_object)
     {
         $params = array();
 
@@ -486,12 +700,17 @@ class Source
 
         $i = 0;
         foreach ($results as $item) {
+
             if ($i == 0) {
-                $doc->comment = $this->cleanItem($item);
+                $source_data_object->comment = $this->cleanItem($item);
 
             } else {
                 $name  = $this->cleanItem(ltrim(rtrim(substr($item, 0, strpos($item, ' ')))));
                 $value = $this->cleanItem(ltrim(rtrim(substr($item, strpos($item, ' ') + 1, 999999))));
+
+                if ($name === 'var') {
+                    $name = 'data_type';
+                }
 
                 if ($name === 'param') {
                     $params[] = $value;
@@ -500,21 +719,19 @@ class Source
                     if ($name === 'api') {
                         $name  = 'api';
                         $value = true;
-
-                    } else {
-                        $name = $prefix . $name;
                     }
-                    $doc->$name = $value;
+
+                    $source_data_object->$name = $value;
                 }
             }
             $i ++;
         }
 
         if (is_array($params) && count($params) > 0) {
-            $doc->param_array = $params;
+            $source_data_object->param_array = $params;
         }
 
-        return $doc;
+        return $source_data_object;
     }
 
     /**

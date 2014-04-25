@@ -13,7 +13,7 @@ $base_path   = substr(__DIR__, 0, strlen(__DIR__) - 5);
 
 $class = 'Molajo\\Reflection\\Source';
 $source = new $class();
-$data = $source->process($base_path, $classmap);
+$data = $source->process($base_path, $classmap, 'Molajo', 'Fieldhandler');
 
 echo '<pre>';
 var_dump($data);
