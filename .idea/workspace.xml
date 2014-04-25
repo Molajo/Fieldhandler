@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="51305232-6c75-47ed-ba07-57257fa48b82" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.dev/ClassMap.json" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ClassReflectionData.json" afterPath="$PROJECT_DIR$/.dev/Documentation/Test.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.dev/DDIndex.php" afterPath="$PROJECT_DIR$/.dev/DDIndex.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Reflection/Source.php" afterPath="$PROJECT_DIR$/Reflection/Source.php" />
+    </list>
+    <ignored path="Fieldhandler.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="Fieldhandler" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="Index.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.29613733" vertical-offset="0" max-vertical-offset="1165">
+              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+              <folding>
+                <element signature="n#style#0;n#xmp#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="true" />
+    </FindUsagesManager>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/.dev/Tests/TrimTest.php" />
+        <option value="$PROJECT_DIR$/.dev/Tests/NumericTest.php" />
+        <option value="$PROJECT_DIR$/.dev/Tests/UpperTest.php" />
+        <option value="$PROJECT_DIR$/.dev/Tests/FalseTest.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/False.php" />
+        <option value="$PROJECT_DIR$/.dev/Tests/TrueTest.php" />
+        <option value="$PROJECT_DIR$/.dev/Tests/FloatTest.php" />
+        <option value="$PROJECT_DIR$/Source/HandleResponse.php" />
+        <option value="$PROJECT_DIR$/.dev/Tests/FullspecialcharsTest.php" />
+        <option value="$PROJECT_DIR$/.dev/Tests/UrlTest.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/Something.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/Primarykey.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/Abstractctype.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/Date.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/Defaults.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/Equal.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/Fileextension.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/Fromto.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/Length.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/Maximum.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/Mimetypes.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/Minimum.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/Notequal.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/Regex.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/Tel.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/Unique.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/Values.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/Contains.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/Alias.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/Arrays.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/Abstractfiltervar.php" />
+        <option value="$PROJECT_DIR$/.dev/DDRender.php" />
+        <option value="$PROJECT_DIR$/.dev/DD.php" />
+        <option value="$PROJECT_DIR$/Source/Request.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/True.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/AbstractConstraint.php" />
+        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
+        <option value="$PROJECT_DIR$/Source/Constraint/AbstractHtml.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/HtmlAttribute.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/Js.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/Css.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/Html.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/Email.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/Encoded.php" />
+        <option value="$PROJECT_DIR$/Source/Constraint/Callback.php" />
+        <option value="$PROJECT_DIR$/vendor/commonapi/model/ConstraintInterface.php" />
+        <option value="$PROJECT_DIR$/.dev/Bootstrap.php" />
+        <option value="$PROJECT_DIR$/.dev/DDIndex.php" />
+        <option value="$PROJECT_DIR$/Reflection/Source.php" />
+        <option value="$PROJECT_DIR$/.dev/Documentation/Test.html" />
+        <option value="$PROJECT_DIR$/Index.html" />
+      </list>
+    </option>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="118" />
+    <option name="y" value="100" />
+    <option name="width" value="1214" />
+    <option name="height" value="1286" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="2" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Fieldhandler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Fieldhandler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Fieldhandler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.lastSelected" value="preferences.sourceCode.PHP" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Molajo" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="LayoutCode.rearrangeEntries" value="false" />
+    <property name="LayoutCode.rearrangeEntriesPHP" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Source/Constraint" />
+      <recent name="$PROJECT_DIR$/.dev" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/.dev/Documentation/Constraints" />
+      <recent name="$PROJECT_DIR$/.dev/Tests" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/.dev/Documentation/Constraints" />
+      <recent name="$PROJECT_DIR$/.dev/xxxTests" />
+      <recent name="$PROJECT_DIR$/.dev/Tests" />
+      <recent name="$PROJECT_DIR$/Source" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method />
+    </configuration>
+    <list size="0" />
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration" myUseAcceleration="nothing">
+    <configuration>$USER_HOME$/.subversion</configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="51305232-6c75-47ed-ba07-57257fa48b82" name="Default" comment="" />
+      <created>1397732602577</created>
+      <option name="number" value="Default" />
+      <updated>1397732602577</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="118" y="100" width="1214" height="1286" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38487116" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24958813" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21692687" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="myTodoPanelSettings">
+      <TodoPanelSettings />
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="855" max-vertical-offset="12915">
+          <caret line="72" column="28" selection-start-line="72" selection-start-column="28" selection-end-line="72" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.29613733" vertical-offset="0" max-vertical-offset="1165">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#xmp#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
+
