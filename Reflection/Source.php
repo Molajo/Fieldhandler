@@ -233,7 +233,6 @@ class Source
                 && $this->class_url_array[$class_namespace]->primary_project === true
                 && $this->class_url_array[$class_namespace]->primary_repository === true
             ) {
-
                 $class_name     = $this->class_url_array[$class_namespace]->class_name;
                 $this->reflectClassNamespace($class_namespace);
 
@@ -248,9 +247,11 @@ class Source
             }
         }
 
-        echo '<pre>';
-        var_dump($class_array);
-        die;
+        file_put_contents(__DIR__ . '/' . $this->primary_project . $this->primary_repository . '.json',
+            json_encode($class_array, JSON_PRETTY_PRINT)
+        );
+
+        return $this;
     }
 
     /**
@@ -293,7 +294,6 @@ class Source
         if ($class_location->primary_project === true
             && $class_location->primary_repository === true
         ) {
-
             $class_location->relative_path = $relative_path;
             $class_location->class_url     = $class_location->source_repository . $this->class_url_path . $relative_path;
         } else {
@@ -318,15 +318,10 @@ class Source
     protected function processClass($class_name, $class_namespace)
     {
         $this->getClassProject($class_namespace);
-
         $this->getClassMeta($class_name, $class_namespace);
-
         $this->processComment($this->class_reflection_object->getDocComment(), $this->class_data_object);
-
         $this->getParent();
-
         $this->getProperties();
-
         $this->getMethods();
 
         return $this;
