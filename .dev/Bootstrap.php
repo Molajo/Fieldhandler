@@ -7,14 +7,13 @@
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
 $base = substr(__DIR__, 0, strlen(__DIR__) - 5);
-include_once __DIR__ . '/CreateClassMap.php';
-//include_once $base . '/vendor/autoload.php';
+if (function_exists('CreateClassMap')) {
+} else {
+    include_once __DIR__ . '/CreateClassMap.php';
+}
+include_once $base . '/vendor/autoload.php';
 
 $classmap = array();
-$results  = createClassMap($base . '/vendor/commonapi/exception/', 'CommonApi\\Exception\\');
-$classmap = array_merge($classmap, $results);
-$classmap = createClassMap($base . '/vendor/commonapi/model/', 'CommonApi\\Model\\');
-$classmap = array_merge($classmap, $results);
 $results  = createClassMap($base . '/Source/Constraint/', 'Molajo\\Fieldhandler\\Constraint\\');
 $classmap = array_merge($classmap, $results);
 $results  = createClassMap($base . '/Source/Escape/', 'Molajo\\Fieldhandler\\Escape\\');
