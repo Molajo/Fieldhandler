@@ -8,12 +8,7 @@
  */
 $base = substr(__DIR__, 0, strlen(__DIR__) - 5);
 include_once __DIR__ . '/CreateClassMap.php';
-include_once $base . '/vendor/autoload.php';
-
-if (! defined('PHP_VERSION_ID')) {
-    $version = explode('.', phpversion());
-    define('PHP_VERSION_ID', ($version[0] * 10000 + $version[1] * 100 + $version[2]));
-}
+//include_once $base . '/vendor/autoload.php';
 
 $classmap = array();
 $results  = createClassMap($base . '/vendor/commonapi/exception/', 'CommonApi\\Exception\\');
@@ -24,13 +19,12 @@ $results  = createClassMap($base . '/Source/Constraint/', 'Molajo\\Fieldhandler\
 $classmap = array_merge($classmap, $results);
 $results  = createClassMap($base . '/Source/Escape/', 'Molajo\\Fieldhandler\\Escape\\');
 $classmap = array_merge($classmap, $results);
-$results  = createClassMap($base . '/Reflection/', 'Molajo\\Reflection\\');
-$classmap = array_merge($classmap, $results);
 
 $classmap['Molajo\\Fieldhandler\\HandleResponse']   = $base . '/Source/HandleResponse.php';
 $classmap['Molajo\\Fieldhandler\\ValidateResponse'] = $base . '/Source/ValidateResponse.php';
 $classmap['Molajo\\Fieldhandler\\Message']          = $base . '/Source/Message.php';
 $classmap['Molajo\\Fieldhandler\\Request']          = $base . '/Source/Request.php';
+$classmap['Molajo\\Fieldhandler\\Escape']          = $base . '/Source/Escape.php';
 ksort($classmap);
 
 spl_autoload_register(
