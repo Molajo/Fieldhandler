@@ -13,7 +13,6 @@
         }
     ],
     "require": {
-        "php": ">=5.4",
         "commonapi/model": "dev-master",
         "commonapi/exception": "dev-master",
         "zendframework/zend-escaper": "dev-master"
