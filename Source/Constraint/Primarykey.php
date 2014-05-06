@@ -29,13 +29,7 @@ class Primarykey extends AbstractConstraint implements ConstraintInterface
      */
     public function validate()
     {
-        if ($this->field_value === null) {
-        } else {
-            if (ctype_print($this->field_value) === false) {
-                $this->setValidateMessage(2000);
-                return false;
-            }
-        }
+//todo
 
         return true;
     }
@@ -48,18 +42,7 @@ class Primarykey extends AbstractConstraint implements ConstraintInterface
      */
     public function sanitize()
     {
-        if ($this->field_value === null) {
-        } else {
-
-            if (ctype_print($this->field_value) === true) {
-            } else {
-                $this->field_value = $this->sanitizeByCharacter(
-                    'ctype_print',
-                    $this->field_value,
-                    $this->getOption('allow_whitespace', false)
-                );
-            }
-        }
+//todo
 
         return $this->field_value;
     }

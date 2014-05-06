@@ -65,13 +65,9 @@ class Alias extends AbstractConstraint implements ConstraintInterface
      */
     public function format()
     {
-        if ($this->field_value === null) {
-            return null;
-        }
+        $this->sanitize();
 
-        $alias = $this->sanitizeAlias($this->field_value);
-
-        $this->field_value = $this->formatAlias($alias);
+        $this->field_value = $this->formatAlias($this->field_value);
 
         return $this->field_value;
     }

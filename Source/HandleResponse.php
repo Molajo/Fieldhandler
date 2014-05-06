@@ -73,16 +73,11 @@ class HandleResponse implements HandleResponseInterface
      */
     public function getChangeIndicator()
     {
-        if ($this->original_data_value === null
-            && $this->response_value === false) {
+        if ($this->testNoValueChange() === true) {
             return true;
         }
-        if ($this->original_data_value === false
-            && $this->response_value === null) {
-            return true;
-        }
-        if ($this->original_data_value === 0
-            && $this->response_value === null) {
+
+        if ($this->testFloat() === true) {
             return true;
         }
 
@@ -90,15 +85,53 @@ class HandleResponse implements HandleResponseInterface
             return false;
         }
 
+        return true;
+    }
+
+    /**
+     * Test for "no value" changes
+     *
+     * @return  boolean
+     * @since   1.0.0
+     */
+    protected function testNoValueChange()
+    {
+        if ($this->original_data_value === null
+            && $this->response_value === false
+        ) {
+            return true;
+        }
+        if ($this->original_data_value === false
+            && $this->response_value === null
+        ) {
+            return true;
+        }
+        if ($this->original_data_value === 0
+            && $this->response_value === null
+        ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Test for numeric float change
+     *
+     * @return  boolean
+     * @since   1.0.0
+     */
+    protected function testFloat()
+    {
         if (is_numeric($this->original_data_value)) {
 
-            if ((float) $this->original_data_value < (float) $this->response_value
-                || (float) $this->response_value < (float) $this->original_data_value) {
-            } else {
-                return false;
+            if ((float)$this->original_data_value < (float)$this->response_value
+                || (float)$this->response_value < (float)$this->original_data_value
+            ) {
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 }
