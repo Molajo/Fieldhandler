@@ -27,37 +27,4 @@ class Greaterthan extends AbstractMath implements ConstraintInterface
      * @since  1.0.0
      */
     protected $method_type = 'getGreaterthan';
-
-    /**
-     * Validate
-     *
-     * @return  boolean
-     * @since   1.0.0
-     */
-    public function validate()
-    {
-        return parent::validate();
-    }
-
-    /**
-     * Sanitize
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function sanitize()
-    {
-        return parent::sanitize();
-    }
-
-    /**
-     * Format
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function format()
-    {
-        return parent::format();
-    }
 }

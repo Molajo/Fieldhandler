@@ -19,7 +19,7 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class AbstractCtype extends AbstractConstraint implements ConstraintInterface
+abstract class AbstractCtype extends AbstractConstraint implements ConstraintInterface
 {
     /**
      * ctype Test

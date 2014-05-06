@@ -19,8 +19,16 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Fileextension extends AbstractConstraint implements ConstraintInterface
+class Fileextension extends AbstractArrays implements ConstraintInterface
 {
+    /**
+     * Array Options Entry Type
+     *
+     * @var    string
+     * @since  1.0.0
+     */
+    protected $array_option_type = 'array_valid_extensions';
+
     /**
      * Validate
      *
@@ -41,7 +49,10 @@ class Fileextension extends AbstractConstraint implements ConstraintInterface
 
         $path_info = pathinfo($this->field_value);
 
-        if (in_array($path_info, $this->getExtensions())) {
+        $hold = $this->field_value;
+        $this->field_value = $path_info['extension'];
+
+        if (parent::validate()) {
             return true;
         }
 
@@ -59,7 +70,15 @@ class Fileextension extends AbstractConstraint implements ConstraintInterface
      */
     public function sanitize()
     {
-        return parent::sanitize();
+        $hold = $this->field_value;
+
+        if (parent::sanitize()) {
+            $this->field_value = $hold;
+        } else {
+            $this->field_value = null;
+        }
+
+        return $this->field_value;
     }
 
     /**

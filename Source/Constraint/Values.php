@@ -19,80 +19,13 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Values extends AbstractConstraint implements ConstraintInterface
+class Values extends AbstractArrays implements ConstraintInterface
 {
     /**
-     * Validate
+     * Array Options Entry Type
      *
-     * @return  boolean
-     * @since   1.0.0
+     * @var    string
+     * @since  1.0.0
      */
-    public function validate()
-    {
-        if ($this->field_value === null) {
-            return true;
-        }
-
-        if (in_array($this->field_value, $this->getFieldValues())) {
-            return true;
-        }
-
-        $this->setValidateMessage(14000);
-
-        return false;
-    }
-
-    /**
-     * Sanitize
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function sanitize()
-    {
-        if ($this->field_value === null) {
-        } else {
-            if (in_array($this->field_value, $this->getFieldValues())) {
-            } else {
-                $this->field_value = null;
-            }
-        }
-
-        return $this->field_value;
-    }
-
-    /**
-     * Format
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function format()
-    {
-        return parent::format();
-    }
-
-    /**
-     * Test Array Entry Values
-     *
-     * @return  array
-     * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException;
-     */
-    public function getFieldValues()
-    {
-        $array_valid_values = $this->getOption('array_valid_values', array());
-
-        if (is_array($array_valid_values)
-            && count($array_valid_values) > 0
-        ) {
-        } else {
-            throw new UnexpectedValueException
-            (
-                'Fieldhandler Values: must provide options[array_valid_values] values.'
-            );
-        }
-
-        return $array_valid_values;
-    }
+    protected $array_option_type = 'array_valid_values';
 }
