@@ -55,7 +55,7 @@ class ValidateResponse implements ValidateResponseInterface
     /**
      * Get Validation Response
      *
-     * @return  boolean
+     * @return  boolean|string
      * @since   1.0.0
      */
     public function getValidateResponse()

@@ -9,7 +9,6 @@
 namespace Molajo\Fieldhandler\Constraint;
 
 use CommonApi\Model\ConstraintInterface;
-use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Mimetypes Constraint

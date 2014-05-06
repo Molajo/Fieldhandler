@@ -23,7 +23,7 @@ class Nothing extends AbstractConstraint implements ConstraintInterface
     /**
      * Validate
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      */
     public function validate()

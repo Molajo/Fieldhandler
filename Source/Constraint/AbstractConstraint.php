@@ -156,7 +156,7 @@ abstract class AbstractConstraint implements ConstraintInterface
     /**
      * Used by Constraint Classes to customize option values needed for Field handling
      *
-     * @return  mixed
+     * @return  AbstractConstraint
      * @since   1.0.0
      */
     public function setOptions()
@@ -282,7 +282,7 @@ abstract class AbstractConstraint implements ConstraintInterface
     /**
      * Flags can be set in options array
      *
-     * @return  mixed
+     * @return  string|null
      * @since   1.0.0
      */
     protected function setFlags()
@@ -344,7 +344,7 @@ abstract class AbstractConstraint implements ConstraintInterface
     /**
      * Get timezone
      *
-     * @return  array
+     * @return  AbstractConstraint
      * @since   1.0.0
      */
     protected function getUserTimeZone()

@@ -153,6 +153,9 @@ function kses_split2($matches)
 } # function kses_split2
 
 
+/**
+ * @param string $attr
+ */
 function kses_attr($element, $attr, $allowed_html, $allowed_protocols)
 ###############################################################################
 # This function removes all attributes, if none are allowed for this element.
@@ -437,6 +440,9 @@ function kses_check_attr_val($value, $vless, $checkname, $checkvalue)
 } # function kses_check_attr_val
 
 
+/**
+ * @param string $string
+ */
 function kses_bad_protocol($string, $allowed_protocols)
 ###############################################################################
 # This function removes all non-allowed protocols from the beginning of

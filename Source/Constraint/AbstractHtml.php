@@ -154,7 +154,7 @@ abstract class AbstractHtml extends AbstractConstraint implements ConstraintInte
      * which are not defined in the white_list. If false, use sanitize to clean content.
      *
      * @api
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      */
     public function validate()

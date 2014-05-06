@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Constraint;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\ConstraintInterface;
 
 /**

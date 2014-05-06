@@ -24,7 +24,7 @@ class Regex extends AbstractConstraint implements ConstraintInterface
     /**
      * Validate
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      */
     public function validate()
@@ -76,7 +76,7 @@ class Regex extends AbstractConstraint implements ConstraintInterface
     /**
      * Format
      *
-     * @return  mixed
+     * @return  string
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */

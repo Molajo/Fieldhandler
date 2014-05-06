@@ -29,7 +29,7 @@ class Css extends AbstractHtml implements ConstraintInterface
      * To review or override white_list, see AbstractHtml Constraint Class
      *
      * @api
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      */
     public function validate()

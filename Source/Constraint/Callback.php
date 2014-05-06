@@ -72,7 +72,7 @@ class Callback extends AbstractConstraint implements ConstraintInterface
      *
      * @api
      * @link    http://www.php.net/manual/en/filter.filters.sanitize.php
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      */
     public function validate()

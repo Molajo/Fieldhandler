@@ -23,7 +23,7 @@ class Time extends AbstractConstraint implements ConstraintInterface
     /**
      * Validate
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      */
     public function validate()
@@ -44,7 +44,7 @@ class Time extends AbstractConstraint implements ConstraintInterface
     /**
      * Sanitize
      *
-     * @return  mixed
+     * @return  null|integer
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */

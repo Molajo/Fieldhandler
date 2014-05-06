@@ -26,7 +26,7 @@ class Resource extends AbstractConstraint implements ConstraintInterface
     /**
      * Validate
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      */
     public function validate()
@@ -47,7 +47,7 @@ class Resource extends AbstractConstraint implements ConstraintInterface
     /**
      * Sanitize
      *
-     * @return  mixed
+     * @return  resource|null
      * @since   1.0.0
      */
     public function sanitize()

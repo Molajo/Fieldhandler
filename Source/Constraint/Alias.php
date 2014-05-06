@@ -43,7 +43,7 @@ class Alias extends AbstractConstraint implements ConstraintInterface
     /**
      * Sanitize
      *
-     * @return  mixed
+     * @return  null|string
      * @since   1.0.0
      */
     public function sanitize()
@@ -60,7 +60,7 @@ class Alias extends AbstractConstraint implements ConstraintInterface
     /**
      * Format
      *
-     * @return  mixed
+     * @return  string
      * @since   1.0.0
      */
     public function format()

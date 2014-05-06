@@ -99,7 +99,7 @@ abstract class AbstractMath extends AbstractConstraint implements ConstraintInte
     /**
      * Verify that the value is less than a supplied value
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
@@ -111,7 +111,7 @@ abstract class AbstractMath extends AbstractConstraint implements ConstraintInte
     /**
      * Verify that the value is less or equal to a supplied value
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
@@ -123,7 +123,7 @@ abstract class AbstractMath extends AbstractConstraint implements ConstraintInte
     /**
      * Verify that the values are not equal
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
@@ -135,7 +135,7 @@ abstract class AbstractMath extends AbstractConstraint implements ConstraintInte
     /**
      * Verify that the value is greater than or equal to a supplied value
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
@@ -147,7 +147,8 @@ abstract class AbstractMath extends AbstractConstraint implements ConstraintInte
     /**
      * Verify that the values are not equal
      *
-     * @return  mixed
+     * @param string $type
+     * @return  boolean
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */

@@ -31,7 +31,7 @@ abstract class AbstractString extends AbstractConstraint implements ConstraintIn
     /**
      * Validate
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      */
     public function validate()
@@ -54,7 +54,7 @@ abstract class AbstractString extends AbstractConstraint implements ConstraintIn
     /**
      * Sanitize
      *
-     * @return  mixed
+     * @return  null|string
      * @since   1.0.0
      */
     public function sanitize()
@@ -76,7 +76,7 @@ abstract class AbstractString extends AbstractConstraint implements ConstraintIn
     /**
      * Format
      *
-     * @return  mixed
+     * @return  string|null
      * @since   1.0.0
      */
     public function format()
@@ -87,7 +87,7 @@ abstract class AbstractString extends AbstractConstraint implements ConstraintIn
     /**
      * Format
      *
-     * @return  mixed
+     * @return  string|null
      * @since   1.0.0
      */
     public function doStringFunction()

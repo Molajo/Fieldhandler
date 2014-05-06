@@ -55,7 +55,7 @@ abstract class AbstractCtype extends AbstractConstraint implements ConstraintInt
     /**
      * Sanitize
      *
-     * @return  mixed
+     * @return  null|string
      * @since   1.0.0
      */
     public function sanitize()

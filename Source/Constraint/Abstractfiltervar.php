@@ -35,7 +35,7 @@ abstract class AbstractFiltervar extends AbstractConstraint implements Constrain
      * Validate
      *
      * @api
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      */
     public function validate()
@@ -86,6 +86,7 @@ abstract class AbstractFiltervar extends AbstractConstraint implements Constrain
     /**
      * Sanitize
      *
+     * @param string $method
      * @return  mixed
      * @since   1.0.0
      */
