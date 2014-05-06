@@ -44,15 +44,19 @@ abstract class AbstractFiltervar extends AbstractConstraint implements Constrain
             return true;
         }
 
-        $results = $this->testFilterVar('validate');
-
-        if ($results === false) {
-            $this->setValidateMessage(1000);
-
-            return false;
+        if ($this->filter_type === FILTER_VALIDATE_FLOAT) {
+            if ((float)$this->field_value === (float)$this->sanitize()) {
+                return true;
+            }
+        } else {
+            if ($this->field_value === $this->sanitize()) {
+                return true;
+            }
         }
 
-        return true;
+        $this->setValidateMessage(1000);
+
+        return false;
     }
 
     /**
@@ -63,11 +67,7 @@ abstract class AbstractFiltervar extends AbstractConstraint implements Constrain
      */
     public function sanitize()
     {
-        $results = $this->testFilterVar('sanitize');
-
-        if ($results == false) {
-            $this->field_value = null;
-        }
+        $this->field_value = filter_var($this->field_value, $this->filter_type, $this->setFlags());
 
         return $this->field_value;
     }
@@ -81,39 +81,5 @@ abstract class AbstractFiltervar extends AbstractConstraint implements Constrain
     public function format()
     {
         return parent::format();
-    }
-
-    /**
-     * Sanitize
-     *
-     * @param string $method
-     * @return  mixed
-     * @since   1.0.0
-     */
-    protected function testFilterVar($method)
-    {
-        $results = filter_var($this->field_value, $this->filter_type, $this->setFlags());
-
-        if ($results === false) {
-            return false;
-        }
-
-        if ($method === 'sanitize') {
-            $this->field_value = $results;
-
-            return $results;
-        }
-
-        if ($this->filter_type === FILTER_VALIDATE_FLOAT) {
-            if ((float)$results === (float)$this->field_value) {
-                return true;
-            }
-        }
-
-        if ($this->field_value === $results) {
-            return true;
-        }
-
-        return false;
     }
 }
