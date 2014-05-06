@@ -97,13 +97,13 @@ class Arrays extends AbstractConstraint implements ConstraintInterface
      */
     public function format()
     {
-        return $this->field_value;
+        return parent::format();
     }
 
     /**
      * Test Array Entry Keys
      *
-     * @param   boolean $sanitize
+     * @param   boolean $filter
      *
      * @return  boolean
      * @since   1.0.0
@@ -112,32 +112,7 @@ class Arrays extends AbstractConstraint implements ConstraintInterface
     {
         $array_valid_values = $this->getOption('array_valid_keys', array());
 
-        if (is_array($array_valid_values) && count($array_valid_values) > 0) {
-        } else {
-            return true;
-        }
-
-        $entries = $this->field_value;
-
-        foreach ($entries as $entry) {
-
-            if (in_array($entry, $array_valid_values)) {
-
-            } else {
-
-                if ($filter === true) {
-                    unset ($entry);
-                } else {
-                    return false;
-                }
-            }
-        }
-
-        if ($filter === true) {
-            $this->field_value = $entries;
-        }
-
-        return true;
+        return $this->testArrayValues($array_valid_values, $filter);
     }
 
     /**
@@ -152,6 +127,20 @@ class Arrays extends AbstractConstraint implements ConstraintInterface
     {
         $array_valid_values = $this->getOption('array_valid_values', array());
 
+        return $this->testArrayValues($array_valid_values, $filter);
+    }
+
+    /**
+     * Test Array Values
+     *
+     * @param   array    $array_valid_values
+     * @param   boolean  $filter
+     *
+     * @return  boolean
+     * @since   1.0.0
+     */
+    protected function testArrayValues($array_valid_values, $filter)
+    {
         if (is_array($array_valid_values) && count($array_valid_values) > 0) {
         } else {
             return true;

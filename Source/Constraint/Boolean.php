@@ -54,16 +54,7 @@ class Boolean extends AbstractConstraint implements ConstraintInterface
      */
     public function sanitize()
     {
-        if ($this->field_value === null) {
-            return $this->field_value;
-        }
-
-        if ($this->field_value === true) {
-        } else {
-            $this->field_value = false;
-        }
-
-        return $this->field_value;
+        return parent::sanitize();
     }
 
     /**
@@ -74,6 +65,6 @@ class Boolean extends AbstractConstraint implements ConstraintInterface
      */
     public function format()
     {
-        return $this->field_value;
+        return parent::format();
     }
 }

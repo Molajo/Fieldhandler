@@ -46,12 +46,9 @@ class Foreignkey extends AbstractDatabase implements ConstraintInterface
     public function sanitize()
     {
         if ($this->field_value === null) {
-
         } else {
 
-            $test = $this->verifyForeignKey($this->field_value);
-
-            if ($test === $this->field_value) {
+            if ($this->verifyForeignKey($this->field_value) === true) {
             } else {
                 $this->field_value = null;
             }
@@ -69,7 +66,7 @@ class Foreignkey extends AbstractDatabase implements ConstraintInterface
      */
     public function format()
     {
-        return $this->sanitize();
+        return parent::format();
     }
 
     /**
@@ -83,33 +80,65 @@ class Foreignkey extends AbstractDatabase implements ConstraintInterface
      */
     public function verifyForeignKey($key_value)
     {
-        if ($this->database === null) {
+        $this->verifyForeignkeyInput('database');
+        $this->verifyForeignkeyInput('table');
+        $this->verifyForeignkeyInput('key');
+
+        $query = $this->verifyForeignkeyInput($key_value);
+
+        return $this->executeDatabaseQuery($query);
+    }
+
+    /**
+     * Verify Input has been correctly sent into class
+     *
+     * @param   string $type
+     *
+     * @return  $this
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function setForeignKeyQuery($type)
+    {
+        if ($this->$type === null) {
             throw new UnexpectedValueException
             (
-                'Fieldhandler Foreignkey: Database connection must be sent in as a database entry $options array.'
+                'Fieldhandler Foreignkey: ' . $type . ' is required input for the $options array.'
             );
         }
+    }
 
-        if ($this->table === null) {
-            throw new UnexpectedValueException
-            (
-                'Fieldhandler Foreignkey: Name of table must be sent in as a table entry in the $options array.'
-            );
-        }
-
-        if ($this->key === null) {
-            throw new UnexpectedValueException
-            (
-                'Fieldhandler Foreignkey: Name of key must be sent in as a key entry in the $options array.'
-            );
-        }
-
+    /**
+     * Create Query
+     *
+     * @param   string $key_value
+     *
+     * @return  object
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function verifyForeignkeyInput($key_value)
+    {
         $query = $this->database->getQueryObject();
 
         $query->select($this->key);
         $query->from($this->table);
         $query->where($this->key . ' =  ' . quote($key_value));
 
+        return $query;
+    }
+
+    /**
+     * Verify Input has been correctly sent into class
+     *
+     * @param   object $query
+     *
+     * @return  mixed
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function executeDatabaseQuery($query)
+    {
         try {
 
             return $this->database->loadResult($query->getSQL());

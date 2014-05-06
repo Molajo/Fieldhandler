@@ -80,7 +80,7 @@ class AbstractFiltervar extends AbstractConstraint implements ConstraintInterfac
      */
     public function format()
     {
-        return $this->field_value;
+        return parent::format();
     }
 
     /**

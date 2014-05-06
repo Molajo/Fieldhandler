@@ -50,10 +50,7 @@ class False extends AbstractConstraint implements ConstraintInterface
         $field_value,
         array $options = array()
     ) {
-        if (isset($this->options['false_array'])) {
-            $this->false_array = $this->options['false_array'];
-            unset($this->options['false_array']);
-        }
+        $options = $this->setPropertyKeyWithOptionKey($options, 'false_array');
 
         parent::__construct(
             $constraint,
@@ -79,11 +76,6 @@ class False extends AbstractConstraint implements ConstraintInterface
 
         } else {
             $testValue = $this->field_value;
-
-            if (is_numeric($testValue) || is_bool($testValue)) {
-            } else {
-                $testValue = strtolower($testValue);
-            }
 
             if (in_array($testValue, $this->false_array) === true || $testValue === false) {
             } else {
@@ -112,15 +104,6 @@ class False extends AbstractConstraint implements ConstraintInterface
 
         $testValue = $this->field_value;
 
-        if (is_numeric($testValue) || is_bool($testValue)) {
-        } else {
-            $testValue = strtolower($testValue);
-        }
-
-        if (is_bool($testValue) && $testValue === false) {
-            return $this->field_value;
-        }
-
         if (count($this->false_array) > 0) {
             foreach ($this->false_array as $item) {
                 if ($item === $testValue) {
@@ -145,6 +128,6 @@ class False extends AbstractConstraint implements ConstraintInterface
      */
     public function format()
     {
-        return $this->field_value;
+        return parent::format();
     }
 }

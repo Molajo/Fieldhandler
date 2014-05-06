@@ -97,7 +97,7 @@ class Alias extends AbstractConstraint implements ConstraintInterface
      *
      * @param   string $alias
      *
-     * @return  bool
+     * @return  string
      * @since   1.0.0
      */
     protected function sanitizeAlias($alias)

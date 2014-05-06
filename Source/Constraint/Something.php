@@ -66,6 +66,6 @@ class Something extends AbstractConstraint implements ConstraintInterface
      */
     public function format()
     {
-        return $this->field_value;
+        return parent::format();
     }
 }

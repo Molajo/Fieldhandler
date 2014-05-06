@@ -25,44 +25,50 @@ class HtmlAttribute extends AbstractHtml implements ConstraintInterface
     /**
      * Validate
      *
+     * Verifies that the field value contents do not contain any HTML tags or attributes
+     * which are not defined in the white_list. If false, use sanitize to clean content.
+     *
+     * To review or override white_list, see AbstractHtml Constraint Class
+     *
+     * @api
      * @return  mixed
      * @since   1.0.0
      */
     public function validate()
     {
-        if ($this->field_value === $this->sanitize()) {
-            return true;
-        }
-
-        $this->setValidateMessage(8000);
-
-        return false;
+        return parent::validate();
     }
 
     /**
      * Sanitize
      *
+     * Sanitizes the field value contents so that there are no HTML tags or attributes
+     * which have not been defined in the white_list. Critical for security.
+     *
+     * To review or override white_list, see AbstractHtml Constraint Class
+     *
+     * @api
      * @return  mixed
      * @since   1.0.0
      */
     public function sanitize()
     {
-        if ($this->field_value === null) {
-        } else {
-            $this->field_value = kses($this->field_value, $this->white_list, array('http', 'https'));
-        }
-
-        return $this->field_value;
+        return parent::sanitize();
     }
 
     /**
      * Format
      *
+     * Escapes the field value contents for presentation on the web; critical for security
+     *
+     * To review or override white_list, see AbstractHtml Constraint Class
+     *
+     * @api
      * @return  mixed
      * @since   1.0.0
      */
     public function format()
     {
-        return $this->sanitize();
+        return parent::format();
     }
 }

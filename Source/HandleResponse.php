@@ -66,8 +66,6 @@ class HandleResponse implements HandleResponseInterface
     /**
      * Did the data value change as a result of processing?
      *
-     * Due to type differences, cannot only use strict testing (ex. 123 (int) <> 123 (double) )
-     *
      * @return  boolean
      * @since   1.0.0
      */
@@ -96,42 +94,48 @@ class HandleResponse implements HandleResponseInterface
      */
     protected function testNoValueChange()
     {
+        $change = false;
+
         if ($this->original_data_value === null
             && $this->response_value === false
         ) {
-            return true;
+            $change = true;
         }
+
         if ($this->original_data_value === false
             && $this->response_value === null
         ) {
-            return true;
+            $change = true;
         }
+
         if ($this->original_data_value === 0
             && $this->response_value === null
         ) {
-            return true;
+            $change = true;
         }
 
-        return false;
+        return $change;
     }
 
     /**
-     * Test for numeric float change
+     * Due to type differences, cannot only use strict testing (ex. 123 (int) <> 123 (double) )
      *
      * @return  boolean
      * @since   1.0.0
      */
     protected function testFloat()
     {
+        $change = false;
+
         if (is_numeric($this->original_data_value)) {
 
             if ((float)$this->original_data_value < (float)$this->response_value
                 || (float)$this->response_value < (float)$this->original_data_value
             ) {
-                return true;
+                $change = true;
             }
         }
 
-        return false;
+        return $change;
     }
 }

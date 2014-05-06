@@ -145,10 +145,7 @@ abstract class AbstractConstraint implements ConstraintInterface
         $this->field_value = $field_value;
 
         foreach ($this->property_array as $key) {
-            if (isset($options[$key])) {
-                $this->$key = $options[$key];
-                unset($options[$key]);
-            }
+            $options = $this->setPropertyKeyWithOptionKey($options, $key);
         }
 
         $this->options = $options;
@@ -185,17 +182,33 @@ abstract class AbstractConstraint implements ConstraintInterface
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    abstract public function sanitize();
+    public function sanitize()
+    {
+        if ($this->field_value === null) {
+            return $this->field_value;
+        }
+
+        if ($this->validate() === false) {
+            $this->field_value = null;
+        }
+
+        return $this->field_value;
+    }
 
     /**
      * Format
+     *
+     * Unused format for constraint simply returns the field value
      *
      * @api
      * @return  mixed
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    abstract public function format();
+    public function format()
+    {
+        return $this->field_value;
+    }
 
     /**
      * Save Code for Validate Message
@@ -223,6 +236,25 @@ abstract class AbstractConstraint implements ConstraintInterface
     public function getValidateMessages()
     {
         return $this->validate_messages;
+    }
+
+    /**
+     * Set Property->$Key with Option[$Key]
+     *
+     * @param   string  $key
+     * @param   array   $options
+     *
+     * @return  array
+     * @since   1.0.0
+     */
+    protected function setPropertyKeyWithOptionKey(array $options = array(), $key)
+    {
+        if (isset($options[$key])) {
+            $this->$key = $options[$key];
+            unset($options[$key]);
+        }
+
+        return $options;
     }
 
     /**

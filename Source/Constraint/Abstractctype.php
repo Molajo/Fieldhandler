@@ -76,7 +76,7 @@ class AbstractCtype extends AbstractConstraint implements ConstraintInterface
      */
     public function format()
     {
-        return $this->field_value;
+        return parent::format();
     }
 
     /**
@@ -89,6 +89,6 @@ class AbstractCtype extends AbstractConstraint implements ConstraintInterface
      */
     public function sanitizeByCType($ctype, $field_value)
     {
-        return $this->sanitizeByCharacter($this->ctype, $field_value, $this->getOption('allow_whitespace', false));
+        return $this->sanitizeByCharacter($ctype, $field_value, $this->getOption('allow_whitespace', false));
     }
 }

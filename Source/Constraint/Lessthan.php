@@ -1,6 +1,6 @@
 <?php
 /**
- * Numeric Constraint
+ * Lessthan Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -11,34 +11,32 @@ namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Numeric Constraint
+ * Lessthan Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Numeric extends AbstractConstraint implements ConstraintInterface
+class Lessthan extends AbstractMath implements ConstraintInterface
 {
+    /**
+     * Method Type
+     *
+     * @var    string
+     * @since  1.0.0
+     */
+    protected $method_type = 'getLessthan';
+
     /**
      * Validate
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      */
     public function validate()
     {
-        if ($this->field_value === null) {
-            return true;
-        }
-
-        if (is_numeric($this->field_value)) {
-            return true;
-        }
-
-        $this->setValidateMessage(1000);
-
-        return false;
+        return parent::validate();
     }
 
     /**
@@ -49,17 +47,7 @@ class Numeric extends AbstractConstraint implements ConstraintInterface
      */
     public function sanitize()
     {
-        if ($this->field_value === null) {
-
-        } else {
-
-            if (is_numeric($this->field_value)) {
-            } else {
-                $this->field_value = null;
-            }
-        }
-
-        return $this->field_value;
+        return parent::sanitize();
     }
 
     /**

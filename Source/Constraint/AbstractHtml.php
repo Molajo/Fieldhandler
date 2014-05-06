@@ -134,20 +134,9 @@ abstract class AbstractHtml extends AbstractConstraint implements ConstraintInte
         $field_value,
         array $options = array()
     ) {
-        if (isset($this->options['white_list'])) {
-            $this->white_list = $this->options['white_list'];
-            unset($this->options['white_list']);
-        }
-
-        if (isset($this->options['html_entities'])) {
-            $this->html_entities = $this->options['html_entities'];
-            unset($this->options['html_entities']);
-        }
-
-        if (isset($this->options['encoding'])) {
-            $this->encoding = $this->options['encoding'];
-            unset($this->options['encoding']);
-        }
+        $options = $this->setPropertyKeyWithOptionKey($options, 'white_list');
+        $options = $this->setPropertyKeyWithOptionKey($options, 'html_entities');
+        $options = $this->setPropertyKeyWithOptionKey($options, 'encoding');
 
         parent::__construct(
             $constraint,
@@ -156,5 +145,73 @@ abstract class AbstractHtml extends AbstractConstraint implements ConstraintInte
             $field_value,
             $options
         );
+    }
+
+    /**
+     * Validate
+     *
+     * Verifies that the field value contents do not contain any HTML tags or attributes
+     * which are not defined in the white_list. If false, use sanitize to clean content.
+     *
+     * @api
+     * @return  mixed
+     * @since   1.0.0
+     */
+    public function validate()
+    {
+        if ($this->field_value === $this->sanitize()) {
+            return true;
+        }
+
+        $this->setValidateMessage(8000);
+
+        return false;
+    }
+
+    /**
+     * Sanitize
+     *
+     * Sanitizes the field value contents so that there are no HTML tags or attributes
+     * which have not been defined in the white_list. Critical for security.
+     *
+     * @api
+     * @return  mixed
+     * @since   1.0.0
+     */
+    public function sanitize()
+    {
+        if ($this->field_value === null) {
+        } else {
+            $this->field_value = kses($this->field_value, $this->white_list, array('http', 'https'));
+        }
+
+        return $this->field_value;
+    }
+
+    /**
+     * Format
+     *
+     * Escapes the field value contents for presentation on the web; critical for security
+     *
+     * @api
+     * @return  mixed
+     * @since   1.0.0
+     */
+    public function format()
+    {
+        /**
+         * $class                 = 'Zend\Escaper\Escaper';
+         * $adapter               = new $class();
+         * $class                 = 'Molajo\\Fieldhandler\\Escape\\Zend';
+         * $adapter               = new $class($adapter);
+         * $class                 = 'Molajo\\Fieldhandler\\Escape';
+         * $escape_instance = new $class($adapter);
+         */
+        if ($this->field_value === null) {
+        } else {
+            // $this->field_value = $this->escape_instance->escapeHtml($this->field_value);
+        }
+        // $this->field_value = htmlspecialchars($this->field_value, null, 'utf-8');
+        return $this->field_value;
     }
 }

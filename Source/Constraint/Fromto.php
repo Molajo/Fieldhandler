@@ -66,7 +66,7 @@ class Fromto extends AbstractConstraint implements ConstraintInterface
      */
     public function format()
     {
-        return $this->sanitize();
+        return parent::format();
     }
 
     /**

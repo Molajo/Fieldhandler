@@ -50,16 +50,7 @@ class Object extends AbstractConstraint implements ConstraintInterface
      */
     public function sanitize()
     {
-        if ($this->field_value === null) {
-        } else {
-
-            if (is_object($this->field_value) === true) {
-            } else {
-                $this->field_value = null;
-            }
-        }
-
-        return $this->field_value;
+        return parent::sanitize();
     }
 
     /**
@@ -70,6 +61,6 @@ class Object extends AbstractConstraint implements ConstraintInterface
      */
     public function format()
     {
-        return $this->field_value;
+        return parent::format();
     }
 }

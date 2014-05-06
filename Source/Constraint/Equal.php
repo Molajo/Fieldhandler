@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Constraint;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\ConstraintInterface;
 
 /**
@@ -19,8 +18,16 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Equal extends AbstractConstraint implements ConstraintInterface
+class Equal extends AbstractMath implements ConstraintInterface
 {
+    /**
+     * Method Type
+     *
+     * @var    string
+     * @since  1.0.0
+     */
+    protected $method_type = 'getEqual';
+
     /**
      * Validate
      *
@@ -29,13 +36,7 @@ class Equal extends AbstractConstraint implements ConstraintInterface
      */
     public function validate()
     {
-        if ($this->field_value === $this->getEqual()) {
-            return true;
-        }
-
-        $this->setValidateMessage(8000);
-
-        return false;
+        return parent::validate();
     }
 
     /**
@@ -46,12 +47,7 @@ class Equal extends AbstractConstraint implements ConstraintInterface
      */
     public function sanitize()
     {
-        if ($this->field_value === $this->getEqual()) {
-        } else {
-            $this->field_value = null;
-        }
-
-        return $this->field_value;
+        return parent::sanitize();
     }
 
     /**
@@ -62,26 +58,6 @@ class Equal extends AbstractConstraint implements ConstraintInterface
      */
     public function format()
     {
-        return $this->field_value;
-    }
-
-    /**
-     * Flags can be set in options array
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function getEqual()
-    {
-        $field_value = $this->getOption('equals', null);
-
-        if ($field_value === null) {
-            throw new UnexpectedValueException
-            (
-                'Fieldhandler Equal: must provide options[equals] value.'
-            );
-        }
-
-        return $field_value;
+        return parent::format();
     }
 }

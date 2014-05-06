@@ -8,7 +8,6 @@
  */
 namespace Molajo\Fieldhandler\Constraint;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\ConstraintInterface;
 
 /**
@@ -19,8 +18,16 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Notequal extends AbstractConstraint implements ConstraintInterface
+class Notequal extends AbstractMath implements ConstraintInterface
 {
+    /**
+     * Method Type
+     *
+     * @var    string
+     * @since  1.0.0
+     */
+    protected $method_type = 'getNotEqual';
+
     /**
      * Validate
      *
@@ -29,12 +36,7 @@ class Notequal extends AbstractConstraint implements ConstraintInterface
      */
     public function validate()
     {
-        if ($this->field_value === $this->getNotEqual()) {
-            $this->setValidateMessage(1000);
-            return false;
-        }
-
-        return true;
+        return parent::validate();
     }
 
     /**
@@ -42,17 +44,10 @@ class Notequal extends AbstractConstraint implements ConstraintInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function sanitize()
     {
-        $notEqual = $this->getNotEqual();
-
-        if ($this->field_value === $notEqual) {
-            $this->field_value = null;
-        }
-
-        return $this->field_value;
+        return parent::sanitize();
     }
 
     /**
@@ -60,31 +55,9 @@ class Notequal extends AbstractConstraint implements ConstraintInterface
      *
      * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function format()
     {
-        return $this->sanitize();
-    }
-
-    /**
-     * Not equal
-     *
-     * @return  mixed
-     * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
-     */
-    protected function getNotEqual()
-    {
-        $field_value = $this->getOption('not_equal', null);
-
-        if ($field_value === null) {
-            throw new UnexpectedValueException
-            (
-                'Fieldhandler Notequal: must provide options[not_equal] value.'
-            );
-        }
-
-        return $field_value;
+        return parent::format();
     }
 }

@@ -63,20 +63,9 @@ abstract class AbstractDatabase extends AbstractConstraint implements Constraint
         $field_value,
         array $options = array()
     ) {
-        if (isset($this->options['database'])) {
-            $this->database = $this->options['database'];
-            unset($this->options['database']);
-        }
-
-        if (isset($this->options['table'])) {
-            $this->table = $this->options['table'];
-            unset($this->options['table']);
-        }
-
-        if (isset($this->options['key'])) {
-            $this->key = $this->options['key'];
-            unset($this->options['key']);
-        }
+        $options = $this->setPropertyKeyWithOptionKey($options, 'database');
+        $options = $this->setPropertyKeyWithOptionKey($options, 'table');
+        $options = $this->setPropertyKeyWithOptionKey($options, 'key');
 
         parent::__construct(
             $constraint,
