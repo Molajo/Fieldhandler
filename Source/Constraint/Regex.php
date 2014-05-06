@@ -75,7 +75,7 @@ class Regex extends AbstractConstraint implements ConstraintInterface
     /**
      * Format
      *
-     * @return  string
+     * @return  integer
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */

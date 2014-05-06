@@ -71,7 +71,6 @@ class Foreignkey extends AbstractDatabase implements ConstraintInterface
     /**
      * Verify Foreign Key
      *
-     * @param   mixed $key_value
      *
      * @return  mixed
      * @since   1.0.0

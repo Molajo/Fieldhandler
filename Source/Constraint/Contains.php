@@ -66,7 +66,7 @@ class Contains extends AbstractConstraint implements ConstraintInterface
     /**
      * Test Contains
      *
-     * @return  boolean
+     * @return  integer
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
