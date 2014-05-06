@@ -22,6 +22,14 @@ use CommonApi\Model\ConstraintInterface;
 class Regex extends AbstractConstraint implements ConstraintInterface
 {
     /**
+     * Method Test
+     *
+     * @var    string
+     * @since  1.0.0
+     */
+    protected $method_test = 'getRegex';
+
+    /**
      * Validate
      *
      * @return  boolean
@@ -33,7 +41,7 @@ class Regex extends AbstractConstraint implements ConstraintInterface
             return true;
         }
 
-        if (preg_match($this->getRegex(), $this->field_value)) {
+        if ($this->getRegex() === true) {
             return true;
         }
 
@@ -50,16 +58,7 @@ class Regex extends AbstractConstraint implements ConstraintInterface
      */
     public function sanitize()
     {
-        if ($this->field_value === null) {
-        } else {
-
-            if (preg_match($this->getRegex(), $this->field_value)) {
-            } else {
-                $this->field_value = null;
-            }
-        }
-
-        return $this->field_value;
+        return parent::sanitize();
     }
 
     /**
@@ -82,15 +81,6 @@ class Regex extends AbstractConstraint implements ConstraintInterface
      */
     protected function getRegex()
     {
-        $field_value = $this->getOption('regex', null);
-
-        if ($field_value === null) {
-            throw new UnexpectedValueException
-            (
-                'Fieldhandler Regex: must provide options[regex] value.'
-            );
-        }
-
-        return $field_value;
+        return preg_match($this->getOption('regex'), $this->field_value);
     }
 }

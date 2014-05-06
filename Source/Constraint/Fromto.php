@@ -28,10 +28,8 @@ class Fromto extends AbstractConstraint implements ConstraintInterface
      */
     public function validate()
     {
-        $from_to = $this->getFromto();
-
-        if ($this->field_value >= $from_to[0]
-            && $this->field_value <= $from_to[1]
+        if ($this->field_value >= $this->getOption('from', 0)
+            && $this->field_value <= $this->getOption('to', 999999999999)
         ) {
             return true;
         }
@@ -49,13 +47,7 @@ class Fromto extends AbstractConstraint implements ConstraintInterface
      */
     public function sanitize()
     {
-        if ($this->validate()) {
-            return $this->field_value;
-        }
-
-        $this->field_value = null;
-
-        return $this->field_value;
+        return parent::sanitize();
     }
 
     /**
@@ -67,19 +59,5 @@ class Fromto extends AbstractConstraint implements ConstraintInterface
     public function format()
     {
         return parent::format();
-    }
-
-    /**
-     * From value and To value
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function getFromto()
-    {
-        $field_value_from = $this->getOption('from', 0);
-        $field_value_to   = $this->getOption('to', 999999999999);
-
-        return array($field_value_from, $field_value_to);
     }
 }

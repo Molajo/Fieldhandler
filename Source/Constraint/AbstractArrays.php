@@ -105,7 +105,7 @@ abstract class AbstractArrays extends AbstractConstraint implements ConstraintIn
      */
     protected function getArrayOptionArray($type)
     {
-        $array_values = $this->getOption($type, array());
+        $array_values = $this->getOption($type);
 
         if (is_array($array_values) && count($array_values) > 0) {
             return $array_values;
@@ -113,7 +113,7 @@ abstract class AbstractArrays extends AbstractConstraint implements ConstraintIn
 
         throw new UnexpectedValueException
         (
-            'Fieldhandler Arrays: must provide options entry: ' . $type
+            'Fieldhandler Arrays: must provide entry with array in options: ' . $type
         );
     }
 

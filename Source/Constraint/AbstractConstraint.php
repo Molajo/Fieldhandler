@@ -8,6 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Constraint;
 
+use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\ConstraintInterface;
 
 /**
@@ -278,18 +279,25 @@ abstract class AbstractConstraint implements ConstraintInterface
      *
      * @return  mixed
      * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException;
      */
     protected function getOption($key, $default = null)
     {
         if (isset($this->options[$key])) {
-        } else {
-            if ($default === null) {
-                return null;
-            }
-            $this->options[$key] = $default;
+            return $this->options[$key];
         }
 
-        return $this->options[$key];
+        if ($default === null) {
+        } else {
+            $this->options[$key] = $default;
+
+            return $this->options[$key];
+        }
+
+        throw new UnexpectedValueException
+        (
+            'Fieldhandler AbstractConstraint: must provide options entry for: ' . $key
+        );
     }
 
     /**

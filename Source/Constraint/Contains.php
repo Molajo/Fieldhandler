@@ -72,19 +72,6 @@ class Contains extends AbstractConstraint implements ConstraintInterface
      */
     protected function testContains()
     {
-        if ($this->field_value === null) {
-            return false;
-        }
-
-        $contains = $this->getOption('contains', null);
-
-        if ($contains === null) {
-            throw new UnexpectedValueException
-            (
-                'Fieldhandler Contains: must provide options[contains] array values.'
-            );
-        }
-
-        return mb_strpos($this->field_value, $contains, 0, mb_detect_encoding($this->field_value));
+        return mb_strpos($this->field_value, $this->getOption('contains'), 0, mb_detect_encoding($this->field_value));
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Fileextension Constraint
+ * Abstract Fieldhandler for ctype data types
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -8,26 +8,26 @@
  */
 namespace Molajo\Fieldhandler\Constraint;
 
-use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Fileextension Constraint
+ * Abstract Ctype Constraint
  *
+ * @link       http://us1.php.net/manual/en/function.ctype-alpha.php
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Fileextension extends AbstractArrays implements ConstraintInterface
+abstract class AbstractCtype extends AbstractConstraint implements ConstraintInterface
 {
     /**
-     * Array Options Entry Type
+     * ctype Test
      *
      * @var    string
      * @since  1.0.0
      */
-    protected $array_option_type = 'array_valid_extensions';
+    protected $ctype;
 
     /**
      * Validate
@@ -41,40 +41,28 @@ class Fileextension extends AbstractArrays implements ConstraintInterface
             return true;
         }
 
-        if (is_file($this->field_value)) {
-        } else {
-            $this->setValidateMessage(9000);
-            return false;
-        }
+        $temp = $this->sanitizeByCType($this->ctype, $this->field_value);
 
-        $path_info = pathinfo($this->field_value);
-
-        $this->field_value = $path_info['extension'];
-
-        if (parent::validate()) {
+        if ($temp === $this->field_value) {
             return true;
         }
 
-        $this->setValidateMessage(9000);
+        $this->setValidateMessage(2000);
 
         return false;
-
     }
 
     /**
      * Sanitize
      *
-     * @return  mixed
+     * @return  null|string
      * @since   1.0.0
      */
     public function sanitize()
     {
-        $hold = $this->field_value;
-
-        if (parent::sanitize()) {
-            $this->field_value = $hold;
+        if ($this->field_value === null) {
         } else {
-            $this->field_value = null;
+            $this->field_value = $this->sanitizeByCType($this->ctype, $this->field_value);
         }
 
         return $this->field_value;
@@ -89,5 +77,18 @@ class Fileextension extends AbstractArrays implements ConstraintInterface
     public function format()
     {
         return parent::format();
+    }
+
+    /**
+     * Common Sanitize Method for ctype
+     *
+     * @param   string $ctype
+     *
+     * @return  string
+     * @since   1.0.0
+     */
+    public function sanitizeByCType($ctype, $field_value)
+    {
+        return $this->sanitizeByCharacter($ctype, $field_value, $this->getOption('allow_whitespace', false));
     }
 }

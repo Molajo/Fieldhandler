@@ -76,7 +76,7 @@ class Email extends AbstractFiltervar implements ConstraintInterface
     {
         $this->sanitize();
 
-        if ($this->getOption('obfuscate_email', null) === null) {
+        if ($this->getOption('obfuscate_email') === null) {
             return $this->field_value;
         }
 
@@ -99,7 +99,7 @@ class Email extends AbstractFiltervar implements ConstraintInterface
      */
     protected function checkMX($host)
     {
-        if ($this->getOption('check_mx', null) === null) {
+        if ($this->getOption('check_mx') === null) {
         } else {
             if (checkdnsrr($host, 'MX')) {
             } else {
@@ -120,7 +120,7 @@ class Email extends AbstractFiltervar implements ConstraintInterface
      */
     protected function checkHost($host)
     {
-        if ($this->getOption('check_host', null) === null) {
+        if ($this->getOption('check_host') === null) {
         } else {
             if (checkdnsrr($host, 'MX') || checkdnsrr($host, "A") || checkdnsrr($host, "AAAA")) {
             } else {

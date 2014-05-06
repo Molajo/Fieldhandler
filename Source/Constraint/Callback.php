@@ -40,7 +40,7 @@ class Callback extends AbstractConstraint implements ConstraintInterface
     public function setOptions()
     {
         $return            = array();
-        $return['options'] = $this->getOption('callback', null);
+        $return['options'] = $this->getOption('callback');
 
         return $return;
     }

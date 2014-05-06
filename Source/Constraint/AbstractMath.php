@@ -154,7 +154,7 @@ abstract class AbstractMath extends AbstractConstraint implements ConstraintInte
      */
     protected function performMathCompare($type)
     {
-        $compare_to_value = $this->getMathOptionValue($type);
+        $compare_to_value = $this->getOption($type);
 
         $comparison = false;
 
@@ -197,25 +197,5 @@ abstract class AbstractMath extends AbstractConstraint implements ConstraintInte
         }
 
         return $comparison;
-    }
-
-    /**
-     * Verify if the values are equal
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function getMathOptionValue($field)
-    {
-        $field_value = $this->getOption($field);
-
-        if ($field_value === null) {
-            throw new UnexpectedValueException
-            (
-                'Fieldhandler AbstractMath: must provide options entry: ' . $field
-            );
-        }
-
-        return $field_value;
     }
 }
