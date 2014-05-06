@@ -8,6 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Constraint;
 
+use CommonApi\Exception\UnexpectedValueException;
 use CommonApi\Model\ConstraintInterface;
 
 /**
@@ -110,9 +111,7 @@ class Arrays extends AbstractConstraint implements ConstraintInterface
      */
     protected function testKeys($filter = false)
     {
-        $array_valid_values = $this->getOption('array_valid_keys', array());
-
-        return $this->testArrayValues($array_valid_values, $filter);
+        return $this->testArrayValues($this->getArrayOptionArray('array_valid_keys'), $filter);
     }
 
     /**
@@ -125,40 +124,54 @@ class Arrays extends AbstractConstraint implements ConstraintInterface
      */
     protected function testValues($filter = false)
     {
-        $array_valid_values = $this->getOption('array_valid_values', array());
+        return $this->testArrayValues($this->getArrayOptionArray('array_valid_values'), $filter);
+    }
 
-        return $this->testArrayValues($array_valid_values, $filter);
+    /**
+     * Test Array Entry Values
+     *
+     * @param   string $type
+     *
+     * @return  array
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function getArrayOptionArray($type)
+    {
+        $array_values = $this->getOption($type, array());
+
+        if (is_array($array_values) && count($array_values) > 0) {
+            return $array_values;
+        }
+
+        throw new UnexpectedValueException
+        (
+            'Fieldhandler Arrays: must provide options entry: ' . $type
+        );
     }
 
     /**
      * Test Array Values
      *
-     * @param   array    $array_valid_values
-     * @param   boolean  $filter
+     * @param   array   $array_values
+     * @param   boolean $filter
      *
      * @return  boolean
      * @since   1.0.0
      */
-    protected function testArrayValues($array_valid_values, $filter)
+    protected function testArrayValues($array_values, $filter)
     {
-        if (is_array($array_valid_values) && count($array_valid_values) > 0) {
-        } else {
-            return true;
-        }
+        $test = true;
 
         $entries = $this->field_value;
 
         foreach ($entries as $entry) {
 
-            if (in_array($entry, $array_valid_values)) {
+            if (in_array($entry, $array_values)) {
 
             } else {
-
-                if ($filter === true) {
-                    unset ($entry);
-                } else {
-                    return false;
-                }
+                unset ($entry);
+                $test = false;
             }
         }
 
@@ -166,7 +179,7 @@ class Arrays extends AbstractConstraint implements ConstraintInterface
             $this->field_value = $entries;
         }
 
-        return true;
+        return $test;
     }
 
     /**

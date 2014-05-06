@@ -81,13 +81,7 @@ class AbstractMath extends AbstractConstraint implements ConstraintInterface
      */
     public function getEqual()
     {
-        $compare_to_value = $this->getOption('equals', null);
-
-        if ($compare_to_value === $this->field_value) {
-            return true;
-        }
-
-        return false;
+        return $this->performMathCompare('equal');
     }
 
     /**
@@ -99,13 +93,7 @@ class AbstractMath extends AbstractConstraint implements ConstraintInterface
      */
     protected function getNotEqual()
     {
-        $compare_to_value = $this->getOption('not_equal', null);
-
-        if ($compare_to_value === $this->field_value) {
-            return false;
-        }
-
-        return true;
+        return $this->performMathCompare('not_equal');
     }
 
     /**
@@ -117,13 +105,7 @@ class AbstractMath extends AbstractConstraint implements ConstraintInterface
      */
     protected function getLessthan()
     {
-        $compare_to_value = $this->getMathOptionValue('less_than');
-
-        if ($this->field_value < $compare_to_value) {
-            return true;
-        }
-
-        return false;
+        return $this->performMathCompare('less_than');
     }
 
     /**
@@ -135,14 +117,51 @@ class AbstractMath extends AbstractConstraint implements ConstraintInterface
      */
     protected function getGreaterthan()
     {
-        $compare_to_value = $this->getMathOptionValue('greater_than');
+        return $this->performMathCompare('greater_than');
+    }
 
-        if ($this->field_value > $compare_to_value) {
-            return true;
+    /**
+     * Verify that the values are not equal
+     *
+     * @return  mixed
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function performMathCompare($type)
+    {
+        $compare_to_value = $this->getMathOptionValue($type);
+
+        switch ($type) {
+            case 'equal':
+                if ($this->field_value === $compare_to_value) {
+                    return true;
+                }
+
+                break;
+            case 'not_equal':
+                if ($this->field_value <> $compare_to_value) {
+                    return true;
+                }
+
+                break;
+            case 'less_than':
+                if ($this->field_value < $compare_to_value) {
+                    return true;
+                }
+
+                break;
+            case 'greater_than':
+                if ($this->field_value > $compare_to_value) {
+                    return true;
+                }
+
+                break;
         }
+
 
         return false;
     }
+
     /**
      * Verify if the values are equal
      *
@@ -151,8 +170,7 @@ class AbstractMath extends AbstractConstraint implements ConstraintInterface
      */
     public function getMathOptionValue($field)
     {
-        $field_value = $this->getOption($field, null);
-        $field_value = $this->getMathOptionValue('greater_than');
+        $field_value = $this->getOption($field);
 
         if ($field_value === null) {
             throw new UnexpectedValueException
