@@ -232,6 +232,9 @@ function kses_attr($element, $attr, $allowed_html, $allowed_protocols)
 } # function kses_attr
 
 
+/**
+ * @param string $attr
+ */
 function kses_hair($attr, $allowed_protocols)
 ###############################################################################
 # This function does a lot of work. It parses an attribute list into an array

@@ -32,6 +32,14 @@ abstract class AbstractFiltervar extends AbstractConstraint implements Constrain
     protected $filter_type;
 
     /**
+     * Message Code
+     *
+     * @var    integer
+     * @since  1.0.0
+     */
+    protected $message_code = 1000;
+
+    /**
      * Validate
      *
      * @api
@@ -40,21 +48,7 @@ abstract class AbstractFiltervar extends AbstractConstraint implements Constrain
      */
     public function validate()
     {
-        if ($this->field_value === null) {
-            return true;
-        }
-
-        if ($this->filter_type === FILTER_VALIDATE_FLOAT
-            && (float)$this->field_value === (float)$this->sanitize()) {
-            return true;
-
-        } elseif ($this->field_value === $this->sanitize()) {
-            return true;
-        }
-
-        $this->setValidateMessage(1000);
-
-        return false;
+        return parent::validate();
     }
 
     /**
@@ -79,5 +73,25 @@ abstract class AbstractFiltervar extends AbstractConstraint implements Constrain
     public function format()
     {
         return parent::format();
+    }
+
+    /**
+     * Validation test
+     *
+     * @api
+     * @return  boolean
+     * @since   1.0.0
+     */
+    protected function validation()
+    {
+        if ($this->filter_type === FILTER_VALIDATE_FLOAT
+            && (float)$this->field_value === (float)$this->sanitize()) {
+            return true;
+
+        } elseif ($this->field_value === $this->sanitize()) {
+            return true;
+        }
+
+        return false;
     }
 }

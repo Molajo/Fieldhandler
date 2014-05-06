@@ -127,6 +127,14 @@ abstract class AbstractConstraint implements ConstraintInterface
     protected $method_test;
 
     /**
+     * Message Code
+     *
+     * @var    integer
+     * @since  1.0.0
+     */
+    protected $message_code;
+
+    /**
      * Constructor
      *
      * @param   string $constraint
@@ -181,7 +189,30 @@ abstract class AbstractConstraint implements ConstraintInterface
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    abstract public function validate();
+    public function validate()
+    {
+        if ($this->field_value === null) {
+            return true;
+        }
+
+        if ($this->validation() === true) {
+            return true;
+        }
+
+        $this->setValidateMessage($this->message_code);
+
+        return false;
+    }
+
+    /**
+     * Validation
+     *
+     * @api
+     * @return  mixed
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    abstract protected function validation();
 
     /**
      * Sanitize
@@ -227,14 +258,18 @@ abstract class AbstractConstraint implements ConstraintInterface
     /**
      * Save Code for Validate Message
      *
-     * @param   string $message_code
+     * @param   null|string $message_code
      *
      * @api
      * @return  $this
      * @since   1.0.0
      */
-    public function setValidateMessage($message_code)
+    public function setValidateMessage($message_code = null)
     {
+        if ($message_code === NULL) {
+            $message_code = 1000;
+        }
+
         $this->validate_messages[] = $message_code;
 
         return $this;

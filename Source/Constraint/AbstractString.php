@@ -29,6 +29,14 @@ abstract class AbstractString extends AbstractConstraint implements ConstraintIn
     protected $string_function;
 
     /**
+     * Message Code
+     *
+     * @var    integer
+     * @since  1.0.0
+     */
+    protected $message_code = 2000;
+
+    /**
      * Validate
      *
      * @return  boolean
@@ -36,19 +44,7 @@ abstract class AbstractString extends AbstractConstraint implements ConstraintIn
      */
     public function validate()
     {
-        if ($this->field_value === null) {
-            return true;
-        }
-
-        $temp = $this->doStringFunction();
-
-        if ($temp === $this->field_value) {
-            return true;
-        }
-
-        $this->setValidateMessage(2000);
-
-        return false;
+        return parent::validate();
     }
 
     /**
@@ -82,6 +78,23 @@ abstract class AbstractString extends AbstractConstraint implements ConstraintIn
     public function format()
     {
         return $this->doStringFunction();
+    }
+
+    /**
+     * Validation Test
+     *
+     * @return  boolean
+     * @since   1.0.0
+     */
+    public function validation()
+    {
+        $temp = $this->doStringFunction();
+
+        if ($temp === $this->field_value) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

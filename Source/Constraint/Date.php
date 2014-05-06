@@ -22,6 +22,14 @@ use DateTime;
 class Date extends AbstractConstraint implements ConstraintInterface
 {
     /**
+     * Message Code
+     *
+     * @var    integer
+     * @since  1.0.0
+     */
+    protected $message_code = 2000;
+
+    /**
      * Validate
      *
      * @return  boolean
@@ -29,18 +37,7 @@ class Date extends AbstractConstraint implements ConstraintInterface
      */
     public function validate()
     {
-        if ($this->field_value === null) {
-            return true;
-        }
-
-        $date = $this->createFromFormat();
-
-        if ($date === false) {
-            $this->setValidateMessage(2000);
-            return false;
-        }
-
-        return true;
+        return parent::validate();
     }
 
     /**
@@ -89,6 +86,24 @@ class Date extends AbstractConstraint implements ConstraintInterface
         return $this->field_value;
     }
 
+    /**
+     * Validation Test
+     *
+     * @return  boolean
+     * @since   1.0.0
+     */
+    public function validation()
+    {
+        $date = $this->createFromFormat();
+
+        if ($date === false) {
+            $this->setValidateMessage(2000);
+            return false;
+        }
+
+        return false;
+    }
+    
     /**
      * Create Data from a specific format
      *
