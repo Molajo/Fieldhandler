@@ -31,6 +31,14 @@ abstract class AbstractArrays extends AbstractConstraint implements ConstraintIn
     protected $array_option_type;
 
     /**
+     * Method Test
+     *
+     * @var    string
+     * @since  1.0.0
+     */
+    protected $method_test = 'getArrayValues';
+
+    /**
      * Validate
      *
      * @return  boolean
@@ -59,15 +67,7 @@ abstract class AbstractArrays extends AbstractConstraint implements ConstraintIn
      */
     public function sanitize()
     {
-        if ($this->field_value === null) {
-        } else {
-            if ($this->getArrayValues() === true) {
-            } else {
-                $this->field_value = null;
-            }
-        }
-
-        return $this->field_value;
+        parent::sanitize();
     }
 
     /**

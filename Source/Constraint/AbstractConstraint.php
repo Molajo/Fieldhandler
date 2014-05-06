@@ -118,6 +118,14 @@ abstract class AbstractConstraint implements ConstraintInterface
     protected $filter_instance;
 
     /**
+     * Method Test
+     *
+     * @var    string
+     * @since  1.0.0
+     */
+    protected $method_test;
+
+    /**
      * Constructor
      *
      * @param   string $constraint
@@ -188,7 +196,12 @@ abstract class AbstractConstraint implements ConstraintInterface
             return $this->field_value;
         }
 
-        if ($this->validate() === false) {
+        if ($this->method_test === null) {
+            $this->method_test = 'validate';
+        }
+
+        if ($this->$this->method_test() === true) {
+        } else {
             $this->field_value = null;
         }
 

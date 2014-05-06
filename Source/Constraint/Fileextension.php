@@ -49,7 +49,6 @@ class Fileextension extends AbstractArrays implements ConstraintInterface
 
         $path_info = pathinfo($this->field_value);
 
-        $hold = $this->field_value;
         $this->field_value = $path_info['extension'];
 
         if (parent::validate()) {

@@ -23,6 +23,14 @@ use CommonApi\Model\ConstraintInterface;
 class Foreignkey extends AbstractDatabase implements ConstraintInterface
 {
     /**
+     * Method Test
+     *
+     * @var    string
+     * @since  1.0.0
+     */
+    protected $method_test = 'verifyForeignKey';
+
+    /**
      * Validate
      *
      * @return  boolean
@@ -45,16 +53,7 @@ class Foreignkey extends AbstractDatabase implements ConstraintInterface
      */
     public function sanitize()
     {
-        if ($this->field_value === null) {
-        } else {
-
-            if ($this->verifyForeignKey($this->field_value) === true) {
-            } else {
-                $this->field_value = null;
-            }
-        }
-
-        return $this->field_value;
+        parent::sanitize();
     }
 
     /**
@@ -78,13 +77,13 @@ class Foreignkey extends AbstractDatabase implements ConstraintInterface
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    public function verifyForeignKey($key_value)
+    public function verifyForeignKey()
     {
         $this->verifyForeignkeyInput('database');
         $this->verifyForeignkeyInput('table');
         $this->verifyForeignkeyInput('key');
 
-        $query = $this->verifyForeignkeyInput($key_value);
+        $query = $this->verifyForeignkeyInput($this->field_value);
 
         return $this->executeDatabaseQuery($query);
     }
