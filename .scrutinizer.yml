@@ -33,9 +33,7 @@ tools:
     php_sim:
         enabled: true
         min_mass: 16
-        filter:
-            excluded_dirs: [".dev", "vendor/*", "Source/Constraint/Library/*"]
-            paths: {  }
+        excluded_dirs: [".dev", "vendor/*", "Source/Constraint/Library/*"]
     php_changetracking:
         enabled: true
         bug_patterns:
@@ -43,9 +41,7 @@ tools:
         feature_patterns:
             - "\badd(?:s|ed)?\b"
             - "\bimplement(?:s|ed)?\b"
-        filter:
-            excluded_paths: [".dev", "vendor/*", "Source/Constraint/Library/*"]
-            paths: {  }
+        excluded_paths: [".dev", "vendor/*", "Source/Constraint/Library/*"]
 before_commands: {  }
 after_commands: {  }
 artifacts: {  }
