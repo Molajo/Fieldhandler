@@ -22,20 +22,12 @@ use CommonApi\Model\ConstraintInterface;
 abstract class AbstractMath extends AbstractConstraint implements ConstraintInterface
 {
     /**
-     * Method Type
-     *
-     * @var    string
-     * @since  1.0.0
-     */
-    protected $method_type;
-
-    /**
      * Verify if the values are equal
      *
      * @return  boolean
      * @since   1.0.0
      */
-    public function getEqual()
+    protected function getEqual()
     {
         if ($this->field_value === $this->getOption('equal')) {
             return TRUE;

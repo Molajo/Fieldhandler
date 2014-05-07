@@ -94,27 +94,42 @@ class HandleResponse implements HandleResponseInterface
      */
     protected function testNoValueChange()
     {
-        $change = FALSE;
-
-        if ($this->original_data_value === NULL
-            && $this->response_value === FALSE
-        ) {
-            $change = TRUE;
+        $change = $this->testNoValueChangeCompare(NULL, FALSE);
+        if ($change === TRUE) {
+            return TRUE;
         }
 
-        if ($this->original_data_value === FALSE
-            && $this->response_value === NULL
-        ) {
-            $change = TRUE;
+        $change = $this->testNoValueChangeCompare(FALSE, NULL);
+        if ($change === TRUE) {
+            return TRUE;
         }
 
-        if ($this->original_data_value === 0
-            && $this->response_value === NULL
-        ) {
-            $change = TRUE;
+        $change = $this->testNoValueChangeCompare(0, NULL);
+        if ($change === TRUE) {
+            return TRUE;
         }
 
-        return $change;
+        return FALSE;
+    }
+
+    /**
+     * Test for "no value" changes
+     *
+     * @return  NULL|mixed  $original
+     * @return  NULL|mixed  $response
+     *
+     * @return  boolean
+     * @since   1.0.0
+     */
+    protected function testNoValueChangeCompare($original = NULL, $response = NULL)
+    {
+        if ($this->original_data_value === $original
+            && $this->response_value === $response
+        ) {
+            return TRUE;
+        }
+
+        return FALSE;
     }
 
     /**
