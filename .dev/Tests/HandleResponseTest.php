@@ -8,8 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use CommonApi\Model\EscapeInterface;
-use Molajo\Fieldhandler\Escape;
+use Molajo\Fieldhandler\HandleResponse;
 use PHPUnit_Framework_TestCase;
 
 /**
@@ -28,7 +27,7 @@ class HandleResponseTest extends PHPUnit_Framework_TestCase
      * @var    object  Molajo\Fieldhandler\Escape
      * @since  1.0.0
      */
-    protected $escape;
+    protected $handle_response;
 
     /**
      * Set up
@@ -38,88 +37,208 @@ class HandleResponseTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $adapter      = new EscapeMock();
-        $this->escape = new Escape($adapter);
+
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Escape::escapeHtml
+     * @covers  Molajo\Fieldhandler\HandleResponse::getFieldValue
      * @return  void
      * @since   1.0.0
      */
-    public function testEscapeHtml()
+    public function testGetFieldValue()
     {
-        $string  = '<script>alert("molajo")</script>';
-        $results = $this->escape->escapeHtml($string);
+        $original_data_value = 1;
+        $response_value = 2;
 
-        $this->assertEquals($results, $string);
+        $this->handle_response = new HandleResponse($original_data_value,
+            $response_value);
+
+        $results = $this->handle_response->getFieldValue();
+
+        $this->assertEquals($results, $response_value);
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Escape::escapeHtmlAttributes
+     * @covers  Molajo\Fieldhandler\HandleResponse::getChangeIndicator
      * @return  void
      * @since   1.0.0
      */
-    public function testEscapeHtmlAttributes()
+    public function testGetChangeIndicator()
     {
-        $string  = 'title="mytitle" onmouseover=alert(/molajo!/)';
-        $results = $this->escape->escapeHtmlAttributes($string);
+        $original_data_value = 1;
+        $response_value = 2;
 
-        $this->assertEquals($results, $string);
+        $this->handle_response = new HandleResponse($original_data_value,
+            $response_value);
+
+        $results = $this->handle_response->getChangeIndicator();
+
+        $this->assertEquals($results, true);
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Escape::escapeJs
+     * @covers  Molajo\Fieldhandler\HandleResponse::testNoValueChange
      * @return  void
      * @since   1.0.0
      */
-    public function testEscapeJs()
+    public function testTestNoValueChange()
     {
-        $string = 'bar&quot;; alert(&quot;Meow!&quot;); var xss=&quot;true';
+        $original_data_value = null;
+        $response_value = false;
 
-        $results = $this->escape->escapeJs($string);
+        $this->handle_response = new HandleResponse($original_data_value,
+            $response_value);
 
-        $this->assertEquals($results, $string);
+        $results = $this->handle_response->getChangeIndicator();
+
+        $this->assertEquals($results, true);
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Escape::escapeCss
+     * @covers  Molajo\Fieldhandler\HandleResponse::testNoValueChange
      * @return  void
      * @since   1.0.0
      */
-    public function testEscapeCss()
+    public function testTestNoValueChange2()
     {
-        $string  = "body {
-            background-image: url('http://example.com/foo.jpg?</style><script>alert(1)</script>');
-            }";
-        $results = $this->escape->escapeCss($string);
+        $original_data_value = false;
+        $response_value = null;
 
-        $this->assertEquals($results, $string);
+        $this->handle_response = new HandleResponse($original_data_value,
+            $response_value);
+
+        $results = $this->handle_response->getChangeIndicator();
+
+        $this->assertEquals($results, true);
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Escape::escapeUrl
+     * @covers  Molajo\Fieldhandler\HandleResponse::testNoValueChange
      * @return  void
      * @since   1.0.0
      */
-    public function testEscapeUrl()
+    public function testTestNoValueChange3()
     {
-        $string  = ' onmouseover="alert(\'molajo\')';
-        $results = $this->escape->escapeUrl($string);
+        $original_data_value = 0;
+        $response_value = null;
 
-        $this->assertEquals($results, $string);
+        $this->handle_response = new HandleResponse($original_data_value,
+            $response_value);
+
+        $results = $this->handle_response->getChangeIndicator();
+
+        $this->assertEquals($results, true);
 
         return;
     }
 
+    /**
+     * @covers  Molajo\Fieldhandler\HandleResponse::testNoValueChange
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testTestNoValueChange4()
+    {
+        $original_data_value = null;
+        $response_value = null;
+
+        $this->handle_response = new HandleResponse($original_data_value,
+            $response_value);
+
+        $results = $this->handle_response->getChangeIndicator();
+
+        $this->assertEquals($results, false);
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\HandleResponse::testNoValueChangeCompare
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testTestNoValueChangeCompare()
+    {
+        $original_data_value = 1;
+        $response_value = 1;
+
+        $this->handle_response = new HandleResponse($original_data_value,
+            $response_value);
+
+        $results = $this->handle_response->getChangeIndicator();
+
+        $this->assertEquals($results, false);
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\HandleResponse::testNoValueChangeCompare
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testTestNoValueChangeCompare2()
+    {
+        $original_data_value = null;
+        $response_value = null;
+
+        $this->handle_response = new HandleResponse($original_data_value,
+            $response_value);
+
+        $results = $this->handle_response->getChangeIndicator();
+
+        $this->assertEquals($results, false);
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\HandleResponse::testFloat
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testTestFloat()
+    {
+        $original_data_value = 3.23345;
+        $response_value = 3.21111111111113345;
+
+        $this->handle_response = new HandleResponse($original_data_value,
+            $response_value);
+
+        $results = $this->handle_response->getChangeIndicator();
+
+        $this->assertEquals($results, true);
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\HandleResponse::testFloat
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testTestFloat2()
+    {
+        $original_data_value = 3.000005;
+        $response_value = 3.000005;
+
+        $this->handle_response = new HandleResponse($original_data_value,
+            $response_value);
+
+        $results = $this->handle_response->getChangeIndicator();
+
+        $this->assertEquals($results, false);
+
+        return;
+    }
     /**
      * Tear down
      *
@@ -128,73 +247,5 @@ class HandleResponseTest extends PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-    }
-}
-
-class EscapeMock implements EscapeInterface
-{
-    /**
-     * Escape Html
-     *
-     * @param   $string
-     *
-     * @return  string
-     * @since   1.0.0
-     */
-    public function escapeHtml($string)
-    {
-        return $string;
-    }
-
-    /**
-     * Escape Html Attributes
-     *
-     * @param   $string
-     *
-     * @return  string
-     * @since   1.0.0
-     */
-    public function escapeHtmlAttributes($string)
-    {
-        return $string;
-    }
-
-    /**
-     * Escape Js
-     *
-     * @param   $string
-     *
-     * @return  string
-     * @since   1.0.0
-     */
-    public function escapeJs($string)
-    {
-        return $string;
-    }
-
-    /**
-     * Escape Css
-     *
-     * @param   $string
-     *
-     * @return  string
-     * @since   1.0.0
-     */
-    public function escapeCss($string)
-    {
-        return $string;
-    }
-
-    /**
-     * Escape Url
-     *
-     * @param   $string
-     *
-     * @return  string
-     * @since   1.0.0
-     */
-    public function escapeUrl($string)
-    {
-        return $string;
     }
 }
