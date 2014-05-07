@@ -72,7 +72,9 @@ class Email extends AbstractFiltervar implements ConstraintInterface
      */
     protected function validation()
     {
-        $valid = true;
+        $valid = TRUE;
+
+        $host = NULL;
 
         $email_parts = explode('@', $this->field_value);
 
@@ -82,12 +84,12 @@ class Email extends AbstractFiltervar implements ConstraintInterface
             $valid = FALSE;
         }
 
-        if ($this->checkMX($host)) {
+        if ($this->checkMX($host) && $valid === TRUE) {
         } else {
             $valid = FALSE;
         }
 
-        if ($this->checkHost($host)) {
+        if ($this->checkHost($host) && $valid === TRUE) {
         } else {
             $valid = FALSE;
         }

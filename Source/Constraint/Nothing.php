@@ -18,7 +18,7 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Nothing extends AbstractConstraint implements ConstraintInterface
+class Nothing extends AbstractSomething implements ConstraintInterface
 {
     /**
      * Message Code
@@ -29,36 +29,6 @@ class Nothing extends AbstractConstraint implements ConstraintInterface
     protected $message_code = 1000;
 
     /**
-     * Sanitize
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function sanitize()
-    {
-        if ($this->field_value === NULL
-            || trim($this->field_value) === ''
-            || (int)$this->field_value === 0
-        ) {
-        } else {
-            $this->field_value = NULL;
-        }
-
-        return $this->field_value;
-    }
-
-    /**
-     * Format
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function format()
-    {
-        return parent::format();
-    }
-
-    /**
      * Validation
      *
      * @return  boolean
@@ -66,10 +36,9 @@ class Nothing extends AbstractConstraint implements ConstraintInterface
      */
     protected function validation()
     {
-        if ($this->field_value === NULL
-            || trim($this->field_value) === ''
-            || (int)$this->field_value === 0
-        ) {
+        $response = parent::validation();
+
+        if ($response === FALSE) {
             return TRUE;
         }
 
