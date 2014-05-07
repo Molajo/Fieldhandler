@@ -30,42 +30,6 @@ class Contains extends AbstractConstraint implements ConstraintInterface
     protected $message_code = 1000;
 
     /**
-     * Validate
-     *
-     * Verifies value is true, 1, 'yes', or 'on', responding with true or false and messages
-     *
-     * @api
-     * @return  boolean
-     * @since   1.0.0
-     */
-    public function validate()
-    {
-        return parent::validate();
-    }
-
-    /**
-     * Sanitize
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function sanitize()
-    {
-        return parent::sanitize();
-    }
-
-    /**
-     * Format
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function format()
-    {
-        return parent::format();
-    }
-
-    /**
      * Test Contains Array
      *
      * @return  boolean

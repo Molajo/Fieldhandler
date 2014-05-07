@@ -22,45 +22,25 @@ use CommonApi\Model\ConstraintInterface;
 class Object extends AbstractConstraint implements ConstraintInterface
 {
     /**
-     * Validate
+     * Message Code
+     *
+     * @var    integer
+     * @since  1.0.0
+     */
+    protected $message_code = 1000;
+
+    /**
+     * Validation test
      *
      * @return  boolean
      * @since   1.0.0
      */
-    public function validate()
+    protected function validation()
     {
-        if ($this->field_value === NULL) {
-            return TRUE;
-        }
-
         if (is_object($this->field_value) == TRUE) {
             return TRUE;
         }
 
-        $this->setValidateMessage(1000);
-
         return FALSE;
-    }
-
-    /**
-     * Sanitize
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function sanitize()
-    {
-        return parent::sanitize();
-    }
-
-    /**
-     * Format
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function format()
-    {
-        return parent::format();
     }
 }

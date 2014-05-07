@@ -32,6 +32,14 @@ class False extends AbstractConstraint implements ConstraintInterface
     protected $false_array = array(FALSE => FALSE, 0 => 0, 'no' => 'no', 'off' => 'off');
 
     /**
+     * Message Code
+     *
+     * @var    integer
+     * @since  1.0.0
+     */
+    protected $message_code = 1000;
+
+    /**
      * Constructor
      *
      * @param   string $constraint
@@ -116,19 +124,5 @@ class False extends AbstractConstraint implements ConstraintInterface
         $this->field_value = NULL;
 
         return $this->field_value;
-    }
-
-    /**
-     * Format
-     *
-     * Method not used for the True constraint - value simply returned
-     *
-     * @api
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function format()
-    {
-        return parent::format();
     }
 }

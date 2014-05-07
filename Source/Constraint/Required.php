@@ -29,41 +29,6 @@ class Required extends AbstractConstraint implements ConstraintInterface
     protected $message_code = 13000;
 
     /**
-     * Validate
-     *
-     * @api
-     * @return  boolean
-     * @since   1.0.0
-     */
-    public function validate()
-    {
-        return parent::validate();
-    }
-
-    /**
-     * Sanitize
-     *
-     * @return  mixed
-     * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
-     */
-    public function sanitize()
-    {
-        return $this->field_value;
-    }
-
-    /**
-     * Format
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function format()
-    {
-        return parent::format();
-    }
-
-    /**
      * Validation test
      *
      * @return  boolean

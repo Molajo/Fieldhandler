@@ -21,25 +21,12 @@ use CommonApi\Model\ConstraintInterface;
 class Alias extends AbstractConstraint implements ConstraintInterface
 {
     /**
-     * Validate
+     * Message Code
      *
-     * @return  boolean
-     * @since   1.0.0
+     * @var    integer
+     * @since  1.0.0
      */
-    public function validate()
-    {
-        if ($this->field_value === NULL) {
-            return TRUE;
-        }
-
-        if ($this->validateAlias() === FALSE) {
-            $this->setValidateMessage(1000);
-
-            return FALSE;
-        }
-
-        return TRUE;
-    }
+    protected $message_code = 1000;
 
     /**
      * Sanitize
@@ -66,6 +53,10 @@ class Alias extends AbstractConstraint implements ConstraintInterface
      */
     public function format()
     {
+        if ($this->field_value === NULL) {
+            return NULL;
+        }
+
         $this->sanitize();
 
         $this->field_value = $this->formatAlias($this->field_value);
@@ -74,12 +65,12 @@ class Alias extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Validate Alias Slug
+     * Validation test
      *
-     * @return  bool
+     * @return  boolean
      * @since   1.0.0
      */
-    protected function validateAlias()
+    protected function validation()
     {
         $alias = $this->field_value;
         $alias = $this->sanitizeAlias($alias);

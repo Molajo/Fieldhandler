@@ -36,25 +36,12 @@ class Tel extends AbstractConstraint implements ConstraintInterface
     );
 
     /**
-     * Validate
+     * Message Code
      *
-     * @return  boolean
-     * @since   1.0.0
+     * @var    integer
+     * @since  1.0.0
      */
-    public function validate()
-    {
-        if ($this->field_value === NULL) {
-            return TRUE;
-        }
-
-        if (filter_var($this->field_value, FILTER_SANITIZE_STRING, $this->setFlags())) {
-            return TRUE;
-        }
-
-        $this->setValidateMessage(1000);
-
-        return FALSE;
-    }
+    protected $message_code = 8000;
 
     /**
      * Sanitize
@@ -93,5 +80,20 @@ class Tel extends AbstractConstraint implements ConstraintInterface
         }
 
         return $this->field_value;
+    }
+
+    /**
+     * Validation Test
+     *
+     * @return  boolean
+     * @since   1.0.0
+     */
+    protected function validation()
+    {
+        if (filter_var($this->field_value, FILTER_SANITIZE_STRING, $this->setFlags())) {
+            return TRUE;
+        }
+
+        return FALSE;
     }
 }

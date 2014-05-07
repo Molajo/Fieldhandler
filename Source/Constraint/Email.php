@@ -39,18 +39,6 @@ class Email extends AbstractFiltervar implements ConstraintInterface
     protected $message_code = 2000;
 
     /**
-     * Validate
-     *
-     * @api
-     * @return  boolean
-     * @since   1.0.0
-     */
-    public function validate()
-    {
-        return parent::validate();
-    }
-
-    /**
      * Format
      *
      * @api
@@ -84,25 +72,27 @@ class Email extends AbstractFiltervar implements ConstraintInterface
      */
     protected function validation()
     {
+        $valid = true;
+
         $email_parts = explode('@', $this->field_value);
 
         if (is_array($email_parts) && count($email_parts) === 2) {
             $host = $email_parts[1];
         } else {
-            return FALSE;
+            $valid = FALSE;
         }
 
         if ($this->checkMX($host)) {
         } else {
-            return FALSE;
+            $valid = FALSE;
         }
 
         if ($this->checkHost($host)) {
         } else {
-            return FALSE;
+            $valid = FALSE;
         }
 
-        return TRUE;
+        return $valid;
     }
 
     /**

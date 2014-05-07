@@ -22,24 +22,12 @@ use CommonApi\Model\ConstraintInterface;
 class Password extends AbstractConstraint implements ConstraintInterface
 {
     /**
-     * Validate
+     * Message Code
      *
-     * @return  boolean
-     * @since   1.0.0
+     * @var    integer
+     * @since  1.0.0
      */
-    public function validate()
-    {
-        if ($this->field_value === NULL) {
-        } else {
-            if (ctype_print($this->field_value) === FALSE) {
-                $this->setValidateMessage(2000);
-
-                return FALSE;
-            }
-        }
-
-        return TRUE;
-    }
+    protected $message_code = 2000;
 
     /**
      * Sanitize
@@ -53,13 +41,17 @@ class Password extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Format
+     * Validation Test
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      */
-    public function format()
+    protected function validation()
     {
-        return parent::format();
+        if (ctype_print($this->field_value) === FALSE) {
+            return FALSE;
+        }
+
+        return TRUE;
     }
 }

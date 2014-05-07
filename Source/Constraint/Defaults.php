@@ -21,21 +21,12 @@ use CommonApi\Model\ConstraintInterface;
 class Defaults extends AbstractConstraint implements ConstraintInterface
 {
     /**
-     * Validate
+     * Message Code
      *
-     * @return  boolean
-     * @since   1.0.0
+     * @var    integer
+     * @since  1.0.0
      */
-    public function validate()
-    {
-        if ($this->field_value === NULL) {
-            $this->setValidateMessage(7000);
-
-            return FALSE;
-        }
-
-        return TRUE;
-    }
+    protected $message_code = 7000;
 
     /**
      * Sanitize
@@ -51,14 +42,18 @@ class Defaults extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Format
+     * Validate
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      */
-    public function format()
+    protected function validation()
     {
-        return parent::format();
+        if ($this->field_value === NULL) {
+            return FALSE;
+        }
+
+        return TRUE;
     }
 
     /**

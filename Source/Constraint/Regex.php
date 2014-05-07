@@ -38,40 +38,7 @@ class Regex extends AbstractConstraint implements ConstraintInterface
     protected $message_code = 8000;
 
     /**
-     * Validate
-     *
-     * @return  boolean
-     * @since   1.0.0
-     */
-    public function validate()
-    {
-        return parent::validate();
-    }
-
-    /**
-     * Sanitize
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function sanitize()
-    {
-        return parent::sanitize();
-    }
-
-    /**
-     * Format
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function format()
-    {
-        return parent::format();
-    }
-
-    /**
-     * Validate
+     * Validation
      *
      * @return  boolean
      * @since   1.0.0

@@ -32,18 +32,6 @@ class Resource extends AbstractConstraint implements ConstraintInterface
     protected $message_code = 13000;
 
     /**
-     * Validate
-     *
-     * @api
-     * @return  boolean
-     * @since   1.0.0
-     */
-    public function validate()
-    {
-        return parent::validate();
-    }
-
-    /**
      * Sanitize
      *
      * @return  resource|null
@@ -62,17 +50,6 @@ class Resource extends AbstractConstraint implements ConstraintInterface
         }
 
         return $this->field_value;
-    }
-
-    /**
-     * Format
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function format()
-    {
-        return parent::format();
     }
 
     /**

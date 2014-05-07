@@ -21,27 +21,12 @@ use CommonApi\Model\ConstraintInterface;
 class Length extends AbstractConstraint implements ConstraintInterface
 {
     /**
-     * Validate
+     * Message Code
      *
-     * @return  boolean
-     * @since   1.0.0
+     * @var    integer
+     * @since  1.0.0
      */
-    public function validate()
-    {
-        if ($this->field_value === NULL) {
-            return TRUE;
-        }
-
-        $results = $this->testMinimumMaximum();
-
-        if ($results === TRUE) {
-            return TRUE;
-        }
-
-        $this->setValidateMessage(8000);
-
-        return FALSE;
-    }
+    protected $message_code = 8000;
 
     /**
      * Sanitize
@@ -60,23 +45,12 @@ class Length extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Format
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function format()
-    {
-        return parent::format();
-    }
-
-    /**
-     * Get Minimum and Maximum
+     * Validate
      *
      * @return  boolean
      * @since   1.0.0
      */
-    protected function testMinimumMaximum()
+    protected function validation()
     {
         $minimum = $this->getOption('minimum_length', 0);
         $maximum = $this->getOption('maximum_length', 999999999999);

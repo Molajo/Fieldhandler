@@ -21,12 +21,20 @@ use CommonApi\Model\ConstraintInterface;
 class Fromto extends AbstractConstraint implements ConstraintInterface
 {
     /**
-     * Validate
+     * Message Code
+     *
+     * @var    integer
+     * @since  1.0.0
+     */
+    protected $message_code = 8000;
+
+    /**
+     * Validation
      *
      * @return  boolean
      * @since   1.0.0
      */
-    public function validate()
+    protected function validation()
     {
         if ($this->field_value >= $this->getOption('from', 0)
             && $this->field_value <= $this->getOption('to', 999999999999)
@@ -34,30 +42,6 @@ class Fromto extends AbstractConstraint implements ConstraintInterface
             return TRUE;
         }
 
-        $this->setValidateMessage(8000);
-
         return FALSE;
-    }
-
-    /**
-     * Sanitize
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function sanitize()
-    {
-        return parent::sanitize();
-    }
-
-    /**
-     * Format
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function format()
-    {
-        return parent::format();
     }
 }

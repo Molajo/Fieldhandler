@@ -21,21 +21,12 @@ use CommonApi\Model\ConstraintInterface;
 class Image extends AbstractConstraint implements ConstraintInterface
 {
     /**
-     * Validate
+     * Message Code
      *
-     * @return  boolean
-     * @since   1.0.0
+     * @var    integer
+     * @since  1.0.0
      */
-    public function validate()
-    {
-        $hold = $this->field_value;
-
-        if ($this->sanitize() === $hold) {
-            return TRUE;
-        }
-
-        return FALSE;
-    }
+    protected $message_code = 1000;
 
     /**
      * Sanitize
@@ -61,13 +52,19 @@ class Image extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Format
+     * Validation Test
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      */
-    public function format()
+    protected function validation()
     {
-        return parent::format();
+        $hold = $this->field_value;
+
+        if ($this->sanitize() === $hold) {
+            return TRUE;
+        }
+
+        return FALSE;
     }
 }

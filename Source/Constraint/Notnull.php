@@ -29,18 +29,6 @@ class Notnull extends AbstractConstraint implements ConstraintInterface
     protected $message_code = 1000;
 
     /**
-     * Validate
-     *
-     * @api
-     * @return  boolean
-     * @since   1.0.0
-     */
-    public function validate()
-    {
-        return parent::validate();
-    }
-
-    /**
      * Sanitize
      *
      * @return  mixed
@@ -74,6 +62,6 @@ class Notnull extends AbstractConstraint implements ConstraintInterface
             return FALSE;
         }
 
-        return FALSE;
+        return TRUE;
     }
 }

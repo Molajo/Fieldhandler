@@ -32,6 +32,14 @@ class Callback extends AbstractConstraint implements ConstraintInterface
     protected $filter_type = FILTER_CALLBACK;
 
     /**
+     * Message Code
+     *
+     * @var    integer
+     * @since  1.0.0
+     */
+    protected $message_code = 1000;
+
+    /**
      * Used by Constraint Classes to customize option values needed for Field handling
      *
      * @return  array
@@ -43,52 +51,6 @@ class Callback extends AbstractConstraint implements ConstraintInterface
         $return['options'] = $this->getOption('callback');
 
         return $return;
-    }
-
-    /**
-     * Validate
-     *
-     * Tests a value using the callback value responding with true or false and messages
-     *
-     * @code
-     *
-     *  ```php
-     *
-     *  $request = new Molajo\Fieldhandler\Request();
-     *
-     *  $options = array();
-     *  $options['callback'] = $callback;
-     *  $results = $request->validate('Field name', $field_value, 'Callback', $options);
-     *
-     *  if ($results->getValidateResponse() === true) {
-     *      // all is good
-     *  } else {
-     *      foreach ($results->getValidateMessages() as $error) {
-     *          echo  'Validation error: ' . $error->code . ': ' . $error->message . '\n';
-     *      }
-     *  }
-     *
-     *  ```
-     *
-     * @api
-     * @link    http://www.php.net/manual/en/filter.filters.sanitize.php
-     * @return  boolean
-     * @since   1.0.0
-     */
-    public function validate()
-    {
-        if ($this->field_value === NULL) {
-            return TRUE;
-        }
-
-        if (filter_var($this->field_value, $this->filter_type, $this->setOptions()) === FALSE) {
-
-            $this->setValidateMessage(1000);
-
-            return FALSE;
-        }
-
-        return TRUE;
     }
 
     /**
@@ -135,16 +97,17 @@ class Callback extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Format
+     * Validation
      *
-     * Not used with Float, simply returns the field value sent in
-     *
-     * @api
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      */
-    public function format()
+    public function validation()
     {
-        return parent::format();
+        if (filter_var($this->field_value, $this->filter_type, $this->setOptions()) === FALSE) {
+            return FALSE;
+        }
+
+        return TRUE;
     }
 }

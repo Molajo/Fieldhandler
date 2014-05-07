@@ -70,20 +70,6 @@ class True extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Validate
-     *
-     * Verifies value is true, 1, 'yes', or 'on', responding with true or false and messages
-     *
-     * @api
-     * @return  boolean
-     * @since   1.0.0
-     */
-    public function validate()
-    {
-        return parent::validate();
-    }
-
-    /**
      * Sanitize
      *
      * Sets the return value to NULL if it is not true, 1, 'yes', or 'on.'
@@ -95,31 +81,15 @@ class True extends AbstractConstraint implements ConstraintInterface
     public function sanitize()
     {
         if ($this->field_value === NULL) {
+            return $this->field_value;
+        }
 
+        if ($this->validation() === TRUE) {
         } else {
-            $testValue = $this->field_value;
-
-            if (in_array($testValue, $this->true_array) === TRUE) {
-            } else {
-                $this->field_value = NULL;
-            }
+            $this->field_value = NULL;
         }
 
         return $this->field_value;
-    }
-
-    /**
-     * Format
-     *
-     * Method not used for the True constraint - value simply returned
-     *
-     * @api
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function format()
-    {
-        return parent::format();
     }
 
     /**
