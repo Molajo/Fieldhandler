@@ -115,8 +115,9 @@ class HandleResponse implements HandleResponseInterface
     /**
      * Test for "no value" changes
      *
-     * @return  null $original
-     * @return  null $response
+     * @param false $response
+     * @return  boolean $original
+     * @return  boolean $response
      *
      * @return  boolean
      * @since   1.0.0

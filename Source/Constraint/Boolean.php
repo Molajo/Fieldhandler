@@ -22,14 +22,6 @@ use CommonApi\Model\ConstraintInterface;
 class Boolean extends AbstractConstraint implements ConstraintInterface
 {
     /**
-     * Message Code
-     *
-     * @var    integer
-     * @since  1.0.0
-     */
-    protected $message_code = 1000;
-
-    /**
      * Validation Test
      *
      * @return  boolean

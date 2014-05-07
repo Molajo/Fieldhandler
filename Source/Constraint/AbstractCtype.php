@@ -81,7 +81,7 @@ abstract class AbstractCtype extends AbstractConstraint implements ConstraintInt
      * @param   string  $ctype
      * @param   mixed   $field_value
      *
-     * @return  mixed
+     * @return  string
      * @since   1.0.0
      */
     protected function sanitizeByCType($ctype, $field_value)
