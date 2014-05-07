@@ -63,7 +63,7 @@ class Escape implements EscapeInterface
      */
     public function escapeHtmlAttributes($string)
     {
-        return $this->adapter->HtmlAttributes($string);
+        return $this->adapter->escapeHtmlAttributes($string);
     }
 
     /**
@@ -76,7 +76,7 @@ class Escape implements EscapeInterface
      */
     public function escapeJs($string)
     {
-        return $this->adapter->Js($string);
+        return $this->adapter->escapeJs($string);
     }
 
     /**
@@ -89,7 +89,7 @@ class Escape implements EscapeInterface
      */
     public function escapeCss($string)
     {
-        return $this->adapter->Css($string);
+        return $this->adapter->escapeCss($string);
     }
 
     /**
@@ -102,6 +102,6 @@ class Escape implements EscapeInterface
      */
     public function escapeUrl($string)
     {
-        return $this->adapter->Url($string);
+        return $this->adapter->escapeUrl($string);
     }
 }

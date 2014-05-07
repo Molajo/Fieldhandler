@@ -15,6 +15,6 @@ before_script:
   - php composer.phar install --dev
 
 script:
-  - phpunit --coverage-clover=coverage.clover
+  - phpunit  -c .dev/phpunit.xml --coverage-clover=coverage.clover
   - wget https://scrutinizer-ci.com/ocular.phar
   - php ocular.phar code-coverage:upload --format=php-clover coverage.clover

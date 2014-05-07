@@ -38,7 +38,7 @@ class EscapeProxyTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $adapter = new EscapeMock();
+        $adapter      = new EscapeMock();
         $this->escape = new Escape($adapter);
     }
 
@@ -47,10 +47,73 @@ class EscapeProxyTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testValidateSucceed()
+    public function testEscapeHtml()
     {
-        $string = '<p>Hello!</p>';
+        $string  = '<script>alert("molajo")</script>';
         $results = $this->escape->escapeHtml($string);
+
+        $this->assertEquals($results, $string);
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Escape::escapeHtmlAttributes
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testEscapeHtmlAttributes()
+    {
+        $string  = 'title="mytitle" onmouseover=alert(/molajo!/)';
+        $results = $this->escape->escapeHtmlAttributes($string);
+
+        $this->assertEquals($results, $string);
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Escape::escapeJs
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testEscapeJs()
+    {
+        $string  = 'bar&quot;; alert(&quot;Meow!&quot;); var xss=&quot;true';
+
+        $results = $this->escape->escapeJs($string);
+
+        $this->assertEquals($results, $string);
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Escape::escapeCss
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testEscapeCss()
+    {
+        $string  = "body {
+            background-image: url('http://example.com/foo.jpg?</style><script>alert(1)</script>');
+            }";
+        $results = $this->escape->escapeCss($string);
+
+        $this->assertEquals($results, $string);
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Escape::escapeUrl
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testEscapeUrl()
+    {
+        $string  = ' onmouseover="alert(\'molajo\')';
+        $results = $this->escape->escapeUrl($string);
 
         $this->assertEquals($results, $string);
 
