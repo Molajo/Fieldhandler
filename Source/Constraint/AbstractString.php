@@ -18,7 +18,7 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-abstract class AbstractString extends AbstractConstraint implements ConstraintInterface
+abstract class AbstractString extends AbstractConstraintTests implements ConstraintInterface
 {
     /**
      * String Function
@@ -118,7 +118,7 @@ abstract class AbstractString extends AbstractConstraint implements ConstraintIn
      */
     protected function doTrim()
     {
-       return trim($this->field_value);
+        return trim($this->field_value);
     }
 
     /**

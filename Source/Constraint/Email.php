@@ -142,9 +142,9 @@ class Email extends AbstractFiltervar implements ConstraintInterface
             return TRUE;
         }
 
-        $response = (int) checkdnsrr($host, 'MX');
-        $response = $response + (int) checkdnsrr($host, 'A');
-        $response = $response + (int) checkdnsrr($host, 'AAAA');
+        $response = (int)checkdnsrr($host, 'MX');
+        $response = $response + (int)checkdnsrr($host, 'A');
+        $response = $response + (int)checkdnsrr($host, 'AAAA');
 
         if ($response > 0) {
             return TRUE;

@@ -18,7 +18,7 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-abstract class AbstractMath extends AbstractConstraint implements ConstraintInterface
+abstract class AbstractMath extends AbstractConstraintTests implements ConstraintInterface
 {
     /**
      * Verify if the values are equal

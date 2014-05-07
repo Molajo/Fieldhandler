@@ -65,15 +65,15 @@ class Arrays extends AbstractArrays implements ConstraintInterface
     protected function validation()
     {
         $validation_array = array(
-            'isArray' => 3000,
+            'isArray'    => 3000,
             'testValues' => 4000,
-            'testKeys' => 5000,
-            'testCount' => 6000,
+            'testKeys'   => 5000,
+            'testCount'  => 6000,
         );
 
         $test = TRUE;
 
-        foreach($validation_array as $key => $value) {
+        foreach ($validation_array as $key => $value) {
             if ($this->runValidationTest($key, $value) === FALSE) {
                 $test = FALSE;
                 break;

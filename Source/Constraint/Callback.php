@@ -20,7 +20,7 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Callback extends AbstractConstraint implements ConstraintInterface
+class Callback extends AbstractConstraintTests implements ConstraintInterface
 {
     /**
      * Filter Type

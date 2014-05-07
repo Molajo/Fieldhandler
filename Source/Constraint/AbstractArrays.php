@@ -20,7 +20,7 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-abstract class AbstractArrays extends AbstractConstraint implements ConstraintInterface
+abstract class AbstractArrays extends AbstractConstraintTests implements ConstraintInterface
 {
     /**
      * Array Options Entry Type
@@ -126,7 +126,7 @@ abstract class AbstractArrays extends AbstractConstraint implements ConstraintIn
     /**
      * Test Array Values returning only good entries
      *
-     * @param   array   $array_values
+     * @param   array $array_values
      *
      * @return  array
      * @since   1.0.0

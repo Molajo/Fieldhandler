@@ -18,7 +18,7 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-abstract class AbstractHtml extends AbstractConstraint implements ConstraintInterface
+abstract class AbstractHtml extends AbstractConstraintTests implements ConstraintInterface
 {
     /**
      * White list

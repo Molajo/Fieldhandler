@@ -19,7 +19,7 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-abstract class AbstractCtype extends AbstractConstraint implements ConstraintInterface
+abstract class AbstractCtype extends AbstractConstraintTests implements ConstraintInterface
 {
     /**
      * ctype Test
@@ -78,8 +78,8 @@ abstract class AbstractCtype extends AbstractConstraint implements ConstraintInt
     /**
      * Common Sanitize Method for ctype
      *
-     * @param   string  $ctype
-     * @param   mixed   $field_value
+     * @param   string $ctype
+     * @param   mixed  $field_value
      *
      * @return  string
      * @since   1.0.0

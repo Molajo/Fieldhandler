@@ -18,7 +18,7 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Numeric extends AbstractConstraint implements ConstraintInterface
+class Numeric extends AbstractConstraintTests implements ConstraintInterface
 {
     /**
      * Message Code

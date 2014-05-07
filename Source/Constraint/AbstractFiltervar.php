@@ -18,7 +18,7 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-abstract class AbstractFiltervar extends AbstractConstraint implements ConstraintInterface
+abstract class AbstractFiltervar extends AbstractConstraintTests implements ConstraintInterface
 {
     /**
      * Filter Type

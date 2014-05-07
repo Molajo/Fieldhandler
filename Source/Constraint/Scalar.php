@@ -22,7 +22,7 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Scalar extends AbstractConstraint implements ConstraintInterface
+class Scalar extends AbstractConstraintTests implements ConstraintInterface
 {
     /**
      * Message Code

@@ -18,7 +18,7 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-abstract class AbstractDatabase extends AbstractConstraint implements ConstraintInterface
+abstract class AbstractDatabase extends AbstractConstraintTests implements ConstraintInterface
 {
     /**
      * Database instance

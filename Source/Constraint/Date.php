@@ -19,7 +19,7 @@ use DateTime;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Date extends AbstractConstraint implements ConstraintInterface
+class Date extends AbstractConstraintTests implements ConstraintInterface
 {
     /**
      * Message Code
