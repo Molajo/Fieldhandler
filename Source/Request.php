@@ -332,25 +332,21 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
      */
     protected function getValidateMessages()
     {
-        if ($this->method === 'validate') {
+        $messages = $this->constraint_instance->getValidateMessages();
+
+        if (count($messages) === 0) {
         } else {
             return $this;
         }
 
-        $messages = $this->constraint_instance->getValidateMessages();
+        $tokens = array();
 
-        if (count($messages) > 0) {
-            $tokens = array();
+        $tokens['field_name']  = $this->field_name;
+        $tokens['field_value'] = $this->field_value;
+        $tokens['constraint']  = $this->constraint;
+        $tokens['method']      = $this->method;
 
-            $tokens['field_name']  = $this->field_name;
-            $tokens['field_value'] = $this->field_value;
-            $tokens['constraint']  = $this->constraint;
-            $tokens['method']      = $this->method;
-
-            $this->message_instance->setMessages($messages, $tokens);
-        }
-
-        return $this;
+        return $this->message_instance->setMessages($messages, $tokens);
     }
 
     /**

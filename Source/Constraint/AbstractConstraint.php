@@ -123,7 +123,7 @@ abstract class AbstractConstraint implements ConstraintInterface
      * @var    string
      * @since  1.0.0
      */
-    protected $method_test;
+    protected $method_test = 'validate';
 
     /**
      * Message Code
@@ -228,10 +228,6 @@ abstract class AbstractConstraint implements ConstraintInterface
     {
         if ($this->field_value === NULL) {
             return $this->field_value;
-        }
-
-        if ($this->method_test === NULL) {
-            $this->method_test = 'validate';
         }
 
         if ($this->$this->method_test() === TRUE) {
@@ -412,11 +408,13 @@ abstract class AbstractConstraint implements ConstraintInterface
      */
     protected function sanitizeCharacter($filter, $test, $allow_whitespace, $i)
     {
-        if (($filter(substr($test, $i, 1)) == 1)
-            || ($allow_whitespace === TRUE && substr($test, $i, 1) === ' ')
-        ) {
+        $value    = substr($test, $i, 1);
+        $filtered = $filter($value);
 
-            return substr($test, $i, 1);
+        if ($filtered === 1
+            || ($allow_whitespace === TRUE && $value === ' ')
+        ) {
+            return $value;
         }
 
         return '';

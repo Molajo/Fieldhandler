@@ -108,24 +108,25 @@ abstract class AbstractArrays extends AbstractConstraint implements ConstraintIn
      */
     protected function testArrayValues($array_values, $filter)
     {
-        $test = TRUE;
+        $new = array();
 
-        $entries = $this->field_value;
+        foreach ($this->field_value as $entry) {
 
-        foreach ($entries as $entry) {
-
-            $test = $this->testArrayValue($array_values, $entry);
-
-            if ($test === FALSE) {
-                unset ($entry);
+            if ($this->testArrayValue($array_values, $entry) === FALSE) {
+            } else {
+                $new[] = $entry;
             }
         }
 
-        if ($filter === TRUE) {
-            $this->field_value = $entries;
+        if (count($new) === count($this->field_value)) {
+            return TRUE;
         }
 
-        return $test;
+        if ($filter === TRUE) {
+            $this->field_value = $new;
+        }
+
+        return FALSE;
     }
 
     /**

@@ -72,7 +72,7 @@ abstract class AbstractString extends AbstractConstraint implements ConstraintIn
     /**
      * Format
      *
-     * @return  string|null
+     * @return  string
      * @since   1.0.0
      */
     public function format()
@@ -98,21 +98,48 @@ abstract class AbstractString extends AbstractConstraint implements ConstraintIn
     }
 
     /**
-     * Format
+     * String Functions
      *
-     * @return  string|null
+     * @return  string
      * @since   1.0.0
      */
-    public function doStringFunction()
+    protected function doStringFunction()
     {
-        if ($this->string_function === 'trim') {
-            return trim($this->field_value);
-        } elseif ($this->string_function === 'lower') {
-            return strtolower($this->field_value);
-        } elseif ($this->string_function === 'upper') {
-            return strtoupper($this->field_value);
-        }
+        $method = 'do' . ucfirst(strtolower($this->string_function));
 
-        return $this->field_value;
+        return $this->$method();
+    }
+
+    /**
+     * Trim String Function
+     *
+     * @return  string
+     * @since   1.0.0
+     */
+    protected function doTrim()
+    {
+       return trim($this->field_value);
+    }
+
+    /**
+     * Lower case String Function
+     *
+     * @return  string
+     * @since   1.0.0
+     */
+    protected function doLower()
+    {
+        return strtolower($this->field_value);
+    }
+
+    /**
+     * Upper case String Function
+     *
+     * @return  string
+     * @since   1.0.0
+     */
+    protected function doUpper()
+    {
+        return strtoupper($this->field_value);
     }
 }
