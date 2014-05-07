@@ -298,7 +298,6 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
         return $this->runConstraintMethod($method);
     }
 
-
     /**
      * Run Constraint Method
      *
@@ -445,31 +444,12 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
      *
      * @return  $this
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     protected function createConstraint($constraint)
     {
         $this->editConstraint($constraint);
 
-        $class = 'Molajo\\Fieldhandler\\Constraint\\' . $constraint;
-
-        try {
-            $this->constraint_instance = new $class (
-                $this->constraint,
-                $this->method,
-                $this->field_name,
-                $this->field_value,
-                $this->options
-            );
-
-        } catch (Exception $e) {
-
-            throw new UnexpectedValueException
-            (
-                'Fieldhandler Request createConstraint Method: Could not instantiate Constraint: ' . $constraint
-                . ' Class: ' . $class
-            );
-        }
+        $this->createConstraintClass($constraint);
 
         return $this;
     }
@@ -492,6 +472,40 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
             throw new UnexpectedValueException
             (
                 'Fieldhandler Request: Must request a specific constraint'
+            );
+        }
+
+        return $this;
+    }
+
+    /**
+     * Create Constraint Class
+     *
+     * @param   string $constraint
+     *
+     * @return  $this
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function createConstraintClass($constraint)
+    {
+        $class = 'Molajo\\Fieldhandler\\Constraint\\' . $constraint;
+
+        try {
+            $this->constraint_instance = new $class (
+                $this->constraint,
+                $this->method,
+                $this->field_name,
+                $this->field_value,
+                $this->options
+            );
+
+        } catch (Exception $e) {
+
+            throw new UnexpectedValueException
+            (
+                'Fieldhandler Request createConstraint Method: Could not instantiate Constraint: ' . $constraint
+                . ' Class: ' . $class
             );
         }
 

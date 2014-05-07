@@ -332,6 +332,8 @@ abstract class AbstractConstraint implements ConstraintInterface
      */
     protected function setFlags()
     {
+        $this->selected_constraint_options = NULL;
+
         foreach ($this->constraint_allowable_options as $entry) {
             $this->setFlag($entry);
         }
@@ -347,7 +349,7 @@ abstract class AbstractConstraint implements ConstraintInterface
      * @return  null|string
      * @since   1.0.0
      */
-    protected function setFlag(array $entry)
+    protected function setFlag($entry)
     {
         $value = $this->getOption($entry);
 
