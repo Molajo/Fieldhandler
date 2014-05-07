@@ -36,10 +36,6 @@ class Required extends AbstractNull implements ConstraintInterface
      */
     protected function validation()
     {
-        if (parent::validation() === TRUE) {
-            return FALSE;
-        }
-
-        return TRUE;
+        return parent::validationNotNull();
     }
 }

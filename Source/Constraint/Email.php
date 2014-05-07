@@ -109,7 +109,7 @@ class Email extends AbstractFiltervar implements ConstraintInterface
     /**
      * Verify MX Record for Host
      *
-     * @param   string  $host
+     * @param   string $host
      *
      * @return  boolean
      * @since   1.0.0

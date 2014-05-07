@@ -78,9 +78,10 @@ abstract class AbstractCtype extends AbstractConstraint implements ConstraintInt
     /**
      * Common Sanitize Method for ctype
      *
-     * @param   string $ctype
+     * @param   string  $ctype
+     * @param   mixed   $field_value
      *
-     * @return  string
+     * @return  mixed
      * @since   1.0.0
      */
     protected function sanitizeByCType($ctype, $field_value)

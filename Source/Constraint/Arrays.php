@@ -86,8 +86,8 @@ class Arrays extends AbstractArrays implements ConstraintInterface
     /**
      * Run the validation Test
      *
-     * @param   string  $method
-     * @param   string  $message_code
+     * @param   string $method
+     * @param   string $message_code
      *
      * @return  boolean
      * @since   1.0.0
@@ -96,6 +96,7 @@ class Arrays extends AbstractArrays implements ConstraintInterface
     {
         if ($this->$method(FALSE) === FALSE) {
             $this->message_code = $message_code;
+
             return FALSE;
         }
 
@@ -113,6 +114,7 @@ class Arrays extends AbstractArrays implements ConstraintInterface
         if (is_array($this->field_value)) {
         } else {
             $this->message_code = 3000;
+
             return FALSE;
         }
 

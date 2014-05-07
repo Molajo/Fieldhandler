@@ -29,23 +29,6 @@ class Alias extends AbstractConstraint implements ConstraintInterface
     protected $message_code = 1000;
 
     /**
-     * Sanitize
-     *
-     * @return  null|string
-     * @since   1.0.0
-     */
-    public function sanitize()
-    {
-        if ($this->field_value === NULL) {
-            return NULL;
-        }
-
-        $this->field_value = $this->sanitizeAlias($this->field_value);
-
-        return $this->field_value;
-    }
-
-    /**
      * Format
      *
      * @return  string
@@ -56,8 +39,6 @@ class Alias extends AbstractConstraint implements ConstraintInterface
         if ($this->field_value === NULL) {
             return NULL;
         }
-
-        $this->sanitize();
 
         $this->field_value = $this->formatAlias($this->field_value);
 
@@ -77,11 +58,10 @@ class Alias extends AbstractConstraint implements ConstraintInterface
         $alias = $this->formatAlias($alias);
 
         if ($this->field_value === $alias) {
-        } else {
-            return FALSE;
+            return TRUE;
         }
 
-        return TRUE;
+        return FALSE;
     }
 
     /**

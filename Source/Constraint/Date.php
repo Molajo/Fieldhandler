@@ -30,38 +30,6 @@ class Date extends AbstractConstraint implements ConstraintInterface
     protected $message_code = 2000;
 
     /**
-     * Validate
-     *
-     * @return  boolean
-     * @since   1.0.0
-     */
-    public function validate()
-    {
-        return parent::validate();
-    }
-
-    /**
-     * Sanitize
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function sanitize()
-    {
-        if ($this->field_value === NULL) {
-            return TRUE;
-        }
-
-        $date = $this->createFromFormat();
-
-        if ($date === FALSE) {
-            $this->field_value = NULL;
-        }
-
-        return $this->field_value;
-    }
-
-    /**
      * Format
      *
      * @return  mixed
@@ -97,12 +65,10 @@ class Date extends AbstractConstraint implements ConstraintInterface
         $date = $this->createFromFormat();
 
         if ($date === FALSE) {
-            $this->setValidateMessage(2000);
-
             return FALSE;
         }
 
-        return FALSE;
+        return TRUE;
     }
 
     /**

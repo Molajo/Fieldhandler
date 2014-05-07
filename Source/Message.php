@@ -106,7 +106,7 @@ class Message implements MessageInterface
      *
      * @param   string $code
      *
-     * @return  $this
+     * @return  string
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */

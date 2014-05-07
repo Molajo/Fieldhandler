@@ -646,5 +646,3 @@ function kses_decode_entities($string)
 
     return $string;
 } # function kses_decode_entities
-
-?>

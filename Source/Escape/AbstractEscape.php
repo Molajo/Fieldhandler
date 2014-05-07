@@ -31,7 +31,7 @@ abstract class AbstractEscape implements EscapeInterface
     /**
      * Constructor
      *
-     * @param   $adapter  \CommonApi\Model\EscapeInterface
+     * @param   object  $escape_instance
      *
      * @since   1.0.0
      */

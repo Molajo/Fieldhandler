@@ -143,7 +143,7 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
     /**
      * Constructor
      *
-     * @param   string $message_templates
+     * @param   array $message_templates
      *
      * @since   1.0.0
      */
@@ -326,6 +326,7 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
         $messages = $this->constraint_instance->getValidateMessages();
 
         if (count($messages) > 0) {
+            $tokens = array();
 
             $tokens['field_name']  = $this->field_name;
             $tokens['field_value'] = $this->field_value;

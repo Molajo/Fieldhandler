@@ -21,12 +21,20 @@ use CommonApi\Model\ConstraintInterface;
 class Time extends AbstractConstraint implements ConstraintInterface
 {
     /**
+     * Message Code
+     *
+     * @var    integer
+     * @since  1.0.0
+     */
+    protected $message_code = 1000;
+
+    /**
      * Validate
      *
      * @return  boolean
      * @since   1.0.0
      */
-    public function validate()
+    public function validation()
     {
         if ($this->field_value === NULL) {
             return TRUE;
@@ -36,38 +44,6 @@ class Time extends AbstractConstraint implements ConstraintInterface
             return TRUE;
         }
 
-        $this->setValidateMessage(1000);
-
         return FALSE;
-    }
-
-    /**
-     * Sanitize
-     *
-     * @return  null|integer
-     * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
-     */
-    public function sanitize()
-    {
-        if ($this->field_value === NULL) {
-            return $this->field_value;
-        }
-
-        $this->field_value = strtotime($this->field_value);
-
-        return $this->field_value;
-    }
-
-    /**
-     * Format
-     *
-     * @return  mixed
-     * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
-     */
-    public function format()
-    {
-        return parent::format();
     }
 }

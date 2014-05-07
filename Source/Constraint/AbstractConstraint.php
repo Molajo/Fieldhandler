@@ -366,9 +366,9 @@ abstract class AbstractConstraint implements ConstraintInterface
     /**
      * Test the string specified in $filter using the function defined by $test
      *
-     * @param   string $filter
-     * @param   string $test
-     * @param   string $allow_whitespace
+     * @param   string   $filter
+     * @param   string   $test
+     * @param   boolean  $allow_whitespace
      *
      * @return  string
      * @since   1.0.0

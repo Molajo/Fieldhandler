@@ -50,4 +50,19 @@ abstract class AbstractNull extends AbstractConstraint implements ConstraintInte
 
         return FALSE;
     }
+
+    /**
+     * Validation test
+     *
+     * @return  boolean
+     * @since   1.0.0
+     */
+    protected function validationNotNull()
+    {
+        if ($this->field_value === NULL) {
+            return FALSE;
+        }
+
+        return TRUE;
+    }
 }

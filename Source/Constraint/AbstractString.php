@@ -112,5 +112,7 @@ abstract class AbstractString extends AbstractConstraint implements ConstraintIn
         } elseif ($this->string_function === 'upper') {
             return strtoupper($this->field_value);
         }
+
+        return $this->field_value;
     }
 }
