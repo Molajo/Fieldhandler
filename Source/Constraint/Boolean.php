@@ -37,11 +37,7 @@ class Boolean extends AbstractConstraint implements ConstraintInterface
      */
     protected function validation()
     {
-        if ($this->field_value === FALSE) {
-            return TRUE;
-        }
-
-        if ($this->field_value === TRUE) {
+        if ($this->field_value === FALSE || $this->field_value === TRUE) {
             return TRUE;
         }
 

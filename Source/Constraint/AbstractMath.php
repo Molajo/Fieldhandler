@@ -30,50 +30,6 @@ abstract class AbstractMath extends AbstractConstraint implements ConstraintInte
     protected $method_type;
 
     /**
-     * Validate
-     *
-     * @return  boolean
-     * @since   1.0.0
-     */
-    public function validate()
-    {
-        if ($this->$this->method_type() === TRUE) {
-            return TRUE;
-        }
-
-        $this->setValidateMessage(8000);
-
-        return FALSE;
-    }
-
-    /**
-     * Sanitize
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function sanitize()
-    {
-        if ($this->$this->method_type() === TRUE) {
-        } else {
-            $this->field_value = NULL;
-        }
-
-        return $this->field_value;
-    }
-
-    /**
-     * Format
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function format()
-    {
-        return parent::format();
-    }
-
-    /**
      * Verify if the values are equal
      *
      * @return  boolean
@@ -81,7 +37,11 @@ abstract class AbstractMath extends AbstractConstraint implements ConstraintInte
      */
     public function getEqual()
     {
-        return $this->performMathCompare('equal');
+        if ($this->field_value === $this->getOption('equal')) {
+            return TRUE;
+        }
+
+        return FALSE;
     }
 
     /**
@@ -93,7 +53,11 @@ abstract class AbstractMath extends AbstractConstraint implements ConstraintInte
      */
     protected function getNotEqual()
     {
-        return $this->performMathCompare('not_equal');
+        if ($this->field_value === $this->getOption('not_equal')) {
+            return FALSE;
+        }
+
+        return TRUE;
     }
 
     /**
@@ -105,7 +69,11 @@ abstract class AbstractMath extends AbstractConstraint implements ConstraintInte
      */
     protected function getLessthan()
     {
-        return $this->performMathCompare('less_than');
+        if ($this->field_value < $this->getOption('less_than')) {
+            return TRUE;
+        }
+
+        return FALSE;
     }
 
     /**
@@ -117,7 +85,11 @@ abstract class AbstractMath extends AbstractConstraint implements ConstraintInte
      */
     protected function getMinimum()
     {
-        return $this->performMathCompare('minimum');
+        if ($this->field_value <= $this->getOption('minimum')) {
+            return TRUE;
+        }
+
+        return FALSE;
     }
 
     /**
@@ -129,7 +101,11 @@ abstract class AbstractMath extends AbstractConstraint implements ConstraintInte
      */
     protected function getGreaterthan()
     {
-        return $this->performMathCompare('greater_than');
+        if ($this->field_value > $this->getOption('greater_than')) {
+            return TRUE;
+        }
+
+        return FALSE;
     }
 
     /**
@@ -141,62 +117,10 @@ abstract class AbstractMath extends AbstractConstraint implements ConstraintInte
      */
     protected function getMaximum()
     {
-        return $this->performMathCompare('maximum');
-    }
-
-    /**
-     * Verify that the values are not equal
-     *
-     * @param string $type
-     *
-     * @return  boolean
-     * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
-     */
-    protected function performMathCompare($type)
-    {
-        $compare_to_value = $this->getOption($type);
-
-        $comparison = FALSE;
-
-        switch ($type) {
-            case 'equal':
-                if ($this->field_value === $compare_to_value) {
-                    $comparison = TRUE;
-                }
-                break;
-
-            case 'not_equal':
-                if ($this->field_value <> $compare_to_value) {
-                    $comparison = TRUE;
-                }
-                break;
-
-            case 'less_than':
-                if ($this->field_value < $compare_to_value) {
-                    $comparison = TRUE;
-                }
-                break;
-
-            case 'minimum':
-                if ($this->field_value <= $compare_to_value) {
-                    $comparison = TRUE;
-                }
-                break;
-
-            case 'greater_than':
-                if ($this->field_value > $compare_to_value) {
-                    $comparison = TRUE;
-                }
-                break;
-
-            case 'maximum':
-                if ($this->field_value >= $compare_to_value) {
-                    $comparison = TRUE;
-                }
-                break;
+        if ($this->field_value >= $this->getOption('maximum')) {
+            return TRUE;
         }
 
-        return $comparison;
+        return FALSE;
     }
 }
