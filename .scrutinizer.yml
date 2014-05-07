@@ -40,7 +40,6 @@ tools:
         feature_patterns:
             - "\badd(?:s|ed)?\b"
             - "\bimplement(?:s|ed)?\b"
-        excluded_paths: [".dev", "vendor/*", "Source/Constraint/Library/*"]
 before_commands: {  }
 after_commands: {  }
 artifacts: {  }
