@@ -5,6 +5,8 @@ filter:
         - '.dev/*'
     paths: {  }
 tools:
+    external_code_coverage:
+        timeout: 600 # Timeout in seconds for code coverage.
     php_sim:
         enabled: true
         min_mass: 16
