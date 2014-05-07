@@ -449,7 +449,7 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
     {
         $this->editConstraint($constraint);
 
-        $this->createConstraintClass($constraint);
+        $this->constraint_instance = $this->createConstraintClass($constraint);
 
         return $this;
     }
@@ -492,30 +492,21 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
         $class = 'Molajo\\Fieldhandler\\Constraint\\' . $constraint;
 
         try {
-            $this->constraint_instance = new $class (
-                $this->constraint,
-                $this->method,
-                $this->field_name,
-                $this->field_value,
-                $this->options
-            );
+            return new $class ($this->constraint, $this->method, $this->field_name, $this->field_value, $this->options);
 
         } catch (Exception $e) {
 
             throw new UnexpectedValueException
             (
-                'Fieldhandler Request createConstraint Method: Could not instantiate Constraint: ' . $constraint
-                . ' Class: ' . $class
+                'Fieldhandler Request createConstraint Method: Failed: ' . $constraint . ' Class: ' . $class
             );
         }
-
-        return $this;
     }
 
     /**
      * Create Message Instance
      *
-     * @return  \CommonApi\Model\HandleResponseInterface
+     * @return  $this
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
@@ -533,6 +524,8 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
                 'Fieldhandler Request createMessageInstance Method: Cannot create class ' . $class
             );
         }
+
+        return $this;
     }
 
     /**
