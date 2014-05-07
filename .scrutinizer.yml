@@ -33,6 +33,8 @@ tools:
     php_sim:
         enabled: true
         min_mass: 16
+    php_changetracking:
+        enabled: true
 before_commands: {  }
 after_commands: {  }
 artifacts: {  }
