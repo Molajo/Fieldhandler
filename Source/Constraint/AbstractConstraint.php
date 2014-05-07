@@ -168,7 +168,7 @@ abstract class AbstractConstraint implements ConstraintInterface
     /**
      * Process Options
      *
-     * @param   array  $options
+     * @param   array $options
      *
      * @return  $this
      * @since   1.0.0
@@ -332,8 +332,8 @@ abstract class AbstractConstraint implements ConstraintInterface
      */
     protected function setFlags()
     {
-        foreach ($this->constraint_allowable_options as $option) {
-            $this->setFlag($option);
+        foreach ($this->constraint_allowable_options as $entry) {
+            $this->setFlag($entry);
         }
 
         return $this->selected_constraint_options;
@@ -342,14 +342,14 @@ abstract class AbstractConstraint implements ConstraintInterface
     /**
      * Flags can be set in options array
      *
-     * @param   array $option
+     * @param   string $entry
      *
      * @return  null|string
      * @since   1.0.0
      */
-    protected function setFlag(array $option)
+    protected function setFlag(array $entry)
     {
-        $value = $this->getOption($option);
+        $value = $this->getOption($entry);
 
         if ($value === NULL) {
         } else {
@@ -359,7 +359,7 @@ abstract class AbstractConstraint implements ConstraintInterface
                 $this->selected_constraint_options .= ', ';
             }
 
-            $this->selected_constraint_options .= $option;
+            $this->selected_constraint_options .= $entry;
         }
 
         return $this;
@@ -406,15 +406,34 @@ abstract class AbstractConstraint implements ConstraintInterface
 
         if (strlen($test) > 0) {
             for ($i = 0; $i < strlen($test); $i ++) {
-                if (($filter(substr($test, $i, 1)) == 1)
-                    || ($allow_whitespace === TRUE && substr($test, $i, 1) === ' ')
-                ) {
-                    $filtered .= substr($test, $i, 1);
-                }
+                $filtered .= $this->sanitizeCharacter($filter, $test, $allow_whitespace, $i);
             }
         }
 
         return $filtered;
+    }
+
+    /**
+     * Test the string specified in $filter using the function defined by $test
+     *
+     * @param   string  $filter
+     * @param   string  $test
+     * @param   boolean $allow_whitespace
+     * @param   integer $filter
+     *
+     * @return  string
+     * @since   1.0.0
+     */
+    protected function sanitizeCharacter($filter, $test, $allow_whitespace, $i)
+    {
+        if (($filter(substr($test, $i, 1)) == 1)
+            || ($allow_whitespace === TRUE && substr($test, $i, 1) === ' ')
+        ) {
+
+            return substr($test, $i, 1);
+        }
+
+        return '';
     }
 
     /**
