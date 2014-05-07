@@ -44,22 +44,6 @@ class Tel extends AbstractConstraint implements ConstraintInterface
     protected $message_code = 8000;
 
     /**
-     * Sanitize
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function sanitize()
-    {
-        if ($this->field_value === NULL) {
-        } else {
-            $this->field_value = filter_var($this->field_value, FILTER_SANITIZE_STRING, $this->setFlags());
-        }
-
-        return $this->field_value;
-    }
-
-    /**
      * Format
      *
      * @return  mixed

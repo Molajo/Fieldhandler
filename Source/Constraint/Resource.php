@@ -32,27 +32,6 @@ class Resource extends AbstractConstraint implements ConstraintInterface
     protected $message_code = 13000;
 
     /**
-     * Sanitize
-     *
-     * @return  resource|null
-     * @since   1.0.0
-     */
-    public function sanitize()
-    {
-        if ($this->field_value === NULL) {
-
-        } else {
-
-            if (is_resource($this->field_value)) {
-            } else {
-                $this->field_value = NULL;
-            }
-        }
-
-        return $this->field_value;
-    }
-
-    /**
      * Validation Test
      *
      * @return  boolean

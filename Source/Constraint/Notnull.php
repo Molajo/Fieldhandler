@@ -29,28 +29,6 @@ class Notnull extends AbstractConstraint implements ConstraintInterface
     protected $message_code = 1000;
 
     /**
-     * Sanitize
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function sanitize()
-    {
-        return $this->field_value;
-    }
-
-    /**
-     * Format
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function format()
-    {
-        return parent::format();
-    }
-
-    /**
      * Validation
      *
      * @return  boolean

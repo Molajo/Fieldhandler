@@ -78,51 +78,15 @@ class False extends AbstractConstraint implements ConstraintInterface
      * @return  boolean
      * @since   1.0.0
      */
-    public function validate()
+    protected function validation()
     {
-        if ($this->field_value === NULL) {
+        $testValue = $this->field_value;
 
+        if (in_array($testValue, $this->false_array) === TRUE || $testValue === FALSE) {
         } else {
-            $testValue = $this->field_value;
-
-            if (in_array($testValue, $this->false_array) === TRUE || $testValue === FALSE) {
-            } else {
-                $this->setValidateMessage(1000);
-
-                return FALSE;
-            }
+            return FALSE;
         }
 
         return TRUE;
-    }
-
-    /**
-     * Sanitize
-     *
-     * Sets the return value to NULL if it is not false, 0, 'no', or 'off'
-     *
-     * @api
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function sanitize()
-    {
-        if ($this->field_value === NULL) {
-            return $this->field_value;
-        }
-
-        $testValue = $this->field_value;
-
-        if (count($this->false_array) > 0) {
-            foreach ($this->false_array as $item) {
-                if ($item === $testValue) {
-                    return $this->field_value;
-                }
-            }
-        }
-
-        $this->field_value = NULL;
-
-        return $this->field_value;
     }
 }

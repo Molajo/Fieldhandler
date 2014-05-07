@@ -29,19 +29,6 @@ class Null extends AbstractConstraint implements ConstraintInterface
     protected $message_code = 1000;
 
     /**
-     * Sanitize
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function sanitize()
-    {
-        $this->field_value = NULL;
-
-        return $this->field_value;
-    }
-
-    /**
      * Validation test
      *
      * @return  boolean

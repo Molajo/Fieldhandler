@@ -64,9 +64,7 @@ class Arrays extends AbstractArrays implements ConstraintInterface
      */
     protected function validation()
     {
-        if (is_array($this->field_value)) {
-        } else {
-            $this->message_code = 3000;
+        if ($this->runValidationTest('isArray', 3000) === FALSE) {
             return FALSE;
         }
 
@@ -98,6 +96,23 @@ class Arrays extends AbstractArrays implements ConstraintInterface
     {
         if ($this->$method(FALSE) === FALSE) {
             $this->message_code = $message_code;
+            return FALSE;
+        }
+
+        return TRUE;
+    }
+
+    /**
+     * Test Array Entry Keys
+     *
+     * @return  boolean
+     * @since   1.0.0
+     */
+    protected function testIsArray()
+    {
+        if (is_array($this->field_value)) {
+        } else {
+            $this->message_code = 3000;
             return FALSE;
         }
 

@@ -70,29 +70,6 @@ class True extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Sanitize
-     *
-     * Sets the return value to NULL if it is not true, 1, 'yes', or 'on.'
-     *
-     * @api
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function sanitize()
-    {
-        if ($this->field_value === NULL) {
-            return $this->field_value;
-        }
-
-        if ($this->validation() === TRUE) {
-        } else {
-            $this->field_value = NULL;
-        }
-
-        return $this->field_value;
-    }
-
-    /**
      * Verifies value is true, 1, 'yes', or 'on', responding with true or false and messages
      *
      * @return  boolean

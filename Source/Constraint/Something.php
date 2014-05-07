@@ -27,15 +27,4 @@ class Something extends AbstractSomething implements ConstraintInterface
      * @since  1.0.0
      */
     protected $message_code = 1000;
-
-    /**
-     * Validation
-     *
-     * @return  boolean
-     * @since   1.0.0
-     */
-    protected function validation()
-    {
-        return parent::validation();
-    }
 }

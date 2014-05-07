@@ -29,27 +29,6 @@ class Numeric extends AbstractConstraint implements ConstraintInterface
     protected $message_code = 1000;
 
     /**
-     * Sanitize
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function sanitize()
-    {
-        if ($this->field_value === NULL) {
-
-        } else {
-
-            if (is_numeric($this->field_value)) {
-            } else {
-                $this->field_value = NULL;
-            }
-        }
-
-        return $this->field_value;
-    }
-
-    /**
      * Validation test
      *
      * @return  boolean

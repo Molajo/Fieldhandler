@@ -54,49 +54,6 @@ class Callback extends AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Sanitize
-     *
-     * Sanitizes the field value according to the callback
-     *
-     * @code
-     *
-     * ```php
-     *
-     *  $request = new Molajo\Fieldhandler\Request();
-     *
-     *  $options = array();
-     *  $options['callback'] = $callback;
-     *  $response = $request->sanitize($field_name, $field_value, 'Callback', $options);
-     *
-     *  // Replace the existing value if it was changed by filtering
-     *
-     *  if ($response->getChangeIndicator() === true) {
-     *     $field_value = $response->getFieldValue();
-     *  }
-     *
-     * ```
-     *
-     * @api
-     * @link    http://www.php.net/manual/en/filter.filters.sanitize.php
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function sanitize()
-    {
-        if ($this->field_value === NULL) {
-            return $this->field_value;
-        }
-
-        if (filter_var($this->field_value, $this->filter_type, $this->setOptions())) {
-            return $this->field_value;
-        }
-
-        $this->field_value = NULL;
-
-        return $this->field_value;
-    }
-
-    /**
      * Validation
      *
      * @return  boolean

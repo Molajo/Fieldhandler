@@ -33,27 +33,6 @@ class Scalar extends AbstractConstraint implements ConstraintInterface
     protected $message_code = 1000;
 
     /**
-     * Sanitize
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function sanitize()
-    {
-        if ($this->field_value === NULL) {
-
-        } else {
-
-            if (is_scalar($this->field_value)) {
-            } else {
-                $this->field_value = NULL;
-            }
-        }
-
-        return $this->field_value;
-    }
-
-    /**
      * Validation
      *
      * @return  boolean
