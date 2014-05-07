@@ -299,57 +299,6 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
     }
 
     /**
-     * Run Constraint Method
-     *
-     * @param   string $method
-     *
-     * @return  object
-     * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
-     */
-    protected function runConstraintMethod($method)
-    {
-        $response = $this->constraint_instance->$method();
-
-        if ($method === 'validate') {
-            $this->getValidateMessages();
-            if ($response === false) {
-                $this->validate_response = false;
-            }
-
-            return $this->setValidateResponse();
-        }
-
-        return $this->setHandleResponse($response);
-    }
-
-    /**
-     * Get Validation Messages
-     *
-     * @return  $this
-     * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
-     */
-    protected function getValidateMessages()
-    {
-        $messages = $this->constraint_instance->getValidateMessages();
-
-        if (count($messages) === 0) {
-        } else {
-            return $this;
-        }
-
-        $tokens = array();
-
-        $tokens['field_name']  = $this->field_name;
-        $tokens['field_value'] = $this->field_value;
-        $tokens['constraint']  = $this->constraint;
-        $tokens['method']      = $this->method;
-
-        return $this->message_instance->setMessages($messages, $tokens);
-    }
-
-    /**
      * Set Method
      *
      * @param   string $method
@@ -497,6 +446,57 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
                 'Fieldhandler Request createConstraint Method: Failed: ' . $constraint . ' Class: ' . $class
             );
         }
+    }
+
+    /**
+     * Run Constraint Method
+     *
+     * @param   string $method
+     *
+     * @return  object
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function runConstraintMethod($method)
+    {
+        $response = $this->constraint_instance->$method();
+
+        if ($method === 'validate') {
+
+            if ($response === false) {
+                $this->validate_response = false;
+                $this->getValidateMessages();
+            }
+
+            return $this->setValidateResponse();
+        }
+
+        return $this->setHandleResponse($response);
+    }
+
+    /**
+     * Get Validation Messages
+     *
+     * @return  $this
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function getValidateMessages()
+    {
+        $messages = $this->constraint_instance->getValidateMessages();
+
+        if (count($messages) === 0) {
+            return $this;
+        }
+
+        $tokens = array();
+
+        $tokens['field_name']  = $this->field_name;
+        $tokens['field_value'] = $this->field_value;
+        $tokens['constraint']  = $this->constraint;
+        $tokens['method']      = $this->method;
+
+        return $this->message_instance->setMessages($messages, $tokens);
     }
 
     /**

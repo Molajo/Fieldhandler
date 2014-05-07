@@ -44,7 +44,7 @@ class Message implements MessageInterface
      * @var    array
      * @since  1.0.0
      */
-    protected $messages = array();
+    public $messages = array();
 
     /**
      * Constructor
