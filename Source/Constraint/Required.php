@@ -18,7 +18,7 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Required extends AbstractConstraint implements ConstraintInterface
+class Required extends AbstractNull implements ConstraintInterface
 {
     /**
      * Message Code
@@ -29,14 +29,14 @@ class Required extends AbstractConstraint implements ConstraintInterface
     protected $message_code = 13000;
 
     /**
-     * Validation test
+     * Validation
      *
      * @return  boolean
      * @since   1.0.0
      */
     protected function validation()
     {
-        if ($this->field_value === NULL) {
+        if (parent::validation() === TRUE) {
             return FALSE;
         }
 

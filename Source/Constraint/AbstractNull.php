@@ -1,6 +1,6 @@
 <?php
 /**
- * Notnull Constraint
+ * AbstractNull Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -11,27 +11,43 @@ namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Notnull Constraint
+ * AbstractNull Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Notnull extends AbstractNull implements ConstraintInterface
+abstract class AbstractNull extends AbstractConstraint implements ConstraintInterface
 {
     /**
-     * Validation
+     * String Function
+     *
+     * @var    string
+     * @since  1.0.0
+     */
+    protected $string_function;
+
+    /**
+     * Message Code
+     *
+     * @var    integer
+     * @since  1.0.0
+     */
+    protected $message_code = 1000;
+
+    /**
+     * Validation test
      *
      * @return  boolean
      * @since   1.0.0
      */
     protected function validation()
     {
-        if (parent::validation() === TRUE) {
-            return FALSE;
+        if ($this->field_value === NULL) {
+            return TRUE;
         }
 
-        return TRUE;
+        return FALSE;
     }
 }
