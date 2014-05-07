@@ -117,11 +117,12 @@ class Email extends AbstractFiltervar implements ConstraintInterface
     protected function checkMX($host = NULL)
     {
         if ($this->getOption('check_mx') === NULL) {
+            return TRUE;
+        }
+
+        if (checkdnsrr($host, 'MX')) {
         } else {
-            if (checkdnsrr($host, 'MX')) {
-            } else {
-                return FALSE;
-            }
+            return FALSE;
         }
 
         return TRUE;
@@ -138,11 +139,12 @@ class Email extends AbstractFiltervar implements ConstraintInterface
     protected function checkHost($host = NULL)
     {
         if ($this->getOption('check_host') === NULL) {
+            return TRUE;
+        }
+
+        if (checkdnsrr($host, 'MX') || checkdnsrr($host, "A") || checkdnsrr($host, "AAAA")) {
         } else {
-            if (checkdnsrr($host, 'MX') || checkdnsrr($host, "A") || checkdnsrr($host, "AAAA")) {
-            } else {
-                return FALSE;
-            }
+            return FALSE;
         }
 
         return TRUE;

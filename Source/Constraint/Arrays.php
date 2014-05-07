@@ -64,23 +64,23 @@ class Arrays extends AbstractArrays implements ConstraintInterface
      */
     protected function validation()
     {
-        if ($this->runValidationTest('isArray', 3000) === FALSE) {
-            return FALSE;
+        $validation_array = array(
+            'isArray' => 3000,
+            'testValues' => 4000,
+            'testKeys' => 5000,
+            'testCount' => 6000,
+        );
+
+        $test = TRUE;
+
+        foreach($validation_array as $key => $value) {
+            if ($this->runValidationTest($key, $value) === FALSE) {
+                $test = FALSE;
+                break;
+            }
         }
 
-        if ($this->runValidationTest('testValues', 4000) === FALSE) {
-            return FALSE;
-        }
-
-        if ($this->runValidationTest('testKeys', 5000) === FALSE) {
-            return FALSE;
-        }
-
-        if ($this->runValidationTest('testCount', 6000) === FALSE) {
-            return FALSE;
-        }
-
-        return TRUE;
+        return $test;
     }
 
     /**

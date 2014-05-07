@@ -160,13 +160,29 @@ abstract class AbstractConstraint implements ConstraintInterface
         $this->field_name  = $field_name;
         $this->field_value = $field_value;
 
+        $this->processOptions($options);
+
+        $this->getUserTimeZone();
+    }
+
+    /**
+     * Process Options
+     *
+     * @param   array  $options
+     *
+     * @return  $this
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function processOptions($options)
+    {
         foreach ($this->property_array as $key) {
             $options = $this->setPropertyKeyWithOptionKey($options, $key);
         }
 
         $this->options = $options;
 
-        $this->getUserTimeZone();
+        return $this;
     }
 
     /**
@@ -316,26 +332,37 @@ abstract class AbstractConstraint implements ConstraintInterface
      */
     protected function setFlags()
     {
-        if (count($this->constraint_allowable_options) === 0) {
-            return NULL;
-        }
-
         foreach ($this->constraint_allowable_options as $option) {
-
-            $value = $this->getOption($option);
-            if ($value === NULL) {
-            } else {
-
-                if ($this->selected_constraint_options === NULL) {
-                } else {
-                    $this->selected_constraint_options .= ', ';
-                }
-
-                $this->selected_constraint_options .= $option;
-            }
+            $this->setFlag($option);
         }
 
         return $this->selected_constraint_options;
+    }
+
+    /**
+     * Flags can be set in options array
+     *
+     * @param   array $option
+     *
+     * @return  null|string
+     * @since   1.0.0
+     */
+    protected function setFlag(array $option)
+    {
+        $value = $this->getOption($option);
+
+        if ($value === NULL) {
+        } else {
+
+            if ($this->selected_constraint_options === NULL) {
+            } else {
+                $this->selected_constraint_options .= ', ';
+            }
+
+            $this->selected_constraint_options .= $option;
+        }
+
+        return $this;
     }
 
     /**
@@ -366,9 +393,9 @@ abstract class AbstractConstraint implements ConstraintInterface
     /**
      * Test the string specified in $filter using the function defined by $test
      *
-     * @param   string   $filter
-     * @param   string   $test
-     * @param   boolean  $allow_whitespace
+     * @param   string  $filter
+     * @param   string  $test
+     * @param   boolean $allow_whitespace
      *
      * @return  string
      * @since   1.0.0

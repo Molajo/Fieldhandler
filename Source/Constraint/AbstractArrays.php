@@ -114,16 +114,35 @@ abstract class AbstractArrays extends AbstractConstraint implements ConstraintIn
 
         foreach ($entries as $entry) {
 
-            if (in_array($entry, $array_values)) {
+            $test = $this->testArrayValue($array_values, $entry);
 
-            } else {
+            if ($test === FALSE) {
                 unset ($entry);
-                $test = FALSE;
             }
         }
 
         if ($filter === TRUE) {
             $this->field_value = $entries;
+        }
+
+        return $test;
+    }
+
+    /**
+     * Test Single Value from Array
+     *
+     * @param   array   $array_values
+     * @param   mixed   $entry
+     *
+     * @return  boolean
+     * @since   1.0.0
+     */
+    protected function testArrayValue($array_values, $entry)
+    {
+        if (in_array($entry, $array_values)) {
+            $test = TRUE;
+        } else {
+            $test = FALSE;
         }
 
         return $test;

@@ -295,6 +295,21 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
         $this->setOptions($options);
         $this->createConstraint($constraint);
 
+        return $this->runConstraintMethod($method);
+    }
+
+
+    /**
+     * Run Constraint Method
+     *
+     * @param   string $method
+     *
+     * @return  object
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function runConstraintMethod($method)
+    {
         $response = $this->constraint_instance->$method();
 
         if ($method === 'validate') {
@@ -434,15 +449,7 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
      */
     protected function createConstraint($constraint)
     {
-        $this->constraint = ucfirst(strtolower($constraint));
-
-        if (trim($this->constraint) === '' || $this->constraint === NULL) {
-
-            throw new UnexpectedValueException
-            (
-                'Fieldhandler Request: Must request a specific constraint'
-            );
-        }
+        $this->editConstraint($constraint);
 
         $class = 'Molajo\\Fieldhandler\\Constraint\\' . $constraint;
 
@@ -461,6 +468,30 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
             (
                 'Fieldhandler Request createConstraint Method: Could not instantiate Constraint: ' . $constraint
                 . ' Class: ' . $class
+            );
+        }
+
+        return $this;
+    }
+
+    /**
+     * Edit Constraint
+     *
+     * @param   string $constraint
+     *
+     * @return  $this
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function editConstraint($constraint)
+    {
+        $this->constraint = ucfirst(strtolower($constraint));
+
+        if (trim($this->constraint) === '' || $this->constraint === NULL) {
+
+            throw new UnexpectedValueException
+            (
+                'Fieldhandler Request: Must request a specific constraint'
             );
         }
 
