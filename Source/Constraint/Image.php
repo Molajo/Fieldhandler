@@ -31,10 +31,10 @@ class Image extends AbstractConstraint implements ConstraintInterface
         $hold = $this->field_value;
 
         if ($this->sanitize() === $hold) {
-            return true;
+            return TRUE;
         }
 
-        return false;
+        return FALSE;
     }
 
     /**
@@ -54,7 +54,7 @@ class Image extends AbstractConstraint implements ConstraintInterface
 
         if (filter_var($url, FILTER_SANITIZE_URL, $this->setFlags()) === $url) {
         } else {
-            $this->field_value = null;
+            $this->field_value = NULL;
         }
 
         return $this->field_value;

@@ -31,12 +31,12 @@ class Fromto extends AbstractConstraint implements ConstraintInterface
         if ($this->field_value >= $this->getOption('from', 0)
             && $this->field_value <= $this->getOption('to', 999999999999)
         ) {
-            return true;
+            return TRUE;
         }
 
         $this->setValidateMessage(8000);
 
-        return false;
+        return FALSE;
     }
 
     /**

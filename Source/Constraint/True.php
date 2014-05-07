@@ -29,7 +29,15 @@ class True extends AbstractConstraint implements ConstraintInterface
      * @var    array
      * @since  1.0.0
      */
-    protected $true_array = array(true => true, 1 => 1, 'yes' => 'yes', 'on' => 'on');
+    protected $true_array = array(TRUE => TRUE, 1 => 1, 'yes' => 'yes', 'on' => 'on');
+
+    /**
+     * Message Code
+     *
+     * @var    integer
+     * @since  1.0.0
+     */
+    protected $message_code = 1000;
 
     /**
      * Constructor
@@ -72,18 +80,7 @@ class True extends AbstractConstraint implements ConstraintInterface
      */
     public function validate()
     {
-        if ($this->field_value === null) {
-
-        } else {
-            $testValue = $this->field_value;
-
-            if (in_array($testValue, $this->true_array) === false) {
-                $this->setValidateMessage(1000);
-                return false;
-            }
-        }
-
-        return true;
+        return parent::validate();
     }
 
     /**
@@ -97,14 +94,14 @@ class True extends AbstractConstraint implements ConstraintInterface
      */
     public function sanitize()
     {
-        if ($this->field_value === null) {
+        if ($this->field_value === NULL) {
 
         } else {
             $testValue = $this->field_value;
 
-            if (in_array($testValue, $this->true_array) === true) {
+            if (in_array($testValue, $this->true_array) === TRUE) {
             } else {
-                $this->field_value = null;
+                $this->field_value = NULL;
             }
         }
 
@@ -123,5 +120,20 @@ class True extends AbstractConstraint implements ConstraintInterface
     public function format()
     {
         return parent::format();
+    }
+
+    /**
+     * Verifies value is true, 1, 'yes', or 'on', responding with true or false and messages
+     *
+     * @return  boolean
+     * @since   1.0.0
+     */
+    protected function validation()
+    {
+        if (in_array($this->field_value, $this->true_array) === FALSE) {
+            return FALSE;
+        }
+
+        return TRUE;
     }
 }

@@ -30,6 +30,14 @@ class Regex extends AbstractConstraint implements ConstraintInterface
     protected $method_test = 'getRegex';
 
     /**
+     * Message Code
+     *
+     * @var    integer
+     * @since  1.0.0
+     */
+    protected $message_code = 8000;
+
+    /**
      * Validate
      *
      * @return  boolean
@@ -37,17 +45,7 @@ class Regex extends AbstractConstraint implements ConstraintInterface
      */
     public function validate()
     {
-        if ($this->field_value === null) {
-            return true;
-        }
-
-        if ($this->getRegex() === true) {
-            return true;
-        }
-
-        $this->setValidateMessage(8000);
-
-        return false;
+        return parent::validate();
     }
 
     /**
@@ -70,6 +68,21 @@ class Regex extends AbstractConstraint implements ConstraintInterface
     public function format()
     {
         return parent::format();
+    }
+
+    /**
+     * Validate
+     *
+     * @return  boolean
+     * @since   1.0.0
+     */
+    protected function validation()
+    {
+        if ($this->getRegex() === TRUE) {
+            return TRUE;
+        }
+
+        return FALSE;
     }
 
     /**

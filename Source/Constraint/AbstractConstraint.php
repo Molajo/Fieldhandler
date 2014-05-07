@@ -82,7 +82,7 @@ abstract class AbstractConstraint implements ConstraintInterface
      * @var    string
      * @since  1.0.0
      */
-    protected $selected_constraint_options = null;
+    protected $selected_constraint_options = NULL;
 
     /**
      * Timezone
@@ -150,8 +150,8 @@ abstract class AbstractConstraint implements ConstraintInterface
         $method,
         $field_name,
         $field_value,
-        array $options = array())
-    {
+        array $options = array()
+    ) {
         if (function_exists('date_default_timezone_set') && function_exists('date_default_timezone_get')) {
             date_default_timezone_set(@date_default_timezone_get());
         }
@@ -191,30 +191,30 @@ abstract class AbstractConstraint implements ConstraintInterface
      */
     public function validate()
     {
-        if ($this->field_value === null) {
-            return true;
+        if ($this->field_value === NULL) {
+            return TRUE;
         }
 
-        if ($this->validation() === true) {
-            return true;
+        if ($this->validation() === TRUE) {
+            return TRUE;
         }
 
         $this->setValidateMessage($this->message_code);
 
-        return false;
+        return FALSE;
     }
 
     /**
      * Validation
      *
      * @api
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     protected function validation()
     {
-        return $this;
+        return FALSE;
     }
 
     /**
@@ -227,17 +227,17 @@ abstract class AbstractConstraint implements ConstraintInterface
      */
     public function sanitize()
     {
-        if ($this->field_value === null) {
+        if ($this->field_value === NULL) {
             return $this->field_value;
         }
 
-        if ($this->method_test === null) {
+        if ($this->method_test === NULL) {
             $this->method_test = 'validate';
         }
 
-        if ($this->$this->method_test() === true) {
+        if ($this->$this->method_test() === TRUE) {
         } else {
-            $this->field_value = null;
+            $this->field_value = NULL;
         }
 
         return $this->field_value;
@@ -267,7 +267,7 @@ abstract class AbstractConstraint implements ConstraintInterface
      * @return  $this
      * @since   1.0.0
      */
-    public function setValidateMessage($message_code = null)
+    public function setValidateMessage($message_code = NULL)
     {
         if ($message_code === NULL) {
             $message_code = 1000;
@@ -293,84 +293,75 @@ abstract class AbstractConstraint implements ConstraintInterface
     /**
      * Set Property->$Key with Option[$Key]
      *
-     * @param   string  $key
-     * @param   array   $options
+     * @param   string $key
+     * @param   array  $options
      *
      * @return  array
      * @since   1.0.0
      */
     protected function setPropertyKeyWithOptionKey(array $options = array(), $key)
     {
-        if (isset($options[$key])) {
-            $this->$key = $options[$key];
-            unset($options[$key]);
+        if (isset($options[ $key ])) {
+            $this->$key = $options[ $key ];
+            unset($options[ $key ]);
         }
 
         return $options;
     }
 
     /**
+     * Flags can be set in options array
+     *
+     * @return  null|string
+     * @since   1.0.0
+     */
+    protected function setFlags()
+    {
+        if (count($this->constraint_allowable_options) === 0) {
+            return NULL;
+        }
+
+        foreach ($this->constraint_allowable_options as $option) {
+
+            $value = $this->getOption($option);
+            if ($value === NULL) {
+            } else {
+
+                if ($this->selected_constraint_options === NULL) {
+                } else {
+                    $this->selected_constraint_options .= ', ';
+                }
+
+                $this->selected_constraint_options .= $option;
+            }
+        }
+
+        return $this->selected_constraint_options;
+    }
+
+    /**
      * Get $option $key value, if available, or use $default value
      *
-     * @param   string      $key
-     * @param   null|mixed  $default
+     * @param   string     $key
+     * @param   null|mixed $default
      *
      * @return  mixed
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException;
      */
-    protected function getOption($key, $default = null)
+    protected function getOption($key, $default = NULL)
     {
-        if (isset($this->options[$key])) {
-            return $this->options[$key];
+        if (isset($this->options[ $key ])) {
+            return $this->options[ $key ];
         }
 
-        if ($default === null) {
-        } else {
-            $this->options[$key] = $default;
-
-            return $this->options[$key];
+        if ($default === NULL) {
+            return NULL;
         }
 
-        throw new UnexpectedValueException
-        (
-            'Fieldhandler AbstractConstraint: must provide options entry for: ' . $key
-        );
-    }
+        $this->options[ $key ] = $default;
 
-    /**
-     * Flags can be set in options array
-     *
-     * @return  string|null
-     * @since   1.0.0
-     */
-    protected function setFlags()
-    {
-        $this->selected_constraint_options = null;
-
-        if (is_array($this->constraint_allowable_options)
-            && count($this->constraint_allowable_options) > 0
-        ) {
-
-            foreach ($this->constraint_allowable_options as $option) {
-
-                $have_it = $this->getOption($option);
-
-                if ($have_it === null) {
-                } else {
-
-                    if ($this->selected_constraint_options === null) {
-                    } else {
-                        $this->selected_constraint_options .= ', ';
-                    }
-
-                    $this->selected_constraint_options .= $option;
-                }
-            }
-
-        }
-
-        return $this->selected_constraint_options;
+        return $this->options[ $key ];
     }
 
     /**
@@ -383,14 +374,14 @@ abstract class AbstractConstraint implements ConstraintInterface
      * @return  string
      * @since   1.0.0
      */
-    protected function sanitizeByCharacter($filter, $test, $allow_whitespace = false)
+    protected function sanitizeByCharacter($filter, $test, $allow_whitespace = FALSE)
     {
         $filtered = '';
 
         if (strlen($test) > 0) {
             for ($i = 0; $i < strlen($test); $i ++) {
                 if (($filter(substr($test, $i, 1)) == 1)
-                    || ($allow_whitespace === true && substr($test, $i, 1) === ' ')
+                    || ($allow_whitespace === TRUE && substr($test, $i, 1) === ' ')
                 ) {
                     $filtered .= substr($test, $i, 1);
                 }

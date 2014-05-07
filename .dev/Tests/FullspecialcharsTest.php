@@ -54,7 +54,7 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
 
         // validate using data already fullspecialchared -- FALSE - does not compute - nothing to see here.
         $results = $this->request->validate($field_name, $field_value, $constraint, array());
-        $this->assertEquals(false, $results->getValidateResponse());
+        $this->assertEquals(FALSE, $results->getValidateResponse());
 
         return;
     }
@@ -75,7 +75,7 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
 
 // tests as '&amp;' on Travis
 //        $this->assertEquals('&#38;', $results->getFieldValue());
-        $this->assertEquals(true, $results->getChangeIndicator());
+        $this->assertEquals(TRUE, $results->getChangeIndicator());
 
         return;
     }

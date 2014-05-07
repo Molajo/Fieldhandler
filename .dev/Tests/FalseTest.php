@@ -56,7 +56,7 @@ class FalseTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(TRUE, $results->getValidateResponse());
         $this->assertEquals(array(), $results->getValidateMessages());
 
         return;
@@ -78,7 +78,7 @@ class FalseTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(false, $results->getValidateResponse());
+        $this->assertEquals(FALSE, $results->getValidateResponse());
 
         $expected_code    = 1000;
         $expected_message = 'Field: Agreement does not have a valid value for False data type.';
@@ -97,14 +97,14 @@ class FalseTest extends PHPUnit_Framework_TestCase
     public function testSanitizeSucceed()
     {
         $field_name  = 'single';
-        $field_value = false;
+        $field_value = FALSE;
         $constraint  = 'False';
         $options     = array();
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(false, $results->getChangeIndicator());
+        $this->assertEquals(FALSE, $results->getChangeIndicator());
 
         return;
     }
@@ -117,14 +117,14 @@ class FalseTest extends PHPUnit_Framework_TestCase
     public function testSanitizeFailure()
     {
         $field_name  = 'single';
-        $field_value = true;
+        $field_value = TRUE;
         $constraint  = 'False';
         $options     = array();
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(null, $results->getFieldValue());
-        $this->assertEquals(true, $results->getChangeIndicator());
+        $this->assertEquals(NULL, $results->getFieldValue());
+        $this->assertEquals(TRUE, $results->getChangeIndicator());
 
         return;
     }
@@ -144,7 +144,7 @@ class FalseTest extends PHPUnit_Framework_TestCase
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(0, $results->getFieldValue());
-        $this->assertEquals(false, $results->getChangeIndicator());
+        $this->assertEquals(FALSE, $results->getChangeIndicator());
 
         return;
     }
@@ -157,14 +157,14 @@ class FalseTest extends PHPUnit_Framework_TestCase
     public function testFormatFailure()
     {
         $field_name  = 'single';
-        $field_value = true;
+        $field_value = TRUE;
         $constraint  = 'False';
         $options     = array();
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getFieldValue());
-        $this->assertEquals(false, $results->getChangeIndicator());
+        $this->assertEquals(TRUE, $results->getFieldValue());
+        $this->assertEquals(FALSE, $results->getChangeIndicator());
 
         return;
     }

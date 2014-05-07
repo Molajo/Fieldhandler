@@ -31,7 +31,7 @@ class Primarykey extends AbstractConstraint implements ConstraintInterface
     {
 //todo
 
-        return true;
+        return TRUE;
     }
 
     /**

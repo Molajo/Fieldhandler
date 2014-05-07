@@ -22,23 +22,25 @@ use CommonApi\Model\ConstraintInterface;
 class Contains extends AbstractConstraint implements ConstraintInterface
 {
     /**
+     * Message Code
+     *
+     * @var    integer
+     * @since  1.0.0
+     */
+    protected $message_code = 1000;
+
+    /**
      * Validate
      *
+     * Verifies value is true, 1, 'yes', or 'on', responding with true or false and messages
+     *
+     * @api
      * @return  boolean
      * @since   1.0.0
      */
     public function validate()
     {
-        if ($this->field_value === null) {
-            return true;
-        }
-
-        if ($this->testContains() === false) {
-            $this->setValidateMessage(1000);
-            return false;
-        }
-
-        return true;
+        return parent::validate();
     }
 
     /**
@@ -61,6 +63,23 @@ class Contains extends AbstractConstraint implements ConstraintInterface
     public function format()
     {
         return parent::format();
+    }
+
+    /**
+     * Test Contains Array
+     *
+     * @return  boolean
+     * @since   1.0.0
+     */
+    protected function validation()
+    {
+        if ($this->testContains() === FALSE) {
+            $this->setValidateMessage(1000);
+
+            return FALSE;
+        }
+
+        return TRUE;
     }
 
     /**

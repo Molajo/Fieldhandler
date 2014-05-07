@@ -56,7 +56,7 @@ class RegexTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(TRUE, $results->getValidateResponse());
         $this->assertEquals(array(), $results->getValidateMessages());
 
         return;
@@ -77,7 +77,7 @@ class RegexTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(false, $results->getValidateResponse());
+        $this->assertEquals(FALSE, $results->getValidateResponse());
 
         $expected_code    = 8000;
         $expected_message = 'Field: alpha did not pass the Regex data type test.';

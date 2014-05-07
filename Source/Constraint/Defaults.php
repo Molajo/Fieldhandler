@@ -28,12 +28,13 @@ class Defaults extends AbstractConstraint implements ConstraintInterface
      */
     public function validate()
     {
-        if ($this->field_value === null) {
+        if ($this->field_value === NULL) {
             $this->setValidateMessage(7000);
-            return false;
+
+            return FALSE;
         }
 
-        return true;
+        return TRUE;
     }
 
     /**
@@ -68,7 +69,7 @@ class Defaults extends AbstractConstraint implements ConstraintInterface
      */
     protected function setDefault()
     {
-        if ($this->field_value === null) {
+        if ($this->field_value === NULL) {
             $this->field_value = $this->getOption('default');
         }
 

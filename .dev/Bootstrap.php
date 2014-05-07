@@ -23,13 +23,13 @@ $classmap['Molajo\\Fieldhandler\\HandleResponse']   = $base . '/Source/HandleRes
 $classmap['Molajo\\Fieldhandler\\ValidateResponse'] = $base . '/Source/ValidateResponse.php';
 $classmap['Molajo\\Fieldhandler\\Message']          = $base . '/Source/Message.php';
 $classmap['Molajo\\Fieldhandler\\Request']          = $base . '/Source/Request.php';
-$classmap['Molajo\\Fieldhandler\\Escape']          = $base . '/Source/Escape.php';
+$classmap['Molajo\\Fieldhandler\\Escape']           = $base . '/Source/Escape.php';
 ksort($classmap);
 
 spl_autoload_register(
     function ($class) use ($classmap) {
         if (array_key_exists($class, $classmap)) {
-            require_once $classmap[$class];
+            require_once $classmap[ $class ];
         }
     }
 );

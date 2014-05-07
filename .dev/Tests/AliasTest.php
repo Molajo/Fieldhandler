@@ -54,7 +54,7 @@ class AliasTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(TRUE, $results->getValidateResponse());
         $this->assertEquals(array(), $results->getValidateMessages());
 
         return;
@@ -74,7 +74,7 @@ class AliasTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(false, $results->getValidateResponse());
+        $this->assertEquals(FALSE, $results->getValidateResponse());
 
         $expected_code    = 1000;
         $expected_message = 'Field: alias does not have a valid value for Alias data type.';
@@ -100,7 +100,7 @@ class AliasTest extends PHPUnit_Framework_TestCase
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('Jack and Jill', $results->getFieldValue());
-        $this->assertEquals(false, $results->getChangeIndicator());
+        $this->assertEquals(FALSE, $results->getChangeIndicator());
 
         return;
     }
@@ -120,7 +120,7 @@ class AliasTest extends PHPUnit_Framework_TestCase
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('Jack and Jill', $results->getFieldValue());
-        $this->assertEquals(true, $results->getChangeIndicator());
+        $this->assertEquals(TRUE, $results->getChangeIndicator());
 
         return;
     }
@@ -140,7 +140,7 @@ class AliasTest extends PHPUnit_Framework_TestCase
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('jack-and-jill', $results->getFieldValue());
-        $this->assertEquals(true, $results->getChangeIndicator());
+        $this->assertEquals(TRUE, $results->getChangeIndicator());
 
         return;
     }
@@ -160,7 +160,7 @@ class AliasTest extends PHPUnit_Framework_TestCase
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('jack-and-jill', $results->getFieldValue());
-        $this->assertEquals(true, $results->getChangeIndicator());
+        $this->assertEquals(TRUE, $results->getChangeIndicator());
 
         return;
     }

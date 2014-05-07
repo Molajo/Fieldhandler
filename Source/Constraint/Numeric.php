@@ -21,24 +21,23 @@ use CommonApi\Model\ConstraintInterface;
 class Numeric extends AbstractConstraint implements ConstraintInterface
 {
     /**
+     * Message Code
+     *
+     * @var    integer
+     * @since  1.0.0
+     */
+    protected $message_code = 1000;
+
+    /**
      * Validate
      *
+     * @api
      * @return  boolean
      * @since   1.0.0
      */
     public function validate()
     {
-        if ($this->field_value === null) {
-            return true;
-        }
-
-        if (is_numeric($this->field_value)) {
-            return true;
-        }
-
-        $this->setValidateMessage(1000);
-
-        return false;
+        return parent::validate();
     }
 
     /**
@@ -49,13 +48,13 @@ class Numeric extends AbstractConstraint implements ConstraintInterface
      */
     public function sanitize()
     {
-        if ($this->field_value === null) {
+        if ($this->field_value === NULL) {
 
         } else {
 
             if (is_numeric($this->field_value)) {
             } else {
-                $this->field_value = null;
+                $this->field_value = NULL;
             }
         }
 
@@ -71,5 +70,20 @@ class Numeric extends AbstractConstraint implements ConstraintInterface
     public function format()
     {
         return parent::format();
+    }
+
+    /**
+     * Validation test
+     *
+     * @return  boolean
+     * @since   1.0.0
+     */
+    protected function validation()
+    {
+        if (is_numeric($this->field_value)) {
+            return TRUE;
+        }
+
+        return FALSE;
     }
 }

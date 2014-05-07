@@ -77,18 +77,18 @@ class Callback extends AbstractConstraint implements ConstraintInterface
      */
     public function validate()
     {
-        if ($this->field_value === null) {
-            return true;
+        if ($this->field_value === NULL) {
+            return TRUE;
         }
 
-        if (filter_var($this->field_value, $this->filter_type, $this->setOptions()) === false) {
+        if (filter_var($this->field_value, $this->filter_type, $this->setOptions()) === FALSE) {
 
             $this->setValidateMessage(1000);
 
-            return false;
+            return FALSE;
         }
 
-        return true;
+        return TRUE;
     }
 
     /**
@@ -121,7 +121,7 @@ class Callback extends AbstractConstraint implements ConstraintInterface
      */
     public function sanitize()
     {
-        if ($this->field_value === null) {
+        if ($this->field_value === NULL) {
             return $this->field_value;
         }
 
@@ -129,10 +129,11 @@ class Callback extends AbstractConstraint implements ConstraintInterface
             return $this->field_value;
         }
 
-        $this->field_value = null;
+        $this->field_value = NULL;
 
         return $this->field_value;
     }
+
     /**
      * Format
      *

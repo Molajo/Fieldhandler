@@ -28,17 +28,17 @@ class Time extends AbstractConstraint implements ConstraintInterface
      */
     public function validate()
     {
-        if ($this->field_value === null) {
-            return true;
+        if ($this->field_value === NULL) {
+            return TRUE;
         }
 
         if (strtotime($this->field_value)) {
-            return true;
+            return TRUE;
         }
 
         $this->setValidateMessage(1000);
 
-        return false;
+        return FALSE;
     }
 
     /**
@@ -50,7 +50,7 @@ class Time extends AbstractConstraint implements ConstraintInterface
      */
     public function sanitize()
     {
-        if ($this->field_value === null) {
+        if ($this->field_value === NULL) {
             return $this->field_value;
         }
 

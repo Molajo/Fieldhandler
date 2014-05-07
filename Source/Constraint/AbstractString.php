@@ -55,7 +55,7 @@ abstract class AbstractString extends AbstractConstraint implements ConstraintIn
      */
     public function sanitize()
     {
-        if ($this->field_value === null) {
+        if ($this->field_value === NULL) {
             return $this->field_value;
         }
 
@@ -63,7 +63,7 @@ abstract class AbstractString extends AbstractConstraint implements ConstraintIn
 
         if ($this->field_value === $temp) {
         } else {
-            $this->field_value = null;
+            $this->field_value = NULL;
         }
 
         return $this->field_value;
@@ -91,10 +91,10 @@ abstract class AbstractString extends AbstractConstraint implements ConstraintIn
         $temp = $this->doStringFunction();
 
         if ($temp === $this->field_value) {
-            return true;
+            return TRUE;
         }
 
-        return false;
+        return FALSE;
     }
 
     /**

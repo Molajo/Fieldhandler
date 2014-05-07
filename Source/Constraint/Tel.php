@@ -43,17 +43,17 @@ class Tel extends AbstractConstraint implements ConstraintInterface
      */
     public function validate()
     {
-        if ($this->field_value === null) {
-            return true;
+        if ($this->field_value === NULL) {
+            return TRUE;
         }
 
         if (filter_var($this->field_value, FILTER_SANITIZE_STRING, $this->setFlags())) {
-            return true;
+            return TRUE;
         }
 
         $this->setValidateMessage(1000);
 
-        return false;
+        return FALSE;
     }
 
     /**
@@ -64,7 +64,7 @@ class Tel extends AbstractConstraint implements ConstraintInterface
      */
     public function sanitize()
     {
-        if ($this->field_value === null) {
+        if ($this->field_value === NULL) {
         } else {
             $this->field_value = filter_var($this->field_value, FILTER_SANITIZE_STRING, $this->setFlags());
         }
@@ -84,7 +84,7 @@ class Tel extends AbstractConstraint implements ConstraintInterface
 
         /** TODO: Apply localisation mask and remove example */
 
-        if ($this->getOption('format_telephone', null) === null) {
+        if ($this->getOption('format_telephone', NULL) === NULL) {
         } else {
 
             $this->field_value = '1 (' . substr($this->field_value, 0, 3)

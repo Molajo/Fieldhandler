@@ -29,7 +29,7 @@ class False extends AbstractConstraint implements ConstraintInterface
      * @var    array
      * @since  1.0.0
      */
-    protected $false_array = array(false => false, 0 => 0, 'no' => 'no', 'off' => 'off');
+    protected $false_array = array(FALSE => FALSE, 0 => 0, 'no' => 'no', 'off' => 'off');
 
     /**
      * Constructor
@@ -72,19 +72,20 @@ class False extends AbstractConstraint implements ConstraintInterface
      */
     public function validate()
     {
-        if ($this->field_value === null) {
+        if ($this->field_value === NULL) {
 
         } else {
             $testValue = $this->field_value;
 
-            if (in_array($testValue, $this->false_array) === true || $testValue === false) {
+            if (in_array($testValue, $this->false_array) === TRUE || $testValue === FALSE) {
             } else {
                 $this->setValidateMessage(1000);
-                return false;
+
+                return FALSE;
             }
         }
 
-        return true;
+        return TRUE;
     }
 
     /**
@@ -98,7 +99,7 @@ class False extends AbstractConstraint implements ConstraintInterface
      */
     public function sanitize()
     {
-        if ($this->field_value === null) {
+        if ($this->field_value === NULL) {
             return $this->field_value;
         }
 
@@ -112,7 +113,7 @@ class False extends AbstractConstraint implements ConstraintInterface
             }
         }
 
-        $this->field_value = null;
+        $this->field_value = NULL;
 
         return $this->field_value;
     }

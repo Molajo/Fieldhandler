@@ -21,21 +21,23 @@ use CommonApi\Model\ConstraintInterface;
 class Required extends AbstractConstraint implements ConstraintInterface
 {
     /**
+     * Message Code
+     *
+     * @var    integer
+     * @since  1.0.0
+     */
+    protected $message_code = 13000;
+
+    /**
      * Validate
      *
+     * @api
      * @return  boolean
      * @since   1.0.0
      */
     public function validate()
     {
-        if ($this->field_value === null) {
-
-            $this->setValidateMessage(13000);
-
-            return false;
-        }
-
-        return true;
+        return parent::validate();
     }
 
     /**
@@ -59,5 +61,20 @@ class Required extends AbstractConstraint implements ConstraintInterface
     public function format()
     {
         return parent::format();
+    }
+
+    /**
+     * Validation test
+     *
+     * @return  boolean
+     * @since   1.0.0
+     */
+    protected function validation()
+    {
+        if ($this->field_value === NULL) {
+            return FALSE;
+        }
+
+        return TRUE;
     }
 }

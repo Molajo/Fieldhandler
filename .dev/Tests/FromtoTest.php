@@ -56,7 +56,7 @@ class FromtoTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(TRUE, $results->getValidateResponse());
         $this->assertEquals(array(), $results->getValidateMessages());
 
         return;
@@ -78,7 +78,7 @@ class FromtoTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(false, $results->getValidateResponse());
+        $this->assertEquals(FALSE, $results->getValidateResponse());
 
         $expected_code    = 8000;
         $expected_message = 'Field: fieldname did not pass the Fromto data type test.';
@@ -106,7 +106,7 @@ class FromtoTest extends PHPUnit_Framework_TestCase
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(false, $results->getChangeIndicator());
+        $this->assertEquals(FALSE, $results->getChangeIndicator());
 
         return;
     }
@@ -127,8 +127,8 @@ class FromtoTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(null, $results->getFieldValue());
-        $this->assertEquals(true, $results->getChangeIndicator());
+        $this->assertEquals(NULL, $results->getFieldValue());
+        $this->assertEquals(TRUE, $results->getChangeIndicator());
 
         return;
     }
@@ -150,7 +150,7 @@ class FromtoTest extends PHPUnit_Framework_TestCase
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(false, $results->getChangeIndicator());
+        $this->assertEquals(FALSE, $results->getChangeIndicator());
 
         return;
     }
@@ -171,8 +171,8 @@ class FromtoTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(null, $results->getFieldValue());
-        $this->assertEquals(true, $results->getChangeIndicator());
+        $this->assertEquals(NULL, $results->getFieldValue());
+        $this->assertEquals(TRUE, $results->getChangeIndicator());
 
         return;
     }

@@ -54,7 +54,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(TRUE, $results->getValidateResponse());
         $messages = $results->getValidateMessages();
         $this->assertEquals(array(), $messages);
 
@@ -75,7 +75,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(false, $results->getValidateResponse());
+        $this->assertEquals(FALSE, $results->getValidateResponse());
 
         $expected_code    = 2000;
         $expected_message = 'Field: test must only contain Alpha values.';
@@ -101,7 +101,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(false, $results->getChangeIndicator());
+        $this->assertEquals(FALSE, $results->getChangeIndicator());
 
         return;
     }
@@ -122,7 +122,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
 
         $expected_value = 'Aa';
         $this->assertEquals($expected_value, $results->getFieldValue());
-        $this->assertEquals(true, $results->getChangeIndicator());
+        $this->assertEquals(TRUE, $results->getChangeIndicator());
 
         return;
     }
@@ -142,7 +142,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(false, $results->getChangeIndicator());
+        $this->assertEquals(FALSE, $results->getChangeIndicator());
 
         return;
     }
@@ -162,7 +162,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(false, $results->getChangeIndicator());
+        $this->assertEquals(FALSE, $results->getChangeIndicator());
 
         return;
     }

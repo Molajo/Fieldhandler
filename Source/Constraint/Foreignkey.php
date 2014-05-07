@@ -38,11 +38,11 @@ class Foreignkey extends AbstractDatabase implements ConstraintInterface
      */
     public function validate()
     {
-        if ($this->sanitize() === null) {
-            return false;
+        if ($this->sanitize() === NULL) {
+            return FALSE;
         }
 
-        return true;
+        return TRUE;
     }
 
     /**
@@ -98,7 +98,7 @@ class Foreignkey extends AbstractDatabase implements ConstraintInterface
      */
     protected function setForeignKeyQuery($type)
     {
-        if ($this->$type === null) {
+        if ($this->$type === NULL) {
             throw new UnexpectedValueException
             (
                 'Fieldhandler Foreignkey: ' . $type . ' is required input for the $options array.'

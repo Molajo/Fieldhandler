@@ -62,6 +62,7 @@ function kses(
     $string = kses_js_entities($string);
 //  $string = kses_normalize_entities($string); Zenphoto does not want & encoded
     $string = kses_hook($string);
+
 //  $allowed_html = kses_array_lc($allowed_html); Zenphoto insures that these are already lowercase
     return kses_split($string, $allowed_html, $allowed_protocols);
 } # function kses
@@ -134,7 +135,7 @@ function kses_split2($matches)
     $elem     = $matches[2];
     $attrlist = $matches[3];
 
-    if (! @isset($allowed_html[strtolower($elem)])) {
+    if (! @isset($allowed_html[ strtolower($elem) ])) {
         return '';
     }
     # They are using a not allowed HTML element
@@ -142,6 +143,7 @@ function kses_split2($matches)
     if ($slash != '') {
         return "<$slash$elem>";
     }
+
     # No attributes are allowed for closing elements
 
     return kses_attr(
@@ -175,7 +177,7 @@ function kses_attr($element, $attr, $allowed_html, $allowed_protocols)
 
 # Are any attributes allowed at all for this element?
 
-    if (@count($allowed_html[strtolower($element)]) == 0) {
+    if (@count($allowed_html[ strtolower($element) ]) == 0) {
         return "<$element$xhtml_slash>";
     }
 
@@ -189,14 +191,14 @@ function kses_attr($element, $attr, $allowed_html, $allowed_protocols)
     $attr2 = '';
 
     foreach ($attrarr as $arreach) {
-        if (! @isset($allowed_html[strtolower($element)]
-        [strtolower($arreach['name'])])
+        if (! @isset($allowed_html[ strtolower($element) ]
+        [ strtolower($arreach['name']) ])
         ) {
             continue;
         } # the attribute is not allowed
 
-        $current = $allowed_html[strtolower($element)]
-        [strtolower($arreach['name'])];
+        $current = $allowed_html[ strtolower($element) ]
+        [ strtolower($arreach['name']) ];
 
         if (! is_array($current)) {
             $attr2 .= ' ' . $arreach['whole'];
@@ -204,7 +206,7 @@ function kses_attr($element, $attr, $allowed_html, $allowed_protocols)
 
         else {
             # there are some checks
-            $ok = true;
+            $ok = TRUE;
             foreach ($current as $currkey => $currval) {
                 if (! kses_check_attr_val(
                     $arreach['value'],
@@ -213,7 +215,7 @@ function kses_attr($element, $attr, $allowed_html, $allowed_protocols)
                     $currval
                 )
                 ) {
-                    $ok = false;
+                    $ok = FALSE;
                     break;
                 }
             }
@@ -378,7 +380,7 @@ function kses_check_attr_val($value, $vless, $checkname, $checkvalue)
 # with even more checks to come soon.
 ###############################################################################
 {
-    $ok = true;
+    $ok = TRUE;
 
     switch (strtolower($checkname)) {
         case 'maxlen':
@@ -387,7 +389,7 @@ function kses_check_attr_val($value, $vless, $checkname, $checkvalue)
             # in WWW clients and various Internet servers.
 
             if (strlen($value) > $checkvalue) {
-                $ok = false;
+                $ok = FALSE;
             }
             break;
 
@@ -396,7 +398,7 @@ function kses_check_attr_val($value, $vless, $checkname, $checkvalue)
             # smaller than the given value.
 
             if (strlen($value) < $checkvalue) {
-                $ok = false;
+                $ok = FALSE;
             }
             break;
 
@@ -408,10 +410,10 @@ function kses_check_attr_val($value, $vless, $checkname, $checkvalue)
             # This check can be used to avoid Denial of Service attacks.
 
             if (! preg_match('/^\s{0,6}[0-9]{1,6}\s{0,6}$/', $value)) {
-                $ok = false;
+                $ok = FALSE;
             }
             if ($value > $checkvalue) {
-                $ok = false;
+                $ok = FALSE;
             }
             break;
 
@@ -420,10 +422,10 @@ function kses_check_attr_val($value, $vless, $checkname, $checkvalue)
             # and that it is not smaller than the given value.
 
             if (! preg_match('/^\s{0,6}[0-9]{1,6}\s{0,6}$/', $value)) {
-                $ok = false;
+                $ok = FALSE;
             }
             if ($value < $checkvalue) {
-                $ok = false;
+                $ok = FALSE;
             }
             break;
 
@@ -434,7 +436,7 @@ function kses_check_attr_val($value, $vless, $checkname, $checkvalue)
             # If the given value is an "n" or an "N", the attribute must have one.
 
             if (strtolower($checkvalue) != $vless) {
-                $ok = false;
+                $ok = FALSE;
             }
             break;
     } # switch
@@ -498,12 +500,12 @@ function kses_array_lc($inarray)
     $outarray = array();
 
     foreach ($inarray as $inkey => $inval) {
-        $outkey            = strtolower($inkey);
-        $outarray[$outkey] = array();
+        $outkey              = strtolower($inkey);
+        $outarray[ $outkey ] = array();
 
         foreach ($inval as $inkey2 => $inval2) {
-            $outkey2                     = strtolower($inkey2);
-            $outarray[$outkey][$outkey2] = $inval2;
+            $outkey2                         = strtolower($inkey2);
+            $outarray[ $outkey ][ $outkey2 ] = $inval2;
         } # foreach $inval
     } # foreach $inarray
 
@@ -570,10 +572,10 @@ function kses_bad_protocol_once2($matches)
     # deals with Opera "feature"
     $string2 = strtolower($string2);
 
-    $allowed = false;
+    $allowed = FALSE;
     foreach ($allowed_protocols as $one_protocol) {
         if (strtolower($one_protocol) == $string2) {
-            $allowed = true;
+            $allowed = TRUE;
             break;
         }
     }

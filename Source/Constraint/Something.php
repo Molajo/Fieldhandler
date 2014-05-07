@@ -28,16 +28,16 @@ class Something extends AbstractConstraint implements ConstraintInterface
      */
     public function validate()
     {
-        if ($this->field_value === null
+        if ($this->field_value === NULL
             || trim($this->field_value) === ''
             || $this->field_value === 0
         ) {
             $this->setValidateMessage(1000);
 
-            return false;
+            return FALSE;
         }
 
-        return true;
+        return TRUE;
     }
 
     /**
@@ -48,11 +48,11 @@ class Something extends AbstractConstraint implements ConstraintInterface
      */
     public function sanitize()
     {
-        if ($this->field_value === null
+        if ($this->field_value === NULL
             || trim($this->field_value) === ''
             || $this->field_value === 0
         ) {
-            $this->field_value = null;
+            $this->field_value = NULL;
         }
 
         return $this->field_value;

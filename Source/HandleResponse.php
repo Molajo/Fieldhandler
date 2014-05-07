@@ -71,19 +71,19 @@ class HandleResponse implements HandleResponseInterface
      */
     public function getChangeIndicator()
     {
-        if ($this->testNoValueChange() === true) {
-            return true;
+        if ($this->testNoValueChange() === TRUE) {
+            return TRUE;
         }
 
-        if ($this->testFloat() === true) {
-            return true;
+        if ($this->testFloat() === TRUE) {
+            return TRUE;
         }
 
         if ($this->original_data_value === $this->response_value) {
-            return false;
+            return FALSE;
         }
 
-        return true;
+        return TRUE;
     }
 
     /**
@@ -94,24 +94,24 @@ class HandleResponse implements HandleResponseInterface
      */
     protected function testNoValueChange()
     {
-        $change = false;
+        $change = FALSE;
 
-        if ($this->original_data_value === null
-            && $this->response_value === false
+        if ($this->original_data_value === NULL
+            && $this->response_value === FALSE
         ) {
-            $change = true;
+            $change = TRUE;
         }
 
-        if ($this->original_data_value === false
-            && $this->response_value === null
+        if ($this->original_data_value === FALSE
+            && $this->response_value === NULL
         ) {
-            $change = true;
+            $change = TRUE;
         }
 
         if ($this->original_data_value === 0
-            && $this->response_value === null
+            && $this->response_value === NULL
         ) {
-            $change = true;
+            $change = TRUE;
         }
 
         return $change;
@@ -125,14 +125,14 @@ class HandleResponse implements HandleResponseInterface
      */
     protected function testFloat()
     {
-        $change = false;
+        $change = FALSE;
 
         if (is_numeric($this->original_data_value)) {
 
             if ((float)$this->original_data_value < (float)$this->response_value
                 || (float)$this->response_value < (float)$this->original_data_value
             ) {
-                $change = true;
+                $change = TRUE;
             }
         }
 

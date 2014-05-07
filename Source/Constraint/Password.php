@@ -29,15 +29,16 @@ class Password extends AbstractConstraint implements ConstraintInterface
      */
     public function validate()
     {
-        if ($this->field_value === null) {
+        if ($this->field_value === NULL) {
         } else {
-            if (ctype_print($this->field_value) === false) {
+            if (ctype_print($this->field_value) === FALSE) {
                 $this->setValidateMessage(2000);
-                return false;
+
+                return FALSE;
             }
         }
 
-        return true;
+        return TRUE;
     }
 
     /**

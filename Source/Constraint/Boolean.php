@@ -29,21 +29,21 @@ class Boolean extends AbstractConstraint implements ConstraintInterface
      */
     public function validate()
     {
-        if ($this->field_value === null) {
-            return true;
+        if ($this->field_value === NULL) {
+            return TRUE;
         }
 
-        if ($this->field_value === false) {
-            return true;
+        if ($this->field_value === FALSE) {
+            return TRUE;
         }
 
-        if ($this->field_value === true) {
-            return true;
+        if ($this->field_value === TRUE) {
+            return TRUE;
         }
 
         $this->setValidateMessage(1000);
 
-        return false;
+        return FALSE;
     }
 
     /**

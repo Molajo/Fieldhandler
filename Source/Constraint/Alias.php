@@ -28,16 +28,17 @@ class Alias extends AbstractConstraint implements ConstraintInterface
      */
     public function validate()
     {
-        if ($this->field_value === null) {
-            return true;
+        if ($this->field_value === NULL) {
+            return TRUE;
         }
 
-        if ($this->validateAlias() === false) {
+        if ($this->validateAlias() === FALSE) {
             $this->setValidateMessage(1000);
-            return false;
+
+            return FALSE;
         }
 
-        return true;
+        return TRUE;
     }
 
     /**
@@ -48,8 +49,8 @@ class Alias extends AbstractConstraint implements ConstraintInterface
      */
     public function sanitize()
     {
-        if ($this->field_value === null) {
-            return null;
+        if ($this->field_value === NULL) {
+            return NULL;
         }
 
         $this->field_value = $this->sanitizeAlias($this->field_value);
@@ -86,10 +87,10 @@ class Alias extends AbstractConstraint implements ConstraintInterface
 
         if ($this->field_value === $alias) {
         } else {
-            return false;
+            return FALSE;
         }
 
-        return true;
+        return TRUE;
     }
 
     /**
@@ -102,7 +103,7 @@ class Alias extends AbstractConstraint implements ConstraintInterface
      */
     protected function sanitizeAlias($alias)
     {
-        return $this->sanitizeByCharacter('ctype_alnum', str_replace('-', ' ', trim($alias)), true);
+        return $this->sanitizeByCharacter('ctype_alnum', str_replace('-', ' ', trim($alias)), TRUE);
     }
 
     /**

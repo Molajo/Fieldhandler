@@ -48,14 +48,14 @@ class Date extends AbstractConstraint implements ConstraintInterface
      */
     public function sanitize()
     {
-        if ($this->field_value === null) {
-            return true;
+        if ($this->field_value === NULL) {
+            return TRUE;
         }
 
         $date = $this->createFromFormat();
 
-        if ($date === false) {
-            $this->field_value = null;
+        if ($date === FALSE) {
+            $this->field_value = NULL;
         }
 
         return $this->field_value;
@@ -69,14 +69,14 @@ class Date extends AbstractConstraint implements ConstraintInterface
      */
     public function format()
     {
-        if ($this->field_value === null) {
-            return true;
+        if ($this->field_value === NULL) {
+            return TRUE;
         }
 
         $date = $this->createFromFormat();
 
-        if ($date === false) {
-            $this->field_value = null;
+        if ($date === FALSE) {
+            $this->field_value = NULL;
         }
 
         $format = $this->getOption('display_as_date_format', 'Y-m-d');
@@ -96,12 +96,13 @@ class Date extends AbstractConstraint implements ConstraintInterface
     {
         $date = $this->createFromFormat();
 
-        if ($date === false) {
+        if ($date === FALSE) {
             $this->setValidateMessage(2000);
-            return false;
+
+            return FALSE;
         }
 
-        return false;
+        return FALSE;
     }
 
     /**
@@ -118,7 +119,7 @@ class Date extends AbstractConstraint implements ConstraintInterface
 
         $errors = DateTime::getLastErrors();
         if ($errors['warning_count'] > 0) {
-            return false;
+            return FALSE;
         }
 
         return $date;

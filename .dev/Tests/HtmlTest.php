@@ -55,7 +55,7 @@ class HtmlTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, array());
 
-        $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(TRUE, $results->getValidateResponse());
 
         return;
     }
@@ -76,7 +76,7 @@ class HtmlTest extends PHPUnit_Framework_TestCase
         $results = $this->request->sanitize($field_name, $field_value, $constraint, array());
 
         $this->assertEquals($filtered, $results->getFieldValue());
-        $this->assertEquals(true, $results->getChangeIndicator());
+        $this->assertEquals(TRUE, $results->getChangeIndicator());
 
         return;
     }
@@ -96,7 +96,7 @@ class HtmlTest extends PHPUnit_Framework_TestCase
         $results = $this->request->format($field_name, $field_value, $constraint, array());
 
         $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(false, $results->getChangeIndicator());
+        $this->assertEquals(FALSE, $results->getChangeIndicator());
 
         return;
     }

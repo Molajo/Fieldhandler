@@ -56,7 +56,7 @@ abstract class AbstractCtype extends AbstractConstraint implements ConstraintInt
      */
     public function sanitize()
     {
-        if ($this->field_value === null) {
+        if ($this->field_value === NULL) {
         } else {
             $this->field_value = $this->sanitizeByCType($this->ctype, $this->field_value);
         }
@@ -85,7 +85,7 @@ abstract class AbstractCtype extends AbstractConstraint implements ConstraintInt
      */
     protected function sanitizeByCType($ctype, $field_value)
     {
-        return $this->sanitizeByCharacter($ctype, $field_value, $this->getOption('allow_whitespace', false));
+        return $this->sanitizeByCharacter($ctype, $field_value, $this->getOption('allow_whitespace', FALSE));
     }
 
     /**
@@ -99,9 +99,9 @@ abstract class AbstractCtype extends AbstractConstraint implements ConstraintInt
         $temp = $this->sanitizeByCType($this->ctype, $this->field_value);
 
         if ($temp === $this->field_value) {
-            return true;
+            return TRUE;
         }
 
-        return false;
+        return FALSE;
     }
 }

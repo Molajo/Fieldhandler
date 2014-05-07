@@ -31,7 +31,7 @@ class Unique extends AbstractConstraint implements ConstraintInterface
     {
 //todo
 
-        return true;
+        return TRUE;
     }
 
     /**

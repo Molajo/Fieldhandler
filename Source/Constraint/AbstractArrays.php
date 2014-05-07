@@ -46,17 +46,17 @@ abstract class AbstractArrays extends AbstractConstraint implements ConstraintIn
      */
     public function validate()
     {
-        if ($this->field_value === null) {
-            return true;
+        if ($this->field_value === NULL) {
+            return TRUE;
         }
 
-        if ($this->getArrayValues() === true) {
-            return true;
+        if ($this->getArrayValues() === TRUE) {
+            return TRUE;
         }
 
         $this->setValidateMessage(14000);
 
-        return false;
+        return FALSE;
     }
 
     /**
@@ -89,7 +89,7 @@ abstract class AbstractArrays extends AbstractConstraint implements ConstraintIn
      * @return  boolean
      * @since   1.0.0
      */
-    protected function getArrayValues($filter = false)
+    protected function getArrayValues($filter = FALSE)
     {
         return $this->testArrayValues($this->getArrayOptionArray($this->array_option_type), $filter);
     }
@@ -128,7 +128,7 @@ abstract class AbstractArrays extends AbstractConstraint implements ConstraintIn
      */
     protected function testArrayValues($array_values, $filter)
     {
-        $test = true;
+        $test = TRUE;
 
         $entries = $this->field_value;
 
@@ -138,11 +138,11 @@ abstract class AbstractArrays extends AbstractConstraint implements ConstraintIn
 
             } else {
                 unset ($entry);
-                $test = false;
+                $test = FALSE;
             }
         }
 
-        if ($filter === true) {
+        if ($filter === TRUE) {
             $this->field_value = $entries;
         }
 
@@ -157,7 +157,7 @@ abstract class AbstractArrays extends AbstractConstraint implements ConstraintIn
      * @return  boolean
      * @since   1.0.0
      */
-    protected function testCount($filter = false)
+    protected function testCount($filter = FALSE)
     {
         $array_minimum = $this->getOption('array_minimum', 0);
         $array_maximum = $this->getOption('array_maximum', 9999999999);
@@ -166,13 +166,13 @@ abstract class AbstractArrays extends AbstractConstraint implements ConstraintIn
             || count($this->field_value) > $array_maximum
         ) {
 
-            if ($filter === true) {
-                $this->field_value = null;
+            if ($filter === TRUE) {
+                $this->field_value = NULL;
             }
 
-            return false;
+            return FALSE;
         }
 
-        return true;
+        return TRUE;
     }
 }

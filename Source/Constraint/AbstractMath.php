@@ -37,13 +37,13 @@ abstract class AbstractMath extends AbstractConstraint implements ConstraintInte
      */
     public function validate()
     {
-        if ($this->$this->method_type() === true) {
-            return true;
+        if ($this->$this->method_type() === TRUE) {
+            return TRUE;
         }
 
         $this->setValidateMessage(8000);
 
-        return false;
+        return FALSE;
     }
 
     /**
@@ -54,9 +54,9 @@ abstract class AbstractMath extends AbstractConstraint implements ConstraintInte
      */
     public function sanitize()
     {
-        if ($this->$this->method_type() === true) {
+        if ($this->$this->method_type() === TRUE) {
         } else {
-            $this->field_value = null;
+            $this->field_value = NULL;
         }
 
         return $this->field_value;
@@ -148,6 +148,7 @@ abstract class AbstractMath extends AbstractConstraint implements ConstraintInte
      * Verify that the values are not equal
      *
      * @param string $type
+     *
      * @return  boolean
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
@@ -156,42 +157,42 @@ abstract class AbstractMath extends AbstractConstraint implements ConstraintInte
     {
         $compare_to_value = $this->getOption($type);
 
-        $comparison = false;
+        $comparison = FALSE;
 
         switch ($type) {
             case 'equal':
                 if ($this->field_value === $compare_to_value) {
-                    $comparison = true;
+                    $comparison = TRUE;
                 }
                 break;
 
             case 'not_equal':
                 if ($this->field_value <> $compare_to_value) {
-                    $comparison = true;
+                    $comparison = TRUE;
                 }
                 break;
 
             case 'less_than':
                 if ($this->field_value < $compare_to_value) {
-                    $comparison = true;
+                    $comparison = TRUE;
                 }
                 break;
 
             case 'minimum':
                 if ($this->field_value <= $compare_to_value) {
-                    $comparison = true;
+                    $comparison = TRUE;
                 }
                 break;
 
             case 'greater_than':
                 if ($this->field_value > $compare_to_value) {
-                    $comparison = true;
+                    $comparison = TRUE;
                 }
                 break;
 
             case 'maximum':
                 if ($this->field_value >= $compare_to_value) {
-                    $comparison = true;
+                    $comparison = TRUE;
                 }
                 break;
         }

@@ -24,24 +24,23 @@ use CommonApi\Model\ConstraintInterface;
 class Resource extends AbstractConstraint implements ConstraintInterface
 {
     /**
+     * Message Code
+     *
+     * @var    integer
+     * @since  1.0.0
+     */
+    protected $message_code = 13000;
+
+    /**
      * Validate
      *
+     * @api
      * @return  boolean
      * @since   1.0.0
      */
     public function validate()
     {
-        if ($this->field_value === null) {
-            return true;
-        }
-
-        if (is_resource($this->field_value)) {
-            return true;
-        }
-
-        $this->setValidateMessage(1000);
-
-        return false;
+        return parent::validate();
     }
 
     /**
@@ -52,13 +51,13 @@ class Resource extends AbstractConstraint implements ConstraintInterface
      */
     public function sanitize()
     {
-        if ($this->field_value === null) {
+        if ($this->field_value === NULL) {
 
         } else {
 
             if (is_resource($this->field_value)) {
             } else {
-                $this->field_value = null;
+                $this->field_value = NULL;
             }
         }
 
@@ -74,5 +73,20 @@ class Resource extends AbstractConstraint implements ConstraintInterface
     public function format()
     {
         return parent::format();
+    }
+
+    /**
+     * Validation Test
+     *
+     * @return  boolean
+     * @since   1.0.0
+     */
+    protected function validation()
+    {
+        if (is_resource($this->field_value)) {
+            return TRUE;
+        }
+
+        return FALSE;
     }
 }

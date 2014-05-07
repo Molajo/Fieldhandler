@@ -28,19 +28,19 @@ class Length extends AbstractConstraint implements ConstraintInterface
      */
     public function validate()
     {
-        if ($this->field_value === null) {
-            return true;
+        if ($this->field_value === NULL) {
+            return TRUE;
         }
 
         $results = $this->testMinimumMaximum();
 
-        if ($results === true) {
-            return true;
+        if ($results === TRUE) {
+            return TRUE;
         }
 
         $this->setValidateMessage(8000);
 
-        return false;
+        return FALSE;
     }
 
     /**
@@ -53,7 +53,7 @@ class Length extends AbstractConstraint implements ConstraintInterface
     {
         if ($this->validate()) {
         } else {
-            $this->field_value = null;
+            $this->field_value = NULL;
         }
 
         return $this->field_value;
@@ -86,9 +86,9 @@ class Length extends AbstractConstraint implements ConstraintInterface
         if ($string_length >= $minimum
             && $string_length <= $maximum
         ) {
-            return true;
+            return TRUE;
         }
 
-        return false;
+        return FALSE;
     }
 }

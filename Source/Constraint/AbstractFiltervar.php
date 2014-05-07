@@ -85,13 +85,14 @@ abstract class AbstractFiltervar extends AbstractConstraint implements Constrain
     protected function validation()
     {
         if ($this->filter_type === FILTER_VALIDATE_FLOAT
-            && (float)$this->field_value === (float)$this->sanitize()) {
-            return true;
+            && (float)$this->field_value === (float)$this->sanitize()
+        ) {
+            return TRUE;
 
         } elseif ($this->field_value === $this->sanitize()) {
-            return true;
+            return TRUE;
         }
 
-        return false;
+        return FALSE;
     }
 }

@@ -21,23 +21,23 @@ use CommonApi\Model\ConstraintInterface;
 class Nothing extends AbstractConstraint implements ConstraintInterface
 {
     /**
+     * Message Code
+     *
+     * @var    integer
+     * @since  1.0.0
+     */
+    protected $message_code = 1000;
+
+    /**
      * Validate
      *
+     * @api
      * @return  boolean
      * @since   1.0.0
      */
     public function validate()
     {
-        if ($this->field_value === null
-            || trim($this->field_value) === ''
-            || (int)$this->field_value === 0
-        ) {
-        } else {
-            $this->setValidateMessage(1000);
-            return false;
-        }
-
-        return true;
+        return parent::validate();
     }
 
     /**
@@ -48,12 +48,12 @@ class Nothing extends AbstractConstraint implements ConstraintInterface
      */
     public function sanitize()
     {
-        if ($this->field_value === null
+        if ($this->field_value === NULL
             || trim($this->field_value) === ''
             || (int)$this->field_value === 0
         ) {
         } else {
-            $this->field_value = null;
+            $this->field_value = NULL;
         }
 
         return $this->field_value;
@@ -68,5 +68,23 @@ class Nothing extends AbstractConstraint implements ConstraintInterface
     public function format()
     {
         return parent::format();
+    }
+
+    /**
+     * Validation
+     *
+     * @return  boolean
+     * @since   1.0.0
+     */
+    protected function validation()
+    {
+        if ($this->field_value === NULL
+            || trim($this->field_value) === ''
+            || (int)$this->field_value === 0
+        ) {
+            return TRUE;
+        }
+
+        return FALSE;
     }
 }

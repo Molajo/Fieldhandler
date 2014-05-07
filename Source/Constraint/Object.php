@@ -29,17 +29,17 @@ class Object extends AbstractConstraint implements ConstraintInterface
      */
     public function validate()
     {
-        if ($this->field_value === null) {
-            return true;
+        if ($this->field_value === NULL) {
+            return TRUE;
         }
 
-        if (is_object($this->field_value) == true) {
-            return true;
+        if (is_object($this->field_value) == TRUE) {
+            return TRUE;
         }
 
         $this->setValidateMessage(1000);
 
-        return false;
+        return FALSE;
     }
 
     /**

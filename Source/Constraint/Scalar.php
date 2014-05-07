@@ -25,24 +25,23 @@ use CommonApi\Model\ConstraintInterface;
 class Scalar extends AbstractConstraint implements ConstraintInterface
 {
     /**
+     * Message Code
+     *
+     * @var    integer
+     * @since  1.0.0
+     */
+    protected $message_code = 1000;
+
+    /**
      * Validate
      *
+     * @api
      * @return  boolean
      * @since   1.0.0
      */
     public function validate()
     {
-        if ($this->field_value === null) {
-            return true;
-        }
-
-        if (is_scalar($this->field_value)) {
-            return true;
-        }
-
-        $this->setValidateMessage(1000);
-
-        return false;
+        return parent::validate();
     }
 
     /**
@@ -53,13 +52,13 @@ class Scalar extends AbstractConstraint implements ConstraintInterface
      */
     public function sanitize()
     {
-        if ($this->field_value === null) {
+        if ($this->field_value === NULL) {
 
         } else {
 
             if (is_scalar($this->field_value)) {
             } else {
-                $this->field_value = null;
+                $this->field_value = NULL;
             }
         }
 
@@ -75,5 +74,20 @@ class Scalar extends AbstractConstraint implements ConstraintInterface
     public function format()
     {
         return parent::format();
+    }
+
+    /**
+     * Validation
+     *
+     * @return  boolean
+     * @since   1.0.0
+     */
+    protected function validation()
+    {
+        if (is_scalar($this->field_value)) {
+            return TRUE;
+        }
+
+        return FALSE;
     }
 }

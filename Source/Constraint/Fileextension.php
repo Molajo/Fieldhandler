@@ -36,14 +36,15 @@ class Fileextension extends AbstractArrays implements ConstraintInterface
      */
     public function validate()
     {
-        if ($this->field_value === null) {
-            return true;
+        if ($this->field_value === NULL) {
+            return TRUE;
         }
 
         if (is_file($this->field_value)) {
         } else {
             $this->setValidateMessage(9000);
-            return false;
+
+            return FALSE;
         }
 
         $path_info = pathinfo($this->field_value);
@@ -51,12 +52,12 @@ class Fileextension extends AbstractArrays implements ConstraintInterface
         $this->field_value = $path_info['extension'];
 
         if (parent::validate()) {
-            return true;
+            return TRUE;
         }
 
         $this->setValidateMessage(9000);
 
-        return false;
+        return FALSE;
 
     }
 
@@ -73,7 +74,7 @@ class Fileextension extends AbstractArrays implements ConstraintInterface
         if (parent::sanitize()) {
             $this->field_value = $hold;
         } else {
-            $this->field_value = null;
+            $this->field_value = NULL;
         }
 
         return $this->field_value;
