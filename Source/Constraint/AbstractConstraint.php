@@ -217,7 +217,19 @@ abstract class AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Sanitize
+     * Validation testing in sub-types
+     *
+     * @return  boolean
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function validation()
+    {
+        return FALSE;
+    }
+
+    /**
+     * Default Sanitize - sanitize primarily in sub-types
      *
      * @api
      * @return  mixed
@@ -326,7 +338,7 @@ abstract class AbstractConstraint implements ConstraintInterface
      *
      * @param   string $entry
      *
-     * @return  null|string
+     * @return  AbstractConstraint
      * @since   1.0.0
      */
     protected function setFlag($entry)
@@ -402,6 +414,7 @@ abstract class AbstractConstraint implements ConstraintInterface
      * @param   string  $test
      * @param   boolean $allow_whitespace
      * @param   integer $filter
+     * @param integer $i
      *
      * @return  string
      * @since   1.0.0

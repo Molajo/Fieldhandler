@@ -108,45 +108,42 @@ abstract class AbstractArrays extends AbstractConstraint implements ConstraintIn
      */
     protected function testArrayValues($array_values, $filter)
     {
+        $tested = $this->testArrayValuesPart($array_values);
+
+        if (count($tested) === count($this->field_value)) {
+            $test = TRUE;
+
+        } else {
+            $test = FALSE;
+            if ($filter === TRUE) {
+                $this->field_value = $tested;
+            }
+        }
+
+        return $test;
+    }
+
+    /**
+     * Test Array Values returning only good entries
+     *
+     * @param   array   $array_values
+     *
+     * @return  array
+     * @since   1.0.0
+     */
+    protected function testArrayValuesPart($array_values)
+    {
         $new = array();
 
         foreach ($this->field_value as $entry) {
 
-            if ($this->testArrayValue($array_values, $entry) === FALSE) {
+            if (in_array($entry, $array_values) === FALSE) {
             } else {
                 $new[] = $entry;
             }
         }
 
-        if (count($new) === count($this->field_value)) {
-            return TRUE;
-        }
-
-        if ($filter === TRUE) {
-            $this->field_value = $new;
-        }
-
-        return FALSE;
-    }
-
-    /**
-     * Test Single Value from Array
-     *
-     * @param   array   $array_values
-     * @param   mixed   $entry
-     *
-     * @return  boolean
-     * @since   1.0.0
-     */
-    protected function testArrayValue($array_values, $entry)
-    {
-        if (in_array($entry, $array_values)) {
-            $test = TRUE;
-        } else {
-            $test = FALSE;
-        }
-
-        return $test;
+        return $new;
     }
 
     /**
