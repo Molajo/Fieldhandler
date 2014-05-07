@@ -92,7 +92,7 @@ class Date extends AbstractConstraint implements ConstraintInterface
      * @return  boolean
      * @since   1.0.0
      */
-    public function validation()
+    protected function validation()
     {
         $date = $this->createFromFormat();
 
@@ -103,7 +103,7 @@ class Date extends AbstractConstraint implements ConstraintInterface
 
         return false;
     }
-    
+
     /**
      * Create Data from a specific format
      *

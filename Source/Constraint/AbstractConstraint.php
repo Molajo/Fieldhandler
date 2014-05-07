@@ -212,7 +212,10 @@ abstract class AbstractConstraint implements ConstraintInterface
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    abstract protected function validation();
+    protected function validation()
+    {
+        return $this;
+    }
 
     /**
      * Sanitize

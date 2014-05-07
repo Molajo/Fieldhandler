@@ -86,7 +86,7 @@ abstract class AbstractString extends AbstractConstraint implements ConstraintIn
      * @return  boolean
      * @since   1.0.0
      */
-    public function validation()
+    protected function validation()
     {
         $temp = $this->doStringFunction();
 

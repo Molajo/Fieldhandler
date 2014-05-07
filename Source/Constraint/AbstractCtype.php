@@ -83,7 +83,7 @@ abstract class AbstractCtype extends AbstractConstraint implements ConstraintInt
      * @return  string
      * @since   1.0.0
      */
-    public function sanitizeByCType($ctype, $field_value)
+    protected function sanitizeByCType($ctype, $field_value)
     {
         return $this->sanitizeByCharacter($ctype, $field_value, $this->getOption('allow_whitespace', false));
     }
@@ -94,7 +94,7 @@ abstract class AbstractCtype extends AbstractConstraint implements ConstraintInt
      * @return  boolean
      * @since   1.0.0
      */
-    public function validation()
+    protected function validation()
     {
         $temp = $this->sanitizeByCType($this->ctype, $this->field_value);
 
