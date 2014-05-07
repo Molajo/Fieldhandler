@@ -1,59 +1,44 @@
-filter:
-    excluded_paths:
-        - 'vendor/*'
-        - 'Source/Constraint/Library/*'
-        - '.dev/*'
-    paths: {  }
 tools:
     external_code_coverage:
         timeout: 600 # Timeout in seconds for code coverage.
+    php_code_sniffer:
+        enabled: true
+        config:
+            standard: "PSR1", "PSR2"
+        filter:
+            paths: ["Source/*"]
+    php_cpd:
+        enabled: true
+        excluded_dirs: [".dev", "vendor", "Source/Constraint/Library"]
+    php_loc:
+        enabled: true
+        excluded_dirs: [".dev", "vendor", "Source/Constraint/Library"]
+    php_mess_detector:
+        enabled: true
+        filter:
+            paths: ["Source/*"]
+    php_pdepend:
+        enabled: true
+        excluded_dirs: [".dev", "vendor", "Source/Constraint/Library"]
+    php_analyzer:
+        enabled: true
+        excluded_dirs: [".dev", "vendor", "Source/Constraint/Library"]
+    sensiolabs_security_checker: true        
     php_sim:
         enabled: true
         min_mass: 16
         filter:
-            excluded_paths:
-                - 'vendor/*'
-                - 'Source/Constraint/Library/*'
-                - '.dev/*'
+            excluded_dirs: [".dev", "vendor/*", "Source/Constraint/Library/*"]
             paths: {  }
-    php_pdepend:
-        enabled: true
-        configuration_file: null
-        suffixes:
-            - php
-        excluded_dirs: {  }
-        filter:
-            excluded_paths:
-                - 'vendor/*'
-                - 'Source/Constraint/Library/*'
-                - '.dev/*'
-
-            paths: {  }
-    php_analyzer:
-        enabled: true
-        extensions:
-            - php
-        dependency_paths: {  }
-        filter:
-            excluded_paths:
-                - 'vendor/*'
-                - 'Source/Constraint/Library/*'
-                - '.dev/*'
-
-            paths: {  }
-        path_configs: {  }
     php_changetracking:
         enabled: true
         bug_patterns:
-            - '\bfix(?:es|ed)?\b'
+            - "\bfix(?:es|ed)?\b"
         feature_patterns:
-            - '\badd(?:s|ed)?\b'
-            - '\bimplement(?:s|ed)?\b'
+            - "\badd(?:s|ed)?\b"
+            - "\bimplement(?:s|ed)?\b"
         filter:
-            excluded_paths:
-                - 'vendor/*'
-                - 'Source/Constraint/Library/*'
-                - '.dev/*'
+            excluded_paths: [".dev", "vendor/*", "Source/Constraint/Library/*"]
             paths: {  }
 before_commands: {  }
 after_commands: {  }
