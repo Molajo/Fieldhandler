@@ -70,18 +70,34 @@ class Arrays extends AbstractArrays implements ConstraintInterface
             return FALSE;
         }
 
-        if ($this->testValues(FALSE) === FALSE) {
-            $this->message_code = 4000;
+        if ($this->runValidationTest('testValues', 4000) === FALSE) {
             return FALSE;
         }
 
-        if ($this->testKeys(FALSE) === FALSE) {
-            $this->message_code = 5000;
+        if ($this->runValidationTest('testKeys', 5000) === FALSE) {
             return FALSE;
         }
 
-        if ($this->testCount(FALSE) === FALSE) {
-            $this->message_code = 6000;
+        if ($this->runValidationTest('testCount', 6000) === FALSE) {
+            return FALSE;
+        }
+
+        return TRUE;
+    }
+
+    /**
+     * Run the validation Test
+     *
+     * @param   string  $method
+     * @param   string  $message_code
+     *
+     * @return  boolean
+     * @since   1.0.0
+     */
+    protected function runValidationTest($method, $message_code)
+    {
+        if ($this->$method(FALSE) === FALSE) {
+            $this->message_code = $message_code;
             return FALSE;
         }
 
