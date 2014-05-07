@@ -191,10 +191,7 @@ abstract class AbstractConstraint implements ConstraintInterface
      * @return  AbstractConstraint
      * @since   1.0.0
      */
-    public function setOptions()
-    {
-        return $this;
-    }
+    abstract public function setOptions();
 
     /**
      * Validate
@@ -216,19 +213,6 @@ abstract class AbstractConstraint implements ConstraintInterface
 
         $this->setValidateMessage($this->message_code);
 
-        return FALSE;
-    }
-
-    /**
-     * Validation
-     *
-     * @api
-     * @return  boolean
-     * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
-     */
-    protected function validation()
-    {
         return FALSE;
     }
 
@@ -354,15 +338,15 @@ abstract class AbstractConstraint implements ConstraintInterface
         $value = $this->getOption($entry);
 
         if ($value === NULL) {
-        } else {
-
-            if ($this->selected_constraint_options === NULL) {
-            } else {
-                $this->selected_constraint_options .= ', ';
-            }
-
-            $this->selected_constraint_options .= $entry;
+            return $this;
         }
+
+        if ($this->selected_constraint_options === NULL) {
+        } else {
+            $this->selected_constraint_options .= ', ';
+        }
+
+        $this->selected_constraint_options .= $entry;
 
         return $this;
     }
