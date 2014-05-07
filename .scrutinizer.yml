@@ -1,15 +1,20 @@
 tools:
     external_code_coverage:
-        timeout: 600 # Timeout in seconds for code coverage.
+      timeout: 600
     php_code_sniffer:
         enabled: true
         config:
-            standard: "PSR2"
+            standard: PSR2
         filter:
             paths: ["Source/*"]
     php_cpd:
         enabled: true
         excluded_dirs: [".dev", "vendor", "Source/Constraint/Library"]
+    php_cs_fixer:
+        config:
+          level: psr2
+        filter:
+          paths: ["Source/*"]
     php_loc:
         enabled: true
         excluded_dirs: [".dev", "vendor", "Source/Constraint/Library"]
@@ -22,11 +27,9 @@ tools:
         excluded_dirs: [".dev", "vendor", "Source/Constraint/Library"]
     php_analyzer:
         enabled: true
-        excluded_dirs: [".dev", "vendor", "Source/Constraint/Library"]
+        filter:
+            paths: ["Source/*"]
     sensiolabs_security_checker: true
-    php_cs_fixer:
-        config: { level: psr2 }
-        excluded_paths: [".dev", "vendor", "Source/Constraint/Library"]
     php_sim:
         enabled: true
         min_mass: 16
