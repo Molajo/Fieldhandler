@@ -33,7 +33,7 @@ tools:
     php_sim:
         enabled: true
         min_mass: 16
-        excluded_dirs: [".dev", "vendor/*", "Source/Constraint/Library/*"]
+        excluded_paths: [".dev", "vendor/*", "Source/Constraint/Library/*"]
     php_changetracking:
         enabled: true
         bug_patterns:
