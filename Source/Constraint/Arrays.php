@@ -22,46 +22,12 @@ use CommonApi\Model\ConstraintInterface;
 class Arrays extends AbstractArrays implements ConstraintInterface
 {
     /**
-     * Validate
+     * Message Code
      *
-     * @return  boolean
-     * @since   1.0.0
+     * @var    integer
+     * @since  1.0.0
      */
-    public function validate()
-    {
-        if ($this->field_value === NULL) {
-            return TRUE;
-        }
-
-        $edits_passed = TRUE;
-
-        if (is_array($this->field_value)) {
-        } else {
-            $this->setValidateMessage(3000);
-            $edits_passed = FALSE;
-        }
-
-        if ($this->testValues(FALSE) === FALSE) {
-            $this->setValidateMessage(4000);
-            $edits_passed = FALSE;
-        }
-
-        if ($this->testKeys(FALSE) === FALSE) {
-            $this->setValidateMessage(5000);
-            $edits_passed = FALSE;
-        }
-
-        if ($this->testCount(FALSE) === FALSE) {
-            $this->setValidateMessage(6000);
-            $edits_passed = FALSE;
-        }
-
-        if ($edits_passed === FALSE) {
-            return FALSE;
-        }
-
-        return TRUE;
-    }
+    protected $message_code = 3000;
 
     /**
      * Sanitize
@@ -72,33 +38,54 @@ class Arrays extends AbstractArrays implements ConstraintInterface
     public function sanitize()
     {
         if ($this->field_value === NULL) {
-        } else {
-
-            if (is_array($this->field_value)) {
-
-            } else {
-                $this->field_value = NULL;
-
-                return $this->field_value;
-            }
-
-            $this->testValues(TRUE);
-            $this->testKeys(TRUE);
-            $this->testCount(TRUE);
+            return $this->field_value;
         }
+
+        if (is_array($this->field_value)) {
+
+        } else {
+            $this->field_value = NULL;
+
+            return $this->field_value;
+        }
+
+        $this->testValues(TRUE);
+        $this->testKeys(TRUE);
+        $this->testCount(TRUE);
 
         return $this->field_value;
     }
 
     /**
-     * Format
+     * Validation Testing
      *
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      */
-    public function format()
+    protected function validation()
     {
-        return parent::format();
+        if (is_array($this->field_value)) {
+        } else {
+            $this->message_code = 3000;
+            return FALSE;
+        }
+
+        if ($this->testValues(FALSE) === FALSE) {
+            $this->message_code = 4000;
+            return FALSE;
+        }
+
+        if ($this->testKeys(FALSE) === FALSE) {
+            $this->message_code = 5000;
+            return FALSE;
+        }
+
+        if ($this->testCount(FALSE) === FALSE) {
+            $this->message_code = 6000;
+            return FALSE;
+        }
+
+        return TRUE;
     }
 
     /**

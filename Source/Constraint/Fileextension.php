@@ -29,21 +29,23 @@ class Fileextension extends AbstractArrays implements ConstraintInterface
     protected $array_option_type = 'array_valid_extensions';
 
     /**
-     * Validate
+     * Method Test
+     *
+     * @var    string
+     * @since  1.0.0
+     */
+    protected $method_test = 'validation';
+
+    /**
+     * Validation Test
      *
      * @return  boolean
      * @since   1.0.0
      */
-    public function validate()
+    protected function validation()
     {
-        if ($this->field_value === NULL) {
-            return TRUE;
-        }
-
         if (is_file($this->field_value)) {
         } else {
-            $this->setValidateMessage(9000);
-
             return FALSE;
         }
 
@@ -51,43 +53,10 @@ class Fileextension extends AbstractArrays implements ConstraintInterface
 
         $this->field_value = $path_info['extension'];
 
-        if (parent::validate()) {
+        if ($this->getArrayValues(FALSE) === TRUE) {
             return TRUE;
         }
 
-        $this->setValidateMessage(9000);
-
         return FALSE;
-
-    }
-
-    /**
-     * Sanitize
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function sanitize()
-    {
-        $hold = $this->field_value;
-
-        if (parent::sanitize()) {
-            $this->field_value = $hold;
-        } else {
-            $this->field_value = NULL;
-        }
-
-        return $this->field_value;
-    }
-
-    /**
-     * Format
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function format()
-    {
-        return parent::format();
     }
 }

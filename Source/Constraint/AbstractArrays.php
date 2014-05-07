@@ -39,46 +39,26 @@ abstract class AbstractArrays extends AbstractConstraint implements ConstraintIn
     protected $method_test = 'getArrayValues';
 
     /**
-     * Validate
+     * Message Code
+     *
+     * @var    integer
+     * @since  1.0.0
+     */
+    protected $message_code = 3000;
+
+    /**
+     * Validation Test
      *
      * @return  boolean
      * @since   1.0.0
      */
-    public function validate()
+    protected function validation()
     {
-        if ($this->field_value === NULL) {
+        if ($this->getArrayValues(FALSE) === TRUE) {
             return TRUE;
         }
-
-        if ($this->getArrayValues() === TRUE) {
-            return TRUE;
-        }
-
-        $this->setValidateMessage(14000);
 
         return FALSE;
-    }
-
-    /**
-     * Sanitize
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function sanitize()
-    {
-        parent::sanitize();
-    }
-
-    /**
-     * Format
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function format()
-    {
-        return parent::format();
     }
 
     /**
