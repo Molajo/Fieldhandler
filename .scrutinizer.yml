@@ -4,7 +4,7 @@ tools:
     php_code_sniffer:
         enabled: true
         config:
-            standard: "PSR1", "PSR2"
+            standard: "PSR2"
         filter:
             paths: ["Source/*"]
     php_cpd:
@@ -23,7 +23,10 @@ tools:
     php_analyzer:
         enabled: true
         excluded_dirs: [".dev", "vendor", "Source/Constraint/Library"]
-    sensiolabs_security_checker: true        
+    sensiolabs_security_checker: true
+    php_cs_fixer:
+        config: { level: psr2 }
+      excluded_paths: [".dev", "vendor", "Source/Constraint/Library"]
     php_sim:
         enabled: true
         min_mass: 16
