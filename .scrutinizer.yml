@@ -33,13 +33,6 @@ tools:
     php_sim:
         enabled: true
         min_mass: 16
-    php_changetracking:
-        enabled: true
-        bug_patterns:
-            - "\bfix(?:es|ed)?\b"
-        feature_patterns:
-            - "\badd(?:s|ed)?\b"
-            - "\bimplement(?:s|ed)?\b"
 before_commands: {  }
 after_commands: {  }
 artifacts: {  }
