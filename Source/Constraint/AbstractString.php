@@ -55,7 +55,7 @@ abstract class AbstractString extends AbstractConstraintTests implements Constra
      */
     public function sanitize()
     {
-        if ($this->field_value === NULL) {
+        if ($this->field_value === null) {
             return $this->field_value;
         }
 
@@ -63,7 +63,7 @@ abstract class AbstractString extends AbstractConstraintTests implements Constra
 
         if ($this->field_value === $temp) {
         } else {
-            $this->field_value = NULL;
+            $this->field_value = null;
         }
 
         return $this->field_value;
@@ -91,10 +91,10 @@ abstract class AbstractString extends AbstractConstraintTests implements Constra
         $temp = $this->doStringFunction();
 
         if ($temp === $this->field_value) {
-            return TRUE;
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 
     /**

@@ -31,7 +31,7 @@ class Unique extends AbstractConstraintTests implements ConstraintInterface
     {
 //todo
 
-        return TRUE;
+        return true;
     }
 
     /**

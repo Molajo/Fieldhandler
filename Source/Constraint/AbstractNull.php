@@ -44,11 +44,11 @@ abstract class AbstractNull extends AbstractConstraintTests implements Constrain
      */
     protected function validation()
     {
-        if ($this->field_value === NULL) {
-            return TRUE;
+        if ($this->field_value === null) {
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -59,10 +59,10 @@ abstract class AbstractNull extends AbstractConstraintTests implements Constrain
      */
     protected function validationNotNull()
     {
-        if ($this->field_value === NULL) {
-            return FALSE;
+        if ($this->field_value === null) {
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
 }

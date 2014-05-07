@@ -160,12 +160,12 @@ abstract class AbstractHtml extends AbstractConstraintTests implements Constrain
     public function validate()
     {
         if ($this->field_value === $this->sanitize()) {
-            return TRUE;
+            return true;
         }
 
         $this->setValidateMessage(8000);
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -180,7 +180,7 @@ abstract class AbstractHtml extends AbstractConstraintTests implements Constrain
      */
     public function sanitize()
     {
-        if ($this->field_value === NULL) {
+        if ($this->field_value === null) {
         } else {
             $this->field_value = kses($this->field_value, $this->white_list, array('http', 'https'));
         }
@@ -207,7 +207,7 @@ abstract class AbstractHtml extends AbstractConstraintTests implements Constrain
          * $class                 = 'Molajo\\Fieldhandler\\Escape';
          * $escape_instance = new $class($adapter);
          */
-        if ($this->field_value === NULL) {
+        if ($this->field_value === null) {
         } else {
             // $this->field_value = $this->escape_instance->escapeHtml($this->field_value);
         }

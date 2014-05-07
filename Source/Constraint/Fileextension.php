@@ -46,17 +46,17 @@ class Fileextension extends AbstractArrays implements ConstraintInterface
     {
         if (is_file($this->field_value)) {
         } else {
-            return FALSE;
+            return false;
         }
 
         $path_info = pathinfo($this->field_value);
 
         $this->field_value = $path_info['extension'];
 
-        if ($this->getArrayValues(FALSE) === TRUE) {
-            return TRUE;
+        if ($this->getArrayValues(false) === true) {
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 }

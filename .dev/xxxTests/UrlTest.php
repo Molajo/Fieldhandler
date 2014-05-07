@@ -54,7 +54,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(TRUE, $results->getValidateResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
         $this->assertEquals(array(), $results->getValidateMessages());
 
         return;
@@ -74,7 +74,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(FALSE, $results->getValidateResponse());
+        $this->assertEquals(false, $results->getValidateResponse());
 
         $expected_code    = 1000;
         $expected_message = 'Field: url_field does not have a valid value for Url data type.';
@@ -100,7 +100,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(FALSE, $results->getChangeIndicator());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
@@ -116,13 +116,13 @@ class UrlTest extends PHPUnit_Framework_TestCase
         $field_value                           = 'yessireebob';
         $constraint                            = 'Url';
         $options                               = array();
-        $options['FILTER_FLAG_PATH_REQUIRED']  = TRUE;
-        $options['FILTER_FLAG_QUERY_REQUIRED'] = TRUE;
+        $options['FILTER_FLAG_PATH_REQUIRED']  = true;
+        $options['FILTER_FLAG_QUERY_REQUIRED'] = true;
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(FALSE, $results->getChangeIndicator());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
@@ -142,7 +142,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(FALSE, $results->getChangeIndicator());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
@@ -158,12 +158,12 @@ class UrlTest extends PHPUnit_Framework_TestCase
         $field_value                 = 'yessireebob';
         $constraint                  = 'Url';
         $options                     = array();
-        $options['FILTER_FLAG_IPV6'] = TRUE;
+        $options['FILTER_FLAG_IPV6'] = true;
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(FALSE, $results->getChangeIndicator());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }

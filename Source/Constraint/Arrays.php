@@ -37,21 +37,21 @@ class Arrays extends AbstractArrays implements ConstraintInterface
      */
     public function sanitize()
     {
-        if ($this->field_value === NULL) {
+        if ($this->field_value === null) {
             return $this->field_value;
         }
 
         if (is_array($this->field_value)) {
 
         } else {
-            $this->field_value = NULL;
+            $this->field_value = null;
 
             return $this->field_value;
         }
 
-        $this->testValues(TRUE);
-        $this->testKeys(TRUE);
-        $this->testCount(TRUE);
+        $this->testValues(true);
+        $this->testKeys(true);
+        $this->testCount(true);
 
         return $this->field_value;
     }
@@ -71,11 +71,11 @@ class Arrays extends AbstractArrays implements ConstraintInterface
             'testCount'  => 6000,
         );
 
-        $test = TRUE;
+        $test = true;
 
         foreach ($validation_array as $key => $value) {
-            if ($this->runValidationTest($key, $value) === FALSE) {
-                $test = FALSE;
+            if ($this->runValidationTest($key, $value) === false) {
+                $test = false;
                 break;
             }
         }
@@ -94,13 +94,13 @@ class Arrays extends AbstractArrays implements ConstraintInterface
      */
     protected function runValidationTest($method, $message_code)
     {
-        if ($this->$method(FALSE) === FALSE) {
+        if ($this->$method(false) === false) {
             $this->message_code = $message_code;
 
-            return FALSE;
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
 
     /**
@@ -115,10 +115,10 @@ class Arrays extends AbstractArrays implements ConstraintInterface
         } else {
             $this->message_code = 3000;
 
-            return FALSE;
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
 
     /**
@@ -129,7 +129,7 @@ class Arrays extends AbstractArrays implements ConstraintInterface
      * @return  boolean
      * @since   1.0.0
      */
-    protected function testKeys($filter = FALSE)
+    protected function testKeys($filter = false)
     {
         return $this->testArrayValues($this->getArrayOptionArray('array_valid_keys'), $filter);
     }
@@ -142,7 +142,7 @@ class Arrays extends AbstractArrays implements ConstraintInterface
      * @return  boolean
      * @since   1.0.0
      */
-    protected function testValues($filter = FALSE)
+    protected function testValues($filter = false)
     {
         return $this->testArrayValues($this->getArrayOptionArray('array_valid_values'), $filter);
     }

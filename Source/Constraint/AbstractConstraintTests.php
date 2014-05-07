@@ -47,7 +47,7 @@ abstract class AbstractConstraintTests extends AbstractConstraint implements Con
      */
     protected function setFlags()
     {
-        $this->selected_constraint_options = NULL;
+        $this->selected_constraint_options = null;
 
         foreach ($this->constraint_allowable_options as $entry) {
             $this->setFlag($entry);
@@ -68,11 +68,11 @@ abstract class AbstractConstraintTests extends AbstractConstraint implements Con
     {
         $value = $this->getOption($entry);
 
-        if ($value === NULL) {
+        if ($value === null) {
             return $this;
         }
 
-        if ($this->selected_constraint_options === NULL) {
+        if ($this->selected_constraint_options === null) {
         } else {
             $this->selected_constraint_options .= ', ';
         }
@@ -92,14 +92,14 @@ abstract class AbstractConstraintTests extends AbstractConstraint implements Con
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException;
      */
-    protected function getOption($key, $default = NULL)
+    protected function getOption($key, $default = null)
     {
         if (isset($this->options[ $key ])) {
             return $this->options[ $key ];
         }
 
-        if ($default === NULL) {
-            return NULL;
+        if ($default === null) {
+            return null;
         }
 
         $this->options[ $key ] = $default;
@@ -117,7 +117,7 @@ abstract class AbstractConstraintTests extends AbstractConstraint implements Con
      * @return  string
      * @since   1.0.0
      */
-    protected function sanitizeByCharacter($filter, $test, $allow_whitespace = FALSE)
+    protected function sanitizeByCharacter($filter, $test, $allow_whitespace = false)
     {
         $filtered = '';
 
@@ -148,7 +148,7 @@ abstract class AbstractConstraintTests extends AbstractConstraint implements Con
         $filtered = $filter($value);
 
         if ($filtered === 1
-            || ($allow_whitespace === TRUE && $value === ' ')
+            || ($allow_whitespace === true && $value === ' ')
         ) {
             return $value;
         }

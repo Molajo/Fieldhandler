@@ -54,7 +54,7 @@ class NumericTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(TRUE, $results->getValidateResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
 
         $messages = $results->getValidateMessages();
         $this->assertEquals(array(), $messages);
@@ -70,13 +70,13 @@ class NumericTest extends PHPUnit_Framework_TestCase
     public function testValidate2()
     {
         $field_name  = 'numeric_fieldname';
-        $field_value = NULL;
+        $field_value = null;
         $constraint  = 'Numeric';
         $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(TRUE, $results->getValidateResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
 
         $messages = $results->getValidateMessages();
         $this->assertEquals(array(), $messages);
@@ -98,7 +98,7 @@ class NumericTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(FALSE, $results->getValidateResponse());
+        $this->assertEquals(false, $results->getValidateResponse());
 
         $expected_code    = 1000;
         $expected_message = 'Field: numeric_fieldname does not have a valid value for Numeric data type.';
@@ -124,7 +124,7 @@ class NumericTest extends PHPUnit_Framework_TestCase
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(FALSE, $results->getChangeIndicator());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
@@ -143,9 +143,9 @@ class NumericTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
-        $field_value = NULL;
+        $field_value = null;
         $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(TRUE, $results->getChangeIndicator());
+        $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }
@@ -165,7 +165,7 @@ class NumericTest extends PHPUnit_Framework_TestCase
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(FALSE, $results->getChangeIndicator());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
@@ -185,7 +185,7 @@ class NumericTest extends PHPUnit_Framework_TestCase
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(FALSE, $results->getChangeIndicator());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }

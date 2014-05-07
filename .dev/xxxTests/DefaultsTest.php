@@ -49,7 +49,7 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
     public function testValidatePass()
     {
         $field_name  = 'dog';
-        $field_value = NULL;
+        $field_value = null;
         $constraint  = 'Defaults';
         $options     = array(
             'default' => 'bark'
@@ -57,7 +57,7 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(FALSE, $results->getValidateResponse());
+        $this->assertEquals(false, $results->getValidateResponse());
 
         $expected_code    = 7000;
         $expected_message = 'Field: dog does not have a default value.';
@@ -76,7 +76,7 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
     public function testSanitizeSuccess()
     {
         $field_name  = 'dog';
-        $field_value = NULL;
+        $field_value = null;
         $constraint  = 'Defaults';
         $options     = array(
             'default' => 'bark'
@@ -85,7 +85,7 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('bark', $results->getFieldValue());
-        $this->assertEquals(TRUE, $results->getChangeIndicator());
+        $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }
@@ -98,7 +98,7 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
     public function testValidApplyDefaultThenValidate()
     {
         $field_name  = 'cat';
-        $field_value = NULL;
+        $field_value = null;
         $constraint  = 'Defaults';
         $options     = array(
             'default' => 'bark'
@@ -108,11 +108,11 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
 
         $field_value = 'bark';
         $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(TRUE, $results->getChangeIndicator());
+        $this->assertEquals(true, $results->getChangeIndicator());
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(TRUE, $results->getValidateResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
 
         $messages = $results->getValidateMessages();
         $this->assertEquals(array(), $messages);

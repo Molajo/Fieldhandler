@@ -81,7 +81,7 @@ abstract class AbstractConstraint implements ConstraintInterface
      * @var    string
      * @since  1.0.0
      */
-    protected $selected_constraint_options = NULL;
+    protected $selected_constraint_options = null;
 
     /**
      * Timezone
@@ -203,17 +203,17 @@ abstract class AbstractConstraint implements ConstraintInterface
      */
     public function validate()
     {
-        if ($this->field_value === NULL) {
-            return TRUE;
+        if ($this->field_value === null) {
+            return true;
         }
 
-        if ($this->validation() === TRUE) {
-            return TRUE;
+        if ($this->validation() === true) {
+            return true;
         }
 
         $this->setValidateMessage($this->message_code);
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -225,7 +225,7 @@ abstract class AbstractConstraint implements ConstraintInterface
      */
     protected function validation()
     {
-        return FALSE;
+        return false;
     }
 
     /**
@@ -238,13 +238,13 @@ abstract class AbstractConstraint implements ConstraintInterface
      */
     public function sanitize()
     {
-        if ($this->field_value === NULL) {
+        if ($this->field_value === null) {
             return $this->field_value;
         }
 
-        if ($this->$this->method_test() === TRUE) {
+        if ($this->$this->method_test() === true) {
         } else {
-            $this->field_value = NULL;
+            $this->field_value = null;
         }
 
         return $this->field_value;
@@ -274,9 +274,9 @@ abstract class AbstractConstraint implements ConstraintInterface
      * @return  $this
      * @since   1.0.0
      */
-    public function setValidateMessage($message_code = NULL)
+    public function setValidateMessage($message_code = null)
     {
-        if ($message_code === NULL) {
+        if ($message_code === null) {
             $message_code = 1000;
         }
 

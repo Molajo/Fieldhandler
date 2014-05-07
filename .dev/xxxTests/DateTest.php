@@ -54,7 +54,7 @@ class DateTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint);
 
-        $this->assertEquals(TRUE, $results->getValidateResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
 
         $messages = $results->getValidateMessages();
         $this->assertEquals(array(), $messages);
@@ -75,7 +75,7 @@ class DateTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint);
 
-        $this->assertEquals(FALSE, $results->getValidateResponse());
+        $this->assertEquals(false, $results->getValidateResponse());
 
         $expected_code    = 2000;
         $expected_message = 'Field: this_is_a_date_field must only contain Date values.';
@@ -104,7 +104,7 @@ class DateTest extends PHPUnit_Framework_TestCase
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(FALSE, $results->getChangeIndicator());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
@@ -123,8 +123,8 @@ class DateTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint);
 
-        $this->assertEquals(NULL, $results->getFieldValue());
-        $this->assertEquals(TRUE, $results->getChangeIndicator());
+        $this->assertEquals(null, $results->getFieldValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }
@@ -147,7 +147,7 @@ class DateTest extends PHPUnit_Framework_TestCase
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('09/13/2012', $results->getFieldValue());
-        $this->assertEquals(TRUE, $results->getChangeIndicator());
+        $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }

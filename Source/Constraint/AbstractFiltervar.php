@@ -87,12 +87,12 @@ abstract class AbstractFiltervar extends AbstractConstraintTests implements Cons
         if ($this->filter_type === FILTER_VALIDATE_FLOAT
             && (float)$this->field_value === (float)$this->sanitize()
         ) {
-            return TRUE;
+            return true;
 
         } elseif ($this->field_value === $this->sanitize()) {
-            return TRUE;
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 }

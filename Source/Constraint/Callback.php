@@ -61,10 +61,10 @@ class Callback extends AbstractConstraintTests implements ConstraintInterface
      */
     public function validation()
     {
-        if (filter_var($this->field_value, $this->filter_type, $this->setOptions()) === FALSE) {
-            return FALSE;
+        if (filter_var($this->field_value, $this->filter_type, $this->setOptions()) === false) {
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
 }

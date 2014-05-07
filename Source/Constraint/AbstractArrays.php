@@ -54,11 +54,11 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
      */
     protected function validation()
     {
-        if ($this->getArrayValues(FALSE) === TRUE) {
-            return TRUE;
+        if ($this->getArrayValues(false) === true) {
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -69,7 +69,7 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
      * @return  boolean
      * @since   1.0.0
      */
-    protected function getArrayValues($filter = FALSE)
+    protected function getArrayValues($filter = false)
     {
         return $this->testArrayValues($this->getArrayOptionArray($this->array_option_type), $filter);
     }
@@ -111,11 +111,11 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
         $tested = $this->testArrayValuesPart($array_values);
 
         if (count($tested) === count($this->field_value)) {
-            $test = TRUE;
+            $test = true;
 
         } else {
-            $test = FALSE;
-            if ($filter === TRUE) {
+            $test = false;
+            if ($filter === true) {
                 $this->field_value = $tested;
             }
         }
@@ -137,7 +137,7 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
 
         foreach ($this->field_value as $entry) {
 
-            if (in_array($entry, $array_values) === FALSE) {
+            if (in_array($entry, $array_values) === false) {
             } else {
                 $new[] = $entry;
             }
@@ -154,7 +154,7 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
      * @return  boolean
      * @since   1.0.0
      */
-    protected function testCount($filter = FALSE)
+    protected function testCount($filter = false)
     {
         $array_minimum = $this->getOption('array_minimum', 0);
         $array_maximum = $this->getOption('array_maximum', 9999999999);
@@ -163,13 +163,13 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
             || count($this->field_value) > $array_maximum
         ) {
 
-            if ($filter === TRUE) {
-                $this->field_value = NULL;
+            if ($filter === true) {
+                $this->field_value = null;
             }
 
-            return FALSE;
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
 }

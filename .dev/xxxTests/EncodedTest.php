@@ -54,7 +54,7 @@ class EncodedTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(TRUE, $results->getValidateResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
         $this->assertEquals(array(), $results->getValidateMessages());
 
         return;
@@ -74,7 +74,7 @@ class EncodedTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(FALSE, $results->getValidateResponse());
+        $this->assertEquals(false, $results->getValidateResponse());
 
         $expected_code    = 1000;
         $expected_message = 'Field: dog does not have a valid value for Encoded data type.';
@@ -100,7 +100,7 @@ class EncodedTest extends PHPUnit_Framework_TestCase
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('my-apples%26are%20green%20and%20red', $results->getFieldValue());
-        $this->assertEquals(TRUE, $results->getChangeIndicator());
+        $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }
@@ -120,7 +120,7 @@ class EncodedTest extends PHPUnit_Framework_TestCase
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('Jack%20%2A%26and%2BJill', $results->getFieldValue());
-        $this->assertEquals(TRUE, $results->getChangeIndicator());
+        $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }
@@ -140,7 +140,7 @@ class EncodedTest extends PHPUnit_Framework_TestCase
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('Jack *&and+Jill', $results->getFieldValue());
-        $this->assertEquals(FALSE, $results->getChangeIndicator());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }

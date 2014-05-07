@@ -189,7 +189,7 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    public function validate($field_name, $field_value = NULL, $constraint, array $options = array())
+    public function validate($field_name, $field_value = null, $constraint, array $options = array())
     {
         return $this->processRequest('validate', $field_name, $field_value, $constraint, $options);
     }
@@ -225,7 +225,7 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    public function sanitize($field_name, $field_value = NULL, $constraint, array $options = array())
+    public function sanitize($field_name, $field_value = null, $constraint, array $options = array())
     {
         return $this->processRequest('sanitize', $field_name, $field_value, $constraint, $options);
     }
@@ -264,7 +264,7 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    public function format($field_name, $field_value = NULL, $constraint, array $options = array())
+    public function format($field_name, $field_value = null, $constraint, array $options = array())
     {
         return $this->processRequest('format', $field_name, $field_value, $constraint, $options);
     }
@@ -285,7 +285,7 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
     protected function processRequest(
         $method,
         $field_name,
-        $field_value = NULL,
+        $field_value = null,
         $constraint,
         array $options = array()
     ) {
@@ -313,8 +313,8 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
 
         if ($method === 'validate') {
             $this->getValidateMessages();
-            if ($response === FALSE) {
-                $this->validate_response = FALSE;
+            if ($response === false) {
+                $this->validate_response = false;
             }
 
             return $this->setValidateResponse();
@@ -372,7 +372,7 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
 
         $this->createMessageInstance();
 
-        $this->validate_response = TRUE;
+        $this->validate_response = true;
 
         return $this;
     }
@@ -390,7 +390,7 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
     {
         $this->field_name = ltrim(rtrim($field_name));
 
-        if ($field_name === '' || $field_name === NULL) {
+        if ($field_name === '' || $field_name === null) {
         } else {
             return $this;
         }
@@ -410,7 +410,7 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    protected function setFieldValue($field_value = NULL)
+    protected function setFieldValue($field_value = null)
     {
         $this->field_value = $field_value;
 
@@ -463,7 +463,7 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
     {
         $this->constraint = ucfirst(strtolower($constraint));
 
-        if (trim($this->constraint) === '' || $this->constraint === NULL) {
+        if (trim($this->constraint) === '' || $this->constraint === null) {
 
             throw new UnexpectedValueException
             (

@@ -37,14 +37,14 @@ class Date extends AbstractConstraintTests implements ConstraintInterface
      */
     public function format()
     {
-        if ($this->field_value === NULL) {
-            return TRUE;
+        if ($this->field_value === null) {
+            return true;
         }
 
         $date = $this->createFromFormat();
 
-        if ($date === FALSE) {
-            $this->field_value = NULL;
+        if ($date === false) {
+            $this->field_value = null;
         }
 
         $format = $this->getOption('display_as_date_format', 'Y-m-d');
@@ -64,11 +64,11 @@ class Date extends AbstractConstraintTests implements ConstraintInterface
     {
         $date = $this->createFromFormat();
 
-        if ($date === FALSE) {
-            return FALSE;
+        if ($date === false) {
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
 
     /**
@@ -85,7 +85,7 @@ class Date extends AbstractConstraintTests implements ConstraintInterface
 
         $errors = DateTime::getLastErrors();
         if ($errors['warning_count'] > 0) {
-            return FALSE;
+            return false;
         }
 
         return $date;

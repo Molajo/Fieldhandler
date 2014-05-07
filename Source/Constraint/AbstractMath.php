@@ -29,10 +29,10 @@ abstract class AbstractMath extends AbstractConstraintTests implements Constrain
     protected function getEqual()
     {
         if ($this->field_value === $this->getOption('equal')) {
-            return TRUE;
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -45,10 +45,10 @@ abstract class AbstractMath extends AbstractConstraintTests implements Constrain
     protected function getNotEqual()
     {
         if ($this->field_value === $this->getOption('not_equal')) {
-            return FALSE;
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
 
     /**
@@ -61,10 +61,10 @@ abstract class AbstractMath extends AbstractConstraintTests implements Constrain
     protected function getLessthan()
     {
         if ($this->field_value < $this->getOption('less_than')) {
-            return TRUE;
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -77,10 +77,10 @@ abstract class AbstractMath extends AbstractConstraintTests implements Constrain
     protected function getMinimum()
     {
         if ($this->field_value <= $this->getOption('minimum')) {
-            return TRUE;
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -93,10 +93,10 @@ abstract class AbstractMath extends AbstractConstraintTests implements Constrain
     protected function getGreaterthan()
     {
         if ($this->field_value > $this->getOption('greater_than')) {
-            return TRUE;
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -109,9 +109,9 @@ abstract class AbstractMath extends AbstractConstraintTests implements Constrain
     protected function getMaximum()
     {
         if ($this->field_value >= $this->getOption('maximum')) {
-            return TRUE;
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 }

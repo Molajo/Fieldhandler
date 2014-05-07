@@ -36,13 +36,13 @@ class Contains extends AbstractConstraintTests implements ConstraintInterface
      */
     protected function validation()
     {
-        if ($this->testContains() === FALSE) {
+        if ($this->testContains() === false) {
             $this->setValidateMessage(1000);
 
-            return FALSE;
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
 
     /**

@@ -18,24 +18,24 @@ function createClassMap($base, $qcn_prefix, array $exclude_array = array())
 
     foreach ($objects as $file_path => $file_object) {
 
-        $include = TRUE;
+        $include = true;
 
         if (count($exclude_array) === 0) {
         } else {
             foreach ($exclude_array as $search_for) {
-                if (strrpos($file_object->getPath(), $search_for) === FALSE) {
+                if (strrpos($file_object->getPath(), $search_for) === false) {
                 } else {
-                    $include = FALSE;
+                    $include = false;
                 }
             }
         }
 
         if ($file_object->getExtension() == 'php') {
         } else {
-            $include = FALSE;
+            $include = false;
         }
 
-        if ($include === TRUE) {
+        if ($include === true) {
             $qcn                        = $qcn_prefix . $file_object->getBaseName('.php');
             $path                       = $file_object->getPath() . '/' . $file_object->getFileName();
             $function_class_map[ $qcn ] = $path;

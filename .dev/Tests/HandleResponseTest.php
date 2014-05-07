@@ -1,6 +1,6 @@
 <?php
 /**
- * EscapeProxy Test
+ * HandleResponse Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -13,14 +13,14 @@ use Molajo\Fieldhandler\Escape;
 use PHPUnit_Framework_TestCase;
 
 /**
- * EscapeProxy Fieldhandler
+ * HandleResponse Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class EscapeProxyTest extends PHPUnit_Framework_TestCase
+class HandleResponseTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Escape

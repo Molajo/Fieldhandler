@@ -58,7 +58,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(TRUE, $results->getValidateResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
 
         $messages = $results->getValidateMessages();
         $this->assertEquals(array(), $messages);
@@ -88,7 +88,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(FALSE, $results->getValidateResponse());
+        $this->assertEquals(false, $results->getValidateResponse());
         $messages = $results->getValidateMessages();
         $this->assertEquals(3, count($messages));
 
@@ -111,7 +111,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(FALSE, $results->getValidateResponse());
+        $this->assertEquals(false, $results->getValidateResponse());
 
         $messages         = $results->getValidateMessages();
         $expected_code    = 3000;
@@ -143,7 +143,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(TRUE, $results->getValidateResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
 
         $messages = $results->getValidateMessages();
         $this->assertEquals(array(), $messages);
@@ -170,7 +170,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(TRUE, $results->getValidateResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
 
         $messages = $results->getValidateMessages();
         $this->assertEquals(array(), $messages);
@@ -204,7 +204,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(TRUE, $results->getValidateResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
 
         return;
     }
@@ -264,7 +264,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(TRUE, $results->getValidateResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
 
         return;
     }
@@ -288,7 +288,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(TRUE, $results->getValidateResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
 
         return;
     }

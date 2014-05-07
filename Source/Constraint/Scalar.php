@@ -41,9 +41,9 @@ class Scalar extends AbstractConstraintTests implements ConstraintInterface
     protected function validation()
     {
         if (is_scalar($this->field_value)) {
-            return TRUE;
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 }

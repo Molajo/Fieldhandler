@@ -49,11 +49,11 @@ class Defaults extends AbstractConstraintTests implements ConstraintInterface
      */
     protected function validation()
     {
-        if ($this->field_value === NULL) {
-            return FALSE;
+        if ($this->field_value === null) {
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
 
     /**
@@ -64,7 +64,7 @@ class Defaults extends AbstractConstraintTests implements ConstraintInterface
      */
     protected function setDefault()
     {
-        if ($this->field_value === NULL) {
+        if ($this->field_value === null) {
             $this->field_value = $this->getOption('default');
         }
 

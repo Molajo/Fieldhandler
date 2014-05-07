@@ -54,7 +54,7 @@ class ControlCharactersTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(TRUE, $results->getValidateResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
         $this->assertEquals(array(), $results->getValidateMessages());
 
         return;
@@ -74,7 +74,7 @@ class ControlCharactersTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(FALSE, $results->getValidateResponse());
+        $this->assertEquals(false, $results->getValidateResponse());
 
         $expected_code    = 2000;
         $expected_message = 'Field: test must only contain Controlcharacters values.';
@@ -100,7 +100,7 @@ class ControlCharactersTest extends PHPUnit_Framework_TestCase
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(FALSE, $results->getChangeIndicator());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
@@ -121,7 +121,7 @@ class ControlCharactersTest extends PHPUnit_Framework_TestCase
 
         $expected_value = "\n\r\t";
         $this->assertEquals($expected_value, $results->getFieldValue());
-        $this->assertEquals(TRUE, $results->getChangeIndicator());
+        $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }
@@ -141,7 +141,7 @@ class ControlCharactersTest extends PHPUnit_Framework_TestCase
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(FALSE, $results->getChangeIndicator());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }

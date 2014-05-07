@@ -29,10 +29,10 @@ class Boolean extends AbstractConstraintTests implements ConstraintInterface
      */
     protected function validation()
     {
-        if ($this->field_value === FALSE || $this->field_value === TRUE) {
-            return TRUE;
+        if ($this->field_value === false || $this->field_value === true) {
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 }

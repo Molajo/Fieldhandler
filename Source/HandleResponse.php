@@ -71,19 +71,19 @@ class HandleResponse implements HandleResponseInterface
      */
     public function getChangeIndicator()
     {
-        if ($this->testNoValueChange() === TRUE) {
-            return TRUE;
+        if ($this->testNoValueChange() === true) {
+            return true;
         }
 
-        if ($this->testFloat() === TRUE) {
-            return TRUE;
+        if ($this->testFloat() === true) {
+            return true;
         }
 
         if ($this->original_data_value === $this->response_value) {
-            return FALSE;
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
 
     /**
@@ -94,22 +94,22 @@ class HandleResponse implements HandleResponseInterface
      */
     protected function testNoValueChange()
     {
-        $change = $this->testNoValueChangeCompare(NULL, FALSE);
-        if ($change === TRUE) {
-            return TRUE;
+        $change = $this->testNoValueChangeCompare(null, false);
+        if ($change === true) {
+            return true;
         }
 
-        $change = $this->testNoValueChangeCompare(FALSE, NULL);
-        if ($change === TRUE) {
-            return TRUE;
+        $change = $this->testNoValueChangeCompare(false, null);
+        if ($change === true) {
+            return true;
         }
 
-        $change = $this->testNoValueChangeCompare(0, NULL);
-        if ($change === TRUE) {
-            return TRUE;
+        $change = $this->testNoValueChangeCompare(0, null);
+        if ($change === true) {
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -123,15 +123,15 @@ class HandleResponse implements HandleResponseInterface
      * @return  boolean
      * @since   1.0.0
      */
-    protected function testNoValueChangeCompare($original = NULL, $response = NULL)
+    protected function testNoValueChangeCompare($original = null, $response = null)
     {
         if ($this->original_data_value === $original
             && $this->response_value === $response
         ) {
-            return TRUE;
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -142,14 +142,14 @@ class HandleResponse implements HandleResponseInterface
      */
     protected function testFloat()
     {
-        $change = FALSE;
+        $change = false;
 
         if (is_numeric($this->original_data_value)) {
 
             if ((float)$this->original_data_value < (float)$this->response_value
                 || (float)$this->response_value < (float)$this->original_data_value
             ) {
-                $change = TRUE;
+                $change = true;
             }
         }
 

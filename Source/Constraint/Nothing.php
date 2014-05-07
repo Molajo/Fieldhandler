@@ -38,10 +38,10 @@ class Nothing extends AbstractSomething implements ConstraintInterface
     {
         $response = parent::validation();
 
-        if ($response === FALSE) {
-            return TRUE;
+        if ($response === false) {
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 }

@@ -52,7 +52,7 @@ class RawTest extends PHPUnit_Framework_TestCase
         $field_value                       = '&';
         $constraint                        = 'Raw';
         $options                           = array();
-        $options['FILTER_FLAG_ENCODE_AMP'] = TRUE;
+        $options['FILTER_FLAG_ENCODE_AMP'] = true;
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
@@ -61,7 +61,7 @@ class RawTest extends PHPUnit_Framework_TestCase
         } else {
             $this->assertEquals('&amp;', $results->getFieldValue());
         }
-        $this->assertEquals(FALSE, $results->getChangeIndicator());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }

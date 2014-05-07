@@ -37,9 +37,9 @@ class Numeric extends AbstractConstraintTests implements ConstraintInterface
     protected function validation()
     {
         if (is_numeric($this->field_value)) {
-            return TRUE;
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 }

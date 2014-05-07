@@ -54,7 +54,7 @@ class RequiredTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(TRUE, $results->getValidateResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
         $this->assertEquals(array(), $results->getValidateMessages());
 
         return;
@@ -68,7 +68,7 @@ class RequiredTest extends PHPUnit_Framework_TestCase
     public function testValidateFail()
     {
         $field_name  = 'email';
-        $field_value = NULL;
+        $field_value = null;
         $constraint  = 'Required';
 
         $results = $this->request->validate($field_name, $field_value, $constraint, array());

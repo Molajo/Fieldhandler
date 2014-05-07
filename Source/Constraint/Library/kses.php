@@ -206,7 +206,7 @@ function kses_attr($element, $attr, $allowed_html, $allowed_protocols)
 
         else {
             # there are some checks
-            $ok = TRUE;
+            $ok = true;
             foreach ($current as $currkey => $currval) {
                 if (! kses_check_attr_val(
                     $arreach['value'],
@@ -215,7 +215,7 @@ function kses_attr($element, $attr, $allowed_html, $allowed_protocols)
                     $currval
                 )
                 ) {
-                    $ok = FALSE;
+                    $ok = false;
                     break;
                 }
             }
@@ -380,7 +380,7 @@ function kses_check_attr_val($value, $vless, $checkname, $checkvalue)
 # with even more checks to come soon.
 ###############################################################################
 {
-    $ok = TRUE;
+    $ok = true;
 
     switch (strtolower($checkname)) {
         case 'maxlen':
@@ -389,7 +389,7 @@ function kses_check_attr_val($value, $vless, $checkname, $checkvalue)
             # in WWW clients and various Internet servers.
 
             if (strlen($value) > $checkvalue) {
-                $ok = FALSE;
+                $ok = false;
             }
             break;
 
@@ -398,7 +398,7 @@ function kses_check_attr_val($value, $vless, $checkname, $checkvalue)
             # smaller than the given value.
 
             if (strlen($value) < $checkvalue) {
-                $ok = FALSE;
+                $ok = false;
             }
             break;
 
@@ -410,10 +410,10 @@ function kses_check_attr_val($value, $vless, $checkname, $checkvalue)
             # This check can be used to avoid Denial of Service attacks.
 
             if (! preg_match('/^\s{0,6}[0-9]{1,6}\s{0,6}$/', $value)) {
-                $ok = FALSE;
+                $ok = false;
             }
             if ($value > $checkvalue) {
-                $ok = FALSE;
+                $ok = false;
             }
             break;
 
@@ -422,10 +422,10 @@ function kses_check_attr_val($value, $vless, $checkname, $checkvalue)
             # and that it is not smaller than the given value.
 
             if (! preg_match('/^\s{0,6}[0-9]{1,6}\s{0,6}$/', $value)) {
-                $ok = FALSE;
+                $ok = false;
             }
             if ($value < $checkvalue) {
-                $ok = FALSE;
+                $ok = false;
             }
             break;
 
@@ -436,7 +436,7 @@ function kses_check_attr_val($value, $vless, $checkname, $checkvalue)
             # If the given value is an "n" or an "N", the attribute must have one.
 
             if (strtolower($checkvalue) != $vless) {
-                $ok = FALSE;
+                $ok = false;
             }
             break;
     } # switch
@@ -572,10 +572,10 @@ function kses_bad_protocol_once2($matches)
     # deals with Opera "feature"
     $string2 = strtolower($string2);
 
-    $allowed = FALSE;
+    $allowed = false;
     foreach ($allowed_protocols as $one_protocol) {
         if (strtolower($one_protocol) == $string2) {
-            $allowed = TRUE;
+            $allowed = true;
             break;
         }
     }

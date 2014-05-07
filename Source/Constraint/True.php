@@ -29,7 +29,7 @@ class True extends AbstractConstraintTests implements ConstraintInterface
      * @var    array
      * @since  1.0.0
      */
-    protected $true_array = array(TRUE => TRUE, 1 => 1, 'yes' => 'yes', 'on' => 'on');
+    protected $true_array = array(true => true, 1 => 1, 'yes' => 'yes', 'on' => 'on');
 
     /**
      * Message Code
@@ -77,10 +77,10 @@ class True extends AbstractConstraintTests implements ConstraintInterface
      */
     protected function validation()
     {
-        if (in_array($this->field_value, $this->true_array) === FALSE) {
-            return FALSE;
+        if (in_array($this->field_value, $this->true_array) === false) {
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
 }

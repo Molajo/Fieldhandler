@@ -37,10 +37,10 @@ class Object extends AbstractConstraintTests implements ConstraintInterface
      */
     protected function validation()
     {
-        if (is_object($this->field_value) == TRUE) {
-            return TRUE;
+        if (is_object($this->field_value) == true) {
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 }

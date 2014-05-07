@@ -55,7 +55,7 @@ class ObjectTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(TRUE, $results->getValidateResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
         $this->assertEquals(array(), $results->getValidateMessages());
 
         return;
@@ -73,9 +73,9 @@ class ObjectTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Object';
         $options     = array();
 
-        $results = $this->request->validate(FALSE, $field_value, $constraint, $options);
+        $results = $this->request->validate(false, $field_value, $constraint, $options);
 
-        $this->assertEquals(FALSE, $results->getValidateResponse());
+        $this->assertEquals(false, $results->getValidateResponse());
 
         $expected_code    = 1000;
         $expected_message = 'Field:  does not have a valid value for Object data type.';

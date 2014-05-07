@@ -49,7 +49,7 @@ class Email extends AbstractFiltervar implements ConstraintInterface
     {
         $this->sanitize();
 
-        if ($this->getOption('obfuscate_email') === NULL) {
+        if ($this->getOption('obfuscate_email') === null) {
             return $this->field_value;
         }
 
@@ -72,18 +72,18 @@ class Email extends AbstractFiltervar implements ConstraintInterface
      */
     protected function validation()
     {
-        $valid = TRUE;
+        $valid = true;
 
         $host = $this->getHost();
 
-        if ($this->checkMX($host) === TRUE) {
+        if ($this->checkMX($host) === true) {
         } else {
-            $valid = FALSE;
+            $valid = false;
         }
 
-        if ($this->checkHost($host) === TRUE) {
+        if ($this->checkHost($host) === true) {
         } else {
-            $valid = FALSE;
+            $valid = false;
         }
 
         return $valid;
@@ -103,7 +103,7 @@ class Email extends AbstractFiltervar implements ConstraintInterface
             return $email_parts[1];
         }
 
-        return NULL;
+        return null;
     }
 
     /**
@@ -114,18 +114,18 @@ class Email extends AbstractFiltervar implements ConstraintInterface
      * @return  boolean
      * @since   1.0.0
      */
-    protected function checkMX($host = NULL)
+    protected function checkMX($host = null)
     {
-        if ($this->getOption('check_mx') === NULL) {
-            return TRUE;
+        if ($this->getOption('check_mx') === null) {
+            return true;
         }
 
         if (checkdnsrr($host, 'MX')) {
         } else {
-            return FALSE;
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
 
     /**
@@ -136,10 +136,10 @@ class Email extends AbstractFiltervar implements ConstraintInterface
      * @return  boolean
      * @since   1.0.0
      */
-    protected function checkHost($host = NULL)
+    protected function checkHost($host = null)
     {
-        if ($this->getOption('check_host') === NULL) {
-            return TRUE;
+        if ($this->getOption('check_host') === null) {
+            return true;
         }
 
         $response = (int)checkdnsrr($host, 'MX');
@@ -147,9 +147,9 @@ class Email extends AbstractFiltervar implements ConstraintInterface
         $response = $response + (int)checkdnsrr($host, 'AAAA');
 
         if ($response > 0) {
-            return TRUE;
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 }

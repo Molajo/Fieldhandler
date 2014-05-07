@@ -39,9 +39,9 @@ class Fromto extends AbstractConstraintTests implements ConstraintInterface
         if ($this->field_value >= $this->getOption('from', 0)
             && $this->field_value <= $this->getOption('to', 999999999999)
         ) {
-            return TRUE;
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 }

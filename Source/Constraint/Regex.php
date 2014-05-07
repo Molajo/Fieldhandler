@@ -44,11 +44,11 @@ class Regex extends AbstractConstraintTests implements ConstraintInterface
      */
     protected function validation()
     {
-        if ($this->getRegex() === TRUE) {
-            return TRUE;
+        if ($this->getRegex() === true) {
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 
     /**

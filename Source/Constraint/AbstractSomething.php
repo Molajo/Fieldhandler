@@ -55,9 +55,9 @@ abstract class AbstractSomething extends AbstractConstraintTests implements Cons
      */
     public function sanitize()
     {
-        if ($this->validation() === TRUE) {
+        if ($this->validation() === true) {
         } else {
-            $this->field_value = NULL;
+            $this->field_value = null;
         }
 
         return $this->field_value;
@@ -71,13 +71,13 @@ abstract class AbstractSomething extends AbstractConstraintTests implements Cons
      */
     protected function validation()
     {
-        if ($this->field_value === NULL
+        if ($this->field_value === null
             || trim($this->field_value) === ''
             || $this->field_value === 0
         ) {
-            return FALSE;
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
 }

@@ -50,7 +50,7 @@ class SomethingTest extends PHPUnit_Framework_TestCase
     public function testValidateSuccessNull()
     {
         $field_name  = 'agreement';
-        $field_value = NULL;
+        $field_value = null;
         $constraint  = 'Something';
         $options     = array();
 
@@ -123,13 +123,13 @@ class SomethingTest extends PHPUnit_Framework_TestCase
     public function testValidateFalse()
     {
         $field_name  = 'single';
-        $field_value = TRUE;
+        $field_value = true;
         $constraint  = 'Something';
         $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(TRUE, $results->getValidateResponse());
+        $this->assertEquals(true, $results->getValidateResponse());
 
         return;
     }
@@ -148,8 +148,8 @@ class SomethingTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(NULL, $results->getFieldValue());
-        $this->assertEquals(TRUE, $results->getChangeIndicator());
+        $this->assertEquals(null, $results->getFieldValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }
@@ -162,14 +162,14 @@ class SomethingTest extends PHPUnit_Framework_TestCase
     public function testSanitizeFailure()
     {
         $field_name  = 'single';
-        $field_value = TRUE;
+        $field_value = true;
         $constraint  = 'Something';
         $options     = array();
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(TRUE, $results->getFieldValue());
-        $this->assertEquals(FALSE, $results->getChangeIndicator());
+        $this->assertEquals(true, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
@@ -189,7 +189,7 @@ class SomethingTest extends PHPUnit_Framework_TestCase
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(FALSE, $results->getChangeIndicator());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
@@ -202,14 +202,14 @@ class SomethingTest extends PHPUnit_Framework_TestCase
     public function testFormatFailure()
     {
         $field_name  = 'single';
-        $field_value = TRUE;
+        $field_value = true;
         $constraint  = 'Something';
         $options     = array();
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(TRUE, $results->getFieldValue());
-        $this->assertEquals(FALSE, $results->getChangeIndicator());
+        $this->assertEquals(true, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }

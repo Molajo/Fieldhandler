@@ -56,7 +56,7 @@ abstract class AbstractCtype extends AbstractConstraintTests implements Constrai
      */
     public function sanitize()
     {
-        if ($this->field_value === NULL) {
+        if ($this->field_value === null) {
         } else {
             $this->field_value = $this->sanitizeByCType($this->ctype, $this->field_value);
         }
@@ -86,7 +86,7 @@ abstract class AbstractCtype extends AbstractConstraintTests implements Constrai
      */
     protected function sanitizeByCType($ctype, $field_value)
     {
-        return $this->sanitizeByCharacter($ctype, $field_value, $this->getOption('allow_whitespace', FALSE));
+        return $this->sanitizeByCharacter($ctype, $field_value, $this->getOption('allow_whitespace', false));
     }
 
     /**
@@ -100,9 +100,9 @@ abstract class AbstractCtype extends AbstractConstraintTests implements Constrai
         $temp = $this->sanitizeByCType($this->ctype, $this->field_value);
 
         if ($temp === $this->field_value) {
-            return TRUE;
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 }

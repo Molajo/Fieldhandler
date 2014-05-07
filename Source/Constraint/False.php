@@ -29,7 +29,7 @@ class False extends AbstractConstraintTests implements ConstraintInterface
      * @var    array
      * @since  1.0.0
      */
-    protected $false_array = array(FALSE => FALSE, 0 => 0, 'no' => 'no', 'off' => 'off');
+    protected $false_array = array(false => false, 0 => 0, 'no' => 'no', 'off' => 'off');
 
     /**
      * Message Code
@@ -82,11 +82,11 @@ class False extends AbstractConstraintTests implements ConstraintInterface
     {
         $testValue = $this->field_value;
 
-        if (in_array($testValue, $this->false_array) === TRUE || $testValue === FALSE) {
+        if (in_array($testValue, $this->false_array) === true || $testValue === false) {
         } else {
-            return FALSE;
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
 }

@@ -48,10 +48,10 @@ class Password extends AbstractConstraintTests implements ConstraintInterface
      */
     protected function validation()
     {
-        if (ctype_print($this->field_value) === FALSE) {
-            return FALSE;
+        if (ctype_print($this->field_value) === false) {
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
 }

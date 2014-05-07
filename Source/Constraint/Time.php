@@ -29,9 +29,9 @@ class Time extends AbstractConstraintTests implements ConstraintInterface
     public function validation()
     {
         if (strtotime($this->field_value)) {
-            return TRUE;
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 }

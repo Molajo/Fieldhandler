@@ -44,9 +44,9 @@ class Length extends AbstractConstraintTests implements ConstraintInterface
         if ($string_length >= $minimum
             && $string_length <= $maximum
         ) {
-            return TRUE;
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 }

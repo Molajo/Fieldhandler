@@ -36,8 +36,8 @@ class Alias extends AbstractConstraintTests implements ConstraintInterface
      */
     public function format()
     {
-        if ($this->field_value === NULL) {
-            return NULL;
+        if ($this->field_value === null) {
+            return null;
         }
 
         $this->field_value = $this->formatAlias($this->field_value);
@@ -58,10 +58,10 @@ class Alias extends AbstractConstraintTests implements ConstraintInterface
         $alias = $this->formatAlias($alias);
 
         if ($this->field_value === $alias) {
-            return TRUE;
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -74,7 +74,7 @@ class Alias extends AbstractConstraintTests implements ConstraintInterface
      */
     protected function sanitizeAlias($alias)
     {
-        return $this->sanitizeByCharacter('ctype_alnum', str_replace('-', ' ', trim($alias)), TRUE);
+        return $this->sanitizeByCharacter('ctype_alnum', str_replace('-', ' ', trim($alias)), true);
     }
 
     /**
