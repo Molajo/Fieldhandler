@@ -1,7 +1,7 @@
 filter:
     excluded_paths:
         - 'vendor/*'
-        - 'Library/*'
+        - 'Source/Constraint/Library/*'
         - '.dev/*'
     paths: {  }
 tools:
@@ -11,7 +11,7 @@ tools:
         filter:
             excluded_paths:
                 - 'vendor/*'
-                - 'Library/*'
+                - 'Source/Constraint/Library/*'
                 - '.dev/*'
             paths: {  }
     php_pdepend:
@@ -23,7 +23,7 @@ tools:
         filter:
             excluded_paths:
                 - 'vendor/*'
-                - 'Library/*'
+                - 'Source/Constraint/Library/*'
                 - '.dev/*'
 
             paths: {  }
@@ -35,7 +35,7 @@ tools:
         filter:
             excluded_paths:
                 - 'vendor/*'
-                - 'Library/*'
+                - 'Source/Constraint/Library/*'
                 - '.dev/*'
 
             paths: {  }
@@ -50,7 +50,7 @@ tools:
         filter:
             excluded_paths:
                 - 'vendor/*'
-                - 'Library/*'
+                - 'Source/Constraint/Library/*'
                 - '.dev/*'
             paths: {  }
 before_commands: {  }
