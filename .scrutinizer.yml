@@ -26,7 +26,7 @@ tools:
     sensiolabs_security_checker: true
     php_cs_fixer:
         config: { level: psr2 }
-      excluded_paths: [".dev", "vendor", "Source/Constraint/Library"]
+        excluded_paths: [".dev", "vendor", "Source/Constraint/Library"]
     php_sim:
         enabled: true
         min_mass: 16
