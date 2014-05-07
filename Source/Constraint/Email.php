@@ -74,22 +74,14 @@ class Email extends AbstractFiltervar implements ConstraintInterface
     {
         $valid = TRUE;
 
-        $host = NULL;
+        $host = $this->getHost();
 
-        $email_parts = explode('@', $this->field_value);
-
-        if (is_array($email_parts) && count($email_parts) === 2) {
-            $host = $email_parts[1];
+        if ($this->checkMX($host) === TRUE) {
         } else {
             $valid = FALSE;
         }
 
-        if ($this->checkMX($host) && $valid === TRUE) {
-        } else {
-            $valid = FALSE;
-        }
-
-        if ($this->checkHost($host) && $valid === TRUE) {
+        if ($this->checkHost($host) === TRUE) {
         } else {
             $valid = FALSE;
         }
@@ -98,13 +90,34 @@ class Email extends AbstractFiltervar implements ConstraintInterface
     }
 
     /**
+     * Extract Host
+     *
+     * @return  null|string
+     * @since   1.0.0
+     */
+    protected function getHost()
+    {
+        $email_parts = explode('@', $this->field_value);
+
+        if (is_array($email_parts) && count($email_parts) === 2) {
+            return $email_parts[1];
+        }
+
+        return NULL;
+    }
+
+    /**
      * Verify MX Record for Host
      *
      * @return  boolean
      * @since   1.0.0
      */
-    protected function checkMX($host)
+    protected function checkMX($host = NULL)
     {
+        if ($host === NULL) {
+            return FALSE;
+        }
+
         if ($this->getOption('check_mx') === NULL) {
         } else {
             if (checkdnsrr($host, 'MX')) {
@@ -124,8 +137,12 @@ class Email extends AbstractFiltervar implements ConstraintInterface
      * @return  boolean
      * @since   1.0.0
      */
-    protected function checkHost($host)
+    protected function checkHost($host = NULL)
     {
+        if ($host === NULL) {
+            return FALSE;
+        }
+
         if ($this->getOption('check_host') === NULL) {
         } else {
             if (checkdnsrr($host, 'MX') || checkdnsrr($host, "A") || checkdnsrr($host, "AAAA")) {
