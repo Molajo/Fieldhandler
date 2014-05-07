@@ -9,7 +9,7 @@
 namespace Molajo\Fieldhandler\Tests;
 
 use CommonApi\Model\EscapeInterface;
-use Molajo\Fieldhandler;
+use Molajo\Fieldhandler\Escape;
 use PHPUnit_Framework_TestCase;
 
 /**
