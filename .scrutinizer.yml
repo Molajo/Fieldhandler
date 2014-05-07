@@ -1,6 +1,6 @@
 tools:
     external_code_coverage:
-      timeout: 600
+      timeout: 6000
     php_code_sniffer:
         enabled: true
         config:
@@ -8,7 +8,7 @@ tools:
         filter:
             paths: ["Source/*"]
     php_cpd:
-        enabled: true
+        enabled: false
         excluded_dirs: [".dev", "vendor", "Source/Constraint/Library"]
     php_cs_fixer:
         config:
