@@ -186,14 +186,6 @@ abstract class AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Used by Constraint Classes to customize option values needed for Field handling
-     *
-     * @return  AbstractConstraint
-     * @since   1.0.0
-     */
-    abstract public function setOptions();
-
-    /**
      * Validate
      *
      * @api

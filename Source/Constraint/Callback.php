@@ -40,20 +40,6 @@ class Callback extends AbstractConstraintTests implements ConstraintInterface
     protected $message_code = 1000;
 
     /**
-     * Used by Constraint Classes to customize option values needed for Field handling
-     *
-     * @return  array
-     * @since   1.0.0
-     */
-    public function setOptions()
-    {
-        $return            = array();
-        $return['options'] = $this->getOption('callback');
-
-        return $return;
-    }
-
-    /**
      * Validation
      *
      * @return  boolean
@@ -61,10 +47,24 @@ class Callback extends AbstractConstraintTests implements ConstraintInterface
      */
     public function validation()
     {
-        if (filter_var($this->field_value, $this->filter_type, $this->setOptions()) === false) {
+        if (filter_var($this->field_value, $this->filter_type, $this->setCallbackOptions()) === false) {
             return false;
         }
 
         return true;
+    }
+
+    /**
+     * Used by Constraint Classes to customize option values needed for Field handling
+     *
+     * @return  array
+     * @since   1.0.0
+     */
+    protected function setCallbackOptions()
+    {
+        $return            = array();
+        $return['options'] = $this->getOption('callback');
+
+        return $return;
     }
 }

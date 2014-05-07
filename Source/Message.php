@@ -65,17 +65,6 @@ class Message implements MessageInterface
     }
 
     /**
-     * Get Messages
-     *
-     * @return  array
-     * @since   1.0.0
-     */
-    public function getMessages()
-    {
-        return $this->messages;
-    }
-
-    /**
      * Set Messages and inject tokens
      *
      * @param   array $message_codes
@@ -99,6 +88,17 @@ class Message implements MessageInterface
         }
 
         return $this;
+    }
+
+    /**
+     * Get Messages
+     *
+     * @return  array
+     * @since   1.0.0
+     */
+    public function getMessages()
+    {
+        return $this->messages;
     }
 
     /**
