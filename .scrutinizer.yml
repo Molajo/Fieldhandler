@@ -29,8 +29,3 @@ tools:
 
     # https://scrutinizer-ci.com/docs/tools/php/security-advisory-checker/
     sensiolabs_security_checker: true
-
-before_commands: {  }
-after_commands: {  }
-artifacts: {  }
-build_failure_conditions: {  }

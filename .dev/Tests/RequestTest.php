@@ -105,12 +105,142 @@ class RequestTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Request::getRequestTemplate
+     * @covers  Molajo\Fieldhandler\Request::sanitize
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testSanitize()
+    {
+        $field_name  = 'Field Name';
+        $field_value = 123;
+        $constraint  = 'Mocknumeric';
+        $options = array();
+
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals($results->getFieldValue(), 123);
+        $this->assertEquals($results->getChangeIndicator(), false);
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Request::sanitize
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testSanitizeFalse()
+    {
+        $field_name  = 'Field Name';
+        $field_value = 'Dog';
+        $constraint  = 'Mocknumeric';
+        $options = array();
+
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals($results->getFieldValue(), null);
+        $this->assertEquals($results->getChangeIndicator(), true);
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Request::format
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testFormat()
+    {
+        $field_name  = 'Field Name';
+        $field_value = 123;
+        $constraint  = 'Mocknumeric';
+        $options = array();
+
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals($results->getFieldValue(), 123);
+        $this->assertEquals($results->getChangeIndicator(), false);
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Request::processRequest
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testProcessRequest()
+    {
+        $field_name  = 'Field Name';
+        $field_value = 123;
+        $constraint  = 'Mocknumeric';
+        $options = array();
+
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals($results->getFieldValue(), 123);
+        $this->assertEquals($results->getChangeIndicator(), false);
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Request::setFieldName
      * @expectedException        \CommonApi\Exception\UnexpectedValueException
-     * @expectedExceptionRequest Fieldhandler Request getRequestTemplate Method: Do not have template: 4444
+     * @expectedExceptionRequest Fieldhandler Request: Must provide the field name.
      *
      * @since   1.0.0
      */
+    public function testSetFieldName()
+    {
+        $field_name  = null;
+        $field_value = 123;
+        $constraint  = 'Mocknumeric';
+        $options = array();
+
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Request::editConstraint
+     * @expectedException        \CommonApi\Exception\UnexpectedValueException
+     * @expectedExceptionRequest Fieldhandler Request: Must request a specific constraint
+     *
+     * @since   1.0.0
+     */
+    public function testEditConstraint()
+    {
+        $field_name  = 'dog';
+        $field_value = 123;
+        $constraint  = '';
+        $options = array();
+
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Request::createConstraintClass
+     * @expectedException        \CommonApi\Exception\UnexpectedValueException
+     * @expectedExceptionRequest Fieldhandler Request createConstraint Method Failed: Dog Class: Molajo\Fieldhandler\Constraint\Dog
+     *
+     * @since   1.0.0
+     */
+    public function testCreateConstraintClass()
+    {
+        $field_name  = 'field_name';
+        $field_value = 123;
+        $constraint  = 'dog';
+        $options = array();
+
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
+
+        return;
+    }
+
     /**
      * Tear down
      *
@@ -124,7 +254,26 @@ class RequestTest extends PHPUnit_Framework_TestCase
 
 namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Model\ConstraintInterface;
+use Exception;
 
+/**
+ * Mock Dog Constraint
+ *
+ * @package    Molajo
+ * @copyright  2014 Amy Stephen. All rights reserved.
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @since      1.0.0
+ */
+class Dog extends AbstractConstraintTests implements ConstraintInterface
+{
+    public function __construct()
+    {
+        throw new Exception
+        (
+            'Mock Exception'
+        );
+    }
+}
 /**
  * Mock Numeric Constraint
  *
@@ -180,6 +329,12 @@ class Mocknumeric extends AbstractConstraintTests implements ConstraintInterface
      */
     public function sanitize()
     {
+        if (is_numeric($this->field_value)) {
+            return $this->field_value;
+        }
+
+        $this->field_value = null;
+
         return $this->field_value;
     }
 

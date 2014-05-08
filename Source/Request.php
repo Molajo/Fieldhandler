@@ -311,14 +311,6 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
     {
         $this->method = $method;
 
-        if (in_array($this->method, array('validate', 'sanitize', 'format'))) {
-        } else {
-            throw new UnexpectedValueException
-            (
-                'Fieldhandler Request: Must provide validate, sanitize, or format as requested method.'
-            );
-        }
-
         $this->createMessageInstance();
 
         $this->validate_response = true;
@@ -443,7 +435,7 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
 
             throw new UnexpectedValueException
             (
-                'Fieldhandler Request createConstraint Method: Failed: ' . $constraint . ' Class: ' . $class
+                'Fieldhandler Request createConstraint Method Failed: ' . $constraint . ' Class: ' . $class
             );
         }
     }
