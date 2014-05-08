@@ -47,7 +47,7 @@ class EscapeProxyTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testEscapeHtml()
+    public function testFormatHtml()
     {
         $string  = '<script>alert("molajo")</script>';
         $results = $this->escape->escapeHtml($string);
@@ -62,7 +62,7 @@ class EscapeProxyTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testEscapeHtmlAttributes()
+    public function testFormatHtmlAttributes()
     {
         $string  = 'title="mytitle" onmouseover=alert(/molajo!/)';
         $results = $this->escape->escapeHtmlAttributes($string);
@@ -77,7 +77,7 @@ class EscapeProxyTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testEscapeJs()
+    public function testFormatJs()
     {
         $string = 'bar&quot;; alert(&quot;Meow!&quot;); var xss=&quot;true';
 
@@ -93,7 +93,7 @@ class EscapeProxyTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testEscapeCss()
+    public function testFormatCss()
     {
         $string  = "body {
             background-image: url('http://example.com/foo.jpg?</style><script>alert(1)</script>');
@@ -110,7 +110,7 @@ class EscapeProxyTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testEscapeUrl()
+    public function testFormatUrl()
     {
         $string  = ' onmouseover="alert(\'molajo\')';
         $results = $this->escape->escapeUrl($string);

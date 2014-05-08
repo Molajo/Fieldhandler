@@ -80,7 +80,7 @@ class ForeignkeyTest extends PHPUnit_Framework_TestCase
      * @return void
      * @since   1.0.0
      */
-    public function testEscapeFail()
+    public function testFormatFail()
     {
         $field_name          = 'my_foreign_key';
         $field_value         = 100000;

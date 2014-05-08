@@ -90,7 +90,7 @@ class ControlCharactersTest extends PHPUnit_Framework_TestCase
      * @return void
      * @since   1.0.0
      */
-    public function testFilterNoChange()
+    public function testSanitizeNoChange()
     {
         $field_name  = 'test';
         $field_value = "\n\r\t";
@@ -110,7 +110,7 @@ class ControlCharactersTest extends PHPUnit_Framework_TestCase
      * @return void
      * @since   1.0.0
      */
-    public function testFilterChange()
+    public function testSanitizeChange()
     {
         $field_name  = 'test';
         $field_value = "xyz\n\r\t";
@@ -131,7 +131,7 @@ class ControlCharactersTest extends PHPUnit_Framework_TestCase
      * @return void
      * @since   1.0.0
      */
-    public function testEscapeNoChange1()
+    public function testFormatNoChange1()
     {
         $field_name  = 'test';
         $field_value = '1A2b3C4d5E6f7G8';

@@ -124,13 +124,13 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * test Filter Success
+     * test Sanitize Success
      *
      * @covers  Molajo\Fieldhandler\Constraint\Default::validate
      * @return void
      * @since   1.0.0
      */
-    public function testFilterSuccess()
+    public function testSanitizeSuccess()
     {
         $input   = array();
         $input[] = 1;
@@ -152,13 +152,13 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * test Filter Success 2
+     * test Sanitize Success 2
      *
      * @covers  Molajo\Fieldhandler\Constraint\Default::validate
      * @return void
      * @since   1.0.0
      */
-    public function testFilterSuccess2()
+    public function testSanitizeSuccess2()
     {
         $input   = array();
         $input[] = 'dog';
@@ -179,13 +179,13 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * test Filter Success 3
+     * test Sanitize Success 3
      *
      * @covers  Molajo\Fieldhandler\Constraint\Default::validate
      * @return void
      * @since   1.0.0
      */
-    public function testFilterSuccess3()
+    public function testSanitizeSuccess3()
     {
         $input   = array();
         $input[] = 'dog';
@@ -210,13 +210,13 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * test Filter Fail 1
+     * test Sanitize Fail 1
      *
      * @covers  Molajo\Fieldhandler\Constraint\Default::validate
      * @return void
      * @since   1.0.0
      */
-    public function testFilterFail1()
+    public function testSanitizeFail1()
     {
         $input   = array();
         $input[] = 'dog';
@@ -251,7 +251,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      * @return void
      * @since   1.0.0
      */
-    public function testEscapeSuccess()
+    public function testFormatSuccess()
     {
         $input   = array();
         $input[] = 1;
@@ -276,7 +276,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      * @return void
      * @since   1.0.0
      */
-    public function testEscapeSuccess2()
+    public function testFormatSuccess2()
     {
         $input   = array();
         $input[] = 'dog';

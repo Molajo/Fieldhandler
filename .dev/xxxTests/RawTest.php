@@ -46,7 +46,7 @@ class RawTest extends PHPUnit_Framework_TestCase
      * @return void
      * @since   1.0.0
      */
-    public function testEscapeFail()
+    public function testFormatFail()
     {
         $field_name                        = 'field1';
         $field_value                       = '&';

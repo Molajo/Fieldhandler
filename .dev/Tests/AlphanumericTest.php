@@ -92,7 +92,7 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testFilterValid()
+    public function testSanitizeValid()
     {
         $field_name  = 'test';
         $field_value = 'Aa123';
@@ -112,7 +112,7 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testFilterFail()
+    public function testSanitizeFail()
     {
         $field_name  = 'test';
         $field_value = '@Aa123';
@@ -133,7 +133,7 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testEscapeNothingtodo()
+    public function testFormatNothingtodo()
     {
         $field_name  = 'test';
         $field_value = 'Aa123';
@@ -153,7 +153,7 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testEscapeNothingToSee()
+    public function testFormatNothingToSee()
     {
         $field_name  = 'test';
         $field_value = '@Aa123';

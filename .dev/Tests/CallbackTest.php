@@ -69,7 +69,7 @@ class CallbackTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testFilter1()
+    public function testSanitize1()
     {
         $field_name          = 'attention';
         $field_value         = 'DOG';

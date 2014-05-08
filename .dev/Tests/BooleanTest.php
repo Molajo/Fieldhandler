@@ -41,7 +41,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Boolean::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Boolean::validation
      * @return  void
      * @since   1.0.0
      */
@@ -63,7 +63,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Boolean::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Boolean::validation
      * @return  void
      * @since   1.0.0
      */
@@ -85,7 +85,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Boolean::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Boolean::validation
      * @return  void
      * @since   1.0.0
      */
@@ -107,7 +107,7 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Boolean::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Boolean::validation
      * @return void
      * @since   1.0.0
      */
@@ -133,11 +133,11 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Boolean::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
      * @return  void
      * @since   1.0.0
      */
-    public function testFilter1()
+    public function testSanitize1()
     {
         $field_name  = 'boolean_fieldname';
         $field_value = false;
@@ -153,11 +153,11 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Boolean::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
      * @return  void
      * @since   1.0.0
      */
-    public function testFilter2()
+    public function testSanitize2()
     {
         $field_name  = 'boolean_fieldname';
         $field_value = true;
@@ -173,11 +173,11 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Boolean::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
      * @return  void
      * @since   1.0.0
      */
-    public function testFilter3()
+    public function testSanitize3()
     {
         $field_name  = 'boolean_fieldname';
         $field_value = null;
@@ -193,11 +193,11 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Boolean::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
      * @return void
      * @since   1.0.0
      */
-    public function testFilterFail()
+    public function testSanitizeFail()
     {
         $field_name  = 'boolean_fieldname';
         $field_value = 'yessireebob';
@@ -213,11 +213,11 @@ class BooleanTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Boolean::escape
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
      * @return  void
      * @since   1.0.0
      */
-    public function testEscape1()
+    public function testFormat1()
     {
         $field_name  = 'boolean_fieldname';
         $field_value = false;

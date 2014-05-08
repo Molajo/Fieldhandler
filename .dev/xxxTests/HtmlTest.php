@@ -87,7 +87,7 @@ class HtmlTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testFilterSuccess()
+    public function testSanitizeSuccess()
     {
         $field_name  = 'fieldname';
         $field_value = '<script>("Gotcha!");</script><p>I am fine.</p>';

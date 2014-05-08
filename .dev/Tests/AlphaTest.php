@@ -91,7 +91,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
      * @return void
      * @since   1.0.0
      */
-    public function testFilterNoChange()
+    public function testSanitizeNoChange()
     {
         $field_name  = 'test';
         $field_value = 'AbCdEfG';
@@ -111,7 +111,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
      * @return void
      * @since   1.0.0
      */
-    public function testFilterChange()
+    public function testSanitizeChange()
     {
         $field_name  = 'test';
         $field_value = '@Aa123';
@@ -132,7 +132,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
      * @return void
      * @since   1.0.0
      */
-    public function testEscapeNoChange1()
+    public function testFormatNoChange1()
     {
         $field_name  = 'test';
         $field_value = '1A2b3C4d5E6f7G8';
@@ -152,7 +152,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
      * @return void
      * @since   1.0.0
      */
-    public function testEscapeNoChange2()
+    public function testFormatNoChange2()
     {
         $field_name  = 'test';
         $field_value = 'Aa';

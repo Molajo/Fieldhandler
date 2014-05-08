@@ -41,7 +41,7 @@ class EqualTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Equal::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractMath::validate
      * @return  void
      * @since   1.0.0
      */
@@ -62,7 +62,7 @@ class EqualTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Equal::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractMath::validate
      * @return  void
      * @since   1.0.0
      */
@@ -88,7 +88,7 @@ class EqualTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Equal::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractMath::sanitize
      * @return  void
      * @since   1.0.0
      */
@@ -109,7 +109,7 @@ class EqualTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Equal::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractMath::sanitize
      * @return  void
      * @since   1.0.0
      */
@@ -130,7 +130,7 @@ class EqualTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Equal::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractMath::format
      * @return  void
      * @since   1.0.0
      */
@@ -151,7 +151,7 @@ class EqualTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Equal::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractMath::format
      * @return  void
      * @since   1.0.0
      */
