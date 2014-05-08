@@ -41,16 +41,31 @@ class ControlCharactersTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\ControlCharacters::validate
-     * @return void
+     * @covers  Molajo\Fieldhandler\Constraint\Controlcharacters::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Controlcharacters::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Controlcharacters::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Controlcharacters::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::sanitizeByCType
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
+     * @return  void
      * @since   1.0.0
      */
-    public function testValidateSucceed()
+    public function testValidateTrue()
     {
-        $field_name  = 'test';
-        $field_value = "\n\r\t";
-        $constraint  = 'Controlcharacters';
-        $options     = array();
+        $field_name                  = 'test';
+        $field_value                 = "\n \r \t";
+        $constraint                  = 'Controlcharacters';
+        $options                     = array();
+        $options['allow_space_character'] = true;
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
@@ -61,11 +76,25 @@ class ControlCharactersTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\ControlCharacters::validate
-     * @return void
+     * @covers  Molajo\Fieldhandler\Constraint\Controlcharacters::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Controlcharacters::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Controlcharacters::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Controlcharacters::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::sanitizeByCType
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
+     * @return  void
      * @since   1.0.0
      */
-    public function testValidateFail()
+    public function testValidateFalse()
     {
         $field_name  = 'test';
         $field_value = "xyz\n\r\t";
@@ -86,8 +115,16 @@ class ControlCharactersTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\ControlCharacters::sanitize
-     * @return void
+     * @covers  Molajo\Fieldhandler\Constraint\Controlcharacters::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Controlcharacters::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::sanitizeByCType
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
+     * @return  void
      * @since   1.0.0
      */
     public function testSanitizeNoChange()
@@ -106,8 +143,16 @@ class ControlCharactersTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\ControlCharacters::sanitize
-     * @return void
+     * @covers  Molajo\Fieldhandler\Constraint\Controlcharacters::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Controlcharacters::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::sanitizeByCType
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
+     * @return  void
      * @since   1.0.0
      */
     public function testSanitizeChange()
@@ -127,11 +172,14 @@ class ControlCharactersTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\ControlCharacters::sanitize
-     * @return void
+     * @covers  Molajo\Fieldhandler\Constraint\Controlcharacters::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
+     *
+     * @return  void
      * @since   1.0.0
      */
-    public function testFormatNoChange1()
+    public function testFormat()
     {
         $field_name  = 'test';
         $field_value = '1A2b3C4d5E6f7G8';

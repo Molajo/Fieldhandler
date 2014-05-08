@@ -1,6 +1,6 @@
 <?php
 /**
- * Alpha Constraint Test
+ * Graph Constraint Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -12,14 +12,14 @@ use Molajo\Fieldhandler\Request;
 use PHPUnit_Framework_TestCase;
 
 /**
- * Alpha Fieldhandler
+ * Graph Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class AlphaTest extends PHPUnit_Framework_TestCase
+class GraphTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Request
@@ -41,12 +41,13 @@ class AlphaTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::validate
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::validation
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::getValidateMessages
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\Graph::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Graph::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Graph::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Graph::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::sanitizeByCType
      * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
@@ -60,28 +61,28 @@ class AlphaTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateTrue()
     {
-        $field_name                  = 'test';
-        $field_value                 = 'AbC dEfG';
-        $constraint                  = 'Alpha';
-        $options                     = array();
+        $field_name                       = 'test';
+        $field_value                      = "This is visible.";
+        $constraint                       = 'Graph';
+        $options                          = array();
         $options['allow_space_character'] = true;
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getValidateResponse());
-        $messages = $results->getValidateMessages();
-        $this->assertEquals(array(), $messages);
+        $this->assertEquals(array(), $results->getValidateMessages());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::validate
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::validation
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::getValidateMessages
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\Graph::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Graph::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Graph::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Graph::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::sanitizeByCType
      * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
@@ -95,17 +96,18 @@ class AlphaTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateFalse()
     {
-        $field_name  = 'test';
-        $field_value = '@Aa123';
-        $constraint  = 'Alpha';
-        $options     = array();
+        $field_name                       = 'test';
+        $field_value                      = "This is visible.\n\r\t";
+        $constraint                       = 'Graph';
+        $options                          = array();
+        $options['allow_space_character'] = true;
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(false, $results->getValidateResponse());
 
         $expected_code    = 2000;
-        $expected_message = 'Field: test must only contain Alpha values.';
+        $expected_message = 'Field: test must only contain Graph values.';
         $messages         = $results->getValidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);
@@ -114,10 +116,11 @@ class AlphaTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::sanitize
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Graph::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Graph::validation
      * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::sanitizeByCType
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeCharacter
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
@@ -127,10 +130,11 @@ class AlphaTest extends PHPUnit_Framework_TestCase
      */
     public function testSanitizeNoChange()
     {
-        $field_name  = 'test';
-        $field_value = 'AbCdEfG';
-        $constraint  = 'Alpha';
-        $options     = array();
+        $field_name                       = 'test';
+        $field_value                      = "This is visible.";
+        $constraint                       = 'Graph';
+        $options                          = array();
+        $options['allow_space_character'] = true;
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
@@ -141,10 +145,11 @@ class AlphaTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::sanitize
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Graph::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Graph::validation
      * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::sanitizeByCType
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeCharacter
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
@@ -154,14 +159,15 @@ class AlphaTest extends PHPUnit_Framework_TestCase
      */
     public function testSanitizeChange()
     {
-        $field_name  = 'test';
-        $field_value = '@Aa123';
-        $constraint  = 'Alpha';
-        $options     = array();
+        $field_name                       = 'test';
+        $field_value                      = "This is visible.\n\r\t";
+        $constraint                       = 'Graph';
+        $options                          = array();
+        $options['allow_space_character'] = true;
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
-        $expected_value = 'Aa';
+        $expected_value = "This is visible.";
         $this->assertEquals($expected_value, $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
 
@@ -169,7 +175,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::format
+     * @covers  Molajo\Fieldhandler\Constraint\Graph::format
      * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::format
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
      *
@@ -180,7 +186,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
     {
         $field_name  = 'test';
         $field_value = '1A2b3C4d5E6f7G8';
-        $constraint  = 'Alpha';
+        $constraint  = 'Graph';
         $options     = array();
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);

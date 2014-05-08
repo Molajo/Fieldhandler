@@ -21,14 +21,6 @@ use CommonApi\Model\ConstraintInterface;
 abstract class AbstractSomething extends AbstractConstraintTests implements ConstraintInterface
 {
     /**
-     * String Function
-     *
-     * @var    string
-     * @since  1.0.0
-     */
-    protected $string_function;
-
-    /**
      * Message Code
      *
      * @var    integer

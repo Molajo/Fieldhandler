@@ -13,8 +13,48 @@ use CommonApi\Model\ConstraintInterface;
 /**
  * Space Constraint
  *
- * Checks if all of the characters in the provided string, text, creates whitespace.
+ * Each character must be a whitespace character.
+ * Besides the blank character this also includes tab, vertical tab, line feed, carriage return
+ * and form feed characters.
  *
+ * **Validate**
+ *
+ * Verifies value against constraint and provides messages with false test.
+ *
+ * ```php
+ * $options = array();
+ * $options['allow_space_character'] = true;
+ * $response = $request->validate('space_field', '\n \r \t', 'Space');
+ *
+ * if ($response->getValidateResponse() === true) {
+ *     // all is well
+ * } else {
+ *     foreach ($response->getValidateMessages as $code => $message) {
+ *         echo $code . ': ' . $message . '/n';
+ *     }
+ * }
+ *
+ * ```
+ *
+ * **Sanitize**
+ *
+ * Removes character that does not meet the definition of the constraint. In this example,
+ *  `$field_value` will contain `\n \r \t`.
+ *
+ * ```php
+ * $response = $request->sanitize('space_field', '*\n \r \t', 'Space');
+ *
+ * if ($response->getChangeIndicator() === true) {
+ *     $field_value = $response->getFieldValue();
+ * }
+ *
+ * ```
+ *
+ * **Format**
+ *
+ * For this constraint, the `format` method is not implemented and simply returns the value unchanged.
+ *
+ * @api
  * @link       http://us1.php.net/manual/en/function.ctype-space.php
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.

@@ -42,15 +42,30 @@ class DigitTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Digit::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Digit::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Digit::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Digit::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::sanitizeByCType
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testValidateSuccess()
+    public function testValidateTrue()
     {
-        $field_name  = 'digit_fieldname';
-        $field_value = '1234';
-        $constraint  = 'Digit';
-        $options     = array();
+        $field_name                  = 'digit_fieldname';
+        $field_value                 = '1 2 3 4';
+        $constraint                  = 'Digit';
+        $options                     = array();
+        $options['allow_space_character'] = true;
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
@@ -64,32 +79,24 @@ class DigitTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Digit::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Digit::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Digit::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Digit::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::sanitizeByCType
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testValidate2()
-    {
-        $field_name  = 'digit_fieldname';
-        $field_value = null;
-        $constraint  = 'Digit';
-        $options     = array();
-
-        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
-
-        $this->assertEquals(true, $results->getValidateResponse());
-
-        $messages = $results->getValidateMessages();
-        $this->assertEquals(array(), $messages);
-
-        return;
-    }
-
-    /**
-     * @covers  Molajo\Fieldhandler\Constraint\Digit::validate
-     * @return void
-     * @since   1.0.0
-     */
-    public function testValidateFail()
+    public function testValidateFalse()
     {
         $field_name  = 'digit_fieldname';
         $field_value = 'yessireebob';
@@ -111,10 +118,18 @@ class DigitTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Digit::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Digit::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::sanitizeByCType
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testSanitizeSuccess()
+    public function testSanitizeNoChange()
     {
         $field_name  = 'digit_fieldname';
         $field_value = '123';
@@ -131,19 +146,27 @@ class DigitTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Digit::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Digit::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::sanitizeByCType
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testSanitizeFail()
+    public function testSanitizeChange()
     {
         $field_name  = 'digit_fieldname';
-        $field_value = 'dog';
+        $field_value = '1dog';
         $constraint  = 'Digit';
         $options     = array();
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
-        $field_value = null;
+        $field_value = '1';
         $this->assertEquals($field_value, $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
 
@@ -151,11 +174,14 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Digit::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Digit::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testFormatSuccess()
+    public function testFormat()
     {
         $field_name  = 'digit_fieldname';
         $field_value = '123';
@@ -168,15 +194,5 @@ class DigitTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
-    }
-
-    /**
-     * Tear down
-     *
-     * @return void
-     * @since   1.0.0
-     */
-    protected function tearDown()
-    {
     }
 }

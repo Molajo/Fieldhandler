@@ -38,17 +38,6 @@ abstract class AbstractCtype extends AbstractConstraintTests implements Constrai
     protected $message_code = 2000;
 
     /**
-     * Validate
-     *
-     * @return  boolean
-     * @since   1.0.0
-     */
-    public function validate()
-    {
-        return parent::validate();
-    }
-
-    /**
      * Sanitize
      *
      * @return  null|string
@@ -62,31 +51,6 @@ abstract class AbstractCtype extends AbstractConstraintTests implements Constrai
         }
 
         return $this->field_value;
-    }
-
-    /**
-     * Format
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function format()
-    {
-        return parent::format();
-    }
-
-    /**
-     * Common Sanitize Method for ctype
-     *
-     * @param   string $ctype
-     * @param   mixed  $field_value
-     *
-     * @return  string
-     * @since   1.0.0
-     */
-    protected function sanitizeByCType($ctype, $field_value)
-    {
-        return $this->sanitizeByCharacter($ctype, $field_value, $this->getOption('allow_whitespace', false));
     }
 
     /**
@@ -104,5 +68,19 @@ abstract class AbstractCtype extends AbstractConstraintTests implements Constrai
         }
 
         return false;
+    }
+
+    /**
+     * Common Sanitize Method for ctype
+     *
+     * @param   string $ctype
+     * @param   mixed  $field_value
+     *
+     * @return  string
+     * @since   1.0.0
+     */
+    protected function sanitizeByCType($ctype, $field_value)
+    {
+        return $this->sanitizeByCharacter($ctype, $field_value, $this->getOption('allow_space_character', false));
     }
 }

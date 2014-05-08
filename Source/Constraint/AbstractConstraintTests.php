@@ -93,18 +93,18 @@ abstract class AbstractConstraintTests extends AbstractConstraint implements Con
      *
      * @param   string  $filter
      * @param   string  $test
-     * @param   boolean $allow_whitespace
+     * @param   boolean $allow_space_character
      *
      * @return  string
      * @since   1.0.0
      */
-    protected function sanitizeByCharacter($filter, $test, $allow_whitespace = false)
+    protected function sanitizeByCharacter($filter, $test, $allow_space_character = false)
     {
         $filtered = '';
 
         if (strlen($test) > 0) {
             for ($i = 0; $i < strlen($test); $i ++) {
-                $filtered .= $this->sanitizeCharacter($filter, substr($test, $i, 1), $allow_whitespace);
+                $filtered .= $this->sanitizeCharacter($filter, substr($test, $i, 1), $allow_space_character);
             }
         }
 
@@ -116,15 +116,15 @@ abstract class AbstractConstraintTests extends AbstractConstraint implements Con
      *
      * @param   string  $filter
      * @param   string  $value
-     * @param   boolean $allow_whitespace
+     * @param   boolean $allow_space_character
      *
      * @return  string
      * @since   1.0.0
      */
-    protected function sanitizeCharacter($filter, $value, $allow_whitespace)
+    protected function sanitizeCharacter($filter, $value, $allow_space_character)
     {
         if ($filter($value) === true
-            || ($allow_whitespace === true && $value === ' ')
+            || ($allow_space_character === true && $value === ' ')
         ) {
             return $value;
         }

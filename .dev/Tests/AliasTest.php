@@ -44,9 +44,13 @@ class AliasTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\Alias::validate
      * @covers  Molajo\Fieldhandler\Constraint\Alias::validation
      * @covers  Molajo\Fieldhandler\Constraint\Alias::sanitizeAlias
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeCharacter
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      * @return  void
      * @since   1.0.0
      */
@@ -69,9 +73,13 @@ class AliasTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\Alias::validate
      * @covers  Molajo\Fieldhandler\Constraint\Alias::validation
      * @covers  Molajo\Fieldhandler\Constraint\Alias::sanitizeAlias
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeCharacter
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      * @return  void
      * @since   1.0.0
      */

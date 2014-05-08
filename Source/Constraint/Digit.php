@@ -13,6 +13,49 @@ use CommonApi\Model\ConstraintInterface;
 /**
  * Digit Constraint
  *
+ * Each character must be a numeric digit.
+ * To allow the 'space character', use the `allow_space_character` $option.
+ *
+ * **Validate**
+ *
+ * Verifies value against constraint and provides messages with false test.
+ *
+ * ```php
+ * $options = array();
+ * $options['allow_space_character'] = true;
+ * $response = $request->validate('digit_fieldname', '1 2 3 4 5', 'Digit', $options);
+ *
+ * if ($response->getValidateResponse() === true) {
+ *     // all is well
+ * } else {
+ *     foreach ($response->getValidateMessages as $code => $message) {
+ *         echo $code . ': ' . $message . '/n';
+ *     }
+ * }
+ *
+ * ```
+ *
+ * **Sanitize**
+ *
+ * Removes character that does not meet the definition of the constraint. In this example,
+ *  `$field_value` will contain `1 2 3 4 5`.
+ *
+ * ```php
+ * $options = array();
+ * $options['allow_space_character'] = true;
+ * $response = $request->sanitize('text_field', '1x 2x 3x 4x 5x', 'Digit');
+ *
+ * if ($response->getChangeIndicator() === true) {
+ *     $field_value = $response->getFieldValue();
+ * }
+ *
+ * ```
+ *
+ * **Format**
+ *
+ * For this constraint, the `format` method is not implemented and simply returns the value unchanged.
+ *
+ * @api
  * @link       http://us1.php.net/manual/en/function.ctype-digit.php
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.

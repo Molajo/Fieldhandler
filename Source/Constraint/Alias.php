@@ -46,7 +46,7 @@ use CommonApi\Model\ConstraintInterface;
  * ```
  *
  * **Format**
- * 
+ *
  * For `alias`, the `format` method produces the same results as `sanitize`.
  *
  * @api

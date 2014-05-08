@@ -178,7 +178,7 @@ Verifies value against constraint and provides messages with false test.
 $response = $request->validate('alias_field', 'This will not validate', 'Alias');
 
 if ($response->getValidateResponse() === true) {
-// all is well
+    // all is well
 } else {
     foreach ($response->getValidateMessages as $code => $message) {
         echo $code . ': ' . $message . '/n';
@@ -186,6 +186,7 @@ if ($response->getValidateResponse() === true) {
 }
 
 ```
+
 **Sanitize**
 Converts the value to a usable URL slug. In this example, `$field_value` will contain `jack-and-jill`.
 
@@ -202,33 +203,89 @@ if ($response->getChangeIndicator() === true) {
 For `alias`, the `format` method produces the same results as `sanitize`.
 
 
-### Accepted ###
-Value is true, 1, 'yes', or 'on.'
-
-```php
-    $validated_value = $request->validate('agreement', 1, 'Accepted');
-
-```
-Note: The list of `accepted` values can be customized by including an array of desired values
-in the `options` array, as shown below:
-
-```php
-    $options = array();
-    $options['true_array'] = array(true, 1);
-    $validated_value = $request->validate('agreement', 1, 'Accepted', $options);
-
-```
-
 ### Alpha ###
-Tests if values are a character of A through Z.
+Each character in the alias URL slug must be alphabetic. To allow the 'space character', use the
+`allow_space_character` $option.
+
+**Validate**
+
+Verifies value against constraint and provides messages with false test.
 
 ```php
-    // Field order_number 'ABC123#' would be returned as 'ABC' for filter and escape
-    // An exception would be thrown for validate
-    $results = $request->sanitize('order_number', 'ABC123#', 'Alpha');
+$options = array();
+$options['allow_space_character'] = true;
+$response = $request->validate('employee_name', 'Pat 3Nelson', 'Alpha', $options);
+
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+   foreach ($response->getValidateMessages as $code => $message) {
+      echo $code . ': ' . $message . '/n';
+   }
+}
 
 ```
 
+**Sanitize**
+
+Removes character that does not meet the definition of the constraint. In this example,
+`$field_value` will contain `Pat Nelson`.
+
+```php
+$options = array();
+$options['allow_space_character'] = true;
+$response = $request->sanitize('employee_name', 'Pat 3Nelson', 'Alpha');
+
+if ($response->getChangeIndicator() === true) {
+   $field_value = $response->getFieldValue();
+}
+
+```
+
+**Format**
+For this constraint, the `format` method is not implemented and simply returns the value unchanged.
+
+### Alphanumeric ###
+Each character in the alias URL slug must be a character or a digit. To allow the 'space character', use the
+`allow_space_character` $option.
+
+**Validate**
+
+Verifies value against constraint and provides messages with false test.
+
+```php
+$options = array();
+$options['allow_space_character'] = true;
+$response = $request->validate('description', '4 dogs and #3 cats', 'Alphanumeric', $options);
+
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+   foreach ($response->getValidateMessages as $code => $message) {
+      echo $code . ': ' . $message . '/n';
+   }
+}
+
+```
+
+**Sanitize**
+
+Removes character that does not meet the definition of the constraint. In this example,
+`$field_value` will contain `4 dogs and 3 cats`.
+
+```php
+$options = array();
+$options['allow_space_character'] = true;
+$response = $request->sanitize('description', '4 dogs and #3 cats', 'Alphanumeric', $options);
+
+if ($response->getChangeIndicator() === true) {
+   $field_value = $response->getFieldValue();
+}
+
+```
+
+**Format**
+For this constraint, the `format` method is not implemented and simply returns the value unchanged.
 
 ### Arrays ###
 Tests if value is an array.
@@ -279,6 +336,48 @@ change the input to null.
     $results = $request->sanitize('dog_field', $dog_field, 'Contains');
 
 ```
+### Controlcharacters ###
+Each character must be a control character (ex. line feed, tab, escape).
+To allow the 'space character', use the `allow_space_character` $option.
+
+**Validate**
+
+Verifies value against constraint and provides messages with false test.
+
+```php
+$options = array();
+$options['allow_space_character'] = true;
+$response = $request->validate('text_field', '\n\r\t', 'Controlcharacters', $options);
+
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+   foreach ($response->getValidateMessages as $code => $message) {
+      echo $code . ': ' . $message . '/n';
+   }
+}
+
+```
+
+**Sanitize**
+
+Removes character that does not meet the definition of the constraint. In this example,
+`$field_value` will contain `\n \r \t`.
+
+```php
+$options = array();
+$options['allow_space_character'] = true;
+$response = $request->sanitize('text_field', 'N\n \r \t', 'Alpha');
+
+if ($response->getChangeIndicator() === true) {
+   $field_value = $response->getFieldValue();
+}
+
+```
+
+**Format**
+For this constraint, the `format` method is not implemented and simply returns the value unchanged.
+
 
 ### Date ###
 Processes a value to determine if it is a valid date. For Validate, if the resulting value is not a valid
@@ -315,16 +414,50 @@ Changes a null value to the value provided for default.
 
 ```
 
+
 ### Digit ###
-Tests that each digit is numeric.
+
+Each character must be a numeric digit.
+To allow the 'space character', use the `allow_space_character` $option.
+
+**Validate**
+
+Verifies value against constraint and provides messages with false test.
 
 ```php
-    // The value of field `numeric_field` is 'ABC123'. The filtered and escaped values will be 123.
-    // For 'validate', an exception is thrown.
+$options = array();
+$options['allow_space_character'] = true;
+$response = $request->validate('digit_fieldname', '1 2 3 4 5', 'Digit', $options);
 
-    $results = $request->sanitize('numeric_field', 'ABC123', 'Digit');
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
 
 ```
+
+**Sanitize**
+
+Removes character that does not meet the definition of the constraint. In this example,
+  `$field_value` will contain `1 2 3 4 5`.
+
+```php
+$options = array();
+$options['allow_space_character'] = true;
+$response = $request->sanitize('text_field', '1x 2x 3x 4x 5x', 'Digit');
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
+
+```
+
+**Format**
+
+For this constraint, the `format` method is not implemented and simply returns the value unchanged.
 
 ### Email ###
 Tests that a value is a valid email address. When invalid, validate throws exception while
@@ -438,6 +571,94 @@ with with ENT_QUOTES set.
 
 ```
 
+### Graph
+
+Each character must be a visible, printable character.
+To allow the 'space character', use the `allow_space_character` $option.
+
+**Validate**
+
+Verifies value against constraint and provides messages with false test.
+
+```php
+$options = array();
+$options['allow_space_character'] = true;
+$response = $request->validate('space_field', 'This is visible.\n\r\t', 'Graph', $options);
+
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
+
+```
+
+**Sanitize**
+
+Removes character that does not meet the definition of the constraint. In this example,
+ `$field_value` will contain `This is visible.`.
+
+```php
+$options = array();
+$options['allow_space_character'] = true;
+$response = $request->sanitize('space_field', 'This is visible.\n\r\t', 'Graph', $options);
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
+
+```
+
+**Format**
+
+For this constraint, the `format` method is not implemented and simply returns the value unchanged.
+
+### Hexidecimal ###
+
+Each character must be a numeric digit.
+To allow the 'space character', use the `allow_space_character` $option.
+
+**Validate**
+
+Verifies value against constraint and provides messages with false test.
+
+```php
+$options = array();
+$options['allow_space_character'] = true;
+$response = $request->validate('digit_fieldname', '1 2 3 4 5', 'Digit', $options);
+
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
+
+```
+
+**Sanitize**
+
+Removes character that does not meet the definition of the constraint. In this example,
+  `$field_value` will contain `1 2 3 4 5`.
+
+```php
+$options = array();
+$options['allow_space_character'] = true;
+$response = $request->sanitize('text_field', '1x 2x 3x 4x 5x', 'Digit');
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
+
+```
+
+**Format**
+
+For this constraint, the `format` method is not implemented and simply returns the value unchanged.
+
 ### Html ###
 
 add whitelist description
@@ -486,13 +707,58 @@ Tests that the value is an IP Address.
 
 ```
 
-### Lower ###
-Validates or filters/escapes each character to be lower case.
+### Lower
+
+Each character must be an lowercase character.
+To allow the 'space character', use the `allow_space_character` $option.
+
+**Validate**
+
+Verifies value against constraint and provides messages with false test.
+
+This example returns false due to the inclusion of non lowercase characters.
 
 ```php
-    // The value of field `input_field` is 'ABC123'. Validate will fail.
-    // Filtered and escaped values will return 'abc123'.
-    $results = $request->sanitize('input_field', 'ABC123', 'lower');
+$options = array();
+$options['allow_space_character'] = true;
+$response = $request->validate('lower_field', 'This is lower', 'Lower');
+
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
+
+```
+
+**Sanitize**
+
+Removes character that does not meet the definition of the constraint. In this example,
+ `$field_value` will only contain the lowercase letter `his is lower` since the `T` and `.` are not lowercase.
+
+```php
+$options = array();
+$options['allow_space_character'] = true;
+$response = $request->sanitize('lower_field', 'This is lower.', 'Lower');
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
+
+```
+
+**Format**
+
+Lowercase all character values.  In this example, `$field_value` will contain `this is lower.`.
+
+```php
+$response = $request->format('lower_field', 'This is lower.', 'Lower');
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
 
 ```
 
@@ -594,6 +860,89 @@ See [sanitize filters](http://php.net/manual/en/filter.filters.sanitize.php).
 
 ```
 
+### Printable ###
+Each character must be a printable character.
+
+**Validate**
+
+Verifies value against constraint and provides messages with false test.
+
+This example returns false due to the inclusion of control characters which cannot be displayed.
+
+```php
+$response = $request->validate('printable_field', 'asdf\n\r\t', 'Printable');
+
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
+
+```
+
+**Sanitize**
+
+Removes character that does not meet the definition of the constraint. In this example,
+ `$field_value` will contain `asdf`.
+
+```php
+$response = $request->sanitize('printable_field', 'asdf\n\r\t', 'Printable');
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
+
+```
+
+**Format**
+For this constraint, the `format` method is not implemented and simply returns the value unchanged.
+
+### Punctuation Constraint
+
+Each character must be a punctuation character.
+To allow the 'space character', use the `allow_space_character` $option.
+
+**Validate**
+
+Verifies value against constraint and provides messages with false test.
+
+```php
+$options = array();
+$options['allow_space_character'] = true;
+$response = $request->validate('punctuation_field', 'ABasdk! @ ! $ #', 'Punctuation', $options);
+ *
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
+
+```
+
+**Sanitize**
+
+Removes character that does not meet the definition of the constraint. In this example,
+ `$field_value` will contain `* & $ ( )`.
+
+```php
+$options = array();
+$options['allow_space_character'] = true;
+$response = $request->sanitize('punctuation_field', '* & $ ( )ABC', 'Punctuation', $options);
+ *
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
+
+```
+
+**Format**
+
+For this constraint, the `format` method is not implemented and simply returns the value unchanged.
+
 ### Regex ###
 Performs regex checking against the input value for the regex sent in.
 
@@ -646,6 +995,46 @@ From and To testing includes the from and to values.
 
     $results = $request->validate('My Field Name', $field_to_measure, 'Stringlength', $options);
 ```
+### Space Constraint
+
+Each character must be a whitespace character.
+Besides the blank character this also includes tab, vertical tab, line feed, carriage return
+and form feed characters.
+
+**Validate**
+
+Verifies value against constraint and provides messages with false test.
+
+```php
+$response = $request->validate('space_field', '\n \r \t', 'Space');
+
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
+
+```
+
+**Sanitize**
+
+Removes character that does not meet the definition of the constraint. In this example,
+ `$field_value` will contain `\n \r \t`.
+
+```php
+$response = $request->sanitize('space_field', '*\n \r \t', 'Space');
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
+
+```
+
+**Format**
+
+For this constraint, the `format` method is not implemented and simply returns the value unchanged.
 
 ### Tel ###
 Tests that the value is a string.
@@ -665,13 +1054,59 @@ Tests that the string is trimmed.
     $results = $request->sanitize($field_name, $field_value, $constraint);
 ```
 
-### Upper ###
-Validates or filters/escapes each character to be upper case.
+### Upper
+
+Each character must be an lowercase character.
+To allow the 'space character', use the `allow_space_character` $option.
+
+**Validate**
+
+Verifies value against constraint and provides messages with false test.
+
+This example returns false due to the inclusion of non uppercase characters.
 
 ```php
-    // The value of field `input_field` is 'abc123'. Validate will value.
-    // Filtered and escaped values will return 'ABC123'.
-    $results = $request->sanitize('input_field', 'abc123', 'lower');
+$options = array();
+$options['allow_space_character'] = true;
+$response = $request->validate('upper_field', 'This is upper', 'Upper');
+
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
+
+```
+
+**Sanitize**
+
+Removes character that does not meet the definition of the constraint. In this example,
+ `$field_value` will only contain the uppercase letter `T` since no other characters meet
+ the constraint definition.
+
+```php
+$options = array();
+$options['allow_space_character'] = true;
+$response = $request->sanitize('upper_field', 'This is upper.', 'Upper');
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
+
+```
+
+**Format**
+
+Uppercase all character values.  In this example, `$field_value` will contain `THIS IS UPPER.`.
+
+```php
+$response = $request->format('upper_field', 'This is upper.', 'Upper');
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
 
 ```
 
@@ -700,7 +1135,7 @@ Compares a field_value against a set of values;
 ```
 
 ## Requirements and Compliance
- * PHP framework independent, no dependencies
+PHP framework independent, no dependencies
  * Requires PHP 5.4, or above
  * [Semantic Versioning](http://semver.org/)
  * Compliant with:

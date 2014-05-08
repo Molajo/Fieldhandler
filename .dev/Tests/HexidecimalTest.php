@@ -1,6 +1,6 @@
 <?php
 /**
- * Alpha Constraint Test
+ * Hexidecimal Constraint Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -12,14 +12,14 @@ use Molajo\Fieldhandler\Request;
 use PHPUnit_Framework_TestCase;
 
 /**
- * Alpha Fieldhandler
+ * Hexidecimal Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class AlphaTest extends PHPUnit_Framework_TestCase
+class HexidecimalTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Request
@@ -41,12 +41,13 @@ class AlphaTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::validate
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::validation
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::getValidateMessages
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\Hexidecimal::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Hexidecimal::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Hexidecimal::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Hexidecimal::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::sanitizeByCType
      * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
@@ -60,15 +61,16 @@ class AlphaTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateTrue()
     {
-        $field_name                  = 'test';
-        $field_value                 = 'AbC dEfG';
-        $constraint                  = 'Alpha';
+        $field_name                  = 'hexidecimal_fieldname';
+        $field_value                 = 'AB 10 BC 99';
+        $constraint                  = 'Hexidecimal';
         $options                     = array();
         $options['allow_space_character'] = true;
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getValidateResponse());
+
         $messages = $results->getValidateMessages();
         $this->assertEquals(array(), $messages);
 
@@ -76,12 +78,13 @@ class AlphaTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::validate
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::validation
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::getValidateMessages
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\Hexidecimal::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Hexidecimal::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Hexidecimal::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Hexidecimal::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::sanitizeByCType
      * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
@@ -95,9 +98,9 @@ class AlphaTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateFalse()
     {
-        $field_name  = 'test';
-        $field_value = '@Aa123';
-        $constraint  = 'Alpha';
+        $field_name  = 'hexidecimal_fieldname';
+        $field_value = 'yessireebob';
+        $constraint  = 'Hexidecimal';
         $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
@@ -105,7 +108,7 @@ class AlphaTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(false, $results->getValidateResponse());
 
         $expected_code    = 2000;
-        $expected_message = 'Field: test must only contain Alpha values.';
+        $expected_message = 'Field: hexidecimal_fieldname must only contain Hexidecimal values.';
         $messages         = $results->getValidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);
@@ -114,10 +117,11 @@ class AlphaTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::sanitize
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Hexidecimal::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Hexidecimal::validation
      * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::sanitizeByCType
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeCharacter
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
@@ -127,9 +131,9 @@ class AlphaTest extends PHPUnit_Framework_TestCase
      */
     public function testSanitizeNoChange()
     {
-        $field_name  = 'test';
-        $field_value = 'AbCdEfG';
-        $constraint  = 'Alpha';
+        $field_name  = 'hexidecimal_fieldname';
+        $field_value = 'AB10BC99';
+        $constraint  = 'Hexidecimal';
         $options     = array();
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
@@ -141,10 +145,11 @@ class AlphaTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::sanitize
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Hexidecimal::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Hexidecimal::validation
      * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::sanitizeByCType
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeCharacter
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
@@ -154,22 +159,22 @@ class AlphaTest extends PHPUnit_Framework_TestCase
      */
     public function testSanitizeChange()
     {
-        $field_name  = 'test';
-        $field_value = '@Aa123';
-        $constraint  = 'Alpha';
+        $field_name  = 'hexidecimal_fieldname';
+        $field_value = 'ABzzzzz10zzzzzBCzzzzzz99';
+        $constraint  = 'Hexidecimal';
         $options     = array();
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
-        $expected_value = 'Aa';
-        $this->assertEquals($expected_value, $results->getFieldValue());
+        $field_value = 'AB10BC99';
+        $this->assertEquals($field_value, $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alpha::format
+     * @covers  Molajo\Fieldhandler\Constraint\Hexidecimal::format
      * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::format
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
      *
@@ -178,9 +183,9 @@ class AlphaTest extends PHPUnit_Framework_TestCase
      */
     public function testFormat()
     {
-        $field_name  = 'test';
-        $field_value = '1A2b3C4d5E6f7G8';
-        $constraint  = 'Alpha';
+        $field_name  = 'hexidecimal_fieldname';
+        $field_value = '123';
+        $constraint  = 'Hexidecimal';
         $options     = array();
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);

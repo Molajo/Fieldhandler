@@ -43,10 +43,23 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::sanitizeByCType
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      * @return  void
      * @since   1.0.0
      */
-    public function testValidationSucceed()
+    public function testValidationTrue()
     {
         $field_name  = 'test';
         $field_value = 'Aa123';
@@ -64,10 +77,24 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::sanitizeByCType
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testValidationFail()
+    public function testValidationFalse()
     {
         $field_name  = 'test';
         $field_value = '@Aa123';
@@ -89,15 +116,23 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testSanitizeValid()
+    public function testSanitizeNoChange()
     {
-        $field_name  = 'test';
-        $field_value = 'Aa123';
-        $constraint  = 'Alphanumeric';
-        $options     = array();
+        $field_name                   = 'test';
+        $field_value                  = 'Aa1 23';
+        $constraint                   = 'Alphanumeric';
+        $options                      = array();
+        $options['allow_space_character']  = true;
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
@@ -109,10 +144,18 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::sanitizeByCType
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testSanitizeFail()
+    public function testSanitizeChange()
     {
         $field_name  = 'test';
         $field_value = '@Aa123';
@@ -129,34 +172,17 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testFormatNothingtodo()
+    public function testFormat()
     {
         $field_name  = 'test';
         $field_value = 'Aa123';
-        $constraint  = 'Alphanumeric';
-        $options     = array();
-
-        $results = $this->request->format($field_name, $field_value, $constraint, $options);
-
-        $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(false, $results->getChangeIndicator());
-
-        return;
-    }
-
-    /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alphanumeric::sanitize
-     * @return  void
-     * @since   1.0.0
-     */
-    public function testFormatNothingToSee()
-    {
-        $field_name  = 'test';
-        $field_value = '@Aa123';
         $constraint  = 'Alphanumeric';
         $options     = array();
 
