@@ -168,6 +168,39 @@ The examples in this section assume the *Fieldhandler* has been instantiated, as
 
 ```
 
+### Alias ###
+Each character in the alias URL slug must be alphanumeric or a dash.
+
+**Validate**
+Verifies value against constraint and provides messages with false test.
+
+```php
+$response = $request->validate('alias_field', 'This will not validate', 'Alias');
+
+if ($response->getValidateResponse() === true) {
+// all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
+
+```
+**Sanitize**
+Converts the value to a usable URL slug. In this example, `$field_value` will contain `jack-and-jill`.
+
+```php
+$response = $request->sanitize('alias_field', 'Jack and Jill', 'Alias');
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
+
+```
+
+**Format**
+For `alias`, the `format` method produces the same results as `sanitize`.
+
 
 ### Accepted ###
 Value is true, 1, 'yes', or 'on.'

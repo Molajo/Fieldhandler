@@ -42,10 +42,15 @@ class AliasTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Alias::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::sanitizeAlias
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
      * @return  void
      * @since   1.0.0
      */
-    public function testValidateSucceed()
+    public function testValidateTrue()
     {
         $field_name  = 'alias';
         $field_value = 'jack-and-jill';
@@ -62,10 +67,15 @@ class AliasTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Alias::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::sanitizeAlias
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
      * @return  void
      * @since   1.0.0
      */
-    public function testValidateFail()
+    public function testValidateFalse()
     {
         $field_name  = 'alias';
         $field_value = 'Jack and Jill';
@@ -87,10 +97,15 @@ class AliasTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Alias::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::sanitizeAlias
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
      * @return  void
      * @since   1.0.0
      */
-    public function testSanitizeSucceed()
+    public function testSanitizeNoChange()
     {
         $field_name  = 'alias';
         $field_value = 'jack-and-jill';
@@ -106,11 +121,40 @@ class AliasTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Alias::format
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::sanitizeAlias
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
      * @return  void
      * @since   1.0.0
      */
-    public function testFormatSucceed()
+    public function testSanitizeChange()
+    {
+        $field_name  = 'alias';
+        $field_value = 'Jack *&and Jill';
+        $constraint  = 'Alias';
+        $options     = array();
+
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals(null, $results->getFieldValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::format
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::sanitizeAlias
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeCharacter
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testFormatSame()
     {
         $field_name  = 'alias';
         $field_value = 'Jack and Jill';
@@ -127,10 +171,14 @@ class AliasTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Alias::format
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::sanitizeAlias
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeCharacter
      * @return  void
      * @since   1.0.0
      */
-    public function testFormatFailure()
+    public function testFormatChange()
     {
         $field_name  = 'alias';
         $field_value = 'Jack *&and Jill';
@@ -143,15 +191,5 @@ class AliasTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
-    }
-
-    /**
-     * Tear down
-     *
-     * @return void
-     * @since   1.0.0
-     */
-    protected function tearDown()
-    {
     }
 }
