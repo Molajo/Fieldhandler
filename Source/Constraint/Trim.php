@@ -40,7 +40,7 @@ class Trim extends AbstractConstraint implements ConstraintInterface
     /**
      * Sanitize
      *
-     * @return  mixed
+     * @return  string
      * @since   1.0.0
      */
     public function sanitize()
@@ -51,7 +51,7 @@ class Trim extends AbstractConstraint implements ConstraintInterface
     /**
      * Format
      *
-     * @return  mixed
+     * @return  string
      * @since   1.0.0
      */
     public function format()

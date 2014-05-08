@@ -186,7 +186,7 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
      *
      * ```
      * @api
-     * @return  \CommonApi\Model\ValidateResponseInterface
+     * @return  \CommonApi\Model\HandleResponseInterface
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
@@ -279,7 +279,7 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
      * @param   string $constraint
      * @param   array  $options
      *
-     * @return  object
+     * @return  \CommonApi\Model\HandleResponseInterface
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
@@ -410,7 +410,7 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
      *
      * @param   string $method
      *
-     * @return  object
+     * @return  \CommonApi\Model\HandleResponseInterface
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
@@ -475,8 +475,6 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
             $this->field_value,
             $this->options
         );
-
-        return $this;
     }
 
     /**
@@ -496,7 +494,7 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
     /**
      * Instantiates Validation Response
      *
-     * @return  \CommonApi\Model\ValidateResponseInterface
+     * @return  \CommonApi\Model\HandleResponseInterface
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
@@ -525,9 +523,15 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
     /**
      * Create Class
      *
-     * @param   mixed $response
+     * @param   string  $class
+     * @param   null    $parameter1
+     * @param   null    $parameter2
+     * @param   null    $parameter3
+     * @param   null    $parameter4
+     * @param   null    $parameter5
      *
-     * @return  \CommonApi\Model\HandleResponseInterface
+     *
+     * @return  mixed
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
