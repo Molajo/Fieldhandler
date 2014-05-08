@@ -18,7 +18,7 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Equal extends AbstractMath implements ConstraintInterface
+class Equal extends AbstractConstraintTests implements ConstraintInterface
 {
     /**
      * Method Type
@@ -26,5 +26,13 @@ class Equal extends AbstractMath implements ConstraintInterface
      * @var    string
      * @since  1.0.0
      */
-    protected $method_type = 'getEqual';
+    protected $validation_test = 'getEqual';
+
+    /**
+     * Message Code
+     *
+     * @var    integer
+     * @since  1.0.0
+     */
+    protected $message_code = 8000;
 }

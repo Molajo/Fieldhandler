@@ -21,25 +21,6 @@ use CommonApi\Model\ConstraintInterface;
 abstract class AbstractConstraintTests extends AbstractConstraint implements ConstraintInterface
 {
     /**
-     * Set Property->$Key with Option[$Key]
-     *
-     * @param   string $key
-     * @param   array  $options
-     *
-     * @return  array
-     * @since   1.0.0
-     */
-    protected function setPropertyKeyWithOptionKey(array $options = array(), $key)
-    {
-        if (isset($options[ $key ])) {
-            $this->$key = $options[ $key ];
-            unset($options[ $key ]);
-        }
-
-        return $options;
-    }
-
-    /**
      * Flags can be set in options array
      *
      * @return  null|string
@@ -123,7 +104,7 @@ abstract class AbstractConstraintTests extends AbstractConstraint implements Con
 
         if (strlen($test) > 0) {
             for ($i = 0; $i < strlen($test); $i ++) {
-                $filtered .= $this->sanitizeCharacter($filter,  substr($test, $i, 1), $allow_whitespace);
+                $filtered .= $this->sanitizeCharacter($filter, substr($test, $i, 1), $allow_whitespace);
             }
         }
 
@@ -152,27 +133,97 @@ abstract class AbstractConstraintTests extends AbstractConstraint implements Con
     }
 
     /**
-     * Get timezone
+     * Verify if the values are equal
      *
-     * @return  AbstractConstraint
+     * @return  boolean
      * @since   1.0.0
      */
-    protected function getUserTimeZone()
+    protected function getEqual()
     {
-        $timezone = $this->timezone;
-
-        if ($timezone === '') {
-            if (ini_get('date.timezone')) {
-                $timezone = ini_get('date.timezone');
-            }
+        if ($this->field_value === $this->getOption('equals')) {
+            return true;
         }
 
-        if ($timezone === '') {
-            $timezone = 'UTC';
+        return false;
+    }
+
+    /**
+     * Verify that the values are not equal
+     *
+     * @return  boolean
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function getNotEqual()
+    {
+        if ($this->field_value === $this->getOption('not_equal')) {
+            return false;
         }
 
-        $this->timezone = $timezone;
+        return true;
+    }
 
-        return $this;
+    /**
+     * Verify that the value is less than a supplied value
+     *
+     * @return  boolean
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function getLessthan()
+    {
+        if ($this->field_value < $this->getOption('less_than')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Verify that the value is less or equal to a supplied value
+     *
+     * @return  boolean
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function getMinimum()
+    {
+        if ($this->field_value <= $this->getOption('minimum')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Verify that the values are not equal
+     *
+     * @return  boolean
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function getGreaterthan()
+    {
+        if ($this->field_value > $this->getOption('greater_than')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Verify that the value is greater than or equal to a supplied value
+     *
+     * @return  boolean
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function getMaximum()
+    {
+        if ($this->getOption('maximum') >= $this->field_value) {
+            return true;
+        }
+
+        return false;
     }
 }

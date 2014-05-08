@@ -23,12 +23,12 @@ use CommonApi\Model\ConstraintInterface;
 class Foreignkey extends AbstractDatabase implements ConstraintInterface
 {
     /**
-     * Method Test
+     * Validation Test
      *
      * @var    string
      * @since  1.0.0
      */
-    protected $method_test = 'verifyForeignKey';
+    protected $validation_test = 'verifyForeignKey';
 
     /**
      * Validate
@@ -99,9 +99,9 @@ class Foreignkey extends AbstractDatabase implements ConstraintInterface
     protected function setForeignKeyQuery($type)
     {
         if ($this->$type === null) {
-            throw new UnexpectedValueException
-            (
-                'Fieldhandler Foreignkey: ' . $type . ' is required input for the $options array.'
+            throw new UnexpectedValueException(
+                'Fieldhandler Foreignkey: '
+                . $type . ' is required input for the $options array.'
             );
         }
     }
@@ -143,10 +143,7 @@ class Foreignkey extends AbstractDatabase implements ConstraintInterface
 
         } catch (Exception $e) {
 
-            throw new UnexpectedValueException
-            (
-                'Fieldhandler Foreignkey: Database query failed: ' . $e->getMessage()
-            );
+            throw new UnexpectedValueException('Fieldhandler Foreignkey: Database query failed: ' . $e->getMessage());
         }
     }
 }

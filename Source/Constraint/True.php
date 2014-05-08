@@ -58,7 +58,7 @@ class True extends AbstractConstraintTests implements ConstraintInterface
         $field_value,
         array $options = array()
     ) {
-        $options = $this->setPropertyKeyWithOptionKey($options, 'true_array');
+        $options = $this->setPropertyKeyWithOptionKey('true_array', $options);
 
         parent::__construct(
             $constraint,

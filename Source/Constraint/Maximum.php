@@ -18,7 +18,7 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Maximum extends AbstractMath implements ConstraintInterface
+class Maximum extends AbstractConstraintTests implements ConstraintInterface
 {
     /**
      * Method Type
@@ -26,5 +26,5 @@ class Maximum extends AbstractMath implements ConstraintInterface
      * @var    string
      * @since  1.0.0
      */
-    protected $method_type = 'getMaximum';
+    protected $validation_test = 'getMaximum';
 }

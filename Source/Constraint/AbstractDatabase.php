@@ -63,9 +63,9 @@ abstract class AbstractDatabase extends AbstractConstraintTests implements Const
         $field_value,
         array $options = array()
     ) {
-        $options = $this->setPropertyKeyWithOptionKey($options, 'database');
-        $options = $this->setPropertyKeyWithOptionKey($options, 'table');
-        $options = $this->setPropertyKeyWithOptionKey($options, 'key');
+        $options = $this->setPropertyKeyWithOptionKey('database', $options);
+        $options = $this->setPropertyKeyWithOptionKey('table', $options);
+        $options = $this->setPropertyKeyWithOptionKey('key', $options);
 
         parent::__construct(
             $constraint,

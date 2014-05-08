@@ -51,12 +51,7 @@ class Image extends AbstractConstraintTests implements ConstraintInterface
      */
     public function sanitize()
     {
-        $url = str_replace(
-            array('ftp://', 'ftps://', 'http://', 'https://'),
-            ''
-            ,
-            strtolower($this->field_value)
-        );
+        $url = str_replace(array('ftp://', 'ftps://', 'http://', 'https://'), '', strtolower($this->field_value));
 
         if (filter_var($url, FILTER_SANITIZE_URL, $this->setFlags()) === $url) {
         } else {

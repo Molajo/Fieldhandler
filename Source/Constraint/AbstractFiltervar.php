@@ -107,7 +107,8 @@ abstract class AbstractFiltervar extends AbstractConstraintTests implements Cons
         $temp = $this->field_value;
 
         if (is_numeric($temp)
-            && (float)$temp === (float)$this->sanitize()) {
+            && (float)$temp === (float)$this->sanitize()
+        ) {
             return true;
         }
 

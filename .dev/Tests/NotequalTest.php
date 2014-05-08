@@ -42,7 +42,7 @@ class NotequalTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractMath::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
      * @return  void
      * @since   1.0.0
      */
@@ -63,7 +63,7 @@ class NotequalTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractMath::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
      * @return void
      * @since   1.0.0
      */
@@ -87,7 +87,7 @@ class NotequalTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractMath::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
      * @return  void
      * @since   1.0.0
      */
@@ -108,7 +108,7 @@ class NotequalTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractMath::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
      * @return void
      * @since   1.0.0
      */
@@ -129,7 +129,7 @@ class NotequalTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractMath::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
      * @return  void
      * @since   1.0.0
      */
@@ -150,7 +150,7 @@ class NotequalTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractMath::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
      * @return void
      * @since   1.0.0
      */

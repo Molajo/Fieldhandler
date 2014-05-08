@@ -31,12 +31,12 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
     protected $array_option_type;
 
     /**
-     * Method Test
+     * Validation Test
      *
      * @var    string
      * @since  1.0.0
      */
-    protected $method_test = 'getArrayValues';
+    protected $validation_test = 'getArrayValues';
 
     /**
      * Message Code
@@ -91,10 +91,7 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
             return $array_values;
         }
 
-        throw new UnexpectedValueException
-        (
-            'Fieldhandler Arrays: must provide entry with array in options: ' . $type
-        );
+        throw new UnexpectedValueException('Fieldhandler Arrays: must provide entry with array in options: ' . $type);
     }
 
     /**

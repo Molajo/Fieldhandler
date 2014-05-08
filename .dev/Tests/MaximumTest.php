@@ -42,7 +42,7 @@ class MaximumTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractMath::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
      * @return  void
      * @since   1.0.0
      */
@@ -63,7 +63,7 @@ class MaximumTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractMath::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
      * @return  void
      * @since   1.0.0
      */
@@ -84,7 +84,7 @@ class MaximumTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractMath::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
      * @return  void
      * @since   1.0.0
      */

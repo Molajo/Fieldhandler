@@ -118,12 +118,12 @@ abstract class AbstractConstraint implements ConstraintInterface
     protected $filter_instance;
 
     /**
-     * Method Test
+     * Validation Test
      *
      * @var    string
      * @since  1.0.0
      */
-    protected $method_test = 'validate';
+    protected $validation_test = 'validation';
 
     /**
      * Message Code
@@ -166,26 +166,6 @@ abstract class AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * Process Options
-     *
-     * @param   array $options
-     *
-     * @return  $this
-     * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
-     */
-    protected function processOptions($options)
-    {
-        foreach ($this->property_array as $key) {
-            $options = $this->setPropertyKeyWithOptionKey($options, $key);
-        }
-
-        $this->options = $options;
-
-        return $this;
-    }
-
-    /**
      * Validate
      *
      * @api
@@ -199,24 +179,14 @@ abstract class AbstractConstraint implements ConstraintInterface
             return true;
         }
 
-        if ($this->validation() === true) {
+        $method = $this->validation_test;
+
+        if ($this->$method() === true) {
             return true;
         }
 
         $this->setValidateMessage($this->message_code);
 
-        return false;
-    }
-
-    /**
-     * Validation testing in sub-types
-     *
-     * @return  boolean
-     * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
-     */
-    protected function validation()
-    {
         return false;
     }
 
@@ -234,7 +204,7 @@ abstract class AbstractConstraint implements ConstraintInterface
             return $this->field_value;
         }
 
-        $method = $this->method_test;
+        $method = $this->validation_test;
 
         if ($this->$method() === true) {
         } else {
@@ -289,5 +259,69 @@ abstract class AbstractConstraint implements ConstraintInterface
     public function getValidateMessages()
     {
         return $this->validate_messages;
+    }
+
+    /**
+     * Process Options
+     *
+     * @param   array $options
+     *
+     * @return  $this
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function processOptions($options)
+    {
+        foreach ($this->property_array as $key) {
+            $options = $this->setPropertyKeyWithOptionKey($key, $options);
+        }
+
+        $this->options = $options;
+
+        return $this;
+    }
+
+    /**
+     * Set Property->$Key with Option[$Key]
+     *
+     * @param   string $key
+     * @param   array  $options
+     *
+     * @return  array
+     * @since   1.0.0
+     */
+    protected function setPropertyKeyWithOptionKey($key, array $options = array())
+    {
+        if (isset($options[ $key ])) {
+            $this->$key = $options[ $key ];
+            unset($options[ $key ]);
+        }
+
+        return $options;
+    }
+
+    /**
+     * Get timezone
+     *
+     * @return  AbstractConstraint
+     * @since   1.0.0
+     */
+    protected function getUserTimeZone()
+    {
+        $timezone = $this->timezone;
+
+        if ($timezone === '') {
+            if (ini_get('date.timezone')) {
+                $timezone = ini_get('date.timezone');
+            }
+        }
+
+        if ($timezone === '') {
+            $timezone = 'UTC';
+        }
+
+        $this->timezone = $timezone;
+
+        return $this;
     }
 }

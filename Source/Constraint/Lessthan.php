@@ -18,7 +18,7 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Lessthan extends AbstractMath implements ConstraintInterface
+class Lessthan extends AbstractConstraintTests implements ConstraintInterface
 {
     /**
      * Method Type
@@ -26,5 +26,5 @@ class Lessthan extends AbstractMath implements ConstraintInterface
      * @var    string
      * @since  1.0.0
      */
-    protected $method_type = 'getLessthan';
+    protected $validation_test = 'getLessthan';
 }

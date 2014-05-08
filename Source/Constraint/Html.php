@@ -10,8 +10,6 @@ namespace Molajo\Fieldhandler\Constraint;
 
 use CommonApi\Model\ConstraintInterface;
 
-include __DIR__ . '/Library/kses.php';
-
 /**
  * Html Constraint
  *

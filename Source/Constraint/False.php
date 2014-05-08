@@ -58,7 +58,7 @@ class False extends AbstractConstraintTests implements ConstraintInterface
         $field_value,
         array $options = array()
     ) {
-        $options = $this->setPropertyKeyWithOptionKey($options, 'false_array');
+        $options = $this->setPropertyKeyWithOptionKey('false_array', $options);
 
         parent::__construct(
             $constraint,

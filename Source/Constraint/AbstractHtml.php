@@ -134,9 +134,9 @@ abstract class AbstractHtml extends AbstractConstraintTests implements Constrain
         $field_value,
         array $options = array()
     ) {
-        $options = $this->setPropertyKeyWithOptionKey($options, 'white_list');
-        $options = $this->setPropertyKeyWithOptionKey($options, 'html_entities');
-        $options = $this->setPropertyKeyWithOptionKey($options, 'encoding');
+        $options = $this->setPropertyKeyWithOptionKey('white_list', $options);
+        $options = $this->setPropertyKeyWithOptionKey('html_entities', $options);
+        $options = $this->setPropertyKeyWithOptionKey('encoding', $options);
 
         parent::__construct(
             $constraint,

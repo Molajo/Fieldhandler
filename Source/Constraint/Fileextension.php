@@ -29,12 +29,12 @@ class Fileextension extends AbstractArrays implements ConstraintInterface
     protected $array_option_type = 'array_valid_extensions';
 
     /**
-     * Method Test
+     * Validation Test
      *
      * @var    string
      * @since  1.0.0
      */
-    protected $method_test = 'validation';
+    protected $validation_test = 'validation';
 
     /**
      * Validation Test

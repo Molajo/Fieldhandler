@@ -158,10 +158,10 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
     /**
      * Validate Request - validates $field_value for compliance with constraint specifications
      *
-     * @param   string     $field_name  Defines a textual value used in messages
-     * @param   null|mixed $field_value Value of the field to be processed
-     * @param   string     $constraint  Name of the data constraint to evaluate $field_value
-     * @param   array      $options     Options vary by and are documented in the constraint class
+     * @param   string $field_name  Defines a textual value used in messages
+     * @param   mixed  $field_value Value of the field to be processed
+     * @param   string $constraint  Name of the data constraint to evaluate $field_value
+     * @param   array  $options     Options vary by and are documented in the constraint class
      *
      * @code
      *
@@ -189,7 +189,7 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    public function validate($field_name, $field_value = null, $constraint, array $options = array())
+    public function validate($field_name, $field_value, $constraint, array $options = array())
     {
         return $this->processRequest('validate', $field_name, $field_value, $constraint, $options);
     }
@@ -197,10 +197,10 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
     /**
      * Sanitize Request - sanitizes $field_value, if necessary, in accordance with constraint specifications
      *
-     * @param   string     $field_name  Defines a textual value used in messages
-     * @param   null|mixed $field_value Value of the field to be processed
-     * @param   string     $constraint  Name of the data constraint to evaluate $field_value
-     * @param   array      $options     Options vary by and are documented in the constraint class
+     * @param   string $field_name  Defines a textual value used in messages
+     * @param   mixed  $field_value Value of the field to be processed
+     * @param   string $constraint  Name of the data constraint to evaluate $field_value
+     * @param   array  $options     Options vary by and are documented in the constraint class
      *
      * @code
      *
@@ -225,7 +225,7 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    public function sanitize($field_name, $field_value = null, $constraint, array $options = array())
+    public function sanitize($field_name, $field_value, $constraint, array $options = array())
     {
         return $this->processRequest('sanitize', $field_name, $field_value, $constraint, $options);
     }
@@ -235,10 +235,10 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
      *
      * $response = $request->format($field_name, $field_value, $constraint, $options);
      *
-     * @param   string     $field_name  Defines a textual value used in messages
-     * @param   null|mixed $field_value Value of the field to be processed
-     * @param   string     $constraint  Name of the data constraint to evaluate $field_value
-     * @param   array      $options     Options vary by and are documented in the constraint class
+     * @param   string $field_name  Defines a textual value used in messages
+     * @param   mixed  $field_value Value of the field to be processed
+     * @param   string $constraint  Name of the data constraint to evaluate $field_value
+     * @param   array  $options     Options vary by and are documented in the constraint class
      *
      * @code
      *
@@ -264,7 +264,7 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    public function format($field_name, $field_value = null, $constraint, array $options = array())
+    public function format($field_name, $field_value, $constraint, array $options = array())
     {
         return $this->processRequest('format', $field_name, $field_value, $constraint, $options);
     }
@@ -272,23 +272,18 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
     /**
      * Process Request
      *
-     * @param   string     $method
-     * @param   string     $field_name
-     * @param   null|mixed $field_value
-     * @param   string     $constraint
-     * @param   array      $options
+     * @param   string $method
+     * @param   string $field_name
+     * @param   mixed  $field_value
+     * @param   string $constraint
+     * @param   array  $options
      *
      * @return  object
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    protected function processRequest(
-        $method,
-        $field_name,
-        $field_value = null,
-        $constraint,
-        array $options = array()
-    ) {
+    protected function processRequest($method, $field_name, $field_value, $constraint, array $options = array())
+    {
         $this->setMethod($method);
         $this->setFieldName($field_name);
         $this->setFieldValue($field_value);
@@ -345,7 +340,7 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
     /**
      * Set Field Value
      *
-     * @param   null|mixed $field_value
+     * @param   mixed $field_value
      *
      * @return  $this
      * @since   1.0.0
@@ -406,10 +401,7 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
 
         if (trim($this->constraint) === '' || $this->constraint === null) {
 
-            throw new UnexpectedValueException
-            (
-                'Fieldhandler Request: Must request a specific constraint'
-            );
+            throw new UnexpectedValueException('Fieldhandler Request: Must request a specific constraint');
         }
 
         return $this;
@@ -433,9 +425,9 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
 
         } catch (Exception $e) {
 
-            throw new UnexpectedValueException
-            (
-                'Fieldhandler Request createConstraint Method Failed: ' . $constraint . ' Class: ' . $class
+            throw new UnexpectedValueException(
+                'Fieldhandler Request createConstraint Method Failed: '
+                . $constraint . ' Class: ' . $class
             );
         }
     }

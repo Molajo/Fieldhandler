@@ -12,6 +12,7 @@ if (function_exists('CreateClassMap')) {
     include_once __DIR__ . '/CreateClassMap.php';
 }
 include_once $base . '/vendor/autoload.php';
+include_once $base. '/Source/Constraint/Library/kses.php';
 
 $classmap = array();
 $results  = createClassMap($base . '/Source/Constraint/', 'Molajo\\Fieldhandler\\Constraint\\');
