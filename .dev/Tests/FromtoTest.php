@@ -41,7 +41,7 @@ class FromtoTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Fromto::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Fromto::validation
      * @return  void
      * @since   1.0.0
      */
@@ -63,7 +63,7 @@ class FromtoTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Fromto::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Fromto::validation
      * @return  void
      * @since   1.0.0
      */
@@ -90,7 +90,7 @@ class FromtoTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Fromto::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
      * @return  void
      * @since   1.0.0
      */
@@ -112,7 +112,7 @@ class FromtoTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Fromto::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
      * @return  void
      * @since   1.0.0
      */
@@ -134,7 +134,7 @@ class FromtoTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Fromto::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
      * @return  void
      * @since   1.0.0
      */
@@ -156,7 +156,7 @@ class FromtoTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Fromto::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
      * @return  void
      * @since   1.0.0
      */
@@ -171,8 +171,8 @@ class FromtoTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(null, $results->getFieldValue());
-        $this->assertEquals(true, $results->getChangeIndicator());
+        $this->assertEquals(500, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }

@@ -29,7 +29,7 @@ class True extends AbstractConstraintTests implements ConstraintInterface
      * @var    array
      * @since  1.0.0
      */
-    protected $true_array = array(true => true, 1 => 1, 'yes' => 'yes', 'on' => 'on');
+    protected $true_array = array(true, 1, 'yes', 'on');
 
     /**
      * Message Code
@@ -72,15 +72,34 @@ class True extends AbstractConstraintTests implements ConstraintInterface
     /**
      * Verifies value is true, 1, 'yes', or 'on', responding with true or false and messages
      *
+     * @api
      * @return  boolean
      * @since   1.0.0
      */
     protected function validation()
     {
-        if (in_array($this->field_value, $this->true_array) === false) {
+        if ($this->testInArray() === true || $this->field_value === true) {
+        } else {
             return false;
         }
 
         return true;
+    }
+
+    /**
+     * Loop thru array and strict comparison
+     *
+     * @return  boolean
+     * @since   1.0.0
+     */
+    protected function testInArray()
+    {
+        foreach ($this->true_array as $value) {
+            if ($this->field_value === $value) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

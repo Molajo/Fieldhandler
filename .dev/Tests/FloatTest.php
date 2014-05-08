@@ -93,11 +93,12 @@ class FloatTest extends PHPUnit_Framework_TestCase
     public function testSanitizeSucceed()
     {
         $field_name  = 'float_fieldname';
-        $field_value = 123;
+        $field_value = (float) 123;
         $constraint  = 'Float';
         $options     = array();
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
+
         $this->assertEquals($field_value, $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());
 

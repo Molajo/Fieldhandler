@@ -39,12 +39,20 @@ abstract class AbstractSomething extends AbstractConstraintTests implements Cons
     /**
      * Validate
      *
+     * @api
      * @return  boolean
      * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
-        return parent::validate();
+        if ($this->validation() === true) {
+            return true;
+        }
+
+        $this->setValidateMessage($this->message_code);
+
+        return false;
     }
 
     /**
@@ -71,6 +79,10 @@ abstract class AbstractSomething extends AbstractConstraintTests implements Cons
      */
     protected function validation()
     {
+        if ($this->field_value === null) {
+            return false;
+        }
+
         if ($this->field_value === null
             || trim($this->field_value) === ''
             || $this->field_value === 0

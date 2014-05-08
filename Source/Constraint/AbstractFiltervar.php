@@ -84,12 +84,30 @@ abstract class AbstractFiltervar extends AbstractConstraintTests implements Cons
      */
     protected function validation()
     {
-        if ($this->filter_type === FILTER_VALIDATE_FLOAT
-            && (float)$this->field_value === (float)$this->sanitize()
-        ) {
-            return true;
+        if ($this->filter_type === FILTER_VALIDATE_FLOAT) {
+            return $this->validationFloat();
+        }
 
-        } elseif ($this->field_value === $this->sanitize()) {
+        if ($this->field_value === $this->sanitize()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Validation test for Float
+     *
+     * @api
+     * @return  boolean
+     * @since   1.0.0
+     */
+    protected function validationFloat()
+    {
+        $temp = $this->field_value;
+
+        if (is_numeric($temp)
+            && (float)$temp === (float)$this->sanitize()) {
             return true;
         }
 
