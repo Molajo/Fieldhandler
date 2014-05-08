@@ -331,10 +331,7 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
             return $this;
         }
 
-        throw new UnexpectedValueException
-        (
-            'Fieldhandler Request: Must provide the field name.'
-        );
+        throw new UnexpectedValueException('Fieldhandler Request: Must provide the field name.');
     }
 
     /**
@@ -425,10 +422,8 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
 
         } catch (Exception $e) {
 
-            throw new UnexpectedValueException(
-                'Fieldhandler Request createConstraint Method Failed: '
-                . $constraint . ' Class: ' . $class
-            );
+            $message = 'Fieldhandler Request createConstraint Method Failed: ' . $constraint . ' Class: ' . $class;
+            throw new UnexpectedValueException($message);
         }
     }
 
@@ -499,10 +494,8 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
 
         } catch (Exception $e) {
 
-            throw new UnexpectedValueException
-            (
-                'Fieldhandler Request createMessageInstance Method: Cannot create class ' . $class
-            );
+            $message = 'Fieldhandler Request createMessageInstance Method: Cannot create class ' . $class;
+            throw new UnexpectedValueException($message);
         }
 
         return $this;
@@ -527,10 +520,8 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
 
         } catch (Exception $e) {
 
-            throw new UnexpectedValueException
-            (
-                'Fieldhandler Request setValidateResponse Method: Cannot create class ' . $class
-            );
+            $message = 'Fieldhandler Request setValidateResponse Method: Cannot create class ' . $class;
+            throw new UnexpectedValueException($message);
         }
     }
 
@@ -555,10 +546,8 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
 
         } catch (Exception $e) {
 
-            throw new UnexpectedValueException
-            (
-                'Fieldhandler Request setHandleResponse Method: Cannot create class ' . $class
-            );
+            $message = 'Fieldhandler Request setHandleResponse Method: Cannot create class ' . $class;
+            throw new UnexpectedValueException($message);
         }
     }
 }

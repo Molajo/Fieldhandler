@@ -91,7 +91,7 @@ class Upper extends AbstractCtype implements ConstraintInterface
      * Format - upper case data
      *
      * @api
-     * @return  mixed
+     * @return  string
      * @since   1.0.0
      */
     public function format()

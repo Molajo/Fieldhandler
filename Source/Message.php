@@ -116,10 +116,8 @@ class Message implements MessageInterface
             return $this->message_templates[ $code ];
         }
 
-        throw new UnexpectedValueException
-        (
-            'Fieldhandler Message getMessageTemplate Method: Do not have template: ' . $code
-        );
+        $message = 'Fieldhandler Message getMessageTemplate Method: Do not have template: ' . $code;
+        throw new UnexpectedValueException($message);
     }
 
     /**

@@ -18,13 +18,44 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Trim extends AbstractString implements ConstraintInterface
+class Trim extends AbstractConstraint implements ConstraintInterface
 {
     /**
-     * String Function
+     * Validate
      *
-     * @var    string
-     * @since  1.0.0
+     * @return  boolean
+     * @since   1.0.0
      */
-    protected $string_function = 'trim';
+    public function validate()
+    {
+        if ($this->field_value === $this->sanitize()) {
+            return true;
+        }
+
+        $this->setValidateMessage(2000);
+
+        return false;
+    }
+
+    /**
+     * Sanitize
+     *
+     * @return  mixed
+     * @since   1.0.0
+     */
+    public function sanitize()
+    {
+        return trim($this->field_value);
+    }
+
+    /**
+     * Format
+     *
+     * @return  mixed
+     * @since   1.0.0
+     */
+    public function format()
+    {
+        return $this->sanitize();
+    }
 }

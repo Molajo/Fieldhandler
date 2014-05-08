@@ -13,7 +13,8 @@ use CommonApi\Model\ConstraintInterface;
 /**
  * Alpha Constraint
  *
- * Each character in the alias URL slug must be alphabetic. To allow the 'space character', use the `allow_space_character` $option.
+ * Each character in the alias URL slug must be alphabetic.
+ * To allow the 'space character', use the `allow_space_character` $option.
  *
  * **Validate**
  *

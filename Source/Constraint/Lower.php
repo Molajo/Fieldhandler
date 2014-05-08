@@ -90,7 +90,7 @@ class Lower extends AbstractCtype implements ConstraintInterface
      * Format - lower case data
      *
      * @api
-     * @return  mixed
+     * @return  string
      * @since   1.0.0
      */
     public function format()
