@@ -21,12 +21,23 @@ use CommonApi\Model\ConstraintInterface;
 class Required extends AbstractNull implements ConstraintInterface
 {
     /**
-     * Message Code
+     * Validate
      *
-     * @var    integer
-     * @since  1.0.0
+     * @api
+     * @return  boolean
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    protected $message_code = 13000;
+    public function validate()
+    {
+        if ($this->validation() === true) {
+            return true;
+        }
+
+        $this->setValidateMessage($this->message_code);
+
+        return false;
+    }
 
     /**
      * Validation

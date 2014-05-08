@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1399521388">
-  <project timestamp="1399521388">
+<coverage generated="1399523729">
+  <project timestamp="1399523729">
     <package name="Molajo\Factories\Fieldhandler">
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Factories/Fieldhandler/FieldhandlerFactoryMethod.php">
         <class name="FieldhandlerFactoryMethod" namespace="Molajo\Factories\Fieldhandler">
@@ -339,23 +339,18 @@
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/AbstractNull.php">
         <class name="AbstractNull" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
-          <metrics methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="0" elements="16" coveredelements="0"/>
+          <metrics methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="8" coveredelements="0"/>
         </class>
         <line num="45" type="method" name="validation" crap="6" count="0"/>
-        <line num="46" type="stmt" count="0"/>
         <line num="47" type="stmt" count="0"/>
         <line num="48" type="stmt" count="0"/>
-        <line num="49" type="stmt" count="0"/>
         <line num="51" type="stmt" count="0"/>
-        <line num="52" type="stmt" count="0"/>
         <line num="60" type="method" name="validationNotNull" crap="6" count="0"/>
-        <line num="61" type="stmt" count="0"/>
         <line num="62" type="stmt" count="0"/>
         <line num="63" type="stmt" count="0"/>
-        <line num="64" type="stmt" count="0"/>
         <line num="66" type="stmt" count="0"/>
-        <line num="67" type="stmt" count="0"/>
-        <metrics loc="68" ncloc="29" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="0" elements="16" coveredelements="0"/>
+        <line num="69" type="stmt" count="0"/>
+        <metrics loc="68" ncloc="29" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="8" coveredelements="0"/>
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/AbstractSomething.php">
         <class name="AbstractSomething" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
@@ -1013,13 +1008,17 @@
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/Notnull.php">
         <class name="Notnull" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
-          <metrics methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="5" coveredelements="0"/>
+          <metrics methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="4" elements="7" coveredelements="5"/>
         </class>
-        <line num="29" type="method" name="validation" crap="2" count="0"/>
-        <line num="30" type="stmt" count="0"/>
-        <line num="31" type="stmt" count="0"/>
-        <line num="32" type="stmt" count="0"/>
-        <metrics loc="33" ncloc="12" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="5" coveredelements="0"/>
+        <line num="31" type="method" name="validate" crap="2" count="2"/>
+        <line num="33" type="stmt" count="2"/>
+        <line num="34" type="stmt" count="1"/>
+        <line num="37" type="stmt" count="1"/>
+        <line num="39" type="stmt" count="1"/>
+        <line num="48" type="method" name="validation" crap="2" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="53" type="stmt" count="0"/>
+        <metrics loc="52" ncloc="23" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="4" elements="7" coveredelements="5"/>
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/Null.php">
         <class name="Null" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
@@ -1123,13 +1122,17 @@
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/Required.php">
         <class name="Required" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
-          <metrics methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="5" coveredelements="0"/>
+          <metrics methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="4" elements="7" coveredelements="5"/>
         </class>
-        <line num="37" type="method" name="validation" crap="2" count="0"/>
-        <line num="38" type="stmt" count="0"/>
-        <line num="39" type="stmt" count="0"/>
-        <line num="40" type="stmt" count="0"/>
-        <metrics loc="41" ncloc="14" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="5" coveredelements="0"/>
+        <line num="31" type="method" name="validate" crap="2" count="2"/>
+        <line num="33" type="stmt" count="2"/>
+        <line num="34" type="stmt" count="1"/>
+        <line num="37" type="stmt" count="1"/>
+        <line num="39" type="stmt" count="1"/>
+        <line num="48" type="method" name="validation" crap="2" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="53" type="stmt" count="0"/>
+        <metrics loc="52" ncloc="23" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="4" elements="7" coveredelements="5"/>
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/Resource.php">
         <class name="Resource" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
@@ -2500,6 +2503,6 @@
         <metrics loc="18" ncloc="8" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
     </package>
-    <metrics files="120" loc="9061" ncloc="3923" classes="99" methods="242" coveredmethods="47" conditionals="0" coveredconditionals="0" statements="1630" coveredstatements="316" elements="1872" coveredelements="363"/>
+    <metrics files="120" loc="9091" ncloc="3943" classes="99" methods="244" coveredmethods="49" conditionals="0" coveredconditionals="0" statements="1624" coveredstatements="324" elements="1868" coveredelements="373"/>
   </project>
 </coverage>

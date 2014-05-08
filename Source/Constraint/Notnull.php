@@ -21,6 +21,25 @@ use CommonApi\Model\ConstraintInterface;
 class Notnull extends AbstractNull implements ConstraintInterface
 {
     /**
+     * Validate
+     *
+     * @api
+     * @return  boolean
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    public function validate()
+    {
+        if ($this->validation() === true) {
+            return true;
+        }
+
+        $this->setValidateMessage($this->message_code);
+
+        return false;
+    }
+
+    /**
      * Validation
      *
      * @return  boolean

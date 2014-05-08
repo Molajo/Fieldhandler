@@ -73,8 +73,8 @@ class RequiredTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, array());
 
-        $expected_code    = 13000;
-        $expected_message = 'Field: email value is required, but was not provided.';
+        $expected_code    = 1000;
+        $expected_message = 'Field: email does not have a valid value for Required data type.';
         $messages         = $results->getValidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);
