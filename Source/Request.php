@@ -123,22 +123,23 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
      * @var    array
      * @since  1.0.0
      */
-    protected $message_templates = array(
-        1000  => 'Field: {field_name} does not have a valid value for {constraint} data type.',
-        2000  => 'Field: {field_name} must only contain {constraint} values.',
-        3000  => 'Field: {field_name} is not an array.',
-        4000  => 'Field: {field_name} has an invalid array element value.',
-        5000  => 'Field: {field_name} has an invalid array key entry.',
-        6000  => 'Field: {field_name} does not have the correct number of array values.',
-        7000  => 'Field: {field_name} does not have a default value.',
-        8000  => 'Field: {field_name} did not pass the {constraint} data type test.',
-        9000  => 'Field: {field_name} does not have a valid file extension.',
-        10000 => 'Field: {field_name} exceeded maximum value allowed.',
-        11000 => 'Field: {field_name} is less than the minimum value allowed.',
-        12000 => 'Field: {field_name} does not have a valid mime type.',
-        13000 => 'Field: {field_name} value is required, but was not provided.',
-        14000 => 'Field: {field_name} value does not match a value from the list allowed.',
-    );
+    protected $message_templates
+        = array(
+            1000  => 'Field: {field_name} does not have a valid value for {constraint} data type.',
+            2000  => 'Field: {field_name} must only contain {constraint} values.',
+            3000  => 'Field: {field_name} is not an array.',
+            4000  => 'Field: {field_name} has an invalid array element value.',
+            5000  => 'Field: {field_name} has an invalid array key entry.',
+            6000  => 'Field: {field_name} does not have the correct number of array values.',
+            7000  => 'Field: {field_name} does not have a default value.',
+            8000  => 'Field: {field_name} did not pass the {constraint} data type test.',
+            9000  => 'Field: {field_name} does not have a valid file extension.',
+            10000 => 'Field: {field_name} exceeded maximum value allowed.',
+            11000 => 'Field: {field_name} is less than the minimum value allowed.',
+            12000 => 'Field: {field_name} does not have a valid mime type.',
+            13000 => 'Field: {field_name} value is required, but was not provided.',
+            14000 => 'Field: {field_name} value does not match a value from the list allowed.',
+        );
 
     /**
      * Constructor
@@ -405,29 +406,6 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
     }
 
     /**
-     * Create Constraint Class
-     *
-     * @param   string $constraint
-     *
-     * @return  $this
-     * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
-     */
-    protected function createConstraintClass($constraint)
-    {
-        $class = 'Molajo\\Fieldhandler\\Constraint\\' . $constraint;
-
-        try {
-            return new $class ($this->constraint, $this->method, $this->field_name, $this->field_value, $this->options);
-
-        } catch (Exception $e) {
-
-            $message = 'Fieldhandler Request createConstraint Method Failed: ' . $constraint . ' Class: ' . $class;
-            throw new UnexpectedValueException($message);
-        }
-    }
-
-    /**
      * Run Constraint Method
      *
      * @param   string $method
@@ -479,6 +457,29 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
     }
 
     /**
+     * Create Constraint Class
+     *
+     * @param   string $constraint
+     *
+     * @return  $this
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function createConstraintClass($constraint)
+    {
+        return $this->createClass(
+            'Molajo\\Fieldhandler\\Constraint\\' . $constraint,
+            $this->constraint,
+            $this->method,
+            $this->field_name,
+            $this->field_value,
+            $this->options
+        );
+
+        return $this;
+    }
+
+    /**
      * Create Message Instance
      *
      * @return  $this
@@ -487,16 +488,7 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
      */
     protected function createMessageInstance()
     {
-        $class = 'Molajo\\Fieldhandler\\Message';
-
-        try {
-            $this->message_instance = new $class($this->message_templates);
-
-        } catch (Exception $e) {
-
-            $message = 'Fieldhandler Request createMessageInstance Method: Cannot create class ' . $class;
-            throw new UnexpectedValueException($message);
-        }
+        $this->message_instance = $this->createClass('Molajo\\Fieldhandler\\Message', $this->message_templates);
 
         return $this;
     }
@@ -510,19 +502,11 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
      */
     protected function setValidateResponse()
     {
-        $class = 'Molajo\\Fieldhandler\\ValidateResponse';
-
-        try {
-            return new $class(
-                $this->validate_response,
-                $this->message_instance->getMessages()
-            );
-
-        } catch (Exception $e) {
-
-            $message = 'Fieldhandler Request setValidateResponse Method: Cannot create class ' . $class;
-            throw new UnexpectedValueException($message);
-        }
+        return $this->createClass(
+            'Molajo\\Fieldhandler\\ValidateResponse',
+            $this->validate_response,
+            $this->message_instance->getMessages()
+        );
     }
 
     /**
@@ -532,22 +516,42 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
      *
      * @return  \CommonApi\Model\HandleResponseInterface
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     protected function setHandleResponse($response)
     {
-        $class = 'Molajo\\Fieldhandler\\HandleResponse';
+        return $this->createClass('Molajo\\Fieldhandler\\HandleResponse', $this->field_value, $response);
+    }
+
+    /**
+     * Create Class
+     *
+     * @param   mixed $response
+     *
+     * @return  \CommonApi\Model\HandleResponseInterface
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function createClass(
+        $class,
+        $parameter1 = null,
+        $parameter2 = null,
+        $parameter3 = null,
+        $parameter4 = null,
+        $parameter5 = null
+    ) {
+        if (class_exists($class)) {
+        } else {
+            throw new UnexpectedValueException('Fieldhandler Request createClass - Class does not exist: ' . $class);
+        }
 
         try {
-            return new $class(
-                $this->field_value,
-                $response
-            );
+            return new $class($parameter1, $parameter2, $parameter3, $parameter4, $parameter5);
 
         } catch (Exception $e) {
 
-            $message = 'Fieldhandler Request setHandleResponse Method: Cannot create class ' . $class;
+            $message = 'Fieldhandler Request createClass Method: Error constructing class: ' . $class;
             throw new UnexpectedValueException($message);
+
         }
     }
 }
