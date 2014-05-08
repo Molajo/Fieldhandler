@@ -234,7 +234,9 @@ abstract class AbstractConstraint implements ConstraintInterface
             return $this->field_value;
         }
 
-        if ($this->$this->method_test() === true) {
+        $method = $this->method_test;
+
+        if ($this->$method() === true) {
         } else {
             $this->field_value = null;
         }

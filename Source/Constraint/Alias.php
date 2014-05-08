@@ -40,9 +40,7 @@ class Alias extends AbstractConstraintTests implements ConstraintInterface
             return null;
         }
 
-        $this->field_value = $this->formatAlias($this->field_value);
-
-        return $this->field_value;
+        return $this->sanitizeAlias($this->field_value);
     }
 
     /**
@@ -55,7 +53,6 @@ class Alias extends AbstractConstraintTests implements ConstraintInterface
     {
         $alias = $this->field_value;
         $alias = $this->sanitizeAlias($alias);
-        $alias = $this->formatAlias($alias);
 
         if ($this->field_value === $alias) {
             return true;
@@ -74,23 +71,11 @@ class Alias extends AbstractConstraintTests implements ConstraintInterface
      */
     protected function sanitizeAlias($alias)
     {
-        return $this->sanitizeByCharacter('ctype_alnum', str_replace('-', ' ', trim($alias)), true);
-    }
-
-    /**
-     * Create Alias from Text Value
-     *
-     * @param   string $alias
-     *
-     * @return  string
-     * @since   1.0.0
-     */
-    protected function formatAlias($alias)
-    {
         $alias = str_replace('-', ' ', strtolower(trim($alias)));
         $alias = trim($alias, '-');
         $alias = str_replace('  ', ' ', strtolower(trim($alias)));
-        $alias = str_replace(' ', '-', strtolower(trim($alias)));
+        $alias = $this->sanitizeByCharacter('ctype_alnum', $alias, true);
+        $alias = str_replace(' ', '-', $alias);
 
         return $alias;
     }

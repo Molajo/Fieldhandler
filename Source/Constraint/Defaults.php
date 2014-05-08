@@ -29,6 +29,25 @@ class Defaults extends AbstractConstraintTests implements ConstraintInterface
     protected $message_code = 7000;
 
     /**
+     * Validate
+     *
+     * @api
+     * @return  boolean
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    public function validate()
+    {
+        if ($this->validation() === true) {
+            return true;
+        }
+
+        $this->setValidateMessage($this->message_code);
+
+        return false;
+    }
+
+    /**
      * Sanitize
      *
      * @return  mixed

@@ -75,11 +75,10 @@ class EmailTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-
         $this->assertEquals(false, $results->getValidateResponse());
 
-        $expected_code    = 1000;
-        $expected_message = 'Field: email_address does not have a valid value for Email data type.';
+        $expected_code    = 2000;
+        $expected_message = 'Field: email_address must only contain Email values.';
         $messages         = $results->getValidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);

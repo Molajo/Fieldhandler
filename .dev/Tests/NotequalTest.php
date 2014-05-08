@@ -77,8 +77,8 @@ class NotequalTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $expected_code    = 1000;
-        $expected_message = 'Field: field1 does not have a valid value for Notequal data type.';
+        $expected_code    = 8000;
+        $expected_message = 'Field: field1 did not pass the Notequal data type test.';
         $messages         = $results->getValidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);

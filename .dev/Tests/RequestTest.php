@@ -8,10 +8,8 @@
  */
 namespace Molajo\Fieldhandler\Tests;
 
-use CommonApi\Exception\UnexpectedValueException;
 use Molajo\Fieldhandler\Request;
 use PHPUnit_Framework_TestCase;
-use stdClass;
 
 /**
  * Request Test

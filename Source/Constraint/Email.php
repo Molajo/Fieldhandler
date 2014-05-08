@@ -76,14 +76,19 @@ class Email extends AbstractFiltervar implements ConstraintInterface
 
         $host = $this->getHost();
 
-        if ($this->checkMX($host) === true) {
-        } else {
+        if ($host === null) {
             $valid = false;
-        }
+        } else {
 
-        if ($this->checkHost($host) === true) {
-        } else {
-            $valid = false;
+            if ($this->checkMX($host) === true) {
+            } else {
+                $valid = false;
+            }
+
+            if ($this->checkHost($host) === true) {
+            } else {
+                $valid = false;
+            }
         }
 
         return $valid;

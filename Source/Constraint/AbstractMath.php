@@ -21,6 +21,39 @@ use CommonApi\Model\ConstraintInterface;
 abstract class AbstractMath extends AbstractConstraintTests implements ConstraintInterface
 {
     /**
+     * Message Code
+     *
+     * @var    integer
+     * @since  1.0.0
+     */
+    protected $message_code = 8000;
+
+    /**
+     * Validate
+     *
+     * @api
+     * @return  boolean
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    public function validate()
+    {
+        if ($this->field_value === null) {
+            return true;
+        }
+
+        $method = $this->method_type;
+
+        if ($this->$method() === true) {
+            return true;
+        }
+
+        $this->setValidateMessage($this->message_code);
+
+        return false;
+    }
+
+    /**
      * Verify if the values are equal
      *
      * @return  boolean
@@ -28,7 +61,7 @@ abstract class AbstractMath extends AbstractConstraintTests implements Constrain
      */
     protected function getEqual()
     {
-        if ($this->field_value === $this->getOption('equal')) {
+        if ($this->field_value === $this->getOption('equals')) {
             return true;
         }
 
@@ -108,7 +141,7 @@ abstract class AbstractMath extends AbstractConstraintTests implements Constrain
      */
     protected function getMaximum()
     {
-        if ($this->field_value >= $this->getOption('maximum')) {
+        if ($this->getOption('maximum') >= $this->field_value) {
             return true;
         }
 
