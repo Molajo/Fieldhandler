@@ -9,7 +9,7 @@ tools:
     php_analyzer: true
 
     # https://scrutinizer-ci.com/docs/tools/php/change-tracking-analyzer/
-    php_changetracking: true
+    php_changetracking: false
 
     # https://scrutinizer-ci.com/docs/tools/php/code-sniffer/
     php_code_sniffer:
