@@ -42,6 +42,9 @@ class EqualTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getEqual
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -63,6 +66,9 @@ class EqualTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getEqual
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -89,6 +95,9 @@ class EqualTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getEqual
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -110,6 +119,9 @@ class EqualTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getEqual
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -131,6 +143,9 @@ class EqualTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getEqual
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -152,6 +167,9 @@ class EqualTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getEqual
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -169,15 +187,5 @@ class EqualTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
-    }
-
-    /**
-     * Tear down
-     *
-     * @return void
-     * @since   1.0.0
-     */
-    protected function tearDown()
-    {
     }
 }

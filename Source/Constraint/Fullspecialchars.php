@@ -47,16 +47,4 @@ class Fullspecialchars extends AbstractFiltervar implements ConstraintInterface
     protected $constraint_allowable_options = array(
        FILTER_FLAG_NO_ENCODE_QUOTES
     );
-
-    /**
-     * Validate
-     *
-     * @return  boolean
-     * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
-     */
-    public function validate()
-    {
-        return $this->validateCompare();
-    }
 }

@@ -13,13 +13,49 @@ use CommonApi\Model\ConstraintInterface;
 /**
  * Boolean Constraint
  *
- * @link       http://php.net/manual/en/function.is-bool.php
+ * Character must be true or false or NULL. (Use Default and/or Required if NULL is not allowed.)
+ *
+ * #### Validate
+ *
+ * Verifies value against constraint, returning a TRUE or FALSE result and error messages
+ *
+ * ```php
+ * $response = $request->validate('boolean_field', true, 'Boolean');
+ *
+ * if ($response->getValidateResponse() === true) {
+ *     // all is well
+ * } else {
+ *     foreach ($response->getValidateMessages as $code => $message) {
+ *         echo $code . ': ' . $message . '/n';
+ *     }
+ * }
+ *
+ * ```
+ *
+ * #### Sanitize
+ *
+ * Sanitizes for true or false, else returns NULL.
+ *
+ * ```php
+ * $response = $request->validate('boolean_field', 'dog', 'Boolean');
+ *
+ * if ($response->getChangeIndicator() === true) {
+ *     $field_value = $response->getFieldValue();
+ * }
+ *
+ * ```
+ *
+ * #### Format
+ *
+ * Not implemented. Value sent in is not evaluated or changed.
+ *
+ * @api
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Boolean extends AbstractConstraintTests implements ConstraintInterface
+class Boolean extends AbstractConstraint implements ConstraintInterface
 {
     /**
      * Validation Test

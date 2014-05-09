@@ -16,9 +16,9 @@ use CommonApi\Model\ConstraintInterface;
  * Each character in the alias URL slug must be alphanumeric (a letter or a number).
  * To allow the 'space character', use the `allow_space_character` $option.
  *
- * **Validate**
+ * #### Validate
  *
- * Verifies value against constraint and provides messages with false test.
+ * Verifies value against constraint, returning a TRUE or FALSE result and error messages
  *
  * ```php
  * $options = array();
@@ -35,7 +35,7 @@ use CommonApi\Model\ConstraintInterface;
  *
  * ```
  *
- * **Sanitize**
+ * #### Sanitize
  *
  * Removes characters not conforming to the definition of the constraint. In this example,
  *  `$field_value` will contain `4 dogs and 3 cats`.
@@ -51,8 +51,8 @@ use CommonApi\Model\ConstraintInterface;
  *
  * ```
  *
- * **Format**
- * For this constraint, the `format` method is not implemented and simply returns the value unchanged.
+ * #### Format
+ * For this constraint, the `format` method is not implemented. The value sent in is not evaluated or changed.
  *
  * @api
  * @link       http://us1.php.net/manual/en/function.ctype-alnum.php

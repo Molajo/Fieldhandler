@@ -46,9 +46,10 @@ abstract class AbstractCtype extends AbstractConstraintTests implements Constrai
     public function sanitize()
     {
         if ($this->field_value === null) {
-        } else {
-            $this->field_value = $this->sanitizeByCType($this->ctype, $this->field_value);
+            return $this->field_value;
         }
+
+        $this->field_value = $this->sanitizeByCType($this->ctype, $this->field_value);
 
         return $this->field_value;
     }

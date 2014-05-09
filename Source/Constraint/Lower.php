@@ -16,9 +16,9 @@ use CommonApi\Model\ConstraintInterface;
  * Each character must be an lowercase character.
  * To allow the 'space character', use the `allow_space_character` $option.
  *
- * **Validate**
+ * #### Validate
  *
- * Verifies value against constraint and provides messages with false test.
+ * Verifies value against constraint, returning a TRUE or FALSE result and error messages
  *
  * This example returns false due to the inclusion of non lowercase characters.
  *
@@ -37,7 +37,7 @@ use CommonApi\Model\ConstraintInterface;
  *
  * ```
  *
- * **Sanitize**
+ * #### Sanitize
  *
  * Removes characters not conforming to the definition of the constraint. In this example,
  *  `$field_value` will only contain the lowercase letter `his is lower` since the `T` is uppercased.
@@ -53,7 +53,7 @@ use CommonApi\Model\ConstraintInterface;
  *
  * ```
  *
- * **Format**
+ * #### Format
  *
  * Lowercase all character values.  In this example,
  *  `$field_value` will contain `this is lower.`.

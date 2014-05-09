@@ -42,10 +42,17 @@ class NumericTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Numeric::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Numeric::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Numeric::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Numeric::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testValidateSuccess()
+    public function testValidateTrue()
     {
         $field_name  = 'numeric_fieldname';
         $field_value = 1234;
@@ -64,10 +71,17 @@ class NumericTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Numeric::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Numeric::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Numeric::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Numeric::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testValidate2()
+    public function testValidateTrueNull()
     {
         $field_name  = 'numeric_fieldname';
         $field_value = null;
@@ -86,10 +100,17 @@ class NumericTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Numeric::validate
-     * @return void
+     * @covers  Molajo\Fieldhandler\Constraint\Numeric::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Numeric::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Numeric::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
+     * @return  void
      * @since   1.0.0
      */
-    public function testValidateFail()
+    public function testValidateFalse()
     {
         $field_name  = 'numeric_fieldname';
         $field_value = 'yessireebob';
@@ -111,10 +132,13 @@ class NumericTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Numeric::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Numeric::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testSanitizeSuccess()
+    public function testSanitizeNoChange()
     {
         $field_name  = 'numeric_fieldname';
         $field_value = 123;
@@ -131,13 +155,16 @@ class NumericTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Numeric::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Numeric::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testSanitizeFail()
+    public function testSanitizeChange()
     {
         $field_name  = 'numeric_fieldname';
-        $field_value = 'dog';
+        $field_value = '333dog';
         $constraint  = 'Numeric';
         $options     = array();
 
@@ -151,11 +178,15 @@ class NumericTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Numeric::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Numeric::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
+     *
+     * @return  void
+     * @since   1.0.0
      * @return  void
      * @since   1.0.0
      */
-    public function testFormatSuccess()
+    public function testFormat()
     {
         $field_name  = 'numeric_fieldname';
         $field_value = 123;
@@ -168,35 +199,5 @@ class NumericTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
-    }
-
-    /**
-     * @covers  Molajo\Fieldhandler\Constraint\Numeric::sanitize
-     * @return  void
-     * @since   1.0.0
-     */
-    public function testFormatFail()
-    {
-        $field_name  = 'numeric_fieldname';
-        $field_value = 'dog';
-        $constraint  = 'Numeric';
-        $options     = array();
-
-        $results = $this->request->format($field_name, $field_value, $constraint, $options);
-
-        $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(false, $results->getChangeIndicator());
-
-        return;
-    }
-
-    /**
-     * Tear down
-     *
-     * @return void
-     * @since   1.0.0
-     */
-    protected function tearDown()
-    {
     }
 }

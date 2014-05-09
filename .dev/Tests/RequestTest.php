@@ -58,6 +58,25 @@ class RequestTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers  Molajo\Fieldhandler\Request::__construct
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testRequest()
+    {
+        $message_templates = array(
+            1000  => 'Field: {field_name} does not have a valid value for {constraint} data type.',
+        );
+
+        $this->request2 = new Request2($message_templates);
+        $results = $this->request2->getMessages();
+
+        $this->assertEquals($results, $message_templates);
+
+        return;
+    }
+
+    /**
      * @covers  Molajo\Fieldhandler\Request::validate
      * @return  void
      * @since   1.0.0
@@ -250,6 +269,16 @@ class RequestTest extends PHPUnit_Framework_TestCase
     }
 }
 
+
+class Request2 extends Request
+{
+    public function getMessages()
+    {
+        return $this->message_templates;
+    }
+}
+
+
 namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Model\ConstraintInterface;
 use Exception;
@@ -352,3 +381,6 @@ class Mocknumeric extends AbstractConstraintTests implements ConstraintInterface
         return $this->field_value;
     }
 }
+
+
+

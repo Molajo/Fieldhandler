@@ -10,7 +10,6 @@ namespace Molajo\Fieldhandler\Tests;
 
 use Molajo\Fieldhandler\Request;
 use PHPUnit_Framework_TestCase;
-use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Defaults Fieldhandler
@@ -43,19 +42,46 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Defaults::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Defaults::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Defaults::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testValidatePass()
+    public function testValidateTrue()
+    {
+        $field_name  = 'dog';
+        $field_value = 'barks';
+        $constraint  = 'Defaults';
+
+        $results = $this->request->validate($field_name, $field_value, $constraint);
+
+        $this->assertEquals(true, $results->getValidateResponse());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Defaults::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Defaults::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Defaults::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testValidateFalse()
     {
         $field_name  = 'dog';
         $field_value = null;
         $constraint  = 'Defaults';
-        $options     = array(
-            'default' => 'bark'
-        );
 
-        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
+        $results = $this->request->validate($field_name, $field_value, $constraint);
 
         $this->assertEquals(false, $results->getValidateResponse());
 
@@ -69,11 +95,43 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Defaults::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Defaults::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
      * @return void
      * @since   1.0.0
      */
-    public function testSanitizeSuccess()
+    public function testSanitizeNoChange()
+    {
+        $field_name  = 'dog';
+        $field_value = 'bark';
+        $constraint  = 'Defaults';
+        $options     = array(
+            'default' => 'bark'
+        );
+
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Defaults::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
+     * @return void
+     * @since   1.0.0
+     */
+    public function testSanitizeChange()
     {
         $field_name  = 'dog';
         $field_value = null;
@@ -91,7 +149,40 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers  Molajo\Fieldhandler\Constraint\Defaults::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
+     *
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testFormat()
+    {
+        $field_name  = 'cat';
+        $field_value = null;
+        $constraint  = 'Defaults';
+        $options     = array(
+            'default' => 'meow'
+        );
+
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
+
+        return;
+    }
+
+    /**
      * @covers  Molajo\Fieldhandler\Constraint\Defaults::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Defaults::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Defaults::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Defaults::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -101,12 +192,12 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
         $field_value = null;
         $constraint  = 'Defaults';
         $options     = array(
-            'default' => 'bark'
+            'default' => 'meow'
         );
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
-        $field_value = 'bark';
+        $field_value = 'meow';
         $this->assertEquals($field_value, $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
 
@@ -118,15 +209,5 @@ class DefaultsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(array(), $messages);
 
         return;
-    }
-
-    /**
-     * Tear down
-     *
-     * @return void
-     * @since   1.0.0
-     */
-    protected function tearDown()
-    {
     }
 }

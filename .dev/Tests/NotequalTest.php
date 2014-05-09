@@ -43,6 +43,9 @@ class NotequalTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getNotEqual
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -64,6 +67,9 @@ class NotequalTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getNotEqual
+     *
      * @return void
      * @since   1.0.0
      */
@@ -88,6 +94,9 @@ class NotequalTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getNotEqual
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -109,7 +118,10 @@ class NotequalTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
-     * @return void
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getNotEqual
+     *
+     * @return  void
      * @since   1.0.0
      */
     public function testSanitizeFail()
@@ -130,6 +142,9 @@ class NotequalTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getNotEqual
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -151,6 +166,9 @@ class NotequalTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getNotEqual
+     *
      * @return void
      * @since   1.0.0
      */

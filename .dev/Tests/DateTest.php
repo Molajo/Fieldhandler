@@ -43,6 +43,7 @@ class DateTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Date::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
      * @return  void
      * @since   1.0.0
      */

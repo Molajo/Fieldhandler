@@ -42,6 +42,7 @@ class FromtoTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Fromto::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
      * @return  void
      * @since   1.0.0
      */

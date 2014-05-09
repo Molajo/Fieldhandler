@@ -15,7 +15,7 @@ routines. The goal of the *Molajo Fieldhandler* is to make it easier for PHP dev
 this goal but as importantly to be able to communicate exactly how the application enforcing
 integrity constraints in terms that the client can understand.
 
-## Overview of the Methodology ##
+## Overview of the Methodology
 
 At the most basic level, *constraints* define data collection and usage rules by describing qualities of the data.
 These rules might include specifications about the minimum and maximum values, number of occurrences for an array,
@@ -105,17 +105,17 @@ $fieldhandler = new Molajo\Fieldhandler\Request();
 
 // 2. Enforce Password Constraints using a terse syntax
 
-    $results = $request->ensureFieldConstraints(
-        'Display Password', $display_password,
-        array('verify' => 'date', 'verify' => 'Alphanumeric', 'verify' => 'Length', 'escape' => 'Password'),
-        array('LT' => 91, 'Context' => 'Days', 'special_characters' => '-, $, #' );
+$results = $request->ensureFieldConstraints(
+    'Display Password', $display_password,
+    array('verify' => 'date', 'verify' => 'Alphanumeric', 'verify' => 'Length', 'escape' => 'Password'),
+    array('LT' => 91, 'Context' => 'Days', 'special_characters' => '-, $, #' );
 
-    if ($results->getSuccessIndicator() === false) {
-        $field->messages = $results->getValidateMessages();
+if ($results->getSuccessIndicator() === false) {
+    $field->messages = $results->getValidateMessages();
 
-    } elseif ($results->getChangeIndicator() === true) {
-        $field->value = $results->getFieldValue();
-    }
+} elseif ($results->getChangeIndicator() === true) {
+    $field->value = $results->getFieldValue();
+}
 
 ```
 
@@ -150,15 +150,15 @@ foreach ($data_object as $field) {
 
 ```
 
-## Creating Custom Constraints ##
+## Creating Custom Constraints
 
 INCOMPLETE
 
-## Messages ##
+## Messages
 
 INCOMPLETE
 
-## Package Constraints ##
+## Package Constraints
 
 The examples in this section assume the *Fieldhandler* has been instantiated, as follows:
 
@@ -168,11 +168,11 @@ The examples in this section assume the *Fieldhandler* has been instantiated, as
 
 ```
 
-### Alias ###
+### Alias
 Each character in the alias URL slug must be alphanumeric or a dash.
 
-**Validate**
-Verifies value against constraint and provides messages with false test.
+#### Validate
+Verifies value against constraint, returning a TRUE or FALSE result and error messages
 
 ```php
 $response = $request->validate('alias_field', 'This will not validate', 'Alias');
@@ -187,7 +187,7 @@ if ($response->getValidateResponse() === true) {
 
 ```
 
-**Sanitize**
+#### Sanitize
 Converts the value to a usable URL slug. In this example, `$field_value` will contain `jack-and-jill`.
 
 ```php
@@ -199,17 +199,17 @@ if ($response->getChangeIndicator() === true) {
 
 ```
 
-**Format**
+#### Format
 For `alias`, the `format` method produces the same results as `sanitize`.
 
 
-### Alpha ###
+### Alpha
 Each character in the alias URL slug must be alphabetic. To allow the 'space character', use the
 `allow_space_character` $option.
 
-**Validate**
+#### Validate
 
-Verifies value against constraint and provides messages with false test.
+Verifies value against constraint, returning a TRUE or FALSE result and error messages
 
 ```php
 $options = array();
@@ -226,7 +226,7 @@ if ($response->getValidateResponse() === true) {
 
 ```
 
-**Sanitize**
+#### Sanitize
 
 Removes characters not conforming to the definition of the constraint. In this example,
 `$field_value` will contain `Pat Nelson`.
@@ -242,16 +242,16 @@ if ($response->getChangeIndicator() === true) {
 
 ```
 
-**Format**
-For this constraint, the `format` method is not implemented and simply returns the value unchanged.
+#### Format
+For this constraint, the `format` method is not implemented. The value sent in is not evaluated or changed.
 
-### Alphanumeric ###
+### Alphanumeric
 Each character in the alias URL slug must be a character or a digit. To allow the 'space character', use the
 `allow_space_character` $option.
 
-**Validate**
+#### Validate
 
-Verifies value against constraint and provides messages with false test.
+Verifies value against constraint, returning a TRUE or FALSE result and error messages
 
 ```php
 $options = array();
@@ -268,7 +268,7 @@ if ($response->getValidateResponse() === true) {
 
 ```
 
-**Sanitize**
+#### Sanitize
 
 Removes characters not conforming to the definition of the constraint. In this example,
 `$field_value` will contain `4 dogs and 3 cats`.
@@ -284,10 +284,10 @@ if ($response->getChangeIndicator() === true) {
 
 ```
 
-**Format**
-For this constraint, the `format` method is not implemented and simply returns the value unchanged.
+#### Format
+For this constraint, the `format` method is not implemented. The value sent in is not evaluated or changed.
 
-### Arrays ###
+### Arrays
 Tests if value is an array.
 
 ```php
@@ -301,31 +301,95 @@ Tests if value is an array.
     array_maximum (default 9999999999)
 
 ```
-### Boolean ###
-Tests if value is true or false.
+
+### Boolean
+
+Character must be true or false or NULL. (Use Default and/or Required if NULL is not allowed.)
+
+#### Validate
+
+Verifies value against constraint, returning a TRUE or FALSE result and error messages
 
 ```php
-    // Field on_or_off_field false would be returned as NULL for filter and escape
-    // An exception would be thrown for validate
-    $results = $request->sanitize('on_or_off_field', false, 'Boolean');
+$response = $request->validate('boolean_field', true, 'Boolean');
+
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
 
 ```
 
-### Callback ###
-Processes a value by the specified Callback. For Validate, if the resulting value does not match
-the current value, an Exception is thrown. For Filter and Escape, the value produced by the
-Callback is returned.
+#### Sanitize
+
+Sanitizes for true or false, else returns NULL.
 
 ```php
-    // The value of field `example_field` is 'DOG' and is processed by the callback `strtolower`.
-    // An exception would be thrown for validate. The value 'dog' is returned for Filter and Escape.
-    $options = array();
-    $options['callback'] = 'strtolower';
-    $results = $request->sanitize('example_field', 'DOG', 'Callback', $options);
+$response = $request->validate('boolean_field', 'dog', 'Boolean');
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
 
 ```
 
-### Contains ###
+#### Format
+
+Not implemented. Value sent in is not evaluated or changed.
+
+
+### Callback
+Enables use of a custom callable function or method to sanitize, filter and format data.
+
+#### Validate
+
+Verifies value against constraint, returning a TRUE or FALSE result and error messages
+
+In this example, the data value 'hello' is input to the callback 'strtoupper' and the result 'HELLO'
+is compared to the original value. Since the values are different, `false` is returned.
+
+```php
+$options             = array();
+$options['callback'] = 'strtoupper';
+$response = $request->validate('callback_field', 'hello', 'Callback', $options);
+
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
+
+```
+
+#### Sanitize
+
+Executes the callable against the data value to produce a sanitized result.
+
+In this example, `$field_value` will result in `HELLO`.
+
+```php
+$options             = array();
+$options['callback'] = 'strtoupper';
+$response = $request->sanitize('callback_field', 'hello', 'Callback', $options);
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
+
+```
+
+#### Format
+
+For `callback`, the `format` method produces the same results as `sanitize`. It can be
+used to format data, as needed.
+
+
+### Contains
 Tests if a value is contained within the input field. If it is not, validate fails and filter and escape
 change the input to null.
 
@@ -336,13 +400,14 @@ change the input to null.
     $results = $request->sanitize('dog_field', $dog_field, 'Contains');
 
 ```
-### Controlcharacters ###
+
+### Controlcharacters
 Each character must be a control character (ex. line feed, tab, escape).
 To allow the 'space character', use the `allow_space_character` $option.
 
-**Validate**
+#### Validate
 
-Verifies value against constraint and provides messages with false test.
+Verifies value against constraint, returning a TRUE or FALSE result and error messages
 
 ```php
 $options = array();
@@ -359,7 +424,7 @@ if ($response->getValidateResponse() === true) {
 
 ```
 
-**Sanitize**
+#### Sanitize
 
 Removes characters not conforming to the definition of the constraint. In this example,
 `$field_value` will contain `\n \r \t`.
@@ -375,11 +440,11 @@ if ($response->getChangeIndicator() === true) {
 
 ```
 
-**Format**
-For this constraint, the `format` method is not implemented and simply returns the value unchanged.
+#### Format
+For this constraint, the `format` method is not implemented. The value sent in is not evaluated or changed.
 
 
-### Date ###
+### Date
 Processes a value to determine if it is a valid date. For Validate, if the resulting value is not a valid
  date, an Exception is thrown. For Filter and Escape, the value returned is NULL if it is not valid.
 
@@ -391,7 +456,7 @@ Processes a value to determine if it is a valid date. For Validate, if the resul
 
 ```
 
-### Datetime ###
+### Datetime
 Processes a value to determine if it is a valid date. For Validate, if the resulting value is not a valid
  date, an Exception is thrown. For Filter and Escape, the value returned is NULL if it is not valid.
 
@@ -403,26 +468,52 @@ Processes a value to determine if it is a valid date. For Validate, if the resul
 
 ```
 
-### Defaults ###
-Changes a null value to the value provided for default.
+### Defaults
+Applies default value for sanitize and verifies if the value requires a default for validate.
+
+#### Validate
+Verifies if the value is null, if so, returns a FALSE that a default has not been applied.
+If the field has a value, validate returns TRUE.
 
 ```php
-    // The value of field `dog_field` is NULL and is set to 'bark'.
-    $options = array();
-    $options['default'] = 'bark';
-    $results = $request->sanitize('dog_field', NULL, 'Default');
+$response = $request->validate('any_field', null, 'Default');
+
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
 
 ```
 
+#### Sanitize
+Applies the default value defined in the `$options` array to the value, if the value is NULL.
 
-### Digit ###
+```php
+$options = array();
+$options['default_value'] = $default;
+$response = $request->validate('any_field', NULL, 'Default');
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
+
+```
+
+#### Format
+Not implemented. Value sent in is not evaluated or changed.
+
+
+### Digit
 
 Each character must be a numeric digit.
 To allow the 'space character', use the `allow_space_character` $option.
 
-**Validate**
+#### Validate
 
-Verifies value against constraint and provides messages with false test.
+Verifies value against constraint, returning a TRUE or FALSE result and error messages
 
 ```php
 $options = array();
@@ -439,7 +530,7 @@ if ($response->getValidateResponse() === true) {
 
 ```
 
-**Sanitize**
+#### Sanitize
 
 Removes characters not conforming to the definition of the constraint. In this example,
   `$field_value` will contain `1 2 3 4 5`.
@@ -455,18 +546,16 @@ if ($response->getChangeIndicator() === true) {
 
 ```
 
-**Format**
+#### Format
 
-For this constraint, the `format` method is not implemented and simply returns the value unchanged.
+For this constraint, the `format` method is not implemented. The value sent in is not evaluated or changed.
 
 ### Email
 
-Only letters, digits and `!#$%&'*+-/=?^_`{|}~@.[]`.
+Only letters, digits and `!#$%&'*+-/=?^_`{|}~@.[]`
 
-Can be used with the following flags by defining $option entries for each flag desired:
-
-**Validate**
-Verifies value against constraint and provides messages with false test.
+#### Validate
+Verifies value against constraint, returning a TRUE or FALSE result and error messages
 
 This example returns true.
 
@@ -483,12 +572,12 @@ if ($response->getValidateResponse() === true) {
 
 ```
 
-**Sanitize**
+#### Sanitize
 Removes characters not conforming to the definition of the constraint. In this example,
  `$field_value` will result in NULL.
 
 ```php
-$response = $request->sanitize('email_field', 'AmyStephen@gmail.com', 'Email');
+$response = $request->sanitize('email_field', 'not a valid email', 'Email');
 
 if ($response->getChangeIndicator() === true) {
     $field_value = $response->getFieldValue();
@@ -496,8 +585,8 @@ if ($response->getChangeIndicator() === true) {
 
 ```
 
-**Format**
-Set the `obfuscate_email` option to format the email in that manner.
+#### Format
+Format returns an obfuscated email address.
 
 ```php
 $options = array();
@@ -510,18 +599,56 @@ if ($response->getChangeIndicator() === true) {
 
 ```
 
-### Encoded ###
-Tests that an encoded value is sanitized.
+### Encoded
+URL-encode string, optionally strip or encode special characters.
+
+The following flags can be applied by adding to the options array (see examples):
+
+FILTER_FLAG_STRIP_LOW
+FILTER_FLAG_STRIP_HIGH
+FILTER_FLAG_ENCODE_LOW
+FILTER_FLAG_ENCODE_HIGH
+
+#### Validate
+
+Verifies value against constraint, returning a TRUE or FALSE result and error messages.
+For Encoded, the original value is compared to a sanitized value. If those values match,
+true is returned. Otherwise, the response is false and an error message is available.
 
 ```php
-    // The value of field `encoded_field` is 'my-apples&are green and red'.
-    // The filtered and escaped values will be 'my-apples%26are%20green%20and%20red'.
+$response = $request->validate('encode_field', 'AmyStephen@gmail.com', 'Encode');
 
-    $results = $request->sanitize('encoded_field', 'my-apples&are green and red', 'Encoded');
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
 
 ```
 
-### Equal ###
+#### Sanitize
+
+Removes characters not conforming to the definition of the constraint.
+
+In this example, the input URL is `something.php?text=unknown values here`.
+The resulting value is `unknown%20values%20here`.
+
+```php
+$response = $request->sanitize('encode_field', 'unknown values here', 'Encode');
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
+
+```
+
+#### Format
+
+Format is not implemented for this constraint.
+
+### Equal
 Tests that a value is equal to a specified value.
 
 ```php
@@ -530,7 +657,7 @@ Tests that a value is equal to a specified value.
 
 ```
 
-### Fileextension ###
+### Fileextension
 Tests that a value is equal to the specified value. If the value does not match for validate, an
 Exception is thrown. If the value does not match for filter or escape, null is returned.
 
@@ -557,7 +684,7 @@ Exception is thrown. If the value does not match for filter or escape, null is r
 
 ```
 
-### Float ###
+### Float
 
 Remove all characters except digits, +- and optionally .,eE.
 
@@ -571,9 +698,9 @@ $options[FILTER_FLAG_ALLOW_SCIENTIFIC] = true;
 
 ```
 
-**Validate**
+#### Validate
 
-Verifies value against constraint and provides messages with false test.
+Verifies value against constraint, returning a TRUE or FALSE result and error messages
 
 This example returns true.
 
@@ -592,7 +719,7 @@ if ($response->getValidateResponse() === true) {
 
 ```
 
-**Sanitize**
+#### Sanitize
 
 Removes characters not conforming to the definition of the constraint. In this example,
  `$field_value` will result in NULL.
@@ -606,10 +733,10 @@ if ($response->getChangeIndicator() === true) {
 
 ```
 
-**Format**
-For this constraint, the `format` method is not implemented and simply returns the value unchanged.
+#### Format
+For this constraint, the `format` method is not implemented. The value sent in is not evaluated or changed.
 
-### Foreignkey ###
+### Foreignkey
 Uses the database connection defined in $options['database'] to execute a query that verifies there is
 a row for the table named in $options['table'] with a field named $options['key'] with a value of
 $field_value.
@@ -627,7 +754,7 @@ $field_value.
 
 ```
 
-### Fromto ###
+### Fromto
 Verifies that the $field_value is greater than the From value and less than the To value.
 
 ```php
@@ -642,7 +769,7 @@ Verifies that the $field_value is greater than the From value and less than the 
 
 ```
 
-### Fullspecialchars ###
+### Fullspecialchars
 Converts special characters to HTML entities. Equivalent to [htmlspecialchars](http://www.php.net/manual/en/function.htmlspecialchars.php)
 with with ENT_QUOTES set.
 
@@ -661,9 +788,9 @@ with with ENT_QUOTES set.
 Each character must be a visible, printable character.
 To allow the 'space character', use the `allow_space_character` $option.
 
-**Validate**
+#### Validate
 
-Verifies value against constraint and provides messages with false test.
+Verifies value against constraint, returning a TRUE or FALSE result and error messages
 
 ```php
 $options = array();
@@ -680,7 +807,7 @@ if ($response->getValidateResponse() === true) {
 
 ```
 
-**Sanitize**
+#### Sanitize
 
 Removes characters not conforming to the definition of the constraint. In this example,
  `$field_value` will contain `This is visible.`.
@@ -696,18 +823,18 @@ if ($response->getChangeIndicator() === true) {
 
 ```
 
-**Format**
+#### Format
 
-For this constraint, the `format` method is not implemented and simply returns the value unchanged.
+For this constraint, the `format` method is not implemented. The value sent in is not evaluated or changed.
 
-### Hexidecimal ###
+### Hexidecimal
 
 Each character must be a numeric digit.
 To allow the 'space character', use the `allow_space_character` $option.
 
-**Validate**
+#### Validate
 
-Verifies value against constraint and provides messages with false test.
+Verifies value against constraint, returning a TRUE or FALSE result and error messages
 
 ```php
 $options = array();
@@ -724,7 +851,7 @@ if ($response->getValidateResponse() === true) {
 
 ```
 
-**Sanitize**
+#### Sanitize
 
 Removes characters not conforming to the definition of the constraint. In this example,
   `$field_value` will contain `1 2 3 4 5`.
@@ -740,11 +867,11 @@ if ($response->getChangeIndicator() === true) {
 
 ```
 
-**Format**
+#### Format
 
-For this constraint, the `format` method is not implemented and simply returns the value unchanged.
+For this constraint, the `format` method is not implemented. The value sent in is not evaluated or changed.
 
-### Html ###
+### Html
 
 add whitelist description
 Escapes HTML entities. Equivalent to [htmlspecialchars](http://www.php.net/manual/en/function.htmlspecialchars.php)
@@ -760,7 +887,7 @@ with with ENT_QUOTES set.
 
 ```
 
-### Image ###
+### Image
 Tests that the value is an image.
 
 ```php
@@ -774,9 +901,9 @@ Tests that the value is an image.
 ### Integer
 Includes only digits, plus and minus sign.
 
-**Validate**
+#### Validate
 
-Verifies value against constraint and provides messages with false test.
+Verifies value against constraint, returning a TRUE or FALSE result and error messages
 
 This example returns true.
 
@@ -793,7 +920,7 @@ if ($response->getValidateResponse() === true) {
 
 ```
 
-**Sanitize**
+#### Sanitize
 
 Removes characters not conforming to the definition of the constraint. In this example,
  `$field_value` will result in NULL.
@@ -807,11 +934,11 @@ if ($response->getChangeIndicator() === true) {
 
 ```
 
-**Format**
+#### Format
 
 Not implemented, simply returns the value sent in.
 
-### Ip ###
+### Ip
 Tests that the value is an IP Address.
 
 ```php
@@ -826,9 +953,9 @@ Tests that the value is an IP Address.
 Each character must be an lowercase character.
 To allow the 'space character', use the `allow_space_character` $option.
 
-**Validate**
+#### Validate
 
-Verifies value against constraint and provides messages with false test.
+Verifies value against constraint, returning a TRUE or FALSE result and error messages
 
 This example returns false due to the inclusion of non lowercase characters.
 
@@ -847,7 +974,7 @@ if ($response->getValidateResponse() === true) {
 
 ```
 
-**Sanitize**
+#### Sanitize
 
 Removes characters not conforming to the definition of the constraint. In this example,
  `$field_value` will only contain the lowercase letter `his is lower` since the `T` and `.` are not lowercase.
@@ -863,7 +990,7 @@ if ($response->getChangeIndicator() === true) {
 
 ```
 
-**Format**
+#### Format
 
 Lowercase all character values.  In this example, `$field_value` will contain `this is lower.`.
 
@@ -876,7 +1003,7 @@ if ($response->getChangeIndicator() === true) {
 
 ```
 
-### Maximum ###
+### Maximum
 Validates or filters/escapes numeric value to not exceed the maximum.
 
 ```php
@@ -892,7 +1019,7 @@ Validates or filters/escapes numeric value to not exceed the maximum.
 
 ```
 
-### Mimetypes ###
+### Mimetypes
 Validates or filters/escapes xxxx
 
 ```php
@@ -908,7 +1035,7 @@ Validates or filters/escapes xxxx
 
 ```
 
-### Minimum ###
+### Minimum
 Validates or filters/escapes numeric value to not exceed the maximum.
 
 ```php
@@ -924,7 +1051,7 @@ Validates or filters/escapes numeric value to not exceed the maximum.
 
 ```
 
-### Notequal ###
+### Notequal
 Tests that a value is not equal to a specified value.
 
 ```php
@@ -933,29 +1060,82 @@ Tests that a value is not equal to a specified value.
 
 ```
 
-### Numeric ###
-Tests that the value is an numeric.
+### Numeric
+Characters must be numeric.
+
+#### Validate
+
+Verifies if the value is numeric.
 
 ```php
-    // The value of field `numeric_field` is 'ABC123'. The filtered and escaped values will be 0.
-    // For 'validate', an exception is thrown. The following will return 123.
+$response = $request->validate('any_field', 234, 'Numeric');
 
-    $results = $request->sanitize('numeric_field', '123', 'Numeric');
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
 
 ```
 
-### Object ###
-Tests that a value is an object.
+#### Sanitize
+
+Returns null if value is not numeric.
 
 ```php
-    // The value of field `database` is an object containing the database connection.
-    // All will return the object
+$response = $request->validate('any_field', 'dog', 'Numeric');
 
-    $results = $request->sanitize('database', $instance, 'Object');
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
 
 ```
 
-### Raw ###
+#### Format
+
+Not implemented. Value sent in is not evaluated or changed.
+
+### Object
+
+Must be an object.
+
+#### Validate
+
+Verifies if the value is an object.
+
+```php
+$response = $request->validate('any_field', $data_value, 'Object');
+
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
+
+```
+
+#### Sanitize
+
+Returns null if value is not an object.
+
+```php
+$response = $request->validate('any_field', $data_value, 'Object');
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
+
+```
+
+#### Format
+
+Not implemented. Value sent in is not evaluated or changed.
+
+### Raw
 Do nothing, optionally strip or encode special characters.  FILTER_FLAG_STRIP_LOW,
 FILTER_FLAG_STRIP_HIGH, FILTER_FLAG_ENCODE_LOW, FILTER_FLAG_ENCODE_HIGH, FILTER_FLAG_ENCODE_AMP.
 See [sanitize filters](http://php.net/manual/en/filter.filters.sanitize.php).
@@ -974,12 +1154,12 @@ See [sanitize filters](http://php.net/manual/en/filter.filters.sanitize.php).
 
 ```
 
-### Printable ###
+### Printable
 Each character must be a printable character.
 
-**Validate**
+#### Validate
 
-Verifies value against constraint and provides messages with false test.
+Verifies value against constraint, returning a TRUE or FALSE result and error messages
 
 This example returns false due to the inclusion of control characters which cannot be displayed.
 
@@ -996,7 +1176,7 @@ if ($response->getValidateResponse() === true) {
 
 ```
 
-**Sanitize**
+#### Sanitize
 
 Removes characters not conforming to the definition of the constraint. In this example,
  `$field_value` will contain `asdf`.
@@ -1010,17 +1190,17 @@ if ($response->getChangeIndicator() === true) {
 
 ```
 
-**Format**
-For this constraint, the `format` method is not implemented and simply returns the value unchanged.
+#### Format
+For this constraint, the `format` method is not implemented. The value sent in is not evaluated or changed.
 
 ### Punctuation Constraint
 
 Each character must be a punctuation character.
 To allow the 'space character', use the `allow_space_character` $option.
 
-**Validate**
+#### Validate
 
-Verifies value against constraint and provides messages with false test.
+Verifies value against constraint, returning a TRUE or FALSE result and error messages
 
 ```php
 $options = array();
@@ -1037,7 +1217,7 @@ if ($response->getValidateResponse() === true) {
 
 ```
 
-**Sanitize**
+#### Sanitize
 
 Removes characters not conforming to the definition of the constraint. In this example,
  `$field_value` will contain `* & $ ( )`.
@@ -1053,11 +1233,11 @@ if ($response->getChangeIndicator() === true) {
 
 ```
 
-**Format**
+#### Format
 
-For this constraint, the `format` method is not implemented and simply returns the value unchanged.
+For this constraint, the `format` method is not implemented. The value sent in is not evaluated or changed.
 
-### Regex ###
+### Regex
 Performs regex checking against the input value for the regex sent in.
 
 ```php
@@ -1072,7 +1252,7 @@ Performs regex checking against the input value for the regex sent in.
 
 ```
 
-### Required ###
+### Required
 Field is required. Null value is not allowed. Use after Default when used in combination.
 
 ```php
@@ -1085,7 +1265,7 @@ Field is required. Null value is not allowed. Use after Default when used in com
 
 ```
 
-### String ###
+### String
 Tests that the value is a string.
 
 ```php
@@ -1097,7 +1277,7 @@ Tests that the value is a string.
     $results = $request->validate($field_name, $field_value, $constraint);
 ```
 
-### Stringlength ###
+### Stringlength
 Tests that the length of the string is from a specific value and to a second value.
 From and To testing includes the from and to values.
 
@@ -1115,9 +1295,9 @@ Each character must be a whitespace character.
 Besides the blank character this also includes tab, vertical tab, line feed, carriage return
 and form feed characters.
 
-**Validate**
+#### Validate
 
-Verifies value against constraint and provides messages with false test.
+Verifies value against constraint, returning a TRUE or FALSE result and error messages
 
 ```php
 $response = $request->validate('space_field', '\n \r \t', 'Space');
@@ -1132,7 +1312,7 @@ if ($response->getValidateResponse() === true) {
 
 ```
 
-**Sanitize**
+#### Sanitize
 
 Removes characters not conforming to the definition of the constraint. In this example,
  `$field_value` will contain `\n \r \t`.
@@ -1146,21 +1326,21 @@ if ($response->getChangeIndicator() === true) {
 
 ```
 
-**Format**
+#### Format
 
-For this constraint, the `format` method is not implemented and simply returns the value unchanged.
+For this constraint, the `format` method is not implemented. The value sent in is not evaluated or changed.
 
-### Tel ###
+### Tel
 Tests that the value is a string.
 
-### Time ###
+### Time
 
 ### Trim
 The text must not have spaces before or after the last visible character.
 
-**Validate**
+#### Validate
 
-Verifies value against constraint and provides messages with false test.
+Verifies value against constraint, returning a TRUE or FALSE result and error messages
 
 This example returns false due to the inclusion of spaces before and after the text string.
 
@@ -1177,7 +1357,7 @@ if ($response->getValidateResponse() === true) {
 
 ```
 
-**Sanitize**
+#### Sanitize
 
 Removes characters not conforming to the definition of the constraint. In this example,
  `$field_value` will result in 'This is trimmed.' and the spaces preceding and following
@@ -1194,7 +1374,7 @@ if ($response->getChangeIndicator() === true) {
 
 ```
 
-**Format**
+#### Format
 
 Performs sanitize.
 
@@ -1203,9 +1383,9 @@ Performs sanitize.
 Each character must be an lowercase character.
 To allow the 'space character', use the `allow_space_character` $option.
 
-**Validate**
+#### Validate
 
-Verifies value against constraint and provides messages with false test.
+Verifies value against constraint, returning a TRUE or FALSE result and error messages
 
 This example returns false due to the inclusion of non uppercase characters.
 
@@ -1224,7 +1404,7 @@ if ($response->getValidateResponse() === true) {
 
 ```
 
-**Sanitize**
+#### Sanitize
 
 Removes characters not conforming to the definition of the constraint. In this example,
  `$field_value` will only contain the uppercase letter `T` since no other characters meet
@@ -1241,7 +1421,7 @@ if ($response->getChangeIndicator() === true) {
 
 ```
 
-**Format**
+#### Format
 
 Uppercase all character values.  In this example, `$field_value` will contain `THIS IS UPPER.`.
 
@@ -1254,7 +1434,7 @@ if ($response->getChangeIndicator() === true) {
 
 ```
 
-### Url ###
+### Url
 Tests that a value is a valid email address. When invalid, validate throws exception while
 Filter and Escape return null.
 
@@ -1263,7 +1443,7 @@ Filter and Escape return null.
 
 ```
 
-### Values ###
+### Values
 Compares a field_value against a set of values;
 
 ```php
@@ -1279,17 +1459,20 @@ Compares a field_value against a set of values;
 ```
 
 ## Requirements and Compliance
-PHP framework independent, no dependencies
-Requires PHP 5.4, or above
-[Semantic Versioning](http://semver.org/)
+ * PHP framework independent, no dependencies
+ * Requires PHP 5.4, or above
+ * [Semantic Versioning](http://semver.org/)
  * Compliant with:
     * [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md) Basic Coding Standards
     * [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) Coding Style
-    * [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) Coding Standards
+    * [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) Autoloader
  * [phpDocumentor2] (https://github.com/phpDocumentor/phpDocumentor2)
  * [phpUnit Testing] (https://github.com/sebastianbergmann/phpunit)
  * Author [AmyStephen](http://twitter.com/AmyStephen)
  * [Travis Continuous Improvement] (https://travis-ci.org/profile/Molajo)
+ * [Scrutinizer Analysis](https://scrutinizer-ci.com/g/Molajo/Fieldhandler/) Testing using PHP Analyzer,
+ PHP Mess Detector, PHP Code Sniffer, SensioLabs Security Advisory Checker, PHP PDepend,
+ External Code Coverage, PHP Similarity Analyzer
  * Listed on [Packagist] (http://packagist.org) and installed using [Composer] (http://getcomposer.org/)
  * Use github to submit [pull requests](https://github.com/Molajo/Fieldhandler/pulls) and [features](https://github.com/Molajo/Fieldhandler/issues)
  * Licensed under the MIT License - see the `LICENSE` file for details

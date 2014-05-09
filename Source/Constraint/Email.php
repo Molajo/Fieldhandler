@@ -15,9 +15,9 @@ use CommonApi\Model\ConstraintInterface;
  *
  * Only letters, digits and !#$%&'*+-/=?^_`{|}~@.[].
  *
- * **Validate**
+ * #### Validate
  *
- * Verifies value against constraint and provides messages with false test.
+ * Verifies value against constraint, returning a TRUE or FALSE result and error messages
  *
  * This example returns true.
  *
@@ -34,13 +34,13 @@ use CommonApi\Model\ConstraintInterface;
  *
  * ```
  *
- * **Sanitize**
+ * #### Sanitize
  *
  * Removes characters not conforming to the definition of the constraint. In this example,
  *  `$field_value` will result in NULL.
  *
  * ```php
- * $response = $request->sanitize('email_field', 'AmyStephen@gmail.com', 'Email');
+ * $response = $request->sanitize('email_field', 'not a valid email', 'Email');
  *
  * if ($response->getChangeIndicator() === true) {
  *     $field_value = $response->getFieldValue();
@@ -48,9 +48,9 @@ use CommonApi\Model\ConstraintInterface;
  *
  * ```
  *
- * **Format**
+ * #### Format
  *
- * Set the `obfuscate_email` option to format the email in that manner.
+ * Format returns an obfuscated email address.
  *
  * ```php
  * $options = array();

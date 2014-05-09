@@ -50,20 +50,4 @@ class Ip extends AbstractFiltervar implements ConstraintInterface
         FILTER_FLAG_NO_PRIV_RANGE,
         FILTER_FLAG_NO_RES_RANGE
     );
-
-    /**
-     * Sanitize
-     *
-     * @return  null|mixed
-     * @since   1.0.0
-     */
-    public function sanitize()
-    {
-        if (filter_var($this->field_value, $this->validate_filter, $this->setFlags())) {
-        } else {
-            $this->field_value = null;
-        }
-
-        return $this->field_value;
-    }
 }

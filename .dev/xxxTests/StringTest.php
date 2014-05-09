@@ -42,6 +42,8 @@ class StringTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\String::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
+     *
      * @return  void
      * @since   1.0.0
      */

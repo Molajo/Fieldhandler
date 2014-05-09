@@ -42,6 +42,9 @@ class LessthanTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Lessthan::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getLessthan
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -63,8 +66,12 @@ class LessthanTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Lessthan::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getLessthan
+     *
      * @return  void
      * @since   1.0.0
+
      */
     public function testValidateAlpha()
     {
@@ -84,8 +91,12 @@ class LessthanTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Lessthan::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getLessthan
+     *
      * @return  void
      * @since   1.0.0
+
      */
     public function testValidateFail()
     {
@@ -104,8 +115,12 @@ class LessthanTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Lessthan::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getLessthan
+     *
      * @return  void
      * @since   1.0.0
+
      */
     public function testValidateFail2()
     {

@@ -45,6 +45,7 @@ class CallbackTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\Callback::validate
      * @covers  Molajo\Fieldhandler\Constraint\Callback::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Callback::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\Callback::setCallback
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
@@ -73,6 +74,7 @@ class CallbackTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\Callback::validate
      * @covers  Molajo\Fieldhandler\Constraint\Callback::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Callback::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\Callback::setCallback
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
@@ -100,7 +102,10 @@ class CallbackTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Callback::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Callback::setCallback
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
      *
      * @return  void
@@ -124,7 +129,10 @@ class CallbackTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Callback::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Callback::setCallback
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
      *
      * @return  void
@@ -147,8 +155,11 @@ class CallbackTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Callback::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Callback::format
+     * @covers  Molajo\Fieldhandler\Constraint\Callback::setCallback
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
      *
      * @return  void
@@ -171,8 +182,11 @@ class CallbackTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Callback::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Callback::format
+     * @covers  Molajo\Fieldhandler\Constraint\Callback::setCallback
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
      *
      * @return  void

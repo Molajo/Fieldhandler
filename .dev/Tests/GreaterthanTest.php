@@ -42,6 +42,9 @@ class GreaterthanTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Greaterthan::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getGreaterthan
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -63,6 +66,9 @@ class GreaterthanTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Greaterthan::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getGreaterthan
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -84,6 +90,9 @@ class GreaterthanTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Greaterthan::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getGreaterthan
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -104,6 +113,9 @@ class GreaterthanTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Greaterthan::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getGreaterthan
+     *
      * @return  void
      * @since   1.0.0
      */

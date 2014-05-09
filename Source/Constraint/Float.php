@@ -25,9 +25,9 @@ use CommonApi\Model\ConstraintInterface;
  *
  * ```
  *
- * **Validate**
+ * #### Validate
  *
- * Verifies value against constraint and provides messages with false test.
+ * Verifies value against constraint, returning a TRUE or FALSE result and error messages
  *
  * This example returns true.
  *
@@ -46,7 +46,7 @@ use CommonApi\Model\ConstraintInterface;
  *
  * ```
  *
- * **Sanitize**
+ * #### Sanitize
  *
  * Removes characters not conforming to the definition of the constraint. In this example,
  *  `$field_value` will result in NULL.
@@ -60,7 +60,7 @@ use CommonApi\Model\ConstraintInterface;
  *
  * ```
  *
- * **Format**
+ * #### Format
  *
  * Performs sanitize.
  *

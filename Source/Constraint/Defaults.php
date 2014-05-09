@@ -13,6 +13,46 @@ use CommonApi\Model\ConstraintInterface;
 /**
  * Defaults Constraint
  *
+ * Applies default value for sanitize and verifies if the value requires a default for validate.
+ *
+ * #### Validate
+ *
+ * Verifies if the value is null, if so, returns a FALSE that a default has not been applied.
+ * If the field has a value, validate returns TRUE.
+ *
+ * ```php
+ * $response = $request->validate('any_field', null, 'Defaults');
+ *
+ * if ($response->getValidateResponse() === true) {
+ *     // all is well
+ * } else {
+ *     foreach ($response->getValidateMessages as $code => $message) {
+ *         echo $code . ': ' . $message . '/n';
+ *     }
+ * }
+ *
+ * ```
+ *
+ * #### Sanitize
+ *
+ * Applies the default value defined in the `$options` array to the value, if the value is NULL.
+ *
+ * ```php
+ * $options = array();
+ * $options['default_value'] = $default;
+ * $response = $request->validate('any_field', NULL, 'Defaults');
+ *
+ * if ($response->getChangeIndicator() === true) {
+ *     $field_value = $response->getFieldValue();
+ * }
+ *
+ * ```
+ *
+ * #### Format
+ *
+ * Not implemented. Value sent in is not evaluated or changed.
+ *
+ * @api
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
@@ -34,17 +74,16 @@ class Defaults extends AbstractConstraintTests implements ConstraintInterface
      * @api
      * @return  boolean
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
-        if ($this->validation() === true) {
-            return true;
+        if ($this->field_value === null) {
+            $this->setValidateMessage($this->message_code);
+
+            return false;
         }
 
-        $this->setValidateMessage($this->message_code);
-
-        return false;
+        return true;
     }
 
     /**
@@ -55,38 +94,10 @@ class Defaults extends AbstractConstraintTests implements ConstraintInterface
      */
     public function sanitize()
     {
-        $this->setDefault();
-
-        return $this->field_value;
-    }
-
-    /**
-     * Validate
-     *
-     * @return  boolean
-     * @since   1.0.0
-     */
-    protected function validation()
-    {
-        if ($this->field_value === null) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * If needed, apply default to Field
-     *
-     * @return  $this
-     * @since   1.0.0
-     */
-    protected function setDefault()
-    {
         if ($this->field_value === null) {
             $this->field_value = $this->getOption('default');
         }
 
-        return $this;
+        return $this->field_value;
     }
 }

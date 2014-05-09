@@ -42,7 +42,11 @@ class MinimumTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers  Molajo\Fieldhandler\Constraint\Minimum::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getMinimum
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -63,7 +67,11 @@ class MinimumTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers  Molajo\Fieldhandler\Constraint\Minimum::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getMinimum
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -84,7 +92,11 @@ class MinimumTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers  Molajo\Fieldhandler\Constraint\Minimum::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getMinimum
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     *
      * @return  void
      * @since   1.0.0
      */

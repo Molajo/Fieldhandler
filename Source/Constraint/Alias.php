@@ -15,9 +15,9 @@ use CommonApi\Model\ConstraintInterface;
  *
  * Each character in the alias URL slug must be alphanumeric or a dash.
  *
- * **Validate**
+ * #### Validate
  *
- * Verifies value against constraint and provides messages with false test.
+ * Verifies value against constraint, returning a TRUE or FALSE result and error messages
  *
  * ```php
  * $response = $request->validate('alias_field', 'This will not validate', 'Alias');
@@ -32,7 +32,7 @@ use CommonApi\Model\ConstraintInterface;
  *
  * ```
  *
- * **Sanitize**
+ * #### Sanitize
  *
  * Converts the value to a usable URL slug. In this example, `$field_value` will contain `jack-and-jill`.
  *
@@ -45,7 +45,7 @@ use CommonApi\Model\ConstraintInterface;
  *
  * ```
  *
- * **Format**
+ * #### Format
  *
  * For `alias`, the `format` method produces the same results as `sanitize`.
  *

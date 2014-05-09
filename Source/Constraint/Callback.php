@@ -8,12 +8,59 @@
  */
 namespace Molajo\Fieldhandler\Constraint;
 
-
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Callback Constraint
+ * Callable Constraint
  *
+ * Enables use of a callable function or method to sanitize, filter or format data
+ *
+ * #### Validate
+ *
+ * Verifies value against constraint, returning a TRUE or FALSE result and error messages
+ *
+ * In this example, the data value 'hello' is input to the callback 'strtoupper' and the result 'HELLO'
+ * is compared to the original value. Since the values are different, `false` is returned.
+ *
+ * ```php
+ * $options             = array();
+ * $options['callback'] = 'strtoupper';
+ * $response = $request->validate('callback_field', 'hello', 'Callback', $options);
+ *
+ * if ($response->getValidateResponse() === true) {
+ *     // all is well
+ * } else {
+ *     foreach ($response->getValidateMessages as $code => $message) {
+ *         echo $code . ': ' . $message . '/n';
+ *     }
+ * }
+ *
+ * ```
+ *
+ * #### Sanitize
+ *
+ * Executes the callable against the data value to produce a sanitized result.
+ *
+ * In this example, `$field_value` will result in `HELLO`.
+ *
+ * ```php
+ * $options             = array();
+ * $options['callback'] = 'strtoupper';
+ * $response = $request->sanitize('callback_field', 'hello', 'Callback', $options);
+ *
+ * if ($response->getChangeIndicator() === true) {
+ *     $field_value = $response->getFieldValue();
+ * }
+ *
+ * ```
+ *
+ * #### Format
+ *
+ * For `callback`, the `format` method produces the same results as `sanitize`. It can be
+ * used to format data, as needed.
+ *
+ * @api
+ * @link       http://us1.php.net/manual/en/filter.filters.misc.php
  * @link       http://us3.php.net/callback
  * @link       http://us3.php.net/manual/en/language.types.callable.php
  * @package    Molajo

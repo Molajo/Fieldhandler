@@ -15,9 +15,9 @@ use CommonApi\Model\ConstraintInterface;
  *
  * The text must not have spaces before or after the last visible character.
  *
- * **Validate**
+ * #### Validate
  *
- * Verifies value against constraint and provides messages with false test.
+ * Verifies value against constraint, returning a TRUE or FALSE result and error messages
  *
  * This example returns false due to the inclusion of spaces before and after the text string.
  *
@@ -34,7 +34,7 @@ use CommonApi\Model\ConstraintInterface;
  *
  * ```
  *
- * **Sanitize**
+ * #### Sanitize
  *
  * Removes characters not conforming to the definition of the constraint. In this example,
  *  `$field_value` will result in 'This is trimmed.' and the spaces preceding and following
@@ -51,7 +51,7 @@ use CommonApi\Model\ConstraintInterface;
  *
  * ```
  *
- * **Format**
+ * #### Format
  *
  * Performs sanitize.
  *

@@ -44,6 +44,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\Email::validate
      * @covers  Molajo\Fieldhandler\Constraint\Email::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Email::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
@@ -70,6 +71,7 @@ class EmailTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\Email::validate
      * @covers  Molajo\Fieldhandler\Constraint\Email::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Email::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
@@ -99,6 +101,9 @@ class EmailTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Email::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
      *
      * @return  void
@@ -122,6 +127,9 @@ class EmailTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Email::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
      *
      * @return  void
@@ -146,6 +154,9 @@ class EmailTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Email::format
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
      * @return  void
      * @since   1.0.0
@@ -170,6 +181,9 @@ class EmailTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Email::format
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
      * @return void
      * @since   1.0.0

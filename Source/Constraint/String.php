@@ -53,16 +53,4 @@ class String extends AbstractFiltervar implements ConstraintInterface
         FILTER_FLAG_ENCODE_LOW,
         FILTER_FLAG_ENCODE_AMP
     );
-
-    /**
-     * Validate
-     *
-     * @return  boolean
-     * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
-     */
-    public function validate()
-    {
-        return $this->validateCompare();
-    }
 }

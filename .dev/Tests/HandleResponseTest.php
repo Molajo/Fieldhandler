@@ -42,6 +42,7 @@ class HandleResponseTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\HandleResponse::getFieldValue
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -62,6 +63,7 @@ class HandleResponseTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\HandleResponse::getChangeIndicator
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -69,6 +71,28 @@ class HandleResponseTest extends PHPUnit_Framework_TestCase
     {
         $original_data_value = 1;
         $response_value = 2;
+
+        $this->handle_response = new HandleResponse($original_data_value,
+            $response_value);
+
+        $results = $this->handle_response->getChangeIndicator();
+
+        $this->assertEquals($results, true);
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\HandleResponse::getChangeIndicator
+     * @covers  Molajo\Fieldhandler\HandleResponse::testNoValueChange
+     *
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testGetChangeIndicatortestNoValueChange()
+    {
+        $original_data_value = null;
+        $response_value = false;
 
         $this->handle_response = new HandleResponse($original_data_value,
             $response_value);

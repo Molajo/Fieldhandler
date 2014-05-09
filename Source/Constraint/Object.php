@@ -13,6 +13,42 @@ use CommonApi\Model\ConstraintInterface;
 /**
  * Object Constraint
  *
+ * Must be an object.
+ *
+ * #### Validate
+ *
+ * Verifies if the value is an object.
+ *
+ * ```php
+ * $response = $request->validate('any_field', $data_value, 'Object');
+ *
+ * if ($response->getValidateResponse() === true) {
+ *     // all is well
+ * } else {
+ *     foreach ($response->getValidateMessages as $code => $message) {
+ *         echo $code . ': ' . $message . '/n';
+ *     }
+ * }
+ *
+ * ```
+ *
+ * #### Sanitize
+ *
+ * Returns null if value is not an object.
+ *
+ * ```php
+ * $response = $request->validate('any_field', $data_value, 'Object');
+ *
+ * if ($response->getChangeIndicator() === true) {
+ *     $field_value = $response->getFieldValue();
+ * }
+ *
+ * ```
+ *
+ * #### Format
+ *
+ * Not implemented. Value sent in is not evaluated or changed.
+ *
  * @link       http://php.net/manual/en/function.is-object.php
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.

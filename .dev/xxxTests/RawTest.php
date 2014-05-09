@@ -43,6 +43,8 @@ class RawTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
+     *
      * @return void
      * @since   1.0.0
      */

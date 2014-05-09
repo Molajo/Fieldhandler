@@ -200,4 +200,28 @@ class AliasTest extends PHPUnit_Framework_TestCase
 
         return;
     }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::format
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Alias::sanitizeAlias
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeCharacter
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testFormatNull()
+    {
+        $field_name  = 'alias';
+        $field_value = null;
+        $constraint  = 'Alias';
+        $options     = array();
+
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
+
+        return;
+    }
 }

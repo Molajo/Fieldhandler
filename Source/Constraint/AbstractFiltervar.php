@@ -63,6 +63,10 @@ abstract class AbstractFiltervar extends AbstractConstraintTests implements Cons
             return true;
         }
 
+        if ($this->validate_filter === null) {
+            return $this->validateCompare();
+        }
+
         if (filter_var($this->field_value, $this->validate_filter, $this->setFlags())) {
             return true;
         }
@@ -73,7 +77,7 @@ abstract class AbstractFiltervar extends AbstractConstraintTests implements Cons
     }
 
     /**
-     * Validate Compare (used when only sanitize filter var is available)
+     * Validate by comparison to sanitized result
      *
      * @return  boolean
      * @since   1.0.0
@@ -81,10 +85,6 @@ abstract class AbstractFiltervar extends AbstractConstraintTests implements Cons
      */
     public function validateCompare()
     {
-        if ($this->field_value === null) {
-            return true;
-        }
-
         $temp = $this->field_value;
 
         if ($temp === $this->sanitize()) {
@@ -104,8 +104,43 @@ abstract class AbstractFiltervar extends AbstractConstraintTests implements Cons
      */
     public function sanitize()
     {
+        if ($this->sanitize_filter === null) {
+            return $this->sanitizeNull();
+        }
+
         $this->field_value = filter_var($this->field_value, $this->sanitize_filter, $this->setFlags());
 
+        if ($this->validate_filter === null) {
+            return $this->field_value;
+        }
+
+        return $this->validateSanitizedResult();
+    }
+
+    /**
+     * Sanitize to null if not validated
+     *
+     * @return  null|mixed
+     * @since   1.0.0
+     */
+    public function sanitizeNull()
+    {
+        if (filter_var($this->field_value, $this->validate_filter, $this->setFlags())) {
+        } else {
+            $this->field_value = null;
+        }
+
+        return $this->field_value;
+    }
+
+    /**
+     * Once sanitized result is available, verify if it is valid
+     *
+     * @return  null|mixed
+     * @since   1.0.0
+     */
+    public function validateSanitizedResult()
+    {
         if (filter_var($this->field_value, $this->validate_filter, $this->setFlags())) {
         } else {
             $this->field_value = null;

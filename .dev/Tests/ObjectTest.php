@@ -1,6 +1,6 @@
 <?php
 /**
- * Float Constraint Test
+ * Object Constraint Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -10,16 +10,17 @@ namespace Molajo\Fieldhandler\Tests;
 
 use Molajo\Fieldhandler\Request;
 use PHPUnit_Framework_TestCase;
+use stdClass;
 
 /**
- * Float Fieldhandler
+ * Object Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class FloatTest extends PHPUnit_Framework_TestCase
+class ObjectTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Request
@@ -32,7 +33,7 @@ class FloatTest extends PHPUnit_Framework_TestCase
     /**
      * Set up
      *
-     * @return  void
+     * @return void
      * @since   1.0.0
      */
     protected function setUp()
@@ -41,9 +42,11 @@ class FloatTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Float::validate
-     * @covers  Molajo\Fieldhandler\Constraint\Float::getValidateMessages
-     * @covers  Molajo\Fieldhandler\Constraint\Float::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\Object::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Object::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Object::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Object::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
@@ -52,9 +55,9 @@ class FloatTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateTrue()
     {
-        $field_name  = 'float_fieldname';
-        $field_value = 123.456789;
-        $constraint  = 'Float';
+        $field_name  = 'field1';
+        $field_value = new stdClass();
+        $constraint  = 'Object';
         $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
@@ -66,28 +69,30 @@ class FloatTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Float::validate
-     * @covers  Molajo\Fieldhandler\Constraint\Float::getValidateMessages
-     * @covers  Molajo\Fieldhandler\Constraint\Float::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\Object::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Object::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Object::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Object::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
-     *
-     * @return  void
+     * 
+     * @return void
      * @since   1.0.0
      */
     public function testValidateFalse()
     {
-        $field_name  = 'float_fieldname';
-        $field_value = 'yessireebob';
-        $constraint  = 'Float';
+        $field_name  = 'field1';
+        $field_value = 'dog';
+        $constraint  = 'Object';
         $options     = array();
 
-        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
+        $results = $this->request->validate(false, $field_value, $constraint, $options);
 
         $this->assertEquals(false, $results->getValidateResponse());
 
-        $expected_code    = 2000;
-        $expected_message = 'Field: float_fieldname must only contain Float values.';
+        $expected_code    = 1000;
+        $expected_message = 'Field:  does not have a valid value for Object data type.';
         $messages         = $results->getValidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);
@@ -96,10 +101,8 @@ class FloatTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Float::sanitize
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
+     * @covers  Molajo\Fieldhandler\Constraint\Object::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Object::validation
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
      *
      * @return  void
@@ -107,11 +110,10 @@ class FloatTest extends PHPUnit_Framework_TestCase
      */
     public function testSanitizeNoChange()
     {
-        $field_name  = 'float_fieldname';
-        $field_value = 123.123;
-        $constraint  = 'Float';
+        $field_name  = 'object_field';
+        $field_value = new stdClass();
+        $constraint  = 'Object';
         $options     = array();
-        $options[FILTER_FLAG_ALLOW_FRACTION] = true;
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
@@ -122,10 +124,8 @@ class FloatTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Float::sanitize
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
+     * @covers  Molajo\Fieldhandler\Constraint\Object::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Object::validation
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
      *
      * @return  void
@@ -133,9 +133,9 @@ class FloatTest extends PHPUnit_Framework_TestCase
      */
     public function testSanitizeChange()
     {
-        $field_name  = 'float_fieldname';
-        $field_value = 'yessireebob';
-        $constraint  = 'Float';
+        $field_name  = 'object_field';
+        $field_value = 123;
+        $constraint  = 'Object';
         $options     = array();
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
@@ -147,20 +147,19 @@ class FloatTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Float::format
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::format
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
+     * @covers  Molajo\Fieldhandler\Constraint\Object::format
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
      *
      * @return  void
      * @since   1.0.0
+     * @return  void
+     * @since   1.0.0
      */
-    public function testFormatNoChange()
+    public function testFormat()
     {
-        $field_name  = 'float_fieldname';
-        $field_value = (float) 123.123;
-        $constraint  = 'Float';
+        $field_name  = 'numeric_fieldname';
+        $field_value = 123;
+        $constraint  = 'Object';
         $options     = array();
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);

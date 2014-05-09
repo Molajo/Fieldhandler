@@ -15,15 +15,55 @@ use CommonApi\Model\ConstraintInterface;
  *
  * URL-encode string, optionally strip or encode special characters.
  *
- * Uses PHP Sanitize Filters http://www.php.net/manual/en/filter.filters.sanitize.php and FILTER_SANITIZE_ENCODED
- * to URL-encode string and can accept the following flags:
+ * The following flags can be applied by adding to the options array (see examples):
  *
- *  FILTER_FLAG_STRIP_LOW
- *  FILTER_FLAG_STRIP_HIGH
- *  FILTER_FLAG_ENCODE_LOW
- *  FILTER_FLAG_ENCODE_HIGH
+ * FILTER_FLAG_STRIP_LOW
+ * FILTER_FLAG_STRIP_HIGH
+ * FILTER_FLAG_ENCODE_LOW
+ * FILTER_FLAG_ENCODE_HIGH
  *
- * @link       http://www.php.net/manual/en/filter.filters.sanitize.php
+ * #### Validate
+ *
+ * Verifies value against constraint, returning a TRUE or FALSE result and error messages.
+ * For Encoded, the original value is compared to a sanitized value. If those values match,
+ * true is returned. Otherwise, the response is false and an error message is available.
+ *
+ * ```php
+ * $response = $request->validate('encode_field', 'AmyStephen@gmail.com', 'Encode');
+ *
+ * if ($response->getValidateResponse() === true) {
+ *     // all is well
+ * } else {
+ *     foreach ($response->getValidateMessages as $code => $message) {
+ *         echo $code . ': ' . $message . '/n';
+ *     }
+ * }
+ *
+ * ```
+ *
+ * #### Sanitize
+ *
+ * Removes characters not conforming to the definition of the constraint.
+ *
+ * In this example, the input URL is `something.php?text=unknown values here`.
+ * The resulting value is `unknown%20values%20here`.
+ *
+ * ```php
+ * $response = $request->sanitize('encode_field', 'unknown values here', 'Encode');
+ *
+ * if ($response->getChangeIndicator() === true) {
+ *     $field_value = $response->getFieldValue();
+ * }
+ *
+ * ```
+ *
+ * #### Format
+ *
+ * Format is not implemented for this constraint.
+ *
+ * @api
+ * @link       http://us1.php.net/manual/en/filter.filters.sanitize.php
+ * @link       http://us1.php.net/manual/en/filter.filters.validate.php
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
@@ -64,16 +104,4 @@ class Encoded extends AbstractFiltervar implements ConstraintInterface
         FILTER_FLAG_ENCODE_HIGH,
         FILTER_FLAG_ENCODE_LOW
     );
-
-    /**
-     * Validate
-     *
-     * @return  boolean
-     * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
-     */
-    public function validate()
-    {
-        return $this->validateCompare();
-    }
 }

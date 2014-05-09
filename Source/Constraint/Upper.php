@@ -16,9 +16,9 @@ use CommonApi\Model\ConstraintInterface;
  * Each character must be an uppercase character.
  * To allow the 'space character', use the `allow_space_character` $option.
  *
- * **Validate**
+ * #### Validate
  *
- * Verifies value against constraint and provides messages with false test.
+ * Verifies value against constraint, returning a TRUE or FALSE result and error messages
  *
  * This example returns false due to the inclusion of non uppercase characters.
  *
@@ -37,7 +37,7 @@ use CommonApi\Model\ConstraintInterface;
  *
  * ```
  *
- * **Sanitize**
+ * #### Sanitize
  *
  * Removes characters not conforming to the definition of the constraint. In this example,
  *  `$field_value` will only contain the uppercase letter `T` since no other characters meet
@@ -54,7 +54,7 @@ use CommonApi\Model\ConstraintInterface;
  *
  * ```
  *
- * **Format**
+ * #### Format
  *
  * Uppercase all character values.  In this example,
  *  `$field_value` will contain `THIS IS UPPER.`.

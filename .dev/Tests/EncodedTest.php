@@ -42,6 +42,12 @@ class EncodedTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Encoded::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Encoded::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Encoded::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -62,6 +68,11 @@ class EncodedTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Encoded::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Encoded::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Encoded::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      * @return  void
      * @since   1.0.0
      */
@@ -76,8 +87,8 @@ class EncodedTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(false, $results->getValidateResponse());
 
-        $expected_code    = 1000;
-        $expected_message = 'Field: dog does not have a valid value for Encoded data type.';
+        $expected_code    = 2000;
+        $expected_message = 'Field: dog must only contain Encoded values.';
         $messages         = $results->getValidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);
@@ -87,10 +98,15 @@ class EncodedTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Encoded::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testSanitizeSucceed()
+    public function testSanitizeNoChange()
     {
         $field_name  = 'dog';
         $field_value = 'my-apples&are green and red';
@@ -107,10 +123,14 @@ class EncodedTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Encoded::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
      * @return  void
      * @since   1.0.0
      */
-    public function testSanitizeFailure()
+    public function testSanitizeChange()
     {
         $field_name  = 'encoded';
         $field_value = 'Jack *&and+Jill';
@@ -127,10 +147,15 @@ class EncodedTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Encoded::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testFormatSucceed()
+    public function testFormat()
     {
         $field_name  = 'encoded';
         $field_value = 'Jack *&and+Jill';
