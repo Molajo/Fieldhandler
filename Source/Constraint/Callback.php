@@ -8,6 +8,7 @@
  */
 namespace Molajo\Fieldhandler\Constraint;
 
+
 use CommonApi\Model\ConstraintInterface;
 
 /**
@@ -20,16 +21,25 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Callback extends AbstractConstraintTests implements ConstraintInterface
+class Callback extends AbstractFiltervar implements ConstraintInterface
 {
     /**
-     * Filter Type
+     * Validate Filter
      *
      * @api
-     * @var    string
+     * @var    int
      * @since  1.0.0
      */
-    protected $filter_type = FILTER_CALLBACK;
+    protected $validate_filter = null;
+
+    /**
+     * Sanitize Filter
+     *
+     * @api
+     * @var    int
+     * @since  1.0.0
+     */
+    protected $sanitize_filter = FILTER_CALLBACK;
 
     /**
      * Message Code
@@ -45,25 +55,53 @@ class Callback extends AbstractConstraintTests implements ConstraintInterface
      * @return  boolean
      * @since   1.0.0
      */
-    public function validation()
+    public function validate()
     {
-        if (filter_var($this->field_value, $this->filter_type, $this->setCallbackOptions()) === false) {
-            return false;
+        $hold = $this->field_value;
+
+        if ($hold === $this->sanitize()) {
+            return true;
         }
 
-        return true;
+        $this->setValidateMessage($this->message_code);
+
+        return false;
     }
 
     /**
-     * Used by Constraint Classes to customize option values needed for Field handling
+     * Sanitize
+     *
+     * @return  null|mixed
+     * @since   1.0.0
+     */
+    public function sanitize()
+    {
+        $this->field_value = filter_var($this->field_value, $this->sanitize_filter, $this->setCallback());
+
+        return $this->field_value;
+    }
+
+    /**
+     * Format
+     *
+     * @return  null|mixed
+     * @since   1.0.0
+     */
+    public function format()
+    {
+        return $this->sanitize();
+    }
+
+    /**
+     * Callback set in the $options array for $request
      *
      * @return  array
      * @since   1.0.0
      */
-    protected function setCallbackOptions()
+    protected function setCallback()
     {
         $return            = array();
-        $return['options'] = $this->getOption('callback');
+        $return['options'] = $this->getOption('callback', null);
 
         return $return;
     }

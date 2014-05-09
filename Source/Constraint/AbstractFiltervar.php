@@ -21,15 +21,26 @@ use CommonApi\Model\ConstraintInterface;
 abstract class AbstractFiltervar extends AbstractConstraintTests implements ConstraintInterface
 {
     /**
-     * Filter Type
+     * Validate Filter
      *
-     * Defined in child class
+     * Defined in subtype class
      *
      * @api
-     * @var    string
+     * @var    int
      * @since  1.0.0
      */
-    protected $filter_type;
+    protected $validate_filter;
+
+    /**
+     * Validate Filter
+     *
+     * Defined in subtype class
+     *
+     * @api
+     * @var    int
+     * @since  1.0.0
+     */
+    protected $sanitize_filter;
 
     /**
      * Message Code
@@ -37,81 +48,69 @@ abstract class AbstractFiltervar extends AbstractConstraintTests implements Cons
      * @var    integer
      * @since  1.0.0
      */
-    protected $message_code = 1000;
+    protected $message_code = 2000;
 
     /**
      * Validate
      *
-     * @api
      * @return  boolean
      * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validate()
     {
-        return parent::validate();
+        if ($this->field_value === null) {
+            return true;
+        }
+
+        if (filter_var($this->field_value, $this->validate_filter, $this->setFlags())) {
+            return true;
+        }
+
+        $this->setValidateMessage($this->message_code);
+
+        return false;
+    }
+
+    /**
+     * Validate Compare (used when only sanitize filter var is available)
+     *
+     * @return  boolean
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    public function validateCompare()
+    {
+        if ($this->field_value === null) {
+            return true;
+        }
+
+        $temp = $this->field_value;
+
+        if ($temp === $this->sanitize()) {
+            return true;
+        }
+
+        $this->setValidateMessage($this->message_code);
+
+        return false;
     }
 
     /**
      * Sanitize
      *
-     * @return  mixed
+     * @return  null|mixed
      * @since   1.0.0
      */
     public function sanitize()
     {
-        $this->field_value = filter_var($this->field_value, $this->filter_type, $this->setFlags());
+        $this->field_value = filter_var($this->field_value, $this->sanitize_filter, $this->setFlags());
+
+        if (filter_var($this->field_value, $this->validate_filter, $this->setFlags())) {
+        } else {
+            $this->field_value = null;
+        }
 
         return $this->field_value;
-    }
-
-    /**
-     * Format
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function format()
-    {
-        return parent::format();
-    }
-
-    /**
-     * Validation test
-     *
-     * @api
-     * @return  boolean
-     * @since   1.0.0
-     */
-    protected function validation()
-    {
-        if ($this->filter_type === FILTER_VALIDATE_FLOAT) {
-            return $this->validationFloat();
-        }
-
-        if ($this->field_value === $this->sanitize()) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Validation test for Float
-     *
-     * @api
-     * @return  boolean
-     * @since   1.0.0
-     */
-    protected function validationFloat()
-    {
-        $temp = $this->field_value;
-
-        if (is_numeric($temp)
-            && (float)$temp === (float)$this->sanitize()
-        ) {
-            return true;
-        }
-
-        return false;
     }
 }

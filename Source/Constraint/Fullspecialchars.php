@@ -21,12 +21,22 @@ use CommonApi\Model\ConstraintInterface;
 class Fullspecialchars extends AbstractFiltervar implements ConstraintInterface
 {
     /**
-     * Filter Type
+     * Validate Filter
      *
-     * @var    string
+     * @api
+     * @var    int
      * @since  1.0.0
      */
-    protected $filter_type = FILTER_SANITIZE_FULL_SPECIAL_CHARS;
+    protected $validate_filter = null;
+
+    /**
+     * Sanitize Filter
+     *
+     * @api
+     * @var    int
+     * @since  1.0.0
+     */
+    protected $sanitize_filter = FILTER_SANITIZE_FULL_SPECIAL_CHARS;
 
     /**
      * Constraint Flags
@@ -35,6 +45,18 @@ class Fullspecialchars extends AbstractFiltervar implements ConstraintInterface
      * @since  1.0.0
      */
     protected $constraint_allowable_options = array(
-        'FILTER_FLAG_NO_ENCODE_QUOTES'
+       FILTER_FLAG_NO_ENCODE_QUOTES
     );
+
+    /**
+     * Validate
+     *
+     * @return  boolean
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    public function validate()
+    {
+        return $this->validateCompare();
+    }
 }

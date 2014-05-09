@@ -42,10 +42,15 @@ class EmailTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Email::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Email::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Email::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testValidateSuccess()
+    public function testValidateTrue()
     {
         $field_name  = 'email_address';
         $field_value = 'AmyStephen@Molajo.org';
@@ -63,10 +68,15 @@ class EmailTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Email::validate
-     * @return void
+     * @covers  Molajo\Fieldhandler\Constraint\Email::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Email::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
+     * @return  void
      * @since   1.0.0
      */
-    public function testValidateFail()
+    public function testValidateFalse()
     {
         $field_name  = 'email_address';
         $field_value = 'yessireebob';
@@ -88,10 +98,13 @@ class EmailTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Email::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testSanitizeSuccess()
+    public function testSanitizeNoChange()
     {
         $field_name  = 'email_address';
         $field_value = 'AmyStephen@Molajo.org';
@@ -107,11 +120,14 @@ class EmailTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Email::validate
-     * @return void
+     * @covers  Molajo\Fieldhandler\Constraint\Email::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
+     * @return  void
      * @since   1.0.0
      */
-    public function testSanitizeFail()
+    public function testSanitizeChange()
     {
         $field_name  = 'email_address';
         $field_value = 'yessireebob';
@@ -128,11 +144,13 @@ class EmailTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Email::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Email::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
      * @return  void
      * @since   1.0.0
      */
-    public function testFormatSuccess()
+    public function testFormatObfuscate()
     {
         $field_name                 = 'email_address';
         $field_value                = 'AmyStephen@Molajo.org';
@@ -150,7 +168,9 @@ class EmailTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Email::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Email::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
      * @return void
      * @since   1.0.0
      */

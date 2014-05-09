@@ -116,8 +116,8 @@ class UrlTest extends PHPUnit_Framework_TestCase
         $field_value                           = 'yessireebob';
         $constraint                            = 'Url';
         $options                               = array();
-        $options['FILTER_FLAG_PATH_REQUIRED']  = true;
-        $options['FILTER_FLAG_QUERY_REQUIRED'] = true;
+        $options[FILTER_FLAG_PATH_REQUIRED]  = true;
+        $options[FILTER_FLAG_QUERY_REQUIRED] = true;
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
@@ -158,7 +158,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
         $field_value                 = 'yessireebob';
         $constraint                  = 'Url';
         $options                     = array();
-        $options['FILTER_FLAG_IPV6'] = true;
+        $options[FILTER_FLAG_IPV6]   = true;
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 

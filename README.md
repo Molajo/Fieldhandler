@@ -228,7 +228,7 @@ if ($response->getValidateResponse() === true) {
 
 **Sanitize**
 
-Removes character that does not meet the definition of the constraint. In this example,
+Removes characters not conforming to the definition of the constraint. In this example,
 `$field_value` will contain `Pat Nelson`.
 
 ```php
@@ -270,7 +270,7 @@ if ($response->getValidateResponse() === true) {
 
 **Sanitize**
 
-Removes character that does not meet the definition of the constraint. In this example,
+Removes characters not conforming to the definition of the constraint. In this example,
 `$field_value` will contain `4 dogs and 3 cats`.
 
 ```php
@@ -361,7 +361,7 @@ if ($response->getValidateResponse() === true) {
 
 **Sanitize**
 
-Removes character that does not meet the definition of the constraint. In this example,
+Removes characters not conforming to the definition of the constraint. In this example,
 `$field_value` will contain `\n \r \t`.
 
 ```php
@@ -441,7 +441,7 @@ if ($response->getValidateResponse() === true) {
 
 **Sanitize**
 
-Removes character that does not meet the definition of the constraint. In this example,
+Removes characters not conforming to the definition of the constraint. In this example,
   `$field_value` will contain `1 2 3 4 5`.
 
 ```php
@@ -459,12 +459,54 @@ if ($response->getChangeIndicator() === true) {
 
 For this constraint, the `format` method is not implemented and simply returns the value unchanged.
 
-### Email ###
-Tests that a value is a valid email address. When invalid, validate throws exception while
-Filter and Escape return null.
+### Email
+
+Only letters, digits and `!#$%&'*+-/=?^_`{|}~@.[]`.
+
+Can be used with the following flags by defining $option entries for each flag desired:
+
+**Validate**
+Verifies value against constraint and provides messages with false test.
+
+This example returns true.
 
 ```php
-    $results = $request->validate('email_address', 'AmyStephen@Molajo.org', 'Email');
+$response = $request->validate('email_field', 'AmyStephen@gmail.com', 'Email');
+
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
+
+```
+
+**Sanitize**
+Removes characters not conforming to the definition of the constraint. In this example,
+ `$field_value` will result in NULL.
+
+```php
+$response = $request->sanitize('email_field', 'AmyStephen@gmail.com', 'Email');
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
+
+```
+
+**Format**
+Set the `obfuscate_email` option to format the email in that manner.
+
+```php
+$options = array();
+$options['obfuscate_email'] = true;
+$response = $request->sanitize('email_field', 'AmyStephen@gmail.com', 'Email', $options);
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
 
 ```
 
@@ -516,13 +558,56 @@ Exception is thrown. If the value does not match for filter or escape, null is r
 ```
 
 ### Float ###
-Tests a value to determine if it is a valid Float value.
+
+Remove all characters except digits, +- and optionally .,eE.
+
+Can be used with the following flags by defining $option entries for each flag desired:
 
 ```php
-    // The value of field `numeric_field` is 1234.5678.
-    $results = $request->sanitize('numeric_field', 1234.5678, 'Float');
+$options = array();
+$options[FILTER_FLAG_ALLOW_FRACTION]   = true;
+$options[FILTER_FLAG_ALLOW_THOUSAND]   = true;
+$options[FILTER_FLAG_ALLOW_SCIENTIFIC] = true;
 
 ```
+
+**Validate**
+
+Verifies value against constraint and provides messages with false test.
+
+This example returns true.
+
+```php
+$options = array();
+$options[FILTER_FLAG_ALLOW_FRACTION]   = true;
+$response = $request->validate('float_field', 0.2345, 'Float');
+
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
+
+```
+
+**Sanitize**
+
+Removes characters not conforming to the definition of the constraint. In this example,
+ `$field_value` will result in NULL.
+
+```php
+$response = $request->sanitize('float_field', 'Dog', 'Float');
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
+
+```
+
+**Format**
+For this constraint, the `format` method is not implemented and simply returns the value unchanged.
 
 ### Foreignkey ###
 Uses the database connection defined in $options['database'] to execute a query that verifies there is
@@ -597,7 +682,7 @@ if ($response->getValidateResponse() === true) {
 
 **Sanitize**
 
-Removes character that does not meet the definition of the constraint. In this example,
+Removes characters not conforming to the definition of the constraint. In this example,
  `$field_value` will contain `This is visible.`.
 
 ```php
@@ -641,7 +726,7 @@ if ($response->getValidateResponse() === true) {
 
 **Sanitize**
 
-Removes character that does not meet the definition of the constraint. In this example,
+Removes characters not conforming to the definition of the constraint. In this example,
   `$field_value` will contain `1 2 3 4 5`.
 
 ```php
@@ -686,16 +771,45 @@ Tests that the value is an image.
 
 ```
 
-### Integer ###
-Tests that the value is an integer.
+### Integer
+Includes only digits, plus and minus sign.
+
+**Validate**
+
+Verifies value against constraint and provides messages with false test.
+
+This example returns true.
 
 ```php
-    // The value of field `numeric_field` is 'ABC123'. The filtered and escaped values will be 0.
-    // For 'validate', an exception is thrown. The following will return 123.
+$response = $request->validate('integer_field', 100, 'Integer');
 
-    $results = $request->sanitize('numeric_field', '123', 'Int');
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
 
 ```
+
+**Sanitize**
+
+Removes characters not conforming to the definition of the constraint. In this example,
+ `$field_value` will result in NULL.
+
+```php
+$response = $request->sanitize('integer_field', 'AmyStephen@gmail.com', 'Integer');
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
+
+```
+
+**Format**
+
+Not implemented, simply returns the value sent in.
 
 ### Ip ###
 Tests that the value is an IP Address.
@@ -735,7 +849,7 @@ if ($response->getValidateResponse() === true) {
 
 **Sanitize**
 
-Removes character that does not meet the definition of the constraint. In this example,
+Removes characters not conforming to the definition of the constraint. In this example,
  `$field_value` will only contain the lowercase letter `his is lower` since the `T` and `.` are not lowercase.
 
 ```php
@@ -853,7 +967,7 @@ See [sanitize filters](http://php.net/manual/en/filter.filters.sanitize.php).
     $field_value             = 'Me & You';  //returns 'Me &amp; You'
     $constraint = 'Raw';
     $options                 = array();
-    $options['FILTER_FLAG_ENCODE_AMP']      = true;
+    $options[FILTER_FLAG_ENCODE_AMP]      = true;
 
 
     $results = $request->validate($field_name, $field_value, $constraint, $options);
@@ -884,7 +998,7 @@ if ($response->getValidateResponse() === true) {
 
 **Sanitize**
 
-Removes character that does not meet the definition of the constraint. In this example,
+Removes characters not conforming to the definition of the constraint. In this example,
  `$field_value` will contain `asdf`.
 
 ```php
@@ -925,7 +1039,7 @@ if ($response->getValidateResponse() === true) {
 
 **Sanitize**
 
-Removes character that does not meet the definition of the constraint. In this example,
+Removes characters not conforming to the definition of the constraint. In this example,
  `$field_value` will contain `* & $ ( )`.
 
 ```php
@@ -1020,7 +1134,7 @@ if ($response->getValidateResponse() === true) {
 
 **Sanitize**
 
-Removes character that does not meet the definition of the constraint. In this example,
+Removes characters not conforming to the definition of the constraint. In this example,
  `$field_value` will contain `\n \r \t`.
 
 ```php
@@ -1040,19 +1154,49 @@ For this constraint, the `format` method is not implemented and simply returns t
 Tests that the value is a string.
 
 ### Time ###
-Tests that the value is a string.
 
-### Trim ###
-Tests that the string is trimmed.
+### Trim
+The text must not have spaces before or after the last visible character.
+
+**Validate**
+
+Verifies value against constraint and provides messages with false test.
+
+This example returns false due to the inclusion of spaces before and after the text string.
 
 ```php
+$response = $request->validate('upper_field', ' This is not trimmed. ', 'Upper');
 
-    $field_name              = 'my_field';
-    $field_value             = 'Lots of stuff in here that is stringy.          ';
-    $constraint = 'Trim';
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
 
-    $results = $request->sanitize($field_name, $field_value, $constraint);
 ```
+
+**Sanitize**
+
+Removes characters not conforming to the definition of the constraint. In this example,
+ `$field_value` will result in 'This is trimmed.' and the spaces preceding and following
+ the text literal will be removed.
+
+```php
+$options = array();
+$options['allow_space_character'] = true;
+$response = $request->sanitize('upper_field', ' This is trimmed. ', 'Upper');
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
+
+```
+
+**Format**
+
+Performs sanitize.
 
 ### Upper
 
@@ -1082,7 +1226,7 @@ if ($response->getValidateResponse() === true) {
 
 **Sanitize**
 
-Removes character that does not meet the definition of the constraint. In this example,
+Removes characters not conforming to the definition of the constraint. In this example,
  `$field_value` will only contain the uppercase letter `T` since no other characters meet
  the constraint definition.
 
@@ -1136,8 +1280,8 @@ Compares a field_value against a set of values;
 
 ## Requirements and Compliance
 PHP framework independent, no dependencies
- * Requires PHP 5.4, or above
- * [Semantic Versioning](http://semver.org/)
+Requires PHP 5.4, or above
+[Semantic Versioning](http://semver.org/)
  * Compliant with:
     * [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md) Basic Coding Standards
     * [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) Coding Style

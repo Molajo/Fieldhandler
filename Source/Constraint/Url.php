@@ -21,10 +21,20 @@ use CommonApi\Model\ConstraintInterface;
 class Url extends AbstractFiltervar implements ConstraintInterface
 {
     /**
-     * Filter Type
+     * Validate Filter
      *
-     * @var    string
+     * @api
+     * @var    int
      * @since  1.0.0
      */
-    protected $filter_type = FILTER_SANITIZE_URL;
+    protected $validate_filter = FILTER_VALIDATE_URL;
+
+    /**
+     * Sanitize Filter
+     *
+     * @api
+     * @var    int
+     * @since  1.0.0
+     */
+    protected $sanitize_filter = FILTER_SANITIZE_URL;
 }

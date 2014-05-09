@@ -13,7 +13,59 @@ use CommonApi\Model\ConstraintInterface;
 /**
  * Email Constraint
  *
- * @link       http://php.net/manual/en/function.checkdnsrr.php
+ * Only letters, digits and !#$%&'*+-/=?^_`{|}~@.[].
+ *
+ * **Validate**
+ *
+ * Verifies value against constraint and provides messages with false test.
+ *
+ * This example returns true.
+ *
+ * ```php
+ * $response = $request->validate('email_field', 'AmyStephen@gmail.com', 'Email');
+ *
+ * if ($response->getValidateResponse() === true) {
+ *     // all is well
+ * } else {
+ *     foreach ($response->getValidateMessages as $code => $message) {
+ *         echo $code . ': ' . $message . '/n';
+ *     }
+ * }
+ *
+ * ```
+ *
+ * **Sanitize**
+ *
+ * Removes characters not conforming to the definition of the constraint. In this example,
+ *  `$field_value` will result in NULL.
+ *
+ * ```php
+ * $response = $request->sanitize('email_field', 'AmyStephen@gmail.com', 'Email');
+ *
+ * if ($response->getChangeIndicator() === true) {
+ *     $field_value = $response->getFieldValue();
+ * }
+ *
+ * ```
+ *
+ * **Format**
+ *
+ * Set the `obfuscate_email` option to format the email in that manner.
+ *
+ * ```php
+ * $options = array();
+ * $options['obfuscate_email'] = true;
+ * $response = $request->sanitize('email_field', 'AmyStephen@gmail.com', 'Email', $options);
+ *
+ * if ($response->getChangeIndicator() === true) {
+ *     $field_value = $response->getFieldValue();
+ * }
+ *
+ * ```
+ *
+ * @api
+ * @link       http://us1.php.net/manual/en/filter.filters.sanitize.php
+ * @link       http://us1.php.net/manual/en/filter.filters.validate.php
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
@@ -22,21 +74,22 @@ use CommonApi\Model\ConstraintInterface;
 class Email extends AbstractFiltervar implements ConstraintInterface
 {
     /**
-     * Filter Type
+     * Validate Filter
      *
      * @api
-     * @var    string
+     * @var    int
      * @since  1.0.0
      */
-    protected $filter_type = FILTER_VALIDATE_EMAIL;
+    protected $validate_filter = FILTER_VALIDATE_EMAIL;
 
     /**
-     * Message Code
+     * Sanitize Filter
      *
-     * @var    integer
+     * @api
+     * @var    int
      * @since  1.0.0
      */
-    protected $message_code = 2000;
+    protected $sanitize_filter = FILTER_SANITIZE_EMAIL;
 
     /**
      * Format
@@ -55,106 +108,12 @@ class Email extends AbstractFiltervar implements ConstraintInterface
 
         $obfuscate_email = "";
 
-        for ($i = 0; $i < strlen($this->field_value); $i ++) {
+        for ($i = 0; $i < strlen($this->field_value); $i++) {
             $obfuscate_email .= "&#" . ord($this->field_value[ $i ]) . ";";
         }
 
         $this->field_value = $obfuscate_email;
 
         return $this->field_value;
-    }
-
-    /**
-     * Validation Test
-     *
-     * @return  boolean
-     * @since   1.0.0
-     */
-    protected function validation()
-    {
-        $valid = true;
-
-        $host = $this->getHost();
-
-        if ($host === null) {
-            $valid = false;
-        } else {
-
-            if ($this->checkMX($host) === true) {
-            } else {
-                $valid = false;
-            }
-
-            if ($this->checkHost($host) === true) {
-            } else {
-                $valid = false;
-            }
-        }
-
-        return $valid;
-    }
-
-    /**
-     * Extract Host
-     *
-     * @return  null|string
-     * @since   1.0.0
-     */
-    protected function getHost()
-    {
-        $email_parts = explode('@', $this->field_value);
-
-        if (is_array($email_parts) && count($email_parts) === 2) {
-            return $email_parts[1];
-        }
-
-        return null;
-    }
-
-    /**
-     * Verify MX Record for Host
-     *
-     * @param   string $host
-     *
-     * @return  boolean
-     * @since   1.0.0
-     */
-    protected function checkMX($host = null)
-    {
-        if ($this->getOption('check_mx') === null) {
-            return true;
-        }
-
-        if (checkdnsrr($host, 'MX')) {
-        } else {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Check Host DNS Records for at least one (MX, A, AAAA)
-     *
-     * @param   string $host
-     *
-     * @return  boolean
-     * @since   1.0.0
-     */
-    protected function checkHost($host = null)
-    {
-        if ($this->getOption('check_host') === null) {
-            return true;
-        }
-
-        $response = (int)checkdnsrr($host, 'MX');
-        $response = $response + (int)checkdnsrr($host, 'A');
-        $response = $response + (int)checkdnsrr($host, 'AAAA');
-
-        if ($response > 0) {
-            return true;
-        }
-
-        return false;
     }
 }

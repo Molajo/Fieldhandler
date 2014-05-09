@@ -42,12 +42,17 @@ class IntegerTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Integer::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Integer::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Integer::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
      * @return  void
      * @since   1.0.0
      */
     public function testValidateSuccess()
     {
-        $field_name  = 'digit_fieldname';
+        $field_name  = 'integer_fieldname';
         $field_value = 1234;
         $constraint  = 'Integer';
         $options     = array();
@@ -64,12 +69,17 @@ class IntegerTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Integer::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Integer::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Integer::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
      * @return  void
      * @since   1.0.0
      */
     public function testValidate2()
     {
-        $field_name  = 'digit_fieldname';
+        $field_name  = 'integer_fieldname';
         $field_value = null;
         $constraint  = 'Integer';
         $options     = array();
@@ -91,7 +101,7 @@ class IntegerTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateFail()
     {
-        $field_name  = 'digit_fieldname';
+        $field_name  = 'integer_fieldname';
         $field_value = 'yessireebob';
         $constraint  = 'Integer';
         $options     = array();
@@ -100,8 +110,8 @@ class IntegerTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(false, $results->getValidateResponse());
 
-        $expected_code    = 1000;
-        $expected_message = 'Field: digit_fieldname does not have a valid value for Integer data type.';
+        $expected_code    = 2000;
+        $expected_message = 'Field: integer_fieldname must only contain Integer values.';
         $messages         = $results->getValidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);
@@ -111,12 +121,15 @@ class IntegerTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Integer::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
      * @return  void
      * @since   1.0.0
      */
     public function testSanitizeSuccess()
     {
-        $field_name  = 'digit_fieldname';
+        $field_name  = 'integer_fieldname';
         $field_value = 123;
         $constraint  = 'Integer';
         $options     = array();
@@ -131,12 +144,15 @@ class IntegerTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Integer::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
      * @return  void
      * @since   1.0.0
      */
     public function testSanitizeFail()
     {
-        $field_name  = 'digit_fieldname';
+        $field_name  = 'integer_fieldname';
         $field_value = 'dog';
         $constraint  = 'Integer';
         $options     = array();
@@ -152,12 +168,15 @@ class IntegerTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Integer::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
      * @return  void
      * @since   1.0.0
      */
     public function testFormatSuccess()
     {
-        $field_name  = 'digit_fieldname';
+        $field_name  = 'integer_fieldname';
         $field_value = 'dog';
         $constraint  = 'Integer';
         $options     = array();
@@ -168,15 +187,5 @@ class IntegerTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
-    }
-
-    /**
-     * Tear down
-     *
-     * @return void
-     * @since   1.0.0
-     */
-    protected function tearDown()
-    {
     }
 }

@@ -36,7 +36,7 @@ use CommonApi\Model\ConstraintInterface;
  *
  * **Sanitize**
  *
- * Removes character that does not meet the definition of the constraint. In this example,
+ * Removes characters not conforming to the definition of the constraint. In this example,
  *  `$field_value` will contain `asdf`.
  *
  * ```php

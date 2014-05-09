@@ -42,40 +42,55 @@ class IpTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Ip::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Ip::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Ip::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
      * @return  void
      * @since   1.0.0
      */
     public function testValidateSuccess()
     {
-        $field_name  = 'Ip_fieldname';
+        $field_name  = 'ip_fieldname';
         $field_value = '127.0.0.1';
         $constraint  = 'Ip';
         $options     = array();
+        $options[FILTER_FLAG_IPV4] = true;
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getValidateResponse());
-        $this->assertEquals(array(), $results->getValidateMessages());
+
+        $messages = $results->getValidateMessages();
+        $this->assertEquals(array(), $messages);
 
         return;
     }
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Ip::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Ip::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Ip::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testValidateSuccess2()
+    public function testValidate2()
     {
-        $field_name  = 'Ip_fieldname';
-        $field_value = '0.0.0.0';
+        $field_name  = 'ip_fieldname';
+        $field_value = null;
         $constraint  = 'Ip';
         $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getValidateResponse());
-        $this->assertEquals(array(), $results->getValidateMessages());
+
+        $messages = $results->getValidateMessages();
+        $this->assertEquals(array(), $messages);
 
         return;
     }
@@ -85,9 +100,9 @@ class IpTest extends PHPUnit_Framework_TestCase
      * @return void
      * @since   1.0.0
      */
-    public function testValidateFail()
+    public function testValidateFalse()
     {
-        $field_name  = 'Int_fieldname';
+        $field_name  = 'ip_fieldname';
         $field_value = 'yessireebob';
         $constraint  = 'Ip';
         $options     = array();
@@ -96,8 +111,8 @@ class IpTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(false, $results->getValidateResponse());
 
-        $expected_code    = 1000;
-        $expected_message = 'Field: Int_fieldname does not have a valid value for Ip data type.';
+        $expected_code    = 2000;
+        $expected_message = 'Field: ip_fieldname must only contain Ip values.';
         $messages         = $results->getValidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);
@@ -106,12 +121,72 @@ class IpTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tear down
+     * @covers  Molajo\Fieldhandler\Constraint\Ip::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
      *
-     * @return void
+     * @return  void
      * @since   1.0.0
      */
-    protected function tearDown()
+    public function testSanitizeSuccess()
     {
+        $field_name  = 'ip_fieldname';
+        $field_value = '127.0.0.1';
+        $constraint  = 'Ip';
+        $options     = array();
+
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Ip::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testSanitizeFail()
+    {
+        $field_name  = 'ip_fieldname';
+        $field_value = 'dog';
+        $constraint  = 'Ip';
+        $options     = array();
+
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
+
+        $field_value = null;
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Ip::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testFormatSuccess()
+    {
+        $field_name  = 'ip_fieldname';
+        $field_value = 'dog';
+        $constraint  = 'Ip';
+        $options     = array();
+
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
+
+        return;
     }
 }

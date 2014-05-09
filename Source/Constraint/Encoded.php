@@ -32,40 +32,48 @@ use CommonApi\Model\ConstraintInterface;
 class Encoded extends AbstractFiltervar implements ConstraintInterface
 {
     /**
-     * Filter Type
+     * Validate Filter
      *
      * @api
-     * @var    string
+     * @var    int
      * @since  1.0.0
      */
-    protected $filter_type = FILTER_SANITIZE_ENCODED;
+    protected $validate_filter = null;
+
+    /**
+     * Sanitize Filter
+     *
+     * @api
+     * @var    int
+     * @since  1.0.0
+     */
+    protected $sanitize_filter = FILTER_SANITIZE_ENCODED;
 
     /**
      * Constraint Flags
      *
-     * To enable flags for use with the request, add the flags to the options array"
-     *
-     *  ```php
-     *
-     *  $options = array();
-     *  $options['FILTER_FLAG_STRIP_HIGH'] = true;
-     *  $options['FILTER_FLAG_STRIP_LOW'] = true;
-     *  $options['FILTER_FLAG_ENCODE_HIGH'] = true;
-     *  $options['FILTER_FLAG_ENCODE_LOW'] = true;
-     *
-     *  $request = new Molajo\Fieldhandler\Request();
-     *  $results = $request->validate('URL Encoded', $url_string, 'Encoded', $options);
-     *
-     *  ```
+     * To enable flags for use with the request, add the flags to the options array
      *
      * @api
      * @var    array
      * @since  1.0.0
      */
     protected $constraint_allowable_options = array(
-        'FILTER_FLAG_STRIP_HIGH',
-        'FILTER_FLAG_STRIP_LOW',
-        'FILTER_FLAG_ENCODE_HIGH',
-        'FILTER_FLAG_ENCODE_LOW'
+        FILTER_FLAG_STRIP_HIGH,
+        FILTER_FLAG_STRIP_LOW,
+        FILTER_FLAG_ENCODE_HIGH,
+        FILTER_FLAG_ENCODE_LOW
     );
+
+    /**
+     * Validate
+     *
+     * @return  boolean
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    public function validate()
+    {
+        return $this->validateCompare();
+    }
 }

@@ -43,6 +43,11 @@ class CallbackTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Callback::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Callback::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Callback::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -52,7 +57,7 @@ class CallbackTest extends PHPUnit_Framework_TestCase
         $field_value         = 'DOG';
         $constraint          = 'Callback';
         $options             = array();
-        $options['callback'] = 'strtolower';
+        $options['callback'] = 'strtoupper';
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
@@ -66,10 +71,66 @@ class CallbackTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Callback::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Callback::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Callback::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testSanitize1()
+    public function testValidateFail()
+    {
+        $field_name          = 'attention';
+        $field_value         = 'DOG';
+        $constraint          = 'Callback';
+        $options             = array();
+        $options['callback'] = 'strtolower';
+
+        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
+
+        $expected_code    = 1000;
+        $expected_message = 'Field: attention does not have a valid value for Callback data type.';
+        $messages         = $results->getValidateMessages();
+        $this->assertEquals($expected_code, $messages[0]->code);
+        $this->assertEquals($expected_message, $messages[0]->message);
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Callback::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testSanitizeNoChange()
+    {
+        $field_name          = 'attention';
+        $field_value         = 'DOG';
+        $constraint          = 'Callback';
+        $options             = array();
+        $options['callback'] = 'strtoupper';
+
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Callback::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testSanitizeChange()
     {
         $field_name          = 'attention';
         $field_value         = 'DOG';
@@ -79,8 +140,56 @@ class CallbackTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals('DOG', $results->getFieldValue());
+        $this->assertEquals('dog', $results->getFieldValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Callback::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testFormatNoChange()
+    {
+        $field_name          = 'attention';
+        $field_value         = 'DOG';
+        $constraint          = 'Callback';
+        $options             = array();
+        $options['callback'] = 'strtoupper';
+
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals($field_value, $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Callback::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testFormatChange()
+    {
+        $field_name          = 'attention';
+        $field_value         = 'DOG';
+        $constraint          = 'Callback';
+        $options             = array();
+        $options['callback'] = 'strtolower';
+
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals('dog', $results->getFieldValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }

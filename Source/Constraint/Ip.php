@@ -21,23 +21,49 @@ use CommonApi\Model\ConstraintInterface;
 class Ip extends AbstractFiltervar implements ConstraintInterface
 {
     /**
+     * Validate Filter
+     *
+     * @api
+     * @var    int
+     * @since  1.0.0
+     */
+    protected $validate_filter = FILTER_VALIDATE_IP;
+
+    /**
+     * Sanitize Filter
+     *
+     * @api
+     * @var    int
+     * @since  1.0.0
+     */
+    protected $sanitize_filter = null;
+
+    /**
      * Constraint Flags
      *
      * @var    array
      * @since  1.0.0
      */
     protected $constraint_allowable_options = array(
-        'FILTER_FLAG_IPV4',
-        'FILTER_FLAG_IPV6',
-        'FILTER_FLAG_NO_PRIV_RANGE',
-        'FILTER_FLAG_NO_RES_RANGE'
+        FILTER_FLAG_IPV4,
+        FILTER_FLAG_IPV6,
+        FILTER_FLAG_NO_PRIV_RANGE,
+        FILTER_FLAG_NO_RES_RANGE
     );
 
     /**
-     * Filter Type
+     * Sanitize
      *
-     * @var    string
-     * @since  1.0.0
+     * @return  null|mixed
+     * @since   1.0.0
      */
-    protected $filter_type = FILTER_VALIDATE_IP;
+    public function sanitize()
+    {
+        if (filter_var($this->field_value, $this->validate_filter, $this->setFlags())) {
+        } else {
+            $this->field_value = null;
+        }
+
+        return $this->field_value;
+    }
 }

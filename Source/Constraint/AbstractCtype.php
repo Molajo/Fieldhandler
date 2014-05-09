@@ -13,7 +13,7 @@ use CommonApi\Model\ConstraintInterface;
 /**
  * Abstract Ctype Constraint
  *
- * @link       http://us1.php.net/manual/en/function.ctype-alpha.php
+ * @link       http://us1.php.net/manual/en/ref.ctype.php
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
