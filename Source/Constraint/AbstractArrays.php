@@ -14,6 +14,54 @@ use CommonApi\Model\ConstraintInterface;
 /**
  * Arrays Constraint
  *
+ * Must be an array.
+ * Optionally, must have keys which match array keys defined in $options['valid_array'];
+ * Optionally, must have values which match array values defined in $options['valid_array'];
+ * Optionally, must not have fewer entries than are defined in $options['array_minimum'];
+ * Optionally, must not have more entries than are defined in $options['array_maximum'];
+ *
+ * #### Validate
+ *
+ * Verifies value (or array of values) against constraint, returning a TRUE or FALSE result and error messages
+ *
+ * In this example, $response->getValidateResponse() is TRUE since `a` is in the array `a`, `b`, `c`.
+ *
+ * ```php
+ * $options = array();
+ * $options{'array_valid_values'] = array('a', 'b', 'c');
+ * $response = $request->validate('random_field', 'a', 'Values', $options);
+ *
+ * if ($response->getValidateResponse() === true) {
+ *     // all is well
+ * } else {
+ *     foreach ($response->getValidateMessages as $code => $message) {
+ *         echo $code . ': ' . $message . '/n';
+ *     }
+ * }
+ *
+ * ```
+ *
+ * #### Sanitize
+ *
+ * Returns null if value (or array of values) is not defined within the $options['array_valid_values'].
+ *
+ * In this example, $field_value is NULL since `z` is not `a`, `b` or `c`.
+ *
+ * ```php
+ * $options = array();
+ * $options{'array_valid_values'] = array('a', 'b', 'c');
+ * $response = $request->validate('random_field', 'z', 'Values', $options);
+ *
+ * if ($response->getChangeIndicator() === true) {
+ *     $field_value = $response->getFieldValue();
+ * }
+ *
+ * ```
+ *
+ * #### Format
+ *
+ * Not implemented. Value sent in is returned unchanged.
+ *
  * @link       http://php.net/manual/en/function.is-array.php
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -73,11 +121,6 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
         $field_value,
         array $options = array()
     ) {
-        if ($this->compare_to_array_option_name === null) {
-        } else {
-            $this->getCompareToArrayFromOptions($this->compare_to_array_option_name);
-        }
-
         parent::__construct(
             $constraint,
             $method,
@@ -85,6 +128,11 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
             $field_value,
             $options
         );
+
+        if ($this->compare_to_array_option_name === null) {
+        } else {
+            $this->getCompareToArrayFromOptions($this->compare_to_array_option_name);
+        }
     }
 
     /**
@@ -98,7 +146,14 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
      */
     protected function getCompareToArrayFromOptions($type)
     {
-        return $this->getCompareToArrayFromInput($type, $this->getOption($type));
+        $array = $this->getOption($type);
+        if (count($array) > 0) {
+            return $this->getCompareToArrayFromInput($type, $array);
+        }
+
+        $this->compare_to_array_option_values = array();
+
+        return $this;
     }
 
     /**
@@ -114,7 +169,6 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
     {
         if (is_array($compare_to_array) && count($compare_to_array) > 0) {
             $this->compare_to_array_option_values = $compare_to_array;
-
             return $this;
         }
 

@@ -10,7 +10,6 @@ namespace Molajo\Fieldhandler\Tests;
 
 use Molajo\Fieldhandler\Request;
 use PHPUnit_Framework_TestCase;
-use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Contains Constraint
@@ -43,10 +42,18 @@ class ContainsTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Contains::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Contains::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Contains::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Contains::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\Contains::testContains
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testValidateSuccess()
+    public function testValidateTrue()
     {
         $field_name          = 'fieldname';
         $field_value         = 'first dog last';
@@ -66,10 +73,18 @@ class ContainsTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Contains::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Contains::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Contains::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Contains::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\Contains::testContains
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testValidateFail()
+    public function testValidateFalse()
     {
         $field_name          = 'fieldname';
         $field_value         = 'first cat last';
@@ -91,12 +106,79 @@ class ContainsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tear down
+     * @covers  Molajo\Fieldhandler\Constraint\Contains::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Contains::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Contains::testContains
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
-     * @return void
+     * @return  void
      * @since   1.0.0
      */
-    protected function tearDown()
+    public function testSanitizeNoChange()
     {
+        $field_name          = 'fieldname';
+        $field_value         = 'first dog last';
+        $constraint          = 'Contains';
+        $options             = array();
+        $options['contains'] = 'dog';
+
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Contains::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Contains::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Contains::testContains
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testSanitizeChange()
+    {
+        $field_name          = 'fieldname';
+        $field_value         = 'first cat last';
+        $constraint          = 'Contains';
+        $options             = array();
+        $options['contains'] = 'dog';
+
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals(null, $results->getFieldValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Contains::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
+     *
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testFormat()
+    {
+        $field_name          = 'fieldname';
+        $field_value         = 'first cat last';
+        $constraint          = 'Contains';
+        $options             = array();
+        $options['contains'] = 'dog';
+
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
+
+        return;
     }
 }

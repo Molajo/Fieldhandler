@@ -22,39 +22,20 @@ use CommonApi\Model\ConstraintInterface;
 class Arrays extends AbstractArrays implements ConstraintInterface
 {
     /**
+     * Array Options Entry Type
+     *
+     * @var    string
+     * @since  1.0.0
+     */
+    protected $compare_to_array_option_name = 'valid_array';
+
+    /**
      * Message Code
      *
      * @var    integer
      * @since  1.0.0
      */
     protected $message_code = 3000;
-
-    /**
-     * Sanitize
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function sanitize()
-    {
-        if ($this->field_value === null) {
-            return $this->field_value;
-        }
-
-        if (is_array($this->field_value)) {
-
-        } else {
-            $this->field_value = null;
-
-            return $this->field_value;
-        }
-
-        $this->testValues(true);
-        $this->testKeys(true);
-        $this->testCount(true);
-
-        return $this->field_value;
-    }
 
     /**
      * Validation Testing
@@ -65,10 +46,9 @@ class Arrays extends AbstractArrays implements ConstraintInterface
     protected function validation()
     {
         $validation_array = array(
-            'isArray'    => 3000,
-            'testValues' => 4000,
-            'testKeys'   => 5000,
-            'testCount'  => 6000,
+            'testIsArray'    => 3000,
+            'testValues'     => 4000,
+            'testCount'      => 6000,
         );
 
         $test = true;
@@ -122,28 +102,17 @@ class Arrays extends AbstractArrays implements ConstraintInterface
     }
 
     /**
-     * Test Array Entry Keys
-     *
-     * @param   boolean $filter
+     * Test Array Values to Valid Values
      *
      * @return  boolean
      * @since   1.0.0
      */
-    protected function testKeys($filter = false)
+    protected function testValues()
     {
-        return $this->testArrayValues($this->getCompareToArrayFromOptions('array_valid_keys'), $filter);
-    }
+        if (count($this->compare_to_array_option_values) > 0) {
+            return $this->testInputAgainstValidArray(false);
+        }
 
-    /**
-     * Test Array Entry Values
-     *
-     * @param   boolean $filter
-     *
-     * @return  boolean
-     * @since   1.0.0
-     */
-    protected function testValues($filter = false)
-    {
-        return $this->testArrayValues($this->getCompareToArrayFromOptions('array_valid_values'), $filter);
+        return true;
     }
 }

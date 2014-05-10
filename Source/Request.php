@@ -552,10 +552,8 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
             return new $class($parameter1, $parameter2, $parameter3, $parameter4, $parameter5);
 
         } catch (Exception $e) {
-
             $message = 'Fieldhandler Request createClass Method: Error constructing class: ' . $class;
             throw new UnexpectedValueException($message);
-
         }
     }
 }

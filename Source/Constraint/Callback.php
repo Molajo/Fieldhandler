@@ -11,7 +11,7 @@ namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Callable Constraint
+ * Callback Constraint
  *
  * Enables use of a callable function or method to sanitize, filter or format data
  *

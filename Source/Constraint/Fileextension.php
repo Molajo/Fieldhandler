@@ -1,6 +1,6 @@
 <?php
 /**
- * Fileextension Constraint
+ * File Extension Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -11,7 +11,53 @@ namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Fileextension Constraint
+ * File Extension
+ *
+ * Value must conform to one of the values defined within the $file_extension_array.
+ *
+ * To override, send in an options entry of the values desired:
+ *
+ * ```php
+ *
+ * $file_extension_array = array('gif', 'jpeg', 'jpg', 'png', 'pdf', 'odt', 'txt', 'rtf', 'mp3');
+ * $options = array();
+ * $options{'file_extension_array'] = $file_extension_array;
+ *
+ * ```
+ *
+ * #### Validate
+ *
+ * Verifies value against constraint, returning a TRUE or FALSE result and error messages
+ *
+ * ```php
+ * $response = $request->validate('file_extension_field', '.pdf', 'Fileextension');
+ *
+ * if ($response->getValidateResponse() === true) {
+ *     // all is well
+ * } else {
+ *     foreach ($response->getValidateMessages as $code => $message) {
+ *         echo $code . ': ' . $message . '/n';
+ *     }
+ * }
+ *
+ * ```
+ *
+ * #### Sanitize
+ *
+ * Returns null if value is not defined within the $file_extension_array.
+ *
+ * ```php
+ * $response = $request->validate('file_extension_field', '.pdf', 'Fileextension');
+ *
+ * if ($response->getChangeIndicator() === true) {
+ *     $field_value = $response->getFieldValue();
+ * }
+ *
+ * ```
+ *
+ * #### Format
+ *
+ * Not implemented. Value sent in is returned unchanged.
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -21,30 +67,53 @@ use CommonApi\Model\ConstraintInterface;
 class Fileextension extends AbstractArrays implements ConstraintInterface
 {
     /**
-     * Array Options Entry Type
+     * Valid File Extensions array
      *
-     * @var    string
+     * Override in the Request using $options['file_extension_array'] entry.
+     *
+     * @api
+     * @var    array
      * @since  1.0.0
      */
-    protected $compare_to_array_option_name = 'array_valid_extensions';
+    protected $file_extension_array = array('gif', 'jpeg', 'jpg', 'png', 'pdf', 'odt', 'txt', 'rtf', 'mp3');
 
     /**
-     * Validation Test
+     * Message Code
      *
-     * @return  boolean
+     * @var    integer
+     * @since  1.0.0
+     */
+    protected $message_code = 1000;
+
+    /**
+     * Constructor
+     *
+     * @param   string $constraint
+     * @param   string $method
+     * @param   string $field_name
+     * @param   mixed  $field_value
+     * @param   array  $options
+     *
+     * @api
      * @since   1.0.0
      */
-    protected function validation()
-    {
-        if (is_file($this->field_value)) {
-        } else {
-            return false;
-        }
+    public function __construct(
+        $constraint,
+        $method,
+        $field_name,
+        $field_value,
+        array $options = array()
+    ) {
+        $options = $this->setPropertyKeyWithOptionKey('file_extension_array', $options);
 
-        $path_info = pathinfo($this->field_value);
+        $this->getCompareToArrayFromInput('file_extension_array', $this->file_extension_array);
 
-        $this->field_value = $path_info['extension'];
-
-        return parent::validation();
+        parent::__construct(
+            $constraint,
+            $method,
+            $field_name,
+            $field_value,
+            $options
+        );
     }
 }

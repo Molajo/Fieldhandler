@@ -390,16 +390,51 @@ used to format data, as needed.
 
 
 ### Contains
-Tests if a value is contained within the input field. If it is not, validate fails and filter and escape
-change the input to null.
+
+Within the string, a specified value exists.
+
+#### Validate
+
+Verifies value against constraint, returning a TRUE or FALSE result and error messages
+
+In this example, the response is `false` since the string does not contain the value specified.
 
 ```php
-    // Is the value `bark` contained within the dog_field?
-    $options = array();
-    $options['contains'] = 'bark';
-    $results = $request->sanitize('dog_field', $dog_field, 'Contains');
+$options = array();
+$options['contains'] = 'dog';
+$response = $request->validate('field_name', 'The cat meows.', 'Contains', $options);
+
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
 
 ```
+
+#### Sanitize
+
+Sets field to null if the value specified does not exist in the string.
+
+In this example, the $field_value is NULL.
+
+```php
+$options = array();
+$options['contains'] = 'dog';
+$response = $request->validate('field_name', 'The cat meows.', 'Contains', $options);
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
+
+```
+
+#### Format
+
+For this constraint, the `format` method is not implemented. The value sent in is not evaluated or changed.
+
 
 ### Controlcharacters
 Each character must be a control character (ex. line feed, tab, escape).
@@ -705,31 +740,52 @@ if ($response->getChangeIndicator() === true) {
 Not implemented. Value sent in is returned unchanged.
 
 ### Fileextension
-Tests that a value is equal to the specified value. If the value does not match for validate, an
-Exception is thrown. If the value does not match for filter or escape, null is returned.
+
+Value must conform to one of the values defined within the $file_extension_array.
+
+To override, send in an options entry of the values desired:
 
 ```php
-    // A set of values can be sent in for testing
-    $input = array();
-    $input[] = '.jpg';
-    $input[] = '.gif';
-    $input[] = '.png';
 
-    $field_name              = 'extensions_field';
-    $field_value             = $input;
-    $constraint = 'Extensions';
-
-    $options                 = array();
-    $array_valid_values = array();
-    $array_valid_values[] = '.jpg';
-    $array_valid_values[] = '.gif';
-    $array_valid_values[] = '.png';
-
-    $options = array('array_valid_extensions' => $array_valid_values);
-
-    $results = $request->sanitize('extensions_field', $input, 'Extensions');
+$file_extension_array = array('gif', 'jpeg', 'jpg', 'png', 'pdf', 'odt', 'txt', 'rtf', 'mp3');
+$options = array();
+$options{'file_extension_array'] = $file_extension_array;
 
 ```
+
+#### Validate
+
+Verifies value against constraint, returning a TRUE or FALSE result and error messages
+
+```php
+$response = $request->validate('file_extension_field', '.pdf', 'Fileextension');
+
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
+
+```
+
+#### Sanitize
+
+Returns null if value is not defined within the $file_extension_array.
+
+```php
+$response = $request->validate('file_extension_field', '.pdf', 'Fileextension');
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
+
+```
+
+#### Format
+
+Not implemented. Value sent in is returned unchanged.
 
 ### Float
 
@@ -1089,20 +1145,60 @@ Validates or filters/escapes numeric value to not exceed the maximum.
 ```
 
 ### Mimetypes
-Validates or filters/escapes xxxx
+
+Value must conform to one of the values defined within the $mimetype_array.
+
+To override, send in an options entry of the values desired:
 
 ```php
-    // The value of field `input_field` is 10. Maximum is 3. Validate will fail.
-    // Filtered and escaped values will return 3.
-    $field_name              = 'my_field';
-    $field_value             = 10;
-    $constraint = 'Maximum';
-    $options                 = array();
-    $options['maximum']      = 3;
 
-    $results = $request->validate($field_name, $field_value, $constraint, $options);
+$mimetype_array = array(
+        'image/gif',
+        'image/jpeg',
+        'image/png',
+        'application/pdf',
+        'application/odt',
+        'text/plain',
+        'text/rtf'
+);
+$options = array();
+$options{'mimetype_array'] = $mimetype_array;
 
 ```
+
+#### Validate
+
+Verifies value against constraint, returning a TRUE or FALSE result and error messages
+
+```php
+$response = $request->validate('Mimetype', 'application/pdf', 'Mimetypes');
+
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
+
+```
+
+#### Sanitize
+
+Returns null if value is not defined within the $mimetype_array.
+
+```php
+$response = $request->validate('mimetype_field', 'application/pdf', 'Mimetypes');
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
+
+```
+
+#### Format
+
+Not implemented. Value sent in is returned unchanged.
 
 ### Minimum
 Validates or filters/escapes numeric value to not exceed the maximum.
@@ -1561,20 +1657,50 @@ Filter and Escape return null.
 ```
 
 ### Values
-Compares a field_value against a set of values;
+
+Value (or array of values) must be defined within the $options['array_valid_values'] array.
+
+#### Validate
+
+Verifies value (or array of values) against constraint, returning a TRUE or FALSE result and error messages
+
+In this example, $response->getValidateResponse() is TRUE since `a` is in the array `a`, `b`, `c`.
 
 ```php
-    // The value of field `input_field` must be in the array_valid_values
-    $field_name              = 'my_field';
-    $field_value             = 'a';
-    $constraint = 'Values';
-    $options                 = array();
-    $options['array_valid_values']      = array('a', 'b', 'c');
+$options = array();
+$options{'array_valid_values'] = array('a', 'b', 'c');
+$response = $request->validate('random_field', 'a', 'Values', $options);
 
-    $results = $request->validate($field_name, $field_value, $constraint);
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
 
 ```
 
+#### Sanitize
+
+Returns null if value (or array of values) is not defined within the $options['array_valid_values'].
+
+In this example, $field_value is NULL since `z` is not `a`, `b` or `c`.
+
+```php
+$options = array();
+$options{'array_valid_values'] = array('a', 'b', 'c');
+$response = $request->validate('random_field', 'z', 'Values', $options);
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
+
+```
+
+#### Format
+
+Not implemented. Value sent in is returned unchanged.
 ## Requirements and Compliance
  * PHP framework independent, no dependencies
  * Requires PHP 5.4, or above
