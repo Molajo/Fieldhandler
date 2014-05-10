@@ -83,14 +83,16 @@ class Mimetypes extends AbstractArrays implements ConstraintInterface
      * @var    array
      * @since  1.0.0
      */
-    protected $valid_values_array = array(
-        'image/gif',
-        'image/jpeg',
-        'image/png',
-        'application/pdf',
-        'application/odt',
-        'text/plain',
-        'text/rtf');
+    protected $valid_values_array
+        = array(
+            'image/gif',
+            'image/jpeg',
+            'image/png',
+            'application/pdf',
+            'application/odt',
+            'text/plain',
+            'text/rtf'
+        );
 
     /**
      * Message Code

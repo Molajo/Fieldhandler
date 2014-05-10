@@ -141,6 +141,8 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
             return $this->getCompareToArrayFromInput($array);
         }
 
+        // $this->valid_values_array property can be defined in sub class
+
         return $this;
     }
 
@@ -196,20 +198,7 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
             return $this->testStringInputAgainstValidArray();
         }
 
-        $validated_input_array = $this->testArrayInputAgainstValidArray();
-
-        if (count($validated_input_array) === count($this->field_value)) {
-            $valid = true;
-
-        } else {
-            $valid = false;
-            if ($filter === true) {
-                $this->field_value = $validated_input_array;
-                $valid             = true;
-            }
-        }
-
-        return $valid;
+        return $this->testArrayInputAgainstValidArray($filter);
     }
 
     /**
@@ -236,22 +225,35 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
     /**
      * Verify input array only has entries that are defined by the valid array
      *
+     * @param   boolean $filter
+     *
      * @return  array
      * @since   1.0.0
      */
-    protected function testArrayInputAgainstValidArray()
+    protected function testArrayInputAgainstValidArray($filter)
     {
-        $new = array();
+        $validated_input_array = array();
 
         foreach ($this->field_value as $entry) {
 
             if (in_array($entry, $this->valid_values_array) === false) {
             } else {
-                $new[] = $entry;
+                $validated_input_array[] = $entry;
             }
         }
 
-        return $new;
+        if (count($validated_input_array) === count($this->field_value)) {
+            $valid = true;
+
+        } else {
+            $valid = false;
+            if ($filter === true) {
+                $this->field_value = $validated_input_array;
+                $valid             = true;
+            }
+        }
+
+        return $valid;
     }
 
     /**

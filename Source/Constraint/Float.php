@@ -102,11 +102,12 @@ class Float extends AbstractFiltervar implements ConstraintInterface
      * @var    array
      * @since  1.0.0
      */
-    protected $constraint_allowable_options = array(
-        FILTER_FLAG_ALLOW_FRACTION,
-        FILTER_FLAG_ALLOW_THOUSAND,
-        FILTER_FLAG_ALLOW_SCIENTIFIC
-    );
+    protected $constraint_allowable_options
+        = array(
+            FILTER_FLAG_ALLOW_FRACTION,
+            FILTER_FLAG_ALLOW_THOUSAND,
+            FILTER_FLAG_ALLOW_SCIENTIFIC
+        );
 
     /**
      * Sanitize
@@ -119,7 +120,7 @@ class Float extends AbstractFiltervar implements ConstraintInterface
         parent::sanitize();
 
         if (is_numeric($this->field_value)) {
-            return (float) $this->field_value;
+            return (float)$this->field_value;
         }
 
         return $this->field_value;

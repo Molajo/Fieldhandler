@@ -95,7 +95,8 @@ class EscapeProxyTest extends PHPUnit_Framework_TestCase
      */
     public function testFormatCss()
     {
-        $string  = "body {
+        $string
+                 = "body {
             background-image: url('http://example.com/foo.jpg?</style><script>alert(1)</script>');
             }";
         $results = $this->escape->escapeCss($string);

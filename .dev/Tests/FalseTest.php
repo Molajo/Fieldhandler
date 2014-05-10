@@ -121,7 +121,7 @@ class FalseTest extends PHPUnit_Framework_TestCase
     public function testValidateTrueFalse()
     {
         $field_name  = 'agreement';
-        $field_value = False;
+        $field_value = false;
         $constraint  = 'False';
         $options     = array();
 

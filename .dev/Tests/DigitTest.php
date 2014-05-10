@@ -61,10 +61,10 @@ class DigitTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateTrue()
     {
-        $field_name                  = 'digit_fieldname';
-        $field_value                 = '1 2 3 4';
-        $constraint                  = 'Digit';
-        $options                     = array();
+        $field_name                       = 'digit_fieldname';
+        $field_value                      = '1 2 3 4';
+        $constraint                       = 'Digit';
+        $options                          = array();
         $options['allow_space_character'] = true;
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);

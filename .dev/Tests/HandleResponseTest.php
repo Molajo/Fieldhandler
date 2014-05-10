@@ -49,10 +49,12 @@ class HandleResponseTest extends PHPUnit_Framework_TestCase
     public function testGetFieldValue()
     {
         $original_data_value = 1;
-        $response_value = 2;
+        $response_value      = 2;
 
-        $this->handle_response = new HandleResponse($original_data_value,
-            $response_value);
+        $this->handle_response = new HandleResponse(
+            $original_data_value,
+            $response_value
+        );
 
         $results = $this->handle_response->getFieldValue();
 
@@ -70,10 +72,12 @@ class HandleResponseTest extends PHPUnit_Framework_TestCase
     public function testGetChangeIndicator()
     {
         $original_data_value = 1;
-        $response_value = 2;
+        $response_value      = 2;
 
-        $this->handle_response = new HandleResponse($original_data_value,
-            $response_value);
+        $this->handle_response = new HandleResponse(
+            $original_data_value,
+            $response_value
+        );
 
         $results = $this->handle_response->getChangeIndicator();
 
@@ -92,10 +96,12 @@ class HandleResponseTest extends PHPUnit_Framework_TestCase
     public function testGetChangeIndicatortestNoValueChange()
     {
         $original_data_value = null;
-        $response_value = false;
+        $response_value      = false;
 
-        $this->handle_response = new HandleResponse($original_data_value,
-            $response_value);
+        $this->handle_response = new HandleResponse(
+            $original_data_value,
+            $response_value
+        );
 
         $results = $this->handle_response->getChangeIndicator();
 
@@ -112,10 +118,12 @@ class HandleResponseTest extends PHPUnit_Framework_TestCase
     public function testTestNoValueChange()
     {
         $original_data_value = null;
-        $response_value = false;
+        $response_value      = false;
 
-        $this->handle_response = new HandleResponse($original_data_value,
-            $response_value);
+        $this->handle_response = new HandleResponse(
+            $original_data_value,
+            $response_value
+        );
 
         $results = $this->handle_response->getChangeIndicator();
 
@@ -132,10 +140,12 @@ class HandleResponseTest extends PHPUnit_Framework_TestCase
     public function testTestNoValueChange2()
     {
         $original_data_value = false;
-        $response_value = null;
+        $response_value      = null;
 
-        $this->handle_response = new HandleResponse($original_data_value,
-            $response_value);
+        $this->handle_response = new HandleResponse(
+            $original_data_value,
+            $response_value
+        );
 
         $results = $this->handle_response->getChangeIndicator();
 
@@ -152,10 +162,12 @@ class HandleResponseTest extends PHPUnit_Framework_TestCase
     public function testTestNoValueChange3()
     {
         $original_data_value = 0;
-        $response_value = null;
+        $response_value      = null;
 
-        $this->handle_response = new HandleResponse($original_data_value,
-            $response_value);
+        $this->handle_response = new HandleResponse(
+            $original_data_value,
+            $response_value
+        );
 
         $results = $this->handle_response->getChangeIndicator();
 
@@ -172,10 +184,12 @@ class HandleResponseTest extends PHPUnit_Framework_TestCase
     public function testTestNoValueChange4()
     {
         $original_data_value = null;
-        $response_value = null;
+        $response_value      = null;
 
-        $this->handle_response = new HandleResponse($original_data_value,
-            $response_value);
+        $this->handle_response = new HandleResponse(
+            $original_data_value,
+            $response_value
+        );
 
         $results = $this->handle_response->getChangeIndicator();
 
@@ -192,10 +206,12 @@ class HandleResponseTest extends PHPUnit_Framework_TestCase
     public function testTestNoValueChangeCompare()
     {
         $original_data_value = 1;
-        $response_value = 1;
+        $response_value      = 1;
 
-        $this->handle_response = new HandleResponse($original_data_value,
-            $response_value);
+        $this->handle_response = new HandleResponse(
+            $original_data_value,
+            $response_value
+        );
 
         $results = $this->handle_response->getChangeIndicator();
 
@@ -212,10 +228,12 @@ class HandleResponseTest extends PHPUnit_Framework_TestCase
     public function testTestNoValueChangeCompare2()
     {
         $original_data_value = null;
-        $response_value = null;
+        $response_value      = null;
 
-        $this->handle_response = new HandleResponse($original_data_value,
-            $response_value);
+        $this->handle_response = new HandleResponse(
+            $original_data_value,
+            $response_value
+        );
 
         $results = $this->handle_response->getChangeIndicator();
 
@@ -232,10 +250,12 @@ class HandleResponseTest extends PHPUnit_Framework_TestCase
     public function testTestFloat()
     {
         $original_data_value = 3.23345;
-        $response_value = 3.21111111111113345;
+        $response_value      = 3.21111111111113345;
 
-        $this->handle_response = new HandleResponse($original_data_value,
-            $response_value);
+        $this->handle_response = new HandleResponse(
+            $original_data_value,
+            $response_value
+        );
 
         $results = $this->handle_response->getChangeIndicator();
 
@@ -252,10 +272,12 @@ class HandleResponseTest extends PHPUnit_Framework_TestCase
     public function testTestFloat2()
     {
         $original_data_value = 3.000005;
-        $response_value = 3.000005;
+        $response_value      = 3.000005;
 
-        $this->handle_response = new HandleResponse($original_data_value,
-            $response_value);
+        $this->handle_response = new HandleResponse(
+            $original_data_value,
+            $response_value
+        );
 
         $results = $this->handle_response->getChangeIndicator();
 

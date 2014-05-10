@@ -1261,6 +1261,43 @@ Tests that a value is not equal to a specified value.
     $results = $request->sanitize('field1', 'dog', 'Notequal');
 
 ```
+### Null
+
+Value must be null.
+
+#### Validate
+
+Verifies that value is NULL.
+
+```php
+$response = $request->validate('Null_only_field', $value, 'Null');
+
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
+
+```
+
+#### Sanitize
+
+Returns null if value is not not null. =)
+
+```php
+$response = $request->validate('Null_only_field', $value, 'Null');
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
+
+```
+
+#### Format
+
+Not implemented. Value sent in is returned unchanged.
 
 ### Numeric
 Characters must be numeric.

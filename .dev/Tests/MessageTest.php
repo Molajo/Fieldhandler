@@ -141,11 +141,11 @@ class MessageTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Message::getMessageTemplate
+     * @covers                   Molajo\Fieldhandler\Message::getMessageTemplate
      * @expectedException        \CommonApi\Exception\UnexpectedValueException
      * @expectedExceptionMessage Fieldhandler Message getMessageTemplate Method: Do not have template: 4444
      *
-     * @since   1.0.0
+     * @since                    1.0.0
      */
     public function testGetMessageTemplateException()
     {
@@ -201,9 +201,9 @@ class MessageTest extends PHPUnit_Framework_TestCase
      */
     public function testSetMessageTokens2()
     {
-        $array       = array();
-        $array[]     = 'entry1';
-        $array[]     = 'entry2';
+        $array   = array();
+        $array[] = 'entry1';
+        $array[] = 'entry2';
 
         $message_codes = array(14000);
 

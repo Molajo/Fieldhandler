@@ -60,10 +60,10 @@ class AlphaTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateTrue()
     {
-        $field_name                  = 'test';
-        $field_value                 = 'AbC dEfG';
-        $constraint                  = 'Alpha';
-        $options                     = array();
+        $field_name                       = 'test';
+        $field_value                      = 'AbC dEfG';
+        $constraint                       = 'Alpha';
+        $options                          = array();
         $options['allow_space_character'] = true;
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);

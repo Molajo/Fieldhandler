@@ -29,64 +29,65 @@ abstract class AbstractHtml extends AbstractConstraintTests implements Constrain
      * @var    array
      * @since  1.0.0
      */
-    protected $white_list = array(
-        'a'          => array(
-            'href'  => array('minlen' => 3, 'maxlen' => 50),
-            'title' => array('valueless' => 'n')
-        ),
-        'address'    => array(),
-        'article'    => array(),
-        'aside'      => array(),
-        'b'          => array(),
-        'blockquote' => array(),
-        'body'       => array(),
-        'br'         => array(),
-        'colgroup'   => array(),
-        'dd'         => array(),
-        'datagrid'   => array(),
-        'dialog'     => array(),
-        'dir'        => array(),
-        'div'        => array(),
-        'd1'         => array(),
-        'fieldset'   => array(),
-        'footer'     => array(),
-        'font'       => array(
-            'size' =>
-                array('minval' => 4, 'maxval' => 20)
-        ),
-        'form'       => array(),
-        'h1'         => array(),
-        'h2'         => array(),
-        'h3'         => array(),
-        'h4'         => array(),
-        'h5'         => array(),
-        'h6'         => array(),
-        'head'       => array(),
-        'header'     => array(),
-        'hr'         => array(),
-        'html'       => array(),
-        'i'          => array(),
-        'img'        => array('src' => 1),
-        'menu'       => array(),
-        'nav'        => array(),
-        'option'     => array(),
-        'optgroup'   => array(),
-        'ol'         => array(),
-        'p'          => array(
-            'align' => 1,
-            'dummy' => array('valueless' => 'y')
-        ),
-        'pre'        => array(),
-        'section'    => array(),
-        'table'      => array(),
-        'td'         => array(),
-        'th'         => array(),
-        'thead'      => array(),
-        'tbody'      => array(),
-        'tfoot'      => array(),
-        'tr'         => array(),
-        'ul'         => array()
-    );
+    protected $white_list
+        = array(
+            'a'          => array(
+                'href'  => array('minlen' => 3, 'maxlen' => 50),
+                'title' => array('valueless' => 'n')
+            ),
+            'address'    => array(),
+            'article'    => array(),
+            'aside'      => array(),
+            'b'          => array(),
+            'blockquote' => array(),
+            'body'       => array(),
+            'br'         => array(),
+            'colgroup'   => array(),
+            'dd'         => array(),
+            'datagrid'   => array(),
+            'dialog'     => array(),
+            'dir'        => array(),
+            'div'        => array(),
+            'd1'         => array(),
+            'fieldset'   => array(),
+            'footer'     => array(),
+            'font'       => array(
+                'size' =>
+                    array('minval' => 4, 'maxval' => 20)
+            ),
+            'form'       => array(),
+            'h1'         => array(),
+            'h2'         => array(),
+            'h3'         => array(),
+            'h4'         => array(),
+            'h5'         => array(),
+            'h6'         => array(),
+            'head'       => array(),
+            'header'     => array(),
+            'hr'         => array(),
+            'html'       => array(),
+            'i'          => array(),
+            'img'        => array('src' => 1),
+            'menu'       => array(),
+            'nav'        => array(),
+            'option'     => array(),
+            'optgroup'   => array(),
+            'ol'         => array(),
+            'p'          => array(
+                'align' => 1,
+                'dummy' => array('valueless' => 'y')
+            ),
+            'pre'        => array(),
+            'section'    => array(),
+            'table'      => array(),
+            'td'         => array(),
+            'th'         => array(),
+            'thead'      => array(),
+            'tbody'      => array(),
+            'tfoot'      => array(),
+            'tr'         => array(),
+            'ul'         => array()
+        );
 
     /**
      * HTML Entities
@@ -97,12 +98,13 @@ abstract class AbstractHtml extends AbstractConstraintTests implements Constrain
      * @var    array
      * @since  1.0.0
      */
-    protected $html_entities = array(
-        34 => 'quot',
-        38 => 'amp',
-        60 => 'lt',
-        62 => 'gt',
-    );
+    protected $html_entities
+        = array(
+            34 => 'quot',
+            38 => 'amp',
+            60 => 'lt',
+            62 => 'gt',
+        );
 
     /**
      * Encoding

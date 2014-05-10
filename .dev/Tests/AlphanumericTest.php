@@ -128,11 +128,11 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
      */
     public function testSanitizeNoChange()
     {
-        $field_name                   = 'test';
-        $field_value                  = 'Aa1 23';
-        $constraint                   = 'Alphanumeric';
-        $options                      = array();
-        $options['allow_space_character']  = true;
+        $field_name                       = 'test';
+        $field_value                      = 'Aa1 23';
+        $constraint                       = 'Alphanumeric';
+        $options                          = array();
+        $options['allow_space_character'] = true;
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 

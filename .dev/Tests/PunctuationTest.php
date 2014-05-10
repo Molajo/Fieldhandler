@@ -61,10 +61,10 @@ class PunctuationTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateTrue()
     {
-        $field_name                  = 'test';
-        $field_value                 = "*&$()";
-        $constraint                  = 'Punctuation';
-        $options                     = array();
+        $field_name  = 'test';
+        $field_value = "*&$()";
+        $constraint  = 'Punctuation';
+        $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 

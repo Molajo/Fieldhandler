@@ -103,7 +103,7 @@ abstract class AbstractConstraintTests extends AbstractConstraint implements Con
         $filtered = '';
 
         if (strlen($test) > 0) {
-            for ($i = 0; $i < strlen($test); $i ++) {
+            for ($i = 0; $i < strlen($test); $i++) {
                 $filtered .= $this->sanitizeCharacter($filter, substr($test, $i, 1), $allow_space_character);
             }
         }

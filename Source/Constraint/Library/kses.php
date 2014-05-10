@@ -39,8 +39,8 @@
 function kses(
     $string,
     $allowed_html,
-    $allowed_protocols =
-    array(
+    $allowed_protocols
+    = array(
         'http',
         'https',
         'ftp',
@@ -126,7 +126,7 @@ function kses_split2($matches)
         # It matched a ">" character
     }
 
-    if (! preg_match('%^<\s*(/\s*)?([a-zA-Z0-9]+)([^>]*)>$%', $string, $matches)) {
+    if (!preg_match('%^<\s*(/\s*)?([a-zA-Z0-9]+)([^>]*)>$%', $string, $matches)) {
         return $string;
         # It's seriously malformed
     }
@@ -135,7 +135,7 @@ function kses_split2($matches)
     $elem     = $matches[2];
     $attrlist = $matches[3];
 
-    if (! @isset($allowed_html[ strtolower($elem) ])) {
+    if (!@isset($allowed_html[ strtolower($elem) ])) {
         return '';
     }
     # They are using a not allowed HTML element
@@ -191,7 +191,7 @@ function kses_attr($element, $attr, $allowed_html, $allowed_protocols)
     $attr2 = '';
 
     foreach ($attrarr as $arreach) {
-        if (! @isset($allowed_html[ strtolower($element) ]
+        if (!@isset($allowed_html[ strtolower($element) ]
         [ strtolower($arreach['name']) ])
         ) {
             continue;
@@ -200,7 +200,7 @@ function kses_attr($element, $attr, $allowed_html, $allowed_protocols)
         $current = $allowed_html[ strtolower($element) ]
         [ strtolower($arreach['name']) ];
 
-        if (! is_array($current)) {
+        if (!is_array($current)) {
             $attr2 .= ' ' . $arreach['whole'];
         } # there are no checks
 
@@ -208,7 +208,7 @@ function kses_attr($element, $attr, $allowed_html, $allowed_protocols)
             # there are some checks
             $ok = true;
             foreach ($current as $currkey => $currval) {
-                if (! kses_check_attr_val(
+                if (!kses_check_attr_val(
                     $arreach['value'],
                     $arreach['vless'],
                     $currkey,
@@ -409,7 +409,7 @@ function kses_check_attr_val($value, $vless, $checkname, $checkvalue)
             # value is not greater than the given value.
             # This check can be used to avoid Denial of Service attacks.
 
-            if (! preg_match('/^\s{0,6}[0-9]{1,6}\s{0,6}$/', $value)) {
+            if (!preg_match('/^\s{0,6}[0-9]{1,6}\s{0,6}$/', $value)) {
                 $ok = false;
             }
             if ($value > $checkvalue) {
@@ -421,7 +421,7 @@ function kses_check_attr_val($value, $vless, $checkname, $checkvalue)
             # The minval check checks that the attribute value is a positive integer,
             # and that it is not smaller than the given value.
 
-            if (! preg_match('/^\s{0,6}[0-9]{1,6}\s{0,6}$/', $value)) {
+            if (!preg_match('/^\s{0,6}[0-9]{1,6}\s{0,6}$/', $value)) {
                 $ok = false;
             }
             if ($value < $checkvalue) {

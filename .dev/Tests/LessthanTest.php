@@ -50,10 +50,10 @@ class LessthanTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateSuccess()
     {
-        $field_name         = 'fieldname';
-        $field_value        = 8;
-        $constraint         = 'Lessthan';
-        $options            = array();
+        $field_name           = 'fieldname';
+        $field_value          = 8;
+        $constraint           = 'Lessthan';
+        $options              = array();
         $options['less_than'] = 10;
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
@@ -71,14 +71,13 @@ class LessthanTest extends PHPUnit_Framework_TestCase
      *
      * @return  void
      * @since   1.0.0
-
      */
     public function testValidateAlpha()
     {
-        $field_name         = 'fieldname';
-        $field_value        = 'a';
-        $constraint         = 'Lessthan';
-        $options            = array();
+        $field_name           = 'fieldname';
+        $field_value          = 'a';
+        $constraint           = 'Lessthan';
+        $options              = array();
         $options['less_than'] = 'z';
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
@@ -96,14 +95,13 @@ class LessthanTest extends PHPUnit_Framework_TestCase
      *
      * @return  void
      * @since   1.0.0
-
      */
     public function testValidateFail()
     {
-        $field_name         = 'fieldname';
-        $field_value        = 500;
-        $constraint         = 'Lessthan';
-        $options            = array();
+        $field_name           = 'fieldname';
+        $field_value          = 500;
+        $constraint           = 'Lessthan';
+        $options              = array();
         $options['less_than'] = 100;
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
@@ -120,14 +118,13 @@ class LessthanTest extends PHPUnit_Framework_TestCase
      *
      * @return  void
      * @since   1.0.0
-
      */
     public function testValidateFail2()
     {
-        $field_name         = 'fieldname';
-        $field_value        = 10;
-        $constraint         = 'Lessthan';
-        $options            = array();
+        $field_name           = 'fieldname';
+        $field_value          = 10;
+        $constraint           = 'Lessthan';
+        $options              = array();
         $options['less_than'] = 10;
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);

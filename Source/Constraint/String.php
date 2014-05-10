@@ -45,12 +45,13 @@ class String extends AbstractFiltervar implements ConstraintInterface
      * @var    array
      * @since  1.0.0
      */
-    protected $constraint_allowable_options = array(
-        FILTER_FLAG_NO_ENCODE_QUOTES,
-        FILTER_FLAG_STRIP_HIGH,
-        FILTER_FLAG_STRIP_LOW,
-        FILTER_FLAG_ENCODE_HIGH,
-        FILTER_FLAG_ENCODE_LOW,
-        FILTER_FLAG_ENCODE_AMP
-    );
+    protected $constraint_allowable_options
+        = array(
+            FILTER_FLAG_NO_ENCODE_QUOTES,
+            FILTER_FLAG_STRIP_HIGH,
+            FILTER_FLAG_STRIP_LOW,
+            FILTER_FLAG_ENCODE_HIGH,
+            FILTER_FLAG_ENCODE_LOW,
+            FILTER_FLAG_ENCODE_AMP
+        );
 }

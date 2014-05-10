@@ -57,7 +57,7 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
         $field_name  = 'fieldname';
         $field_value = null;
         $constraint  = 'Fullspecialchars';
-        $results = $this->request->validate($field_name, $field_value, $constraint, array());
+        $results     = $this->request->validate($field_name, $field_value, $constraint, array());
         $this->assertEquals(false, $results->getValidateResponse());
 
         return;

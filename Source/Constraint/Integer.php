@@ -91,7 +91,7 @@ class Integer extends AbstractFiltervar implements ConstraintInterface
         parent::sanitize();
 
         if (is_numeric($this->field_value)) {
-            return (int) $this->field_value;
+            return (int)$this->field_value;
         }
 
         return $this->field_value;

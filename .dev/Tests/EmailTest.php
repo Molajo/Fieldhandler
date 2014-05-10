@@ -171,7 +171,8 @@ class EmailTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
-        $obfuscate = "&#65;&#109;&#121;&#83;&#116;&#101;&#112;&#104;&#101;&#110;&#64;&#77;&#111;&#108;&#97;&#106;&#111;&#46;&#111;&#114;&#103;";
+        $obfuscate
+            = "&#65;&#109;&#121;&#83;&#116;&#101;&#112;&#104;&#101;&#110;&#64;&#77;&#111;&#108;&#97;&#106;&#111;&#46;&#111;&#114;&#103;";
 
         $this->assertEquals($obfuscate, $results->getFieldValue());
 

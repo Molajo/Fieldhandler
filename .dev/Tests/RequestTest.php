@@ -65,11 +65,11 @@ class RequestTest extends PHPUnit_Framework_TestCase
     public function testRequest()
     {
         $message_templates = array(
-            1000  => 'Field: {field_name} does not have a valid value for {constraint} data type.',
+            1000 => 'Field: {field_name} does not have a valid value for {constraint} data type.',
         );
 
         $this->request2 = new Request2($message_templates);
-        $results = $this->request2->getMessages();
+        $results        = $this->request2->getMessages();
 
         $this->assertEquals($results, $message_templates);
 
@@ -86,7 +86,7 @@ class RequestTest extends PHPUnit_Framework_TestCase
         $field_name  = 'Field Name';
         $field_value = 123;
         $constraint  = 'Mocknumeric';
-        $options = array();
+        $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
@@ -106,7 +106,7 @@ class RequestTest extends PHPUnit_Framework_TestCase
         $field_name  = 'Field Name';
         $field_value = 'Dog';
         $constraint  = 'Mocknumeric';
-        $options = array();
+        $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
@@ -131,7 +131,7 @@ class RequestTest extends PHPUnit_Framework_TestCase
         $field_name  = 'Field Name';
         $field_value = 123;
         $constraint  = 'Mocknumeric';
-        $options = array();
+        $options     = array();
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
@@ -151,7 +151,7 @@ class RequestTest extends PHPUnit_Framework_TestCase
         $field_name  = 'Field Name';
         $field_value = 'Dog';
         $constraint  = 'Mocknumeric';
-        $options = array();
+        $options     = array();
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
@@ -171,7 +171,7 @@ class RequestTest extends PHPUnit_Framework_TestCase
         $field_name  = 'Field Name';
         $field_value = 123;
         $constraint  = 'Mocknumeric';
-        $options = array();
+        $options     = array();
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
@@ -191,7 +191,7 @@ class RequestTest extends PHPUnit_Framework_TestCase
         $field_name  = 'Field Name';
         $field_value = 123;
         $constraint  = 'Mocknumeric';
-        $options = array();
+        $options     = array();
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
@@ -202,18 +202,18 @@ class RequestTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Request::setFieldName
+     * @covers                   Molajo\Fieldhandler\Request::setFieldName
      * @expectedException        \CommonApi\Exception\UnexpectedValueException
      * @expectedExceptionRequest Fieldhandler Request: Must provide the field name.
      *
-     * @since   1.0.0
+     * @since                    1.0.0
      */
     public function testSetFieldName()
     {
         $field_name  = null;
         $field_value = 123;
         $constraint  = 'Mocknumeric';
-        $options = array();
+        $options     = array();
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
@@ -221,18 +221,18 @@ class RequestTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Request::editConstraint
+     * @covers                   Molajo\Fieldhandler\Request::editConstraint
      * @expectedException        \CommonApi\Exception\UnexpectedValueException
      * @expectedExceptionRequest Fieldhandler Request: Must request a specific constraint
      *
-     * @since   1.0.0
+     * @since                    1.0.0
      */
     public function testEditConstraint()
     {
         $field_name  = 'dog';
         $field_value = 123;
         $constraint  = '';
-        $options = array();
+        $options     = array();
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
@@ -240,18 +240,18 @@ class RequestTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Request::createConstraintClass
+     * @covers                   Molajo\Fieldhandler\Request::createConstraintClass
      * @expectedException        \CommonApi\Exception\UnexpectedValueException
      * @expectedExceptionRequest Fieldhandler Request createConstraint Method Failed: Dog Class: Molajo\Fieldhandler\Constraint\Dog
      *
-     * @since   1.0.0
+     * @since                    1.0.0
      */
     public function testCreateConstraintClass()
     {
         $field_name  = 'field_name';
         $field_value = 123;
         $constraint  = 'dog';
-        $options = array();
+        $options     = array();
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
@@ -280,6 +280,7 @@ class Request2 extends Request
 
 
 namespace Molajo\Fieldhandler\Constraint;
+
 use CommonApi\Model\ConstraintInterface;
 use Exception;
 
@@ -301,6 +302,7 @@ class Dog extends AbstractConstraintTests implements ConstraintInterface
         );
     }
 }
+
 /**
  * Mock Numeric Constraint
  *

@@ -52,11 +52,11 @@ class IpTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateSuccess()
     {
-        $field_name  = 'ip_fieldname';
-        $field_value = '127.0.0.1';
-        $constraint  = 'Ip';
-        $options     = array();
-        $options[FILTER_FLAG_IPV4] = true;
+        $field_name                  = 'ip_fieldname';
+        $field_value                 = '127.0.0.1';
+        $constraint                  = 'Ip';
+        $options                     = array();
+        $options[ FILTER_FLAG_IPV4 ] = true;
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 

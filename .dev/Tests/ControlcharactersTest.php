@@ -61,10 +61,10 @@ class ControlCharactersTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateTrue()
     {
-        $field_name                  = 'test';
-        $field_value                 = "\n \r \t";
-        $constraint                  = 'Controlcharacters';
-        $options                     = array();
+        $field_name                       = 'test';
+        $field_value                      = "\n \r \t";
+        $constraint                       = 'Controlcharacters';
+        $options                          = array();
         $options['allow_space_character'] = true;
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);

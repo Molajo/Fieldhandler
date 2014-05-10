@@ -61,10 +61,10 @@ class HexidecimalTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateTrue()
     {
-        $field_name                  = 'hexidecimal_fieldname';
-        $field_value                 = 'AB 10 BC 99';
-        $constraint                  = 'Hexidecimal';
-        $options                     = array();
+        $field_name                       = 'hexidecimal_fieldname';
+        $field_value                      = 'AB 10 BC 99';
+        $constraint                       = 'Hexidecimal';
+        $options                          = array();
         $options['allow_space_character'] = true;
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);

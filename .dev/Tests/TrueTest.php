@@ -121,7 +121,7 @@ class TrueTest extends PHPUnit_Framework_TestCase
     public function testValidateTrueTrue()
     {
         $field_name  = 'agreement';
-        $field_value = True;
+        $field_value = true;
         $constraint  = 'True';
         $options     = array();
 

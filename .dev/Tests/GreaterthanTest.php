@@ -50,10 +50,10 @@ class GreaterthanTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateSuccess()
     {
-        $field_name         = 'fieldname';
-        $field_value        = 10;
-        $constraint         = 'Greaterthan';
-        $options            = array();
+        $field_name              = 'fieldname';
+        $field_value             = 10;
+        $constraint              = 'Greaterthan';
+        $options                 = array();
         $options['greater_than'] = 8;
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
@@ -74,10 +74,10 @@ class GreaterthanTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateAlpha()
     {
-        $field_name         = 'fieldname';
-        $field_value        = 'z';
-        $constraint         = 'Greaterthan';
-        $options            = array();
+        $field_name              = 'fieldname';
+        $field_value             = 'z';
+        $constraint              = 'Greaterthan';
+        $options                 = array();
         $options['greater_than'] = 'a';
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
@@ -98,10 +98,10 @@ class GreaterthanTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateFail()
     {
-        $field_name         = 'fieldname';
-        $field_value        = 100;
-        $constraint         = 'Greaterthan';
-        $options            = array();
+        $field_name              = 'fieldname';
+        $field_value             = 100;
+        $constraint              = 'Greaterthan';
+        $options                 = array();
         $options['greater_than'] = 500;
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
@@ -121,10 +121,10 @@ class GreaterthanTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateFail2()
     {
-        $field_name         = 'fieldname';
-        $field_value        = 10;
-        $constraint         = 'Greaterthan';
-        $options            = array();
+        $field_name              = 'fieldname';
+        $field_value             = 10;
+        $constraint              = 'Greaterthan';
+        $options                 = array();
         $options['greater_than'] = 10;
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);

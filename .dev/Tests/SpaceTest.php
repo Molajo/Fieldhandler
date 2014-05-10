@@ -61,10 +61,10 @@ class SpaceTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateTrue()
     {
-        $field_name                  = 'test';
-        $field_value                 = "\n \r \t";
-        $constraint                  = 'Space';
-        $options                     = array();
+        $field_name  = 'test';
+        $field_value = "\n \r \t";
+        $constraint  = 'Space';
+        $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 

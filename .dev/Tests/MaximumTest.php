@@ -96,7 +96,6 @@ class MaximumTest extends PHPUnit_Framework_TestCase
      *
      * @return  void
      * @since   1.0.0
-
      */
     public function testValidateFail()
     {

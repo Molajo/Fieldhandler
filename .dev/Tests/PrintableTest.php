@@ -61,10 +61,10 @@ class PrintableTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateTrue()
     {
-        $field_name                  = 'test';
-        $field_value                 = "Dogfood";
-        $constraint                  = 'Printable';
-        $options                     = array();
+        $field_name  = 'test';
+        $field_value = "Dogfood";
+        $constraint  = 'Printable';
+        $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
