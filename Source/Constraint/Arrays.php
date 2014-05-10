@@ -131,7 +131,7 @@ class Arrays extends AbstractArrays implements ConstraintInterface
      */
     protected function testKeys($filter = false)
     {
-        return $this->testArrayValues($this->getArrayOptionArray('array_valid_keys'), $filter);
+        return $this->testArrayValues($this->getCompareToArrayFromOptions('array_valid_keys'), $filter);
     }
 
     /**
@@ -144,6 +144,6 @@ class Arrays extends AbstractArrays implements ConstraintInterface
      */
     protected function testValues($filter = false)
     {
-        return $this->testArrayValues($this->getArrayOptionArray('array_valid_values'), $filter);
+        return $this->testArrayValues($this->getCompareToArrayFromOptions('array_valid_values'), $filter);
     }
 }

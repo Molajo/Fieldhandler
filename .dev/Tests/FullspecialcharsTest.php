@@ -43,18 +43,20 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Fullspecialchars::validate
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Fullspecialchars::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Fullspecialchars::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
      * @return  void
      * @since   1.0.0
      */
-    public function testValidateSuccess()
+    public function testValidate()
     {
         $field_name  = 'fieldname';
-        $field_value = '&';
+        $field_value = null;
         $constraint  = 'Fullspecialchars';
-
-        // validate using data already fullspecialchared -- FALSE - does not compute - nothing to see here.
         $results = $this->request->validate($field_name, $field_value, $constraint, array());
         $this->assertEquals(false, $results->getValidateResponse());
 
@@ -62,33 +64,68 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Fullspecialchars::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Fullspecialchars::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testValidate()
+    public function testSanitizeChange()
     {
         $field_name  = 'fieldname';
-        $field_value = '&';
+        $field_value = '<div>The dog is fine.</div>';
         $constraint  = 'Fullspecialchars';
         $options     = array('FILTER_FLAG_NO_ENCODE_QUOTES');
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
-// tests as '&amp;' on Travis
-//        $this->assertEquals('&#38;', $results->getFieldValue());
+        $this->assertEquals('&#60;div&#62;The dog is fine.&#60;/div&#62;', $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }
 
     /**
-     * Tear down
+     * @covers  Molajo\Fieldhandler\Constraint\Fullspecialchars::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
      *
-     * @return void
+     * @return  void
      * @since   1.0.0
      */
-    protected function tearDown()
+    public function testSanitizeNoChange()
     {
+        $field_name  = 'fieldname';
+        $field_value = 'The dog is fine.';
+        $constraint  = 'Fullspecialchars';
+        $options     = array('FILTER_FLAG_NO_ENCODE_QUOTES');
+
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Fullspecialchars::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
+     *
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testFormat()
+    {
+        $field_name  = 'fieldname';
+        $field_value = '<div>The dog is fine.</div>';
+        $constraint  = 'Fullspecialchars';
+        $options     = array('FILTER_FLAG_NO_ENCODE_QUOTES');
+
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
+
+        return;
     }
 }

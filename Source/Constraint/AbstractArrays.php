@@ -28,7 +28,15 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
      * @var    string
      * @since  1.0.0
      */
-    protected $array_option_type;
+    protected $compare_to_array_option_name;
+
+    /**
+     * Array Options Values
+     *
+     * @var    array
+     * @since  1.0.0
+     */
+    protected $compare_to_array_option_values;
 
     /**
      * Validation Test
@@ -36,7 +44,7 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
      * @var    string
      * @since  1.0.0
      */
-    protected $validation_test = 'getArrayValues';
+    protected $validation_test = 'validation';
 
     /**
      * Message Code
@@ -47,6 +55,75 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
     protected $message_code = 3000;
 
     /**
+     * Constructor
+     *
+     * @param   string $constraint
+     * @param   string $method
+     * @param   string $field_name
+     * @param   mixed  $field_value
+     * @param   array  $options
+     *
+     * @api
+     * @since   1.0.0
+     */
+    public function __construct(
+        $constraint,
+        $method,
+        $field_name,
+        $field_value,
+        array $options = array()
+    ) {
+        if ($this->compare_to_array_option_name === null) {
+        } else {
+            $this->getCompareToArrayFromOptions($this->compare_to_array_option_name);
+        }
+
+        parent::__construct(
+            $constraint,
+            $method,
+            $field_name,
+            $field_value,
+            $options
+        );
+    }
+
+    /**
+     * Build Compare To Array using $options Entry
+     *
+     * @param   string $type
+     *
+     * @return  $this
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function getCompareToArrayFromOptions($type)
+    {
+        return $this->getCompareToArrayFromInput($type, $this->getOption($type));
+    }
+
+    /**
+     * Build Compare To Array from Array Input
+     *
+     * @param   array $compare_to_array
+     *
+     * @return  $this
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function getCompareToArrayFromInput($type, array $compare_to_array = array())
+    {
+        if (is_array($compare_to_array) && count($compare_to_array) > 0) {
+            $this->compare_to_array_option_values = $compare_to_array;
+
+            return $this;
+        }
+
+        throw new UnexpectedValueException(
+            'Fieldhandler Arrays getCompareToArrayFromInput: invalid empty array for type: ' . $type
+        );
+    }
+
+    /**
      * Validation Test
      *
      * @return  boolean
@@ -54,7 +131,7 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
      */
     protected function validation()
     {
-        if ($this->getArrayValues(false) === true) {
+        if ($this->testInputAgainstValidArray(false) === true) {
             return true;
         }
 
@@ -62,79 +139,70 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
     }
 
     /**
-     * Test Array Entry Keys
+     * Test Input against Valid Values Array
      *
      * @param   boolean $filter
      *
      * @return  boolean
      * @since   1.0.0
      */
-    protected function getArrayValues($filter = false)
+    protected function testInputAgainstValidArray($filter)
     {
-        return $this->testArrayValues($this->getArrayOptionArray($this->array_option_type), $filter);
-    }
-
-    /**
-     * Test Array Entry Values
-     *
-     * @param   string $type
-     *
-     * @return  array
-     * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
-     */
-    protected function getArrayOptionArray($type)
-    {
-        $array_values = $this->getOption($type);
-
-        if (is_array($array_values) && count($array_values) > 0) {
-            return $array_values;
+        if (is_array($this->field_value)) {
+        } else {
+            return $this->testStringInputAgainstValidArray();
         }
 
-        throw new UnexpectedValueException('Fieldhandler Arrays: must provide entry with array in options: ' . $type);
-    }
+        $validated_input_array = $this->testArrayInputAgainstValidArray();
 
-    /**
-     * Test Array Values
-     *
-     * @param   array   $array_values
-     * @param   boolean $filter
-     *
-     * @return  boolean
-     * @since   1.0.0
-     */
-    protected function testArrayValues($array_values, $filter)
-    {
-        $tested = $this->testArrayValuesPart($array_values);
-
-        if (count($tested) === count($this->field_value)) {
-            $test = true;
+        if (count($validated_input_array) === count($this->field_value)) {
+            $valid = true;
 
         } else {
-            $test = false;
+            $valid = false;
             if ($filter === true) {
-                $this->field_value = $tested;
+                $this->field_value = $validated_input_array;
+                $valid             = true;
             }
         }
 
-        return $test;
+        return $valid;
     }
 
     /**
-     * Test Array Values returning only good entries
+     * Verify single value input to valid array
      *
-     * @param   array $array_values
+     * @return  boolean
+     * @since   1.0.0
+     */
+    protected function testStringInputAgainstValidArray()
+    {
+        $matched = false;
+
+        foreach ($this->compare_to_array_option_values as $valid) {
+
+            if ($this->field_value === $valid) {
+                $matched = true;
+                break;
+            }
+        }
+
+        return $matched;
+    }
+
+    /**
+     * Verify input array only has entries that are defined by the valid array
      *
      * @return  array
      * @since   1.0.0
      */
-    protected function testArrayValuesPart($array_values)
+    protected function testArrayInputAgainstValidArray()
     {
         $new = array();
 
         foreach ($this->field_value as $entry) {
 
-            if (in_array($entry, $array_values) === false) {
+            if (in_array($entry, $this->compare_to_array_option_values) === false) {
             } else {
                 $new[] = $entry;
             }

@@ -13,12 +13,59 @@ use CommonApi\Model\ConstraintInterface;
 /**
  * True Constraint
  *
+ * Value must conform to one of the values defined within the $true_array.
+ *
+ * To override, send in an options entry of the values desired:
+ *
+ * ```php
+ *
+ * $true_array = array(true, 1, 'yes', 'on');
+ * $options = array();
+ * $options{'true_array'] = $true_array;
+ *
+ * ```
+ *
+ * #### Validate
+ *
+ * Verifies value against constraint, returning a TRUE or FALSE result and error messages
+ *
+ * ```php
+ * $response = $request->validate('true_only_field', $value, 'True');
+ *
+ * if ($response->getValidateResponse() === true) {
+ *     // all is well
+ * } else {
+ *     foreach ($response->getValidateMessages as $code => $message) {
+ *         echo $code . ': ' . $message . '/n';
+ *     }
+ * }
+ *
+ * ```
+ *
+ * #### Sanitize
+ *
+ * Returns null if value is not defined within the $true_array.
+ *
+ * ```php
+ * $response = $request->validate('true_only_field', $value, 'True');
+ *
+ * if ($response->getChangeIndicator() === true) {
+ *     $field_value = $response->getFieldValue();
+ * }
+ *
+ * ```
+ *
+ * #### Format
+ *
+ * Not implemented. Value sent in is returned unchanged.
+ *
+ * @api
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class True extends AbstractConstraintTests implements ConstraintInterface
+class True extends AbstractArrays implements ConstraintInterface
 {
     /**
      * True array
@@ -60,6 +107,8 @@ class True extends AbstractConstraintTests implements ConstraintInterface
     ) {
         $options = $this->setPropertyKeyWithOptionKey('true_array', $options);
 
+        $this->getCompareToArrayFromInput('true_array', $this->true_array);
+
         parent::__construct(
             $constraint,
             $method,
@@ -67,39 +116,5 @@ class True extends AbstractConstraintTests implements ConstraintInterface
             $field_value,
             $options
         );
-    }
-
-    /**
-     * Verifies value is true, 1, 'yes', or 'on', responding with true or false and messages
-     *
-     * @api
-     * @return  boolean
-     * @since   1.0.0
-     */
-    protected function validation()
-    {
-        if ($this->testInArray() === true || $this->field_value === true) {
-        } else {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Loop thru array and strict comparison
-     *
-     * @return  boolean
-     * @since   1.0.0
-     */
-    protected function testInArray()
-    {
-        foreach ($this->true_array as $value) {
-            if ($this->field_value === $value) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

@@ -13,12 +13,59 @@ use CommonApi\Model\ConstraintInterface;
 /**
  * False Constraint
  *
+ * Value must conform to one of the values defined within the $false_array.
+ *
+ * To override, send in an options entry of the values desired:
+ *
+ * ```php
+ *
+ * $false_array = array(false, 0, 'no', 'off');
+ * $options = array();
+ * $options{'false_array'] = $false_array;
+ *
+ * ```
+ *
+ * #### Validate
+ *
+ * Verifies value against constraint, returning a TRUE or FALSE result and error messages
+ *
+ * ```php
+ * $response = $request->validate('false_only_field', $value, 'False');
+ *
+ * if ($response->getValidateResponse() === true) {
+ *     // all is well
+ * } else {
+ *     foreach ($response->getValidateMessages as $code => $message) {
+ *         echo $code . ': ' . $message . '/n';
+ *     }
+ * }
+ *
+ * ```
+ *
+ * #### Sanitize
+ *
+ * Returns null if value is not defined within the $false_array.
+ *
+ * ```php
+ * $response = $request->validate('false_only_field', $value, 'False');
+ *
+ * if ($response->getChangeIndicator() === true) {
+ *     $field_value = $response->getFieldValue();
+ * }
+ *
+ * ```
+ *
+ * #### Format
+ *
+ * Not implemented. Value sent in is returned unchanged.
+ *
+ * @api
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class False extends AbstractConstraintTests implements ConstraintInterface
+class False extends AbstractArrays implements ConstraintInterface
 {
     /**
      * False array
@@ -60,6 +107,8 @@ class False extends AbstractConstraintTests implements ConstraintInterface
     ) {
         $options = $this->setPropertyKeyWithOptionKey('false_array', $options);
 
+        $this->getCompareToArrayFromInput('false_array', $this->false_array);
+
         parent::__construct(
             $constraint,
             $method,
@@ -67,41 +116,5 @@ class False extends AbstractConstraintTests implements ConstraintInterface
             $field_value,
             $options
         );
-    }
-
-    /**
-     * Validate
-     *
-     * Verifies value is false, 0, 'no', or 'off', responding with true or false and messages
-     *
-     * @api
-     * @return  boolean
-     * @since   1.0.0
-     */
-    protected function validation()
-    {
-        if ($this->testInArray() === true || $this->field_value === false) {
-        } else {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Loop thru array and strict comparison
-     *
-     * @return  boolean
-     * @since   1.0.0
-     */
-    protected function testInArray()
-    {
-        foreach ($this->false_array as $value) {
-            if ($this->field_value === $value) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

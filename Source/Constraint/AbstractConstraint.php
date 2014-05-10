@@ -66,6 +66,15 @@ abstract class AbstractConstraint implements ConstraintInterface
     protected $options = array();
 
     /**
+     * Ignore Null
+     *
+     * @api
+     * @var    boolean
+     * @since  1.0.0
+     */
+    protected $ignore_null = true;
+
+    /**
      * Available Options defined within properties by Constraint
      *
      * @api
@@ -97,9 +106,10 @@ abstract class AbstractConstraint implements ConstraintInterface
      * @var    object
      * @since  1.0.0
      */
-    protected $property_array = array(
-        'timezone'
-    );
+    protected $property_array
+        = array(
+            'timezone'
+        );
 
     /**
      * Validation Messages
@@ -175,7 +185,9 @@ abstract class AbstractConstraint implements ConstraintInterface
      */
     public function validate()
     {
-        if ($this->field_value === null) {
+        if ($this->field_value === null
+            && $this->ignore_null === true
+        ) {
             return true;
         }
 
@@ -200,7 +212,9 @@ abstract class AbstractConstraint implements ConstraintInterface
      */
     public function sanitize()
     {
-        if ($this->field_value === null) {
+        if ($this->field_value === null
+            && $this->ignore_null === true
+        ) {
             return $this->field_value;
         }
 

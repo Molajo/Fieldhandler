@@ -26,5 +26,5 @@ class Values extends AbstractArrays implements ConstraintInterface
      * @var    string
      * @since  1.0.0
      */
-    protected $array_option_type = 'array_valid_values';
+    protected $compare_to_array_option_name = 'array_valid_values';
 }

@@ -656,6 +656,53 @@ Tests that a value is equal to a specified value.
     $results = $request->sanitize('field1', 'dog', 'Equal');
 
 ```
+### False
+
+Value must conform to one of the values defined within the $false_array.
+
+To override, send in an options entry of the values desired:
+
+```php
+
+$false_array = array(false, 0, 'no', 'off');
+$options = array();
+$options{'false_array'] = $false_array;
+
+```
+
+#### Validate
+
+Verifies value against constraint, returning a TRUE or FALSE result and error messages
+
+```php
+$response = $request->validate('false_only_field', $value, 'False');
+
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
+
+```
+
+#### Sanitize
+
+Returns null if value is not defined within the $false_array.
+
+```php
+$response = $request->validate('false_only_field', $value, 'False');
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
+
+```
+
+#### Format
+
+Not implemented. Value sent in is returned unchanged.
 
 ### Fileextension
 Tests that a value is equal to the specified value. If the value does not match for validate, an
@@ -770,18 +817,40 @@ Verifies that the $field_value is greater than the From value and less than the 
 ```
 
 ### Fullspecialchars
-Converts special characters to HTML entities. Equivalent to [htmlspecialchars](http://www.php.net/manual/en/function.htmlspecialchars.php)
-with with ENT_QUOTES set.
+Convert special characters to HTML entities:
+
+'&' (ampersand) becomes '&amp;'
+'"' (double quote) becomes '&quot;' when ENT_NOQUOTES is not set.
+"'" (single quote) becomes '&#039;' (or &apos;) only when ENT_QUOTES is set.
+'<' (less than) becomes '&lt;'
+'>' (greater than) becomes '&gt;'
+
+Encoding quotes can be disabled by:
 
 ```php
-    $field_name              = 'my_field';
-    $field_value             = '&';
-    $constraint = 'Fullspecialchars';
-    $options                 = array();
-
-    $results = $request->validate($field_name, $field_value, $constraint, $options);
+$options = array();
+$options[FILTER_FLAG_NO_ENCODE_QUOTES]   = true;
 
 ```
+
+#### Validate
+Not implemented. Will always return false.
+
+#### Sanitize
+
+Convert special characters to HTML entities:
+
+```php
+$response = $request->validate('text_field', $data_value, 'Fullspecialchars');
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
+
+```
+
+#### Format
+Not implemented. The value sent in is returned unchanged.
 
 ### Graph
 
@@ -1377,6 +1446,54 @@ if ($response->getChangeIndicator() === true) {
 #### Format
 
 Performs sanitize.
+
+### True
+
+Value must conform to one of the values defined within the $true_array.
+
+To override, send in an options entry of the values desired:
+
+```php
+
+$true_array = array(true, 1, 'yes', 'on');
+$options = array();
+$options{'true_array'] = $true_array;
+
+```
+
+#### Validate
+
+Verifies value against constraint, returning a TRUE or FALSE result and error messages
+
+```php
+$response = $request->validate('true_only_field', $value, 'True');
+
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
+
+```
+
+#### Sanitize
+
+Returns null if value is not defined within the $true_array.
+
+```php
+$response = $request->validate('true_only_field', $value, 'True');
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
+
+```
+
+#### Format
+
+Not implemented. Value sent in is returned unchanged.
 
 ### Upper
 

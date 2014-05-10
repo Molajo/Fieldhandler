@@ -41,13 +41,22 @@ class FalseTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Validate Success: Invalid Field Value
-     *
      * @covers  Molajo\Fieldhandler\Constraint\False::validate
+     * @covers  Molajo\Fieldhandler\Constraint\False::validation
+     * @covers  Molajo\Fieldhandler\Constraint\False::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\False::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testStringInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
      * @return void
      * @since   1.0.0
      */
-    public function testValidateSuccess()
+    public function testValidateTrueNo()
     {
         $field_name  = 'agreement';
         $field_value = 'no';
@@ -63,13 +72,115 @@ class FalseTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Validate Failure: Invalid Field Value
-     *
      * @covers  Molajo\Fieldhandler\Constraint\False::validate
+     * @covers  Molajo\Fieldhandler\Constraint\False::validation
+     * @covers  Molajo\Fieldhandler\Constraint\False::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\False::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testStringInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
      * @return void
      * @since   1.0.0
      */
-    public function testValidateFailure()
+    public function testValidateTrue0()
+    {
+        $field_name  = 'agreement';
+        $field_value = 0;
+        $constraint  = 'False';
+        $options     = array();
+
+        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(array(), $results->getValidateMessages());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\False::validate
+     * @covers  Molajo\Fieldhandler\Constraint\False::validation
+     * @covers  Molajo\Fieldhandler\Constraint\False::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\False::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testStringInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
+     * @return void
+     * @since   1.0.0
+     */
+    public function testValidateTrueFalse()
+    {
+        $field_name  = 'agreement';
+        $field_value = False;
+        $constraint  = 'False';
+        $options     = array();
+
+        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(array(), $results->getValidateMessages());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\False::validate
+     * @covers  Molajo\Fieldhandler\Constraint\False::validation
+     * @covers  Molajo\Fieldhandler\Constraint\False::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\False::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testStringInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
+     * @return void
+     * @since   1.0.0
+     */
+    public function testValidateTrueOff()
+    {
+        $field_name  = 'agreement';
+        $field_value = 'off';
+        $constraint  = 'False';
+        $options     = array();
+
+        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(array(), $results->getValidateMessages());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\False::validate
+     * @covers  Molajo\Fieldhandler\Constraint\False::validation
+     * @covers  Molajo\Fieldhandler\Constraint\False::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\False::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testStringInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testValidateFalse()
     {
         $field_name  = 'Agreement';
         $field_value = 122222;
@@ -91,10 +202,17 @@ class FalseTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\False::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\False::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testStringInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testSanitizeSucceed()
+    public function testSanitizeNoChange()
     {
         $field_name  = 'single';
         $field_value = false;
@@ -111,10 +229,17 @@ class FalseTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\False::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\False::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testStringInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testSanitizeFailure()
+    public function testSanitizeChange()
     {
         $field_name  = 'single';
         $field_value = true;
@@ -130,11 +255,14 @@ class FalseTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers  Molajo\Fieldhandler\Constraint\False::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::format
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testFormatSucceed()
+    public function testFormat()
     {
         $field_name  = 'single';
         $field_value = 0;
@@ -147,36 +275,5 @@ class FalseTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
-    }
-
-    /**
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
-     * @return  void
-     * @since   1.0.0
-     */
-    public function testFormatFailure()
-    {
-        $field_name  = 'single';
-        $field_value = true;
-        $constraint  = 'False';
-        $options     = array();
-
-        $results = $this->request->format($field_name, $field_value, $constraint, $options);
-
-        $this->assertEquals(true, $results->getFieldValue());
-        $this->assertEquals(false, $results->getChangeIndicator());
-
-        return;
-    }
-
-    /**
-     * Tear down
-     *
-     * @return void
-     * @since   1.0.0
-     */
-    protected function tearDown()
-    {
-        parent::tearDown();
     }
 }

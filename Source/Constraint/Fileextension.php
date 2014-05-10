@@ -26,15 +26,7 @@ class Fileextension extends AbstractArrays implements ConstraintInterface
      * @var    string
      * @since  1.0.0
      */
-    protected $array_option_type = 'array_valid_extensions';
-
-    /**
-     * Validation Test
-     *
-     * @var    string
-     * @since  1.0.0
-     */
-    protected $validation_test = 'validation';
+    protected $compare_to_array_option_name = 'array_valid_extensions';
 
     /**
      * Validation Test
@@ -53,10 +45,6 @@ class Fileextension extends AbstractArrays implements ConstraintInterface
 
         $this->field_value = $path_info['extension'];
 
-        if ($this->getArrayValues(false) === true) {
-            return true;
-        }
-
-        return false;
+        return parent::validation();
     }
 }
