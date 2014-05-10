@@ -19,7 +19,7 @@ use CommonApi\Model\ConstraintInterface;
  *
  * ```php
  *
- * $valid_values_array = array(false, 0, ' ', NULL);
+ * $valid_values_array = array(false, 0, ' ', null);
  * $options = array();
  * $options['valid_values_array'] = $valid_values_array;
  *
@@ -65,10 +65,10 @@ use CommonApi\Model\ConstraintInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Something extends AbstractArrays implements ConstraintInterface
+class Something extends AbstractOpposite implements ConstraintInterface
 {
     /**
-     * Ignore Null
+     * Ignore null
      *
      * @api
      * @var    boolean
@@ -85,58 +85,5 @@ class Something extends AbstractArrays implements ConstraintInterface
      * @var    array
      * @since  1.0.0
      */
-    protected $valid_values_array = array(false, 0, ' ', NULL);
-
-    /**
-     * Message Code
-     *
-     * @var    integer
-     * @since  1.0.0
-     */
-    protected $message_code = 1000;
-
-    /**
-     * Validate - testing for "nothing" - reverse results for "something"
-     *
-     * @api
-     * @return  boolean
-     * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
-     */
-    public function validate()
-    {
-        $results = parent::validate();
-
-        if ($results == false) {
-            $this->validate_messages = array();
-            return true;
-        }
-
-        $this->setValidateMessage($this->message_code);
-
-        return false;
-    }
-
-    /**
-     * Sanitize - testing for "nothing" - reverse results for "something"
-     *
-     * @api
-     * @return  mixed
-     * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
-     */
-    public function sanitize()
-    {
-        $hold = $this->field_value;
-
-        parent::sanitize();
-
-        if ($this->field_value === null) {
-            $this->field_value = $hold;
-        } else {
-            $this->field_value = null;
-        }
-
-        return $this->field_value;
-    }
+    protected $valid_values_array = array(false, 0, ' ', null);
 }

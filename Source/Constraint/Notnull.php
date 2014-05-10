@@ -1,6 +1,6 @@
 <?php
 /**
- * Notnull Constraint
+ * Not Null Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -13,40 +13,57 @@ use CommonApi\Model\ConstraintInterface;
 /**
  * Notnull Constraint
  *
+ * Value must not be a null value.
+ *
+ * #### Validate
+ *
+ * Verifies value against constraint, returning a TRUE or FALSE result and error messages
+ *
+ * ```php
+ * $response = $request->validate('random_field', $value, 'Notnull');
+ *
+ * if ($response->getValidateResponse() === true) {
+ *     // all is well
+ * } else {
+ *     foreach ($response->getValidateMessages as $code => $message) {
+ *         echo $code . ': ' . $message . '/n';
+ *     }
+ * }
+ *
+ * ```
+ *
+ * #### Sanitize
+ *
+ * Not useful. (Can only return a NULL value if it is NULL.)
+ *
+ * #### Format
+ *
+ * Not implemented. Value sent in is returned unchanged.
+ *
+ * @api
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Notnull extends AbstractNull implements ConstraintInterface
+class Notnull extends AbstractOpposite implements ConstraintInterface
 {
     /**
-     * Validate
+     * Ignore Null
      *
      * @api
-     * @return  boolean
-     * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
+     * @var    boolean
+     * @since  1.0.0
      */
-    public function validate()
-    {
-        if ($this->validation() === true) {
-            return true;
-        }
-
-        $this->setValidateMessage($this->message_code);
-
-        return false;
-    }
+    protected $ignore_null = false;
 
     /**
-     * Validation
+     * Copy of Null array
      *
-     * @return  boolean
-     * @since   1.0.0
+     * @api
+     * @var    array
+     * @since  1.0.0
      */
-    protected function validation()
-    {
-        return parent::validationNotNull();
-    }
+    protected $valid_values_array = array(NULL);
+
 }

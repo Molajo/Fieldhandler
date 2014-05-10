@@ -1262,6 +1262,39 @@ Tests that a value is not equal to a specified value.
 
 ```
 
+### Notnull
+Value must not be a null value.
+
+#### Validate
+
+Verifies value against constraint, returning a TRUE or FALSE result and error messages
+
+```php
+$response = $request->validate('random_field', $value, 'Notnull');
+
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
+
+```
+
+#### Sanitize
+
+Not useful. (Can only return a NULL value if it is NULL.)
+
+#### Format
+
+Not implemented. Value sent in is returned unchanged.
+
+#### Format
+
+Not implemented. Value sent in is returned unchanged.
+
+
 ### Nothing
 
 Value must conform to one of the values defined within the $valid_values_array.
@@ -1540,18 +1573,40 @@ Performs regex checking against the input value for the regex sent in.
 
 ```
 
+
 ### Required
-Field is required. Null value is not allowed. Use after Default when used in combination.
+Value must not be a null value.
+
+#### Validate
+
+Verifies value against constraint, returning a TRUE or FALSE result and error messages
 
 ```php
-    // The value of field `input_field` may not be null
-    $field_name              = 'my_field';
-    $field_value             = null;
-    $constraint = 'Required';
+$response = $request->validate('random_field', $value, 'Notnull');
 
-    $results = $request->validate($field_name, $field_value, $constraint);
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
 
 ```
+
+#### Sanitize
+
+Not useful. (Can only return a NULL value if it is NULL.)
+
+#### Format
+
+Not implemented. Value sent in is returned unchanged.
+
+#### Format
+
+Not implemented. Value sent in is returned unchanged.
+
+
 ### Something
 
 Value must not be one of the values defined within the $valid_values_array.

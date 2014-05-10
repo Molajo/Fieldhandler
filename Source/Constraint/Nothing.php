@@ -19,7 +19,7 @@ use CommonApi\Model\ConstraintInterface;
  *
  * ```php
  *
- * $valid_values_array = array(false, 0, ' ', NULL);
+ * $valid_values_array = array(false, 0, ' ', null);
  * $options = array();
  * $options['valid_values_array'] = $valid_values_array;
  *
@@ -76,7 +76,7 @@ class Nothing extends AbstractArrays implements ConstraintInterface
      * @var    array
      * @since  1.0.0
      */
-    protected $valid_values_array = array(false, 0, ' ', NULL);
+    protected $valid_values_array = array(false, 0, ' ', null);
 
     /**
      * Message Code
