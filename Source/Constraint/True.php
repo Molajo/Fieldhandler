@@ -21,7 +21,7 @@ use CommonApi\Model\ConstraintInterface;
  *
  * $valid_values_array = array(true, 1, 'yes', 'on');
  * $options = array();
- * $options{'valid_values_array'] = $valid_values_array;
+ * $options['valid_values_array'] = $valid_values_array;
  *
  * ```
  *

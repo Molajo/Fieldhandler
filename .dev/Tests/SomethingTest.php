@@ -41,23 +41,63 @@ class SomethingTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Validate Success: Invalid Field Value
-     *
      * @covers  Molajo\Fieldhandler\Constraint\Something::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Something::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Something::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Something::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testStringInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testValidateTrue()
+    {
+        $field_name  = 'Random Field';
+        $field_value = 122222;
+        $constraint  = 'Something';
+        $options     = array();
+
+        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(array(), $results->getValidateMessages());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Something::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Something::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Something::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Something::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testStringInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
      * @return void
      * @since   1.0.0
      */
-    public function testValidateSuccessNull()
+    public function testValidateFalseFalse()
     {
-        $field_name  = 'agreement';
-        $field_value = null;
+        $field_name  = 'Random Field';
+        $field_value = false;
         $constraint  = 'Something';
         $options     = array();
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $expected_code    = 1000;
-        $expected_message = 'Field: agreement does not have a valid value for Something data type.';
+        $expected_message = 'Field: Random Field does not have a valid value for Something data type.';
         $messages         = $results->getValidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);
@@ -66,40 +106,24 @@ class SomethingTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Validate Success: Invalid Field Value
-     *
      * @covers  Molajo\Fieldhandler\Constraint\Something::validate
-     * @return void
+     * @covers  Molajo\Fieldhandler\Constraint\Something::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Something::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Something::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testStringInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
+     * @return  void
      * @since   1.0.0
      */
-    public function testValidateSuccessSpace()
+    public function testValidateFalse0()
     {
-        $field_name  = 'agreement';
-        $field_value = ' ';
-        $constraint  = 'Something';
-        $options     = array();
-
-        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
-
-        $expected_code    = 1000;
-        $expected_message = 'Field: agreement does not have a valid value for Something data type.';
-        $messages         = $results->getValidateMessages();
-        $this->assertEquals($expected_code, $messages[0]->code);
-        $this->assertEquals($expected_message, $messages[0]->message);
-
-        return;
-    }
-
-    /**
-     * Validate Success: Invalid Field Value
-     *
-     * @covers  Molajo\Fieldhandler\Constraint\Something::validate
-     * @return void
-     * @since   1.0.0
-     */
-    public function testValidateSuccessZero()
-    {
-        $field_name  = 'agreement';
+        $field_name  = 'Random Field';
         $field_value = 0;
         $constraint  = 'Something';
         $options     = array();
@@ -107,7 +131,75 @@ class SomethingTest extends PHPUnit_Framework_TestCase
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $expected_code    = 1000;
-        $expected_message = 'Field: agreement does not have a valid value for Something data type.';
+        $expected_message = 'Field: Random Field does not have a valid value for Something data type.';
+        $messages         = $results->getValidateMessages();
+        $this->assertEquals($expected_code, $messages[0]->code);
+        $this->assertEquals($expected_message, $messages[0]->message);
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Something::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Something::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Something::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Something::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testStringInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testValidateFalseSpace()
+    {
+        $field_name  = 'Random Field';
+        $field_value = ' ';
+        $constraint  = 'Something';
+        $options     = array();
+
+        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
+
+        $expected_code    = 1000;
+        $expected_message = 'Field: Random Field does not have a valid value for Something data type.';
+        $messages         = $results->getValidateMessages();
+        $this->assertEquals($expected_code, $messages[0]->code);
+        $this->assertEquals($expected_message, $messages[0]->message);
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Something::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Something::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Something::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Something::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testStringInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
+     * @return void
+     * @since   1.0.0
+     */
+    public function testValidateFalseNull()
+    {
+        $field_name  = 'Random Field';
+        $field_value = null;
+        $constraint  = 'Something';
+        $options     = array();
+
+        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
+
+        $expected_code    = 1000;
+        $expected_message = 'Field: Random Field does not have a valid value for Something data type.';
         $messages         = $results->getValidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);
@@ -117,31 +209,46 @@ class SomethingTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Something::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Something::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testStringInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testValidateFalse()
+    public function testSanitizeNoChange()
     {
-        $field_name  = 'single';
+        $field_name  = 'Random Field';
         $field_value = true;
         $constraint  = 'Something';
         $options     = array();
 
-        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Something::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Something::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testStringInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testSanitizeSucceed()
+    public function testSanitizeChange()
     {
-        $field_name  = 'alias';
+        $field_name  = 'Random Field';
         $field_value = 0;
         $constraint  = 'Something';
         $options     = array();
@@ -155,34 +262,17 @@ class SomethingTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Something::sanitize
-     * @return  void
-     * @since   1.0.0
-     */
-    public function testSanitizeFailure()
-    {
-        $field_name  = 'single';
-        $field_value = true;
-        $constraint  = 'Something';
-        $options     = array();
-
-        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
-
-        $this->assertEquals(true, $results->getFieldValue());
-        $this->assertEquals(false, $results->getChangeIndicator());
-
-        return;
-    }
-
-    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Something::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::format
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testFormatSucceed()
+    public function testFormat()
     {
-        $field_name  = 'single';
-        $field_value = 0;
+        $field_name  = 'Random Field';
+        $field_value = 44;
         $constraint  = 'Something';
         $options     = array();
 
@@ -192,36 +282,5 @@ class SomethingTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
-    }
-
-    /**
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
-     * @return  void
-     * @since   1.0.0
-     */
-    public function testFormatFailure()
-    {
-        $field_name  = 'single';
-        $field_value = true;
-        $constraint  = 'Something';
-        $options     = array();
-
-        $results = $this->request->format($field_name, $field_value, $constraint, $options);
-
-        $this->assertEquals(true, $results->getFieldValue());
-        $this->assertEquals(false, $results->getChangeIndicator());
-
-        return;
-    }
-
-    /**
-     * Tear down
-     *
-     * @return void
-     * @since   1.0.0
-     */
-    protected function tearDown()
-    {
-        parent::tearDown();
     }
 }

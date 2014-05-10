@@ -29,7 +29,7 @@ use CommonApi\Model\ConstraintInterface;
  *         'text/rtf'
  * );
  * $options = array();
- * $options{'valid_values_array'] = $valid_values_array;
+ * $options['valid_values_array'] = $valid_values_array;
  *
  * ```
  *

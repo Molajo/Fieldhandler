@@ -23,7 +23,7 @@ use CommonApi\Model\ConstraintInterface;
  *
  * ```php
  * $options = array();
- * $options{'valid_values_array'] = array('a', 'b', 'c');
+ * $options['valid_values_array'] = array('a', 'b', 'c');
  * $response = $request->validate('random_field', 'a', 'Values', $options);
  *
  * if ($response->getValidateResponse() === true) {
@@ -44,7 +44,7 @@ use CommonApi\Model\ConstraintInterface;
  *
  * ```php
  * $options = array();
- * $options{'valid_values_array'] = array('a', 'b', 'c');
+ * $options['valid_values_array'] = array('a', 'b', 'c');
  * $response = $request->validate('random_field', 'z', 'Values', $options);
  *
  * if ($response->getChangeIndicator() === true) {

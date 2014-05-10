@@ -21,7 +21,7 @@ use CommonApi\Model\ConstraintInterface;
  *
  * $valid_values_array = array('gif', 'jpeg', 'jpg', 'png', 'pdf', 'odt', 'txt', 'rtf', 'mp3');
  * $options = array();
- * $options{'valid_values_array'] = $valid_values_array;
+ * $options['valid_values_array'] = $valid_values_array;
  *
  * ```
  *

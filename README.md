@@ -738,7 +738,7 @@ To override, send in an options entry of the values desired:
 
 $valid_values_array = array(false, 0, 'no', 'off');
 $options = array();
-$options{'valid_values_array'] = $valid_values_array;
+$options['valid_values_array'] = $valid_values_array;
 
 ```
 
@@ -786,7 +786,7 @@ To override, send in an options entry of the values desired:
 
 $valid_values_array = array('gif', 'jpeg', 'jpg', 'png', 'pdf', 'odt', 'txt', 'rtf', 'mp3');
 $options = array();
-$options{'valid_values_array'] = $valid_values_array;
+$options['valid_values_array'] = $valid_values_array;
 
 ```
 
@@ -1199,7 +1199,7 @@ $valid_values_array = array(
         'text/rtf'
 );
 $options = array();
-$options{'valid_values_array'] = $valid_values_array;
+$options['valid_values_array'] = $valid_values_array;
 
 ```
 
@@ -1261,6 +1261,55 @@ Tests that a value is not equal to a specified value.
     $results = $request->sanitize('field1', 'dog', 'Notequal');
 
 ```
+
+### Nothing
+
+Value must conform to one of the values defined within the $valid_values_array.
+
+To override, send in an options entry of the values desired:
+
+```php
+
+$valid_values_array = array(false, 0, ' ', NULL);
+$options = array();
+$options['valid_values_array'] = $valid_values_array;
+
+```
+
+#### Validate
+
+Verifies value against constraint, returning a TRUE or FALSE result and error messages
+
+```php
+$response = $request->validate('random_field', $value, 'Nothing');
+
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
+
+```
+
+#### Sanitize
+
+Returns null if value is not defined within the $valid_values_array.
+
+```php
+$response = $request->validate('random_field', $value, 'Nothing');
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
+
+```
+
+#### Format
+
+Not implemented. Value sent in is returned unchanged.
+
 ### Null
 
 Value must be null.
@@ -1503,6 +1552,49 @@ Field is required. Null value is not allowed. Use after Default when used in com
     $results = $request->validate($field_name, $field_value, $constraint);
 
 ```
+### Something
+
+Value must not be one of the values defined within the $valid_values_array.
+
+To override, send in an options entry of the values desired:
+
+```php
+
+$valid_values_array = array(false, 0, ' ', NULL);
+$options = array();
+$options['valid_values_array'] = $valid_values_array;
+
+```
+
+#### Validate
+
+Verifies value against constraint, returning a TRUE or FALSE result and error messages
+
+```php
+$response = $request->validate('random_field', $value, 'Something');
+
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
+
+```
+
+#### Sanitize
+
+Returns null if value is defined within the $valid_values_array.
+
+```php
+$response = $request->validate('random_field', $value, 'Something');
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
+
+```
 
 ### String
 Tests that the value is a string.
@@ -1627,7 +1719,7 @@ To override, send in an options entry of the values desired:
 
 $valid_values_array = array(true, 1, 'yes', 'on');
 $options = array();
-$options{'valid_values_array'] = $valid_values_array;
+$options['valid_values_array'] = $valid_values_array;
 
 ```
 
@@ -1742,7 +1834,7 @@ In this example, $response->getValidateResponse() is TRUE since `a` is in the ar
 
 ```php
 $options = array();
-$options{'valid_values_array'] = array('a', 'b', 'c');
+$options['valid_values_array'] = array('a', 'b', 'c');
 $response = $request->validate('random_field', 'a', 'Values', $options);
 
 if ($response->getValidateResponse() === true) {
@@ -1763,7 +1855,7 @@ In this example, $field_value is NULL since `z` is not `a`, `b` or `c`.
 
 ```php
 $options = array();
-$options{'valid_values_array'] = array('a', 'b', 'c');
+$options['valid_values_array'] = array('a', 'b', 'c');
 $response = $request->validate('random_field', 'z', 'Values', $options);
 
 if ($response->getChangeIndicator() === true) {
