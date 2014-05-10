@@ -13,15 +13,15 @@ use CommonApi\Model\ConstraintInterface;
 /**
  * False Constraint
  *
- * Value must conform to one of the values defined within the $false_array.
+ * Value must conform to one of the values defined within the $valid_values_array.
  *
  * To override, send in an options entry of the values desired:
  *
  * ```php
  *
- * $false_array = array(false, 0, 'no', 'off');
+ * $valid_values_array = array(false, 0, 'no', 'off');
  * $options = array();
- * $options{'false_array'] = $false_array;
+ * $options{'valid_values_array'] = $valid_values_array;
  *
  * ```
  *
@@ -44,7 +44,7 @@ use CommonApi\Model\ConstraintInterface;
  *
  * #### Sanitize
  *
- * Returns null if value is not defined within the $false_array.
+ * Returns null if value is not defined within the $valid_values_array.
  *
  * ```php
  * $response = $request->validate('false_only_field', $value, 'False');
@@ -70,13 +70,13 @@ class False extends AbstractArrays implements ConstraintInterface
     /**
      * False array
      *
-     * Override in the Request using $options['false_array'] entry.
+     * Override in the Request using $options['valid_values_array'] entry.
      *
      * @api
      * @var    array
      * @since  1.0.0
      */
-    protected $false_array = array(false, 0, 'no', 'off');
+    protected $valid_values_array = array(false, 0, 'no', 'off');
 
     /**
      * Message Code
@@ -85,36 +85,4 @@ class False extends AbstractArrays implements ConstraintInterface
      * @since  1.0.0
      */
     protected $message_code = 1000;
-
-    /**
-     * Constructor
-     *
-     * @param   string $constraint
-     * @param   string $method
-     * @param   string $field_name
-     * @param   mixed  $field_value
-     * @param   array  $options
-     *
-     * @api
-     * @since   1.0.0
-     */
-    public function __construct(
-        $constraint,
-        $method,
-        $field_name,
-        $field_value,
-        array $options = array()
-    ) {
-        $options = $this->setPropertyKeyWithOptionKey('false_array', $options);
-
-        $this->getCompareToArrayFromInput('false_array', $this->false_array);
-
-        parent::__construct(
-            $constraint,
-            $method,
-            $field_name,
-            $field_value,
-            $options
-        );
-    }
 }

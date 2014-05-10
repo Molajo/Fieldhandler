@@ -14,7 +14,7 @@ use CommonApi\Model\ConstraintInterface;
  * Arrays Constraint
  *
  * Must be an array.
- * Optionally, if $options['valid_array'] is provided, array values must match a value in the valid array.
+ * Optionally, if $options['valid_values_array'] is provided, array values must match a value in the valid array.
  * Optionally, if $options['array_minimum'] is specified, array entries must not be less than that value.
  * Optionally, if $options['array_maximum'] is specified, array entries must not be exceed that value.
  *
@@ -28,7 +28,7 @@ use CommonApi\Model\ConstraintInterface;
  *
  * ```php
  * $options = array();
- * $options['valid_array'] = array('a', 'b', 'c');
+ * $options['valid_values_array'] = array('a', 'b', 'c');
  * $options['array_minimum'] = 1;
  * $response = $request->validate('array_field', array('b', 'c'), 'Array', $options);
  *
@@ -50,7 +50,7 @@ use CommonApi\Model\ConstraintInterface;
  *
  * ```php
  * $options = array();
- * $options['valid_array'] = array('x', 'y', 'z');
+ * $options['valid_values_array'] = array('x', 'y', 'z');
  * $response = $request->validate('array_field', array('b', 'c'), 'Array', $options);
  *
  * if ($response->getChangeIndicator() === true) {
@@ -70,14 +70,6 @@ use CommonApi\Model\ConstraintInterface;
  */
 class Arrays extends AbstractArrays implements ConstraintInterface
 {
-    /**
-     * Array Options Entry Type
-     *
-     * @var    string
-     * @since  1.0.0
-     */
-    protected $compare_to_array_option_name = 'valid_array';
-
     /**
      * Message Code
      *
@@ -158,7 +150,7 @@ class Arrays extends AbstractArrays implements ConstraintInterface
      */
     protected function testValues()
     {
-        if (count($this->compare_to_array_option_values) > 0) {
+        if (count($this->valid_values_array) > 0) {
             return $this->testInputAgainstValidArray(false);
         }
 

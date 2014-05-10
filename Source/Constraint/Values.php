@@ -13,7 +13,7 @@ use CommonApi\Model\ConstraintInterface;
 /**
  * Values Constraint
  *
- * Value (or array of values) must be defined within the $options['array_valid_values'] array.
+ * Value (or array of values) must be defined within the $options['valid_values_array'] array.
  *
  * #### Validate
  *
@@ -23,7 +23,7 @@ use CommonApi\Model\ConstraintInterface;
  *
  * ```php
  * $options = array();
- * $options{'array_valid_values'] = array('a', 'b', 'c');
+ * $options{'valid_values_array'] = array('a', 'b', 'c');
  * $response = $request->validate('random_field', 'a', 'Values', $options);
  *
  * if ($response->getValidateResponse() === true) {
@@ -38,13 +38,13 @@ use CommonApi\Model\ConstraintInterface;
  *
  * #### Sanitize
  *
- * Returns null if value (or array of values) is not defined within the $options['array_valid_values'].
+ * Returns null if value (or array of values) is not defined within the $options['valid_values_array'].
  *
  * In this example, $field_value is NULL since `z` is not `a`, `b` or `c`.
  *
  * ```php
  * $options = array();
- * $options{'array_valid_values'] = array('a', 'b', 'c');
+ * $options{'valid_values_array'] = array('a', 'b', 'c');
  * $response = $request->validate('random_field', 'z', 'Values', $options);
  *
  * if ($response->getChangeIndicator() === true) {
@@ -64,14 +64,6 @@ use CommonApi\Model\ConstraintInterface;
  */
 class Values extends AbstractArrays implements ConstraintInterface
 {
-    /**
-     * Array Options Entry Type
-     *
-     * @var    string
-     * @since  1.0.0
-     */
-    protected $compare_to_array_option_name = 'array_valid_values';
-
     /**
      * Message Code
      *

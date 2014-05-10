@@ -13,13 +13,13 @@ use CommonApi\Model\ConstraintInterface;
 /**
  * Mimetypes
  *
- * Value must conform to one of the values defined within the $mimetype_array.
+ * Value must conform to one of the values defined within the $valid_values_array.
  *
  * To override, send in an options entry of the values desired:
  *
  * ```php
  *
- * $mimetype_array = array(
+ * $valid_values_array = array(
  *         'image/gif',
  *         'image/jpeg',
  *         'image/png',
@@ -29,7 +29,7 @@ use CommonApi\Model\ConstraintInterface;
  *         'text/rtf'
  * );
  * $options = array();
- * $options{'mimetype_array'] = $mimetype_array;
+ * $options{'valid_values_array'] = $valid_values_array;
  *
  * ```
  *
@@ -52,7 +52,7 @@ use CommonApi\Model\ConstraintInterface;
  *
  * #### Sanitize
  *
- * Returns null if value is not defined within the $mimetype_array.
+ * Returns null if value is not defined within the $valid_values_array.
  *
  * ```php
  * $response = $request->validate('mimetype_field', 'application/pdf', 'Mimetypes');
@@ -77,13 +77,13 @@ class Mimetypes extends AbstractArrays implements ConstraintInterface
     /**
      * Valid Mimetypes array
      *
-     * Override in the Request using $options['mimetype_array'] entry.
+     * Override in the Request using $options['valid_values_array'] entry.
      *
      * @api
      * @var    array
      * @since  1.0.0
      */
-    protected $mimetype_array = array(
+    protected $valid_values_array = array(
         'image/gif',
         'image/jpeg',
         'image/png',
@@ -99,36 +99,4 @@ class Mimetypes extends AbstractArrays implements ConstraintInterface
      * @since  1.0.0
      */
     protected $message_code = 1000;
-
-    /**
-     * Constructor
-     *
-     * @param   string $constraint
-     * @param   string $method
-     * @param   string $field_name
-     * @param   mixed  $field_value
-     * @param   array  $options
-     *
-     * @api
-     * @since   1.0.0
-     */
-    public function __construct(
-        $constraint,
-        $method,
-        $field_name,
-        $field_value,
-        array $options = array()
-    ) {
-        $options = $this->setPropertyKeyWithOptionKey('mimetype_array', $options);
-
-        $this->getCompareToArrayFromInput('mimetype_array', $this->mimetype_array);
-
-        parent::__construct(
-            $constraint,
-            $method,
-            $field_name,
-            $field_value,
-            $options
-        );
-    }
 }

@@ -62,7 +62,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
         $field_value                   = 'a';
         $constraint                    = 'Values';
         $options                       = array();
-        $options['array_valid_values'] = array('a', 'b', 'c');
+        $options['valid_values_array'] = array('a', 'b', 'c');
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
@@ -94,7 +94,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
         $field_value                   = 'z';
         $constraint                    = 'Values';
         $options                       = array();
-        $options['array_valid_values'] = array('a', 'b', 'c');
+        $options['valid_values_array'] = array('a', 'b', 'c');
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
@@ -127,7 +127,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
         $field_value                   = 'a';
         $constraint                    = 'Values';
         $options                       = array();
-        $options['array_valid_values'] = array('a', 'b', 'c');
+        $options['valid_values_array'] = array('a', 'b', 'c');
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
@@ -155,7 +155,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
         $field_value                   = 'z';
         $constraint                    = 'Values';
         $options                       = array();
-        $options['array_valid_values'] = array('a', 'b', 'c');
+        $options['valid_values_array'] = array('a', 'b', 'c');
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
@@ -179,7 +179,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
         $field_value                   = 'z';
         $constraint                    = 'Values';
         $options                       = array();
-        $options['array_valid_values'] = array('a', 'b', 'c');
+        $options['valid_values_array'] = array('a', 'b', 'c');
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
@@ -211,7 +211,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
         $field_value                   = array('a', 'b');
         $constraint                    = 'Values';
         $options                       = array();
-        $options['array_valid_values'] = array('a', 'b', 'c');
+        $options['valid_values_array'] = array('a', 'b', 'c');
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
@@ -243,7 +243,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
         $field_value                   = array('a', 'z');
         $constraint                    = 'Values';
         $options                       = array();
-        $options['array_valid_values'] = array('a', 'b', 'c');
+        $options['valid_values_array'] = array('a', 'b', 'c');
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
@@ -276,7 +276,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
         $field_value                   = array('a', 'b', 'c');
         $constraint                    = 'Values';
         $options                       = array();
-        $options['array_valid_values'] = array('a', 'b', 'c');
+        $options['valid_values_array'] = array('a', 'b', 'c');
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
@@ -304,7 +304,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
         $field_value                   = array('a', 'z');
         $constraint                    = 'Values';
         $options                       = array();
-        $options['array_valid_values'] = array('a', 'b', 'c');
+        $options['valid_values_array'] = array('a', 'b', 'c');
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
@@ -328,7 +328,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
         $field_value                   = array('a', 'z');
         $constraint                    = 'Values';
         $options                       = array();
-        $options['array_valid_values'] = array('a', 'b', 'c');
+        $options['valid_values_array'] = array('a', 'b', 'c');
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 

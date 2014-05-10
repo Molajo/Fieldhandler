@@ -13,15 +13,15 @@ use CommonApi\Model\ConstraintInterface;
 /**
  * File Extension
  *
- * Value must conform to one of the values defined within the $file_extension_array.
+ * Value must conform to one of the values defined within the $valid_values_array.
  *
  * To override, send in an options entry of the values desired:
  *
  * ```php
  *
- * $file_extension_array = array('gif', 'jpeg', 'jpg', 'png', 'pdf', 'odt', 'txt', 'rtf', 'mp3');
+ * $valid_values_array = array('gif', 'jpeg', 'jpg', 'png', 'pdf', 'odt', 'txt', 'rtf', 'mp3');
  * $options = array();
- * $options{'file_extension_array'] = $file_extension_array;
+ * $options{'valid_values_array'] = $valid_values_array;
  *
  * ```
  *
@@ -44,7 +44,7 @@ use CommonApi\Model\ConstraintInterface;
  *
  * #### Sanitize
  *
- * Returns null if value is not defined within the $file_extension_array.
+ * Returns null if value is not defined within the $valid_values_array.
  *
  * ```php
  * $response = $request->validate('file_extension_field', '.pdf', 'Fileextension');
@@ -69,13 +69,13 @@ class Fileextension extends AbstractArrays implements ConstraintInterface
     /**
      * Valid File Extensions array
      *
-     * Override in the Request using $options['file_extension_array'] entry.
+     * Override in the Request using $options['valid_values_array'] entry.
      *
      * @api
      * @var    array
      * @since  1.0.0
      */
-    protected $file_extension_array = array('gif', 'jpeg', 'jpg', 'png', 'pdf', 'odt', 'txt', 'rtf', 'mp3');
+    protected $valid_values_array = array('gif', 'jpeg', 'jpg', 'png', 'pdf', 'odt', 'txt', 'rtf', 'mp3');
 
     /**
      * Message Code
@@ -84,36 +84,4 @@ class Fileextension extends AbstractArrays implements ConstraintInterface
      * @since  1.0.0
      */
     protected $message_code = 1000;
-
-    /**
-     * Constructor
-     *
-     * @param   string $constraint
-     * @param   string $method
-     * @param   string $field_name
-     * @param   mixed  $field_value
-     * @param   array  $options
-     *
-     * @api
-     * @since   1.0.0
-     */
-    public function __construct(
-        $constraint,
-        $method,
-        $field_name,
-        $field_value,
-        array $options = array()
-    ) {
-        $options = $this->setPropertyKeyWithOptionKey('file_extension_array', $options);
-
-        $this->getCompareToArrayFromInput('file_extension_array', $this->file_extension_array);
-
-        parent::__construct(
-            $constraint,
-            $method,
-            $field_name,
-            $field_value,
-            $options
-        );
-    }
 }

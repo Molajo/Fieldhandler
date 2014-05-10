@@ -289,7 +289,7 @@ For this constraint, the `format` method is not implemented. The value sent in i
 
 ### Arrays
 Must be an array.
-Optionally, if $options['valid_array'] is provided, array values must match a value in the valid array.
+Optionally, if $options['valid_values_array'] is provided, array values must match a value in the valid array.
 Optionally, if $options['array_minimum'] is specified, array entries must not be less than that value.
 Optionally, if $options['array_maximum'] is specified, array entries must not be exceed that value.
 
@@ -303,7 +303,7 @@ the minimum value allowed of 1.
 
 ```php
 $options = array();
-$options['valid_array'] = array('a', 'b', 'c');
+$options['valid_values_array'] = array('a', 'b', 'c');
 $options['array_minimum'] = 1;
 $response = $request->validate('array_field', array('b', 'c'), 'Array', $options);
 
@@ -325,7 +325,7 @@ In this example, $field_value is NULL since `b` and `c` are not in the valid arr
 
 ```php
 $options = array();
-$options['valid_array'] = array('x', 'y', 'z');
+$options['valid_values_array'] = array('x', 'y', 'z');
 $response = $request->validate('array_field', array('b', 'c'), 'Array', $options);
 
 if ($response->getChangeIndicator() === true) {
@@ -730,15 +730,15 @@ Tests that a value is equal to a specified value.
 ```
 ### False
 
-Value must conform to one of the values defined within the $false_array.
+Value must conform to one of the values defined within the $valid_values_array.
 
 To override, send in an options entry of the values desired:
 
 ```php
 
-$false_array = array(false, 0, 'no', 'off');
+$valid_values_array = array(false, 0, 'no', 'off');
 $options = array();
-$options{'false_array'] = $false_array;
+$options{'valid_values_array'] = $valid_values_array;
 
 ```
 
@@ -761,7 +761,7 @@ if ($response->getValidateResponse() === true) {
 
 #### Sanitize
 
-Returns null if value is not defined within the $false_array.
+Returns null if value is not defined within the $valid_values_array.
 
 ```php
 $response = $request->validate('false_only_field', $value, 'False');
@@ -778,15 +778,15 @@ Not implemented. Value sent in is returned unchanged.
 
 ### Fileextension
 
-Value must conform to one of the values defined within the $file_extension_array.
+Value must conform to one of the values defined within the $valid_values_array.
 
 To override, send in an options entry of the values desired:
 
 ```php
 
-$file_extension_array = array('gif', 'jpeg', 'jpg', 'png', 'pdf', 'odt', 'txt', 'rtf', 'mp3');
+$valid_values_array = array('gif', 'jpeg', 'jpg', 'png', 'pdf', 'odt', 'txt', 'rtf', 'mp3');
 $options = array();
-$options{'file_extension_array'] = $file_extension_array;
+$options{'valid_values_array'] = $valid_values_array;
 
 ```
 
@@ -809,7 +809,7 @@ if ($response->getValidateResponse() === true) {
 
 #### Sanitize
 
-Returns null if value is not defined within the $file_extension_array.
+Returns null if value is not defined within the $valid_values_array.
 
 ```php
 $response = $request->validate('file_extension_field', '.pdf', 'Fileextension');
@@ -1183,13 +1183,13 @@ Validates or filters/escapes numeric value to not exceed the maximum.
 
 ### Mimetypes
 
-Value must conform to one of the values defined within the $mimetype_array.
+Value must conform to one of the values defined within the $valid_values_array.
 
 To override, send in an options entry of the values desired:
 
 ```php
 
-$mimetype_array = array(
+$valid_values_array = array(
         'image/gif',
         'image/jpeg',
         'image/png',
@@ -1199,7 +1199,7 @@ $mimetype_array = array(
         'text/rtf'
 );
 $options = array();
-$options{'mimetype_array'] = $mimetype_array;
+$options{'valid_values_array'] = $valid_values_array;
 
 ```
 
@@ -1222,7 +1222,7 @@ if ($response->getValidateResponse() === true) {
 
 #### Sanitize
 
-Returns null if value is not defined within the $mimetype_array.
+Returns null if value is not defined within the $valid_values_array.
 
 ```php
 $response = $request->validate('mimetype_field', 'application/pdf', 'Mimetypes');
@@ -1582,15 +1582,15 @@ Performs sanitize.
 
 ### True
 
-Value must conform to one of the values defined within the $true_array.
+Value must conform to one of the values defined within the $valid_values_array.
 
 To override, send in an options entry of the values desired:
 
 ```php
 
-$true_array = array(true, 1, 'yes', 'on');
+$valid_values_array = array(true, 1, 'yes', 'on');
 $options = array();
-$options{'true_array'] = $true_array;
+$options{'valid_values_array'] = $valid_values_array;
 
 ```
 
@@ -1613,7 +1613,7 @@ if ($response->getValidateResponse() === true) {
 
 #### Sanitize
 
-Returns null if value is not defined within the $true_array.
+Returns null if value is not defined within the $valid_values_array.
 
 ```php
 $response = $request->validate('true_only_field', $value, 'True');
@@ -1695,7 +1695,7 @@ Filter and Escape return null.
 
 ### Values
 
-Value (or array of values) must be defined within the $options['array_valid_values'] array.
+Value (or array of values) must be defined within the $options['valid_values_array'] array.
 
 #### Validate
 
@@ -1705,7 +1705,7 @@ In this example, $response->getValidateResponse() is TRUE since `a` is in the ar
 
 ```php
 $options = array();
-$options{'array_valid_values'] = array('a', 'b', 'c');
+$options{'valid_values_array'] = array('a', 'b', 'c');
 $response = $request->validate('random_field', 'a', 'Values', $options);
 
 if ($response->getValidateResponse() === true) {
@@ -1720,13 +1720,13 @@ if ($response->getValidateResponse() === true) {
 
 #### Sanitize
 
-Returns null if value (or array of values) is not defined within the $options['array_valid_values'].
+Returns null if value (or array of values) is not defined within the $options['valid_values_array'].
 
 In this example, $field_value is NULL since `z` is not `a`, `b` or `c`.
 
 ```php
 $options = array();
-$options{'array_valid_values'] = array('a', 'b', 'c');
+$options{'valid_values_array'] = array('a', 'b', 'c');
 $response = $request->validate('random_field', 'z', 'Values', $options);
 
 if ($response->getChangeIndicator() === true) {

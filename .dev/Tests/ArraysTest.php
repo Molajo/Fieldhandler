@@ -61,7 +61,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
         $field_name  = 'test';
         $field_value = array(1, 2);
         $constraint  = 'Arrays';
-        $options     = array('valid_array' => array(1, 2, 3));
+        $options     = array('valid_values_array' => array(1, 2, 3));
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
@@ -125,7 +125,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
         $field_name  = 'animals';
         $field_value = array('dog', 'cat');
         $constraint  = 'Arrays';
-        $options     = array('valid_array' => array('dog', 'cat', 'dogs', 'cats'));
+        $options     = array('valid_values_array' => array('dog', 'cat', 'dogs', 'cats'));
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
@@ -152,7 +152,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
         $field_name  = 'Random Array';
         $field_value = array('dog', 'cat');
         $constraint  = 'Arrays';
-        $options     = array('valid_array' => array('x', 'y'));
+        $options     = array('valid_values_array' => array('x', 'y'));
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
@@ -176,7 +176,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
         $field_name  = 'alias';
         $field_value = array(1, 2);
         $constraint  = 'Arrays';
-        $options     = array('valid_array' => array('x', 'y'));
+        $options     = array('valid_values_array' => array('x', 'y'));
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
