@@ -13,7 +13,56 @@ use CommonApi\Model\ConstraintInterface;
 /**
  * Arrays Constraint
  *
- * @link       http://php.net/manual/en/function.is-array.php
+ * Must be an array.
+ * Optionally, if $options['valid_array'] is provided, array values must match a value in the valid array.
+ * Optionally, if $options['array_minimum'] is specified, array entries must not be less than that value.
+ * Optionally, if $options['array_maximum'] is specified, array entries must not be exceed that value.
+ *
+ * #### Validate
+ *
+ * Verifies value (or array of values) against constraint, returning a TRUE or FALSE result and error messages
+ *
+ * In this example, $response->getValidateResponse() is TRUE since `b` and `c` are in the
+ * valid array of `a`, `b`, `c` and because there are two entries in the input array which is more than
+ * the minimum value allowed of 1.
+ *
+ * ```php
+ * $options = array();
+ * $options['valid_array'] = array('a', 'b', 'c');
+ * $options['array_minimum'] = 1;
+ * $response = $request->validate('array_field', array('b', 'c'), 'Array', $options);
+ *
+ * if ($response->getValidateResponse() === true) {
+ *     // all is well
+ * } else {
+ *     foreach ($response->getValidateMessages as $code => $message) {
+ *         echo $code . ': ' . $message . '/n';
+ *     }
+ * }
+ *
+ * ```
+ *
+ * #### Sanitize
+ *
+ * Returns null if the array does not meet the constraint definition.
+ *
+ * In this example, $field_value is NULL since `b` and `c` are not in the valid array values.
+ *
+ * ```php
+ * $options = array();
+ * $options['valid_array'] = array('x', 'y', 'z');
+ * $response = $request->validate('array_field', array('b', 'c'), 'Array', $options);
+ *
+ * if ($response->getChangeIndicator() === true) {
+ *     $field_value = $response->getFieldValue();
+ * }
+ *
+ * ```
+ *
+ * #### Format
+ *
+ * Not implemented. Value sent in is returned unchanged.
+ *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License

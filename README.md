@@ -288,19 +288,56 @@ if ($response->getChangeIndicator() === true) {
 For this constraint, the `format` method is not implemented. The value sent in is not evaluated or changed.
 
 ### Arrays
-Tests if value is an array.
+Must be an array.
+Optionally, if $options['valid_array'] is provided, array values must match a value in the valid array.
+Optionally, if $options['array_minimum'] is specified, array entries must not be less than that value.
+Optionally, if $options['array_maximum'] is specified, array entries must not be exceed that value.
+
+#### Validate
+
+Verifies value (or array of values) against constraint, returning a TRUE or FALSE result and error messages
+
+In this example, $response->getValidateResponse() is TRUE since `b` and `c` are in the
+valid array of `a`, `b`, `c` and because there are two entries in the input array which is more than
+the minimum value allowed of 1.
 
 ```php
-    // Field order_number array('ABC123', 'DEF456') would be returned as same for
+$options = array();
+$options['valid_array'] = array('a', 'b', 'c');
+$options['array_minimum'] = 1;
+$response = $request->validate('array_field', array('b', 'c'), 'Array', $options);
 
-    $results = $request->sanitize('order_number', array('ABC123', 'DEF456'), 'Array');
-
-    array_valid_keys
-    array_valid_values
-    array_minimum (default 0)
-    array_maximum (default 9999999999)
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
 
 ```
+
+#### Sanitize
+
+Returns null if the array does not meet the constraint definition.
+
+In this example, $field_value is NULL since `b` and `c` are not in the valid array values.
+
+```php
+$options = array();
+$options['valid_array'] = array('x', 'y', 'z');
+$response = $request->validate('array_field', array('b', 'c'), 'Array', $options);
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
+
+```
+
+#### Format
+
+Not implemented. Value sent in is returned unchanged.
+
 
 ### Boolean
 
