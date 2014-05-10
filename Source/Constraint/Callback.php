@@ -97,25 +97,6 @@ class Callback extends AbstractFiltervar implements ConstraintInterface
     protected $message_code = 1000;
 
     /**
-     * Validation
-     *
-     * @return  boolean
-     * @since   1.0.0
-     */
-    public function validate()
-    {
-        $hold = $this->field_value;
-
-        if ($hold === $this->sanitize()) {
-            return true;
-        }
-
-        $this->setValidateMessage($this->message_code);
-
-        return false;
-    }
-
-    /**
      * Sanitize
      *
      * @return  null|mixed

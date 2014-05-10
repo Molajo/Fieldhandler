@@ -77,13 +77,13 @@ class Defaults extends AbstractConstraintTests implements ConstraintInterface
      */
     public function validate()
     {
-        if ($this->field_value === null) {
-            $this->setValidateMessage($this->message_code);
-
-            return false;
+        if ($this->field_value !== null) {
+            return true;
         }
 
-        return true;
+        $this->setValidateMessage($this->message_code);
+
+        return false;
     }
 
     /**

@@ -105,7 +105,7 @@ abstract class AbstractFiltervar extends AbstractConstraintTests implements Cons
     public function sanitize()
     {
         if ($this->sanitize_filter === null) {
-            return $this->sanitizeNull();
+            return $this->sanitizeValidate();
         }
 
         $this->field_value = filter_var($this->field_value, $this->sanitize_filter, $this->setFlags());
@@ -114,23 +114,7 @@ abstract class AbstractFiltervar extends AbstractConstraintTests implements Cons
             return $this->field_value;
         }
 
-        return $this->validateSanitizedResult();
-    }
-
-    /**
-     * Sanitize to null if not validated
-     *
-     * @return  null|mixed
-     * @since   1.0.0
-     */
-    public function sanitizeNull()
-    {
-        if (filter_var($this->field_value, $this->validate_filter, $this->setFlags())) {
-        } else {
-            $this->field_value = null;
-        }
-
-        return $this->field_value;
+        return $this->sanitizeValidate();
     }
 
     /**
@@ -139,7 +123,7 @@ abstract class AbstractFiltervar extends AbstractConstraintTests implements Cons
      * @return  null|mixed
      * @since   1.0.0
      */
-    public function validateSanitizedResult()
+    public function sanitizeValidate()
     {
         if (filter_var($this->field_value, $this->validate_filter, $this->setFlags())) {
         } else {
