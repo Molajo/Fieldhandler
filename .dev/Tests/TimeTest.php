@@ -1,6 +1,6 @@
 <?php
 /**
- * Date Constraint Test
+ * Time Constraint Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -10,17 +10,16 @@ namespace Molajo\Fieldhandler\Tests;
 
 use Molajo\Fieldhandler\Request;
 use PHPUnit_Framework_TestCase;
-use CommonApi\Exception\UnexpectedValueException;
 
 /**
- * Date Fieldhandler
+ * Time Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class DateTest extends PHPUnit_Framework_TestCase
+class TimeTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Request
@@ -33,7 +32,7 @@ class DateTest extends PHPUnit_Framework_TestCase
     /**
      * Set up
      *
-     * @return void
+     * @return  void
      * @since   1.0.0
      */
     protected function setUp()
@@ -42,54 +41,54 @@ class DateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Date::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Time::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getvalidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setvalidateMessage
      *
      * @return  void
      * @since   1.0.0
      */
-    public function testValidateSuccessTrue()
+    public function testvalidateSuccessTrue()
     {
-        $field_name  = 'this_is_a_date_field';
+        $field_name  = 'this_is_a_Time_field';
         $field_value = '2013-04-01';
-        $constraint  = 'Date';
+        $constraint  = 'Time';
 
         $results = $this->request->validate($field_name, $field_value, $constraint);
 
-        $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(true, $results->getvalidateResponse());
 
-        $messages = $results->getValidateMessages();
+        $messages = $results->getvalidateMessages();
         $this->assertEquals(array(), $messages);
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Date::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Time::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getvalidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setvalidateMessage
      *
      * @return  void
      * @since   1.0.0
      */
-    public function testValidateFalse()
+    public function testvalidateFalse()
     {
-        $field_name  = 'this_is_a_date_field';
+        $field_name  = 'this_is_a_Time_field';
         $field_value = 'gggghhhhhh';
-        $constraint  = 'Date';
+        $constraint  = 'Time';
 
         $results = $this->request->validate($field_name, $field_value, $constraint);
 
-        $this->assertEquals(false, $results->getValidateResponse());
+        $this->assertEquals(false, $results->getvalidateResponse());
 
         $expected_code    = 2000;
-        $expected_message = 'Field: this_is_a_date_field must only contain Date values.';
-        $messages         = $results->getValidateMessages();
+        $expected_message = 'Field: this_is_a_Time_field must only contain Time values.';
+        $messages         = $results->getvalidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);
 
@@ -97,23 +96,23 @@ class DateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Date::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Time::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getvalidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setvalidateMessage
      *
      * @return  void
      * @since   1.0.0
      */
     public function testSanitizeNoChange()
     {
-        $field_name  = 'this_is_a_date_field';
+        $field_name  = 'this_is_a_Time_field';
         $field_value = '2012-09-13';
-        $constraint  = 'Date';
+        $constraint  = 'Time';
         $options     = array(
-            'create_from_date_format' => 'Y-m-d',
-            'display_as_date_format'  => 'd/m/Y'
+            'create_from_Time_format' => 'Y-m-d',
+            'display_as_Time_format'  => 'd/m/Y'
         );
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
@@ -125,22 +124,22 @@ class DateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Date::sanitize
-     * @covers  Molajo\Fieldhandler\Constraint\Date::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Time::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Time::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getvalidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setvalidateMessage
      *
      * @return  void
      * @since   1.0.0
      */
     public function testSanitizeChange()
     {
-        $field_name  = 'this_is_a_date_field';
+        $field_name  = 'this_is_a_Time_field';
         $field_value = 'gggghhhhhh';
 
-        $constraint = 'Date';
+        $constraint = 'Time';
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint);
 
@@ -151,7 +150,7 @@ class DateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Date::format
+     * @covers  Molajo\Fieldhandler\Constraint\Time::format
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
      *
@@ -160,12 +159,12 @@ class DateTest extends PHPUnit_Framework_TestCase
      */
     public function testFormatSuccess()
     {
-        $field_name  = 'this_is_a_date_field';
+        $field_name  = 'this_is_a_Time_field';
         $field_value = '2012-09-13';
-        $constraint  = 'Date';
+        $constraint  = 'Time';
         $options     = array(
-            'create_from_date_format' => 'Y-m-d',
-            'display_as_date_format'  => 'm/d/Y'
+            'create_from_Time_format' => 'Y-m-d',
+            'display_as_Time_format'  => 'm/d/Y'
         );
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
