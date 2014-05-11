@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1399783902">
-  <project timestamp="1399783902">
+<coverage generated="1399785448">
+  <project timestamp="1399785448">
     <package name="Molajo\Factories\Fieldhandler">
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Factories/Fieldhandler/FieldhandlerFactoryMethod.php">
         <class name="FieldhandlerFactoryMethod" namespace="Molajo\Factories\Fieldhandler">
@@ -171,7 +171,7 @@
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/AbstractConstraintTests.php">
         <class name="AbstractConstraintTests" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
-          <metrics methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="31" coveredstatements="30" elements="36" coveredelements="35"/>
+          <metrics methods="6" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="64" coveredstatements="30" elements="70" coveredelements="35"/>
         </class>
         <line num="29" type="method" name="setFlags" crap="2" count="13"/>
         <line num="31" type="stmt" count="13"/>
@@ -209,7 +209,41 @@
         <line num="128" type="stmt" count="50"/>
         <line num="129" type="stmt" count="49"/>
         <line num="132" type="stmt" count="24"/>
-        <metrics loc="134" ncloc="75" classes="1" methods="5" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="31" coveredstatements="30" elements="36" coveredelements="34"/>
+        <line num="143" type="method" name="testComparison" crap="182" count="0"/>
+        <line num="145" type="stmt" count="0"/>
+        <line num="146" type="stmt" count="0"/>
+        <line num="149" type="stmt" count="0"/>
+        <line num="150" type="stmt" count="0"/>
+        <line num="151" type="stmt" count="0"/>
+        <line num="152" type="stmt" count="0"/>
+        <line num="153" type="stmt" count="0"/>
+        <line num="154" type="stmt" count="0"/>
+        <line num="155" type="stmt" count="0"/>
+        <line num="156" type="stmt" count="0"/>
+        <line num="157" type="stmt" count="0"/>
+        <line num="159" type="stmt" count="0"/>
+        <line num="160" type="stmt" count="0"/>
+        <line num="161" type="stmt" count="0"/>
+        <line num="162" type="stmt" count="0"/>
+        <line num="163" type="stmt" count="0"/>
+        <line num="164" type="stmt" count="0"/>
+        <line num="165" type="stmt" count="0"/>
+        <line num="166" type="stmt" count="0"/>
+        <line num="167" type="stmt" count="0"/>
+        <line num="168" type="stmt" count="0"/>
+        <line num="169" type="stmt" count="0"/>
+        <line num="170" type="stmt" count="0"/>
+        <line num="171" type="stmt" count="0"/>
+        <line num="172" type="stmt" count="0"/>
+        <line num="173" type="stmt" count="0"/>
+        <line num="174" type="stmt" count="0"/>
+        <line num="175" type="stmt" count="0"/>
+        <line num="176" type="stmt" count="0"/>
+        <line num="177" type="stmt" count="0"/>
+        <line num="178" type="stmt" count="0"/>
+        <line num="179" type="stmt" count="0"/>
+        <line num="182" type="stmt" count="0"/>
+        <metrics loc="184" ncloc="117" classes="1" methods="6" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="64" coveredstatements="30" elements="70" coveredelements="34"/>
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/AbstractCtype.php">
         <class name="AbstractCtype" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
@@ -538,8 +572,8 @@
         <class name="Date" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
           <metrics methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
-        <line num="78" type="stmt" count="0"/>
-        <metrics loc="77" ncloc="9" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        <line num="77" type="stmt" count="0"/>
+        <metrics loc="76" ncloc="8" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/Defaults.php">
         <class name="Defaults" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
@@ -591,14 +625,12 @@
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/Equal.php">
         <class name="Equal" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
-          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
         </class>
-        <line num="37" type="method" name="validation" crap="2" count="4"/>
+        <line num="37" type="method" name="validation" crap="1" count="4"/>
         <line num="39" type="stmt" count="4"/>
-        <line num="40" type="stmt" count="2"/>
-        <line num="43" type="stmt" count="2"/>
-        <line num="46" type="stmt" count="0"/>
-        <metrics loc="45" ncloc="18" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+        <line num="42" type="stmt" count="0"/>
+        <metrics loc="41" ncloc="14" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/False.php">
         <class name="False" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
@@ -712,14 +744,12 @@
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/Greaterthan.php">
         <class name="Greaterthan" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
-          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
         </class>
-        <line num="30" type="method" name="validation" crap="2" count="6"/>
-        <line num="32" type="stmt" count="6"/>
-        <line num="33" type="stmt" count="3"/>
-        <line num="36" type="stmt" count="3"/>
-        <line num="39" type="stmt" count="0"/>
-        <metrics loc="38" ncloc="16" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+        <line num="29" type="method" name="validation" crap="1" count="6"/>
+        <line num="31" type="stmt" count="6"/>
+        <line num="34" type="stmt" count="0"/>
+        <metrics loc="33" ncloc="12" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/Hexidecimal.php">
         <class name="Hexidecimal" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
@@ -836,14 +866,12 @@
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/Lessthan.php">
         <class name="Lessthan" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
-          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
         </class>
-        <line num="30" type="method" name="validation" crap="2" count="6"/>
-        <line num="32" type="stmt" count="6"/>
-        <line num="33" type="stmt" count="3"/>
-        <line num="36" type="stmt" count="3"/>
-        <line num="39" type="stmt" count="0"/>
-        <metrics loc="38" ncloc="16" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+        <line num="29" type="method" name="validation" crap="1" count="6"/>
+        <line num="31" type="stmt" count="6"/>
+        <line num="34" type="stmt" count="0"/>
+        <metrics loc="33" ncloc="12" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/Lower.php">
         <class name="Lower" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
@@ -856,14 +884,12 @@
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/Maximum.php">
         <class name="Maximum" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
-          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
         </class>
-        <line num="30" type="method" name="validation" crap="2" count="6"/>
-        <line num="32" type="stmt" count="6"/>
-        <line num="33" type="stmt" count="4"/>
-        <line num="36" type="stmt" count="2"/>
-        <line num="39" type="stmt" count="0"/>
-        <metrics loc="38" ncloc="16" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+        <line num="29" type="method" name="validation" crap="1" count="6"/>
+        <line num="31" type="stmt" count="6"/>
+        <line num="34" type="stmt" count="0"/>
+        <metrics loc="33" ncloc="12" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/Mimetypes.php">
         <class name="Mimetypes" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
@@ -874,25 +900,21 @@
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/Minimum.php">
         <class name="Minimum" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
-          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
         </class>
-        <line num="30" type="method" name="validation" crap="2" count="6"/>
-        <line num="32" type="stmt" count="6"/>
-        <line num="33" type="stmt" count="4"/>
-        <line num="36" type="stmt" count="2"/>
-        <line num="39" type="stmt" count="0"/>
-        <metrics loc="38" ncloc="16" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+        <line num="29" type="method" name="validation" crap="1" count="6"/>
+        <line num="31" type="stmt" count="6"/>
+        <line num="34" type="stmt" count="0"/>
+        <metrics loc="33" ncloc="12" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/Notequal.php">
         <class name="Notequal" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
-          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
         </class>
-        <line num="38" type="method" name="validation" crap="2" count="4"/>
-        <line num="40" type="stmt" count="4"/>
-        <line num="41" type="stmt" count="2"/>
-        <line num="44" type="stmt" count="2"/>
-        <line num="47" type="stmt" count="0"/>
-        <metrics loc="46" ncloc="18" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+        <line num="37" type="method" name="validation" crap="1" count="4"/>
+        <line num="39" type="stmt" count="4"/>
+        <line num="42" type="stmt" count="0"/>
+        <metrics loc="41" ncloc="14" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/Nothing.php">
         <class name="Nothing" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
@@ -1092,8 +1114,8 @@
         <class name="Time" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
           <metrics methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
-        <line num="85" type="stmt" count="0"/>
-        <metrics loc="84" ncloc="10" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        <line num="84" type="stmt" count="0"/>
+        <metrics loc="83" ncloc="9" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/Trim.php">
         <class name="Trim" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
@@ -2343,6 +2365,6 @@
         <metrics loc="18" ncloc="8" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
     </package>
-    <metrics files="120" loc="10621" ncloc="3780" classes="99" methods="225" coveredmethods="107" conditionals="0" coveredconditionals="0" statements="1463" coveredstatements="585" elements="1688" coveredelements="692"/>
+    <metrics files="120" loc="10640" ncloc="3796" classes="99" methods="226" coveredmethods="107" conditionals="0" coveredconditionals="0" statements="1484" coveredstatements="573" elements="1710" coveredelements="680"/>
   </project>
 </coverage>

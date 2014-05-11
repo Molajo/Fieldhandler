@@ -21,18 +21,13 @@ use CommonApi\Model\ConstraintInterface;
 class Greaterthan extends AbstractConstraintTests implements ConstraintInterface
 {
     /**
-     * Verify that the values are not equal
+     * Verify if the input value is greater than comparison value
      *
      * @return  boolean
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     protected function validation()
     {
-        if ($this->field_value > $this->getOption('greater_than')) {
-            return true;
-        }
-
-        return false;
+        return $this->testComparison('greater_than');
     }
 }

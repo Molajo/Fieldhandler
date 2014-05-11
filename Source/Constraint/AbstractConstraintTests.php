@@ -131,4 +131,54 @@ abstract class AbstractConstraintTests extends AbstractConstraint implements Con
 
         return '';
     }
+
+    /**
+     * Test Compare
+     *
+     * @param   string $comparison
+     *
+     * @return  null|string
+     * @since   1.0.0
+     */
+    protected function testComparison($comparison)
+    {
+        $compare_value     = $this->getOption($comparison);
+        $comparison_result = false;
+
+        switch ($comparison) {
+            case 'equals':
+                if ($this->field_value === $compare_value) {
+                    $comparison_result = true;
+                }
+                break;
+            case 'not_equal':
+                if ($this->field_value === $compare_value) {
+                } else {
+                    $comparison_result = true;
+                }
+                break;
+            case 'greater_than':
+                if ($this->field_value > $compare_value) {
+                    $comparison_result = true;
+                }
+                break;
+            case 'less_than':
+                if ($this->field_value < $compare_value) {
+                    $comparison_result = true;
+                }
+                break;
+            case 'maximum':
+                if ($compare_value >= $this->field_value) {
+                    $comparison_result = true;
+                }
+                break;
+            case 'minimum':
+                if ($compare_value <= $this->field_value) {
+                    $comparison_result = true;
+                }
+                break;
+        }
+
+        return $comparison_result;
+    }
 }

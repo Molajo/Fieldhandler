@@ -21,18 +21,13 @@ use CommonApi\Model\ConstraintInterface;
 class Minimum extends AbstractConstraintTests implements ConstraintInterface
 {
     /**
-     * Verify that the value is less or equal to a supplied value
+     * Verify if the input value is less than or equal to comparison value
      *
      * @return  boolean
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     protected function validation()
     {
-        if ($this->field_value >= $this->getOption('minimum')) {
-            return true;
-        }
-
-        return false;
+        return $this->testComparison('minimum');
     }
 }

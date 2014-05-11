@@ -36,10 +36,6 @@ class Equal extends AbstractConstraintTests implements ConstraintInterface
      */
     protected function validation()
     {
-        if ($this->field_value === $this->getOption('equals')) {
-            return true;
-        }
-
-        return false;
+        return $this->testComparison('equals');
     }
 }

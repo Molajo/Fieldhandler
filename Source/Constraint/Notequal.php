@@ -29,18 +29,13 @@ class Notequal extends AbstractConstraintTests implements ConstraintInterface
     protected $message_code = 8000;
 
     /**
-     * Verify that the values are not equal
+     * Verify if the input value is not equal to comparison value
      *
      * @return  boolean
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     protected function validation()
     {
-        if ($this->field_value === $this->getOption('not_equal')) {
-            return false;
-        }
-
-        return true;
+        return $this->testComparison('not_equal');
     }
 }

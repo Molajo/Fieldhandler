@@ -9,7 +9,6 @@
 namespace Molajo\Fieldhandler\Constraint;
 
 use CommonApi\Model\ConstraintInterface;
-use DateTime;
 
 /**
  * Time Constraint
