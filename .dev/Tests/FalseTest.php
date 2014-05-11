@@ -45,6 +45,8 @@ class FalseTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\False::validation
      * @covers  Molajo\Fieldhandler\Constraint\False::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\False::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::__construct
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromOptions
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
@@ -76,6 +78,9 @@ class FalseTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\False::validation
      * @covers  Molajo\Fieldhandler\Constraint\False::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\False::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::__construct
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromOptions
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testArrayInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
@@ -107,6 +112,9 @@ class FalseTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\False::validation
      * @covers  Molajo\Fieldhandler\Constraint\False::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\False::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::__construct
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromOptions
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testArrayInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
@@ -138,6 +146,9 @@ class FalseTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\False::validation
      * @covers  Molajo\Fieldhandler\Constraint\False::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\False::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::__construct
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromOptions
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testArrayInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
@@ -169,6 +180,9 @@ class FalseTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\False::validation
      * @covers  Molajo\Fieldhandler\Constraint\False::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\False::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::__construct
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromOptions
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testArrayInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
@@ -204,6 +218,9 @@ class FalseTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\False::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\False::validation
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::__construct
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromOptions
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testArrayInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testStringInputAgainstValidArray
@@ -231,6 +248,9 @@ class FalseTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\False::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\False::validation
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::__construct
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromOptions
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testArrayInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testStringInputAgainstValidArray

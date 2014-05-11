@@ -201,7 +201,8 @@ class TrueTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\True::sanitize
+     * @covers  Molajo\Fieldhandler\HandleResponse::testNoValueChange
+     * @covers  Molajo\Fieldhandler\HandleResponse::testNoValueChangeCompare
      * @covers  Molajo\Fieldhandler\Constraint\True::validation
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput

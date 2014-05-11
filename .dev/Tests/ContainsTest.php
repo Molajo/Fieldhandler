@@ -41,6 +41,8 @@ class ContainsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers  Molajo\Fieldhandler\Request::runConstraintMethod
+     * @covers  Molajo\Fieldhandler\Request::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Contains::validate
      * @covers  Molajo\Fieldhandler\Constraint\Contains::validation
      * @covers  Molajo\Fieldhandler\Constraint\Contains::getValidateMessages
@@ -72,6 +74,8 @@ class ContainsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers  Molajo\Fieldhandler\Request::runConstraintMethod
+     * @covers  Molajo\Fieldhandler\Request::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Contains::validate
      * @covers  Molajo\Fieldhandler\Constraint\Contains::validation
      * @covers  Molajo\Fieldhandler\Constraint\Contains::getValidateMessages

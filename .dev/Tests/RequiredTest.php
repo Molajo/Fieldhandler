@@ -49,6 +49,7 @@ class RequiredTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::testInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::testStringInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::validateResponseArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
@@ -84,6 +85,7 @@ class RequiredTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::testInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::testStringInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::validateResponseArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
@@ -116,6 +118,11 @@ class RequiredTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Required::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\Required::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::getCompareToArrayFromInput
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::testInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::testStringInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::validateResponseArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
@@ -143,6 +150,11 @@ class RequiredTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Required::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\Required::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::getCompareToArrayFromInput
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::testInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::testStringInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::validateResponseArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray

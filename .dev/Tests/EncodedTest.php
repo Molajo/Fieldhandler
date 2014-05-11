@@ -45,6 +45,7 @@ class EncodedTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\Encoded::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Encoded::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validateCompare
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
@@ -71,6 +72,7 @@ class EncodedTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\Encoded::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Encoded::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validateCompare
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      * @return  void
@@ -98,7 +100,10 @@ class EncodedTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Encoded::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validateCompare
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitizeValidate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
@@ -123,7 +128,10 @@ class EncodedTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Encoded::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validateCompare
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitizeValidate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize

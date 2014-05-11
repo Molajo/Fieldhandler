@@ -43,7 +43,9 @@ class EscapeProxyTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers  Molajo\Fieldhandler\Escape::__construct
      * @covers  Molajo\Fieldhandler\Escape::escapeHtml
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -58,7 +60,9 @@ class EscapeProxyTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers  Molajo\Fieldhandler\Escape::__construct
      * @covers  Molajo\Fieldhandler\Escape::escapeHtmlAttributes
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -73,7 +77,9 @@ class EscapeProxyTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers  Molajo\Fieldhandler\Escape::__construct
      * @covers  Molajo\Fieldhandler\Escape::escapeJs
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -89,7 +95,9 @@ class EscapeProxyTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers  Molajo\Fieldhandler\Escape::__construct
      * @covers  Molajo\Fieldhandler\Escape::escapeCss
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -107,7 +115,9 @@ class EscapeProxyTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers  Molajo\Fieldhandler\Escape::__construct
      * @covers  Molajo\Fieldhandler\Escape::escapeUrl
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -119,16 +129,6 @@ class EscapeProxyTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($results, $string);
 
         return;
-    }
-
-    /**
-     * Tear down
-     *
-     * @return void
-     * @since   1.0.0
-     */
-    protected function tearDown()
-    {
     }
 }
 

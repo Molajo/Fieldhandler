@@ -44,13 +44,15 @@ class IpTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\Ip::validate
      * @covers  Molajo\Fieldhandler\Constraint\Ip::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Ip::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validateCompare
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
      * @return  void
      * @since   1.0.0
      */
-    public function testValidateSuccess()
+    public function testValidateTrue()
     {
         $field_name                  = 'ip_fieldname';
         $field_value                 = '127.0.0.1';
@@ -72,13 +74,15 @@ class IpTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\Ip::validate
      * @covers  Molajo\Fieldhandler\Constraint\Ip::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Ip::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validateCompare
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
      * @return  void
      * @since   1.0.0
      */
-    public function testValidate2()
+    public function testValidateTrueNull()
     {
         $field_name  = 'ip_fieldname';
         $field_value = null;
@@ -97,6 +101,12 @@ class IpTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Ip::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validateCompare
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
      * @return void
      * @since   1.0.0
      */
@@ -123,6 +133,10 @@ class IpTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Ip::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validateCompare
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitizeValidate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
@@ -148,6 +162,10 @@ class IpTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Ip::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validateCompare
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitizeValidate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
@@ -174,6 +192,10 @@ class IpTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Ip::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validateCompare
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitizeValidate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize

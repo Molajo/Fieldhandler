@@ -44,6 +44,8 @@ class FloatTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\Float::validate
      * @covers  Molajo\Fieldhandler\Constraint\Float::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Float::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validateCompare
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
@@ -69,6 +71,8 @@ class FloatTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\Float::validate
      * @covers  Molajo\Fieldhandler\Constraint\Float::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Float::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validateCompare
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
@@ -97,7 +101,10 @@ class FloatTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Float::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validateCompare
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitizeValidate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
@@ -123,7 +130,10 @@ class FloatTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Float::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validateCompare
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitizeValidate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
@@ -148,7 +158,10 @@ class FloatTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Float::format
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validateCompare
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitizeValidate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format

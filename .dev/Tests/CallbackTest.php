@@ -42,9 +42,13 @@ class CallbackTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers  Molajo\Fieldhandler\Request::runConstraintMethod
+     * @covers  Molajo\Fieldhandler\Request::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Callback::validate
      * @covers  Molajo\Fieldhandler\Constraint\Callback::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Callback::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\Callback::validateCompare
+     * @covers  Molajo\Fieldhandler\Constraint\Callback::sanitizeValidate
      * @covers  Molajo\Fieldhandler\Constraint\Callback::setCallback
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
@@ -71,9 +75,13 @@ class CallbackTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers  Molajo\Fieldhandler\Request::runConstraintMethod
+     * @covers  Molajo\Fieldhandler\Request::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Callback::validate
      * @covers  Molajo\Fieldhandler\Constraint\Callback::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Callback::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\Callback::validateCompare
+     * @covers  Molajo\Fieldhandler\Constraint\Callback::sanitizeValidate
      * @covers  Molajo\Fieldhandler\Constraint\Callback::setCallback
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
@@ -103,6 +111,8 @@ class CallbackTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Callback::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\Callback::setCallback
+     * @covers  Molajo\Fieldhandler\Constraint\Callback::validateCompare
+     * @covers  Molajo\Fieldhandler\Constraint\Callback::sanitizeValidate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
@@ -130,6 +140,8 @@ class CallbackTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Callback::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\Callback::setCallback
+     * @covers  Molajo\Fieldhandler\Constraint\Callback::validateCompare
+     * @covers  Molajo\Fieldhandler\Constraint\Callback::sanitizeValidate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
@@ -157,6 +169,8 @@ class CallbackTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Callback::format
      * @covers  Molajo\Fieldhandler\Constraint\Callback::setCallback
+     * @covers  Molajo\Fieldhandler\Constraint\Callback::validateCompare
+     * @covers  Molajo\Fieldhandler\Constraint\Callback::sanitizeValidate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
@@ -184,6 +198,8 @@ class CallbackTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Callback::format
      * @covers  Molajo\Fieldhandler\Constraint\Callback::setCallback
+     * @covers  Molajo\Fieldhandler\Constraint\Callback::validateCompare
+     * @covers  Molajo\Fieldhandler\Constraint\Callback::sanitizeValidate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag

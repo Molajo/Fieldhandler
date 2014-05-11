@@ -49,6 +49,9 @@ class NotnullTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::testInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::testStringInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::__construct
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromOptions
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testArrayInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
@@ -84,6 +87,9 @@ class NotnullTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::testInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::testStringInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::__construct
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromOptions
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testArrayInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
@@ -116,6 +122,14 @@ class NotnullTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Notnull::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\Notnull::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::getCompareToArrayFromInput
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::testInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::testStringInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::__construct
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromOptions
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testArrayInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
@@ -143,6 +157,14 @@ class NotnullTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Notnull::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\Notnull::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::getCompareToArrayFromInput
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::testInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::testStringInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::__construct
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromOptions
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testArrayInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray

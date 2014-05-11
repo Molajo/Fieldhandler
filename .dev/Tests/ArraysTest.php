@@ -41,10 +41,19 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers  Molajo\Fieldhandler\Request::runConstraintMethod
+     * @covers  Molajo\Fieldhandler\Request::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Arrays::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::runValidationTest
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::testIsArray
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::testValues
      * @covers  Molajo\Fieldhandler\Constraint\Arrays::validation
      * @covers  Molajo\Fieldhandler\Constraint\Arrays::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Arrays::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::__construct
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromOptions
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testArrayInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testCount
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
@@ -72,10 +81,19 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers  Molajo\Fieldhandler\Request::runConstraintMethod
+     * @covers  Molajo\Fieldhandler\Request::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Arrays::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::runValidationTest
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::testIsArray
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::testValues
      * @covers  Molajo\Fieldhandler\Constraint\Arrays::validation
      * @covers  Molajo\Fieldhandler\Constraint\Arrays::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Arrays::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::__construct
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromOptions
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testArrayInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testCount
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
@@ -109,7 +127,15 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Arrays::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::runValidationTest
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::testIsArray
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::testValues
      * @covers  Molajo\Fieldhandler\Constraint\Arrays::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::__construct
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromOptions
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testArrayInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testCount
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
@@ -136,7 +162,15 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Arrays::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::runValidationTest
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::testIsArray
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::testValues
      * @covers  Molajo\Fieldhandler\Constraint\Arrays::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::__construct
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromOptions
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testArrayInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testCount
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
@@ -165,6 +199,8 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      * test Escape Success
      *
      * @covers  Molajo\Fieldhandler\Constraint\Arrays::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::__construct
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromOptions
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::format
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
      * @return void

@@ -174,6 +174,31 @@ class DigitTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers  Molajo\Fieldhandler\Constraint\Digit::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Digit::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeCharacter
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testSanitizeNull()
+    {
+        $field_name  = 'alias';
+        $field_value = null;
+        $constraint  = 'Digit';
+        $options     = array();
+
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
+
+        return;
+    }
+
+    /**
      * @covers  Molajo\Fieldhandler\Constraint\Digit::format
      * @covers  Molajo\Fieldhandler\Constraint\AbstractCtype::format
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format

@@ -44,13 +44,15 @@ class IntegerTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\Integer::validate
      * @covers  Molajo\Fieldhandler\Constraint\Integer::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Integer::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validateCompare
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
      * @return  void
      * @since   1.0.0
      */
-    public function testValidateSuccess()
+    public function testValidateTrue()
     {
         $field_name  = 'integer_fieldname';
         $field_value = 1234;
@@ -71,13 +73,15 @@ class IntegerTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\Integer::validate
      * @covers  Molajo\Fieldhandler\Constraint\Integer::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Integer::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validateCompare
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
      * @return  void
      * @since   1.0.0
      */
-    public function testValidate2()
+    public function testValidateTrueNull()
     {
         $field_name  = 'integer_fieldname';
         $field_value = null;
@@ -96,10 +100,15 @@ class IntegerTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Integer::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validateCompare
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
      * @return void
      * @since   1.0.0
      */
-    public function testValidateFail()
+    public function testValidateFalse()
     {
         $field_name  = 'integer_fieldname';
         $field_value = 'yessireebob';
@@ -121,7 +130,10 @@ class IntegerTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Integer::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validateCompare
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitizeValidate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
@@ -147,6 +159,10 @@ class IntegerTest extends PHPUnit_Framework_TestCase
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Integer::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validateCompare
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitizeValidate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
@@ -154,7 +170,7 @@ class IntegerTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testSanitizeFail()
+    public function testSanitizeChange()
     {
         $field_name  = 'integer_fieldname';
         $field_value = 'dog';
@@ -171,8 +187,8 @@ class IntegerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Integer::sanitize
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Integer::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::format
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
@@ -180,7 +196,7 @@ class IntegerTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testFormatSuccess()
+    public function testFormat()
     {
         $field_name  = 'integer_fieldname';
         $field_value = 'dog';
