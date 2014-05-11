@@ -1,6 +1,6 @@
 <?php
 /**
- * Values Constraint Test
+ * Notvalues Constraint Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -12,14 +12,14 @@ use Molajo\Fieldhandler\Request;
 use PHPUnit_Framework_TestCase;
 
 /**
- * Values Test
+ * Notvalues Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class ValuesTest extends PHPUnit_Framework_TestCase
+class NotvaluesTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Request
@@ -41,10 +41,10 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Values::validate
-     * @covers  Molajo\Fieldhandler\Constraint\Values::validation
-     * @covers  Molajo\Fieldhandler\Constraint\Values::getValidateMessages
-     * @covers  Molajo\Fieldhandler\Constraint\Values::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\Notvalues::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Notvalues::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Notvalues::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Notvalues::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
@@ -59,8 +59,8 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     public function testValidateTrue()
     {
         $field_name                    = 'Random Fieldname';
-        $field_value                   = 'a';
-        $constraint                    = 'Values';
+        $field_value                   = 'z';
+        $constraint                    = 'Notvalues';
         $options                       = array();
         $options['valid_values_array'] = array('a', 'b', 'c');
 
@@ -73,10 +73,10 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Values::validate
-     * @covers  Molajo\Fieldhandler\Constraint\Values::validation
-     * @covers  Molajo\Fieldhandler\Constraint\Values::getValidateMessages
-     * @covers  Molajo\Fieldhandler\Constraint\Values::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\Notvalues::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Notvalues::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Notvalues::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Notvalues::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
@@ -91,8 +91,8 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     public function testValidateFalse()
     {
         $field_name                    = 'Random Fieldname';
-        $field_value                   = 'z';
-        $constraint                    = 'Values';
+        $field_value                   = 'a';
+        $constraint                    = 'Notvalues';
         $options                       = array();
         $options['valid_values_array'] = array('a', 'b', 'c');
 
@@ -101,7 +101,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(false, $results->getValidateResponse());
 
         $expected_code    = 1000;
-        $expected_message = 'Field: Random Fieldname does not have a valid value for Values data type.';
+        $expected_message = 'Field: Random Fieldname does not have a valid value for Notvalues data type.';
         $messages         = $results->getValidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);
@@ -110,8 +110,8 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Values::sanitize
-     * @covers  Molajo\Fieldhandler\Constraint\Values::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Notvalues::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Notvalues::validation
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
@@ -124,8 +124,8 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     public function testSanitizeNoChange()
     {
         $field_name                    = 'Random Fieldname';
-        $field_value                   = 'a';
-        $constraint                    = 'Values';
+        $field_value                   = 'z';
+        $constraint                    = 'Notvalues';
         $options                       = array();
         $options['valid_values_array'] = array('a', 'b', 'c');
 
@@ -138,8 +138,8 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Values::sanitize
-     * @covers  Molajo\Fieldhandler\Constraint\Values::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Notvalues::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Notvalues::validation
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
@@ -152,8 +152,8 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     public function testSanitizeChange()
     {
         $field_name                    = 'Random Fieldname';
-        $field_value                   = 'z';
-        $constraint                    = 'Values';
+        $field_value                   = 'a';
+        $constraint                    = 'Notvalues';
         $options                       = array();
         $options['valid_values_array'] = array('a', 'b', 'c');
 
@@ -166,7 +166,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Values::format
+     * @covers  Molajo\Fieldhandler\Constraint\Notvalues::format
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::format
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
      *
@@ -177,7 +177,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     {
         $field_name                    = 'Random Fieldname';
         $field_value                   = 'z';
-        $constraint                    = 'Values';
+        $constraint                    = 'Notvalues';
         $options                       = array();
         $options['valid_values_array'] = array('a', 'b', 'c');
 
@@ -190,10 +190,10 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Values::validate
-     * @covers  Molajo\Fieldhandler\Constraint\Values::validation
-     * @covers  Molajo\Fieldhandler\Constraint\Values::getValidateMessages
-     * @covers  Molajo\Fieldhandler\Constraint\Values::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\Notvalues::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Notvalues::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Notvalues::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Notvalues::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
@@ -202,14 +202,14 @@ class ValuesTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
-     * @return void
+     * @return  void
      * @since   1.0.0
      */
     public function testValidateTrueArray()
     {
         $field_name                    = 'Random Fieldname';
-        $field_value                   = array('a', 'b');
-        $constraint                    = 'Values';
+        $field_value                   = array('x', 'y');
+        $constraint                    = 'Notvalues';
         $options                       = array();
         $options['valid_values_array'] = array('a', 'b', 'c');
 
@@ -222,10 +222,10 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Values::validate
-     * @covers  Molajo\Fieldhandler\Constraint\Values::validation
-     * @covers  Molajo\Fieldhandler\Constraint\Values::getValidateMessages
-     * @covers  Molajo\Fieldhandler\Constraint\Values::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\Notvalues::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Notvalues::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Notvalues::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Notvalues::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
@@ -241,7 +241,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     {
         $field_name                    = 'Random Fieldname';
         $field_value                   = array('a', 'z');
-        $constraint                    = 'Values';
+        $constraint                    = 'Notvalues';
         $options                       = array();
         $options['valid_values_array'] = array('a', 'b', 'c');
 
@@ -250,7 +250,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(false, $results->getValidateResponse());
 
         $expected_code    = 1000;
-        $expected_message = 'Field: Random Fieldname does not have a valid value for Values data type.';
+        $expected_message = 'Field: Random Fieldname does not have a valid value for Notvalues data type.';
         $messages         = $results->getValidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);
@@ -259,8 +259,8 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Values::sanitize
-     * @covers  Molajo\Fieldhandler\Constraint\Values::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Notvalues::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Notvalues::validation
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
@@ -273,8 +273,8 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     public function testSanitizeNoChangeArray()
     {
         $field_name                    = 'Random Fieldname';
-        $field_value                   = array('a', 'b', 'c');
-        $constraint                    = 'Values';
+        $field_value                   = array('x', 'y', 'z');
+        $constraint                    = 'Notvalues';
         $options                       = array();
         $options['valid_values_array'] = array('a', 'b', 'c');
 
@@ -287,8 +287,8 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Values::sanitize
-     * @covers  Molajo\Fieldhandler\Constraint\Values::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Notvalues::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Notvalues::validation
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
@@ -302,20 +302,20 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     {
         $field_name                    = 'Random Fieldname';
         $field_value                   = array('a', 'z');
-        $constraint                    = 'Values';
+        $constraint                    = 'Notvalues';
         $options                       = array();
         $options['valid_values_array'] = array('a', 'b', 'c');
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(array('a'), $results->getFieldValue());
+        $this->assertEquals(array('z'), $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Values::format
+     * @covers  Molajo\Fieldhandler\Constraint\Notvalues::format
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::format
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
      *
@@ -326,7 +326,7 @@ class ValuesTest extends PHPUnit_Framework_TestCase
     {
         $field_name                    = 'Random Fieldname';
         $field_value                   = array('a', 'z');
-        $constraint                    = 'Values';
+        $constraint                    = 'Notvalues';
         $options                       = array();
         $options['valid_values_array'] = array('a', 'b', 'c');
 

@@ -98,7 +98,6 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(false, $results->getValidateResponse());
 
-        $messages         = $results->getValidateMessages();
         $expected_code    = 3000;
         $expected_message = 'Field: alias is not an array.';
         $messages         = $results->getValidateMessages();
@@ -156,7 +155,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(null, $results->getFieldValue());
+        $this->assertEquals(array(), $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
 
         return;

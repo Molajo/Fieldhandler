@@ -151,7 +151,7 @@ class Arrays extends AbstractArrays implements ConstraintInterface
     protected function testValues()
     {
         if (count($this->valid_values_array) > 0) {
-            return $this->testInputAgainstValidArray(false);
+            return $this->testInputAgainstValidArray();
         }
 
         return true;

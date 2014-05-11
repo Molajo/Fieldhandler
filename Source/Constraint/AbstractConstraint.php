@@ -220,7 +220,9 @@ abstract class AbstractConstraint implements ConstraintInterface
 
         $method = $this->validation_test;
 
-        if ($this->$method() === true) {
+        $validated = $this->$method();
+
+        if ($validated === true || is_array($this->field_value)) {
         } else {
             $this->field_value = null;
         }

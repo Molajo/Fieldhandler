@@ -64,6 +64,5 @@ class Required extends AbstractOpposite implements ConstraintInterface
      * @var    array
      * @since  1.0.0
      */
-    protected $valid_values_array = array(NULL);
-
+    protected $valid_values_array = array(null);
 }

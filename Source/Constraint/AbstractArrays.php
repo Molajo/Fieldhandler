@@ -176,7 +176,7 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
      */
     protected function validation()
     {
-        if ($this->testInputAgainstValidArray(false) === true) {
+        if ($this->testInputAgainstValidArray() === true) {
             return true;
         }
 
@@ -186,19 +186,27 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
     /**
      * Test Input against Valid Values Array
      *
-     * @param   boolean $filter
-     *
      * @return  boolean
      * @since   1.0.0
      */
-    protected function testInputAgainstValidArray($filter)
+    protected function testInputAgainstValidArray()
     {
         if (is_array($this->field_value)) {
         } else {
             return $this->testStringInputAgainstValidArray();
         }
 
-        return $this->testArrayInputAgainstValidArray($filter);
+        $hold_count = count($this->field_value);
+
+        $this->testArrayInputAgainstValidArray();
+
+        if ($hold_count === count($this->field_value)) {
+            $valid = true;
+        } else {
+            $valid = false;
+        }
+
+        return $valid;
     }
 
     /**
@@ -225,12 +233,10 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
     /**
      * Verify input array only has entries that are defined by the valid array
      *
-     * @param   boolean $filter
-     *
      * @return  array
      * @since   1.0.0
      */
-    protected function testArrayInputAgainstValidArray($filter)
+    protected function testArrayInputAgainstValidArray()
     {
         $validated_input_array = array();
 
@@ -242,18 +248,9 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
             }
         }
 
-        if (count($validated_input_array) === count($this->field_value)) {
-            $valid = true;
+        $this->field_value = $validated_input_array;
 
-        } else {
-            $valid = false;
-            if ($filter === true) {
-                $this->field_value = $validated_input_array;
-                $valid             = true;
-            }
-        }
-
-        return $valid;
+        return $this;
     }
 
     /**
