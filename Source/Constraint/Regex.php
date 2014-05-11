@@ -21,14 +21,6 @@ use CommonApi\Model\ConstraintInterface;
 class Regex extends AbstractConstraintTests implements ConstraintInterface
 {
     /**
-     * Validation Test
-     *
-     * @var    string
-     * @since  1.0.0
-     */
-    protected $validation_test = 'getRegex';
-
-    /**
      * Message Code
      *
      * @var    integer

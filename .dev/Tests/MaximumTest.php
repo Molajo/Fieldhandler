@@ -10,7 +10,6 @@ namespace Molajo\Fieldhandler\Tests;
 
 use Molajo\Fieldhandler\Request;
 use PHPUnit_Framework_TestCase;
-use CommonApi\Exception\UnexpectedValueException;
 
 /**
  * Maximum Fieldhandler
@@ -42,17 +41,22 @@ class MaximumTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Maximum::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Maximum::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Maximum::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Maximum::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getMaximum
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
      * @return  void
      * @since   1.0.0
      */
-    public function testValidateSuccess()
+    public function testValidateTrue()
     {
         $field_name         = 'fieldname';
-        $field_value        = 5;
+        $field_value        = 8;
         $constraint         = 'Maximum';
         $options            = array();
         $options['maximum'] = 10;
@@ -66,14 +70,19 @@ class MaximumTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Maximum::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Maximum::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Maximum::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Maximum::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getMaximum
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
      * @return  void
      * @since   1.0.0
      */
-    public function testValidateAlpha()
+    public function testValidateTrueAlpha()
     {
         $field_name         = 'fieldname';
         $field_value        = 'a';
@@ -90,20 +99,25 @@ class MaximumTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Maximum::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Maximum::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Maximum::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Maximum::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getMaximum
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
      * @return  void
      * @since   1.0.0
      */
-    public function testValidateFail()
+    public function testValidateFalse()
     {
         $field_name         = 'fieldname';
         $field_value        = 500;
         $constraint         = 'Maximum';
         $options            = array();
-        $options['maximum'] = 10;
+        $options['maximum'] = 100;
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
@@ -113,12 +127,103 @@ class MaximumTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tear down
+     * @covers  Molajo\Fieldhandler\Constraint\Maximum::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Maximum::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Maximum::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Maximum::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
-     * @return void
+     * @return  void
      * @since   1.0.0
      */
-    protected function tearDown()
+    public function testValidateTrueEquals()
     {
+        $field_name         = 'fieldname';
+        $field_value        = 10;
+        $constraint         = 'Maximum';
+        $options            = array();
+        $options['maximum'] = 10;
+
+        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals(true, $results->getValidateResponse());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Maximum::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Maximum::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testSanitizeNoChange()
+    {
+        $field_name         = 'field1';
+        $field_value        = 1;
+        $constraint         = 'Maximum';
+        $options            = array();
+        $options['maximum'] = 10;
+
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Maximum::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Maximum::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testSanitizeChange()
+    {
+        $field_name         = 'field1';
+        $field_value        = 10;
+        $constraint         = 'Maximum';
+        $options            = array();
+        $options['maximum'] = 1;
+
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals(null, $results->getFieldValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Maximum::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
+     *
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testFormat()
+    {
+        $field_name         = 'field1';
+        $field_value        = 'dog';
+        $constraint         = 'Maximum';
+        $options            = array();
+        $options['maximum'] = 'dog';
+
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
+
+        return;
     }
 }

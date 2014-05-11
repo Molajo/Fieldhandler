@@ -42,14 +42,19 @@ class NotequalTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Notequal::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Notequal::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Notequal::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Notequal::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getNotEqual
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
      * @return  void
      * @since   1.0.0
      */
-    public function testValidateSuccess()
+    public function testValidateTrue()
     {
         $field_name           = 'field1';
         $field_value          = 'dog';
@@ -66,14 +71,19 @@ class NotequalTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Notequal::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Notequal::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Notequal::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Notequal::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getNotEqual
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
      * @return void
      * @since   1.0.0
      */
-    public function testValidateFail()
+    public function testValidateFalse()
     {
         $field_name           = 'field1';
         $field_value          = 'dog';
@@ -93,14 +103,15 @@ class NotequalTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Notequal::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Notequal::validation
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getNotEqual
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
      *
      * @return  void
      * @since   1.0.0
      */
-    public function testSanitizeSuccess()
+    public function testSanitizeNoChange()
     {
         $field_name           = 'field1';
         $field_value          = 'dog';
@@ -117,14 +128,15 @@ class NotequalTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Notequal::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Notequal::validation
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getNotEqual
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
      *
      * @return  void
      * @since   1.0.0
      */
-    public function testSanitizeFail()
+    public function testSanitizeChange()
     {
         $field_name           = 'field1';
         $field_value          = 'dog';
@@ -141,14 +153,13 @@ class NotequalTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers  Molajo\Fieldhandler\Constraint\Notequal::format
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getNotEqual
      *
      * @return  void
      * @since   1.0.0
      */
-    public function testFormatSucceed()
+    public function testFormat()
     {
         $field_name           = 'field1';
         $field_value          = 'dog';
@@ -160,31 +171,6 @@ class NotequalTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals('dog', $results->getFieldValue());
         $this->assertEquals(false, $results->getChangeIndicator());
-
-        return;
-    }
-
-    /**
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getNotEqual
-     *
-     * @return void
-     * @since   1.0.0
-     */
-    public function testFormatFail()
-    {
-        $field_name           = 'field1';
-        $field_value          = 'dog';
-        $constraint           = 'Notequal';
-        $options              = array();
-        $options['not_equal'] = 'dog';
-
-        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
-
-        $field_value = null;
-        $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }

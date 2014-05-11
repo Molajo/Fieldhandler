@@ -23,14 +23,6 @@ use CommonApi\Model\ConstraintInterface;
 class Foreignkey extends AbstractDatabase implements ConstraintInterface
 {
     /**
-     * Validation Test
-     *
-     * @var    string
-     * @since  1.0.0
-     */
-    protected $validation_test = 'verifyForeignKey';
-
-    /**
      * Validate
      *
      * @return  boolean

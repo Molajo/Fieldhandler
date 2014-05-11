@@ -21,10 +21,18 @@ use CommonApi\Model\ConstraintInterface;
 class Lessthan extends AbstractConstraintTests implements ConstraintInterface
 {
     /**
-     * Method Type
+     * Verify that the value is less than a supplied value
      *
-     * @var    string
-     * @since  1.0.0
+     * @return  boolean
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    protected $validation_test = 'getLessthan';
+    protected function validation()
+    {
+        if ($this->field_value < $this->getOption('less_than')) {
+            return true;
+        }
+
+        return false;
+    }
 }

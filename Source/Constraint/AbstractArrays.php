@@ -79,14 +79,6 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
     protected $valid_values_array;
 
     /**
-     * Validation Test
-     *
-     * @var    string
-     * @since  1.0.0
-     */
-    protected $validation_test = 'validation';
-
-    /**
      * Message Code
      *
      * @var    integer

@@ -21,10 +21,18 @@ use CommonApi\Model\ConstraintInterface;
 class Maximum extends AbstractConstraintTests implements ConstraintInterface
 {
     /**
-     * Method Type
+     * Verify that the value is greater than or equal to a supplied value
      *
-     * @var    string
-     * @since  1.0.0
+     * @return  boolean
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    protected $validation_test = 'getMaximum';
+    protected function validation()
+    {
+        if ($this->getOption('maximum') >= $this->field_value) {
+            return true;
+        }
+
+        return false;
+    }
 }

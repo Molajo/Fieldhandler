@@ -41,14 +41,19 @@ class EqualTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Equal::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Equal::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Equal::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Equal::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getEqual
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
      * @return  void
      * @since   1.0.0
      */
-    public function testValidateSucceed()
+    public function testValidateTrue()
     {
         $field_name        = 'field1';
         $field_value       = 'dog';
@@ -65,14 +70,19 @@ class EqualTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Equal::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Equal::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Equal::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Equal::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getEqual
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
      * @return  void
      * @since   1.0.0
      */
-    public function testValidateFail()
+    public function testValidateFalse()
     {
         $field_name        = 'field1';
         $field_value       = 'dog';
@@ -94,14 +104,15 @@ class EqualTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Equal::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Equal::validation
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getEqual
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
      *
      * @return  void
      * @since   1.0.0
      */
-    public function testSanitizeSucceed()
+    public function testSanitizeNoChange()
     {
         $field_name        = 'field1';
         $field_value       = 'dog';
@@ -118,14 +129,15 @@ class EqualTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Equal::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Equal::validation
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getEqual
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
      *
      * @return  void
      * @since   1.0.0
      */
-    public function testSanitizeFailure()
+    public function testSanitizeChange()
     {
         $field_name        = 'field1';
         $field_value       = 'dog';
@@ -142,44 +154,19 @@ class EqualTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers  Molajo\Fieldhandler\Constraint\Equal::format
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getEqual
      *
      * @return  void
      * @since   1.0.0
      */
-    public function testFormatSucceed()
+    public function testFormat()
     {
         $field_name        = 'field1';
         $field_value       = 'dog';
         $constraint        = 'Equal';
         $options           = array();
         $options['equals'] = 'dog';
-
-        $results = $this->request->format($field_name, $field_value, $constraint, $options);
-
-        $this->assertEquals('dog', $results->getFieldValue());
-        $this->assertEquals(false, $results->getChangeIndicator());
-
-        return;
-    }
-
-    /**
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getEqual
-     *
-     * @return  void
-     * @since   1.0.0
-     */
-    public function testFormatFailure()
-    {
-        $field_name        = 'field1';
-        $field_value       = 'dog';
-        $constraint        = 'Equal';
-        $options           = array();
-        $options['equals'] = 'cat';
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 

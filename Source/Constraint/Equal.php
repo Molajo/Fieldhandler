@@ -21,18 +21,25 @@ use CommonApi\Model\ConstraintInterface;
 class Equal extends AbstractConstraintTests implements ConstraintInterface
 {
     /**
-     * Method Type
-     *
-     * @var    string
-     * @since  1.0.0
-     */
-    protected $validation_test = 'getEqual';
-
-    /**
      * Message Code
      *
      * @var    integer
      * @since  1.0.0
      */
     protected $message_code = 8000;
+
+    /**
+     * Verify if the values are equal
+     *
+     * @return  boolean
+     * @since   1.0.0
+     */
+    protected function validation()
+    {
+        if ($this->field_value === $this->getOption('equals')) {
+            return true;
+        }
+
+        return false;
+    }
 }

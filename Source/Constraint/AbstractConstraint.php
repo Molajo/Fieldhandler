@@ -128,14 +128,6 @@ abstract class AbstractConstraint implements ConstraintInterface
     protected $filter_instance;
 
     /**
-     * Validation Test
-     *
-     * @var    string
-     * @since  1.0.0
-     */
-    protected $validation_test = 'validation';
-
-    /**
      * Message Code
      *
      * @var    integer
@@ -191,9 +183,7 @@ abstract class AbstractConstraint implements ConstraintInterface
             return true;
         }
 
-        $method = $this->validation_test;
-
-        if ($this->$method() === true) {
+        if ($this->validation() === true) {
             return true;
         }
 
@@ -218,9 +208,7 @@ abstract class AbstractConstraint implements ConstraintInterface
             return $this->field_value;
         }
 
-        $method = $this->validation_test;
-
-        $validated = $this->$method();
+        $validated = $this->validation();
 
         if ($validated === true || is_array($this->field_value)) {
         } else {
@@ -275,6 +263,21 @@ abstract class AbstractConstraint implements ConstraintInterface
     public function getValidateMessages()
     {
         return $this->validate_messages;
+    }
+
+    /**
+     * Format
+     *
+     * Unused format for constraint simply returns the field value
+     *
+     * @api
+     * @return  mixed
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function validation()
+    {
+        return false;
     }
 
     /**
