@@ -220,7 +220,7 @@ abstract class AbstractConstraint implements ConstraintInterface
      * Default Sanitize - sanitize primarily in sub-types
      *
      * @api
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */

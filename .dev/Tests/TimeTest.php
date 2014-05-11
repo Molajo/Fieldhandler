@@ -50,13 +50,17 @@ class TimeTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testvalidateSuccessTrue()
+    public function testValidateSuccessTrue()
     {
         $field_name  = 'this_is_a_Time_field';
-        $field_value = '2013-04-01';
+        $field_value = '12:30:00';
         $constraint  = 'Time';
+        $options     = array(
+            'create_from_time_format' => 'H:i:s',
+            'display_as_time_format'  => 'H:i:s'
+        );
 
-        $results = $this->request->validate($field_name, $field_value, $constraint);
+        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(true, $results->getvalidateResponse());
 
@@ -76,13 +80,17 @@ class TimeTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testvalidateFalse()
+    public function testValidateFalse()
     {
         $field_name  = 'this_is_a_Time_field';
         $field_value = 'gggghhhhhh';
         $constraint  = 'Time';
+        $options     = array(
+            'create_from_time_format' => 'H:i:s',
+            'display_as_time_format'  => 'H:i:s'
+        );
 
-        $results = $this->request->validate($field_name, $field_value, $constraint);
+        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(false, $results->getvalidateResponse());
 
@@ -108,11 +116,11 @@ class TimeTest extends PHPUnit_Framework_TestCase
     public function testSanitizeNoChange()
     {
         $field_name  = 'this_is_a_Time_field';
-        $field_value = '2012-09-13';
+        $field_value = '12:30:00';
         $constraint  = 'Time';
         $options     = array(
-            'create_from_Time_format' => 'Y-m-d',
-            'display_as_Time_format'  => 'd/m/Y'
+            'create_from_time_format' => 'H:i:s',
+            'display_as_time_format'  => 'H:i:s'
         );
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
@@ -138,10 +146,13 @@ class TimeTest extends PHPUnit_Framework_TestCase
     {
         $field_name  = 'this_is_a_Time_field';
         $field_value = 'gggghhhhhh';
-
         $constraint = 'Time';
+        $options     = array(
+            'create_from_time_format' => 'H:i:s',
+            'display_as_time_format'  => 'H:i:s'
+        );
 
-        $results = $this->request->sanitize($field_name, $field_value, $constraint);
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(null, $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
@@ -160,16 +171,16 @@ class TimeTest extends PHPUnit_Framework_TestCase
     public function testFormatSuccess()
     {
         $field_name  = 'this_is_a_Time_field';
-        $field_value = '2012-09-13';
+        $field_value = '12:30:00';
         $constraint  = 'Time';
         $options     = array(
-            'create_from_Time_format' => 'Y-m-d',
-            'display_as_Time_format'  => 'm/d/Y'
+            'create_from_time_format' => 'H:i:s',
+            'display_as_time_format'  => 'H:i'
         );
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals('09/13/2012', $results->getFieldValue());
+        $this->assertEquals('12:30', $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
 
         return;

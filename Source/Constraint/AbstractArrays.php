@@ -229,25 +229,47 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
      */
     protected function testArrayInputAgainstValidArray()
     {
-        $validated_input_array = array();
-
-        foreach ($this->field_value as $entry) {
-
-            if (in_array($entry, $this->valid_values_array) === false) {
-            } else {
-                $validated_input_array[] = $entry;
-            }
-        }
-
-        $this->field_value = $validated_input_array;
+        $this->field_value = $this->createFieldValueArrayComparison(
+            $this->field_value,
+            $this->valid_values_array,
+            true
+        );
 
         return $this;
     }
 
     /**
-     * Test Array Entry Values
+     * Verify input array only has entries that are defined by the valid array
      *
-     * @param   boolean $filter
+     * @param   array   $basis
+     * @param   array   $comparison
+     * @param   boolean $include_on_match
+     *
+     * @return  array
+     * @since   1.0.0
+     */
+    protected function createFieldValueArrayComparison($basis, $comparison, $include_on_match = true)
+    {
+        $merged = array();
+
+        foreach ($basis as $entry) {
+
+            if (in_array($entry, $comparison) === true) {
+                if ($include_on_match === true) {
+                    $merged[] = $entry;
+                }
+            } else {
+                if ($include_on_match === false) {
+                    $merged[] = $entry;
+                }
+            }
+        }
+
+        return $merged;
+    }
+
+    /**
+     * Test Array Entry Values
      *
      * @return  boolean
      * @since   1.0.0

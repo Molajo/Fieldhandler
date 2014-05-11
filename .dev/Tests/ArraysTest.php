@@ -44,6 +44,27 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Request::runConstraintMethod
      * @covers  Molajo\Fieldhandler\Request::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Arrays::validate
+     * @expectedException        \CommonApi\Exception\UnexpectedValueException
+     * @expectedExceptionRequest Fieldhandler Arrays getCompareToArrayFromInput: invalid empty array
+     *
+     * @since                    1.0.0
+     */
+    public function testNoValidValuesArray()
+    {
+        $field_name  = null;
+        $field_value = array(123);
+        $constraint  = 'Array';
+        $options     = array();
+
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Request::runConstraintMethod
+     * @covers  Molajo\Fieldhandler\Request::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::validate
      * @covers  Molajo\Fieldhandler\Constraint\Arrays::runValidationTest
      * @covers  Molajo\Fieldhandler\Constraint\Arrays::testIsArray
      * @covers  Molajo\Fieldhandler\Constraint\Arrays::testValues

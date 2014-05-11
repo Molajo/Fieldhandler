@@ -80,6 +80,7 @@ abstract class AbstractOpposite extends AbstractArrays implements ConstraintInte
     /**
      * Validation True Logic
      *
+     * @param boolean $validation_results
      * @return  boolean  $validation_results
      * @return  array    $original_array
      *
@@ -106,7 +107,7 @@ abstract class AbstractOpposite extends AbstractArrays implements ConstraintInte
     /**
      * Validation False Logic
      *
-     * @return  array  $original_array
+     * @return  boolean  $original_array
      *
      * @return  boolean
      * @since   1.0.0
@@ -114,16 +115,11 @@ abstract class AbstractOpposite extends AbstractArrays implements ConstraintInte
      */
     public function validateResponseArrayFalse($original_array)
     {
-        $new_array = array();
-
-        foreach ($original_array as $value) {
-            if (in_array($value, $this->field_value)) {
-            } else {
-                $new_array[] = $value;
-            }
-        }
-
-        $this->field_value = $new_array;
+        $this->field_value = $this->createFieldValueArrayComparison(
+            $original_array,
+            $this->field_value,
+            false
+        );
 
         $this->setValidateMessage($this->message_code);
 
