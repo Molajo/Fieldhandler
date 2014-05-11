@@ -28,6 +28,6 @@ class Maximum extends AbstractConstraintTests implements ConstraintInterface
      */
     protected function validation()
     {
-        return $this->testComparison('maximum');
+        return $this->testMaximum();
     }
 }

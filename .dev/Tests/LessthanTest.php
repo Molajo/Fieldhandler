@@ -46,6 +46,7 @@ class LessthanTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\Lessthan::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Lessthan::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::testLessthan
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
@@ -75,6 +76,7 @@ class LessthanTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\Lessthan::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Lessthan::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::testLessthan
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
@@ -104,6 +106,7 @@ class LessthanTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\Lessthan::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Lessthan::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::testLessthan
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
@@ -132,6 +135,7 @@ class LessthanTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\Lessthan::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Lessthan::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::testLessthan
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage

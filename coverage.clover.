@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1399785448">
-  <project timestamp="1399785448">
+<coverage generated="1399786777">
+  <project timestamp="1399786777">
     <package name="Molajo\Factories\Fieldhandler">
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Factories/Fieldhandler/FieldhandlerFactoryMethod.php">
         <class name="FieldhandlerFactoryMethod" namespace="Molajo\Factories\Fieldhandler">
@@ -171,7 +171,7 @@
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/AbstractConstraintTests.php">
         <class name="AbstractConstraintTests" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
-          <metrics methods="6" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="64" coveredstatements="30" elements="70" coveredelements="35"/>
+          <metrics methods="11" coveredmethods="11" conditionals="0" coveredconditionals="0" statements="49" coveredstatements="48" elements="60" coveredelements="59"/>
         </class>
         <line num="29" type="method" name="setFlags" crap="2" count="13"/>
         <line num="31" type="stmt" count="13"/>
@@ -209,41 +209,31 @@
         <line num="128" type="stmt" count="50"/>
         <line num="129" type="stmt" count="49"/>
         <line num="132" type="stmt" count="24"/>
-        <line num="143" type="method" name="testComparison" crap="182" count="0"/>
-        <line num="145" type="stmt" count="0"/>
-        <line num="146" type="stmt" count="0"/>
-        <line num="149" type="stmt" count="0"/>
-        <line num="150" type="stmt" count="0"/>
-        <line num="151" type="stmt" count="0"/>
-        <line num="152" type="stmt" count="0"/>
-        <line num="153" type="stmt" count="0"/>
-        <line num="154" type="stmt" count="0"/>
-        <line num="155" type="stmt" count="0"/>
-        <line num="156" type="stmt" count="0"/>
-        <line num="157" type="stmt" count="0"/>
-        <line num="159" type="stmt" count="0"/>
-        <line num="160" type="stmt" count="0"/>
-        <line num="161" type="stmt" count="0"/>
-        <line num="162" type="stmt" count="0"/>
-        <line num="163" type="stmt" count="0"/>
-        <line num="164" type="stmt" count="0"/>
-        <line num="165" type="stmt" count="0"/>
-        <line num="166" type="stmt" count="0"/>
-        <line num="167" type="stmt" count="0"/>
-        <line num="168" type="stmt" count="0"/>
-        <line num="169" type="stmt" count="0"/>
-        <line num="170" type="stmt" count="0"/>
-        <line num="171" type="stmt" count="0"/>
-        <line num="172" type="stmt" count="0"/>
-        <line num="173" type="stmt" count="0"/>
-        <line num="174" type="stmt" count="0"/>
-        <line num="175" type="stmt" count="0"/>
-        <line num="176" type="stmt" count="0"/>
-        <line num="177" type="stmt" count="0"/>
-        <line num="178" type="stmt" count="0"/>
-        <line num="179" type="stmt" count="0"/>
-        <line num="182" type="stmt" count="0"/>
-        <metrics loc="184" ncloc="117" classes="1" methods="6" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="64" coveredstatements="30" elements="70" coveredelements="34"/>
+        <line num="141" type="method" name="testEqual" crap="2" count="4"/>
+        <line num="143" type="stmt" count="4"/>
+        <line num="144" type="stmt" count="2"/>
+        <line num="147" type="stmt" count="2"/>
+        <line num="156" type="method" name="testNotequal" crap="2" count="4"/>
+        <line num="158" type="stmt" count="4"/>
+        <line num="159" type="stmt" count="2"/>
+        <line num="162" type="stmt" count="2"/>
+        <line num="171" type="method" name="testGreaterthan" crap="2" count="6"/>
+        <line num="173" type="stmt" count="6"/>
+        <line num="174" type="stmt" count="3"/>
+        <line num="177" type="stmt" count="3"/>
+        <line num="186" type="method" name="testLessthan" crap="2" count="4"/>
+        <line num="188" type="stmt" count="4"/>
+        <line num="189" type="stmt" count="2"/>
+        <line num="192" type="stmt" count="2"/>
+        <line num="201" type="method" name="testMaximum" crap="2" count="5"/>
+        <line num="203" type="stmt" count="5"/>
+        <line num="204" type="stmt" count="4"/>
+        <line num="207" type="stmt" count="1"/>
+        <line num="216" type="method" name="testMinimum" crap="2" count="5"/>
+        <line num="218" type="stmt" count="5"/>
+        <line num="219" type="stmt" count="4"/>
+        <line num="222" type="stmt" count="1"/>
+        <metrics loc="224" ncloc="129" classes="1" methods="11" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="49" coveredstatements="48" elements="60" coveredelements="58"/>
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/AbstractCtype.php">
         <class name="AbstractCtype" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
@@ -2365,6 +2355,6 @@
         <metrics loc="18" ncloc="8" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
     </package>
-    <metrics files="120" loc="10640" ncloc="3796" classes="99" methods="226" coveredmethods="107" conditionals="0" coveredconditionals="0" statements="1484" coveredstatements="573" elements="1710" coveredelements="680"/>
+    <metrics files="120" loc="10680" ncloc="3808" classes="99" methods="231" coveredmethods="113" conditionals="0" coveredconditionals="0" statements="1469" coveredstatements="591" elements="1700" coveredelements="704"/>
   </project>
 </coverage>

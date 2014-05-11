@@ -46,6 +46,7 @@ class EqualTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\Equal::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Equal::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::testEqual
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
@@ -75,6 +76,7 @@ class EqualTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\Equal::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Equal::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::testEqual
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
@@ -107,6 +109,7 @@ class EqualTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\Equal::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\Equal::validation
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::testEqual
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
      *
      * @return  void
@@ -132,6 +135,7 @@ class EqualTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\Equal::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\Equal::validation
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::testEqual
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
      *
      * @return  void

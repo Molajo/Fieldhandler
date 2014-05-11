@@ -36,6 +36,6 @@ class Notequal extends AbstractConstraintTests implements ConstraintInterface
      */
     protected function validation()
     {
-        return $this->testComparison('not_equal');
+        return $this->testNotequal();
     }
 }

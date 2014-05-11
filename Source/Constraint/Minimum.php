@@ -28,6 +28,6 @@ class Minimum extends AbstractConstraintTests implements ConstraintInterface
      */
     protected function validation()
     {
-        return $this->testComparison('minimum');
+        return $this->testMinimum();
     }
 }

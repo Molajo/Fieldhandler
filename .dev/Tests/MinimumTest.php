@@ -46,6 +46,7 @@ class MinimumTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\Minimum::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Minimum::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::testMinimum
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
@@ -75,6 +76,7 @@ class MinimumTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\Minimum::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Minimum::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::testMinimum
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
@@ -104,6 +106,7 @@ class MinimumTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\Minimum::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Minimum::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::testMinimum
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
@@ -132,6 +135,7 @@ class MinimumTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\Minimum::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Minimum::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::testMinimum
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
@@ -158,6 +162,7 @@ class MinimumTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\Minimum::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\Minimum::validation
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::testMinimum
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
      *
      * @return  void

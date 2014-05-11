@@ -133,52 +133,92 @@ abstract class AbstractConstraintTests extends AbstractConstraint implements Con
     }
 
     /**
-     * Test Compare
+     * Equal
      *
-     * @param   string $comparison
+     * @return  boolean
+     * @since   1.0.0
+     */
+    protected function testEqual()
+    {
+        if ($this->field_value === $this->getOption('equals')) {
+           return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Not equal
      *
      * @return  null|string
      * @since   1.0.0
      */
-    protected function testComparison($comparison)
+    protected function testNotequal()
     {
-        $compare_value     = $this->getOption($comparison);
-        $comparison_result = false;
-
-        switch ($comparison) {
-            case 'equals':
-                if ($this->field_value === $compare_value) {
-                    $comparison_result = true;
-                }
-                break;
-            case 'not_equal':
-                if ($this->field_value === $compare_value) {
-                } else {
-                    $comparison_result = true;
-                }
-                break;
-            case 'greater_than':
-                if ($this->field_value > $compare_value) {
-                    $comparison_result = true;
-                }
-                break;
-            case 'less_than':
-                if ($this->field_value < $compare_value) {
-                    $comparison_result = true;
-                }
-                break;
-            case 'maximum':
-                if ($compare_value >= $this->field_value) {
-                    $comparison_result = true;
-                }
-                break;
-            case 'minimum':
-                if ($compare_value <= $this->field_value) {
-                    $comparison_result = true;
-                }
-                break;
+        if ($this->field_value === $this->getOption('not_equal')) {
+            return false;
         }
 
-        return $comparison_result;
+        return true;
+    }
+
+    /**
+     * Greater Than
+     *
+     * @return  null|string
+     * @since   1.0.0
+     */
+    protected function testGreaterthan()
+    {
+        if ($this->field_value > $this->getOption('greater_than')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Less Than
+     *
+     * @return  null|string
+     * @since   1.0.0
+     */
+    protected function testLessthan()
+    {
+        if ($this->field_value < $this->getOption('less_than')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Maximum
+     *
+     * @return  null|string
+     * @since   1.0.0
+     */
+    protected function testMaximum()
+    {
+        if ($this->getOption('maximum') >= $this->field_value) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Minimum
+     *
+     * @return  null|string
+     * @since   1.0.0
+     */
+    protected function testMinimum()
+    {
+        if ($this->getOption('minimum') <= $this->field_value) {
+            return true;
+        }
+
+        return false;
     }
 }

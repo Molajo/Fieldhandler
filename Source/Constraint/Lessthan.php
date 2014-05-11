@@ -28,6 +28,6 @@ class Lessthan extends AbstractConstraintTests implements ConstraintInterface
      */
     protected function validation()
     {
-        return $this->testComparison('less_than');
+        return $this->testLessthan();
     }
 }

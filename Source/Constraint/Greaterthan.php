@@ -28,6 +28,6 @@ class Greaterthan extends AbstractConstraintTests implements ConstraintInterface
      */
     protected function validation()
     {
-        return $this->testComparison('greater_than');
+        return $this->testGreaterthan();
     }
 }
