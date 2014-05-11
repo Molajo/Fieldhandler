@@ -254,14 +254,10 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
 
         foreach ($basis as $entry) {
 
-            if (in_array($entry, $comparison) === true) {
-                if ($include_on_match === true) {
+            $in_array = in_array($entry, $comparison);
+
+            if ($in_array === $include_on_match) {
                     $merged[] = $entry;
-                }
-            } else {
-                if ($include_on_match === false) {
-                    $merged[] = $entry;
-                }
             }
         }
 

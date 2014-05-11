@@ -141,7 +141,7 @@ abstract class AbstractConstraintTests extends AbstractConstraint implements Con
     protected function testEqual()
     {
         if ($this->field_value === $this->getOption('equals')) {
-           return true;
+            return true;
         }
 
         return false;
