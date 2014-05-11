@@ -126,6 +126,8 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeCharacter
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitizeNull
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -152,6 +154,7 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeCharacter
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitizeNull
      *
      * @return  void
      * @since   1.0.0
@@ -181,6 +184,7 @@ class AlphanumericTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeByCharacter
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::sanitizeCharacter
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitizeNull
      *
      * @return  void
      * @since   1.0.0

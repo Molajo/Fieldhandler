@@ -71,6 +71,9 @@ class ArraysTest extends PHPUnit_Framework_TestCase
         $field_value = array(1, 2);
         $constraint  = 'Arrays';
         $options     = array('valid_values_array' => array(1, 2, 3));
+        $options['valid_values_array'] = array(1, 2, 3);
+        $options['array_minimum'] = 1;
+        $options['array_maximum'] = 10;
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
@@ -110,7 +113,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
         $field_name  = 'alias';
         $field_value = 'dog';
         $constraint  = 'Arrays';
-        $options     = array();
+        $options     = array('valid_values_array' => array());
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
@@ -121,6 +124,135 @@ class ArraysTest extends PHPUnit_Framework_TestCase
         $messages         = $results->getValidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);
+
+        return;
+    }
+    /**
+     * @covers  Molajo\Fieldhandler\Request::runConstraintMethod
+     * @covers  Molajo\Fieldhandler\Request::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::runValidationTest
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::testIsArray
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::testValues
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::__construct
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromOptions
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testArrayInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testCount
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testStringInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
+     * @return void
+     * @since   1.0.0
+     */
+    public function testValidateEmptyValidArray()
+    {
+        $field_name  = 'alias';
+        $field_value = array('dog');
+        $constraint  = 'Arrays';
+        $options     = array('valid_values_array' => array());
+
+        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(array(), $results->getValidateMessages());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Request::runConstraintMethod
+     * @covers  Molajo\Fieldhandler\Request::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::runValidationTest
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::testIsArray
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::testValues
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::__construct
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromOptions
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testArrayInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testCount
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testStringInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
+     * @return void
+     * @since   1.0.0
+     */
+    public function testValidateLessThanMinimum()
+    {
+        $field_name  = 'test';
+        $field_value = array(1, 2);
+        $constraint  = 'Arrays';
+        $options     = array('valid_values_array' => array(1, 2, 3));
+        $options['valid_values_array'] = array(1, 2, 3);
+        $options['array_minimum'] = 10;
+        $options['array_maximum'] = 100;
+
+        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals(false, $results->getValidateResponse());
+        $message = $results->getValidateMessages();
+        $this->assertEquals(6000, $message[0]->code);
+        $this->assertEquals('Field: test does not have the correct number of array values.', $message[0]->message);
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Request::runConstraintMethod
+     * @covers  Molajo\Fieldhandler\Request::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::runValidationTest
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::testIsArray
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::testValues
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Arrays::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::__construct
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromOptions
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testArrayInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testCount
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testStringInputAgainstValidArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
+     * @return void
+     * @since   1.0.0
+     */
+    public function testValidateMoreThanMaximum()
+    {
+        $field_name  = 'test';
+        $field_value = array(1, 2, 3);
+        $constraint  = 'Arrays';
+        $options     = array('valid_values_array' => array(1, 2, 3));
+        $options['valid_values_array'] = array(1, 2, 3);
+        $options['array_minimum'] = 1;
+        $options['array_maximum'] = 2;
+
+        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals(false, $results->getValidateResponse());
+        $message = $results->getValidateMessages();
+        $this->assertEquals(6000, $message[0]->code);
+        $this->assertEquals('Field: test does not have the correct number of array values.', $message[0]->message);
 
         return;
     }
@@ -141,6 +273,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testStringInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitizeNull
      *
      * @return void
      * @since   1.0.0
@@ -176,8 +309,9 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testStringInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitizeNull
      *
-     * @return void
+     * @return  void
      * @since   1.0.0
      */
     public function testSanitizeChange()

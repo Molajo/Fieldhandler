@@ -202,9 +202,7 @@ abstract class AbstractConstraint implements ConstraintInterface
      */
     public function sanitize()
     {
-        if ($this->field_value === null
-            && $this->ignore_null === true
-        ) {
+        if ($this->sanitizeNull() === true) {
             return $this->field_value;
         }
 
@@ -216,6 +214,25 @@ abstract class AbstractConstraint implements ConstraintInterface
         }
 
         return $this->field_value;
+    }
+
+    /**
+     * Default Sanitize - sanitize primarily in sub-types
+     *
+     * @api
+     * @return  mixed
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    public function sanitizeNull()
+    {
+        if ($this->field_value === null
+            && $this->ignore_null === true
+        ) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -271,7 +288,7 @@ abstract class AbstractConstraint implements ConstraintInterface
      * Unused format for constraint simply returns the field value
      *
      * @api
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */

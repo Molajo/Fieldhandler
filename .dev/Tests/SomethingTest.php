@@ -50,6 +50,8 @@ class SomethingTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::testInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::testStringInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::validateResponseArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::validateResponseArrayTrue
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::validateResponseArrayFalse
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
@@ -86,6 +88,8 @@ class SomethingTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::testInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::testStringInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::validateResponseArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::validateResponseArrayTrue
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::validateResponseArrayFalse
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
@@ -125,6 +129,8 @@ class SomethingTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::testInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::testStringInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::validateResponseArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::validateResponseArrayTrue
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::validateResponseArrayFalse
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
@@ -164,6 +170,8 @@ class SomethingTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::testInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::testStringInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::validateResponseArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::validateResponseArrayTrue
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::validateResponseArrayFalse
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
@@ -203,6 +211,8 @@ class SomethingTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::testInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::testStringInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::validateResponseArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::validateResponseArrayTrue
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::validateResponseArrayFalse
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
@@ -240,6 +250,8 @@ class SomethingTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::testInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::testStringInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::validateResponseArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::validateResponseArrayTrue
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::validateResponseArrayFalse
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray
@@ -272,6 +284,8 @@ class SomethingTest extends PHPUnit_Framework_TestCase
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::testInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::testStringInputAgainstValidArray
      * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::validateResponseArray
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::validateResponseArrayTrue
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractOpposite::validateResponseArrayFalse
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::getCompareToArrayFromInput
      * @covers  Molajo\Fieldhandler\Constraint\AbstractArrays::testInputAgainstValidArray

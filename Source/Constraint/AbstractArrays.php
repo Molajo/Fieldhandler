@@ -119,7 +119,6 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
     /**
      * Build Compare To Array using $options Entry
      *
-     * @param   string $type
      *
      * @return  $this
      * @since   1.0.0
@@ -225,7 +224,7 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
     /**
      * Verify input array only has entries that are defined by the valid array
      *
-     * @return  array
+     * @return  AbstractArrays
      * @since   1.0.0
      */
     protected function testArrayInputAgainstValidArray()
@@ -253,7 +252,7 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
      * @return  boolean
      * @since   1.0.0
      */
-    protected function testCount($filter = false)
+    protected function testCount()
     {
         $array_minimum = $this->getOption('array_minimum', 0);
         $array_maximum = $this->getOption('array_maximum', 9999999999);
@@ -261,11 +260,6 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
         if (count($this->field_value) < $array_minimum
             || count($this->field_value) > $array_maximum
         ) {
-
-            if ($filter === true) {
-                $this->field_value = null;
-            }
-
             return false;
         }
 

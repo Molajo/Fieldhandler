@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1399772637">
-  <project timestamp="1399772637">
+<coverage generated="1399775218">
+  <project timestamp="1399775218">
     <package name="Molajo\Factories\Fieldhandler">
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Factories/Fieldhandler/FieldhandlerFactoryMethod.php">
         <class name="FieldhandlerFactoryMethod" namespace="Molajo\Factories\Fieldhandler">
@@ -19,73 +19,70 @@
     <package name="Molajo\Fieldhandler\Constraint">
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/AbstractArrays.php">
         <class name="AbstractArrays" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
-          <metrics methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="55" coveredstatements="49" elements="63" coveredelements="57"/>
+          <metrics methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="52" coveredstatements="50" elements="60" coveredelements="58"/>
         </class>
-        <line num="101" type="method" name="__construct" crap="1" count="32"/>
-        <line num="108" type="stmt" count="32"/>
-        <line num="109" type="stmt" count="32"/>
-        <line num="110" type="stmt" count="32"/>
-        <line num="111" type="stmt" count="32"/>
-        <line num="112" type="stmt" count="32"/>
-        <line num="114" type="stmt" count="32"/>
-        <line num="116" type="stmt" count="32"/>
-        <line num="117" type="stmt" count="32"/>
-        <line num="128" type="method" name="getCompareToArrayFromOptions" crap="2" count="32"/>
-        <line num="130" type="stmt" count="32"/>
-        <line num="132" type="stmt" count="32"/>
-        <line num="133" type="stmt" count="4"/>
-        <line num="138" type="stmt" count="28"/>
-        <line num="150" type="method" name="getCompareToArrayFromInput" crap="3.58" count="19"/>
-        <line num="152" type="stmt" count="19"/>
-        <line num="153" type="stmt" count="19"/>
-        <line num="155" type="stmt" count="19"/>
-        <line num="158" type="stmt" count="0"/>
-        <line num="160" type="stmt" count="0"/>
-        <line num="169" type="method" name="validation" crap="2" count="63"/>
-        <line num="171" type="stmt" count="63"/>
-        <line num="172" type="stmt" count="35"/>
-        <line num="175" type="stmt" count="28"/>
-        <line num="184" type="method" name="testInputAgainstValidArray" crap="3" count="66"/>
-        <line num="186" type="stmt" count="66"/>
-        <line num="187" type="stmt" count="11"/>
-        <line num="188" type="stmt" count="55"/>
-        <line num="191" type="stmt" count="11"/>
-        <line num="193" type="stmt" count="11"/>
-        <line num="195" type="stmt" count="11"/>
-        <line num="196" type="stmt" count="4"/>
-        <line num="197" type="stmt" count="4"/>
-        <line num="198" type="stmt" count="7"/>
-        <line num="201" type="stmt" count="11"/>
-        <line num="210" type="method" name="testStringInputAgainstValidArray" crap="3" count="55"/>
-        <line num="212" type="stmt" count="55"/>
-        <line num="214" type="stmt" count="55"/>
-        <line num="216" type="stmt" count="55"/>
+        <line num="101" type="method" name="__construct" crap="1" count="35"/>
+        <line num="108" type="stmt" count="35"/>
+        <line num="109" type="stmt" count="35"/>
+        <line num="110" type="stmt" count="35"/>
+        <line num="111" type="stmt" count="35"/>
+        <line num="112" type="stmt" count="35"/>
+        <line num="114" type="stmt" count="35"/>
+        <line num="116" type="stmt" count="35"/>
+        <line num="117" type="stmt" count="35"/>
+        <line num="127" type="method" name="getCompareToArrayFromOptions" crap="2" count="35"/>
+        <line num="129" type="stmt" count="35"/>
+        <line num="131" type="stmt" count="35"/>
+        <line num="132" type="stmt" count="6"/>
+        <line num="137" type="stmt" count="29"/>
+        <line num="149" type="method" name="getCompareToArrayFromInput" crap="3.58" count="21"/>
+        <line num="151" type="stmt" count="21"/>
+        <line num="152" type="stmt" count="21"/>
+        <line num="154" type="stmt" count="21"/>
+        <line num="157" type="stmt" count="0"/>
+        <line num="159" type="stmt" count="0"/>
+        <line num="168" type="method" name="validation" crap="2" count="63"/>
+        <line num="170" type="stmt" count="63"/>
+        <line num="171" type="stmt" count="35"/>
+        <line num="174" type="stmt" count="28"/>
+        <line num="183" type="method" name="testInputAgainstValidArray" crap="3" count="68"/>
+        <line num="185" type="stmt" count="68"/>
+        <line num="186" type="stmt" count="13"/>
+        <line num="187" type="stmt" count="55"/>
+        <line num="190" type="stmt" count="13"/>
+        <line num="192" type="stmt" count="13"/>
+        <line num="194" type="stmt" count="13"/>
+        <line num="195" type="stmt" count="6"/>
+        <line num="196" type="stmt" count="6"/>
+        <line num="197" type="stmt" count="7"/>
+        <line num="200" type="stmt" count="13"/>
+        <line num="209" type="method" name="testStringInputAgainstValidArray" crap="3" count="55"/>
+        <line num="211" type="stmt" count="55"/>
+        <line num="213" type="stmt" count="55"/>
+        <line num="215" type="stmt" count="55"/>
+        <line num="216" type="stmt" count="33"/>
         <line num="217" type="stmt" count="33"/>
-        <line num="218" type="stmt" count="33"/>
-        <line num="220" type="stmt" count="55"/>
-        <line num="222" type="stmt" count="55"/>
-        <line num="231" type="method" name="testArrayInputAgainstValidArray" crap="3" count="3"/>
-        <line num="233" type="stmt" count="3"/>
-        <line num="235" type="stmt" count="3"/>
-        <line num="237" type="stmt" count="3"/>
-        <line num="238" type="stmt" count="1"/>
-        <line num="239" type="stmt" count="2"/>
-        <line num="241" type="stmt" count="3"/>
-        <line num="243" type="stmt" count="3"/>
-        <line num="245" type="stmt" count="3"/>
-        <line num="256" type="method" name="testCount" crap="5.02" count="2"/>
-        <line num="258" type="stmt" count="2"/>
-        <line num="259" type="stmt" count="2"/>
-        <line num="261" type="stmt" count="2"/>
-        <line num="262" type="stmt" count="2"/>
+        <line num="219" type="stmt" count="55"/>
+        <line num="221" type="stmt" count="55"/>
+        <line num="230" type="method" name="testArrayInputAgainstValidArray" crap="3" count="5"/>
+        <line num="232" type="stmt" count="5"/>
+        <line num="234" type="stmt" count="5"/>
+        <line num="236" type="stmt" count="5"/>
+        <line num="237" type="stmt" count="1"/>
+        <line num="238" type="stmt" count="4"/>
+        <line num="240" type="stmt" count="5"/>
+        <line num="242" type="stmt" count="5"/>
+        <line num="244" type="stmt" count="5"/>
+        <line num="255" type="method" name="testCount" crap="3" count="5"/>
+        <line num="257" type="stmt" count="5"/>
+        <line num="258" type="stmt" count="5"/>
+        <line num="260" type="stmt" count="5"/>
+        <line num="261" type="stmt" count="5"/>
+        <line num="262" type="stmt" count="5"/>
         <line num="263" type="stmt" count="2"/>
-        <line num="265" type="stmt" count="0"/>
-        <line num="266" type="stmt" count="0"/>
-        <line num="267" type="stmt" count="0"/>
+        <line num="266" type="stmt" count="3"/>
         <line num="269" type="stmt" count="0"/>
-        <line num="272" type="stmt" count="2"/>
-        <line num="275" type="stmt" count="0"/>
-        <metrics loc="274" ncloc="134" classes="1" methods="8" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="55" coveredstatements="49" elements="63" coveredelements="55"/>
+        <metrics loc="268" ncloc="129" classes="1" methods="8" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="52" coveredstatements="50" elements="60" coveredelements="57"/>
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/AbstractConstraint.php">
         <class name="AbstractConstraint" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
@@ -102,15 +99,15 @@
         <line num="165" type="stmt" count="3"/>
         <line num="167" type="stmt" count="3"/>
         <line num="168" type="stmt" count="3"/>
-        <line num="178" type="method" name="validate" crap="4" count="98"/>
-        <line num="180" type="stmt" count="98"/>
-        <line num="181" type="stmt" count="98"/>
-        <line num="182" type="stmt" count="98"/>
+        <line num="178" type="method" name="validate" crap="4" count="101"/>
+        <line num="180" type="stmt" count="101"/>
+        <line num="181" type="stmt" count="101"/>
+        <line num="182" type="stmt" count="101"/>
         <line num="183" type="stmt" count="3"/>
-        <line num="186" type="stmt" count="95"/>
-        <line num="187" type="stmt" count="54"/>
-        <line num="190" type="stmt" count="41"/>
-        <line num="192" type="stmt" count="41"/>
+        <line num="186" type="stmt" count="98"/>
+        <line num="187" type="stmt" count="55"/>
+        <line num="190" type="stmt" count="43"/>
+        <line num="192" type="stmt" count="43"/>
         <line num="203" type="method" name="sanitize" crap="5" count="54"/>
         <line num="205" type="stmt" count="54"/>
         <line num="206" type="stmt" count="54"/>
@@ -123,14 +120,14 @@
         <line num="218" type="stmt" count="52"/>
         <line num="231" type="method" name="format" crap="1" count="40"/>
         <line num="233" type="stmt" count="40"/>
-        <line num="245" type="method" name="setValidateMessage" crap="2" count="55"/>
-        <line num="247" type="stmt" count="55"/>
+        <line num="245" type="method" name="setValidateMessage" crap="2" count="57"/>
+        <line num="247" type="stmt" count="57"/>
         <line num="248" type="stmt" count="8"/>
         <line num="249" type="stmt" count="8"/>
-        <line num="251" type="stmt" count="55"/>
-        <line num="253" type="stmt" count="55"/>
-        <line num="263" type="method" name="getValidateMessages" crap="1" count="49"/>
-        <line num="265" type="stmt" count="49"/>
+        <line num="251" type="stmt" count="57"/>
+        <line num="253" type="stmt" count="57"/>
+        <line num="263" type="method" name="getValidateMessages" crap="1" count="51"/>
+        <line num="265" type="stmt" count="51"/>
         <line num="278" type="method" name="validation" crap="2" count="0"/>
         <line num="280" type="stmt" count="0"/>
         <line num="292" type="method" name="processOptions" crap="2" count="3"/>
@@ -394,37 +391,37 @@
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/Arrays.php">
         <class name="Arrays" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
-          <metrics methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="23" coveredstatements="22" elements="27" coveredelements="26"/>
+          <metrics methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="23" coveredstatements="23" elements="27" coveredelements="27"/>
         </class>
-        <line num="87" type="method" name="validation" crap="3" count="4"/>
-        <line num="90" type="stmt" count="4"/>
-        <line num="91" type="stmt" count="4"/>
-        <line num="92" type="stmt" count="4"/>
-        <line num="93" type="stmt" count="4"/>
-        <line num="95" type="stmt" count="4"/>
-        <line num="97" type="stmt" count="4"/>
-        <line num="98" type="stmt" count="4"/>
-        <line num="99" type="stmt" count="2"/>
-        <line num="100" type="stmt" count="2"/>
-        <line num="102" type="stmt" count="4"/>
-        <line num="104" type="stmt" count="4"/>
-        <line num="116" type="method" name="runValidationTest" crap="2" count="4"/>
-        <line num="118" type="stmt" count="4"/>
-        <line num="119" type="stmt" count="2"/>
-        <line num="121" type="stmt" count="2"/>
-        <line num="124" type="stmt" count="3"/>
-        <line num="133" type="method" name="testIsArray" crap="2" count="4"/>
-        <line num="135" type="stmt" count="4"/>
-        <line num="136" type="stmt" count="3"/>
+        <line num="87" type="method" name="validation" crap="3" count="7"/>
+        <line num="90" type="stmt" count="7"/>
+        <line num="91" type="stmt" count="7"/>
+        <line num="92" type="stmt" count="7"/>
+        <line num="93" type="stmt" count="7"/>
+        <line num="95" type="stmt" count="7"/>
+        <line num="97" type="stmt" count="7"/>
+        <line num="98" type="stmt" count="7"/>
+        <line num="99" type="stmt" count="4"/>
+        <line num="100" type="stmt" count="4"/>
+        <line num="102" type="stmt" count="7"/>
+        <line num="104" type="stmt" count="7"/>
+        <line num="116" type="method" name="runValidationTest" crap="2" count="7"/>
+        <line num="118" type="stmt" count="7"/>
+        <line num="119" type="stmt" count="4"/>
+        <line num="121" type="stmt" count="4"/>
+        <line num="124" type="stmt" count="6"/>
+        <line num="133" type="method" name="testIsArray" crap="2" count="7"/>
+        <line num="135" type="stmt" count="7"/>
+        <line num="136" type="stmt" count="6"/>
         <line num="137" type="stmt" count="1"/>
         <line num="139" type="stmt" count="1"/>
-        <line num="142" type="stmt" count="3"/>
-        <line num="151" type="method" name="testValues" crap="2.15" count="3"/>
-        <line num="153" type="stmt" count="3"/>
-        <line num="154" type="stmt" count="3"/>
-        <line num="157" type="stmt" count="0"/>
+        <line num="142" type="stmt" count="6"/>
+        <line num="151" type="method" name="testValues" crap="2" count="6"/>
+        <line num="153" type="stmt" count="6"/>
+        <line num="154" type="stmt" count="5"/>
+        <line num="157" type="stmt" count="1"/>
         <line num="160" type="stmt" count="0"/>
-        <metrics loc="159" ncloc="61" classes="1" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="23" coveredstatements="22" elements="27" coveredelements="25"/>
+        <metrics loc="159" ncloc="61" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="23" coveredstatements="23" elements="27" coveredelements="27"/>
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/Boolean.php">
         <class name="Boolean" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
@@ -1447,23 +1444,23 @@
         <line num="82" type="stmt" count="2"/>
         <line num="83" type="stmt" count="1"/>
         <line num="86" type="stmt" count="1"/>
-        <line num="95" type="method" name="testNoValueChange" crap="4" count="7"/>
-        <line num="97" type="stmt" count="7"/>
-        <line num="98" type="stmt" count="7"/>
+        <line num="95" type="method" name="testNoValueChange" crap="4" count="8"/>
+        <line num="97" type="stmt" count="8"/>
+        <line num="98" type="stmt" count="8"/>
         <line num="99" type="stmt" count="2"/>
-        <line num="102" type="stmt" count="5"/>
-        <line num="103" type="stmt" count="5"/>
+        <line num="102" type="stmt" count="6"/>
+        <line num="103" type="stmt" count="6"/>
         <line num="104" type="stmt" count="1"/>
-        <line num="107" type="stmt" count="4"/>
-        <line num="108" type="stmt" count="4"/>
+        <line num="107" type="stmt" count="5"/>
+        <line num="108" type="stmt" count="5"/>
         <line num="109" type="stmt" count="1"/>
-        <line num="112" type="stmt" count="3"/>
-        <line num="126" type="method" name="testNoValueChangeCompare" crap="3.07" count="4"/>
-        <line num="128" type="stmt" count="4"/>
-        <line num="129" type="stmt" count="4"/>
-        <line num="130" type="stmt" count="4"/>
+        <line num="112" type="stmt" count="4"/>
+        <line num="126" type="method" name="testNoValueChangeCompare" crap="3.07" count="5"/>
+        <line num="128" type="stmt" count="5"/>
+        <line num="129" type="stmt" count="5"/>
+        <line num="130" type="stmt" count="5"/>
         <line num="131" type="stmt" count="0"/>
-        <line num="134" type="stmt" count="4"/>
+        <line num="134" type="stmt" count="5"/>
         <line num="143" type="method" name="testFloat" crap="4" count="4"/>
         <line num="145" type="stmt" count="4"/>
         <line num="147" type="stmt" count="4"/>
@@ -1569,25 +1566,25 @@
         <line num="400" type="stmt" count="4"/>
         <line num="402" type="stmt" count="1"/>
         <line num="405" type="stmt" count="3"/>
-        <line num="417" type="method" name="runConstraintMethod" crap="3" count="20"/>
-        <line num="419" type="stmt" count="20"/>
-        <line num="421" type="stmt" count="20"/>
-        <line num="423" type="stmt" count="18"/>
-        <line num="424" type="stmt" count="8"/>
-        <line num="425" type="stmt" count="8"/>
-        <line num="426" type="stmt" count="8"/>
-        <line num="428" type="stmt" count="18"/>
+        <line num="417" type="method" name="runConstraintMethod" crap="3" count="23"/>
+        <line num="419" type="stmt" count="23"/>
+        <line num="421" type="stmt" count="23"/>
+        <line num="423" type="stmt" count="21"/>
+        <line num="424" type="stmt" count="10"/>
+        <line num="425" type="stmt" count="10"/>
+        <line num="426" type="stmt" count="10"/>
+        <line num="428" type="stmt" count="21"/>
         <line num="431" type="stmt" count="2"/>
-        <line num="441" type="method" name="getValidateMessages" crap="2.01" count="8"/>
-        <line num="443" type="stmt" count="8"/>
-        <line num="445" type="stmt" count="8"/>
+        <line num="441" type="method" name="getValidateMessages" crap="2.01" count="10"/>
+        <line num="443" type="stmt" count="10"/>
+        <line num="445" type="stmt" count="10"/>
         <line num="446" type="stmt" count="0"/>
-        <line num="449" type="stmt" count="8"/>
-        <line num="451" type="stmt" count="8"/>
-        <line num="452" type="stmt" count="8"/>
-        <line num="453" type="stmt" count="8"/>
-        <line num="454" type="stmt" count="8"/>
-        <line num="456" type="stmt" count="8"/>
+        <line num="449" type="stmt" count="10"/>
+        <line num="451" type="stmt" count="10"/>
+        <line num="452" type="stmt" count="10"/>
+        <line num="453" type="stmt" count="10"/>
+        <line num="454" type="stmt" count="10"/>
+        <line num="456" type="stmt" count="10"/>
         <line num="468" type="method" name="createConstraintClass" crap="1" count="4"/>
         <line num="470" type="stmt" count="4"/>
         <line num="471" type="stmt" count="4"/>
@@ -2333,6 +2330,6 @@
         <metrics loc="18" ncloc="8" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
     </package>
-    <metrics files="119" loc="10423" ncloc="3745" classes="98" methods="222" coveredmethods="98" conditionals="0" coveredconditionals="0" statements="1467" coveredstatements="543" elements="1689" coveredelements="641"/>
+    <metrics files="119" loc="10417" ncloc="3740" classes="98" methods="222" coveredmethods="100" conditionals="0" coveredconditionals="0" statements="1464" coveredstatements="545" elements="1686" coveredelements="645"/>
   </project>
 </coverage>

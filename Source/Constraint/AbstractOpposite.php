@@ -58,28 +58,65 @@ abstract class AbstractOpposite extends AbstractArrays implements ConstraintInte
      * Manage the validate response for input that is an array
      *
      * @api
-     * @return  mixed
+     * @return  boolean
      * @since   1.0.0
      * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     public function validateResponseArray()
     {
-        $hold_array = $this->field_value;
+        $original_array = $this->field_value;
 
-        $results = parent::validate();
+        $validation_results = parent::validate();
 
-        if ($results == true
-            || count($hold_array) === 0
+        $valid = $this->validateResponseArrayTrue($validation_results, $original_array);
+
+        if ($valid == true) {
+            return $valid;
+        }
+
+        return $this->validateResponseArrayFalse($original_array);
+    }
+
+    /**
+     * Validation True Logic
+     *
+     * @return  boolean  $validation_results
+     * @return  array    $original_array
+     *
+     * @api
+     * @return  boolean
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    public function validateResponseArrayTrue($validation_results, $original_array)
+    {
+        if ($validation_results == true
+            || count($original_array) === 0
             || count($this->field_value) === 0
         ) {
-            $this->field_value       = $hold_array;
+            $this->field_value       = $original_array;
             $this->validate_messages = null;
 
             return true;
         }
 
+        return false;
+    }
+
+    /**
+     * Validation False Logic
+     *
+     * @return  array  $original_array
+     *
+     * @return  boolean
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    public function validateResponseArrayFalse($original_array)
+    {
         $new_array = array();
-        foreach ($hold_array as $value) {
+
+        foreach ($original_array as $value) {
             if (in_array($value, $this->field_value)) {
             } else {
                 $new_array[] = $value;
