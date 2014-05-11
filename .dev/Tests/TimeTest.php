@@ -42,10 +42,17 @@ class TimeTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Time::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Time::format
+     * @covers  Molajo\Fieldhandler\Constraint\Time::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Time::createFromFormat
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::createFromFormat
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getvalidateMessages
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setvalidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
      * @return  void
      * @since   1.0.0
@@ -72,10 +79,17 @@ class TimeTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Time::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Time::format
+     * @covers  Molajo\Fieldhandler\Constraint\Time::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Time::createFromFormat
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::createFromFormat
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getvalidateMessages
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setvalidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
      * @return  void
      * @since   1.0.0
@@ -105,10 +119,16 @@ class TimeTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Time::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Time::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Time::createFromFormat
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::createFromFormat
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getvalidateMessages
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setvalidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
      * @return  void
      * @since   1.0.0
@@ -132,12 +152,17 @@ class TimeTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Time::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\Time::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Time::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Time::createFromFormat
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::createFromFormat
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getvalidateMessages
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setvalidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
      * @return  void
      * @since   1.0.0
@@ -162,8 +187,16 @@ class TimeTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Time::format
+     * @covers  Molajo\Fieldhandler\Constraint\Time::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Time::createFromFormat
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::createFromFormat
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
      * @return  void
      * @since   1.0.0

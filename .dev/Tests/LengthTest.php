@@ -41,12 +41,21 @@ class LengthTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers  Molajo\Fieldhandler\Request::runConstraintMethod
+     * @covers  Molajo\Fieldhandler\Request::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Length::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Length::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Length::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Length::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testValidateSuccess()
+    public function testValidateTrue()
     {
         $field_name                = 'fieldname';
         $field_value               = 'dogfood';
@@ -64,11 +73,21 @@ class LengthTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers  Molajo\Fieldhandler\Request::runConstraintMethod
+     * @covers  Molajo\Fieldhandler\Request::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\Length::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Length::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Length::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Length::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testValidateFail()
+    public function testValidateFalse()
     {
         $field_name                = 'fieldname';
         $field_value               = 'dogfood is not good to eat.';
@@ -91,12 +110,89 @@ class LengthTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tear down
+     * @covers  Molajo\Fieldhandler\Request::runConstraintMethod
+     * @covers  Molajo\Fieldhandler\Request::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Length::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Length::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Length::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
      *
-     * @return void
+     * @return  void
      * @since   1.0.0
      */
-    protected function tearDown()
+    public function testSanitizeNoChange()
     {
+        $field_name                = 'fieldname';
+        $field_value               = 'dogfood is not good to eat.';
+        $constraint                = 'Length';
+        $options                   = array();
+        $options['minimum_length'] = 0;
+        $options['maximum_length'] = 999;
+
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Request::runConstraintMethod
+     * @covers  Molajo\Fieldhandler\Request::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Length::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Length::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Length::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     *
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testSanitizeChange()
+    {
+        $field_name                = 'fieldname';
+        $field_value               = 'dogfood is not good to eat.';
+        $constraint                = 'Length';
+        $options                   = array();
+        $options['minimum_length'] = 0;
+        $options['maximum_length'] = 10;
+
+        $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals(null, $results->getFieldValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Request::runConstraintMethod
+     * @covers  Molajo\Fieldhandler\Request::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Length::format
+     * @covers  Molajo\Fieldhandler\Constraint\Length::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Length::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     *
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testFormat()
+    {
+        $field_name                = 'fieldname';
+        $field_value               = 'dogfood is not good to eat.';
+        $constraint                = 'Length';
+        $options                   = array();
+        $options['minimum_length'] = 0;
+        $options['maximum_length'] = 0;
+
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
+
+        return;
     }
 }

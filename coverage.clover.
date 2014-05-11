@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1399781128">
-  <project timestamp="1399781128">
+<coverage generated="1399783902">
+  <project timestamp="1399783902">
     <package name="Molajo\Factories\Fieldhandler">
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Factories/Fieldhandler/FieldhandlerFactoryMethod.php">
         <class name="FieldhandlerFactoryMethod" namespace="Molajo\Factories\Fieldhandler">
@@ -19,7 +19,7 @@
     <package name="Molajo\Fieldhandler\Constraint">
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/AbstractArrays.php">
         <class name="AbstractArrays" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
-          <metrics methods="9" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="61" coveredstatements="47" elements="70" coveredelements="55"/>
+          <metrics methods="9" coveredmethods="9" conditionals="0" coveredconditionals="0" statements="61" coveredstatements="57" elements="70" coveredelements="66"/>
         </class>
         <line num="101" type="method" name="__construct" crap="1" count="35"/>
         <line num="108" type="stmt" count="35"/>
@@ -70,19 +70,19 @@
         <line num="234" type="stmt" count="5"/>
         <line num="236" type="stmt" count="5"/>
         <line num="238" type="stmt" count="5"/>
-        <line num="251" type="method" name="createFieldValueArrayComparison" crap="30" count="0"/>
-        <line num="253" type="stmt" count="0"/>
-        <line num="255" type="stmt" count="0"/>
-        <line num="257" type="stmt" count="0"/>
-        <line num="258" type="stmt" count="0"/>
-        <line num="259" type="stmt" count="0"/>
-        <line num="260" type="stmt" count="0"/>
-        <line num="261" type="stmt" count="0"/>
-        <line num="262" type="stmt" count="0"/>
+        <line num="251" type="method" name="createFieldValueArrayComparison" crap="5.12" count="5"/>
+        <line num="253" type="stmt" count="5"/>
+        <line num="255" type="stmt" count="5"/>
+        <line num="257" type="stmt" count="5"/>
+        <line num="258" type="stmt" count="4"/>
+        <line num="259" type="stmt" count="4"/>
+        <line num="260" type="stmt" count="4"/>
+        <line num="261" type="stmt" count="4"/>
+        <line num="262" type="stmt" count="1"/>
         <line num="263" type="stmt" count="0"/>
         <line num="264" type="stmt" count="0"/>
-        <line num="266" type="stmt" count="0"/>
-        <line num="268" type="stmt" count="0"/>
+        <line num="266" type="stmt" count="5"/>
+        <line num="268" type="stmt" count="5"/>
         <line num="277" type="method" name="testCount" crap="3" count="5"/>
         <line num="279" type="stmt" count="5"/>
         <line num="280" type="stmt" count="5"/>
@@ -91,7 +91,7 @@
         <line num="284" type="stmt" count="5"/>
         <line num="285" type="stmt" count="2"/>
         <line num="288" type="stmt" count="3"/>
-        <metrics loc="290" ncloc="143" classes="1" methods="9" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="61" coveredstatements="47" elements="70" coveredelements="54"/>
+        <metrics loc="290" ncloc="143" classes="1" methods="9" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="61" coveredstatements="57" elements="70" coveredelements="64"/>
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/AbstractConstraint.php">
         <class name="AbstractConstraint" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
@@ -108,39 +108,39 @@
         <line num="165" type="stmt" count="3"/>
         <line num="167" type="stmt" count="3"/>
         <line num="168" type="stmt" count="3"/>
-        <line num="178" type="method" name="validate" crap="4" count="104"/>
-        <line num="180" type="stmt" count="104"/>
-        <line num="181" type="stmt" count="104"/>
-        <line num="182" type="stmt" count="104"/>
+        <line num="178" type="method" name="validate" crap="4" count="108"/>
+        <line num="180" type="stmt" count="108"/>
+        <line num="181" type="stmt" count="108"/>
+        <line num="182" type="stmt" count="108"/>
         <line num="183" type="stmt" count="3"/>
-        <line num="186" type="stmt" count="101"/>
-        <line num="187" type="stmt" count="57"/>
-        <line num="190" type="stmt" count="44"/>
-        <line num="192" type="stmt" count="44"/>
-        <line num="203" type="method" name="sanitize" crap="4" count="55"/>
-        <line num="205" type="stmt" count="55"/>
-        <line num="206" type="stmt" count="2"/>
-        <line num="209" type="stmt" count="53"/>
-        <line num="211" type="stmt" count="53"/>
-        <line num="212" type="stmt" count="28"/>
-        <line num="213" type="stmt" count="25"/>
-        <line num="216" type="stmt" count="53"/>
-        <line num="227" type="method" name="sanitizeNull" crap="3" count="5"/>
-        <line num="229" type="stmt" count="5"/>
-        <line num="230" type="stmt" count="5"/>
-        <line num="231" type="stmt" count="5"/>
-        <line num="232" type="stmt" count="1"/>
-        <line num="235" type="stmt" count="4"/>
-        <line num="248" type="method" name="format" crap="1" count="40"/>
-        <line num="250" type="stmt" count="40"/>
-        <line num="262" type="method" name="setValidateMessage" crap="2" count="59"/>
-        <line num="264" type="stmt" count="59"/>
+        <line num="186" type="stmt" count="105"/>
+        <line num="187" type="stmt" count="59"/>
+        <line num="190" type="stmt" count="46"/>
+        <line num="192" type="stmt" count="46"/>
+        <line num="203" type="method" name="sanitize" crap="4" count="61"/>
+        <line num="205" type="stmt" count="61"/>
+        <line num="206" type="stmt" count="4"/>
+        <line num="209" type="stmt" count="57"/>
+        <line num="211" type="stmt" count="57"/>
+        <line num="212" type="stmt" count="31"/>
+        <line num="213" type="stmt" count="26"/>
+        <line num="216" type="stmt" count="57"/>
+        <line num="227" type="method" name="sanitizeNull" crap="3" count="11"/>
+        <line num="229" type="stmt" count="11"/>
+        <line num="230" type="stmt" count="11"/>
+        <line num="231" type="stmt" count="11"/>
+        <line num="232" type="stmt" count="3"/>
+        <line num="235" type="stmt" count="8"/>
+        <line num="248" type="method" name="format" crap="1" count="43"/>
+        <line num="250" type="stmt" count="43"/>
+        <line num="262" type="method" name="setValidateMessage" crap="2" count="62"/>
+        <line num="264" type="stmt" count="62"/>
         <line num="265" type="stmt" count="8"/>
         <line num="266" type="stmt" count="8"/>
-        <line num="268" type="stmt" count="59"/>
-        <line num="270" type="stmt" count="59"/>
-        <line num="280" type="method" name="getValidateMessages" crap="1" count="53"/>
-        <line num="282" type="stmt" count="53"/>
+        <line num="268" type="stmt" count="62"/>
+        <line num="270" type="stmt" count="62"/>
+        <line num="280" type="method" name="getValidateMessages" crap="1" count="56"/>
+        <line num="282" type="stmt" count="56"/>
         <line num="295" type="method" name="validation" crap="2" count="0"/>
         <line num="297" type="stmt" count="0"/>
         <line num="309" type="method" name="processOptions" crap="2" count="3"/>
@@ -188,9 +188,9 @@
         <line num="58" type="stmt" count="0"/>
         <line num="61" type="stmt" count="1"/>
         <line num="63" type="stmt" count="1"/>
-        <line num="76" type="method" name="getOption" crap="3" count="48"/>
-        <line num="78" type="stmt" count="48"/>
-        <line num="79" type="stmt" count="39"/>
+        <line num="76" type="method" name="getOption" crap="3" count="51"/>
+        <line num="78" type="stmt" count="51"/>
+        <line num="79" type="stmt" count="42"/>
         <line num="82" type="stmt" count="9"/>
         <line num="83" type="stmt" count="1"/>
         <line num="86" type="stmt" count="8"/>
@@ -255,7 +255,7 @@
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/AbstractDatetime.php">
         <class name="AbstractDatetime" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
-          <metrics methods="3" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="6" elements="22" coveredelements="7"/>
+          <metrics methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="15" elements="22" coveredelements="18"/>
         </class>
         <line num="46" type="method" name="format" crap="3.33" count="2"/>
         <line num="48" type="stmt" count="2"/>
@@ -267,20 +267,20 @@
         <line num="58" type="stmt" count="2"/>
         <line num="60" type="stmt" count="2"/>
         <line num="62" type="stmt" count="2"/>
-        <line num="71" type="method" name="validation" crap="6" count="0"/>
-        <line num="73" type="stmt" count="0"/>
-        <line num="75" type="stmt" count="0"/>
-        <line num="76" type="stmt" count="0"/>
-        <line num="79" type="stmt" count="0"/>
-        <line num="88" type="method" name="createFromFormat" crap="6" count="0"/>
-        <line num="90" type="stmt" count="0"/>
-        <line num="92" type="stmt" count="0"/>
-        <line num="94" type="stmt" count="0"/>
-        <line num="95" type="stmt" count="0"/>
+        <line num="71" type="method" name="validation" crap="2" count="8"/>
+        <line num="73" type="stmt" count="8"/>
+        <line num="75" type="stmt" count="8"/>
+        <line num="76" type="stmt" count="4"/>
+        <line num="79" type="stmt" count="4"/>
+        <line num="88" type="method" name="createFromFormat" crap="2.02" count="10"/>
+        <line num="90" type="stmt" count="10"/>
+        <line num="92" type="stmt" count="10"/>
+        <line num="94" type="stmt" count="10"/>
+        <line num="95" type="stmt" count="10"/>
         <line num="96" type="stmt" count="0"/>
-        <line num="99" type="stmt" count="0"/>
+        <line num="99" type="stmt" count="10"/>
         <line num="102" type="stmt" count="0"/>
-        <metrics loc="101" ncloc="56" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="6" elements="22" coveredelements="6"/>
+        <metrics loc="101" ncloc="56" classes="1" methods="3" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="15" elements="22" coveredelements="16"/>
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/AbstractFiltervar.php">
         <class name="AbstractFiltervar" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
@@ -821,18 +821,18 @@
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/Length.php">
         <class name="Length" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
-          <metrics methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="0" elements="8" coveredelements="0"/>
+          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="8" coveredelements="8"/>
         </class>
-        <line num="37" type="method" name="validation" crap="12" count="0"/>
-        <line num="39" type="stmt" count="0"/>
-        <line num="40" type="stmt" count="0"/>
-        <line num="42" type="stmt" count="0"/>
-        <line num="45" type="stmt" count="0"/>
-        <line num="46" type="stmt" count="0"/>
-        <line num="47" type="stmt" count="0"/>
-        <line num="50" type="stmt" count="0"/>
+        <line num="37" type="method" name="validation" crap="3" count="4"/>
+        <line num="39" type="stmt" count="4"/>
+        <line num="40" type="stmt" count="4"/>
+        <line num="42" type="stmt" count="4"/>
+        <line num="45" type="stmt" count="4"/>
+        <line num="46" type="stmt" count="4"/>
+        <line num="47" type="stmt" count="2"/>
+        <line num="50" type="stmt" count="2"/>
         <line num="53" type="stmt" count="0"/>
-        <metrics loc="52" ncloc="25" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="0" elements="8" coveredelements="0"/>
+        <metrics loc="52" ncloc="25" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="8" coveredelements="8"/>
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/Lessthan.php">
         <class name="Lessthan" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
@@ -1024,29 +1024,25 @@
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/Resource.php">
         <class name="Resource" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
-          <metrics methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="0" elements="8" coveredelements="0"/>
+          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
         </class>
-        <line num="40" type="method" name="validation" crap="6" count="0"/>
-        <line num="41" type="stmt" count="0"/>
-        <line num="42" type="stmt" count="0"/>
-        <line num="43" type="stmt" count="0"/>
-        <line num="44" type="stmt" count="0"/>
-        <line num="46" type="stmt" count="0"/>
-        <line num="47" type="stmt" count="0"/>
-        <metrics loc="48" ncloc="18" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="0" elements="8" coveredelements="0"/>
+        <line num="40" type="method" name="validation" crap="2" count="4"/>
+        <line num="42" type="stmt" count="4"/>
+        <line num="43" type="stmt" count="2"/>
+        <line num="46" type="stmt" count="2"/>
+        <line num="49" type="stmt" count="0"/>
+        <metrics loc="48" ncloc="18" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/Scalar.php">
         <class name="Scalar" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
-          <metrics methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="0" elements="8" coveredelements="0"/>
+          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
         </class>
-        <line num="41" type="method" name="validation" crap="6" count="0"/>
-        <line num="42" type="stmt" count="0"/>
-        <line num="43" type="stmt" count="0"/>
-        <line num="44" type="stmt" count="0"/>
-        <line num="45" type="stmt" count="0"/>
-        <line num="47" type="stmt" count="0"/>
-        <line num="48" type="stmt" count="0"/>
-        <metrics loc="49" ncloc="18" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="0" elements="8" coveredelements="0"/>
+        <line num="41" type="method" name="validation" crap="2" count="4"/>
+        <line num="43" type="stmt" count="4"/>
+        <line num="44" type="stmt" count="2"/>
+        <line num="47" type="stmt" count="2"/>
+        <line num="50" type="stmt" count="0"/>
+        <metrics loc="49" ncloc="18" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
       </file>
       <file name="/Users/amystephen/Sites/Molajo/Fieldhandler/Source/Constraint/Something.php">
         <class name="Something" namespace="Molajo\Fieldhandler\Constraint" fullPackage="Molajo" package="Molajo">
@@ -1583,25 +1579,25 @@
         <line num="400" type="stmt" count="4"/>
         <line num="402" type="stmt" count="1"/>
         <line num="405" type="stmt" count="3"/>
-        <line num="417" type="method" name="runConstraintMethod" crap="3" count="23"/>
-        <line num="419" type="stmt" count="23"/>
-        <line num="421" type="stmt" count="23"/>
-        <line num="423" type="stmt" count="21"/>
-        <line num="424" type="stmt" count="10"/>
-        <line num="425" type="stmt" count="10"/>
-        <line num="426" type="stmt" count="10"/>
-        <line num="428" type="stmt" count="21"/>
-        <line num="431" type="stmt" count="2"/>
-        <line num="441" type="method" name="getValidateMessages" crap="2.01" count="10"/>
-        <line num="443" type="stmt" count="10"/>
-        <line num="445" type="stmt" count="10"/>
+        <line num="417" type="method" name="runConstraintMethod" crap="3" count="32"/>
+        <line num="419" type="stmt" count="32"/>
+        <line num="421" type="stmt" count="32"/>
+        <line num="423" type="stmt" count="27"/>
+        <line num="424" type="stmt" count="13"/>
+        <line num="425" type="stmt" count="13"/>
+        <line num="426" type="stmt" count="13"/>
+        <line num="428" type="stmt" count="27"/>
+        <line num="431" type="stmt" count="5"/>
+        <line num="441" type="method" name="getValidateMessages" crap="2.01" count="13"/>
+        <line num="443" type="stmt" count="13"/>
+        <line num="445" type="stmt" count="13"/>
         <line num="446" type="stmt" count="0"/>
-        <line num="449" type="stmt" count="10"/>
-        <line num="451" type="stmt" count="10"/>
-        <line num="452" type="stmt" count="10"/>
-        <line num="453" type="stmt" count="10"/>
-        <line num="454" type="stmt" count="10"/>
-        <line num="456" type="stmt" count="10"/>
+        <line num="449" type="stmt" count="13"/>
+        <line num="451" type="stmt" count="13"/>
+        <line num="452" type="stmt" count="13"/>
+        <line num="453" type="stmt" count="13"/>
+        <line num="454" type="stmt" count="13"/>
+        <line num="456" type="stmt" count="13"/>
         <line num="468" type="method" name="createConstraintClass" crap="1" count="4"/>
         <line num="470" type="stmt" count="4"/>
         <line num="471" type="stmt" count="4"/>
@@ -2347,6 +2343,6 @@
         <metrics loc="18" ncloc="8" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
     </package>
-    <metrics files="120" loc="10621" ncloc="3780" classes="99" methods="225" coveredmethods="103" conditionals="0" coveredconditionals="0" statements="1471" coveredstatements="553" elements="1696" coveredelements="656"/>
+    <metrics files="120" loc="10621" ncloc="3780" classes="99" methods="225" coveredmethods="107" conditionals="0" coveredconditionals="0" statements="1463" coveredstatements="585" elements="1688" coveredelements="692"/>
   </project>
 </coverage>

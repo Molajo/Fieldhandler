@@ -43,6 +43,13 @@ class DateTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Date::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Date::format
+     * @covers  Molajo\Fieldhandler\Constraint\Date::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Date::createFromFormat
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::createFromFormat
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
@@ -69,6 +76,13 @@ class DateTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Date::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Date::format
+     * @covers  Molajo\Fieldhandler\Constraint\Date::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Date::createFromFormat
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::createFromFormat
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
@@ -98,10 +112,14 @@ class DateTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Date::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Date::format
+     * @covers  Molajo\Fieldhandler\Constraint\Date::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Date::createFromFormat
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::createFromFormat
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
      * @return  void
      * @since   1.0.0
@@ -125,12 +143,15 @@ class DateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Date::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\Date::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Date::format
+     * @covers  Molajo\Fieldhandler\Constraint\Date::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Date::createFromFormat
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::createFromFormat
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
      * @return  void
      * @since   1.0.0
@@ -151,9 +172,15 @@ class DateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers  Molajo\Fieldhandler\Constraint\Date::validate
      * @covers  Molajo\Fieldhandler\Constraint\Date::format
+     * @covers  Molajo\Fieldhandler\Constraint\Date::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Date::createFromFormat
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::createFromFormat
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
      *
      * @return  void
      * @since   1.0.0
