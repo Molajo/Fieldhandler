@@ -301,6 +301,11 @@ class Dog extends AbstractConstraintTests implements ConstraintInterface
             'Mock Exception'
         );
     }
+
+    public function validation()
+    {
+        return true;
+    }
 }
 
 /**
@@ -381,6 +386,11 @@ class Mocknumeric extends AbstractConstraintTests implements ConstraintInterface
     public function format()
     {
         return $this->field_value;
+    }
+
+    public function validation()
+    {
+        return true;
     }
 }
 

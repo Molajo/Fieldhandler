@@ -72,7 +72,7 @@ use DateTime;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Time extends AbstractConstraintTests implements ConstraintInterface
+class Time extends AbstractDatetime implements ConstraintInterface
 {
     /**
      * Message Code
@@ -80,67 +80,5 @@ class Time extends AbstractConstraintTests implements ConstraintInterface
      * @var    integer
      * @since  1.0.0
      */
-    protected $message_code = 2000;
-
-    /**
-     * Format
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    public function format()
-    {
-        if ($this->field_value === null) {
-            return true;
-        }
-
-        $time = $this->createFromFormat();
-
-        if ($time === false) {
-            $this->field_value = null;
-        }
-
-        $format = $this->getOption('display_as_time_format', 'H:i:s');
-
-        $this->field_value = $time->format($format);
-
-        return $this->field_value;
-    }
-
-    /**
-     * Validation Test
-     *
-     * @return  boolean
-     * @since   1.0.0
-     */
-    protected function validation()
-    {
-        $time = $this->createFromFormat();
-
-        if ($time === false) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Create Data from a specific format
-     *
-     * @return  mixed
-     * @since   1.0.0
-     */
-    protected function createFromFormat()
-    {
-        $format = $this->getOption('create_from_time_format', 'H:i:s');
-
-        $time = DateTime::createFromFormat($format, $this->field_value);
-
-        $errors = DateTime::getLastErrors();
-        if ($errors['warning_count'] > 0) {
-            return false;
-        }
-
-        return $time;
-    }
+    protected $default_format = 'H:i:s';
 }

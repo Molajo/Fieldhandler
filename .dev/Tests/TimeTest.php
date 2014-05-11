@@ -175,13 +175,12 @@ class TimeTest extends PHPUnit_Framework_TestCase
         $constraint  = 'Time';
         $options     = array(
             'create_from_time_format' => 'H:i:s',
-            'display_as_time_format'  => 'H:i'
+            'display_as_time_format'  => 'H:i:s'
         );
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals('12:30', $results->getFieldValue());
-        $this->assertEquals(true, $results->getChangeIndicator());
+        $this->assertEquals('12:30:00', $results->getFieldValue());
 
         return;
     }

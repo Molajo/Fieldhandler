@@ -112,8 +112,8 @@ class DateTest extends PHPUnit_Framework_TestCase
         $field_value = '2012-09-13';
         $constraint  = 'Date';
         $options     = array(
-            'create_from_date_format' => 'Y-m-d',
-            'display_as_date_format'  => 'd/m/Y'
+            'create_from_format' => 'Y-m-d',
+            'display_as_format'  => 'd/m/Y'
         );
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
@@ -164,8 +164,8 @@ class DateTest extends PHPUnit_Framework_TestCase
         $field_value = '2012-09-13';
         $constraint  = 'Date';
         $options     = array(
-            'create_from_date_format' => 'Y-m-d',
-            'display_as_date_format'  => 'm/d/Y'
+            'create_from_format' => 'Y-m-d',
+            'display_as_format'  => 'm/d/Y'
         );
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);

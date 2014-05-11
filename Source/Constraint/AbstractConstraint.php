@@ -294,7 +294,7 @@ abstract class AbstractConstraint implements ConstraintInterface
      */
     protected function validation()
     {
-        return false;
+        return true;
     }
 
     /**
