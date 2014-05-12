@@ -243,6 +243,26 @@ class RequestTest extends PHPUnit_Framework_TestCase
      * @covers                   Molajo\Fieldhandler\Request::createClass
      * @covers                   Molajo\Fieldhandler\Request::createConstraintClass
      * @expectedException        \CommonApi\Exception\UnexpectedValueException
+     * @expectedExceptionRequest 'Fieldhandler Request createClass - Class does not exist: Molajo\Fieldhandler\Constraint\ThisDoesNotExist
+     *
+     * @since                    1.0.0
+     */
+    public function testCreateConstraintClassNotFound()
+    {
+        $field_name  = 'field_name';
+        $field_value = 123;
+        $constraint  = 'ThisDoesNotExist';
+        $options     = array();
+
+        $results = $this->request->format($field_name, $field_value, $constraint, $options);
+
+        return;
+    }
+
+    /**
+     * @covers                   Molajo\Fieldhandler\Request::createClass
+     * @covers                   Molajo\Fieldhandler\Request::createConstraintClass
+     * @expectedException        \CommonApi\Exception\UnexpectedValueException
      * @expectedExceptionRequest Fieldhandler Request createConstraint Method Failed: Dog Class: Molajo\Fieldhandler\Constraint\Dog
      *
      * @since                    1.0.0

@@ -42,6 +42,19 @@ class UrlTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Url::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Url::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Url::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Url::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validateCompare
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitizeValidate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -62,6 +75,19 @@ class UrlTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Url::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Url::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Url::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Url::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validateCompare
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitizeValidate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -76,8 +102,8 @@ class UrlTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(false, $results->getValidateResponse());
 
-        $expected_code    = 1000;
-        $expected_message = 'Field: url_field does not have a valid value for Url data type.';
+        $expected_code    = 2000;
+        $expected_message = 'Field: url_field must only contain Url values.';
         $messages         = $results->getValidateMessages();
         $this->assertEquals($expected_code, $messages[0]->code);
         $this->assertEquals($expected_message, $messages[0]->message);
@@ -86,7 +112,14 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Url::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Url::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Url::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitizeValidate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -106,7 +139,14 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Url::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Url::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Url::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitizeValidate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -121,14 +161,15 @@ class UrlTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(false, $results->getChangeIndicator());
+        $this->assertEquals(null, $results->getFieldValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Url::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Url::format
+     *
      * @return  void
      * @since   1.0.0
      */
@@ -138,27 +179,6 @@ class UrlTest extends PHPUnit_Framework_TestCase
         $field_value = 'http://google.com/';
         $constraint  = 'Url';
         $options     = array();
-
-        $results = $this->request->format($field_name, $field_value, $constraint, $options);
-
-        $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(false, $results->getChangeIndicator());
-
-        return;
-    }
-
-    /**
-     * @covers  Molajo\Fieldhandler\Constraint\Url::validate
-     * @return  void
-     * @since   1.0.0
-     */
-    public function testFormatFail()
-    {
-        $field_name                  = 'url_field';
-        $field_value                 = 'yessireebob';
-        $constraint                  = 'Url';
-        $options                     = array();
-        $options[ FILTER_FLAG_IPV6 ] = true;
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 

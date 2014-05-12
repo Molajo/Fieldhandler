@@ -170,14 +170,4 @@ class RegexTest extends PHPUnit_Framework_TestCase
 
         return;
     }
-
-    /**
-     * Tear down
-     *
-     * @return void
-     * @since   1.0.0
-     */
-    protected function tearDown()
-    {
-    }
 }

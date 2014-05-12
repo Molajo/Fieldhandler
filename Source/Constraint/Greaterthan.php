@@ -10,7 +10,6 @@ namespace Molajo\Fieldhandler\Constraint;
 
 use CommonApi\Model\ConstraintInterface;
 
-
 /**
  * Greaterthan Constraint
  *
