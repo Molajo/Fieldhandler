@@ -3,6 +3,8 @@ Molajo Fieldhandler [Alpha]
 =======
 
 [![Build Status](https://travis-ci.org/Molajo/Fieldhandler.png?branch=master)](https://travis-ci.org/Molajo/Fieldhandler)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Molajo/Fieldhandler/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Molajo/Fieldhandler/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/Molajo/Fieldhandler/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Molajo/Fieldhandler/?branch=master)
 
 *Molajo Fieldhandler* is an integrated data integrity assurance package for PHP applications.
 The approach validation and sanitation
