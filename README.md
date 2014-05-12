@@ -517,28 +517,57 @@ For this constraint, the `format` method is not implemented. The value sent in i
 
 
 ### Date
-Processes a value to determine if it is a valid date. For Validate, if the resulting value is not a valid
- date, an Exception is thrown. For Filter and Escape, the value returned is NULL if it is not valid.
+Must be a valid formatted date.
+
+#### Validate
+
+Verifies the date according to the format defined in $options['create_from_format'], returning
+ true if valid or false and error messages if not valid.
 
 ```php
-    // The value of field `date_field` is '2013/04/01 01:00:00' and determined to be valid
-    $options = array();
-    $options['callback'] = '2013/04/01 01:00:00';
-    $results = $request->sanitize('date_field', '2013/04/01 01:00:00', 'Date');
+$options = array();
+$options['create_from_format'] = 'Y-m-d';
+$response = $request->sanitize('date_field', '2013-12-31', 'Date', $options);
+
+if ($response->getValidateResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValidateMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
 
 ```
 
-### Datetime
-Processes a value to determine if it is a valid date. For Validate, if the resulting value is not a valid
- date, an Exception is thrown. For Filter and Escape, the value returned is NULL if it is not valid.
+#### Sanitize
+
+Validates the date and returns null for $field_value if the date does not conform to the constraint.
 
 ```php
-    // The value of field `date_field` is '2013/04/01 01:00:00' and determined to be valid
-    $options = array();
-    $options['callback'] = '2013/04/01 01:00:00';
-    $results = $request->sanitize('date_field', '2013/04/01 01:00:00', 'Date');
+$options = array();
+$options['create_from_format'] = 'Y-m-d';
+$response = $request->sanitize('date_field', '2013-12-31', 'Date', $options);
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
 
 ```
+
+#### Format
+
+Formats a date according to the format defined in $options['display_as_format'];
+
+```php
+$options = array();
+$options['create_from_format'] = 'Y-m-d';
+$options['display_as_format'] = 'd/m/Y';
+$response = $request->sanitize('date_field', '2013-12-31', 'Date', $options);
+
+echo $response->getFieldValue();
+
+```
+
 
 ### Defaults
 Applies default value for sanitize and verifies if the value requires a default for validate.
@@ -676,10 +705,10 @@ URL-encode string, optionally strip or encode special characters.
 
 The following flags can be applied by adding to the options array (see examples):
 
-FILTER_FLAG_STRIP_LOW
-FILTER_FLAG_STRIP_HIGH
-FILTER_FLAG_ENCODE_LOW
-FILTER_FLAG_ENCODE_HIGH
+* FILTER_FLAG_STRIP_LOW
+* FILTER_FLAG_STRIP_HIGH
+* FILTER_FLAG_ENCODE_LOW
+* FILTER_FLAG_ENCODE_HIGH
 
 #### Validate
 
@@ -1720,6 +1749,57 @@ For this constraint, the `format` method is not implemented. The value sent in i
 Tests that the value is a string.
 
 ### Time
+
+Must be a valid formatted time.
+
+#### Valitime
+
+Verifies the time according to the format defined in $options['create_from_time_format'], returning
+ true if valid or false and error messages if not valid.
+
+```php
+$options = array();
+$options['create_from_time_format'] = 'H:i:s';
+$response = $request->sanitize('time_field', '12:30:00', 'time', $options);
+
+if ($response->getValitimeResponse() === true) {
+    // all is well
+} else {
+    foreach ($response->getValitimeMessages as $code => $message) {
+        echo $code . ': ' . $message . '/n';
+    }
+}
+
+```
+
+#### Sanitize
+
+Validate the time and returns null for $field_value if the time does not conform to the constraint.
+
+```php
+$options = array();
+$options['create_from_time_format'] = 'Y-m-d';
+$response = $request->sanitize('time_field', '2013-12-31', 'time', $options);
+
+if ($response->getChangeIndicator() === true) {
+    $field_value = $response->getFieldValue();
+}
+
+```
+
+#### Format
+
+Formats a time according to the format defined in $options['display_as_time_format'];
+
+```php
+$options = array();
+$options['create_from_time_format'] = 'Y-m-d';
+$options['display_as_time_format'] = 'd/m/Y';
+$response = $request->sanitize('time_field', '2013-12-31', 'time', $options);
+
+echo $response->getFieldValue();
+
+```
 
 ### Trim
 The text must not have spaces before or after the last visible character.

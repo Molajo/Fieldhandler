@@ -46,13 +46,14 @@ abstract class AbstractDatetime extends AbstractConstraintTests implements Const
     public function format()
     {
         if ($this->field_value === null) {
-            return true;
+            return $this->field_value;
         }
 
         $date = $this->createFromFormat();
 
         if ($date === false) {
             $this->field_value = null;
+            return $this->field_value;
         }
 
         $format = $this->getOption('display_as_format', $this->default_format);

@@ -308,13 +308,61 @@ abstract class AbstractConstraint implements ConstraintInterface
      */
     protected function processOptions($options)
     {
-        foreach ($this->property_array as $key) {
-            $options = $this->setPropertyKeyWithOptionKey($key, $options);
-        }
-
         $this->options = $options;
 
+        foreach ($this->property_array as $key) {
+            $this->processOption($key);
+        }
+
         return $this;
+    }
+
+    /**
+     * Process a single option key
+     *
+     * @param   string  $key
+     *
+     * @return  $this
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException
+     */
+    protected function processOption($key)
+    {
+        $value = $this->getOption($key);
+
+        unset($this->options[$key]);
+
+        if ($value === null) {
+        } else {
+            $this->$key = $value;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get $option $key value, if available, or use $default value
+     *
+     * @param   string     $key
+     * @param   null|mixed $default
+     *
+     * @return  mixed
+     * @since   1.0.0
+     * @throws  \CommonApi\Exception\UnexpectedValueException;
+     */
+    protected function getOption($key, $default = null)
+    {
+        if (isset($this->options[ $key ])) {
+            return $this->options[ $key ];
+        }
+
+        if ($default === null) {
+            return null;
+        }
+
+        $this->options[ $key ] = $default;
+
+        return $this->options[ $key ];
     }
 
     /**

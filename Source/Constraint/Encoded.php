@@ -17,10 +17,15 @@ use CommonApi\Model\ConstraintInterface;
  *
  * The following flags can be applied by adding to the options array (see examples):
  *
- * FILTER_FLAG_STRIP_LOW
- * FILTER_FLAG_STRIP_HIGH
- * FILTER_FLAG_ENCODE_LOW
- * FILTER_FLAG_ENCODE_HIGH
+ * ```php
+ *
+ * $options = array();
+ * $options[FILTER_FLAG_STRIP_LOW] = true;
+ * $options[FILTER_FLAG_STRIP_HIGH] = true;
+ * $options[FILTER_FLAG_ENCODE_LOW] = true;
+ * $options[FILTER_FLAG_ENCODE_HIGH] = true;
+ *
+ * ```
  *
  * #### Validate
  *

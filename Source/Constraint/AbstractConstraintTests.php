@@ -64,31 +64,6 @@ abstract class AbstractConstraintTests extends AbstractConstraint implements Con
     }
 
     /**
-     * Get $option $key value, if available, or use $default value
-     *
-     * @param   string     $key
-     * @param   null|mixed $default
-     *
-     * @return  mixed
-     * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException;
-     */
-    protected function getOption($key, $default = null)
-    {
-        if (isset($this->options[ $key ])) {
-            return $this->options[ $key ];
-        }
-
-        if ($default === null) {
-            return null;
-        }
-
-        $this->options[ $key ] = $default;
-
-        return $this->options[ $key ];
-    }
-
-    /**
      * Test the string specified in $filter using the function defined by $test
      *
      * @param   string  $filter
@@ -195,12 +170,14 @@ abstract class AbstractConstraintTests extends AbstractConstraint implements Con
     /**
      * Maximum
      *
+     * @param   string  $key
+     *
      * @return  null|string
      * @since   1.0.0
      */
-    protected function testMaximum()
+    protected function testMaximum($key)
     {
-        if ($this->getOption('maximum') >= $this->field_value) {
+        if ($this->getOption($key) >= $this->field_value) {
             return true;
         }
 
@@ -210,12 +187,14 @@ abstract class AbstractConstraintTests extends AbstractConstraint implements Con
     /**
      * Minimum
      *
+     * @param   string  $key
+     *
      * @return  null|string
      * @since   1.0.0
      */
-    protected function testMinimum()
+    protected function testMinimum($key)
     {
-        if ($this->getOption('minimum') <= $this->field_value) {
+        if ($this->getOption($key) <= $this->field_value) {
             return true;
         }
 

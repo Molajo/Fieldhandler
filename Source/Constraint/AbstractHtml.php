@@ -136,10 +136,6 @@ abstract class AbstractHtml extends AbstractConstraintTests implements Constrain
         $field_value,
         array $options = array()
     ) {
-        $options = $this->setPropertyKeyWithOptionKey('white_list', $options);
-        $options = $this->setPropertyKeyWithOptionKey('html_entities', $options);
-        $options = $this->setPropertyKeyWithOptionKey('encoding', $options);
-
         parent::__construct(
             $constraint,
             $method,
@@ -147,6 +143,10 @@ abstract class AbstractHtml extends AbstractConstraintTests implements Constrain
             $field_value,
             $options
         );
+
+        $this->processOption('white_list');
+        $this->processOption('html_entities');
+        $this->processOption('encoding');
     }
 
     /**

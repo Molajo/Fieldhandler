@@ -1,6 +1,6 @@
 <?php
 /**
- * Fullspecialchars Constraint
+ * Specialchars Constraint
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -11,7 +11,7 @@ namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Model\ConstraintInterface;
 
 /**
- * Fullspecialchars Constraint
+ * Specialchars Constraint
  *
  * Convert special characters to HTML entities:
  *
@@ -21,11 +21,13 @@ use CommonApi\Model\ConstraintInterface;
  * '<' (less than) becomes '&lt;'
  * '>' (greater than) becomes '&gt;'
  *
- * Encoding quotes can be disabled by:
+ * The constraint can be modified using these flags:
  *
  * ```php
  * $options = array();
- * $options[FILTER_FLAG_NO_ENCODE_QUOTES]   = true;
+ * $options[FILTER_FLAG_STRIP_LOW]   = true;  // strip characters with ASCII value below 32
+ * $options[FILTER_FLAG_STRIP_HIGH]  = true;  // strip characters with ASCII value above 32
+ * $options[FILTER_FLAG_STRIP_LOW]   = true;  // Encode characters with ASCII value above 32
  *
  * ```
  *
@@ -39,7 +41,7 @@ use CommonApi\Model\ConstraintInterface;
  *
  * ```php
  *
- * $response = $request->validate('text_field', $data_value, 'Fullspecialchars');
+ * $response = $request->validate('text_field', $data_value, 'Specialchars');
  *
  * if ($response->getChangeIndicator() === true) {
  *     $field_value = $response->getFieldValue();
@@ -53,13 +55,12 @@ use CommonApi\Model\ConstraintInterface;
  *
  * @api
  * @link       http://us1.php.net/manual/en/filter.filters.sanitize.php
- * @link       http://us1.php.net/manual/en/function.htmlspecialchars.php
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Fullspecialchars extends AbstractFiltervar implements ConstraintInterface
+class Specialchars extends AbstractFiltervar implements ConstraintInterface
 {
     /**
      * Validate Filter
@@ -77,7 +78,7 @@ class Fullspecialchars extends AbstractFiltervar implements ConstraintInterface
      * @var    int
      * @since  1.0.0
      */
-    protected $sanitize_filter = FILTER_SANITIZE_FULL_SPECIAL_CHARS;
+    protected $sanitize_filter = FILTER_SANITIZE_SPECIAL_CHARS;
 
     /**
      * Constraint Flags
@@ -87,7 +88,9 @@ class Fullspecialchars extends AbstractFiltervar implements ConstraintInterface
      */
     protected $constraint_allowable_options
         = array(
-            FILTER_FLAG_NO_ENCODE_QUOTES
+            FILTER_FLAG_STRIP_LOW,
+            FILTER_FLAG_STRIP_HIGH,
+            FILTER_FLAG_ENCODE_HIGH
         );
 
     /**

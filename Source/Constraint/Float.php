@@ -13,7 +13,7 @@ use CommonApi\Model\ConstraintInterface;
 /**
  * Float Constraint
  *
- * Remove all characters except digits, +- and optionally .,eE.
+ * Remove all characters except digits, `+`, `-` and optionally `.`, `,`, `e`, `E`.
  *
  * Can be used with the following flags by defining $option entries for each flag desired:
  *

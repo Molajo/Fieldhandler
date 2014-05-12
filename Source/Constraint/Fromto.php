@@ -13,6 +13,50 @@ use CommonApi\Model\ConstraintInterface;
 /**
  * Fromto Constraint
  *
+ * Ensures the input value is equal to or greater than the value defined in `$options['from']` value
+ * and less than or equal to the value defined in `$options['to']` value.
+ *
+ * #### Validate
+ *
+ * Verifies value against constraint, returning a TRUE or FALSE result and error messages
+ *
+ * ```php
+ * $options = array();
+ * $options['from'] = 2000;
+ * $options['to'] = 2999;
+ * $response = $request->validate('employee_id', $employee_id, 'Fromto', $options);
+ *
+ * if ($response->getValidateResponse() === true) {
+ *     // all is well
+ * } else {
+ *     foreach ($response->getValidateMessages as $code => $message) {
+ *         echo $code . ': ' . $message . '/n';
+ *     }
+ * }
+ *
+ * ```
+ *
+ * #### Sanitize
+ *
+ * Sets `$field_value` to null if the value is not equal to or greater than the value defined
+ * in `$options['from']` value and less than or equal to the value defined in `$options['to']` value.
+ *
+ * ```php
+ * $options = array();
+ * $options['from'] = 2000;
+ * $options['to'] = 2999;
+ * $response = $request->validate('employee_id', $employee_id, 'Fromto', $options);
+ *
+ * if ($response->getChangeIndicator() === true) {
+ *     $field_value = $response->getFieldValue();
+ * }
+ *
+ * ```
+ *
+ * #### Format
+ *
+ * For this constraint, the `format` method is not implemented. The value sent in is not evaluated or changed.
+ *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
@@ -36,8 +80,9 @@ class Fromto extends AbstractConstraintTests implements ConstraintInterface
      */
     protected function validation()
     {
-        if ($this->field_value >= $this->getOption('from', 0)
-            && $this->field_value <= $this->getOption('to', 999999999999)
+
+        if ($this->testMinimum('from')
+            && $this->testMaximum('to')
         ) {
             return true;
         }

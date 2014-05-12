@@ -1,6 +1,6 @@
 <?php
 /**
- * Fullspecialchars Constraint Test
+ * Specialchars Constraint Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -12,14 +12,14 @@ use Molajo\Fieldhandler\Request;
 use PHPUnit_Framework_TestCase;
 
 /**
- * Fullspecialchars Fieldhandler
+ * Specialchars Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class FullspecialcharsTest extends PHPUnit_Framework_TestCase
+class SpecialcharsTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Request
@@ -41,9 +41,9 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Fullspecialchars::validate
-     * @covers  Molajo\Fieldhandler\Constraint\Fullspecialchars::getValidateMessages
-     * @covers  Molajo\Fieldhandler\Constraint\Fullspecialchars::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\Specialchars::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Specialchars::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Specialchars::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validateCompare
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
@@ -61,7 +61,7 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
 
         $field_name  = 'fieldname';
         $field_value = null;
-        $constraint  = 'Fullspecialchars';
+        $constraint  = 'Specialchars';
         $results     = $this->request->validate($field_name, $field_value, $constraint, array());
 
         $this->assertEquals(false, $results->getValidateResponse());
@@ -70,7 +70,7 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Fullspecialchars::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Specialchars::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validateCompare
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
@@ -84,7 +84,7 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
     {
         $field_name  = 'fieldname';
         $field_value = '<div>The dog is fine.</div>';
-        $constraint  = 'Fullspecialchars';
+        $constraint  = 'Specialchars';
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint);
 
@@ -96,7 +96,7 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Fullspecialchars::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Specialchars::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validateCompare
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
@@ -110,7 +110,7 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
     {
         $field_name  = 'fieldname';
         $field_value = '"The dog is fine."';
-        $constraint  = 'Fullspecialchars';
+        $constraint  = 'Specialchars';
         $options = array();
         $options[FILTER_FLAG_NO_ENCODE_QUOTES] = true;
 
@@ -124,7 +124,7 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Fullspecialchars::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Specialchars::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validateCompare
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
@@ -138,7 +138,7 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
     {
         $field_name  = 'fieldname';
         $field_value = 'The dog is fine.';
-        $constraint  = 'Fullspecialchars';
+        $constraint  = 'Specialchars';
         $options     = array('FILTER_FLAG_NO_ENCODE_QUOTES');
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
@@ -150,7 +150,7 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Fullspecialchars::format
+     * @covers  Molajo\Fieldhandler\Constraint\Specialchars::format
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
      *
      * @return  void
@@ -160,7 +160,7 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
     {
         $field_name  = 'fieldname';
         $field_value = '<div>The dog is fine.</div>';
-        $constraint  = 'Fullspecialchars';
+        $constraint  = 'Specialchars';
         $options     = array('FILTER_FLAG_NO_ENCODE_QUOTES');
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);

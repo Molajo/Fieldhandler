@@ -32,7 +32,7 @@ class FromtoTest extends PHPUnit_Framework_TestCase
     /**
      * Set up
      *
-     * @return  void
+     * @return void
      * @since   1.0.0
      */
     protected function setUp()
@@ -41,18 +41,27 @@ class FromtoTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers  Molajo\Fieldhandler\Constraint\Fromto::validate
      * @covers  Molajo\Fieldhandler\Constraint\Fromto::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Fromto::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Fromto::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::testMaximum
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::testMinimum
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testValidateSucceed()
+    public function testValidateTrue()
     {
         $field_name      = 'fieldname';
-        $field_value     = 5;
+        $field_value     = 8;
         $constraint      = 'Fromto';
         $options         = array();
-        $options['from'] = 0;
+        $options['from'] = 1;
         $options['to']   = 10;
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
@@ -64,44 +73,116 @@ class FromtoTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers  Molajo\Fieldhandler\Constraint\Fromto::validate
      * @covers  Molajo\Fieldhandler\Constraint\Fromto::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Fromto::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Fromto::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::testMaximum
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::testMinimum
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testValidateFail()
+    public function testValidateTrueAlpha()
     {
         $field_name      = 'fieldname';
-        $field_value     = 500;
+        $field_value     = 'a';
         $constraint      = 'Fromto';
         $options         = array();
-        $options['from'] = 0;
-        $options['to']   = 10;
+        $options['from'] = 'a';
+        $options['to']   = 'z';
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(false, $results->getValidateResponse());
-
-        $expected_code    = 8000;
-        $expected_message = 'Field: fieldname did not pass the Fromto data type test.';
-        $messages         = $results->getValidateMessages();
-        $this->assertEquals($expected_code, $messages[0]->code);
-        $this->assertEquals($expected_message, $messages[0]->message);
+        $this->assertEquals(true, $results->getValidateResponse());
+        $this->assertEquals(array(), $results->getValidateMessages());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Fromto::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Fromto::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Fromto::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Fromto::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::testMaximum
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::testMinimum
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testSanitizeSucceed()
+    public function testValidateFalse()
     {
         $field_name      = 'fieldname';
-        $field_value     = 5;
+        $field_value     = 500;
         $constraint      = 'Fromto';
         $options         = array();
-        $options['from'] = 0;
+        $options['from'] = 1;
+        $options['to']   = 100;
+        $results         = $this->request->validate($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals(false, $results->getValidateResponse());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Fromto::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Fromto::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Fromto::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Fromto::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::testMaximum
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::testMinimum
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
+     *
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testValidateTrueEquals()
+    {
+        $field_name      = 'fieldname';
+        $field_value     = 10;
+        $constraint      = 'Fromto';
+        $options         = array();
+        $options['from'] = 1;
+        $options['to']   = 10;
+
+        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals(true, $results->getValidateResponse());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Fromto::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Fromto::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::testMaximum
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::testMinimum
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testSanitizeNoChange()
+    {
+        $field_name      = 'field1';
+        $field_value     = 1;
+        $constraint      = 'Fromto';
+        $options         = array();
+        $options['from'] = 1;
         $options['to']   = 10;
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
@@ -113,18 +194,24 @@ class FromtoTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers  Molajo\Fieldhandler\Constraint\Fromto::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Fromto::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::testMaximum
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::testMinimum
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testSanitizeFailure()
+    public function testSanitizeChange()
     {
-        $field_name      = 'fieldname';
-        $field_value     = 500;
+        $field_name      = 'field1';
+        $field_value     = 10;
         $constraint      = 'Fromto';
         $options         = array();
         $options['from'] = 0;
-        $options['to']   = 10;
+        $options['to']   = 1;
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
@@ -135,18 +222,19 @@ class FromtoTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers  Molajo\Fieldhandler\Constraint\Fromto::format
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
+     *
      * @return  void
      * @since   1.0.0
      */
-    public function testFormatSucceed()
+    public function testFormat()
     {
-        $field_name      = 'fieldname';
-        $field_value     = 5;
-        $constraint      = 'Fromto';
-        $options         = array();
-        $options['from'] = 0;
-        $options['to']   = 10;
+        $field_name    = 'field1';
+        $field_value   = 'dog';
+        $constraint    = 'Fromto';
+        $options       = array();
+        $options['to'] = 'dog';
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
@@ -154,37 +242,5 @@ class FromtoTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
-    }
-
-    /**
-     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
-     * @return  void
-     * @since   1.0.0
-     */
-    public function testFormatFailure()
-    {
-        $field_name      = 'fieldname';
-        $field_value     = 500;
-        $constraint      = 'Fromto';
-        $options         = array();
-        $options['from'] = 0;
-        $options['to']   = 10;
-
-        $results = $this->request->format($field_name, $field_value, $constraint, $options);
-
-        $this->assertEquals(500, $results->getFieldValue());
-        $this->assertEquals(false, $results->getChangeIndicator());
-
-        return;
-    }
-
-    /**
-     * Tear down
-     *
-     * @return void
-     * @since   1.0.0
-     */
-    protected function tearDown()
-    {
     }
 }

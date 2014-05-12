@@ -185,7 +185,7 @@ class DateTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testFormatSuccess()
+    public function testFormat()
     {
         $field_name  = 'this_is_a_date_field';
         $field_value = '2012-09-13';
@@ -198,6 +198,62 @@ class DateTest extends PHPUnit_Framework_TestCase
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals('09/13/2012', $results->getFieldValue());
+        $this->assertEquals(true, $results->getChangeIndicator());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Date::format
+     * @covers  Molajo\Fieldhandler\Constraint\Date::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Date::createFromFormat
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::createFromFormat
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     *
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testFormatNull()
+    {
+        $field_name  = 'this_is_a_date_field';
+        $field_value = null;
+        $constraint  = 'Date';
+
+        $results = $this->request->format($field_name, $field_value, $constraint);
+
+        $this->assertEquals(null, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
+
+        return;
+    }
+
+    /**
+     * @covers  Molajo\Fieldhandler\Constraint\Date::format
+     * @covers  Molajo\Fieldhandler\Constraint\Date::validation
+     * @covers  Molajo\Fieldhandler\Constraint\Date::createFromFormat
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::validate
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::format
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::validation
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractDatetime::createFromFormat
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::validate
+     *
+     * @return  void
+     * @since   1.0.0
+     */
+    public function testFormatBadDate()
+    {
+        $field_name  = 'this_is_a_date_field';
+        $field_value = 'This is not a date';
+        $constraint  = 'Date';
+
+        $results = $this->request->format($field_name, $field_value, $constraint);
+
+        $this->assertEquals(null, $results->getFieldValue());
         $this->assertEquals(true, $results->getChangeIndicator());
 
         return;
