@@ -36,7 +36,7 @@ class Regex extends AbstractConstraintTests implements ConstraintInterface
      */
     protected function validation()
     {
-        if ($this->getRegex() === true) {
+        if (preg_match($this->getOption('regex'), $this->field_value) === 1) {
             return true;
         }
 
@@ -44,14 +44,15 @@ class Regex extends AbstractConstraintTests implements ConstraintInterface
     }
 
     /**
-     * Format
+     * Sanitize
      *
-     * @return  integer
+     * @return  mixed
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
-    protected function getRegex()
+    public function sanitize()
     {
-        return preg_match($this->getOption('regex'), $this->field_value);
+        $this->field_value = preg_replace($this->getOption('regex'), '', $this->field_value);
+
+        return $this->field_value;
     }
 }

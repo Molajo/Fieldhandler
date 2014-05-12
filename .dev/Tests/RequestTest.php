@@ -240,6 +240,7 @@ class RequestTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers                   Molajo\Fieldhandler\Request::createClass
      * @covers                   Molajo\Fieldhandler\Request::createConstraintClass
      * @expectedException        \CommonApi\Exception\UnexpectedValueException
      * @expectedExceptionRequest Fieldhandler Request createConstraint Method Failed: Dog Class: Molajo\Fieldhandler\Constraint\Dog
@@ -254,6 +255,25 @@ class RequestTest extends PHPUnit_Framework_TestCase
         $options     = array();
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
+
+        return;
+    }
+
+    /**
+     * @covers                   Molajo\Fieldhandler\Request::createClass
+     * @covers                   Molajo\Fieldhandler\Request::createConstraintClass
+     * @expectedException        PHPUnit_Framework_Error_Warning
+     * @expectedExceptionRequest filter_var(): First argument is expected to be a valid callback
+     *
+     * @since                    1.0.0
+     */
+    public function testCreateConstraintClassInputMissing()
+    {
+        $field_name  = 'alias';
+        $field_value = array('dog');
+        $constraint  = 'Callback';
+
+        $results = $this->request->format($field_name, $field_value, $constraint);
 
         return;
     }

@@ -59,7 +59,7 @@ class NullTest extends PHPUnit_Framework_TestCase
     public function testValidateTrue()
     {
         $field_name  = 'Random Field';
-        $field_value = Null;
+        $field_value = null;
         $constraint  = 'Null';
         $options     = array();
 
@@ -96,7 +96,7 @@ class NullTest extends PHPUnit_Framework_TestCase
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
-        $this->assertEquals(Null, $results->getValidateResponse());
+        $this->assertEquals(null, $results->getValidateResponse());
 
         $expected_code    = 1000;
         $expected_message = 'Field: Random Field does not have a valid value for Null data type.';
@@ -122,14 +122,14 @@ class NullTest extends PHPUnit_Framework_TestCase
     public function testSanitizeNoChange()
     {
         $field_name  = 'Random Field';
-        $field_value = Null;
+        $field_value = null;
         $constraint  = 'Null';
         $options     = array();
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals($field_value, $results->getFieldValue());
-        $this->assertEquals(Null, $results->getChangeIndicator());
+        $this->assertEquals(null, $results->getChangeIndicator());
 
         return;
     }
@@ -179,7 +179,7 @@ class NullTest extends PHPUnit_Framework_TestCase
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 
         $this->assertEquals(0, $results->getFieldValue());
-        $this->assertEquals(Null, $results->getChangeIndicator());
+        $this->assertEquals(null, $results->getChangeIndicator());
 
         return;
     }

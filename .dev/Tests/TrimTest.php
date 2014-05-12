@@ -144,7 +144,6 @@ class TrimTest extends PHPUnit_Framework_TestCase
         return;
     }
 
-
     /**
      * @covers  Molajo\Fieldhandler\Constraint\Trim::format
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize

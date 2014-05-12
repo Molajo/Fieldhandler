@@ -320,7 +320,7 @@ abstract class AbstractConstraint implements ConstraintInterface
     /**
      * Process a single option key
      *
-     * @param   string  $key
+     * @param   string $key
      *
      * @return  $this
      * @since   1.0.0
@@ -330,7 +330,7 @@ abstract class AbstractConstraint implements ConstraintInterface
     {
         $value = $this->getOption($key);
 
-        unset($this->options[$key]);
+        unset($this->options[ $key ]);
 
         if ($value === null) {
         } else {

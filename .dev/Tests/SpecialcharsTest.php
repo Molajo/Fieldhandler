@@ -108,11 +108,11 @@ class SpecialcharsTest extends PHPUnit_Framework_TestCase
      */
     public function testSanitizeChangeQuotes()
     {
-        $field_name  = 'fieldname';
-        $field_value = '"The dog is fine."';
-        $constraint  = 'Specialchars';
-        $options = array();
-        $options[FILTER_FLAG_NO_ENCODE_QUOTES] = true;
+        $field_name                              = 'fieldname';
+        $field_value                             = '"The dog is fine."';
+        $constraint                              = 'Specialchars';
+        $options                                 = array();
+        $options[ FILTER_FLAG_NO_ENCODE_QUOTES ] = true;
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 

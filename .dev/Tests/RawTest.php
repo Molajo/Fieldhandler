@@ -1,6 +1,6 @@
 <?php
 /**
- * Fullspecialchars Constraint Test
+ * Raw Constraint Test
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
@@ -12,14 +12,14 @@ use Molajo\Fieldhandler\Request;
 use PHPUnit_Framework_TestCase;
 
 /**
- * Fullspecialchars Fieldhandler
+ * Raw Fieldhandler
  *
  * @package    Molajo
  * @copyright  2014 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class FullspecialcharsTest extends PHPUnit_Framework_TestCase
+class RawTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Request
@@ -41,14 +41,16 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Fullspecialchars::validate
-     * @covers  Molajo\Fieldhandler\Constraint\Fullspecialchars::getValidateMessages
-     * @covers  Molajo\Fieldhandler\Constraint\Fullspecialchars::setValidateMessage
+     * @covers  Molajo\Fieldhandler\Constraint\Raw::validate
+     * @covers  Molajo\Fieldhandler\Constraint\Raw::getValidateMessages
+     * @covers  Molajo\Fieldhandler\Constraint\Raw::setValidateMessage
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validateCompare
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitizeValidate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::getValidateMessages
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::setValidateMessage
      *
@@ -59,18 +61,22 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
     {
         // validate always returns false since it is not implemented for this constraint
 
-        $field_name  = 'fieldname';
-        $field_value = null;
-        $constraint  = 'Fullspecialchars';
-        $results     = $this->request->validate($field_name, $field_value, $constraint, array());
+        $field_name                              = 'fieldname';
+        $field_value                             = null;
+        $constraint                              = 'Raw';
+        $options                                 = array();
+        $options[ FILTER_FLAG_NO_ENCODE_QUOTES ] = true;
+        $options[ FILTER_FLAG_STRIP_LOW ]        = true;
 
-        $this->assertEquals(false, $results->getValidateResponse());
+        $results = $this->request->validate($field_name, $field_value, $constraint, $options);
+
+        $this->assertEquals(true, $results->getValidateResponse());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Fullspecialchars::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Raw::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validateCompare
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
@@ -80,28 +86,30 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
      * @return  void
      * @since   1.0.0
      */
-    public function testSanitizeChange()
+    public function testSanitizeNoChange1()
     {
         $field_name  = 'fieldname';
         $field_value = '<div>The dog is fine.</div>';
-        $constraint  = 'Fullspecialchars';
+        $constraint  = 'Raw';
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint);
 
-//        $this->assertEquals('&#60;div&#62;The dog is fine.&#60;/div&#62;', $results->getFieldValue());
-// Travis says: &lt;div&gt;The dog is fine.&lt;/div&gt;'
-        $this->assertEquals(true, $results->getChangeIndicator());
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Fullspecialchars::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Raw::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validateCompare
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitizeValidate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::getOption
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlags
+     * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraintTests::setFlag
      *
      * @return  void
      * @since   1.0.0
@@ -110,21 +118,21 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
     {
         $field_name                              = 'fieldname';
         $field_value                             = '"The dog is fine."';
-        $constraint                              = 'Fullspecialchars';
+        $constraint                              = 'Raw';
         $options                                 = array();
         $options[ FILTER_FLAG_NO_ENCODE_QUOTES ] = true;
+        $options[ FILTER_FLAG_STRIP_LOW ]        = true;
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
-//        $this->assertEquals('&#60;div&#62;The dog is fine.&#60;/div&#62;', $results->getFieldValue());
-// Travis says: &lt;div&gt;The dog is fine.&lt;/div&gt;'
-        $this->assertEquals(true, $results->getChangeIndicator());
+        $this->assertEquals($field_value, $results->getFieldValue());
+        $this->assertEquals(false, $results->getChangeIndicator());
 
         return;
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Fullspecialchars::sanitize
+     * @covers  Molajo\Fieldhandler\Constraint\Raw::sanitize
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validate
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::validateCompare
      * @covers  Molajo\Fieldhandler\Constraint\AbstractFiltervar::sanitize
@@ -138,8 +146,10 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
     {
         $field_name  = 'fieldname';
         $field_value = 'The dog is fine.';
-        $constraint  = 'Fullspecialchars';
-        $options     = array('FILTER_FLAG_NO_ENCODE_QUOTES');
+        $constraint  = 'Raw';
+        $options                                 = array();
+        $options[ FILTER_FLAG_NO_ENCODE_QUOTES ] = true;
+        $options[ FILTER_FLAG_STRIP_LOW ]        = true;
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
@@ -150,7 +160,7 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Constraint\Fullspecialchars::format
+     * @covers  Molajo\Fieldhandler\Constraint\Raw::format
      * @covers  Molajo\Fieldhandler\Constraint\AbstractConstraint::format
      *
      * @return  void
@@ -160,8 +170,10 @@ class FullspecialcharsTest extends PHPUnit_Framework_TestCase
     {
         $field_name  = 'fieldname';
         $field_value = '<div>The dog is fine.</div>';
-        $constraint  = 'Fullspecialchars';
-        $options     = array('FILTER_FLAG_NO_ENCODE_QUOTES');
+        $constraint  = 'Raw';
+        $options                                 = array();
+        $options[ FILTER_FLAG_NO_ENCODE_QUOTES ] = true;
+        $options[ FILTER_FLAG_STRIP_LOW ]        = true;
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 

@@ -170,10 +170,10 @@ class GreaterthanTest extends PHPUnit_Framework_TestCase
      */
     public function testSanitizeNoChange()
     {
-        $field_name        = 'field1';
-        $field_value       = 10;
-        $constraint        = 'Greaterthan';
-        $options           = array();
+        $field_name              = 'field1';
+        $field_value             = 10;
+        $constraint              = 'Greaterthan';
+        $options                 = array();
         $options['greater_than'] = 1;
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
@@ -196,10 +196,10 @@ class GreaterthanTest extends PHPUnit_Framework_TestCase
      */
     public function testSanitizeChange()
     {
-        $field_name        = 'field1';
-        $field_value       = 1;
-        $constraint        = 'Greaterthan';
-        $options           = array();
+        $field_name              = 'field1';
+        $field_value             = 1;
+        $constraint              = 'Greaterthan';
+        $options                 = array();
         $options['greater_than'] = 10;
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
@@ -219,10 +219,10 @@ class GreaterthanTest extends PHPUnit_Framework_TestCase
      */
     public function testFormat()
     {
-        $field_name        = 'field1';
-        $field_value       = 'dog';
-        $constraint        = 'Greaterthan';
-        $options           = array();
+        $field_name              = 'field1';
+        $field_value             = 'dog';
+        $constraint              = 'Greaterthan';
+        $options                 = array();
         $options['greater_than'] = 'dog';
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);

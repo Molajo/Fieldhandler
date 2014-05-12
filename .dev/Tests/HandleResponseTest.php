@@ -88,7 +88,6 @@ class HandleResponseTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers  Molajo\Fieldhandler\HandleResponse::getChangeIndicator
-     * @covers  Molajo\Fieldhandler\HandleResponse::testNoValueChange
      *
      * @return  void
      * @since   1.0.0

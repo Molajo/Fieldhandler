@@ -144,7 +144,6 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
      *
      * @return  $this
      * @since   1.0.0
-     * @throws  \CommonApi\Exception\UnexpectedValueException
      */
     protected function getCompareToArrayFromInput(array $compare_to_array = array())
     {
@@ -153,10 +152,6 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
 
             return $this;
         }
-
-        throw new UnexpectedValueException(
-            'Fieldhandler Arrays getCompareToArrayFromInput: invalid empty array'
-        );
     }
 
     /**
@@ -257,7 +252,7 @@ abstract class AbstractArrays extends AbstractConstraintTests implements Constra
             $in_array = in_array($entry, $comparison);
 
             if ($in_array === $include_on_match) {
-                    $merged[] = $entry;
+                $merged[] = $entry;
             }
         }
 

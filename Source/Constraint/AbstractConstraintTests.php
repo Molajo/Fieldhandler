@@ -170,7 +170,7 @@ abstract class AbstractConstraintTests extends AbstractConstraint implements Con
     /**
      * Maximum
      *
-     * @param   string  $key
+     * @param   string $key
      *
      * @return  null|string
      * @since   1.0.0
@@ -187,7 +187,7 @@ abstract class AbstractConstraintTests extends AbstractConstraint implements Con
     /**
      * Minimum
      *
-     * @param   string  $key
+     * @param   string $key
      *
      * @return  null|string
      * @since   1.0.0

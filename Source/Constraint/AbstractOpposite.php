@@ -81,6 +81,7 @@ abstract class AbstractOpposite extends AbstractArrays implements ConstraintInte
      * Validation True Logic
      *
      * @param boolean $validation_results
+     *
      * @return  boolean  $validation_results
      * @return  array    $original_array
      *

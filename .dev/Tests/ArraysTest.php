@@ -41,9 +41,9 @@ class ArraysTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  Molajo\Fieldhandler\Request::runConstraintMethod
-     * @covers  Molajo\Fieldhandler\Request::getValidateMessages
-     * @covers  Molajo\Fieldhandler\Constraint\Arrays::validate
+     * @covers                   Molajo\Fieldhandler\Request::runConstraintMethod
+     * @covers                   Molajo\Fieldhandler\Request::getValidateMessages
+     * @covers                   Molajo\Fieldhandler\Constraint\Arrays::validate
      * @expectedException        \CommonApi\Exception\UnexpectedValueException
      * @expectedExceptionRequest Fieldhandler Arrays getCompareToArrayFromInput: invalid empty array
      *
@@ -89,13 +89,13 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateTrue()
     {
-        $field_name  = 'test';
-        $field_value = array(1, 2);
-        $constraint  = 'Arrays';
-        $options     = array('valid_values_array' => array(1, 2, 3));
+        $field_name                    = 'test';
+        $field_value                   = array(1, 2);
+        $constraint                    = 'Arrays';
+        $options                       = array('valid_values_array' => array(1, 2, 3));
         $options['valid_values_array'] = array(1, 2, 3);
-        $options['array_minimum'] = 1;
-        $options['array_maximum'] = 10;
+        $options['array_minimum']      = 1;
+        $options['array_maximum']      = 10;
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
@@ -150,6 +150,7 @@ class ArraysTest extends PHPUnit_Framework_TestCase
 
         return;
     }
+
     /**
      * @covers  Molajo\Fieldhandler\Request::runConstraintMethod
      * @covers  Molajo\Fieldhandler\Request::getValidateMessages
@@ -219,13 +220,13 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateLessThanMinimum()
     {
-        $field_name  = 'test';
-        $field_value = array(1, 2);
-        $constraint  = 'Arrays';
-        $options     = array('valid_values_array' => array(1, 2, 3));
+        $field_name                    = 'test';
+        $field_value                   = array(1, 2);
+        $constraint                    = 'Arrays';
+        $options                       = array('valid_values_array' => array(1, 2, 3));
         $options['valid_values_array'] = array(1, 2, 3);
-        $options['array_minimum'] = 10;
-        $options['array_maximum'] = 100;
+        $options['array_minimum']      = 10;
+        $options['array_maximum']      = 100;
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
@@ -265,13 +266,13 @@ class ArraysTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateMoreThanMaximum()
     {
-        $field_name  = 'test';
-        $field_value = array(1, 2, 3);
-        $constraint  = 'Arrays';
-        $options     = array('valid_values_array' => array(1, 2, 3));
+        $field_name                    = 'test';
+        $field_value                   = array(1, 2, 3);
+        $constraint                    = 'Arrays';
+        $options                       = array('valid_values_array' => array(1, 2, 3));
         $options['valid_values_array'] = array(1, 2, 3);
-        $options['array_minimum'] = 1;
-        $options['array_maximum'] = 2;
+        $options['array_minimum']      = 1;
+        $options['array_maximum']      = 2;
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 

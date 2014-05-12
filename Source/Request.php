@@ -526,7 +526,7 @@ class Request implements ValidateInterface, SanitizeInterface, FormatInterface
      * @param   string     $class
      * @param   null|mixed $parameter1
      * @param   null|mixed $parameter2
-     * @param   string $parameter3
+     * @param   string     $parameter3
      * @param   null|mixed $parameter4
      * @param   null|mixed $parameter5
      *

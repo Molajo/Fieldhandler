@@ -171,7 +171,7 @@ class TimeTest extends PHPUnit_Framework_TestCase
     {
         $field_name  = 'this_is_a_Time_field';
         $field_value = 'gggghhhhhh';
-        $constraint = 'Time';
+        $constraint  = 'Time';
         $options     = array(
             'create_from_time_format' => 'H:i:s',
             'display_as_time_format'  => 'H:i:s'

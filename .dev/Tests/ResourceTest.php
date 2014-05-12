@@ -47,7 +47,7 @@ class ResourceTest extends PHPUnit_Framework_TestCase
     {
         $this->request = new Request();
 
-        $url = 'http://example.com/';
+        $url        = 'http://example.com/';
         $this->curl = new Curl($url);
     }
 
@@ -219,10 +219,14 @@ class ResourceTest extends PHPUnit_Framework_TestCase
 class Curl
 {
     public $handle;
-    public function __construct($url) {
+
+    public function __construct($url)
+    {
         $this->handle = curl_init($url);
     }
-    public function exec() {
+
+    public function exec()
+    {
         return curl_exec($this->handle);
     }
 }
