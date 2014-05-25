@@ -45,7 +45,7 @@ use CommonApi\Model\ValidateInterface;
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @api
  */
-class Request implements ValidateInterface, SanitizeInterface, FormatInterface
+class Request implements ValidateInterface, SanitizeInterface, FormatInterface, FieldhandlerInterface
 {
     /**
      * Method: validate, sanitize, format
