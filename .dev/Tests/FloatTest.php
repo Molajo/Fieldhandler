@@ -114,11 +114,11 @@ class FloatTest extends PHPUnit_Framework_TestCase
      */
     public function testSanitizeNoChange()
     {
-        $field_name                            = 'float_fieldname';
-        $field_value                           = 123.123;
-        $constraint                            = 'Float';
-        $options                               = array();
-        $options[ FILTER_FLAG_ALLOW_FRACTION ] = true;
+        $field_name                          = 'float_fieldname';
+        $field_value                         = 123.123;
+        $constraint                          = 'Float';
+        $options                             = array();
+        $options[FILTER_FLAG_ALLOW_FRACTION] = true;
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 

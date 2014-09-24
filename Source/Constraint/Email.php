@@ -109,7 +109,7 @@ class Email extends AbstractFiltervar implements ConstraintInterface
         $obfuscate_email = "";
 
         for ($i = 0; $i < strlen($this->field_value); $i++) {
-            $obfuscate_email .= "&#" . ord($this->field_value[ $i ]) . ";";
+            $obfuscate_email .= "&#" . ord($this->field_value[$i]) . ";";
         }
 
         $this->field_value = $obfuscate_email;

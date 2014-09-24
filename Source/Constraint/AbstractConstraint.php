@@ -330,7 +330,7 @@ abstract class AbstractConstraint implements ConstraintInterface
     {
         $value = $this->getOption($key);
 
-        unset($this->options[ $key ]);
+        unset($this->options[$key]);
 
         if ($value === null) {
         } else {
@@ -352,17 +352,17 @@ abstract class AbstractConstraint implements ConstraintInterface
      */
     protected function getOption($key, $default = null)
     {
-        if (isset($this->options[ $key ])) {
-            return $this->options[ $key ];
+        if (isset($this->options[$key])) {
+            return $this->options[$key];
         }
 
         if ($default === null) {
             return null;
         }
 
-        $this->options[ $key ] = $default;
+        $this->options[$key] = $default;
 
-        return $this->options[ $key ];
+        return $this->options[$key];
     }
 
     /**
@@ -376,9 +376,9 @@ abstract class AbstractConstraint implements ConstraintInterface
      */
     protected function setPropertyKeyWithOptionKey($key, array $options = array())
     {
-        if (isset($options[ $key ])) {
-            $this->$key = $options[ $key ];
-            unset($options[ $key ]);
+        if (isset($options[$key])) {
+            $this->$key = $options[$key];
+            unset($options[$key]);
         }
 
         return $options;

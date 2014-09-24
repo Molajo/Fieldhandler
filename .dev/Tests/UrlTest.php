@@ -152,12 +152,12 @@ class UrlTest extends PHPUnit_Framework_TestCase
      */
     public function testSanitizeFail()
     {
-        $field_name                            = 'url_field';
-        $field_value                           = 'yessireebob';
-        $constraint                            = 'Url';
-        $options                               = array();
-        $options[ FILTER_FLAG_PATH_REQUIRED ]  = true;
-        $options[ FILTER_FLAG_QUERY_REQUIRED ] = true;
+        $field_name                          = 'url_field';
+        $field_value                         = 'yessireebob';
+        $constraint                          = 'Url';
+        $options                             = array();
+        $options[FILTER_FLAG_PATH_REQUIRED]  = true;
+        $options[FILTER_FLAG_QUERY_REQUIRED] = true;
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 

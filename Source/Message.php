@@ -112,8 +112,8 @@ class Message implements MessageInterface
      */
     protected function getMessageTemplate($code)
     {
-        if (isset($this->message_templates[ $code ])) {
-            return $this->message_templates[ $code ];
+        if (isset($this->message_templates[$code])) {
+            return $this->message_templates[$code];
         }
 
         throw new UnexpectedValueException(
@@ -144,7 +144,7 @@ class Message implements MessageInterface
 
             $value = (string)$value;
 
-            $this->parameter_injected_tokens[ '{' . $token . '}' ] = $value;
+            $this->parameter_injected_tokens['{' . $token . '}'] = $value;
         }
 
         return $this;

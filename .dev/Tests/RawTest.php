@@ -61,12 +61,12 @@ class RawTest extends PHPUnit_Framework_TestCase
     {
         // validate always returns false since it is not implemented for this constraint
 
-        $field_name                              = 'fieldname';
-        $field_value                             = null;
-        $constraint                              = 'Raw';
-        $options                                 = array();
-        $options[ FILTER_FLAG_NO_ENCODE_QUOTES ] = true;
-        $options[ FILTER_FLAG_STRIP_LOW ]        = true;
+        $field_name                            = 'fieldname';
+        $field_value                           = null;
+        $constraint                            = 'Raw';
+        $options                               = array();
+        $options[FILTER_FLAG_NO_ENCODE_QUOTES] = true;
+        $options[FILTER_FLAG_STRIP_LOW]        = true;
 
         $results = $this->request->validate($field_name, $field_value, $constraint, $options);
 
@@ -116,12 +116,12 @@ class RawTest extends PHPUnit_Framework_TestCase
      */
     public function testSanitizeChangeQuotes()
     {
-        $field_name                              = 'fieldname';
-        $field_value                             = '"The dog is fine."';
-        $constraint                              = 'Raw';
-        $options                                 = array();
-        $options[ FILTER_FLAG_NO_ENCODE_QUOTES ] = true;
-        $options[ FILTER_FLAG_STRIP_LOW ]        = true;
+        $field_name                            = 'fieldname';
+        $field_value                           = '"The dog is fine."';
+        $constraint                            = 'Raw';
+        $options                               = array();
+        $options[FILTER_FLAG_NO_ENCODE_QUOTES] = true;
+        $options[FILTER_FLAG_STRIP_LOW]        = true;
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
@@ -144,12 +144,12 @@ class RawTest extends PHPUnit_Framework_TestCase
      */
     public function testSanitizeNoChange()
     {
-        $field_name  = 'fieldname';
-        $field_value = 'The dog is fine.';
-        $constraint  = 'Raw';
-        $options                                 = array();
-        $options[ FILTER_FLAG_NO_ENCODE_QUOTES ] = true;
-        $options[ FILTER_FLAG_STRIP_LOW ]        = true;
+        $field_name                            = 'fieldname';
+        $field_value                           = 'The dog is fine.';
+        $constraint                            = 'Raw';
+        $options                               = array();
+        $options[FILTER_FLAG_NO_ENCODE_QUOTES] = true;
+        $options[FILTER_FLAG_STRIP_LOW]        = true;
 
         $results = $this->request->sanitize($field_name, $field_value, $constraint, $options);
 
@@ -168,12 +168,12 @@ class RawTest extends PHPUnit_Framework_TestCase
      */
     public function testFormat()
     {
-        $field_name  = 'fieldname';
-        $field_value = '<div>The dog is fine.</div>';
-        $constraint  = 'Raw';
-        $options                                 = array();
-        $options[ FILTER_FLAG_NO_ENCODE_QUOTES ] = true;
-        $options[ FILTER_FLAG_STRIP_LOW ]        = true;
+        $field_name                            = 'fieldname';
+        $field_value                           = '<div>The dog is fine.</div>';
+        $constraint                            = 'Raw';
+        $options                               = array();
+        $options[FILTER_FLAG_NO_ENCODE_QUOTES] = true;
+        $options[FILTER_FLAG_STRIP_LOW]        = true;
 
         $results = $this->request->format($field_name, $field_value, $constraint, $options);
 

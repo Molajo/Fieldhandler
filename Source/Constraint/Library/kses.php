@@ -135,7 +135,7 @@ function kses_split2($matches)
     $elem     = $matches[2];
     $attrlist = $matches[3];
 
-    if (!@isset($allowed_html[ strtolower($elem) ])) {
+    if (!@isset($allowed_html[strtolower($elem)])) {
         return '';
     }
     # They are using a not allowed HTML element
@@ -177,7 +177,7 @@ function kses_attr($element, $attr, $allowed_html, $allowed_protocols)
 
 # Are any attributes allowed at all for this element?
 
-    if (@count($allowed_html[ strtolower($element) ]) == 0) {
+    if (@count($allowed_html[strtolower($element)]) == 0) {
         return "<$element$xhtml_slash>";
     }
 
@@ -191,14 +191,14 @@ function kses_attr($element, $attr, $allowed_html, $allowed_protocols)
     $attr2 = '';
 
     foreach ($attrarr as $arreach) {
-        if (!@isset($allowed_html[ strtolower($element) ]
-        [ strtolower($arreach['name']) ])
+        if (!@isset($allowed_html[strtolower($element)]
+            [strtolower($arreach['name'])])
         ) {
             continue;
         } # the attribute is not allowed
 
-        $current = $allowed_html[ strtolower($element) ]
-        [ strtolower($arreach['name']) ];
+        $current = $allowed_html[strtolower($element)]
+        [strtolower($arreach['name'])];
 
         if (!is_array($current)) {
             $attr2 .= ' ' . $arreach['whole'];
@@ -500,12 +500,12 @@ function kses_array_lc($inarray)
     $outarray = array();
 
     foreach ($inarray as $inkey => $inval) {
-        $outkey              = strtolower($inkey);
-        $outarray[ $outkey ] = array();
+        $outkey            = strtolower($inkey);
+        $outarray[$outkey] = array();
 
         foreach ($inval as $inkey2 => $inval2) {
-            $outkey2                         = strtolower($inkey2);
-            $outarray[ $outkey ][ $outkey2 ] = $inval2;
+            $outkey2                     = strtolower($inkey2);
+            $outarray[$outkey][$outkey2] = $inval2;
         } # foreach $inval
     } # foreach $inarray
 
