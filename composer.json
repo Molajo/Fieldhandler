@@ -2,7 +2,14 @@
     "name": "molajo/fieldhandler",
     "type": "molajo-package",
     "description": "Molajo Fieldhandler: Validates and Filters Input; Escapes and Formats Output",
-    "keywords": ["Molajo", "Fieldhandler", "Filter", "Validate", "Escape", "Format"],
+    "keywords": [
+        "Molajo",
+        "Fieldhandler",
+        "Filter",
+        "Validate",
+        "Escape",
+        "Format"
+    ],
     "homepage": "http://github.com/Molajo/Fieldhandler",
     "license": "MIT",
     "authors": [
@@ -14,8 +21,7 @@
     ],
     "require": {
         "commonapi/model": "dev-master",
-        "commonapi/exception": "dev-master",
-        "zendframework/zend-escaper": "dev-master"
+        "commonapi/exception": "dev-master"
     },
     "support": {
         "event": "hello@molajo.org",

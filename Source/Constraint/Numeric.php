@@ -3,12 +3,12 @@
  * Numeric Constraint
  *
  * @package    Molajo
- * @copyright  2014 Amy Stephen. All rights reserved.
+ * @copyright  2014-2015 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
 namespace Molajo\Fieldhandler\Constraint;
 
-use CommonApi\Model\ConstraintInterface;
+use CommonApi\Fieldhandler\ConstraintInterface;
 
 /**
  * Numeric Constraint
@@ -73,5 +73,20 @@ class Numeric extends AbstractConstraint implements ConstraintInterface
         }
 
         return false;
+    }
+
+    /**
+     * Sanitize
+     *
+     * @return  null|mixed
+     * @since   1.0.0
+     */
+    public function sanitize()
+    {
+        if ($this->validation() === true) {
+            return $this->field_value;
+        }
+
+        return null;
     }
 }

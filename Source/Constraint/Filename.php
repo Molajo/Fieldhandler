@@ -3,12 +3,12 @@
  * Filename Constraint
  *
  * @package    Molajo
- * @copyright  2014 Amy Stephen. All rights reserved.
+ * @copyright  2014-2015 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
 namespace Molajo\Fieldhandler\Constraint;
 
-use CommonApi\Model\ConstraintInterface;
+use CommonApi\Fieldhandler\ConstraintInterface;
 
 /**
  * Filename Constraint
@@ -51,7 +51,7 @@ use CommonApi\Model\ConstraintInterface;
  *
  * @api
  * @package    Molajo
- * @copyright  2014 Amy Stephen. All rights reserved.
+ * @copyright  2014-2015 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
@@ -90,11 +90,6 @@ class Filename extends AbstractConstraintTests implements ConstraintInterface
 
         $filename = $this->field_value;
         if (is_file($filename)) {
-            return true;
-        }
-
-        $directory = dirname($filename);
-        if ($this->field_value === $filename) {
             return true;
         }
 

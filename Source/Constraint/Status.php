@@ -1,6 +1,6 @@
 <?php
 /**
- * Float Constraint
+ * Status Constraint
  *
  * @package    Molajo
  * @copyright  2014-2015 Amy Stephen. All rights reserved.
@@ -11,19 +11,9 @@ namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Fieldhandler\ConstraintInterface;
 
 /**
- * Float Constraint
+ * Status Constraint
  *
- * Remove all characters except digits, `+`, `-` and optionally `.`, `,`, `e`, `E`.
- *
- * Can be used with the following flags by defining $option entries for each flag desired:
- *
- * ```php
- * $options = array();
- * $options[FILTER_FLAG_ALLOW_FRACTION]   = true;
- * $options[FILTER_FLAG_ALLOW_THOUSAND]   = true;
- * $options[FILTER_FLAG_ALLOW_SCIENTIFIC] = true;
- *
- * ```
+ * Includes only digits, plus and minus sign.
  *
  * #### Validate
  *
@@ -32,9 +22,7 @@ use CommonApi\Fieldhandler\ConstraintInterface;
  * This example returns true.
  *
  * ```php
- * $options = array();
- * $options[FILTER_FLAG_ALLOW_FRACTION]   = true;
- * $response = $request->validate('float_field', 0.2345, 'Float');
+ * $response = $request->validate('integer_field', 100, 'Status');
  *
  * if ($response->getValidateResponse() === true) {
  *     // all is well
@@ -52,7 +40,7 @@ use CommonApi\Fieldhandler\ConstraintInterface;
  *  `$field_value` will result in NULL.
  *
  * ```php
- * $response = $request->sanitize('float_field', 'Dog', 'Float');
+ * $response = $request->sanitize('integer_field', 'AmyStephen@gmail.com', 'Status');
  *
  * if ($response->getChangeIndicator() === true) {
  *     $field_value = $response->getFieldValue();
@@ -62,18 +50,17 @@ use CommonApi\Fieldhandler\ConstraintInterface;
  *
  * #### Format
  *
- * Performs sanitize.
+ * Not implemented, simply returns the value sent in.
  *
  * @api
- * @link       http://php.net/manual/en/function.is-float.php
- * @link       http://php.net/manual/en/function.is-double.php
- * @link       http://php.net/manual/en/function.is-real.php
+ * @link       http://us1.php.net/manual/en/filter.filters.sanitize.php
+ * @link       http://us1.php.net/manual/en/filter.filters.validate.php
  * @package    Molajo
  * @copyright  2014-2015 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Float extends AbstractFiltervar implements ConstraintInterface
+class Status extends AbstractFiltervar implements ConstraintInterface
 {
     /**
      * Validate Filter
@@ -82,7 +69,7 @@ class Float extends AbstractFiltervar implements ConstraintInterface
      * @var    int
      * @since  1.0.0
      */
-    protected $validate_filter = FILTER_VALIDATE_FLOAT;
+    protected $validate_filter = FILTER_VALIDATE_INT;
 
     /**
      * Sanitize Filter
@@ -91,23 +78,15 @@ class Float extends AbstractFiltervar implements ConstraintInterface
      * @var    int
      * @since  1.0.0
      */
-    protected $sanitize_filter = FILTER_SANITIZE_NUMBER_FLOAT;
+    protected $sanitize_filter = FILTER_SANITIZE_NUMBER_INT;
 
     /**
-     * Constraint Flags
+     * Sanitize Array
      *
-     * To enable flags for use with the request, add the flags to the options array
-     *
-     * @api
      * @var    array
      * @since  1.0.0
      */
-    protected $constraint_allowable_options
-        = array(
-            FILTER_FLAG_ALLOW_FRACTION,
-            FILTER_FLAG_ALLOW_THOUSAND,
-            FILTER_FLAG_ALLOW_SCIENTIFIC
-        );
+    protected $status_array = array(2, 1, -1, -2, -5, -10, 0);
 
     /**
      * Sanitize
@@ -119,10 +98,10 @@ class Float extends AbstractFiltervar implements ConstraintInterface
     {
         parent::sanitize();
 
-        if (is_numeric($this->field_value)) {
-            return (float)$this->field_value;
+        if (in_array($this->field_value, $this->status_array)) {
+            return (int)$this->field_value;
         }
 
-        return $this->field_value;
+        return 0;
     }
 }

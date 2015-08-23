@@ -1,6 +1,6 @@
 <?php
 /**
- * Url Constraint
+ * Tel Constraint
  *
  * @package    Molajo
  * @copyright  2014-2015 Amy Stephen. All rights reserved.
@@ -11,30 +11,15 @@ namespace Molajo\Fieldhandler\Constraint;
 use CommonApi\Fieldhandler\ConstraintInterface;
 
 /**
- * Url Constraint
+ * Tel Constraint
  *
+ * @link       http://php.net/manual/en/function.is-string.php
  * @package    Molajo
  * @copyright  2014-2015 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Url extends AbstractFiltervar implements ConstraintInterface
+class Tel extends String implements ConstraintInterface
 {
-    /**
-     * Validate Filter
-     *
-     * @api
-     * @var    int
-     * @since  1.0.0
-     */
-    protected $validate_filter = FILTER_VALIDATE_URL;
 
-    /**
-     * Sanitize Filter
-     *
-     * @api
-     * @var    int
-     * @since  1.0.0
-     */
-    protected $sanitize_filter = FILTER_SANITIZE_URL;
 }

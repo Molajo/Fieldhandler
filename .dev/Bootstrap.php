@@ -3,7 +3,7 @@
  * Bootstrap for Testing
  *
  * @package    Molajo
- * @copyright  2014 Amy Stephen. All rights reserved.
+ * @copyright  2014-2015 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
 $base = substr(__DIR__, 0, strlen(__DIR__) - 5);
@@ -12,7 +12,6 @@ if (function_exists('CreateClassMap')) {
     include_once __DIR__ . '/CreateClassMap.php';
 }
 include_once $base . '/vendor/autoload.php';
-include_once $base . '/Source/Constraint/Library/kses.php';
 
 $classmap = array();
 $results  = createClassMap($base . '/Source/Constraint/', 'Molajo\\Fieldhandler\\Constraint\\');

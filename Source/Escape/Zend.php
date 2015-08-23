@@ -3,22 +3,22 @@
  * Escape Adapter for Zend Escaper
  *
  * @package    Molajo
- * @copyright  2014 Amy Stephen. All rights reserved.
+ * @copyright  2014-2015 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
 namespace Molajo\Fieldhandler\Escape;
 
-use CommonApi\Model\EscapeInterface;
+use CommonApi\Fieldhandler\EscapeInterface;
 
 /**
  * Escape Adapter for Zend Escaper
  *
  * @package    Molajo
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
- * @copyright  2014 Amy Stephen. All rights reserved.
+ * @copyright  2014-2015 Amy Stephen. All rights reserved.
  * @since      1.0.0
  */
-class Zend extends AbstractEscape implements EscapeInterface
+final class Zend extends AbstractEscape implements EscapeInterface
 {
     /**
      * Escape Html

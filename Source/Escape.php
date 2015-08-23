@@ -3,19 +3,19 @@
  * Proxy to Escape Adapter
  *
  * @package    Molajo
- * @copyright  2014 Amy Stephen. All rights reserved.
+ * @copyright  2014-2015 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
 namespace Molajo\Fieldhandler;
 
-use CommonApi\Model\EscapeInterface;
+use CommonApi\Fieldhandler\EscapeInterface;
 
 /**
  * Proxy to Escape Adapter
  *
  * @package    Molajo
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
- * @copyright  2014 Amy Stephen. All rights reserved.
+ * @copyright  2014-2015 Amy Stephen. All rights reserved.
  * @since      1.0.0
  */
 class Escape implements EscapeInterface
@@ -31,7 +31,7 @@ class Escape implements EscapeInterface
     /**
      * Constructor
      *
-     * @param   $adapter  \CommonApi\Model\EscapeInterface
+     * @param   $adapter  \CommonApi\Fieldhandler\EscapeInterface
      *
      * @since   1.0.0
      */

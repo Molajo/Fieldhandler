@@ -3,23 +3,23 @@
  * Password Constraint
  *
  * @package    Molajo
- * @copyright  2014 Amy Stephen. All rights reserved.
+ * @copyright  2014-2015 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
 namespace Molajo\Fieldhandler\Constraint;
 
-use CommonApi\Model\ConstraintInterface;
+use CommonApi\Fieldhandler\ConstraintInterface;
 
 /**
  * Password Constraint
  *
  * @link       http://php.net/manual/en/function.ctype-print.php
  * @package    Molajo
- * @copyright  2014 Amy Stephen. All rights reserved.
+ * @copyright  2014-2015 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
-class Password extends AbstractConstraintTests implements ConstraintInterface
+class Password extends String implements ConstraintInterface
 {
     /**
      * Message Code
@@ -37,21 +37,7 @@ class Password extends AbstractConstraintTests implements ConstraintInterface
      */
     public function sanitize()
     {
+        return parent::sanitize();
         // if the password is 90 days or more, expire the password
-    }
-
-    /**
-     * Validation Test
-     *
-     * @return  boolean
-     * @since   1.0.0
-     */
-    protected function validation()
-    {
-        if (ctype_print($this->field_value) === false) {
-            return false;
-        }
-
-        return true;
     }
 }

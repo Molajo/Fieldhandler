@@ -3,17 +3,17 @@
  * Boolean Constraint
  *
  * @package    Molajo
- * @copyright  2014 Amy Stephen. All rights reserved.
+ * @copyright  2014-2015 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  */
 namespace Molajo\Fieldhandler\Constraint;
 
-use CommonApi\Model\ConstraintInterface;
+use CommonApi\Fieldhandler\ConstraintInterface;
 
 /**
  * Boolean Constraint
  *
- * Character must be true or false or NULL. (Use Default and/or Required if NULL is not allowed.)
+ * Character must be true or false 0 or 1 or NULL. (Use Default and/or Required if NULL is not allowed.)
  *
  * #### Validate
  *
@@ -34,7 +34,7 @@ use CommonApi\Model\ConstraintInterface;
  *
  * #### Sanitize
  *
- * Sanitizes for true or false, else returns NULL.
+ * Sanitizes for true or false, 0 or 1, else returns NULL.
  *
  * ```php
  * $response = $request->validate('boolean_field', 'dog', 'Boolean');
@@ -51,7 +51,7 @@ use CommonApi\Model\ConstraintInterface;
  *
  * @api
  * @package    Molajo
- * @copyright  2014 Amy Stephen. All rights reserved.
+ * @copyright  2014-2015 Amy Stephen. All rights reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
  * @since      1.0.0
  */
@@ -65,7 +65,11 @@ class Boolean extends AbstractConstraint implements ConstraintInterface
      */
     protected function validation()
     {
-        if ($this->field_value === false || $this->field_value === true) {
+        if ($this->field_value === false
+            || $this->field_value === true
+            || $this->field_value == 0
+            || $this->field_value == 1
+        ) {
             return true;
         }
 
