@@ -20,7 +20,6 @@
         }
     ],
     "require": {
-        "commonapi/model": "dev-master",
         "commonapi/exception": "dev-master"
     },
     "support": {
